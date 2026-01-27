@@ -1,24 +1,45 @@
 .DS_Store
-# System Folders
-.agent/
-.agent_suite/
-.claude/
-.cursor/
-.codex/
-.gemini/
-.obsidian/
+
+# --- Security & Exclusions ---
+SECRET_Key_Vault.md
+.env
+
+# --- Specific Content Exclusions (Keep Folder Structure Only) ---
+
+# Document Vault (Sensitive PDFs)
+Asher_Source_Profile_v1/03_Inventory_Assets/3.4_Document_Vault/*
+!Asher_Source_Profile_v1/03_Inventory_Assets/3.4_Document_Vault/.gitkeep
+!Asher_Source_Profile_v1/03_Inventory_Assets/3.4_Document_Vault/_VAULT_GUIDE.md
+
+# Inbox (Messy)
+Asher_Source_Profile_v1/00_Inbox/*
+!Asher_Source_Profile_v1/00_Inbox/.gitkeep
+
+# Meeting Notes (Privacy)
+Asher_Source_Profile_v1/00_Archive/Meeting_Notes/*
+!Asher_Source_Profile_v1/00_Archive/Meeting_Notes/.gitkeep
+
+# Raw Transcripts (Privacy)
+Asher_Source_Profile_v1/00_Archive/Raw_Transcripts/*
+!Asher_Source_Profile_v1/00_Archive/Raw_Transcripts/.gitkeep
+
+# Protocols (Intellectual Property - Local Only)
+Asher_Source_Profile_v1/05_Protocols/*
+!Asher_Source_Profile_v1/05_Protocols/.gitkeep
+
+# Consciousness Stream (Personal)
+Asher_Source_Profile_v1/06_Consciousness_Stream/*
+!Asher_Source_Profile_v1/06_Consciousness_Stream/.gitkeep
+
+# Content Output (Large Files/Intermediate)
+Content/*
+!Content/.gitkeep
+
+# --- Standard Ignnores ---
 node_modules/
 dist/
 build/
 *.log
-.env
-
-# Skills Library (Keep root visible, ignore internals)
-AI_Skills_Library/.agents/
-AI_Skills_Library/.agent/keys/
-AI_Skills_Library/.claude/
-AI_Skills_Library/.cursor/
-SECRET_Key_Vault.md
 
 # Temporary Scripts
 analyze_pdf.py
