@@ -15,13 +15,14 @@ Asher_Source_Profile_v1/03_Inventory_Assets/3.4_Document_Vault/*
 Asher_Source_Profile_v1/00_Inbox/*
 !Asher_Source_Profile_v1/00_Inbox/.gitkeep
 
-# Meeting Notes (Privacy)
-Asher_Source_Profile_v1/00_Archive/Meeting_Notes/*
-!Asher_Source_Profile_v1/00_Archive/Meeting_Notes/.gitkeep
+# Archive (History/Logs - All Subfolders)
+Asher_Source_Profile_v1/00_Archive/*
+!Asher_Source_Profile_v1/00_Archive/.gitkeep
+!Asher_Source_Profile_v1/00_Archive/*.md
 
-# Raw Transcripts (Privacy)
-Asher_Source_Profile_v1/00_Archive/Raw_Transcripts/*
-!Asher_Source_Profile_v1/00_Archive/Raw_Transcripts/.gitkeep
+# Strategy Models (Business Plans - Private)
+Asher_Source_Profile_v1/04_Strategy_Models/*
+!Asher_Source_Profile_v1/04_Strategy_Models/.gitkeep
 
 # Protocols (Intellectual Property - Local Only)
 Asher_Source_Profile_v1/05_Protocols/*
@@ -30,6 +31,11 @@ Asher_Source_Profile_v1/05_Protocols/*
 # Consciousness Stream (Personal)
 Asher_Source_Profile_v1/06_Consciousness_Stream/*
 !Asher_Source_Profile_v1/06_Consciousness_Stream/.gitkeep
+
+# Quests (External Tasks/Bounties - Private Details)
+Quests/*
+!Quests/.gitkeep
+!Quests/README.md
 
 # Content Output (Large Files/Intermediate)
 Content/*
