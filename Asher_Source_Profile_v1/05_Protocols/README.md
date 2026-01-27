@@ -1,5 +1,15 @@
-# Protocols (Local Only)
+# ⚙️ 05_Protocols (Execution SOPs)
 
-Standard Operating Procedures (SOPs) and decision trees.
+## 📌 Overview
+The **Operating System Kernel**. This directory contains the explicit rules, algorithms, and decision trees that guide how the system (and Asher) executes tasks.
 
-**Privacy Policy**: Content is Git-ignored (Intellectual Property).
+## 🗂 Key Components
+*   **Decision Trees**: Algorithms for making complex choices (e.g., "Build vs. Buy", "Accept vs. Reject").
+*   **Output Style Guides**: Rules for tone of voice, formatting, and presentation aesthetics.
+*   **Sales Protocols**: Scripts and flows for commercial interactions.
+*   **Standard Operating Procedures (SOPs)**: Step-by-step guides for recurring tasks.
+
+## 🔒 Privacy Policy
+**STATUS: LOCAL ONLY**
+Contents are **git-ignored** as they represent proprietary operational know-how.
+*   This is the "Source Code" of behavior.
