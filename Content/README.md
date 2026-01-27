@@ -1,3 +1,22 @@
+# 🎬 Content Output (制造工厂)
+
+## 📌 概述
+**生产车间**。此目录存储由系统“内容创作”工作流生成的最终输出资产。
+
+## 🗂 典型资产
+*   **Videos**: 渲染好的 `.mp4` 文件，项目文件 (Premiere/Davinci)。
+*   **Articles**: Markdown 草稿，docx 导出文件，发布的 HTML 页面。
+*   **Images**: 生成的艺术图 (Midjourney/DALL-E)，缩略图，图表。
+*   **Intermediate Files**: 临时渲染和在制品 (WIP) 资产。
+
+## 🔒 隐私策略
+**状态：仅本地 (LOCAL ONLY)**
+内容被 **git-ignored**，原因有二：
+1.  **大小**: 媒体文件通常对于 Git 来说太大了。
+2.  **冗余**: 这些是**输出**，而非源代码。源映射和脚本在其他地方跟踪（例如在 `.agent/scripts` 或 `04_Strategy_Models` 中）。
+
+---
+
 # 🎬 Content Output (The Manufacturing Plant)
 
 ## 📌 Overview
