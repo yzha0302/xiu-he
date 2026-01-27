@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  # The Discord Bot (The "Body")
+  discord-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: asher-protocol-bot
+    restart: always
+    environment:
+      - DISCORD_TOKEN=${DISCORD_TOKEN}
+      - GUILD_ID=${GUILD_ID}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY} # For the "Brain"
+    volumes:
+      - ./data:/app/data # Persist user data (XP, levels)
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+  # Optional: Redis for caching / Conversation memory if we get complex
+  # redis:
+  #   image: redis:alpine
+  #   restart: always

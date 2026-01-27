@@ -8,6 +8,10 @@ from discord.ext import commands, tasks
 from discord import app_commands
 import os
 import json
+from dotenv import load_dotenv
+
+load_dotenv()
+
 from datetime import datetime
 from collections import defaultdict
 
@@ -16,6 +20,7 @@ TOKEN = os.getenv('DISCORD_TOKEN')
 GUILD_ID = int(os.getenv('GUILD_ID', 0))
 
 # 身份组配置 (Clearance Levels)
+# 身份组配置 (Matches Ultimate Schema)
 ROLES_CONFIG = {
     'protocol': {'name': '🤖 Protocol・协议', 'color': 0x95A5A6, 'level': 0},
     'awakened': {'name': '🟢 Awakened・觉醒者', 'color': 0x2ECC71, 'level': 1},
