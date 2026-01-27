@@ -1,0 +1,235 @@
+{
+  "main": {
+    "id": "769702f31ba698f6",
+    "type": "split",
+    "children": [
+      {
+        "id": "21e2886267c31281",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "5ab43c6e5d2eeacf",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Asher_Source_Profile_v1/02_Skill_Tree/Modules/Philosophy/Ascension_Worldview/Ascension_Worldview.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Ascension_Worldview"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "14fe51b7aed892a7",
+    "type": "split",
+    "children": [
+      {
+        "id": "85649c182cf7e00e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "202456c2ca102f2b",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "721c8db7c0b96bb5",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "27548bc3af04fb8e",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200
+  },
+  "right": {
+    "id": "ff7154180a9c7ed1",
+    "type": "split",
+    "children": [
+      {
+        "id": "fc8ef3003c0ef5d6",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "9484bb0325e09b76",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Asher_Source_Profile_v1/02_Skill_Tree/Modules/Philosophy/Ascension_Worldview/Ascension_Worldview.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Ascension_Worldview 的反向链接列表"
+            }
+          },
+          {
+            "id": "1a7820d501fdf7ba",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Asher_Source_Profile_v1/02_Skill_Tree/Modules/Philosophy/Ascension_Worldview/Ascension_Worldview.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Ascension_Worldview 的出链列表"
+            }
+          },
+          {
+            "id": "f767fb0e5743b0db",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "48538eb20b882e46",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "添加笔记属性"
+            }
+          },
+          {
+            "id": "405a7c9ef176b42d",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Asher_Source_Profile_v1/02_Skill_Tree/Modules/Philosophy/Ascension_Worldview/Ascension_Worldview.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Ascension_Worldview 的大纲"
+            }
+          }
+        ],
+        "currentTab": 4
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "bases:新建数据库": false,
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false
+    }
+  },
+  "active": "5ab43c6e5d2eeacf",
+  "lastOpenFiles": [
+    "vibe-kanban/dev_assets/db.sqlite-journal",
+    "dida-mcp-server/dist/resources/cached-data.js",
+    "dida-mcp-server/dist/utils/response.js",
+    "dida-mcp-server/dist/tasks/index.js",
+    "dida-mcp-server/dist/utils/index.js",
+    "dida-mcp-server/dist/utils/helpers.js",
+    "dida-mcp-server/dist/tasks/tools.js",
+    "dida-mcp-server/dist/types/index.js",
+    "dida-mcp-server/dist/projects/index.js",
+    "dida-mcp-server/dist/auth/tools.js",
+    "dida-mcp-server/dist/projects/tools.js",
+    "dida-mcp-server/node_modules/caniuse-lite/README.md",
+    "dida-mcp-server/node_modules/@babel/helper-module-transforms/README.md",
+    "dida-mcp-server/node_modules/@babel/helper-validator-option/README.md",
+    "dida-mcp-server/node_modules/@modelcontextprotocol/sdk/README.md",
+    "dida-mcp-server/node_modules/@babel/code-frame/README.md",
+    "dida-mcp-server/node_modules/@babel/plugin-syntax-jsx/README.md",
+    "dida-mcp-server/node_modules/@babel/helper-plugin-utils/README.md",
+    "dida-mcp-server/node_modules/ts-jest/node_modules/type-fest/readme.md",
+    "dida-mcp-server/node_modules/@babel/helper-compilation-targets/README.md",
+    "dida-mcp-server/node_modules/@babel/helpers/README.md",
+    "dida-mcp-server/node_modules/@babel/generator/README.md",
+    "dida-mcp-server/node_modules/@babel/compat-data/README.md",
+    "dida-mcp-server/node_modules/@babel/core/README.md",
+    "dida-mcp-server/node_modules/@babel/traverse/README.md",
+    "dida-mcp-server/node_modules/@babel/helper-module-imports/README.md",
+    "dida-mcp-server/node_modules/typescript/SECURITY.md",
+    "dida-mcp-server/node_modules/typescript/README.md",
+    "dida-mcp-server/node_modules/@babel/parser/README.md",
+    "dida-mcp-server/node_modules/electron-to-chromium/README.md",
+    "dida-mcp-server/node_modules/@babel/template/README.md",
+    "dida-mcp-server/node_modules/@babel/parser/CHANGELOG.md",
+    "dida-mcp-server/node_modules/browserslist/README.md",
+    "dida-mcp-server/node_modules/ts-jest/TROUBLESHOOTING.md",
+    "dida-mcp-server/node_modules/ts-jest/README.md",
+    "dida-mcp-server/node_modules/ts-jest/LICENSE.md",
+    "dida-mcp-server/node_modules/@jest/reporters/assets/jest_logo.png",
+    "dida-mcp-server/node_modules/istanbul-reports/lib/html/assets/favicon.png",
+    "dida-mcp-server/node_modules/istanbul-reports/lib/html-spa/assets/sort-arrow-sprite.png",
+    "dida-mcp-server/node_modules/istanbul-reports/lib/html/assets/sort-arrow-sprite.png",
+    "Quests/Power_Leveling/2026-01-26_Xiaojia_Roommate_Dispute_PWL26012601/2026-01_Chat_Xiaohongshu_Subtenant_J_Roommate_No_Response.jpg",
+    "Quests/Power_Leveling/2026-01-26_Xiaojia_Roommate_Dispute_PWL26012601/2026-01_Chat_WeChat_Subtenant_J_Work_Schedule.jpg",
+    "Quests/Power_Leveling/2026-01-26_Xiaojia_Roommate_Dispute_PWL26012601/f7ccf53698b580189b2e14fb8dfbbb40.jpg",
+    "Quests/Power_Leveling/2026-01-26_Xiaojia_Roommate_Dispute_PWL26012601/b6138f96d5d52c6dd4163029f7cc48ba.jpg",
+    "Quests/Power_Leveling/帮助小加/f7ccf53698b580189b2e14fb8dfbbb40.jpg",
+    "Quests/Power_Leveling/帮助小加/b6138f96d5d52c6dd4163029f7cc48ba.jpg"
+  ]
+}
