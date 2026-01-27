@@ -1,0 +1,485 @@
+{
+    "_comment": "Asyre Content Creation OS - 创作配置文件 v2.1",
+    "_version": "2.1",
+    "_updated": "2026-01-12",
+    "_formula": "Q = T × E × C × F × D × A × B",
+    "content_type_presets": {
+        "oral_script": {
+            "_description": "口播视频脚本 - 强钩子、高情绪、口语化",
+            "T_Trustworthiness": {
+                "accuracy_threshold": 0.8,
+                "transparency_level": 0.7,
+                "source_citation": false,
+                "fact_check_required": false
+            },
+            "B_Buzz": {
+                "controversy_index": 0.7,
+                "timeliness": 0.8,
+                "heat_score": 0.7,
+                "policy_safety": 0.9,
+                "time_decay_factor": 0.8
+            },
+            "E_Experience": {
+                "firsthand_experience": 0.7,
+                "expertise_depth": 0.6,
+                "style_consistency": 0.9,
+                "voice_distinctiveness": 0.8,
+                "attitude_strength": 0.8
+            },
+            "C_ContentDepth": {
+                "source_quality_threshold": 0.7,
+                "cross_domain_links": 0.7,
+                "originality_score": 0.6,
+                "insight_density": 0.6
+            },
+            "F_Fit": {
+                "target_knowledge_level": "intermediate",
+                "cognitive_match": 0.8,
+                "emotional_context": "curious",
+                "emotion_alignment": 0.8,
+                "cultural_tribe": "general",
+                "tribe_adaptation": 0.7,
+                "attention_span": "short"
+            },
+            "D_Delivery": {
+                "D1_practical_value": 0.6,
+                "D2_social_currency": 0.7,
+                "D2_emotion_arousal": 0.8,
+                "D2_story_integration": 0.7,
+                "D3_rigor": 0.6,
+                "balance_strategy": "virality_first"
+            },
+            "A_Amplification": {
+                "hook_intensity": 0.9,
+                "platform_adaptation": 0.8,
+                "algorithm_understanding": 0.7,
+                "oral_language_weight": 1.0,
+                "structure_type": "climax_first",
+                "pacing": "fast",
+                "modules_required": [
+                    "Hook_Techniques",
+                    "Oral_Script_Style"
+                ]
+            }
+        },
+        "deep_article": {
+            "_description": "深度长文 - 严谨优先、深度关联、允许慢热",
+            "T_Trustworthiness": {
+                "accuracy_threshold": 0.95,
+                "transparency_level": 0.9,
+                "source_citation": true,
+                "fact_check_required": true
+            },
+            "B_Buzz": {
+                "controversy_index": 0.5,
+                "timeliness": 0.4,
+                "heat_score": 0.5,
+                "policy_safety": 0.95,
+                "time_decay_factor": 0.3
+            },
+            "E_Experience": {
+                "firsthand_experience": 0.8,
+                "expertise_depth": 0.9,
+                "style_consistency": 0.85,
+                "voice_distinctiveness": 0.7,
+                "attitude_strength": 0.6
+            },
+            "C_ContentDepth": {
+                "source_quality_threshold": 0.9,
+                "cross_domain_links": 0.9,
+                "originality_score": 0.8,
+                "insight_density": 0.9
+            },
+            "F_Fit": {
+                "target_knowledge_level": "advanced",
+                "cognitive_match": 0.7,
+                "emotional_context": "curious",
+                "emotion_alignment": 0.5,
+                "cultural_tribe": "intellectual",
+                "tribe_adaptation": 0.6,
+                "attention_span": "long"
+            },
+            "D_Delivery": {
+                "D1_practical_value": 0.8,
+                "D2_social_currency": 0.4,
+                "D2_emotion_arousal": 0.3,
+                "D2_story_integration": 0.5,
+                "D3_rigor": 0.95,
+                "balance_strategy": "rigor_first"
+            },
+            "A_Amplification": {
+                "hook_intensity": 0.6,
+                "platform_adaptation": 0.5,
+                "algorithm_understanding": 0.4,
+                "oral_language_weight": 0.3,
+                "structure_type": "pyramid",
+                "pacing": "medium",
+                "modules_required": [
+                    "Hook_Techniques"
+                ]
+            }
+        },
+        "social_commentary": {
+            "_description": "社会评论 - 态度鲜明、情绪共鸣、争议驱动",
+            "T_Trustworthiness": {
+                "accuracy_threshold": 0.8,
+                "transparency_level": 0.8,
+                "source_citation": false,
+                "fact_check_required": true
+            },
+            "B_Buzz": {
+                "controversy_index": 0.9,
+                "timeliness": 0.9,
+                "heat_score": 0.8,
+                "policy_safety": 0.7,
+                "time_decay_factor": 0.9
+            },
+            "E_Experience": {
+                "firsthand_experience": 0.8,
+                "expertise_depth": 0.7,
+                "style_consistency": 0.9,
+                "voice_distinctiveness": 0.9,
+                "attitude_strength": 0.95
+            },
+            "C_ContentDepth": {
+                "source_quality_threshold": 0.7,
+                "cross_domain_links": 0.8,
+                "originality_score": 0.7,
+                "insight_density": 0.7
+            },
+            "F_Fit": {
+                "target_knowledge_level": "intermediate",
+                "cognitive_match": 0.7,
+                "emotional_context": "frustrated",
+                "emotion_alignment": 0.9,
+                "cultural_tribe": "urban_youth",
+                "tribe_adaptation": 0.9,
+                "attention_span": "medium"
+            },
+            "D_Delivery": {
+                "D1_practical_value": 0.5,
+                "D2_social_currency": 0.85,
+                "D2_emotion_arousal": 0.9,
+                "D2_story_integration": 0.8,
+                "D3_rigor": 0.6,
+                "balance_strategy": "emotion_first"
+            },
+            "A_Amplification": {
+                "hook_intensity": 0.95,
+                "platform_adaptation": 0.9,
+                "algorithm_understanding": 0.8,
+                "oral_language_weight": 0.9,
+                "structure_type": "problem_solution",
+                "pacing": "varied",
+                "modules_required": [
+                    "Hook_Techniques",
+                    "Oral_Script_Style"
+                ]
+            }
+        },
+        "knowledge_explainer": {
+            "_description": "知识科普 - 门槛降解、通俗易懂、实用价值",
+            "T_Trustworthiness": {
+                "accuracy_threshold": 0.9,
+                "transparency_level": 0.85,
+                "source_citation": true,
+                "fact_check_required": true
+            },
+            "B_Buzz": {
+                "controversy_index": 0.3,
+                "timeliness": 0.5,
+                "heat_score": 0.6,
+                "policy_safety": 0.95,
+                "time_decay_factor": 0.4
+            },
+            "E_Experience": {
+                "firsthand_experience": 0.6,
+                "expertise_depth": 0.8,
+                "style_consistency": 0.8,
+                "voice_distinctiveness": 0.6,
+                "attitude_strength": 0.4
+            },
+            "C_ContentDepth": {
+                "source_quality_threshold": 0.85,
+                "cross_domain_links": 0.7,
+                "originality_score": 0.5,
+                "insight_density": 0.7
+            },
+            "F_Fit": {
+                "target_knowledge_level": "beginner",
+                "cognitive_match": 0.9,
+                "emotional_context": "curious",
+                "emotion_alignment": 0.6,
+                "cultural_tribe": "general",
+                "tribe_adaptation": 0.8,
+                "attention_span": "medium"
+            },
+            "D_Delivery": {
+                "D1_practical_value": 0.95,
+                "D2_social_currency": 0.5,
+                "D2_emotion_arousal": 0.4,
+                "D2_story_integration": 0.6,
+                "D3_rigor": 0.8,
+                "balance_strategy": "simplification_first"
+            },
+            "A_Amplification": {
+                "hook_intensity": 0.7,
+                "platform_adaptation": 0.7,
+                "algorithm_understanding": 0.6,
+                "oral_language_weight": 0.7,
+                "structure_type": "step_by_step",
+                "pacing": "medium",
+                "modules_required": [
+                    "Hook_Techniques"
+                ]
+            }
+        }
+    },
+    "layer_descriptions": {
+        "T_Trustworthiness": {
+            "name": "可信度",
+            "english": "Trustworthiness",
+            "question": "Is it True - 这是真实可信的吗?",
+            "position": 0,
+            "nature": "门槛",
+            "formula": "T = 准确性 × 透明度 × 来源可靠性",
+            "source": "Google E-E-A-T Framework (2024)"
+        },
+        "B_Buzz": {
+            "name": "选题时机",
+            "english": "Buzz",
+            "question": "When - 什么时候说这个?",
+            "position": 1,
+            "nature": "可自动化",
+            "formula": "B = 热度 × 争议度 × (1-风险) × 时效衰减",
+            "source": "病毒传播研究"
+        },
+        "E_Experience": {
+            "name": "创作者身份",
+            "english": "Experience + Expertise",
+            "question": "Who - 谁在说?",
+            "position": 2,
+            "nature": "不可替代",
+            "formula": "E = 第一手经验 × 专业深度 × 风格辨识度",
+            "source": "E-E-A-T Framework"
+        },
+        "C_ContentDepth": {
+            "name": "深度判断力",
+            "english": "Content Depth",
+            "question": "What - 说什么?",
+            "position": 3,
+            "nature": "不可替代",
+            "formula": "C = 资料质量 × 跨域关联 × 原创洞察",
+            "source": "Information Literacy Research"
+        },
+        "F_Fit": {
+            "name": "受众理解",
+            "english": "Fit / Audience Match",
+            "question": "For Whom - 说给谁?",
+            "position": 4,
+            "nature": "人机协作",
+            "formula": "F = 认知匹配 × 情绪契合 × 圈层适配",
+            "source": "内容营销研究 (受众理解占成功因素82%)"
+        },
+        "D_Delivery": {
+            "name": "表达设计",
+            "english": "Delivery",
+            "question": "How - 怎么说?",
+            "position": 5,
+            "nature": "人机协作",
+            "formula": "D = D1(实用价值) × D2(社交货币×情绪×故事) × D3(严谨)",
+            "source": "STEPPS Framework (Jonah Berger)"
+        },
+        "A_Amplification": {
+            "name": "执行方法",
+            "english": "Amplification",
+            "question": "Execute - 具体执行",
+            "position": 6,
+            "nature": "可自动化",
+            "formula": "A = 执行技巧 × 平台适配 × 算法理解",
+            "source": "注意力经济 + 平台推荐算法研究"
+        }
+    },
+    "workflow_phases": {
+        "phase_0_trust": {
+            "name": "可信度检查阶段",
+            "primary_layers": [
+                "T_Trustworthiness"
+            ],
+            "secondary_layers": [
+                "C_ContentDepth"
+            ],
+            "description": "确保来源可靠、事实准确、无误导风险"
+        },
+        "phase_1_topic": {
+            "name": "选题阶段",
+            "primary_layers": [
+                "B_Buzz"
+            ],
+            "secondary_layers": [
+                "E_Experience",
+                "C_ContentDepth"
+            ],
+            "description": "确定选题时机和方向"
+        },
+        "phase_2_intent": {
+            "name": "立意阶段",
+            "primary_layers": [
+                "E_Experience",
+                "C_ContentDepth"
+            ],
+            "secondary_layers": [
+                "F_Fit"
+            ],
+            "description": "确定核心洞察和立场"
+        },
+        "phase_3_research": {
+            "name": "收集阶段",
+            "primary_layers": [
+                "C_ContentDepth",
+                "T_Trustworthiness"
+            ],
+            "secondary_layers": [
+                "E_Experience"
+            ],
+            "description": "收集、筛选和核实素材"
+        },
+        "phase_4_design": {
+            "name": "构思阶段",
+            "primary_layers": [
+                "F_Fit",
+                "D_Delivery"
+            ],
+            "secondary_layers": [
+                "C_ContentDepth",
+                "A_Amplification"
+            ],
+            "description": "考虑受众设计表达"
+        },
+        "phase_5_draft": {
+            "name": "初稿阶段",
+            "primary_layers": [
+                "D_Delivery",
+                "A_Amplification"
+            ],
+            "secondary_layers": [
+                "F_Fit"
+            ],
+            "description": "快写出骨架"
+        },
+        "phase_6_refine": {
+            "name": "打磨阶段",
+            "primary_layers": [
+                "D_Delivery",
+                "A_Amplification",
+                "F_Fit"
+            ],
+            "secondary_layers": [
+                "E_Experience",
+                "T_Trustworthiness"
+            ],
+            "description": "慢改到位，核实准确性"
+        },
+        "phase_7_publish": {
+            "name": "发布阶段",
+            "primary_layers": [
+                "B_Buzz"
+            ],
+            "secondary_layers": [
+                "D_Delivery"
+            ],
+            "description": "选择发布时机"
+        },
+        "phase_8_feedback": {
+            "name": "反馈阶段",
+            "primary_layers": [
+                "F_Fit"
+            ],
+            "secondary_layers": [
+                "E_Experience",
+                "D_Delivery",
+                "T_Trustworthiness"
+            ],
+            "description": "收集反馈迭代，验证可信度"
+        }
+    },
+    "knowledge_modules": {
+        "Hook_Techniques": {
+            "path": "Modules/Content_Creation/1.0_Hook_Techniques.md",
+            "layer": "A_Amplification",
+            "applies_to": [
+                "oral_script",
+                "deep_article",
+                "social_commentary",
+                "knowledge_explainer"
+            ],
+            "when_to_use": "phase_5_draft",
+            "priority": 10
+        },
+        "Oral_Script_Style": {
+            "path": "Modules/Content_Creation/Oral_Script_Style.md",
+            "layer": "A_Amplification",
+            "applies_to": [
+                "oral_script",
+                "social_commentary"
+            ],
+            "when_to_use": "phase_6_refine",
+            "priority": 8
+        }
+    },
+    "balance_strategies": {
+        "rigor_first": {
+            "description": "严谨优先 - 冲突时牺牲传播性保严谨",
+            "priority_order": [
+                "D3_rigor",
+                "D1_practical_value",
+                "D2_social_currency"
+            ],
+            "T_threshold": 0.9
+        },
+        "virality_first": {
+            "description": "传播优先 - 冲突时牺牲严谨保传播",
+            "priority_order": [
+                "D2_social_currency",
+                "D2_emotion_arousal",
+                "D1_practical_value",
+                "D3_rigor"
+            ],
+            "T_threshold": 0.7
+        },
+        "simplification_first": {
+            "description": "易懂优先 - 冲突时牺牲深度保理解",
+            "priority_order": [
+                "D1_practical_value",
+                "D3_rigor",
+                "D2_social_currency"
+            ],
+            "T_threshold": 0.85
+        },
+        "emotion_first": {
+            "description": "情绪优先 - 冲突时优先保证情绪共鸣",
+            "priority_order": [
+                "D2_emotion_arousal",
+                "D2_story_integration",
+                "D3_rigor",
+                "D1_practical_value"
+            ],
+            "T_threshold": 0.75
+        }
+    },
+    "layer_classification": {
+        "gatekeeper": [
+            "T_Trustworthiness"
+        ],
+        "moat": [
+            "E_Experience",
+            "C_ContentDepth"
+        ],
+        "amplifier": [
+            "F_Fit",
+            "D_Delivery",
+            "A_Amplification",
+            "B_Buzz"
+        ]
+    }
+}

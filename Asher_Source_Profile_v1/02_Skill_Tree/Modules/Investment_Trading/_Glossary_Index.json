@@ -1,0 +1,732 @@
+[
+  {
+    "term_en": "Long Position",
+    "term_cn": "做多",
+    "definition_short": "看涨买入，涨了卖出赚差价",
+    "definition_deep": "做多是投资交易中最基本的操作方式。投资者预期标的价格会上涨，于是先买入持有，等价格上涨后再卖出，赚取买卖差价。这是大多数人最熟悉的投资方式，类似于买房等涨再卖。做多的最大亏损是本金归零（价格跌到0），但理论上收益无上限（价格可以无限上涨）。",
+    "why_it_matters": "做多是所有投资的基础操作，不理解做多就无法理解做空等其他概念",
+    "common_mistakes": "在下跌趋势中做多（逆势操作），或在高位追涨买入",
+    "related_terms": ["Short Position", "Entry", "Exit"],
+    "source_file": "1.0_Trading_Fundamentals.md"
+  },
+  {
+    "term_en": "Short Position",
+    "term_cn": "做空",
+    "definition_short": "看跌先卖，跌了买回赚差价",
+    "definition_deep": "做空是一种反向操作策略。投资者预期价格会下跌，于是先借入资产卖出（获得现金），等价格下跌后再用更低的价格买回归还，赚取中间差价。做空的风险比做多大得多，因为价格理论上可以无限上涨（亏损无上限），但下跌最多只能跌到零（收益有上限）。在期货和衍生品市场广泛使用。",
+    "why_it_matters": "理解做空让你在熊市也能赚钱，同时也帮助理解市场的空头力量",
+    "common_mistakes": "在上涨趋势中做空（逆势），或不设止损导致爆仓",
+    "related_terms": ["Long Position", "Margin", "Liquidation"],
+    "source_file": "1.0_Trading_Fundamentals.md"
+  },
+  {
+    "term_en": "Position",
+    "term_cn": "仓位",
+    "definition_short": "你投入资金占总资金的比例",
+    "definition_deep": "仓位是投资风险管理的核心概念。它指的是你在某项投资中投入的资金占总可投资资金的百分比。仓位越重，潜在收益越大，但风险也越大。专业投资者会根据市场环境、个人判断的确信度、资金安全边际等因素动态调整仓位。常见的仓位描述包括：空仓(0%)、轻仓(10-30%)、半仓(50%)、重仓(70-90%)、满仓(100%)。",
+    "why_it_matters": "仓位管理是风险控制的第一道防线，决定了你最多能亏多少",
+    "common_mistakes": "因为过度自信而重仓/满仓单一标的",
+    "related_terms": ["Risk Management", "All-In", "Diversification"],
+    "source_file": "1.0_Trading_Fundamentals.md"
+  },
+  {
+    "term_en": "Stop Loss",
+    "term_cn": "止损",
+    "definition_short": "跌到底线价自动卖出控制损失",
+    "definition_deep": "止损是风险管理的核心工具，指预设一个价格底线，当市场价格跌到这个底线时自动卖出以控制损失。止损的本质不是认输，而是承认市场可能与你的判断不同，通过限制单次损失来保存实力。心理学上，人类有强烈的损失厌恶倾向，会抗拒止损（因为卖出意味着承认错误），这恰恰是止损难以执行的原因，也是它如此重要的原因。",
+    "why_it_matters": "止损决定了你的生存能力。不止损一次爆仓，十年努力白费",
+    "common_mistakes": "不设止损、止损设得太近频繁被打掉、情绪化取消止损",
+    "related_terms": ["Take Profit", "Risk-Reward Ratio", "Drawdown"],
+    "source_file": "1.0_Trading_Fundamentals.md"
+  },
+  {
+    "term_en": "Take Profit",
+    "term_cn": "止盈",
+    "definition_short": "涨到目标价自动卖出锁定利润",
+    "definition_deep": "止盈是利润锁定的工具，指预设一个目标价格，当市场价格涨到这个目标时自动卖出以锁定利润。止盈的必要性在于：人类的贪婪心理会让我们在盈利时想要赚更多，结果往往是坐过山车——眼看利润消失甚至变成亏损。止盈的本质是承认你不可能卖在最高点，接受次优解比追求完美更实际。",
+    "why_it_matters": "浮盈不是真钱，只有卖出锁定后才是真正的利润",
+    "common_mistakes": "贪心不设止盈、止盈设得太近错过大行情",
+    "related_terms": ["Stop Loss", "Unrealized P&L", "Risk-Reward Ratio"],
+    "source_file": "1.0_Trading_Fundamentals.md"
+  },
+  {
+    "term_en": "Dollar-Cost Averaging",
+    "term_cn": "定投",
+    "definition_short": "固定时间固定金额买入，不管涨跌",
+    "definition_deep": "定投(DCA)是一种被动投资策略，指在固定的时间间隔（如每月）投入固定的金额，不管市场涨跌。这种策略的数学原理是：价格高时同样的钱买得少，价格低时买得多，长期下来持仓成本会趋向于平均价格。定投的最大优势是排除情绪干扰，避免择时失败。它特别适合对市场走势没有强判断、追求长期稳健收益的投资者。",
+    "why_it_matters": "定投是普通人最实用的投资策略，简单且能克服人性弱点",
+    "common_mistakes": "在明显下跌趋势中盲目定投、中途放弃导致前功尽弃",
+    "related_terms": ["Pyramiding", "Position", "Entry"],
+    "source_file": "1.0_Trading_Fundamentals.md"
+  },
+  {
+    "term_en": "Risk-Reward Ratio",
+    "term_cn": "风险收益比",
+    "definition_short": "预期收益与预期亏损的比值",
+    "definition_deep": "风险收益比(RRR)是评估一笔交易是否值得做的核心指标。计算公式：RRR = (目标价 - 买入价) / (买入价 - 止损价)。例如买入价100元，止损90元，目标120元，则RRR = 20/10 = 2:1。专业交易员的铁律是：不做RRR低于2:1的交易。因为即使你只有33%的胜率，2:1的RRR也能让你长期盈利。RRR改变了思维方式：从追求高胜率变成追求高期望值。",
+    "why_it_matters": "RRR决定了你可以用较低的胜率实现长期盈利",
+    "common_mistakes": "只看胜率不看RRR、设定不切实际的止盈目标",
+    "related_terms": ["Stop Loss", "Take Profit", "Expected Value"],
+    "source_file": "1.0_Trading_Fundamentals.md"
+  },
+  {
+    "term_en": "Drawdown",
+    "term_cn": "回撤",
+    "definition_short": "从历史最高点跌落的幅度",
+    "definition_deep": "回撤是衡量投资策略风险的重要指标，指资产价值从历史最高点跌到某一低点的幅度。最大回撤(MDD)是历史上最大的一次跌幅。回撤的重要性在于：它反映了投资者可能面临的最坏情况。一个年化收益20%但最大回撤50%的策略，可能不如年化收益15%但最大回撤20%的策略——因为50%的回撤需要100%的涨幅才能回本，很多人在回撤过程中就放弃了。",
+    "why_it_matters": "回撤决定了你能否在心理上和资金上撑过最困难的时期",
+    "common_mistakes": "只看收益率不看回撤、低估自己对回撤的心理承受能力",
+    "related_terms": ["Maximum Drawdown", "Risk Management", "Recovery"],
+    "source_file": "1.0_Trading_Fundamentals.md"
+  },
+  {
+    "term_en": "Leverage",
+    "term_cn": "杠杆",
+    "definition_short": "借钱放大投资规模",
+    "definition_deep": "杠杆是用借来的资金放大投资规模的工具。例如10倍杠杆意味着用1万元控制10万元的头寸。杠杆是双刃剑：收益和亏损都会被放大。10倍杠杆下，标的涨10%你赚100%，但跌10%你就亏光本金（爆仓）。杠杆交易需要缴纳保证金，当亏损超过保证金时会被强制平仓。杠杆不创造价值，只是放大波动，新手应极其谨慎使用。",
+    "why_it_matters": "杠杆是放大器，放大收益也放大风险，是爆仓的主要原因",
+    "common_mistakes": "过度使用杠杆、不理解杠杆的风险就使用",
+    "related_terms": ["Margin", "Liquidation", "Risk Management"],
+    "source_file": "1.0_Trading_Fundamentals.md"
+  },
+  {
+    "term_en": "Liquidation",
+    "term_cn": "爆仓",
+    "definition_short": "杠杆交易中亏损超过保证金被强制平仓",
+    "definition_deep": "爆仓是杠杆交易中的强制平仓机制。当你的浮亏接近或超过你缴纳的保证金时，交易所会强制卖出你的头寸以防止进一步亏损（保护借你钱的一方）。爆仓意味着你的本金全部或大部分损失。爆仓是使用杠杆的最大风险，也是很多新手亏光积蓄的原因。避免爆仓的方法：降低杠杆倍数、严格止损、留足保证金缓冲。",
+    "why_it_matters": "爆仓 = 归零，是投资交易中最致命的结果之一",
+    "common_mistakes": "高杠杆+不止损、在高波动期间使用杠杆",
+    "related_terms": ["Leverage", "Margin", "Stop Loss"],
+    "source_file": "1.0_Trading_Fundamentals.md"
+  },
+  {
+    "term_en": "Unrealized P&L",
+    "term_cn": "浮盈浮亏",
+    "definition_short": "还没卖出的账面盈亏",
+    "definition_deep": "浮盈/浮亏指的是按当前市场价格计算、但尚未实际卖出锁定的盈亏。浮盈也叫纸面富贵——看起来赚了，但没有卖出就不是真钱。投资者常犯的错误是把浮盈当成已经到手的钱，导致过度乐观或过早提升生活水平。反之，浮亏也不是真正的亏损，直到你卖出的那一刻。但这不意味着应该无限持有浮亏——要结合止损策略判断。",
+    "why_it_matters": "区分浮盈和实际盈利是保持理性投资心态的关键",
+    "common_mistakes": "把浮盈当真钱花掉、因为'只是浮亏'而不执行止损",
+    "related_terms": ["Take Profit", "Stop Loss", "Position"],
+    "source_file": "1.0_Trading_Fundamentals.md"
+  },
+  {
+    "term_en": "Pyramiding",
+    "term_cn": "金字塔加仓",
+    "definition_short": "按层级递减的方式分批买入",
+    "definition_deep": "金字塔加仓是一种仓位管理策略，指根据预设条件分批次买入，每次买入的量递减（形成金字塔形状）。有两种用法：上涨金字塔（趋势确认后加仓，如首次买50%，涨5%后加30%，涨10%后加20%）和下跌金字塔（抄底用，如首次买30%，跌10%后加30%，跌20%后加40%）。金字塔加仓的优势是分散买入时机的风险，避免一次性买在高点或低点。",
+    "why_it_matters": "金字塔加仓让你在不确定性中保持灵活，降低择时失败的代价",
+    "common_mistakes": "下跌金字塔不设止损（无限抄底）、加仓比例不递减",
+    "related_terms": ["Dollar-Cost Averaging", "Position", "Stop Loss"],
+    "source_file": "1.0_Trading_Fundamentals.md"
+  },
+  {
+    "term_en": "All-In",
+    "term_cn": "梭哈/满仓",
+    "definition_short": "把全部资金一次性投入",
+    "definition_deep": "梭哈(All-In)指将全部可用资金一次性投入单一标的。这是风险最高的操作方式，因为一旦判断错误，没有任何补救空间。梭哈的心理根源通常是过度自信、FOMO(错失恐惧)或赌徒心态。专业投资者几乎不会梭哈，因为再有把握的判断也存在失败可能。标准风控建议：单一标的最大仓位不超过总资金的30%，永远留有现金应对意外。",
+    "why_it_matters": "梭哈是新手亏损的最常见原因，一次错误就可能归零",
+    "common_mistakes": "因为'这次一定赚'而梭哈、不给自己留退路",
+    "related_terms": ["Position", "Risk Management", "Diversification"],
+    "source_file": "1.0_Trading_Fundamentals.md"
+  },
+  {
+    "term_en": "Expected Value",
+    "term_cn": "期望值",
+    "definition_short": "长期来看每次交易的平均盈亏",
+    "definition_deep": "期望值(EV)是概率论中的核心概念，在交易中指长期来看每次交易的平均盈亏。公式：EV = 胜率 × 平均盈利 - 败率 × 平均亏损。例如：胜率40%，平均赚3元；败率60%，平均亏1元。EV = 0.4×3 - 0.6×1 = 1.2 - 0.6 = +0.6元/次。期望值为正的策略，只要执行足够多次，长期一定赚钱。这解释了为什么胜率不是最重要的——高胜率但盈亏比差的策略可能期望值为负。",
+    "why_it_matters": "期望值是判断交易策略是否值得执行的终极标准",
+    "common_mistakes": "只追求高胜率而忽视期望值、样本量太小就下结论",
+    "related_terms": ["Risk-Reward Ratio", "Win Rate", "Probability Thinking"],
+    "source_file": "1.0_Trading_Fundamentals.md"
+  },
+  {
+    "term_en": "Loss Aversion",
+    "term_cn": "损失厌恶",
+    "definition_short": "亏损的痛苦是同等盈利快乐的2倍",
+    "definition_deep": "损失厌恶是行为经济学中的核心概念，指人类对损失的心理反应强度是同等收益的约2倍。比如亏100元的痛苦，需要赚200元的快乐才能抵消。这种心理偏差导致投资者：1)不愿止损（卖出意味着承认亏损）2)过早止盈（急于锁定利润避免变成亏损）3)风险决策不理性。理解损失厌恶是克服它的第一步——意识到你的情绪反应是被进化编程的，不一定符合理性决策。",
+    "why_it_matters": "损失厌恶是投资者不愿止损的心理根源，理解它才能克服它",
+    "common_mistakes": "被损失厌恶驱动而死扛亏损、为避免小损失而承担大风险",
+    "related_terms": ["Stop Loss", "Sunk Cost Fallacy", "Behavioral Economics"],
+    "source_file": "1.0_Trading_Fundamentals.md"
+  },
+  {
+    "term_en": "Sunk Cost Fallacy",
+    "term_cn": "沉没成本谬误",
+    "definition_short": "因为已经投入太多而继续投入",
+    "definition_deep": "沉没成本谬误是一种认知偏差，指因为已经投入了大量资源（时间、金钱、精力）而继续投入，即使理性上应该止损。在投资中表现为：'我都亏这么多了，现在卖太亏了'或'我研究这个标的花了这么多时间，不能放弃'。正确的思维应该是：过去的投入是沉没成本，已经无法挽回，当前决策应该只基于未来的预期收益，而非过去的投入。",
+    "why_it_matters": "沉没成本谬误是深度套牢的心理根源，识别它才能做出理性决策",
+    "common_mistakes": "把'已经亏了多少'作为不止损的理由",
+    "related_terms": ["Loss Aversion", "Stop Loss", "Behavioral Economics"],
+    "source_file": "1.0_Trading_Fundamentals.md"
+  },
+  {
+    "term_en": "Candlestick",
+    "term_cn": "K线/蜡烛图",
+    "definition_short": "显示开盘、收盘、最高、最低四个价格的图表单位",
+    "definition_deep": "K线（蜡烛图）是技术分析的基本单位，由18世纪日本米商发明。每一根K线包含四个关键价格：开盘价(Open)、收盘价(Close)、最高价(High)、最低价(Low)。K线由实体(Body)和影线(Shadow/Wick)组成，实体是开盘价与收盘价之间的区域，影线是实体延伸到最高/最低价的细线。收盘价高于开盘价为阳线（涨），反之为阴线（跌）。K线的形态反映了多空双方的博弈结果。",
+    "why_it_matters": "K线是所有技术分析的基础，不懂K线就无法读懂任何图表",
+    "common_mistakes": "只看K线颜色不看形态、忽视影线的重要信息",
+    "related_terms": ["Open", "Close", "High", "Low", "Body", "Shadow"],
+    "source_file": "2.0_Technical_Analysis.md"
+  },
+  {
+    "term_en": "Open Price",
+    "term_cn": "开盘价",
+    "definition_short": "该周期第一笔成交价格",
+    "definition_deep": "开盘价是某个时间周期（分钟/小时/天/周等）开始时的第一笔成交价格。它代表了市场参与者在新周期开始时的共识价格。开盘价与前一周期收盘价的差距（跳空/Gap）是重要的技术信号。开盘价是K线四个核心价格之一，与收盘价的关系决定了K线是阳线还是阴线。",
+    "why_it_matters": "开盘价是判断K线涨跌的基准之一，跳空开盘更是重要信号",
+    "common_mistakes": "忽视开盘价与收盘价的关系",
+    "related_terms": ["Close", "Candlestick", "Gap"],
+    "source_file": "2.0_Technical_Analysis.md"
+  },
+  {
+    "term_en": "Close Price",
+    "term_cn": "收盘价",
+    "definition_short": "该周期最后一笔成交价格",
+    "definition_deep": "收盘价是某个时间周期结束时的最后一笔成交价格。收盘价被认为是该周期最重要的价格，因为它代表了多空博弈的最终结果。均线计算通常使用收盘价。收盘价高于开盘价形成阳线，低于开盘价形成阴线。很多技术指标和交易系统都以收盘价作为主要参考。",
+    "why_it_matters": "收盘价是K线最重要的价格，大多数技术指标都基于收盘价计算",
+    "common_mistakes": "只看盘中波动不等收盘确认",
+    "related_terms": ["Open", "Candlestick", "Moving Average"],
+    "source_file": "2.0_Technical_Analysis.md"
+  },
+  {
+    "term_en": "Bullish Candle",
+    "term_cn": "阳线",
+    "definition_short": "收盘价高于开盘价的K线，表示上涨",
+    "definition_deep": "阳线是收盘价高于开盘价的K线，表示在该周期内多方胜利，价格上涨。在国际惯例中阳线通常显示为绿色或白色，而中国股市习惯用红色表示阳线。阳线的实体越长，表示多方力量越强。光头光脚阳线（无上下影线）是最强势的阳线，表示多方完全主导。阳线只代表该周期内涨了，不代表整体趋势是涨。",
+    "why_it_matters": "阳线是最基本的看涨信号，但需要结合位置和形态综合判断",
+    "common_mistakes": "看到阳线就认为会继续涨、忽视阳线的影线信息",
+    "related_terms": ["Bearish Candle", "Candlestick", "Body", "Marubozu"],
+    "source_file": "2.0_Technical_Analysis.md"
+  },
+  {
+    "term_en": "Bearish Candle",
+    "term_cn": "阴线",
+    "definition_short": "收盘价低于开盘价的K线，表示下跌",
+    "definition_deep": "阴线是收盘价低于开盘价的K线，表示在该周期内空方胜利，价格下跌。在国际惯例中阴线通常显示为红色或黑色，而中国股市习惯用绿色表示阴线。阴线的实体越长，表示空方力量越强。光头光脚阴线是最弱势的K线，表示空方完全主导。阴线只代表该周期内跌了，需要结合趋势判断后续走势。",
+    "why_it_matters": "阴线是最基本的看跌信号，但同样需要结合上下文判断",
+    "common_mistakes": "看到阴线就恐慌卖出、忽视阴线的长下影（可能是支撑）",
+    "related_terms": ["Bullish Candle", "Candlestick", "Body"],
+    "source_file": "2.0_Technical_Analysis.md"
+  },
+  {
+    "term_en": "Body",
+    "term_cn": "实体",
+    "definition_short": "K线中开盘价与收盘价之间的粗柱子部分",
+    "definition_deep": "实体是K线中开盘价与收盘价之间的区域，是K线的主要组成部分。实体的长度反映了多空力量的强度：长实体表示一方力量强劲，短实体表示多空力量接近。阳线实体表示收盘价高于开盘价（涨），阴线实体表示收盘价低于开盘价（跌）。当开盘价等于收盘价时，实体消失，形成十字星。",
+    "why_it_matters": "实体大小直接反映多空力量对比，是判断K线强度的核心依据",
+    "common_mistakes": "只看实体颜色不看大小、忽视影线与实体的比例关系",
+    "related_terms": ["Shadow", "Candlestick", "Doji"],
+    "source_file": "2.0_Technical_Analysis.md"
+  },
+  {
+    "term_en": "Shadow/Wick",
+    "term_cn": "影线",
+    "definition_short": "K线中从实体延伸到最高/最低价的细线",
+    "definition_deep": "影线是K线中从实体延伸出去的细线，分为上影线和下影线。上影线从实体上端延伸到最高价，表示价格冲高后被压回；下影线从实体下端延伸到最低价，表示价格下探后被拉回。影线的长度反映了博弈的激烈程度：长上影表示上方有强阻力，长下影表示下方有强支撑。影线是判断市场情绪和支撑阻力的重要依据。",
+    "why_it_matters": "影线揭示了看不见的多空博弈过程，比实体提供更多信息",
+    "common_mistakes": "忽视影线只看实体、不理解长影线的反转含义",
+    "related_terms": ["Body", "Upper Shadow", "Lower Shadow", "Hammer"],
+    "source_file": "2.0_Technical_Analysis.md"
+  },
+  {
+    "term_en": "Doji",
+    "term_cn": "十字星",
+    "definition_short": "开盘价等于或接近收盘价的K线，表示多空平衡",
+    "definition_deep": "十字星是开盘价与收盘价相等或非常接近的K线，实体极小或没有，只有上下影线。十字星表示多空双方激烈博弈但最终平衡，是重要的反转信号。出现在上涨顶部的十字星可能预示见顶，出现在下跌底部的十字星可能预示见底。十字星的变体包括：长脚十字星（上下影线都长）、蜻蜓十字星（只有下影线）、墓碑十字星（只有上影线）。",
+    "why_it_matters": "十字星是重要的犹豫和反转信号，尤其在趋势关键位置出现时",
+    "common_mistakes": "孤立看十字星不看位置、忽视十字星后的确认K线",
+    "related_terms": ["Candlestick", "Body", "Reversal Pattern"],
+    "source_file": "2.0_Technical_Analysis.md"
+  },
+  {
+    "term_en": "Hammer",
+    "term_cn": "锤子线",
+    "definition_short": "小实体+长下影线出现在底部的看涨反转形态",
+    "definition_deep": "锤子线是一种单根K线反转形态，特征是小实体位于K线顶部，下方有长长的下影线（通常是实体的2倍以上），上影线很短或没有。锤子线只在下跌趋势底部有效，表示空方一度大幅杀跌，但被多方强力拉回，暗示空方力量衰竭。锤子线本身只是信号，需要后续阳线确认才算有效反转。阳线锤子比阴线锤子更可靠。",
+    "why_it_matters": "锤子线是最经典的底部反转信号之一，识别它能帮你抓住底部",
+    "common_mistakes": "在顶部看到类似形态误判为锤子（那是上吊线）、不等确认就买入",
+    "related_terms": ["Hanging Man", "Inverted Hammer", "Reversal Pattern"],
+    "source_file": "2.0_Technical_Analysis.md"
+  },
+  {
+    "term_en": "Hanging Man",
+    "term_cn": "上吊线",
+    "definition_short": "小实体+长下影线出现在顶部的看跌反转形态",
+    "definition_deep": "上吊线与锤子线形态完全相同（小实体+长下影线），但出现在上涨趋势顶部。它表示尽管多方试图拉升，但遭遇强劲抛压。上吊线是看跌反转信号，暗示上涨动能衰减，但需要后续阴线确认。上吊线出现后第二天如果低开低走，则反转确认；如果高开高走，则上吊线失效。",
+    "why_it_matters": "上吊线是顶部警告信号，识别它能帮你及时止盈",
+    "common_mistakes": "混淆上吊线和锤子线（位置不同含义相反）、在底部误判上吊线",
+    "related_terms": ["Hammer", "Shooting Star", "Reversal Pattern"],
+    "source_file": "2.0_Technical_Analysis.md"
+  },
+  {
+    "term_en": "Shooting Star",
+    "term_cn": "射击之星",
+    "definition_short": "小实体+长上影线出现在顶部的看跌反转形态",
+    "definition_deep": "射击之星是一种单根K线反转形态，特征是小实体位于K线底部，上方有长长的上影线（通常是实体的2倍以上），下影线很短或没有。射击之星只在上涨趋势顶部有效，表示多方试图冲高但遭到空方强力打压，是看跌反转信号。阴线射击之星比阳线射击之星更可靠。需要后续阴线确认。",
+    "why_it_matters": "射击之星是经典的顶部反转信号，长上影代表强烈的卖压",
+    "common_mistakes": "在底部看到类似形态误判为射击之星（那是倒锤子）、忽视确认信号",
+    "related_terms": ["Inverted Hammer", "Hanging Man", "Reversal Pattern"],
+    "source_file": "2.0_Technical_Analysis.md"
+  },
+  {
+    "term_en": "Engulfing Pattern",
+    "term_cn": "吞没形态",
+    "definition_short": "后一根K线实体完全包裹前一根K线实体的双K线形态",
+    "definition_deep": "吞没形态是由两根K线组成的强反转信号。看涨吞没(Bullish Engulfing)：在下跌趋势中，一根大阳线完全包裹前一根阴线的实体，是强烈的底部反转信号。看跌吞没(Bearish Engulfing)：在上涨趋势中，一根大阴线完全包裹前一根阳线的实体，是强烈的顶部反转信号。吞没形态的实体大小反映反转力度，第二根K线实体越大，信号越强。",
+    "why_it_matters": "吞没形态是最可靠的双K线反转信号之一，尤其在关键位置出现时",
+    "common_mistakes": "只看颜色不看是否真正'吞没'、在趋势中间误判吞没形态",
+    "related_terms": ["Bullish Engulfing", "Bearish Engulfing", "Reversal Pattern"],
+    "source_file": "2.0_Technical_Analysis.md"
+  },
+  {
+    "term_en": "Morning Star",
+    "term_cn": "早晨之星",
+    "definition_short": "三根K线组成的底部反转形态：长阴→小实体→长阳",
+    "definition_deep": "早晨之星是强烈的底部反转形态，由三根K线组成：第一根是下跌趋势中的长阴线；第二根是小实体或十字星（最好向下跳空），代表多空平衡犹豫；第三根是长阳线，最好深入第一根阴线实体50%以上。早晨之星表示空方力量耗尽，多方开始反攻。该形态在关键支撑位或超卖区出现更可靠。",
+    "why_it_matters": "早晨之星是最强烈的底部反转信号之一，三根K线确认增加可靠性",
+    "common_mistakes": "形态不标准就强行认定、忽视形态出现的位置和趋势背景",
+    "related_terms": ["Evening Star", "Doji", "Reversal Pattern"],
+    "source_file": "2.0_Technical_Analysis.md"
+  },
+  {
+    "term_en": "Evening Star",
+    "term_cn": "黄昏之星",
+    "definition_short": "三根K线组成的顶部反转形态：长阳→小实体→长阴",
+    "definition_deep": "黄昏之星是早晨之星的镜像，是强烈的顶部反转形态。由三根K线组成：第一根是上涨趋势中的长阳线；第二根是小实体或十字星（最好向上跳空），代表上涨动能衰减；第三根是长阴线，最好深入第一根阳线实体50%以上。黄昏之星表示多方力量耗尽，空方开始反攻。该形态在关键阻力位或超买区出现更可靠。",
+    "why_it_matters": "黄昏之星是最强烈的顶部反转信号之一，是止盈的重要参考",
+    "common_mistakes": "在上涨中途误判黄昏之星、第三根阴线不够深入就认定",
+    "related_terms": ["Morning Star", "Doji", "Reversal Pattern"],
+    "source_file": "2.0_Technical_Analysis.md"
+  },
+  {
+    "term_en": "Moving Average",
+    "term_cn": "均线",
+    "definition_short": "过去N个周期收盘价的平均值连成的线",
+    "definition_deep": "均线(MA)是技术分析中最基础也最重要的工具之一，通过计算过去N个周期收盘价的平均值来平滑价格波动，显示趋势方向。均线的作用包括：1)判断趋势方向（价格在均线上方为涨势，下方为跌势）2)作为动态支撑/阻力位 3)产生交易信号（金叉/死叉）。常用均线包括5日、10日、20日、60日、200日等。",
+    "why_it_matters": "均线是判断趋势和支撑阻力的核心工具，是技术分析的基石",
+    "common_mistakes": "只用单一均线判断、在震荡市过度依赖均线信号",
+    "related_terms": ["SMA", "EMA", "Golden Cross", "Death Cross"],
+    "source_file": "2.0_Technical_Analysis.md"
+  },
+  {
+    "term_en": "SMA",
+    "term_cn": "简单移动平均线",
+    "definition_short": "所有数据权重相同的均线，反应较慢",
+    "definition_deep": "简单移动平均线(Simple Moving Average)是最基本的均线类型，计算方法是将过去N个周期的收盘价相加除以N。SMA的特点是每个数据点权重相同，因此反应较慢但更平滑，不容易产生假信号。SMA更适合判断长期趋势，而非捕捉短期转折。公式：SMA = (P1 + P2 + ... + Pn) / n。",
+    "why_it_matters": "SMA是最直观的均线，适合初学者理解均线原理",
+    "common_mistakes": "在快速变化的市场中使用SMA可能反应太慢",
+    "related_terms": ["EMA", "Moving Average", "MA Period"],
+    "source_file": "2.0_Technical_Analysis.md"
+  },
+  {
+    "term_en": "EMA",
+    "term_cn": "指数移动平均线",
+    "definition_short": "近期数据权重更高的均线，反应更快",
+    "definition_deep": "指数移动平均线(Exponential Moving Average)给予近期价格更高的权重，因此对价格变化反应更快、更敏感。EMA的计算包含一个平滑因子K = 2/(N+1)，使得最近的价格影响更大。EMA更适合短线交易和捕捉趋势转折，但也更容易产生假信号。MACD指标就是基于EMA计算的。",
+    "why_it_matters": "EMA反应更快，适合短线交易者和快速市场",
+    "common_mistakes": "在震荡市中EMA可能产生过多假信号、新手不理解EMA和SMA的区别",
+    "related_terms": ["SMA", "Moving Average", "MACD"],
+    "source_file": "2.0_Technical_Analysis.md"
+  },
+  {
+    "term_en": "Golden Cross",
+    "term_cn": "金叉",
+    "definition_short": "短期均线从下方向上穿越长期均线，看涨信号",
+    "definition_deep": "金叉是最经典的均线买入信号，指短期均线从下方向上穿越长期均线。这表示短期趋势转强，可能开启上涨行情。经典金叉组合包括：MA5上穿MA20（短期金叉）、MA50上穿MA200（强烈牛市信号，又称'黄金交叉'）。金叉在上涨趋势中的回调后出现更可靠，在震荡市中可能产生假信号。",
+    "why_it_matters": "金叉是最经典的买入信号之一，尤其是MA50/MA200金叉代表趋势转变",
+    "common_mistakes": "每次金叉都买入（震荡市金叉多假信号）、不等金叉确认就提前入场",
+    "related_terms": ["Death Cross", "Moving Average", "Bullish Alignment"],
+    "source_file": "2.0_Technical_Analysis.md"
+  },
+  {
+    "term_en": "Death Cross",
+    "term_cn": "死叉",
+    "definition_short": "短期均线从上方向下穿越长期均线，看跌信号",
+    "definition_deep": "死叉是金叉的反向信号，指短期均线从上方向下穿越长期均线。这表示短期趋势转弱，可能开启下跌行情。经典死叉组合包括：MA5下穿MA20（短期死叉）、MA50下穿MA200（强烈熊市信号，被称为'死亡交叉'）。死叉在下跌趋势中的反弹后出现更可靠，是减仓或做空的信号。",
+    "why_it_matters": "死叉是最经典的卖出信号之一，尤其是MA50/MA200死叉预示熊市",
+    "common_mistakes": "恐慌式每次死叉都卖出、在牛市回调中误判死叉",
+    "related_terms": ["Golden Cross", "Moving Average", "Bearish Alignment"],
+    "source_file": "2.0_Technical_Analysis.md"
+  },
+  {
+    "term_en": "Support Level",
+    "term_cn": "支撑位",
+    "definition_short": "价格下跌时遇到的托住价格的水平区域",
+    "definition_deep": "支撑位是价格下跌时不容易跌破的价格水平，就像地板一样托住价格。支撑位的形成原因包括：1)历史上的买入密集区，多方愿意在此接盘 2)心理整数关口（如100元） 3)前期低点。支撑位不是精确的价格点，而是一个价格区域。价格接近支撑位时，买盘增加导致价格反弹。一旦支撑位被有效跌破，它会转变为阻力位。",
+    "why_it_matters": "支撑位是关键的买入位置和止损参考位，跌破支撑是重要的看跌信号",
+    "common_mistakes": "把支撑位当作精确价格点、支撑位跌破后继续持有不止损",
+    "related_terms": ["Resistance Level", "Support and Resistance Flip", "Breakout"],
+    "source_file": "2.0_Technical_Analysis.md"
+  },
+  {
+    "term_en": "Resistance Level",
+    "term_cn": "阻力位",
+    "definition_short": "价格上涨时遇到的压住价格的水平区域",
+    "definition_deep": "阻力位是价格上涨时不容易突破的价格水平，就像天花板一样压住价格。阻力位的形成原因包括：1)历史上的卖出密集区，空方愿意在此出货 2)心理整数关口 3)前期高点。阻力位也是一个价格区域而非精确点。价格接近阻力位时，卖盘增加导致价格回落。一旦阻力位被有效突破，它会转变为支撑位（这叫支撑阻力互换）。",
+    "why_it_matters": "阻力位是关键的卖出位置和止盈参考位，突破阻力是重要的看涨信号",
+    "common_mistakes": "在阻力位追涨买入、忽视突破后的回踩确认",
+    "related_terms": ["Support Level", "Support and Resistance Flip", "Breakout"],
+    "source_file": "2.0_Technical_Analysis.md"
+  },
+  {
+    "term_en": "Breakout",
+    "term_cn": "突破",
+    "definition_short": "价格有效穿越支撑或阻力水平",
+    "definition_deep": "突破是价格有效穿越重要支撑位或阻力位的行为。有效突破的判断标准包括：1)收盘价突破（而非只是盘中触及） 2)成交量放大配合 3)持续确认（连续2-3根K线站稳）。突破后原支撑变阻力、原阻力变支撑。突破交易是经典的趋势跟随策略，但要警惕假突破。通常建议等待回踩确认后再入场。",
+    "why_it_matters": "突破是趋势开始或加速的信号，是重要的入场时机",
+    "common_mistakes": "追突破不等确认、不分辨真突破和假突破",
+    "related_terms": ["False Breakout", "Support Level", "Resistance Level", "Retest"],
+    "source_file": "2.0_Technical_Analysis.md"
+  },
+  {
+    "term_en": "False Breakout",
+    "term_cn": "假突破",
+    "definition_short": "价格短暂突破支撑/阻力后快速反转回原区间",
+    "definition_deep": "假突破(Fakeout)是价格看似突破重要支撑或阻力，但随后迅速反转回原区间的现象。假突破的成因包括：1)主力诱多/诱空 2)止损盘触发后的回补 3)突破动能不足。假突破对追突破者是噩梦，但对反向交易者是机会。识别假突破：观察成交量是否放大、是否收盘价确认、后续走势是否持续。",
+    "why_it_matters": "识别假突破能避免追高被套，甚至可以反向操作获利",
+    "common_mistakes": "每次突破都追入不等确认、被假突破止损后不敢再入场",
+    "related_terms": ["Breakout", "Retest", "Stop Loss Hunting"],
+    "source_file": "2.0_Technical_Analysis.md"
+  },
+  {
+    "term_en": "Volume",
+    "term_cn": "成交量",
+    "definition_short": "某周期内成交的股数/合约数/金额总量",
+    "definition_deep": "成交量是技术分析中与价格并列的两大核心数据之一。成交量反映市场参与者的活跃程度和意愿强度。'量在价先'是经典法则——成交量的变化往往先于价格变化。成交量的分析关注：放量/缩量、量价关系（量价齐升/量价背离）、关键位置的成交量特征。成交量是验证价格走势有效性的重要工具。",
+    "why_it_matters": "成交量是验证价格走势真实性的关键指标，量价配合是判断趋势健康度的标准",
+    "common_mistakes": "只看价格不看量、忽视量价背离的警告信号",
+    "related_terms": ["Volume Surge", "Volume Decline", "Volume-Price Confirmation"],
+    "source_file": "2.0_Technical_Analysis.md"
+  },
+  {
+    "term_en": "Volume Surge",
+    "term_cn": "放量",
+    "definition_short": "成交量明显高于近期平均水平",
+    "definition_deep": "放量是成交量显著高于近期平均水平的现象。放量通常出现在趋势转折点、突破时刻、恐慌/狂热时期。放量上涨表示多方资金积极进场，上涨健康可持续；放量下跌表示恐慌性抛售，可能加速下跌；突破时放量是有效突破的重要确认。天量（极端放量）往往是趋势见顶或见底的信号。",
+    "why_it_matters": "放量是市场情绪和资金流向的直接反映，是验证突破的关键",
+    "common_mistakes": "不关注放量的位置和背景、忽视天量可能是反转信号",
+    "related_terms": ["Volume Decline", "Volume", "Climax Volume"],
+    "source_file": "2.0_Technical_Analysis.md"
+  },
+  {
+    "term_en": "Volume Decline",
+    "term_cn": "缩量",
+    "definition_short": "成交量明显低于近期平均水平",
+    "definition_deep": "缩量是成交量显著低于近期平均水平的现象。缩量上涨表示追涨意愿不足，上涨可能乏力；缩量下跌表示抛压减轻，下跌趋缓，可能接近底部；盘整期间缩量表示多空观望，蓄势待发。地量（极端缩量）往往出现在趋势底部，表示抛压耗尽。",
+    "why_it_matters": "缩量回调是健康信号，缩量上涨是危险信号，地量可能是底部",
+    "common_mistakes": "缩量上涨时继续追涨、忽视缩量盘整后的突破信号",
+    "related_terms": ["Volume Surge", "Volume", "Dry-up Volume"],
+    "source_file": "2.0_Technical_Analysis.md"
+  },
+  {
+    "term_en": "RSI",
+    "term_cn": "相对强弱指数",
+    "definition_short": "衡量价格涨跌强度的振荡器，判断超买超卖",
+    "definition_deep": "RSI(Relative Strength Index)是J. Welles Wilder在1978年发明的动量振荡器，通过计算一定周期内上涨和下跌幅度的比例来衡量价格变化的速度和幅度。RSI数值在0-100之间波动，通常RSI>70视为超买（可能回调），RSI<30视为超卖（可能反弹）。RSI还可用于识别背离：价格创新高但RSI不创新高（顶背离，看跌）；价格创新低但RSI不创新低（底背离，看涨）。",
+    "why_it_matters": "RSI是最常用的超买超卖指标，背离信号是强烈的反转预警",
+    "common_mistakes": "趋势强劲时RSI会钝化（长期超买/超卖）、孤立使用RSI不结合趋势",
+    "related_terms": ["Overbought", "Oversold", "Divergence", "MACD"],
+    "source_file": "2.0_Technical_Analysis.md"
+  },
+  {
+    "term_en": "Overbought",
+    "term_cn": "超买",
+    "definition_short": "价格涨过头，可能面临回调压力",
+    "definition_deep": "超买是指资产价格在短期内上涨过快、过多，超出了其合理估值或技术承载范围。在技术指标上，RSI>70、KDJ中K/D>80等都是超买信号。超买不意味着价格一定会跌，但表示上涨动能可能衰减，买入风险增加。在强势上涨趋势中，超买状态可能持续很长时间。超买更适合作为减仓或观望信号，而非做空信号。",
+    "why_it_matters": "超买区是风险增加区，不适合追涨买入，考虑止盈",
+    "common_mistakes": "看到超买就做空（趋势可能继续）、在超买区追涨",
+    "related_terms": ["Oversold", "RSI", "KDJ"],
+    "source_file": "2.0_Technical_Analysis.md"
+  },
+  {
+    "term_en": "Oversold",
+    "term_cn": "超卖",
+    "definition_short": "价格跌过头，可能面临反弹动力",
+    "definition_deep": "超卖是指资产价格在短期内下跌过快、过多。在技术指标上，RSI<30、KDJ中K/D<20等都是超卖信号。超卖不意味着价格一定会涨，但表示下跌动能可能衰减，卖出风险增加。在强势下跌趋势中，超卖状态可能持续很长时间。超卖更适合作为观察反弹机会的区域，而非盲目抄底的理由。",
+    "why_it_matters": "超卖区是潜在的反弹区，可以关注但需要确认信号",
+    "common_mistakes": "看到超卖就抄底（可能继续跌）、在超卖区恐慌卖出",
+    "related_terms": ["Overbought", "RSI", "KDJ"],
+    "source_file": "2.0_Technical_Analysis.md"
+  },
+  {
+    "term_en": "MACD",
+    "term_cn": "指数平滑异同移动平均线",
+    "definition_short": "基于均线差值的趋势跟踪指标",
+    "definition_deep": "MACD(Moving Average Convergence Divergence)是Gerald Appel在1970年代发明的趋势跟踪指标。MACD由三部分组成：DIF(快线，EMA12-EMA26)、DEA(慢线，DIF的EMA9)、MACD柱(DIF-DEA的2倍)。核心信号：DIF上穿DEA是金叉(买入)，DIF下穿DEA是死叉(卖出)；零轴上方代表多头市场，零轴下方代表空头市场；MACD柱的背离是重要的反转预警。",
+    "why_it_matters": "MACD是最经典的趋势跟踪指标，金叉死叉是广泛使用的交易信号",
+    "common_mistakes": "MACD信号滞后，不适合短线、震荡市中MACD假信号多",
+    "related_terms": ["DIF", "DEA", "Golden Cross", "Divergence"],
+    "source_file": "2.0_Technical_Analysis.md"
+  },
+  {
+    "term_en": "Bollinger Bands",
+    "term_cn": "布林带",
+    "definition_short": "基于标准差的动态价格通道",
+    "definition_deep": "布林带是John Bollinger在1980年代发明的波动率指标。由三条线组成：中轨(20日均线)、上轨(中轨+2倍标准差)、下轨(中轨-2倍标准差)。约95%的价格波动在上下轨之间。核心用法：价格触及上轨可能超买，触及下轨可能超卖；布林带收窄表示波动率降低，大行情即将来临；价格沿上轨运行是强势上涨，沿下轨运行是强势下跌。",
+    "why_it_matters": "布林带是判断波动率和超买超卖的直观工具，收窄是大行情前兆",
+    "common_mistakes": "把触及上轨直接当卖出信号（强势时价格沿上轨运行）、忽视布林带收窄的预警",
+    "related_terms": ["Standard Deviation", "Moving Average", "Volatility"],
+    "source_file": "2.0_Technical_Analysis.md"
+  },
+  {
+    "term_en": "Divergence",
+    "term_cn": "背离",
+    "definition_short": "价格走势与技术指标走势相反的现象",
+    "definition_deep": "背离是价格创新高/新低，但技术指标（如RSI、MACD）没有同步创新高/新低的现象。顶背离(Bearish Divergence)：价格创新高，指标不创新高，暗示上涨动能衰减，可能见顶。底背离(Bullish Divergence)：价格创新低，指标不创新低，暗示下跌动能衰减，可能见底。背离是最可靠的反转预警之一，但背离后不一定立即反转，需要其他信号确认。",
+    "why_it_matters": "背离是最强烈的反转预警信号之一，多指标同时背离更可靠",
+    "common_mistakes": "背离出现就立即操作不等确认、忽视背离可能持续多个周期",
+    "related_terms": ["RSI", "MACD", "Reversal Pattern"],
+    "source_file": "2.0_Technical_Analysis.md"
+  },
+  {
+    "term_en": "Head and Shoulders",
+    "term_cn": "头肩形态",
+    "definition_short": "三峰反转形态，中间峰最高/最低",
+    "definition_deep": "头肩形态是最经典的反转形态之一。头肩顶：左肩(第一个高点)→头部(更高的高点)→右肩(较低的高点，与左肩高度相近)，颈线连接两个低点。价格跌破颈线确认形态完成，目标价=颈线-(头部到颈线距离)。头肩底是头肩顶的镜像，是底部反转形态。头肩形态形成周期较长，形态越标准越可靠。",
+    "why_it_matters": "头肩形态是最可靠的反转形态之一，跌破/突破颈线是重要交易信号",
+    "common_mistakes": "形态不标准强行认定、不等颈线突破确认就操作",
+    "related_terms": ["Neckline", "Double Top", "Reversal Pattern"],
+    "source_file": "2.0_Technical_Analysis.md"
+  },
+  {
+    "term_en": "Double Top",
+    "term_cn": "双顶/M顶",
+    "definition_short": "两个等高高点组成的顶部反转形态",
+    "definition_deep": "双顶（又称M顶）是常见的顶部反转形态，由两个高度相近的高点和中间一个回调低点组成，形如字母M。形态判断：两个高点高度接近（差距不超过3%）、中间回调幅度明显、第二个高点伴随成交量减少。颈线是中间低点的水平线，价格跌破颈线确认形态完成。目标价=颈线-(顶部到颈线距离)。",
+    "why_it_matters": "双顶是常见且可靠的顶部反转形态，是止盈或做空的重要参考",
+    "common_mistakes": "在形成过程中过早认定双顶、忽视成交量配合",
+    "related_terms": ["Double Bottom", "Head and Shoulders", "Neckline"],
+    "source_file": "2.0_Technical_Analysis.md"
+  },
+  {
+    "term_en": "Double Bottom",
+    "term_cn": "双底/W底",
+    "definition_short": "两个等低低点组成的底部反转形态",
+    "definition_deep": "双底（又称W底）是双顶的镜像，是常见的底部反转形态。由两个高度相近的低点和中间一个反弹高点组成，形如字母W。形态判断：两个低点高度接近、中间反弹幅度明显、第二个低点伴随成交量减少（抛压减轻）。颈线是中间高点的水平线，价格突破颈线确认形态完成。目标价=颈线+(颈线到底部距离)。",
+    "why_it_matters": "双底是常见且可靠的底部反转形态，是买入的重要参考",
+    "common_mistakes": "在形成过程中过早抄底、不等颈线突破确认",
+    "related_terms": ["Double Top", "Head and Shoulders", "Neckline"],
+    "source_file": "2.0_Technical_Analysis.md"
+  },
+  {
+    "term_en": "Triangle Pattern",
+    "term_cn": "三角形态",
+    "definition_short": "价格在收敛区间内震荡形成的三角形整理形态",
+    "definition_deep": "三角形态是常见的整理形态，表示多空双方在逐渐收敛的区间内博弈。三种类型：对称三角形（高点下降+低点上升，方向不定）、上升三角形（高点水平+低点上升，偏多，大概率向上突破）、下降三角形（高点下降+低点水平，偏空，大概率向下突破）。三角形收敛到顶点附近通常会选择方向突破，突破方向决定后续趋势。",
+    "why_it_matters": "三角形态预示着突破即将来临，识别类型可预判突破方向",
+    "common_mistakes": "在三角形内部频繁操作、不等突破确认就押注方向",
+    "related_terms": ["Breakout", "Symmetrical Triangle", "Ascending Triangle"],
+    "source_file": "2.0_Technical_Analysis.md"
+  },
+  {
+    "term_en": "Trend Line",
+    "term_cn": "趋势线",
+    "definition_short": "连接价格高点或低点形成的斜线",
+    "definition_deep": "趋势线是技术分析中最基本的工具之一。上升趋势线连接两个或以上的更高低点，作为动态支撑；下降趋势线连接两个或以上的更低高点，作为动态阻力。画法规则：至少需要2个点，3个点以上更可靠；线应该触及尽可能多的点。趋势线被突破往往是趋势反转的信号。趋势线越陡峭越不可持续，越平缓越稳定。",
+    "why_it_matters": "趋势线是判断趋势方向和反转的基础工具",
+    "common_mistakes": "画太多趋势线导致混乱、趋势线被突破后不及时止损",
+    "related_terms": ["Uptrend", "Downtrend", "Support Level", "Resistance Level"],
+    "source_file": "2.0_Technical_Analysis.md"
+  },
+  {
+    "term_en": "Loss Aversion",
+    "term_cn": "损失厌恶",
+    "definition_short": "亏损的痛苦是同等盈利快乐的2倍",
+    "definition_deep": "损失厌恶是行为经济学的核心概念，由Kahneman和Tversky在前景理论中提出。研究表明，人们对损失的心理反应强度约是同等收益的2-2.5倍。这解释了为什么投资者不愿止损（卖出意味着确认亏损=痛苦）、过早止盈（赶快锁定利润避免变成亏损）、以及在亏损时反而更愿意冒险（想尽快消除痛苦）。",
+    "why_it_matters": "损失厌恶是投资者不愿止损的心理根源，理解它才能克服它",
+    "common_mistakes": "被损失厌恶驱动而死扛亏损、为避免小损失而承担大风险",
+    "related_terms": ["Stop Loss", "Sunk Cost Fallacy", "Disposition Effect"],
+    "source_file": "3.0_Market_Psychology.md"
+  },
+  {
+    "term_en": "Anchoring Effect",
+    "term_cn": "锚定效应",
+    "definition_short": "过度依赖第一个获得的信息（如买入价）",
+    "definition_deep": "锚定效应是一种认知偏差，指人们在做判断时会过度依赖最先获得的信息（锚点），即使这个信息可能与判断无关。在交易中，常见的锚点包括：买入价（总是用买入价衡量涨跌）、历史高点（认为'跌了这么多肯定要反弹'）、整数关口（对100元、10000点等整数价格特别敏感）。锚定效应导致投资者无法客观评估当前价值。",
+    "why_it_matters": "锚定效应让你被历史价格束缚，无法客观判断当前是否值得买卖",
+    "common_mistakes": "用买入价作为卖出参考、认为'跌了很多所以便宜了'",
+    "related_terms": ["Loss Aversion", "Confirmation Bias", "Sunk Cost Fallacy"],
+    "source_file": "3.0_Market_Psychology.md"
+  },
+  {
+    "term_en": "Confirmation Bias",
+    "term_cn": "确认偏误",
+    "definition_short": "只看支持自己观点的信息，忽视反面证据",
+    "definition_deep": "确认偏误是指人们倾向于寻找、解读、记忆支持自己已有观点的信息，同时忽视或贬低反面证据。在交易中表现为：选择性搜索（只看看涨的分析）、选择性解读（同样的数据被解读为支持自己观点）、选择性记忆（记住判断对的时候，忘记错的时候）。确认偏误导致过度自信和忽视风险。",
+    "why_it_matters": "确认偏误让你看不到风险，导致过度自信和重仓操作",
+    "common_mistakes": "买入后不断找利好安慰自己、只和看法一致的人交流",
+    "related_terms": ["Overconfidence", "Anchoring Effect", "Echo Chamber"],
+    "source_file": "3.0_Market_Psychology.md"
+  },
+  {
+    "term_en": "Overconfidence",
+    "term_cn": "过度自信",
+    "definition_short": "高估自己的判断能力和预测准确率",
+    "definition_deep": "过度自信是指人们普遍高估自己的能力、知识和判断准确性。研究表明90%的人认为自己高于平均水平（数学上不可能）。过度自信有三种形态：过度精确（预测精确到小数点）、过度估计（以为预测准确率80%实际只有50%）、过度定位（以为自己比90%的人强）。过度自信导致重仓押注、频繁交易、忽视止损。",
+    "why_it_matters": "过度自信是重仓爆仓的主要原因，让你承担超出能力的风险",
+    "common_mistakes": "因为'这次一定对'而重仓、忽视止损因为'我知道会涨'",
+    "related_terms": ["Confirmation Bias", "All-In", "Leverage"],
+    "source_file": "3.0_Market_Psychology.md"
+  },
+  {
+    "term_en": "Sunk Cost Fallacy",
+    "term_cn": "沉没成本谬误",
+    "definition_short": "因为已经投入太多而继续投入",
+    "definition_deep": "沉没成本谬误是一种认知偏差，指因为已经投入了大量资源（时间、金钱、精力）而继续投入，即使理性上应该止损。在交易中表现为'我都亏这么多了，现在卖太亏了'或'我研究这个标的花了这么多时间，不能放弃'。正确思维应该是：过去的投入是沉没成本，已经无法挽回，当前决策应该只基于未来预期收益。",
+    "why_it_matters": "沉没成本谬误是深度套牢的心理根源，识别它才能做出理性决策",
+    "common_mistakes": "把'已经亏了多少'作为不止损的理由、把投入时间作为持有理由",
+    "related_terms": ["Loss Aversion", "Stop Loss", "Anchoring Effect"],
+    "source_file": "3.0_Market_Psychology.md"
+  },
+  {
+    "term_en": "Hindsight Bias",
+    "term_cn": "后见之明偏差",
+    "definition_short": "事后觉得'我早就知道会这样'",
+    "definition_deep": "后见之明偏差是指事情发生后，人们倾向于认为'我早就知道会这样'，高估自己事前的预测能力。这种偏差导致：高估自己的判断能力、低估市场的不确定性、无法从错误中学习（把错误归因于运气）、看历史图表时产生幻觉（觉得每个顶和底都'很明显'）。实际上，当时的未来是完全未知的。",
+    "why_it_matters": "后见之明让你高估自己能力，下次更敢冒险，最终吃大亏",
+    "common_mistakes": "复盘时觉得信号'很明显'、把成功归因于能力而非运气",
+    "related_terms": ["Overconfidence", "Outcome Bias", "Survivorship Bias"],
+    "source_file": "3.0_Market_Psychology.md"
+  },
+  {
+    "term_en": "Disposition Effect",
+    "term_cn": "处置效应",
+    "definition_short": "赚了想跑，亏了死扛",
+    "definition_deep": "处置效应是指投资者倾向于过早卖出盈利的股票（落袋为安），同时过晚卖出亏损的股票（死扛不认输）。这是损失厌恶和风险偏好反转的综合体现。数学上，这种行为导致'赚小钱亏大钱'——平均盈利10%就卖，平均亏损30%才卖，盈亏比1:3，需要75%胜率才能保本，长期必亏。",
+    "why_it_matters": "处置效应导致'赚小钱亏大钱'，是散户长期亏损的主要原因",
+    "common_mistakes": "浮盈10%就急着锁定、浮亏30%还在死扛等解套",
+    "related_terms": ["Loss Aversion", "Take Profit", "Stop Loss"],
+    "source_file": "3.0_Market_Psychology.md"
+  },
+  {
+    "term_en": "FOMO",
+    "term_cn": "错失恐惧症",
+    "definition_short": "害怕错过赚钱机会的焦虑",
+    "definition_deep": "FOMO (Fear of Missing Out) 是害怕错过赚钱机会而产生的焦虑，导致冲动追涨。触发场景包括：看到别人晒收益、某资产连涨几天、听说'内幕消息'、社交媒体充斥'上车'言论。FOMO驱动的买入往往发生在价格高位，因为正是上涨本身触发了FOMO。结果是追涨买入后高位套牢。",
+    "why_it_matters": "FOMO是追高被套的心理根源，理解它才能避免冲动买入",
+    "common_mistakes": "看到上涨就冲动买入、因为'不能再错过了'而追涨",
+    "related_terms": ["Greed", "Herding Behavior", "Market Sentiment"],
+    "source_file": "3.0_Market_Psychology.md"
+  },
+  {
+    "term_en": "FUD",
+    "term_cn": "恐惧不确定怀疑",
+    "definition_short": "由负面消息引发的恐慌情绪",
+    "definition_deep": "FUD (Fear, Uncertainty, Doubt) 是由负面消息引发的恐慌情绪，导致非理性抛售。来源包括：媒体渲染的负面新闻、竞争对手/空头散布的谣言、宏观经济的不确定性、监管政策风险。FUD通过社交媒体放大后引发散户恐慌抛售，导致价格下跌，下跌本身又成为新的FUD，形成负反馈循环。聪明钱往往在FUD高峰时抄底。",
+    "why_it_matters": "识别FUD和真风险的区别，避免在恐慌中低位割肉",
+    "common_mistakes": "被媒体渲染吓到恐慌卖出、不验证消息来源就操作",
+    "related_terms": ["Fear", "Panic Selling", "Market Sentiment"],
+    "source_file": "3.0_Market_Psychology.md"
+  },
+  {
+    "term_en": "Greed",
+    "term_cn": "贪婪",
+    "definition_short": "对收益的过度渴望",
+    "definition_deep": "贪婪是对收益的过度渴望，导致承担超出承受能力的风险。表现包括：赚了还想赚更多、使用过高杠杆、不设止盈、忽视风险只看收益。适度贪婪驱动追求合理收益，但过度贪婪驱动追求暴利，导致高杠杆重仓操作，最终一次爆仓归零。贪婪周期：初期盈利→过度自信→加杠杆→更大盈利→更大贪婪→崩盘。",
+    "why_it_matters": "贪婪是使用过高杠杆和不止盈的根源，导致一次归零",
+    "common_mistakes": "赚了还想更多不止盈、使用超出承受能力的杠杆",
+    "related_terms": ["Leverage", "Take Profit", "Overconfidence"],
+    "source_file": "3.0_Market_Psychology.md"
+  },
+  {
+    "term_en": "Fear",
+    "term_cn": "恐惧",
+    "definition_short": "对损失的过度担忧",
+    "definition_deep": "恐惧是对损失的过度担忧，导致错过机会或恐慌性卖出。表现包括：不敢在底部买入、一有波动就想卖、过早止损、空仓踏空。恐惧和贪婪构成市场情绪周期的两极：贪婪在顶部达到高峰，恐惧在底部达到高峰。巴菲特名言'在别人恐惧时贪婪，在别人贪婪时恐惧'指的就是利用这种情绪极端。",
+    "why_it_matters": "恐惧导致在底部恐慌卖出或不敢买入，错过最佳机会",
+    "common_mistakes": "在下跌中恐慌割肉、因为害怕而不敢在低位买入",
+    "related_terms": ["FUD", "Panic Selling", "Capitulation"],
+    "source_file": "3.0_Market_Psychology.md"
+  },
+  {
+    "term_en": "Herding Behavior",
+    "term_cn": "羊群效应",
+    "definition_short": "跟随大众行动而非独立思考",
+    "definition_deep": "羊群效应是指投资者倾向于跟随大众的行为，而非独立思考。原因包括：信息不对称（认为别人知道自己不知道的）、社会证明（别人都这么做应该是对的）、责任分散（跟大家一起亏心理负担更小）、FOMO（不想被落下）。羊群效应导致泡沫形成：少数人买入→价格上涨→更多人跟随→泡沫→聪明钱卖出→崩盘→散户套牢。",
+    "why_it_matters": "羊群效应是泡沫形成和崩盘的推动力，理解它才能逆向操作",
+    "common_mistakes": "因为'大家都在买'而买入、在狂热顶部跟风入场",
+    "related_terms": ["FOMO", "Market Sentiment", "Bubble"],
+    "source_file": "3.0_Market_Psychology.md"
+  },
+  {
+    "term_en": "Market Sentiment",
+    "term_cn": "市场情绪",
+    "definition_short": "市场参与者的集体情绪状态",
+    "definition_deep": "市场情绪是市场参与者的集体情绪状态，随价格波动呈现周期性变化。情绪周期：绝望/投降（底部）→怀疑/谨慎→希望/乐观→兴奋/贪婪→狂热/自满（顶部）→焦虑/否认→恐惧/恐慌→绝望。经典名言'市场在绝望中诞生，在怀疑中成长，在乐观中成熟，在狂热中消亡'描述了这个周期。识别情绪周期是逆向投资的关键。",
+    "why_it_matters": "识别市场情绪周期，可以在极端位置逆向操作获利",
+    "common_mistakes": "在狂热时入场、在绝望时离场，完全跟随情绪操作",
+    "related_terms": ["Fear", "Greed", "Herding Behavior", "Capitulation"],
+    "source_file": "3.0_Market_Psychology.md"
+  },
+  {
+    "term_en": "Reflexivity",
+    "term_cn": "反身性",
+    "definition_short": "市场预期和市场现实相互影响",
+    "definition_deep": "反身性是乔治·索罗斯提出的理论——市场参与者的观点会影响市场本身，而市场变化又会影响参与者的观点，形成反馈循环。正反馈循环：价格上涨→信心增强→更多买入→价格继续上涨（泡沫形成）。负反馈循环：价格下跌→信心崩溃→恐慌卖出→价格继续下跌（崩盘）。反身性解释了为什么市场会出现自我实现的预言和过度反应。",
+    "why_it_matters": "理解反身性可以识别市场何时处于自我强化阶段，预判拐点",
+    "common_mistakes": "在反身性阶段试图用'理性分析'对抗趋势",
+    "related_terms": ["Positive Feedback Loop", "Bubble", "Market Sentiment"],
+    "source_file": "3.0_Market_Psychology.md"
+  },
+  {
+    "term_en": "Panic Selling",
+    "term_cn": "恐慌性抛售",
+    "definition_short": "由恐惧驱动的非理性卖出",
+    "definition_deep": "恐慌性抛售是由恐惧驱动的非理性卖出行为，通常发生在市场急剧下跌时。特征包括：成交量急剧放大、价格快速下跌、卖出不考虑价格、情绪极度恐惧。恐慌性抛售往往标志着下跌的尾声（投降阶段），因为最后的卖盘被清出市场后，没有进一步的卖压。聪明钱通常在恐慌性抛售时入场抄底。",
+    "why_it_matters": "恐慌性抛售是底部的信号之一，识别它可以避免低位割肉",
+    "common_mistakes": "在恐慌中跟随卖出、把恐慌性抛售误判为新下跌的开始",
+    "related_terms": ["Fear", "Capitulation", "FUD", "Market Sentiment"],
+    "source_file": "3.0_Market_Psychology.md"
+  },
+  {
+    "term_en": "Capitulation",
+    "term_cn": "投降",
+    "definition_short": "市场参与者放弃抵抗，集体卖出",
+    "definition_deep": "投降是市场参与者放弃抵抗、集体卖出的阶段，通常是底部的标志。特征包括：长期持有者开始卖出、成交量达到极端高位、市场情绪极度悲观、媒体充斥'永远不会涨回来'的言论。投降阶段标志着卖盘耗尽，因为愿意卖的人都已经卖出了。经典名言'当最后一个空头回补时，底部就形成了'描述的就是投降后的反转。",
+    "why_it_matters": "投降是底部的重要信号，识别它可以在底部抄底",
+    "common_mistakes": "在投降阶段跟随卖出、把投降误判为新一轮下跌的开始",
+    "related_terms": ["Panic Selling", "Fear", "Market Sentiment", "Bottom"],
+    "source_file": "3.0_Market_Psychology.md"
+  },
+  {
+    "term_en": "Revenge Trading",
+    "term_cn": "报复性交易",
+    "definition_short": "亏损后急于'赚回来'的冲动交易",
+    "definition_deep": "报复性交易是亏损后急于'赚回来'的冲动交易行为，通常导致更大的亏损。心理机制包括：损失厌恶（想尽快消除痛苦）、控制幻觉（以为能通过更多交易扭转局面）、赌徒谬误（以为亏损后更可能盈利）。报复性交易者往往加大仓位、提高频率、降低标准，结果是把小亏变成大亏。专业交易员设定'冷静期'规则来避免报复性交易。",
+    "why_it_matters": "报复性交易是把小亏变成大亏的主要原因，必须通过纪律避免",
+    "common_mistakes": "亏损后立即加大仓位想回本、连续亏损后情绪化加仓",
+    "related_terms": ["Loss Aversion", "Emotional Trading", "Overtrading"],
+    "source_file": "3.0_Market_Psychology.md"
+  },
+  {
+    "term_en": "Gambler's Fallacy",
+    "term_cn": "赌徒谬误",
+    "definition_short": "认为独立事件之间有因果关系",
+    "definition_deep": "赌徒谬误是指认为独立事件之间存在因果关系——'跌了5天肯定要涨了'或'连续5次亏损后一定会赢'。这种谬误源于人脑对'规律'的过度追求，即使规律不存在。实际上，每一天的涨跌是相对独立的事件，昨天跌不影响今天的概率。赌徒谬误导致投资者在没有逻辑支撑的情况下抄底或追涨。",
+    "why_it_matters": "赌徒谬误导致基于错误假设的操作，应该用客观指标判断",
+    "common_mistakes": "'跌了这么多天肯定要涨了'、'这次一定轮到我赢'",
+    "related_terms": ["Probability Thinking", "Mean Reversion", "Trend"],
+    "source_file": "3.0_Market_Psychology.md"
+  },
+  {
+    "term_en": "Outcome Bias",
+    "term_cn": "结果导向偏差",
+    "definition_short": "用结果评判决策质量",
+    "definition_deep": "结果导向偏差是指用结果的好坏评判决策的质量——'赚了所以决策正确，亏了所以决策错误'。这种偏差忽视了概率的本质：正确的决策也可能产生坏结果（低概率事件发生），错误的决策也可能产生好结果（走运）。专业交易员评估的是'决策过程是否正确'而非'单次结果是否盈利'。长期来看，正确的过程会产生好的结果。",
+    "why_it_matters": "结果导向让你无法从经验中正确学习，应该评估过程而非结果",
+    "common_mistakes": "因为赚钱就认为决策正确、因为亏钱就否定正确的策略",
+    "related_terms": ["Hindsight Bias", "Process vs Outcome", "Probability Thinking"],
+    "source_file": "3.0_Market_Psychology.md"
+  },
+  {
+    "term_en": "Emotional Trading",
+    "term_cn": "情绪化交易",
+    "definition_short": "基于情绪而非逻辑的交易决策",
+    "definition_deep": "情绪化交易是指基于情绪而非逻辑做交易决策。市场波动触发原始的'战或逃'反应，盈利时多巴胺分泌产生兴奋，亏损时杏仁核激活产生恐惧。这些生理反应干扰理性判断，导致追涨杀跌、冲动操作。克服方法包括：提前制定交易计划、情绪激动时强制等待、用清单检查决策逻辑。量化交易的优势之一就是完全规避情绪干扰。",
+    "why_it_matters": "情绪化交易是散户亏损的主要原因，必须通过纪律和规则克服",
+    "common_mistakes": "看到上涨就兴奋买入、看到下跌就恐慌卖出",
+    "related_terms": ["Fear", "Greed", "Revenge Trading", "Discipline"],
+    "source_file": "3.0_Market_Psychology.md"
+  }
+]

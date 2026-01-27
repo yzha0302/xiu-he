@@ -1,0 +1,202 @@
+[
+    {
+        "term_en": "Narrative Crisis",
+        "term_cn": "叙事危机",
+        "definition_short": "因公共叙事缺失导致的集体性意义感塌陷",
+        "definition_deep": "一个社会如果缺乏贯穿历史、人人可参与的公共故事传统，个体就难以在血缘关系之外找到精神归属。这种结构性缺失会导致整个社会弥漫着意义感的空虚，人们只能在现实利益和家族传承中寻找碎片化的慰藉，无法建立超时空的命运共同体认同。",
+        "why_it_matters": "理解叙事危机是诊断当代中国社会众多心理问题（内卷、躺平、中年危机）的根因钥匙",
+        "common_mistakes": "认为精神空虚是个人问题，用消费和娱乐来填补，而非从结构层面理解",
+        "related_terms": [
+            "Hollow Person",
+            "Collective Unconscious",
+            "Public Narrative Structure"
+        ],
+        "source_file": "Narrative_Crisis.md"
+    },
+    {
+        "term_en": "Hollow Person",
+        "term_cn": "空心人",
+        "definition_short": "没有背景故事的IP形象，可承载任意情绪投射",
+        "definition_deep": "指像Molly和Labubu这样没有动画叙事背景的玩偶IP。与奥特曼、哆啦A梦等有丰富故事的角色不同，空心人没有预设的人格和命运，反而成为时代情绪的空白投影幕布——人们可以把任何情感投射其上，使其成为集体心理的精准映射。",
+        "why_it_matters": "观察空心人IP的流行趋势变化，可以诊断社会集体情绪的迁移方向",
+        "common_mistakes": "认为空心人没有故事是缺点，其实这正是其能精准捕捉时代情绪的优势",
+        "related_terms": [
+            "Narrative Crisis",
+            "Collective Unconscious"
+        ],
+        "source_file": "Narrative_Crisis.md"
+    },
+    {
+        "term_en": "Collective Unconscious",
+        "term_cn": "集体潜意识",
+        "definition_short": "一个社会群体共享的深层心理模式",
+        "definition_deep": "荣格提出的概念，指一个文化群体在历史积淀中形成的、不需要学习就内化的心理结构。它不是个人经验的总和，而是代际传递的精神基因。中国人骨子里的实用主义、对权威的依附、悲情美学倾向，都是集体潜意识的表现。",
+        "why_it_matters": "很多你以为是'自己选择'的思维模式，其实是集体潜意识在运作",
+        "common_mistakes": "以为自己的价值观完全是自己形成的，忽视文化结构的深层影响",
+        "related_terms": [
+            "Narrative Crisis",
+            "Melancholic Aesthetics",
+            "Pragmatism"
+        ],
+        "source_file": "Narrative_Crisis.md"
+    },
+    {
+        "term_en": "Meaning Vector",
+        "term_cn": "意义向量",
+        "definition_short": "意义是一个与时间合并的方向性变化",
+        "definition_deep": "意义不是静态的状态，而是一个在时间轴上有方向的向量。只有当一个人或事物被放在时间坐标轴上，持续向前产生积极变化，才会被认为'有意义'。这解释了为什么Labubu代表意义缺失——崩溃是一种没有时间指向的情绪，它只存在于当下这一刻。",
+        "why_it_matters": "理解意义的本质是'方向感'，你就知道为什么短视频让人空虚——它没有时间维度的积累",
+        "common_mistakes": "把'快乐'等同于'有意义'，其实快乐可以是瞬间的，意义必须有方向",
+        "related_terms": [
+            "Temporal Directionality",
+            "Narrative Crisis"
+        ],
+        "source_file": "Narrative_Crisis.md"
+    },
+    {
+        "term_en": "Differential Mode of Association",
+        "term_cn": "差序格局",
+        "definition_short": "以自己为中心、由近及远递减的信任圈",
+        "definition_deep": "费孝通在《乡土中国》中提出的经典概念。中国人的社会关系像水波纹一样，以自己为圆心向外扩散，越近的人越信任，越远的人越陌生。这与西方'团体格局'（人人平等的契约关系）不同。差序格局导致中国人在家族之外缺乏现成的信任机制，走出家门'无人可信'。",
+        "why_it_matters": "这解释了为什么中国人难以形成超越血缘的命运共同体",
+        "common_mistakes": "认为差序格局是落后的，其实它是叙事缺失的自然结果——没有公共故事把陌生人连接起来",
+        "related_terms": [
+            "Community of Destiny",
+            "Public Narrative Structure",
+            "Atomization"
+        ],
+        "source_file": "Narrative_Crisis.md"
+    },
+    {
+        "term_en": "Folk Narrative",
+        "term_cn": "平民叙事",
+        "definition_short": "来自民间、人人可参与的公共故事传统",
+        "definition_deep": "区别于帝王将相的官方叙事，平民叙事是普通人也能感受到'我是这个故事一部分'的公共传统。西方的圣经就是典型的平民叙事——无论你是国王还是农夫，都可以把自己的人生纳入这套故事，找到意义路径。中国历史上，这种平民叙事长期缺失。",
+        "why_it_matters": "没有平民叙事，普通人就无法在宏大历史中找到自己的位置",
+        "common_mistakes": "以为读历史就是参与叙事，其实如果你只能用'帝王视角'看历史，你仍然是旁观者",
+        "related_terms": [
+            "Public Narrative Structure",
+            "Community of Destiny",
+            "Narrative Crisis"
+        ],
+        "source_file": "Narrative_Crisis.md"
+    },
+    {
+        "term_en": "Melancholic Aesthetics",
+        "term_cn": "悲情美学",
+        "definition_short": "以哀伤、不得志、愁苦为美的文化倾向",
+        "definition_deep": "中国传统文化中一种独特的审美取向，表现为对悲伤、失意、无常的偏好。典型如'是非成败转头空'的三国歌词——不是'虽败犹荣'的悲壮，而是'不管成功失败都毫无意义'的虚无。这种美学与中国文化不欣赏失败者、不给失败者安美学色彩的传统有关。",
+        "why_it_matters": "理解悲情美学，可以识别自己思维中的虚无主义底色",
+        "common_mistakes": "把悲情美学当成'深刻'，其实它可能是无力感的美化包装",
+        "related_terms": [
+            "Collective Unconscious",
+            "Narrative Crisis"
+        ],
+        "source_file": "Narrative_Crisis.md"
+    },
+    {
+        "term_en": "Self-Identity",
+        "term_cn": "自我同一性",
+        "definition_short": "意识与潜意识高度整合的状态",
+        "definition_deep": "当一个人的意识层面（我以为正确的）和潜意识层面（我真实感受到的）不再彼此陌生，而是高度亲密和默契时，就达到了自我同一性。在这种状态下，内在矛盾自然消失，存在不再是弥散的而是确定的，人会感受到'存在的恩典'和深层的喜悦。",
+        "why_it_matters": "这是摆脱精神空虚的终极路径——不是获得更多，而是与自己和解",
+        "common_mistakes": "以为需要某种神秘体验才能达到，其实关键只是'忠于感受'",
+        "related_terms": [
+            "Consciousness Dissociation"
+        ],
+        "source_file": "Narrative_Crisis.md"
+    },
+    {
+        "term_en": "Consciousness Dissociation",
+        "term_cn": "意识-潜意识断联",
+        "definition_short": "意识层与潜意识层长期分离的心理状态",
+        "definition_deep": "中国教育'观念为先'，等级强迫和灌输无处不在，不断构建你的意识，同时压抑你的潜意识。结果是：我们往往不去思考我们感受到的，而去思考我们以为正确的。这种断联是空虚、痛苦和'不对劲感'的深层来源。",
+        "why_it_matters": "如果你总觉得'哪里不对劲'却说不出来，很可能就是意识-潜意识断联的表现",
+        "common_mistakes": "以为压抑感受是'成熟'，其实是在制造内在分裂",
+        "related_terms": [
+            "Self-Identity"
+        ],
+        "source_file": "Narrative_Crisis.md"
+    },
+    {
+        "term_en": "Temporal Directionality",
+        "term_cn": "时间指向性",
+        "definition_short": "一种情绪或期待是否指向未来的特性",
+        "definition_deep": "区分不同情绪和心理状态的关键维度。Molly代表的情绪（追求美好自我）有时间指向性——指向未来的期待；而Labubu代表的崩溃情绪没有时间指向——'我现在就要崩溃'，不会有人说'我希望明年崩溃'。意义感的构建依赖时间指向性。",
+        "why_it_matters": "检查你的人生是否有'时间指向性'，是诊断意义感的关键",
+        "common_mistakes": "沉溺于当下的情绪宣泄，而忽视建立有方向性的期待",
+        "related_terms": [
+            "Meaning Vector",
+            "Narrative Crisis"
+        ],
+        "source_file": "Narrative_Crisis.md"
+    },
+    {
+        "term_en": "Atomization",
+        "term_cn": "原子化",
+        "definition_short": "个体与社会联结断裂，各自孤立的状态",
+        "definition_deep": "当公共叙事缺失、社会信任崩解时，个体会变成彼此孤立的'原子'。你不知道自己属于谁，连自己曾经引以为傲的善良和道德都会怀疑。原子化的人除了自身的家庭家族，不知道自己可以永恒地属于什么更大的群体。",
+        "why_it_matters": "很多人的孤独感不是因为没有朋友，而是原子化——没有更大的归属感",
+        "common_mistakes": "以为多社交就能解决，其实需要的是找到超越个人的意义归属",
+        "related_terms": [
+            "Differential Mode of Association",
+            "Narrative Crisis",
+            "Community of Destiny"
+        ],
+        "source_file": "Narrative_Crisis.md"
+    },
+    {
+        "term_en": "Public Narrative Structure",
+        "term_cn": "公共叙事结构",
+        "definition_short": "贯穿社会的、人人可参与的意义框架",
+        "definition_deep": "一个社会的'精神基础设施'。西方的圣经提供了一个80万字的公共叙事结构，回答了每个人的四大问题：你从哪里来、为何而生、应当如何活、将往哪里去。这种结构使陌生人可以建立超越血缘的信任和契约。中国民间长期缺乏这种结构。",
+        "why_it_matters": "这是深层理解中国社会问题的钥匙——很多问题不是个人的，而是结构性缺失导致的",
+        "common_mistakes": "以为皇权叙事可以替代，但皇权叙事只服务权力，不服务平民的意义需求",
+        "related_terms": [
+            "Folk Narrative",
+            "Community of Destiny",
+            "Narrative Crisis"
+        ],
+        "source_file": "Narrative_Crisis.md"
+    },
+    {
+        "term_en": "Community of Destiny",
+        "term_cn": "命运共同体",
+        "definition_short": "因共享叙事而形成的跨时空群体认同",
+        "definition_deep": "当人们把自己的人生纳入同一套公共叙事时，在场的人、不在场的人、活着的人、死去的人，都成为'超时空的命运共同体'。这是契约信任和社会合作的深层基础。没有共享叙事，就无法形成真正的命运共同体。",
+        "why_it_matters": "这解释了为什么中国人难以形成真正的公民社会",
+        "common_mistakes": "以为同属一个国家就是命运共同体，其实需要共享的深层叙事",
+        "related_terms": [
+            "Public Narrative Structure",
+            "Folk Narrative",
+            "Differential Mode of Association"
+        ],
+        "source_file": "Narrative_Crisis.md"
+    },
+    {
+        "term_en": "Pragmatism",
+        "term_cn": "实用主义",
+        "definition_short": "以眼前现实利益为导向的思维方式",
+        "definition_deep": "当一个社会缺乏长期可信赖的公共叙事，人们就只能在血缘和现实中找意义。这必然导致骨子里的实用主义——重视传宗接代、光宗耀祖，很难把视角放在天然具有自我超越性的创造行为中。实用主义不是错，但当它成为唯一选项时，意义感就会塌陷。",
+        "why_it_matters": "理解实用主义的文化根源，可以跳出'只能这样活'的思维陷阱",
+        "common_mistakes": "认为追求超越性是不现实的，其实那是被实用主义框住的表现",
+        "related_terms": [
+            "Narrative Crisis",
+            "Differential Mode of Association"
+        ],
+        "source_file": "Narrative_Crisis.md"
+    },
+    {
+        "term_en": "Fear-Driven vs Love-Driven",
+        "term_cn": "恐惧驱动 vs 热爱驱动",
+        "definition_short": "两种行动的底层动力来源",
+        "definition_deep": "驱动中国人奋斗的往往是恐惧（自尊受辱、福利短缺、养老焦虑）——这是由外而内的压力。而有公共叙事传统的社会，人们更容易被热爱、召唤、内在信仰驱动——这是由内而外的追求。恐惧驱动让人勤奋但不勇敢，热爱驱动让人敢于冒险和创造。",
+        "why_it_matters": "检查自己的驱动力来源，可以诊断精神状态是压抑还是自由",
+        "common_mistakes": "以为恐惧驱动更'务实'，其实它会消耗你的精神能量",
+        "related_terms": [
+            "Narrative Crisis",
+            "Pragmatism"
+        ],
+        "source_file": "Narrative_Crisis.md"
+    }
+]

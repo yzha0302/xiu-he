@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lifestyle Systems - 3D Knowledge Graph</title>
+    <!--
+        ASHER KNOWLEDGE GRAPH - Lifestyle Systems Module
+        Covers: Reverse Shopping, Visual Filters, Lifestyle Hacking
+    -->
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #000005;
+            overflow: hidden;
+        }
+
+        #hud {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 400px;
+            background: rgba(10, 15, 25, 0.95);
+            border: 1px solid #334466;
+            border-left: 3px solid #00ffff;
+            border-radius: 4px;
+            padding: 25px;
+            color: #eef;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            display: none;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        #hud h2 {
+            margin: 0 0 5px 0;
+            font-size: 24px;
+            padding-right: 30px;
+        }
+
+        #hud .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            opacity: 0.6;
+            font-size: 20px;
+            color: #889;
+            text-align: center;
+            line-height: 24px;
+        }
+
+        #hud .close-btn:hover {
+            opacity: 1;
+            color: #ff5555;
+        }
+
+        #hud .sub-header {
+            font-size: 14px;
+            color: #8899aa;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #334455;
+            padding-bottom: 10px;
+        }
+
+        #hud .section-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #556677;
+            letter-spacing: 2px;
+            margin-top: 15px;
+            margin-bottom: 8px;
+        }
+
+        #hud .content-block {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #ccd;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        #hud .en {
+            color: #fff;
+        }
+
+        #hud .cn {
+            color: #88aacc;
+            font-size: 13px;
+        }
+
+        #hud .keyword {
+            color: #00ffff;
+            font-weight: bold;
+        }
+
+        #hud .scene-tag {
+            display: inline-block;
+            font-size: 12px;
+            background: #223344;
+            color: #aab;
+            padding: 4px 8px;
+            border-radius: 12px;
+            margin: 3px 5px 3px 0;
+            border: 1px solid #334455;
+        }
+
+        #legend {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(10, 15, 25, 0.9);
+            border: 1px solid #334466;
+            border-radius: 4px;
+            padding: 15px 20px;
+            color: #ccd;
+            backdrop-filter: blur(10px);
+            min-width: 180px;
+        }
+
+        #legend h3 {
+            margin: 0;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #778;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        #legend h3::after {
+            content: '▼';
+            font-size: 10px;
+            transition: transform 0.3s;
+        }
+
+        #legend.collapsed h3::after {
+            transform: rotate(-90deg);
+        }
+
+        #legend .legend-items {
+            max-height: 200px;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        #legend.collapsed .legend-items {
+            max-height: 0;
+        }
+
+        #legend .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 6px 0;
+            font-size: 13px;
+        }
+
+        #legend .legend-color {
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+            margin-right: 10px;
+        }
+
+        #legend .legend-label {
+            color: #aab;
+        }
+
+        #legend .legend-count {
+            margin-left: auto;
+            color: #667;
+            font-size: 11px;
+        }
+
+        #legend .legend-total {
+            font-size: 11px;
+            color: #667;
+            margin-left: 10px;
+        }
+
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #00ffff;
+            font-family: monospace;
+            letter-spacing: 2px;
+        }
+    </style>
+    <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/3d-force-graph"></script>
+    <script src="https://unpkg.com/three-spritetext@1.8.1/dist/three-spritetext.min.js"></script>
+    <script src="https://unpkg.com/dat.gui"></script>
+</head>
+
+<body>
+    <div id="loading">INITIALIZING...</div>
+    <div id="3d-graph"></div>
+
+    <div id="hud">
+        <span class="close-btn" onclick="hideHUD()">×</span>
+        <h2 id="hud-title">Title</h2>
+        <div id="hud-cn" class="sub-header">Subtitle</div>
+        <div class="section-title">Definition 定义</div>
+        <div id="hud-desc" class="content-block"></div>
+        <div class="section-title">Deep Dive 深度解析</div>
+        <div id="hud-notes" class="content-block" style="border-left: 2px solid #00ffff;"></div>
+        <div class="section-title">Scenarios 应用场景</div>
+        <div id="hud-scenes"></div>
+    </div>
+
+    <div id="legend">
+        <h3 onclick="toggleLegend()">Domain 领域 <span id="legend-total"></span></h3>
+        <div id="legend-items" class="legend-items"></div>
+    </div>
+
+    <script>
+        const CATEGORY_CONFIG = {
+            "Strategy": { color: "#00ffff", label_en: "Strategy", label_cn: "策略" },
+            "Trap": { color: "#ff0055", label_en: "Trap", label_cn: "陷阱" },
+            "Logic": { color: "#ffffff", label_en: "Logic", label_cn: "逻辑" },
+            "Concept": { color: "#00ff00", label_en: "Concept", label_cn: "概念" }
+        };
+
+        const COLOR_PALETTE = ["#00ffff", "#00ff00", "#ff0055", "#ff8800", "#aa00ff"];
+        let colorIndex = 0;
+
+        function getCategory(groupName) {
+            if (!CATEGORY_CONFIG[groupName]) {
+                CATEGORY_CONFIG[groupName] = { color: COLOR_PALETTE[colorIndex % 5], label_en: groupName, label_cn: groupName };
+                colorIndex++;
+            }
+            return CATEGORY_CONFIG[groupName];
+        }
+
+        function toggleLegend() { document.getElementById('legend').classList.toggle('collapsed'); }
+
+        function buildLegend() {
+            const container = document.getElementById('legend-items');
+            container.innerHTML = '';
+            const counts = {};
+            let total = 0;
+            nodes.forEach(n => { counts[n.group] = (counts[n.group] || 0) + 1; total++; });
+            document.getElementById('legend-total').innerText = `(${Object.keys(counts).length} 域 / ${total} 点)`;
+            for (const [group, count] of Object.entries(counts)) {
+                const cat = getCategory(group);
+                const item = document.createElement('div');
+                item.className = 'legend-item';
+                item.innerHTML = `<div class="legend-color" style="background:${cat.color}"></div><span class="legend-label">${cat.label_en} ${cat.label_cn}</span><span class="legend-count">${count}</span>`;
+                container.appendChild(item);
+            }
+        }
+
+        const nodes = [
+            {
+                id: "Reverse Shopping", en: "Reverse Shopping", cn: "反向购物", group: "Strategy", val: 24,
+                desc_en: "Find items by searching for their best accessories.",
+                desc_cn: "通过搜配饰来反向锁定高质量单品。",
+                notes_en: "Buy <span class='keyword'>pants</span>? Search <span class='keyword'>shoes</span>. Buy <span class='keyword'>coat</span>? Search <span class='keyword'>inner wear</span>.",
+                notes_cn: "买<span class='keyword'>裤子</span>搜<span class='keyword'>鞋子</span>；买<span class='keyword'>外套</span>搜<span class='keyword'>内搭</span>。",
+                scenes_en: ["Online Shopping", "Fashion Optimization"],
+                scenes_cn: ["网购", "衣橱优化"]
+            },
+            {
+                id: "Prop Strategy", en: "Prop Strategy", cn: "绿叶策略", group: "Logic", val: 20,
+                desc_en: "Sellers use best props to sell core items.",
+                desc_cn: "商家为了卖核心单品，必配绝佳辅助单品。",
+                notes_en: "We don't buy the core; we buy the <span class='keyword'>curated prop</span>.",
+                notes_cn: "我们不买核心品，我们买那个被精心挑选的<span class='keyword'>'绿叶'</span>。",
+                scenes_en: ["Hacking", "Value Detection"],
+                scenes_cn: ["黑客思维", "价值发现"]
+            },
+            {
+                id: "Association Search", en: "Association Search", cn: "关联搜索", group: "Strategy", val: 20,
+                desc_en: "The algorithm of searching X to find Y.",
+                desc_cn: "搜X找Y的搜索算法。",
+                notes_en: "Pants->Shoes, Coat->Inner, Top->Pants, Bag->Coat.",
+                notes_cn: "裤子->鞋，外套->内搭，上衣->裤子，包->外套。",
+                scenes_en: ["Search Protocol"],
+                scenes_cn: ["搜索协议"]
+            },
+            {
+                id: "Visual Essence", en: "Visual Essence", cn: "视觉本质", group: "Concept", val: 18,
+                desc_en: "Seeing through filters to the fit.",
+                desc_cn: "透过滤镜看清版型本质。",
+                notes_en: "Ignore atmosphere. Look for <span class='keyword'>standing straight</span> models.",
+                notes_cn: "忽略氛围。找<span class='keyword'>好好站着</span>的模特。",
+                scenes_en: ["Quality Check"],
+                scenes_cn: ["质量检查"]
+            },
+            {
+                id: "Fit Masking", en: "Fit Masking", cn: "版型遮掩术", group: "Concept", val: 16,
+                desc_en: "Poses used to hide bad fit.",
+                desc_cn: "用来掩盖版型缺陷的模特姿势。",
+                notes_en: "Hands on hips = bad waist. Kicking leg = too wide/long.",
+                notes_cn: "叉腰=腰身不好。踢腿=太宽/太长。",
+                scenes_en: ["Trap Detection"],
+                scenes_cn: ["陷阱识别"]
+            },
+            {
+                id: "Atmosphere Trap", en: "Atmosphere Trap", cn: "氛围感陷阱", group: "Trap", val: 14,
+                desc_en: "Buying the 'vibe' not the cloth.",
+                desc_cn: "买的是'氛围'而不是'布料'。",
+                notes_en: "Fix: Imagine it on a <span class='keyword'>Uniqlo hanger</span>.",
+                notes_cn: "解法：想象它挂在<span class='keyword'>优衣库衣架</span>上的样子。",
+                scenes_en: ["Consumer Psychology"],
+                scenes_cn: ["消费心理"]
+            },
+            {
+                id: "Stage Outfit", en: "Stage Outfit", cn: "出边衣服", group: "Concept", val: 16,
+                desc_en: "High design, low utility (like K-Pop gear).",
+                desc_cn: "设计感强但实穿率低的'女团服'。",
+                notes_en: "Source of <span class='keyword'>design ideas</span> for basics.",
+                notes_cn: "基础款的<span class='keyword'>设计灵感</span>来源。",
+                scenes_en: ["Style Inspiration"],
+                scenes_cn: ["风格灵感"]
+            },
+            {
+                id: "Search Formula", en: "Search Formula", cn: "搜索公式", group: "Logic", val: 20,
+                desc_en: "Target = Complement(Target)",
+                desc_cn: "搜索词 = 目标物的最佳配饰",
+                notes_en: "Logic: Find the <span class='keyword'>best prop</span>.",
+                notes_cn: "逻辑：寻找<span class='keyword'>最佳绿叶</span>。",
+                scenes_en: ["Algorithm"],
+                scenes_cn: ["算法"]
+            }
+        ];
+
+        const links = [
+            { source: "Reverse Shopping", target: "Prop Strategy", label: "Based On" },
+            { source: "Reverse Shopping", target: "Association Search", label: "Uses" },
+            { source: "Prop Strategy", target: "Association Search", label: "Defines" },
+            { source: "Visual Essence", target: "Fit Masking", label: "Detects" },
+            { source: "Atmosphere Trap", target: "Visual Essence", label: "Fixed By" },
+            { source: "Stage Outfit", target: "Reverse Shopping", label: "Exception Case" },
+            { source: "Search Formula", target: "Association Search", label: "Formalizes" },
+            { source: "Fit Masking", target: "Atmosphere Trap", label: "Related To" }
+        ];
+
+        const settings = { linkDistance: 80, chargeStrength: -200, labelSize: 1.0, opacity: 0.8, autoRotate: true };
+        const elem = document.getElementById('3d-graph');
+        const Graph = ForceGraph3D()(elem)
+            .graphData({ nodes, links })
+            .backgroundColor('#000005')
+            .showNavInfo(false)
+            .nodeThreeObject(node => {
+                const cat = getCategory(node.group);
+                const sprite = new SpriteText(`${node.en}\n${node.cn}`);
+                sprite.color = cat.color;
+                sprite.textHeight = (node.val / 2) * settings.labelSize;
+                sprite.fontFace = 'Arial'; sprite.fontWeight = 'bold';
+                sprite.backgroundColor = `rgba(0,0,0,${settings.opacity / 2})`;
+                sprite.padding = 4;
+                sprite.userData = { baseSize: node.val / 2 };
+                return sprite;
+            })
+            .linkWidth(2.5)
+            .linkColor(link => { const src = nodes.find(n => n.id === (link.source.id || link.source)); return src ? getCategory(src.group).color + '88' : '#445566'; })
+            .onNodeClick(node => {
+                const pos = Graph.cameraPosition();
+                const dist = Math.hypot(pos.x, pos.y, pos.z);
+                const nDist = Math.hypot(node.x, node.y, node.z) || 1;
+                Graph.cameraPosition({ x: node.x / nDist * dist, y: node.y / nDist * dist, z: node.z / nDist * dist }, node, 1500);
+                showHUD(node);
+            });
+
+        Graph.d3Force('link').distance(settings.linkDistance);
+
+        function showHUD(node) {
+            const el = (id) => document.getElementById(id);
+            el('hud').style.display = 'block';
+            el('hud-title').innerText = node.en;
+            el('hud-cn').innerText = `${node.cn} [${node.group}]`;
+            el('hud-desc').innerHTML = `<div class="en">${node.desc_en}</div><div class="cn">${node.desc_cn}</div>`;
+            el('hud-notes').innerHTML = `<div class="en">${node.notes_en}</div><div class="cn">${node.notes_cn}</div>`;
+        }
+        function hideHUD() { document.getElementById('hud').style.display = 'none'; }
+        buildLegend();
+        setTimeout(() => { document.getElementById('loading').style.display = 'none'; }, 1000);
+    </script>
+</body>
+
+</html>

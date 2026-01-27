@@ -1,0 +1,32 @@
+[
+    {
+        "term": "Reverse Shopping",
+        "term_cn": "反向购物",
+        "definition": "一种通过搜索关联商品而非目标商品来寻找高质量单品的策略。利用商家的搭配审美红利。",
+        "source_file": "1.0_Reverse_Shopping_Protocol.md"
+    },
+    {
+        "term": "Stage Outfit",
+        "term_cn": "出边衣服",
+        "definition": "类似女团打歌服，设计感强、适合特定场合但日常实穿率较低的衣服。",
+        "source_file": "1.0_Reverse_Shopping_Protocol.md"
+    },
+    {
+        "term": "Wearability Rate",
+        "term_cn": "实穿率",
+        "definition": "一件衣服在日常生活中能被穿出门的频率。背景复杂的卖家秀通常实穿率低。",
+        "source_file": "1.0_Reverse_Shopping_Protocol.md"
+    },
+    {
+        "term": "Fit Masking",
+        "term_cn": "版型遮掩术",
+        "definition": "模特通过特定姿势（叉腰、侧身、踢腿）来掩盖衣服版型缺陷的拍摄技巧。",
+        "source_file": "1.0_Reverse_Shopping_Protocol.md"
+    },
+    {
+        "term": "Visual Essence",
+        "term_cn": "视觉本质",
+        "definition": "通过剥离滤镜、背景和模特姿势，看到服装版型和剪裁的真实面貌。",
+        "source_file": "1.0_Reverse_Shopping_Protocol.md"
+    }
+]

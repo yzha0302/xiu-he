@@ -1,0 +1,107 @@
+[
+    {
+        "formula_name_en": "Seduction Generation Formula",
+        "formula_name_cn": "诱惑生成公式",
+        "equation": "Seduction = Enigmatic_Message × Delay × Repression",
+        "variables": {
+            "Enigmatic_Message": "无法被翻译的神秘信息 (如被蒙眼时的视觉残影)",
+            "Delay": "时间差 (从童年到成年)",
+            "Repression": "压抑程度 (越禁止越诱惑)"
+        },
+        "mechanism": "诱惑不是来自于对象本身，而是来自于早年形成的神秘幻象与当下现实的叠加。母亲的手遮住眼睛后，视觉残影加上想象形成幻象；长大后亲身遭遇异性时，幻象加工现实，产生诱惑。时间差越长、压抑越深，诱惑越强烈。",
+        "application": "想要减少某对象的诱惑力，不是回避它（压抑只会增加神秘性），而是如实接触和理解它。如实谈论性的哲学意味能消解过度溢出的神秘性。",
+        "anti_pattern": "越禁止越诱惑。'戒色'的徒劳努力往往适得其反，因为它增加了压抑项的值。",
+        "source_file": "Philosophy_of_Love.md"
+    },
+    {
+        "formula_name_en": "Beauty Order Formula",
+        "formula_name_cn": "美感秩序公式",
+        "equation": "Beauty = Order_Sense × Scarcity",
+        "variables": {
+            "Order_Sense": "五官的规律性/和谐感 (偏离均值但没有落入杂乱)",
+            "Scarcity": "稀缺性 (人群中只有少数人具备)"
+        },
+        "mechanism": "美丽的脸 = 不自然但有秩序的脸。愉悦在于乏味和杂乱之间——单调难以吸引注意力，过于复杂则负荷过重。如果秩序变成普遍秩序，它就退隐成无秩序，美感就消失了。所以美必须是稀缺的秩序。",
+        "application": "分析什么是'美'时，不要看均值，而要看是否偏离均值却保持秩序。这是判断跨文化审美标准的普遍方法。",
+        "anti_pattern": "追求成为'平均脸'以获得最大接受度。研究表明美丽是'本身就足够有吸引力的脸的平均'，而非大众均值。",
+        "source_file": "Philosophy_of_Love.md"
+    },
+    {
+        "formula_name_en": "Dialectical Desire Formula",
+        "formula_name_cn": "辩证欲望公式",
+        "equation": "Desire = Antithesis_Negation × Synthesis_Seeking",
+        "variables": {
+            "Antithesis_Negation": "反体对正题的否定力度 (美丽面容否定平庸日常)",
+            "Synthesis_Seeking": "求合题的冲动强度 (渴望接近本质)"
+        },
+        "mechanism": "当你注视美女的瞬间，矛盾产生了——她的秩序感让你觉得你的生活是混乱的、虚假的、表浅的。这种否定产生困惑，困惑驱动求解释的冲动（求合题），冲动就是欲望。欲望的本质是想要接近被反体所昭示的'本质'。",
+        "application": "理解欲望的来源不在对象身上，而在对象与日常的反差中。减少欲望的方法不是获得对象，而是改变你对日常的评价。",
+        "anti_pattern": "以为得到对象就能满足欲望。合题达成的瞬间（无蔽/Aletheia），反体的否定力度消失，欲望也随之消失——这就是脱魅。",
+        "source_file": "Philosophy_of_Love.md"
+    },
+    {
+        "formula_name_en": "Disenchantment Formula",
+        "formula_name_cn": "脱魅公式",
+        "equation": "Disenchantment = Answer_Reached × Mystery_Dissolved",
+        "variables": {
+            "Answer_Reached": "解释达成度 (叹号变成问号)",
+            "Mystery_Dissolved": "神秘性消解程度"
+        },
+        "mechanism": "'不止于此'的谜题变成'仅此而已'的答案，感叹号变成问号——这是脱魅的符号动力学过程。生理层面的性冲动与精神层面的神秘性同时消失，世界丧失暧昧性和淫荡性，变得灰暗了无生气。",
+        "application": "理解脱魅是正常状态，不是'真相'。健康状态是在赋魅和脱魅之间动态切换，而非追求一端的极致。",
+        "anti_pattern": "长期处于脱魅状态，以为看到了'真实'。实际上会失去制造幻想的能力，丧失解释未知和触达意义的动机。",
+        "source_file": "Philosophy_of_Love.md"
+    },
+    {
+        "formula_name_en": "Two-Factor Emotion Formula",
+        "formula_name_cn": "情绪二因公式",
+        "equation": "Emotion = Physiological_Arousal × Cognitive_Interpretation",
+        "variables": {
+            "Physiological_Arousal": "身体反应 (心跳加速/出汗)",
+            "Cognitive_Interpretation": "大脑对身体反应的解释标记"
+        },
+        "mechanism": "Schachter-Singer理论。心跳加速时，你怎么解释它就产生什么情绪。吊桥实验中男性把恐惧的生理唤醒误标记为性吸引。但这个理论对爱情的解释力有限——爱不只是情绪，而是存在状态。",
+        "application": "可以通过重新解释身体信号来调节情绪（如把紧张解释为兴奋）。但不要试图用这种方法'管理'爱情。",
+        "anti_pattern": "把爱情当作可优化的情绪来管理，用打分表评估约会对象的'适配度'。",
+        "source_file": "Philosophy_of_Love.md"
+    },
+    {
+        "formula_name_en": "Security Formula",
+        "formula_name_cn": "安全感公式",
+        "equation": "Security = Attachment_Need × Response_Quality",
+        "variables": {
+            "Attachment_Need": "亲近愿望的强度",
+            "Response_Quality": "回应的及时性与一致性"
+        },
+        "mechanism": "依恋需求才是一切情绪的发源地。回应成功时获得安全感，回应失败时触发二级策略（过度激活→焦虑型 或 去激活→回避型）。自信不是装出来的，自信是爱出来的——持续得到回应的人会形成安全型依恋。",
+        "application": "诊断自己或他人的依恋风格时，看回应历史。改变依恋风格需要持续的高质量回应体验。",
+        "anti_pattern": "用'去激活策略'伪装成独立——说'我不需要任何人'，实际上是回避型依恋的补偿机制。",
+        "source_file": "Philosophy_of_Love.md"
+    },
+    {
+        "formula_name_en": "Love Revolution Formula",
+        "formula_name_cn": "爱情革命公式",
+        "equation": "Adult_Love = Contingency_Event × Difference_Experience",
+        "variables": {
+            "Contingency_Event": "无法预测的偶然遭遇 (坠落)",
+            "Difference_Experience": "他者带来的视差体验 (从'一'到'二')"
+        },
+        "mechanism": "成人之爱不是孩童依恋的简单延续，而是一场存在革命。偶然性打破同一性的幻觉（生命底色是偶然而非必然），差异性带来创造力（借对方的眼睛看世界）。两者相乘产生激情与狂热。",
+        "application": "设计生活时保持对偶然性的开放姿态，拥抱与他人的差异而非试图消除它。",
+        "anti_pattern": "把日常当作'正轨'，把激情视为危险的偏离。放弃追求心爱的人，选择'条件合适'的伴侣。",
+        "source_file": "Philosophy_of_Love.md"
+    },
+    {
+        "formula_name_en": "Sublimation Formula",
+        "formula_name_cn": "升华公式",
+        "equation": "Sublimation = Sexual_Energy × Creative_Channel",
+        "variables": {
+            "Sexual_Energy": "性能量/爱欲驱力",
+            "Creative_Channel": "创造性表达渠道 (艺术/作品)"
+        },
+        "mechanism": "升华是处理性欲的最佳状态——既不被诱惑完全支配（流氓），也不用超我约束本我（压抑），而是将暧昧性和神秘性转化为艺术作品。恋爱中少言木讷的人变成诗人、歌手、画家——因为升华把性能量转化为创造力。",
+        "application": "当性能量过剩时，不要压抑也不要放纵，而是寻找创造性表达的渠道——写作、绘画、运动、工作。",
+        "anti_pattern": "把升华当作'压抑'的委婉说法。错！压抑是否定能量，升华是转化能量。",
+        "source_file": "Philosophy_of_Love.md"
+    }
+]

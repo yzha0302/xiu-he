@@ -1,0 +1,302 @@
+[
+    {
+        "term_en": "Deductive Logic",
+        "term_cn": "演绎逻辑",
+        "definition_short": "从大范畴必然推出小范畴的推理",
+        "definition_deep": "演绎逻辑是从已知的一般性命题推导出特殊性结论的推理形式。其核心特征是'必然的导出'——只要前提为真且推理形式有效，结论必然为真。亚里士多德认为这是唯一符合'逻辑本质'的推理形式，因为大范畴的存在是小范畴存在的充分条件。从词项逻辑到命题逻辑再到数理逻辑，演绎逻辑构成了形式逻辑的核心，也是现代计算机和人工智能的理论基础。",
+        "why_it_matters": "理解演绎逻辑是理解现代科技文明根基的关键——从AEIO到阿尔法Go的必然导出。",
+        "common_mistakes": "认为学会演绎逻辑就能在日常生活中逻辑严密。实际上演绎逻辑是外挂，需要封闭系统和完整信息。",
+        "related_terms": [
+            "Syllogism",
+            "Propositional_Logic",
+            "Boolean_Algebra",
+            "Formal_Logic"
+        ],
+        "source_file": "Logic_and_Reasoning.md"
+    },
+    {
+        "term_en": "Inductive Logic",
+        "term_cn": "归纳逻辑",
+        "definition_short": "从个别到一般的推理，永远只能无限逼近",
+        "definition_deep": "归纳逻辑是从特殊观察中得出一般性结论的推理形式，是人类高效思考的基础。它不具有演绎那样的必然有效性，只有'归纳强度'的差异。密尔五法（求同、求异、共变、剩余、并用）系统化了归纳方法。统计学的发展使归纳从定性走向定量，但皮尔逊的工作表明：因果可能只是相关的特例(r=1)，归纳永远存在那0.0001%的不确定性。这就是休谟之叉的深刻含义。",
+        "why_it_matters": "归纳是我们日常决策的主要思维方式，理解其局限能避免把相关当因果。",
+        "common_mistakes": "把统计相关当成因果关系。皮尔逊说因果是相关的特例，大多数相关只是共同受第三因素影响。",
+        "related_terms": [
+            "Mills_Methods",
+            "Correlation",
+            "Bounded_Rationality",
+            "Humes_Fork"
+        ],
+        "source_file": "Logic_and_Reasoning.md"
+    },
+    {
+        "term_en": "Analogical Reasoning",
+        "term_cn": "类比推理",
+        "definition_short": "在相似范畴间迁移理解，思维的真正引擎",
+        "definition_deep": "类比推理是在相似的范畴之间进行的推理，是思维最基本、最基础、也是最重要的认知方式。侯世达认为'思维的核心就是类比'——人在思考时，每一秒钟都在做数不清的类比。类比分为属性类比（形容词）、关系类比（动词/介词）和结构类比（名词）。我们无时无刻不在用类比理解世界，但往往以隐喻的形式隐秘地运作。概念整合理论解释了类比如何通过结构映射创造新的理解。",
+        "why_it_matters": "类比是人类比AI更智能于模糊情境的核心能力——基于原型的经验迁移。",
+        "common_mistakes": "认为类比只是'不太严谨的推理'。它是触类旁通、不言而喻的认知基础。",
+        "related_terms": [
+            "Metaphor",
+            "Prototype",
+            "Conceptual_Blending",
+            "Family_Resemblance"
+        ],
+        "source_file": "Logic_and_Reasoning.md"
+    },
+    {
+        "term_en": "Syllogism",
+        "term_cn": "三段论",
+        "definition_short": "用规则在脑子里画圈圈，确保圈圈画对",
+        "definition_deep": "三段论是由两个前提（大前提、小前提）和一个结论组成的演绎推理形式。它的实质是在我们的思维中澄清概念的外延关系——用三段式在脑子里画圈圈。256种三段论形式中只有15种是有效的，6条规则就能判断有效性（如'中项必须在前提中至少周延一次'）。关键区分：推理的有效≠内容的真假。逻辑只管形式，内容真假需要实证科学。",
+        "why_it_matters": "三段论是演绎逻辑的基础形式，理解它才能理解'必然的导出'。",
+        "common_mistakes": "认为'这还用逻辑吗，3岁小孩都懂'。哲学家正是通过追问这些'显而易见'的规律创造了形式逻辑。",
+        "related_terms": [
+            "AEIO_Propositions",
+            "Deductive_Logic",
+            "Term_Logic",
+            "Validity"
+        ],
+        "source_file": "Logic_and_Reasoning.md"
+    },
+    {
+        "term_en": "Propositional Logic",
+        "term_cn": "命题逻辑",
+        "definition_short": "研究命题之间关系的逻辑，用真值表穷尽可能性",
+        "definition_deep": "命题逻辑关注命题之间的关系，而非概念之间的关系（那是词项逻辑）。它通过命题连接词（而且/或者/如果那么/并非）组合基本命题成复合命题。逻辑学家发明真值表穷尽了所有可能的真假判断规则——比如2个基本命题有4种真假状况组合、16种复合命题形式。命题演算是对命题逻辑的数学化处理，使符号代数运算成为可能。",
+        "why_it_matters": "命题逻辑是从自然语言到符号运算的关键一步，是布尔代数的直接基础。",
+        "common_mistakes": "用日常语言理解命题连接词。'如果节目好看，那么汤汁用心'='节目不好看或者汤汁用心'——这不是人话，是运算。",
+        "related_terms": [
+            "Truth_Table",
+            "Boolean_Algebra",
+            "Propositional_Calculus",
+            "Logical_Connectives"
+        ],
+        "source_file": "Logic_and_Reasoning.md"
+    },
+    {
+        "term_en": "Boolean Algebra",
+        "term_cn": "布尔代数",
+        "definition_short": "把逻辑变成1和0的运算，现代计算机的基础",
+        "definition_deep": "1854年乔治·布尔发现，对逻辑命题的运算可以简化成符号代数运算：真/假=1/0，而且=乘法，或者=加法，否定=1减它。这三个运算符（与/或/非）可以表示所有复合命题形式。这个发现使'用数理符号规范自然语言'变成可期待的事，开启了逻辑学黄金时代。1936年香农发现布尔逻辑可以用电路开关实现（闭合=1，断开=0），这直接导致了现代计算机的诞生。",
+        "why_it_matters": "布尔代数是形式脱离内容的关键时刻，使逻辑可以被'外包'给机器。",
+        "common_mistakes": "认为布尔代数只是数学家的游戏。从布尔到香农到晶体管到AlphaGo，是必然的导出。",
+        "related_terms": [
+            "Logic_Gates",
+            "Shannon",
+            "Propositional_Logic",
+            "Binary_System"
+        ],
+        "source_file": "Logic_and_Reasoning.md"
+    },
+    {
+        "term_en": "Bounded Rationality",
+        "term_cn": "有限理性",
+        "definition_short": "人只能在封闭的有限变量空间中有效决策",
+        "definition_deep": "赫伯特·西蒙的核心理论：知识的使命是从所有逻辑可能性的总类中挑选出经验可能性较有限的子类，在变量之间建立功能联系，最终从当前状况推出唯一可能性。人的理性是有限的——无法处理无限变量，必须在有限变量的封闭空间中才能有效决策。这解释了为什么归纳和类比是日常思维的主要方式，而非演绎的完全析取推理。",
+        "why_it_matters": "有限理性是认知科学和行为经济学的底层假设，理解它才能理解各种认知偏差。",
+        "common_mistakes": "批评人的决策'不够理性'。有限理性不是缺陷，是高效思考的前提。",
+        "related_terms": [
+            "Simon",
+            "Cognitive_Miser",
+            "Heuristics",
+            "Inductive_Logic"
+        ],
+        "source_file": "Logic_and_Reasoning.md"
+    },
+    {
+        "term_en": "Confounding Variable",
+        "term_cn": "混杂因子",
+        "definition_short": "同时影响因和果的第三因素，因果推断的大敌",
+        "definition_deep": "混杂因子是同时影响自变量和因变量的第三因素，是妨碍因果推断的元凶。比如跑步和思维状态的关系中，睡眠、饮食、天气都可能是混杂因子——它们同时影响跑步意愿和思维状态。费舍尔发明随机对照试验就是为了通过随机取样稀释混杂因子的影响。讽刺的是，费舍尔本人因为是老烟枪而利用混杂因子理论反对'吸烟导致肺癌'的结论。",
+        "why_it_matters": "识别混杂因子是避免把相关当因果的关键能力。",
+        "common_mistakes": "看到相关就脑补因果。比如'吃巧克力的国家诺贝尔奖得主更多'不能说明巧克力让人聪明。",
+        "related_terms": [
+            "Correlation",
+            "Causation",
+            "RCT",
+            "Mills_Methods"
+        ],
+        "source_file": "Logic_and_Reasoning.md"
+    },
+    {
+        "term_en": "Correlation",
+        "term_cn": "相关性",
+        "definition_short": "变量之间的共变关系，因果可能只是r=1的特例",
+        "definition_deep": "相关性是高尔顿在研究人体特征时发明的概念：身高高的人臂长也更长，但这不是因果关系，而是共同受遗传影响。皮尔逊进一步颠覆：'存在比因果更广泛的范畴即相关性，因果只是其中一个有限范畴。'因果在统计学上表现为相关系数=1或-1。这是世界观的反转：不是相关反映因果，而是因果反映相关。概率和相关是自然的语言，因果是人的观念。",
+        "why_it_matters": "皮尔逊的颠覆改变了我们对科学知识本质的理解——我们漂浮在概率的暗海之上。",
+        "common_mistakes": "认为'相关不等于因果'只是提醒语。皮尔逊是在说因果可能根本就是相关的特例。",
+        "related_terms": [
+            "Causation",
+            "Pearson",
+            "Statistics",
+            "Probability"
+        ],
+        "source_file": "Logic_and_Reasoning.md"
+    },
+    {
+        "term_en": "Humes Fork",
+        "term_cn": "休谟之叉",
+        "definition_short": "知识分为经验的和证明的，所有证明都依赖归纳的经验",
+        "definition_deep": "休谟把知识分为两种：经验知识（通过归纳得来，如'所有天鹅都是白的'）和证明知识（理念性的，与事实无关，如'如果前者为真则后者必然'）。这把叉子插进知识深处摧毁了根基：所有演绎知识都基于归纳知识建立，所有归纳知识又受限于经验能力。密尔、皮尔逊、费舍尔的工作只是把叉子'捏得紧了一点'，那0.0001%的不确定性永远存在。",
+        "why_it_matters": "休谟之叉是理解科学知识本质局限的关键——科学不是新的神话和宗教。",
+        "common_mistakes": "把科学当成绝对真理。休谟之叉提醒我们：所有知识都植根于归纳的脆弱基础上。",
+        "related_terms": [
+            "Empiricism",
+            "Inductive_Logic",
+            "Skepticism",
+            "Probability"
+        ],
+        "source_file": "Logic_and_Reasoning.md"
+    },
+    {
+        "term_en": "Metaphor",
+        "term_cn": "隐喻",
+        "definition_short": "用一个概念网络理解另一个概念的类比迁移",
+        "definition_deep": "隐喻是类比的隐身形态，无时无刻不在影响我们的思维和语言，而我们对此毫无察觉。核心隐喻'心理内容即物理实体'使我们能说'丢掉执念、重拾信心、收拾心情、扛不住压力'。由此衍生出'语言即容器'（他的话充满思想）、'视觉即认知'（想清楚、看法）、'思想即建筑'（构建理论、根基不牢）等系统性隐喻。莱考夫的《我们赖以生存的隐喻》详细论述了这一现象。",
+        "why_it_matters": "隐喻是我们轻而易举理解抽象概念的秘密武器，也是锁定我们思维的隐形监狱。",
+        "common_mistakes": "认为隐喻只是修辞手法。它是我们概念系统的基础架构，无时无刻不在运作。",
+        "related_terms": [
+            "Conceptual_Blending",
+            "Prototype",
+            "Analogy",
+            "Lakoff"
+        ],
+        "source_file": "Logic_and_Reasoning.md"
+    },
+    {
+        "term_en": "Prototype",
+        "term_cn": "原型",
+        "definition_short": "范畴的典型实例，其他成员按与它的相似度被归类",
+        "definition_deep": "原型是一个范畴的典型实例，其他成员是基于与原型的相似度被纳入同一范畴的。范畴以原型为中心，通过家族相似性向外扩展。那些越早在我们生命中出现的原型，位置越靠中间，关联节点越多，对我们的控制和影响就越大。比如'家庭'是最早的原型之一，我们用家庭类比社会，与男性上级的相处方式常常是与父亲相处方式的翻版。这就是'原生家庭'话题如此热门的原因。",
+        "why_it_matters": "原型是我们围绕它建立概念网络的核心，理解它就理解了为什么某些信念如此根深蒂固。",
+        "common_mistakes": "认为可以轻易改变根深蒂固的观念。原型的控制力来自它的早期出现和高频使用。",
+        "related_terms": [
+            "Prototype_Theory",
+            "Category",
+            "Family_Resemblance",
+            "Schema"
+        ],
+        "source_file": "Logic_and_Reasoning.md"
+    },
+    {
+        "term_en": "Conceptual Blending",
+        "term_cn": "概念整合",
+        "definition_short": "两个输入空间通过共有结构融合出新理解",
+        "definition_deep": "福康耶的概念整合理论解释了类比和隐喻的作用原理。两个心理对象的整合需要4个空间：两个输入空间（如爱情和战争）、一个类属空间（提取共有特征：双边互动、强弱分别、进攻防守）、一个融合空间（形成综合理解：战争式的爱情）。通过结构映射，我们把对旧情境（战争）的鲜活理解迁移到新情境（爱情），获得一种粗糙但稳定的理解——当然这种理解也会遮蔽某些可能性。",
+        "why_it_matters": "概念整合解释了思维如何创造新的理解，也解释了隐喻如何锁定和限制我们。",
+        "common_mistakes": "忽视融合过程中被遮蔽的部分。'爱情是战争'意味着必须有赢家——这是什么样的爱情？",
+        "related_terms": [
+            "Metaphor",
+            "Analogy",
+            "Fauconnier",
+            "Input_Space"
+        ],
+        "source_file": "Logic_and_Reasoning.md"
+    },
+    {
+        "term_en": "Family Resemblance",
+        "term_cn": "家族相似",
+        "definition_short": "概念之间有亲缘关系但无明确层次的关联方式",
+        "definition_deep": "维特根斯坦后期的重要理论，用家族相似说明语言的模糊性和广泛关联性。概念之间像家族成员：'丢掉'是'放弃'他爹，'小学'是'中学'的邻居，'温柔'是'和蔼'的妹妹。它们有亲缘关系但没有明确的层次和等级，相对关系是在日常交流（语言游戏）中被暂时性确定的。这开启了从经典范畴论到原型范畴论的转向。",
+        "why_it_matters": "家族相似解释了为什么词义会漂移、概念边界是模糊的、理解依赖语境。",
+        "common_mistakes": "试图给所有概念下精确定义。维特根斯坦告诉我们：概念的边界本来就是模糊的。",
+        "related_terms": [
+            "Wittgenstein",
+            "Prototype",
+            "Language_Game",
+            "Category"
+        ],
+        "source_file": "Logic_and_Reasoning.md"
+    },
+    {
+        "term_en": "Cognitive Miser",
+        "term_cn": "认知吝啬鬼",
+        "definition_short": "人类默认用高效但粗糙的启发式代替精确的逻辑分析",
+        "definition_deep": "斯坦诺维奇在《超越智商》中提出：人类都是认知吝啬鬼。这种吝啬体现在我们的大脑会完成高效而隐秘的综合，跳过细致的分析。比如'完全析取推理'测试中，80%的人因为直觉与C选项最相符就选C，而不去分析所有逻辑可能性。这不是缺陷而是特性——如果我们要对所有变量进行完全析取分析，就无法做任何决策。绝大多数人都是'归纳鬼才、类比高手和演绎残废'。",
+        "why_it_matters": "理解认知吝啬就理解了为什么人容易犯逻辑错误，但也能高效处理复杂情境。",
+        "common_mistakes": "批评自己'逻辑不好'。认知吝啬是人类智能的特性，不是bug。",
+        "related_terms": [
+            "Bounded_Rationality",
+            "Heuristics",
+            "System1_System2",
+            "Stanovich"
+        ],
+        "source_file": "Logic_and_Reasoning.md"
+    },
+    {
+        "term_en": "Form Over Content",
+        "term_cn": "形式大于内容",
+        "definition_short": "逻辑的发展史就是形式不断膨胀直至脱离内容的历史",
+        "definition_deep": "形式与内容的关系经历了几个阶段：(1)只有内容没有形式——混沌；(2)形式规范内容——三段论规则；(3)形式开始膨胀——256种组合；(4)形式脱离内容——数理逻辑中内容变成无意义占位符，判断变成计算；(5)形式可以外包——香农电路、计算机、AI。质变时刻是形式可以独立于具体内容运算时——一台电脑里没有魔法，我们循着有效形式从上帝给定的范畴中'必然导出'了手机。",
+        "why_it_matters": "理解形式如何脱离内容创造了现代科技文明——这是演绎逻辑最惊人的威力。",
+        "common_mistakes": "认为'形式大于内容'是贬义。在逻辑发展史中，形式的独立恰恰是威力的来源。",
+        "related_terms": [
+            "Boolean_Algebra",
+            "Formalism",
+            "Shannon",
+            "Computation"
+        ],
+        "source_file": "Logic_and_Reasoning.md"
+    },
+    {
+        "term_en": "Complete Disjunctive Inference",
+        "term_cn": "完全析取推理",
+        "definition_short": "对所有逻辑可能性进行分析，演绎出必然结论",
+        "definition_deep": "完全析取推理要求对所有逻辑可能性进行分析，然后演绎出一个必然包含在前提中的结论。比如'汤汁已婚盯着张三，张三盯着未婚的韩梅梅，问是否有已婚者盯着未婚者？'——张三要么已婚要么未婚，两种情况都有已婚者盯着未婚者，所以答案必然是'是'。计算机就是这么思考的，但80%的人会答错，因为这对人来说'非常不自然'。这就是为什么我们是'演绎残废'。",
+        "why_it_matters": "完全析取推理揭示了人类思维与计算机思维的根本差异。",
+        "common_mistakes": "轻视这种测试。80%的人答错，包括高材生，说明演绎逻辑不是人的本能。",
+        "related_terms": [
+            "Deductive_Logic",
+            "Cognitive_Miser",
+            "Bounded_Rationality",
+            "Syllogism"
+        ],
+        "source_file": "Logic_and_Reasoning.md"
+    },
+    {
+        "term_en": "Mills Methods",
+        "term_cn": "密尔五法",
+        "definition_short": "系统化归纳推理为研究因果的方法论",
+        "definition_deep": "密尔在《逻辑体系》中为归纳梳理出5种方法：求同法（在不同情境中寻找共同因素）、求异法（在差异中寻找原因）、共变法（量的变化对应）、剩余法（排除已知找剩余）、并用法（综合运用）。这将归纳从不自觉的认知方式提炼成研究因果的方法，为实证科学奠定基础。注意：从求同/求异到共变是认知模式的转型——从定性走向定量，背后是统计学革命。",
+        "why_it_matters": "密尔五法是理解现代科学方法论的基础。",
+        "common_mistakes": "认为求同法就够用了。求同法有致命缺陷：因果难分、变量遗漏。",
+        "related_terms": [
+            "Inductive_Logic",
+            "Causation",
+            "Scientific_Method",
+            "Correlation"
+        ],
+        "source_file": "Logic_and_Reasoning.md"
+    },
+    {
+        "term_en": "Randomized Controlled Trial",
+        "term_cn": "随机对照试验",
+        "definition_short": "通过随机取样和对照组稀释混杂因子的实验方法",
+        "definition_deep": "费舍尔发明的随机对照试验(RCT)是人类获得的最强实证手段之一。随机取样在最大限度上减少了混杂因子（同时影响因果的干扰因素）的影响——虽然个体可能有相似的生活环境和作息，但由于样本的随机性，这些变量对样本的影响被稀释。理论上，资源无限多时，可以得到一张表达所有行为与身心状态变化关系的表格。讽刺的是，RCT发明者费舍尔本人利用混杂因子理论反对吸烟致癌的结论。",
+        "why_it_matters": "RCT是现代循证医学和社会科学的黄金标准。",
+        "common_mistakes": "认为RCT可以证明因果。它只能在最大限度上控制混杂因子，提高归纳强度。",
+        "related_terms": [
+            "Fisher",
+            "Confounding_Variable",
+            "Statistics",
+            "Evidence_Based"
+        ],
+        "source_file": "Logic_and_Reasoning.md"
+    },
+    {
+        "term_en": "Logic Gates",
+        "term_cn": "逻辑门",
+        "definition_short": "用电路实现布尔与/或/非运算的物理结构",
+        "definition_deep": "1936年香农发现布尔逻辑的真假值可以与电路开关对应：线路闭合(电流通过)=1，线路断开(电流受阻)=0。在电路中加入特定开关结构可以实现与/或/非的逻辑关系——这就是与门、或门、非门。早期用继电器控制线路闭合(每秒50次)，现代用纳米级晶体管(每秒数百亿次)。一块CPU装着几百亿个晶体管，AlphaGo有1000多个CPU，在最微观层面只是不断连通断开，宏观上却做出人都做不出的判断。",
+        "why_it_matters": "逻辑门是从抽象逻辑到物理实现的关键桥梁，是数字时代的基石。",
+        "common_mistakes": "认为计算机'有智能'。它在最底层只是在做布尔运算的物理实现。",
+        "related_terms": [
+            "Boolean_Algebra",
+            "Shannon",
+            "Transistor",
+            "CPU"
+        ],
+        "source_file": "Logic_and_Reasoning.md"
+    }
+]

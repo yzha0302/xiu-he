@@ -1,0 +1,212 @@
+[
+    {
+        "term_en": "Formalization",
+        "term_cn": "程式化",
+        "definition_short": "强调形式、模式、结构，不追求本质创新",
+        "definition_deep": "中国文化特征之一。指对外在形式、模式、结构的极度重视，而对内在本质、实质性变化的忽视。表现为：改变是表面的（换皮），内在是否变化不重要，但外在是否符合礼仪、格式、形式则极为介意。从八股文到高考作文，从书法到舞蹈，程式化渗透在文化的方方面面。",
+        "why_it_matters": "识别程式化思维是突破形式主义的第一步。它解释了为什么中国社会重形式轻实质。",
+        "common_mistakes": "认为'注重形式'只是审美偏好。实际上它是权力结构的表征和服从性训练的工具。",
+        "related_terms": [
+            "Symbolization",
+            "Servility",
+            "Holistic Thinking"
+        ],
+        "source_file": "Chinese_Culture_Deep_Structure.md"
+    },
+    {
+        "term_en": "Symbolization",
+        "term_cn": "象徵化",
+        "definition_short": "形式承载权力象徵意义，仪式感=秩序表征",
+        "definition_deep": "与程式化相伴的文化特征。指形式不仅是美学表达，更是权力、等级、秩序的象徵。北方饭局的座位安排、敬酒顺序、夹菜顺序都有讲究——吃的东西一样，但其他方面全是规矩，绝不能僭越位置。年轻时觉得压抑，提拔后却要求下属也这样做——象徵化心理需求根植于心。",
+        "why_it_matters": "形式主义不只是浪费时间，它在塑造服从性和权力崇拜。",
+        "common_mistakes": "把仪式感等同于文化传承。实际上很多仪式是权力控制的工具。",
+        "related_terms": [
+            "Formalization",
+            "Power Hierarchy",
+            "Servility Training"
+        ],
+        "source_file": "Chinese_Culture_Deep_Structure.md"
+    },
+    {
+        "term_en": "Holistic Thinking",
+        "term_cn": "整体性思维",
+        "definition_short": "把事物当整体看，拒绝拆解分析",
+        "definition_deep": "中国文化强调天人合一、整体感知，认为世界本来就是一个整体，不应被简单拆解为零部件。表现为：中医把人当整体看（体虚/气虚/阴阳失调），道家的'道可道非常道'——只可意会不可言传。优点是增强灵性感知，缺陷是难以形成可验证、可积累的知识体系，无法产生现代科学方法。",
+        "why_it_matters": "这解释了为什么中国没有产生现代科学——缺乏分析还原方法论。",
+        "common_mistakes": "认为整体性思维'更高级'。它在某些领域有价值，但不能替代分析方法。",
+        "related_terms": [
+            "Only Sensible",
+            "Traditional Medicine",
+            "Anti-Analysis"
+        ],
+        "source_file": "Chinese_Culture_Deep_Structure.md"
+    },
+    {
+        "term_en": "Relational Orientation",
+        "term_cn": "关系取向",
+        "definition_short": "个体由关系定义，不是独立存在",
+        "definition_deep": "中国文化的核心不是个体与世界的理性关系，而是人与人之间的复杂网络。关系取向体现在三层：家族中心、权力等级、关系网络。个体的定义从来不是独立的，而是通过多层嵌套关系构建——'我是某某的儿子/某某的同学/某某的下属'。没有人关心你是谁，大家只关心你是谁的谁。",
+        "why_it_matters": "关系取向消解个体主体性，导致规则让位于关系、公平让位于面子。",
+        "common_mistakes": "认为关系取向只是'人情味'。它的代价是规则被架空、主体性被消解。",
+        "related_terms": [
+            "Embedded Person",
+            "Subjectivity",
+            "Guanxi Network"
+        ],
+        "source_file": "Chinese_Culture_Deep_Structure.md"
+    },
+    {
+        "term_en": "Subjectivity",
+        "term_cn": "主体性",
+        "definition_short": "个人作为独立主体的自我认知和行动能力",
+        "definition_deep": "西方哲学的核心概念。指个人能够独立于外部关系和社会角色，确立'我是谁'的认知，并基于这种认知自主行动的能力。西方强调：我先是我，然后才是别人眼中的谁。中国讲究：我是谁，由我与谁在一起来决定。中国文化的关系嵌套结构系统性地消解主体性。",
+        "why_it_matters": "没有主体性的人在社会角色消失后（退休）容易产生自我认知障碍。",
+        "common_mistakes": "认为主体性是'自私'。主体性是独立思考和行动的能力，与利他不矛盾。",
+        "related_terms": [
+            "Relational Orientation",
+            "Contractual Person",
+            "Autonomy"
+        ],
+        "source_file": "Chinese_Culture_Deep_Structure.md"
+    },
+    {
+        "term_en": "Embedded Person",
+        "term_cn": "嵌入人",
+        "definition_short": "通过关系网络定义的个人",
+        "definition_deep": "孙隆基提出的概念，与西方的'契约人'相对。嵌入人的身份、价值、信任都通过关系网络建立，而非抽象的平等契约。办事第一反应是找人托关系，而非了解规则自主申请。社会信任不是通过规则执行，而是在关系中彼此牵制、彼此背书。这使得规则是虚的、关系是实的。",
+        "why_it_matters": "嵌入人结构解释了为什么公务员那么吃香——有关系的配偶能降低办事成本。",
+        "common_mistakes": "认为关系社会'更有人情味'。代价是规则失效、社会交易成本增加。",
+        "related_terms": [
+            "Contractual Person",
+            "Guanxi",
+            "Rule of Law"
+        ],
+        "source_file": "Chinese_Culture_Deep_Structure.md"
+    },
+    {
+        "term_en": "Contractual Person",
+        "term_cn": "契约人",
+        "definition_short": "通过理性协商放弃部分自由换取法律保障的个人",
+        "definition_deep": "西方政治哲学概念。指个体作为独立的权力主体，通过理性协商与国家建立契约关系——放弃部分自由以换取法律保障。个人在国家中是权力主体，而非附属身份的一环。这与中国文化中个人与国家的'父母-孩子'关系形成鲜明对比。",
+        "why_it_matters": "契约人概念是现代法治的基础——王子犯法与庶民同罪。",
+        "common_mistakes": "认为契约关系'冷漠无情'。实际上它保障的是弱势个体的基本权利。",
+        "related_terms": [
+            "Embedded Person",
+            "Rule of Law",
+            "Social Contract"
+        ],
+        "source_file": "Chinese_Culture_Deep_Structure.md"
+    },
+    {
+        "term_en": "Intimacy Gradient",
+        "term_cn": "清疏远近",
+        "definition_short": "中国社会按关系远近区分对待的信任结构",
+        "definition_deep": "中国社会的信任不是普遍的、基于规则的，而是按关系远近形成梯度。自己人/外人、亲/疏、远/近构成差序格局。对自己人可以破规则给方便，对外人则按规则（或更严苛）处理。这导致规则的选择性执行和社会信任的碎片化。",
+        "why_it_matters": "理解清疏远近结构有助于预测他人行为——你在他的圈子里还是圈子外？",
+        "common_mistakes": "认为这只是'人之常情'。代价是公共规则的权威被系统性削弱。",
+        "related_terms": [
+            "Embedded Person",
+            "Guanxi",
+            "In-group Favoritism"
+        ],
+        "source_file": "Chinese_Culture_Deep_Structure.md"
+    },
+    {
+        "term_en": "Only Sensible (Not Transmittable)",
+        "term_cn": "只可意会不可言传",
+        "definition_short": "知识无法通过语言精确传递，只能靠悟",
+        "definition_deep": "整体性思维的表现之一。指很多'老祖宗的智慧'无法被清晰定义、明确表达、客观验证。道可道非常道——你懂就是你懂，你不懂是你的问题，不是老祖宗的问题。这种思维方式使知识无法积累形成体系，每代人都要重新'悟'一遍。",
+        "why_it_matters": "这解释了为什么中国传统知识难以标准化复制和验证。",
+        "common_mistakes": "认为'只可意会'代表更高智慧。实际上它阻断了知识的积累和传承。",
+        "related_terms": [
+            "Holistic Thinking",
+            "Falsificationism",
+            "Scientific Method"
+        ],
+        "source_file": "Chinese_Culture_Deep_Structure.md"
+    },
+    {
+        "term_en": "Falsificationism",
+        "term_cn": "证伪主义",
+        "definition_short": "科学理论必须能被证伪才有意义",
+        "definition_deep": "卡尔·波普尔提出的科学哲学立场。主张可证明性是知识合法性的基础——一个观点成立不是因为听起来像真理，而是因为经得起质疑、能在逻辑上推演、能被证据支持。这与中国文化的'感悟优于论证'形成鲜明对比，是现代科学方法论的核心。",
+        "why_it_matters": "科学产生的思想条件：清晰激灵问题→假设→验证→修正的逻辑链条。",
+        "common_mistakes": "认为'不能证伪'的东西更高级（如玄学）。实际上不可证伪=无法积累知识。",
+        "related_terms": [
+            "Scientific Method",
+            "Logical Positivism",
+            "Empiricism"
+        ],
+        "source_file": "Chinese_Culture_Deep_Structure.md"
+    },
+    {
+        "term_en": "Power Hierarchy",
+        "term_cn": "权力等级",
+        "definition_short": "社会关系按权力高低排序的结构",
+        "definition_deep": "关系取向的三层之一。中国社会中，人与人的关系不是平等的，而是按权力等级排序。上级对下级有支配权，下级对上级有服从义务。这种等级观念渗透到家庭（父权）、职场（领导崇拜）、社会（官本位）各个层面。",
+        "why_it_matters": "权力等级结构是服从性训练的社会基础。",
+        "common_mistakes": "认为'尊重长辈'和'权力等级'是一回事。尊重可以平等，等级意味着不平等。",
+        "related_terms": [
+            "Symbolization",
+            "Servility",
+            "Guanxi Network"
+        ],
+        "source_file": "Chinese_Culture_Deep_Structure.md"
+    },
+    {
+        "term_en": "Guanxi Network",
+        "term_cn": "关系网络",
+        "definition_short": "人与人之间错综复杂的社会连接",
+        "definition_deep": "关系取向的三层之一。中国社会的运作很大程度上依赖关系网络而非正式规则。关系网络决定信任、资源分配、机会获取。'你是某老板的人'——即使你认为自己是中立的，也会被别人认为属于某个派系。关系网络是隐性的权力结构。",
+        "why_it_matters": "关系网络的存在使'走正规渠道'成本更高、效率更低。",
+        "common_mistakes": "认为关系网络是可选的。实际上你不主动经营，也会被动卷入。",
+        "related_terms": [
+            "Embedded Person",
+            "Intimacy Gradient",
+            "Power Hierarchy"
+        ],
+        "source_file": "Chinese_Culture_Deep_Structure.md"
+    },
+    {
+        "term_en": "Standard Answer Authoritarianism",
+        "term_cn": "标准答案权威",
+        "definition_short": "教育中只有一个正确答案的思维模式",
+        "definition_deep": "中国教育的典型特征。阅读题问'作者中心思想是什么'，标准答案只有一个——即使作者写的时候可能没想过。教学目标不是训练思辨，而是让学生体会老师希望他们体会的东西。这是一种意识的服从性测试：你的思考如果不符合标准答案=毫无意义，甚至有害。",
+        "why_it_matters": "标准答案权威是'思想的恐吓'——孩子在探索欲最强的年纪就被上了锁链。",
+        "common_mistakes": "认为'有标准答案'能保证公平。实际上它扼杀了思辨能力。",
+        "related_terms": [
+            "Servility Training",
+            "Exploration Deficit",
+            "Tightening Spell"
+        ],
+        "source_file": "Chinese_Culture_Deep_Structure.md"
+    },
+    {
+        "term_en": "Deep Structure",
+        "term_cn": "深层结构",
+        "definition_short": "隐藏在文化表层下难以察觉的逻辑模式",
+        "definition_deep": "孙隆基的核心概念。指历史深成的、结构化的文化逻辑——不可见、难察觉、无所不在，如同空气一般。我们不是自觉地活在文化当中，而是被这种结构塑造着。从一出生就被训练成'像样、听话、别出头'的社会文化执行者，却很少反问：我这样做是因为正确，还是因为习惯，还是因为恐惧？",
+        "why_it_matters": "识别深层结构是超越它的第一步。",
+        "common_mistakes": "认为文化只是'风俗习惯'。深层结构塑造的是思维方式本身。",
+        "related_terms": [
+            "Formalization",
+            "Symbolization",
+            "Relational Orientation"
+        ],
+        "source_file": "Chinese_Culture_Deep_Structure.md"
+    },
+    {
+        "term_en": "Aesthetic of Uniformity",
+        "term_cn": "统一性审美",
+        "definition_short": "认为整齐划一比多元表达更美的审美观",
+        "definition_deep": "程式化的审美表现。北京奥运开幕式：上千演员整齐划一=美；其他国家多元表达=乱糟糟。相比多样性带来的美，更在意一致性带来的美；相比真实带来的感动，更在意形式带来的感动。这种审美偏好强化了对个体差异的压制和对权威的服从。",
+        "why_it_matters": "统一性审美不只是审美偏好，它是服从性训练的感性层面。",
+        "common_mistakes": "认为喜欢整齐划一是'正常审美'。它是被训练出来的文化偏好。",
+        "related_terms": [
+            "Formalization",
+            "Symbolization",
+            "Collectivism"
+        ],
+        "source_file": "Chinese_Culture_Deep_Structure.md"
+    }
+]

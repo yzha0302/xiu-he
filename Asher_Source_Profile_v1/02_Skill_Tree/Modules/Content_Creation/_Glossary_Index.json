@@ -1,0 +1,1212 @@
+[
+    {
+        "term_en": "Hook",
+        "term_cn": "钩子",
+        "definition_short": "开头3秒抓住观众的内容，决定他划不划走",
+        "definition_deep": "钩子是口播内容的生死线。现代观众的注意力只有3秒决策窗口，如果开头没有足够的吸引力，观众会直接划走。钩子的核心不是'介绍'，而是'制造问题感'——可以是反直觉、痛点共鸣、冲突悬念、数据震撼或情绪宣泄。好的钩子让观众产生'这跟我有关'的感觉。",
+        "why_it_matters": "没有钩子=没有观众。再好的内容，开头留不住人就等于0。",
+        "common_mistakes": "用'大家好今天我们来聊一聊'开头；用概念定义或背景介绍开头；自我介绍占用宝贵的前10秒",
+        "related_terms": [
+            "Climax_First",
+            "Emotional_Rhythm",
+            "Problem_Sense"
+        ],
+        "source_file": "Oral_Script_Style.md"
+    },
+    {
+        "term_en": "Climax First",
+        "term_cn": "高潮前置",
+        "definition_short": "先给结论/情绪点，再补充解释",
+        "definition_deep": "传统写作按逻辑顺序：A→B→C→结论D。口播要倒过来：先把D甩出来，再解释为什么。因为观众没有耐心等你推导完整个逻辑链条，他们需要先被'结论的冲击力'抓住，然后才愿意听你解释。这不是'不讲道理'，而是'先给道理，再讲过程'。",
+        "why_it_matters": "逻辑链太长观众会走神。结论前置保证核心信息被传达。",
+        "common_mistakes": "按时间顺序从头讲到尾；铺垫太长高潮时观众已经走了",
+        "related_terms": [
+            "Hook",
+            "Emotional_Rhythm",
+            "Attitude_Output"
+        ],
+        "source_file": "Oral_Script_Style.md"
+    },
+    {
+        "term_en": "Attitude Output",
+        "term_cn": "态度输出",
+        "definition_short": "明确表达立场和情绪，敢说'这就是错的'",
+        "definition_deep": "口播不是学术论文，观众要的不是'客观分析'，而是'你怎么看'。态度输出意味着选定一个立场并把它讲透，而不是两边讨好、处处辩证。'一方面...另一方面...'在口播场景下是致命的——它让内容失去锋芒，变成废话。观众需要的是能引发共鸣或争议的鲜明态度。",
+        "why_it_matters": "没有态度的内容没有记忆点。观众记住的是你的立场，不是你的分析。",
+        "common_mistakes": "强行辩证两边讨好；怕得罪人所以不敢表态；用'这个问题很复杂'逃避表态",
+        "related_terms": [
+            "Fence_Sitting",
+            "Emotional_Rhythm",
+            "Pronoun_Shift"
+        ],
+        "source_file": "Oral_Script_Style.md"
+    },
+    {
+        "term_en": "Fence-Sitting",
+        "term_cn": "骑墙",
+        "definition_short": "两边讨好，不敢表态，观众看了不爽",
+        "definition_deep": "骑墙是口播的大忌。表现为：分析完A的好处，马上补一句'但也有问题'；批评完B，又说'当然也有可取之处'。这种写法源于对'客观性'的迷信，以为两边都说就是公正。但在口播场景下，骑墙=没有态度=没有吸引力。观众要的是带他们看问题的'导游'，不是'地图'。",
+        "why_it_matters": "骑墙的内容无法激发情绪共鸣，观众看完记不住任何东西。",
+        "common_mistakes": "每个观点都加'但是'；用'因人而异'逃避判断；用'辩证地看'掩盖没有立场",
+        "related_terms": [
+            "Attitude_Output",
+            "Emotional_Rhythm"
+        ],
+        "source_file": "Oral_Script_Style.md"
+    },
+    {
+        "term_en": "Emotional Rhythm",
+        "term_cn": "情绪节奏",
+        "definition_short": "内容的情绪起伏，像音乐有高潮有缓冲",
+        "definition_deep": "口播不能一直高能（观众会疲劳），也不能一直平淡（观众会无聊）。情绪节奏是：酝酿→爆发→缓冲→再酝酿→再爆发→收尾。像心电图一样有起伏。设计内容时要刻意安排至少2个情绪高潮点，用短句、反问、态度词制造爆发感，用案例、解释制造缓冲。",
+        "why_it_matters": "没有节奏变化的内容像死水，观众无法保持注意力。",
+        "common_mistakes": "从头到尾语气一样像读PPT；情绪一直高能观众疲劳；没有设计明确的高潮点",
+        "related_terms": [
+            "Hook",
+            "Climax_First",
+            "Attitude_Output"
+        ],
+        "source_file": "Oral_Script_Style.md"
+    },
+    {
+        "term_en": "Oral Language",
+        "term_cn": "口播语",
+        "definition_short": "适合说出来的语言，区别于书面语",
+        "definition_deep": "口播语不是'把书面语读出来'，而是完全不同的语法系统。特征包括：短句为主、一句一个点；大量使用'你''我''咱们'；用口语连接词（'所以''但是''你看'）替换书面连接词（'因此''故而''鉴于'）；读出来不觉得奇怪。判断标准：这句话你会在和朋友聊天时说吗？",
+        "why_it_matters": "书面语在口播中听起来生硬、疏离，让观众觉得你是在'念稿子'。",
+        "common_mistakes": "使用'众所周知''综上所述''换言之'等书面套话；句子太长主谓宾复杂；第三人称过多",
+        "related_terms": [
+            "Pronoun_Shift",
+            "Eye_Level"
+        ],
+        "source_file": "Oral_Script_Style.md"
+    },
+    {
+        "term_en": "Pronoun Shift",
+        "term_cn": "人称切换",
+        "definition_short": "在'我/你/我们/他们'之间切换制造不同效果",
+        "definition_deep": "人称选择决定观众的心理位置。'我'拉近距离、增加真实感；'你'制造对话感、被针对感；'咱们/我们'建立同盟感、引发共鸣；'他们'制造对立、划清阵营。熟练的口播创作者会在不同段落切换人称来操控观众的心理状态。",
+        "why_it_matters": "人称选择直接影响观众是觉得'你在教育我'还是'你跟我一起'。",
+        "common_mistakes": "全程用'人们''大家'等疏离人称；该用'你'制造紧迫感时用了'我们'",
+        "related_terms": [
+            "Eye_Level",
+            "Oral_Language",
+            "Attitude_Output"
+        ],
+        "source_file": "Oral_Script_Style.md"
+    },
+    {
+        "term_en": "Eye-Level",
+        "term_cn": "平视受众",
+        "definition_short": "和观众站在同一位置，而不是居高临下教育",
+        "definition_deep": "平视受众意味着用'我也一样''咱们都经历过'而不是'你们应该''很多人不懂'。观众对'被教育'天然抵触，但对'有人理解我'天然亲近。平视的关键是承认自己也有困惑、也犯过错、也是普通人——而不是扮演无所不知的专家。",
+        "why_it_matters": "居高临下的口吻会激发观众的逆反心理，降低内容的说服力。",
+        "common_mistakes": "用'我来告诉你们一个道理'开头；过度强调自己的专业背景；把观众当学生而不是朋友",
+        "related_terms": [
+            "Pronoun_Shift",
+            "Attitude_Output"
+        ],
+        "source_file": "Oral_Script_Style.md"
+    },
+    {
+        "term_en": "Problem Sense",
+        "term_cn": "问题感",
+        "definition_short": "让观众意识到'有个问题需要解决'的紧迫感",
+        "definition_deep": "问题感是钩子的核心引擎。不是告诉观众'今天聊什么话题'，而是让他意识到'我好像确实有这个问题'或'这件事原来还有我不知道的内幕'。问题感激活人的好奇心和焦虑感，让他必须看下去才能'解决问题'。没有问题感的开头，就没有继续看的理由。",
+        "why_it_matters": "问题感是观众留下来的根本动力。",
+        "common_mistakes": "开头只说话题不制造问题；问题太抽象和观众没关系",
+        "related_terms": [
+            "Hook",
+            "Climax_First"
+        ],
+        "source_file": "Oral_Script_Style.md"
+    },
+    {
+        "term_en": "Short Sentence Burst",
+        "term_cn": "短句爆发",
+        "definition_short": "用连续短句制造情绪高潮点",
+        "definition_deep": "当需要情绪爆发时，把长句拆成短句。'就这么简单。就这一条。记住了。'比'总结一下，核心的要点就是这一条，请大家务必记住'有力得多。短句制造节奏感和冲击感，是口播中制造高潮的重要工具。",
+        "why_it_matters": "短句爆发让观众感受到情绪的力量，增强记忆点。",
+        "common_mistakes": "需要爆发时还在用长句；全程都是短句失去节奏对比",
+        "related_terms": [
+            "Emotional_Rhythm",
+            "Attitude_Output"
+        ],
+        "source_file": "Oral_Script_Style.md"
+    },
+    {
+        "term_en": "Counter-Intuitive Hook",
+        "term_cn": "反直觉钩子",
+        "definition_short": "颠覆常识激活认知冲突的开头",
+        "definition_deep": "反直觉钩子通过提出与观众已有认知相悖的信息来制造认知冲突。公式是'很多人以为X，其实Y'。当观众发现自己的常识被挑战，会产生必须看下去解决这个冲突的冲动。反直觉钩子的效力取决于X和Y之间的距离——距离越大，冲击越强。",
+        "why_it_matters": "认知冲突是人类最难以忽视的心理状态，必须解决才能安心。",
+        "common_mistakes": "反直觉变成瞎说八道；缺乏论据支撑；Y不够震撼",
+        "related_terms": [
+            "Hook",
+            "Cognitive_Conflict",
+            "Data_Shock_Hook"
+        ],
+        "source_file": "1.0_Hook_Techniques.md"
+    },
+    {
+        "term_en": "Pain Point Hook",
+        "term_cn": "痛点共鸣钩子",
+        "definition_short": "触碰观众正在经历的困扰建立情感连接",
+        "definition_deep": "痛点共鸣钩子通过描述具体的痛苦场景，让观众产生'这说的不就是我吗'的感觉。公式是'你是不是也有过这种感觉...'。越具体的场景描述越能引发共鸣。痛点可以是情绪层面（焦虑迷茫）、行为层面（拖延失败）、社交层面（被忽视孤独）或成长层面（停滞怀疑自己）。",
+        "why_it_matters": "被理解的感觉会让观众产生信任，愿意听你继续说。",
+        "common_mistakes": "痛点太抽象不具体；没有场景感；自以为的痛点实际不普遍",
+        "related_terms": [
+            "Hook",
+            "Problem_Sense",
+            "Identity_Hook"
+        ],
+        "source_file": "1.0_Hook_Techniques.md"
+    },
+    {
+        "term_en": "Conflict Suspense Hook",
+        "term_cn": "冲突悬念钩子",
+        "definition_short": "制造信息不对称暗示有内幕",
+        "definition_deep": "冲突悬念钩子通过暗示存在隐藏信息来激活好奇心，同时通过阵营划分建立同盟感。公式是'今天我要告诉你一件X不希望你知道的事'。关键元素包括：隐藏者（老板/公司/专家）、秘密（内幕/真相/潜规则）、你（我站你这边）。",
+        "why_it_matters": "人对被隐瞒的信息有本能的好奇，加上同盟感会更想听。",
+        "common_mistakes": "悬念太弱；没有明确的对立方；承诺的内幕其实不值钱",
+        "related_terms": [
+            "Hook",
+            "Story_Suspense_Hook",
+            "Emotional_Vent_Hook"
+        ],
+        "source_file": "1.0_Hook_Techniques.md"
+    },
+    {
+        "term_en": "Data Shock Hook",
+        "term_cn": "数据震撼钩子",
+        "definition_short": "用具体数字制造冲击感建立权威性",
+        "definition_deep": "数据震撼钩子用具体数字产生真实感和权威感，同时暗示观众'你可能也在这个数字里面'。公式是'X%的人在Y这件事上都搞错了'。效果最强的是极端占比（99%）和对比数据（差10倍）。数字要具体、要可信、要和观众相关。",
+        "why_it_matters": "数字让抽象变具体，让观点变可信，让观众自我对照。",
+        "common_mistakes": "数字来源不可信；数字太普通没冲击力；和观众无关",
+        "related_terms": [
+            "Hook",
+            "Counter_Intuitive_Hook",
+            "Benefit_Promise_Hook"
+        ],
+        "source_file": "1.0_Hook_Techniques.md"
+    },
+    {
+        "term_en": "Emotional Vent Hook",
+        "term_cn": "情绪宣泄钩子",
+        "definition_short": "替观众说出他们想说但不敢说的话",
+        "definition_deep": "情绪宣泄钩子通过强烈的情绪表达触发观众共鸣，让他们觉得'你说出了我心里话'。公式是'我真的受够了X...'。适用情绪包括愤怒（不公平现象）、厌恶（虚伪行为）、无奈（被迫接受）、心疼（他人痛苦）。宣泄完会建立同盟感，让观众想听你继续说。",
+        "why_it_matters": "替人说出心里话会赢得强烈的认同感和同盟感。",
+        "common_mistakes": "情绪太假不真诚；宣泄的点不普遍；变成纯发泄没有价值",
+        "related_terms": [
+            "Hook",
+            "Attitude_Output",
+            "Pain_Point_Hook"
+        ],
+        "source_file": "1.0_Hook_Techniques.md"
+    },
+    {
+        "term_en": "Identity Hook",
+        "term_cn": "身份认同钩子",
+        "definition_short": "让特定人群觉得这是给我看的",
+        "definition_deep": "身份认同钩子通过点名特定群体，让观众自我检验'我是不是这类人'，如果是就会产生'这是专门给我看的'的感觉。公式是'如果你是X类型的人，一定要看这个'。身份标签可以是年龄（90后）、职业（打工人）、性格（i人）、状态（正在迷茫）或困境（月薪不到1万）。",
+        "why_it_matters": "针对性内容比泛内容更有吸引力，观众觉得被理解。",
+        "common_mistakes": "标签太宽泛不精准；标签和内容不匹配；排斥了潜在观众",
+        "related_terms": [
+            "Hook",
+            "Pain_Point_Hook",
+            "Eye_Level"
+        ],
+        "source_file": "1.0_Hook_Techniques.md"
+    },
+    {
+        "term_en": "Benefit Promise Hook",
+        "term_cn": "利益承诺钩子",
+        "definition_short": "直接告诉观众看完能得到什么",
+        "definition_deep": "利益承诺钩子通过明确承诺收益让观众评估'这个对我有用吗'。公式是'看完这个，你就知道如何X'。承诺必须具体（不能抽象）、可量化（有数字更好）、有紧迫性（暗示错过损失）。太夸张会失去可信度，太模糊没有吸引力。",
+        "why_it_matters": "明确收益让观众有动力投入时间，知道看完能得到什么。",
+        "common_mistakes": "承诺太夸张不可信；收益太模糊；和目标观众无关",
+        "related_terms": [
+            "Hook",
+            "Data_Shock_Hook",
+            "Climax_First"
+        ],
+        "source_file": "1.0_Hook_Techniques.md"
+    },
+    {
+        "term_en": "Story Suspense Hook",
+        "term_cn": "故事悬念钩子",
+        "definition_short": "用故事开头在关键处停住",
+        "definition_deep": "故事悬念钩子用故事建立场景代入感，然后在高潮前停住制造悬念。公式是'那天晚上发生了一件事，彻底改变了我...'。结构包括：场景（时间地点人物）、转折（意外发生）、悬念（在高潮前停住）。人对未完成的故事有强烈的完成欲望。",
+        "why_it_matters": "故事有代入感，悬念有必须听完的冲动。",
+        "common_mistakes": "故事开头太长；悬念设置太弱；故事和内容主题脱节",
+        "related_terms": [
+            "Hook",
+            "Conflict_Suspense_Hook",
+            "Emotional_Rhythm"
+        ],
+        "source_file": "1.0_Hook_Techniques.md"
+    },
+    {
+        "term_en": "Combo Hook",
+        "term_cn": "组合钩子",
+        "definition_short": "多种钩子类型叠加使用增强效果",
+        "definition_deep": "组合钩子是将两种或以上的钩子类型配合使用，产生1+1>2的效果。常见高效组合包括：反直觉+数据（科普类）、痛点+承诺（教程类）、身份+情绪（情感类）、悬念+反直觉（故事类）、冲突+情绪（观点类）。不是所有组合都高效，需要根据内容类型选择。",
+        "why_it_matters": "单一钩子有效，组合钩子更强，多个触发点叠加。",
+        "common_mistakes": "组合太多变得杂乱；组合类型不匹配；主次不分",
+        "related_terms": [
+            "Hook",
+            "Counter_Intuitive_Hook",
+            "Pain_Point_Hook",
+            "Data_Shock_Hook"
+        ],
+        "source_file": "1.0_Hook_Techniques.md"
+    },
+    {
+        "term_en": "Intent Factor",
+        "term_cn": "意图因子",
+        "definition_short": "创作目的的最小单位，可量化可推导",
+        "definition_deep": "意图因子是 Asyre 系统的核心概念。它把'我想让观众怎样'这个模糊问题拆解成可量化的原子单位。每篇内容是多个意图因子的加权组合，比如说服(0.8)+情感共鸣(0.6)+信息揭示(0.5)。意图因子的价值在于它可以自动推导出执行参数——知道你想说服人，系统就知道态度要鲜明、不能骑墙。",
+        "why_it_matters": "意图因子解决了'用AI写内容时不知道该怎么写'的根本问题——从意图推导参数。",
+        "common_mistakes": "意图模糊不量化；意图因子冲突互相打架；过度堆砌太多高权重因子",
+        "related_terms": [
+            "Purpose_Layer",
+            "Derivation_Rule",
+            "Weighted_Combination"
+        ],
+        "source_file": "2.0_Intent_Factor_System.md"
+    },
+    {
+        "term_en": "Purpose Layer",
+        "term_cn": "目的层",
+        "definition_short": "意图因子的上层分类：认知/态度/行为/情感",
+        "definition_deep": "目的层是意图因子的分类框架。分为四大类：认知改变（让人学到新东西）、态度改变（让人改变看法）、行为改变（让人采取行动）、情感满足（让人获得情感体验）。每个目的层下有具体的意图因子，如认知改变包含概念澄清、信息揭示、认知颠覆、知识传递四个因子。",
+        "why_it_matters": "目的层帮你快速定位内容的核心目标属于哪一类，避免目的混乱。",
+        "common_mistakes": "把不同目的层的因子混在一起；不清楚自己的核心目的是什么",
+        "related_terms": [
+            "Intent_Factor",
+            "Cognitive_Change",
+            "Attitude_Change",
+            "Behavior_Change",
+            "Emotional_Fulfillment"
+        ],
+        "source_file": "2.0_Intent_Factor_System.md"
+    },
+    {
+        "term_en": "Derivation Rule",
+        "term_cn": "推导规则",
+        "definition_short": "从意图因子自动推导执行参数的逻辑",
+        "definition_deep": "推导规则是意图因子系统的核心引擎。当你配置了意图因子（如 persuasion >= 0.7 AND value_guidance >= 0.6），系统会自动触发对应规则，推导出执行参数（如 attitude_strength 必须 >= 0.8，禁止骑墙）。这实现了从'我想达成什么'到'具体怎么写'的自动桥接。",
+        "why_it_matters": "推导规则让AI不再瞎猜，知道每种意图对应什么执行要求。",
+        "common_mistakes": "忽略规则直接写内容；规则冲突时不知道如何处理",
+        "related_terms": [
+            "Intent_Factor",
+            "Parameter_Derivation",
+            "Execution_Rule"
+        ],
+        "source_file": "2.0_Intent_Factor_System.md"
+    },
+    {
+        "term_en": "Weighted Combination",
+        "term_cn": "加权组合",
+        "definition_short": "多个意图因子按权重叠加形成最终配置",
+        "definition_deep": "一篇好内容往往不是单一目的，而是多个意图因子的加权叠加。比如一篇社会评论可能是：价值引导(0.85)+说服(0.8)+情感共鸣(0.75)+情绪宣泄(0.6)+信息揭示(0.5)。加权组合让内容有主次之分，高权重因子决定核心方向，低权重因子提供调味。",
+        "why_it_matters": "理解加权组合才能设计出层次丰富而不杂乱的内容。",
+        "common_mistakes": "所有因子权重都很高导致冲突；没有主次全是0.5",
+        "related_terms": [
+            "Intent_Factor",
+            "Combo_Pattern",
+            "Purpose_Layer"
+        ],
+        "source_file": "2.0_Intent_Factor_System.md"
+    },
+    {
+        "term_en": "Cognitive Change",
+        "term_cn": "认知改变",
+        "definition_short": "让受众脑子里装进新东西或换掉旧东西",
+        "definition_deep": "认知改变是四大目的层之一。核心目标是改变受众的知识结构——可以是增加新知识（知识传递）、消除误解（概念澄清）、揭示隐藏信息（信息揭示）、或打破固有认知（认知颠覆）。认知改变的修辞基础是 Logos（逻辑诉求）和中心路径处理，需要受众有一定认知投入意愿。",
+        "why_it_matters": "认知一旦改变，态度和行为改变会跟着来。认知是一切的基础。",
+        "common_mistakes": "只给结论不给逻辑；太抽象没有案例支撑；忽略受众的认知起点",
+        "related_terms": [
+            "Purpose_Layer",
+            "Concept_Clarification",
+            "Hidden_Reveal",
+            "Cognitive_Disruption",
+            "Knowledge_Transfer"
+        ],
+        "source_file": "2.0_Intent_Factor_System.md"
+    },
+    {
+        "term_en": "Attitude Change",
+        "term_cn": "态度改变",
+        "definition_short": "让受众对某件事的态度发生转变",
+        "definition_deep": "态度改变是四大目的层之一。核心目标是改变受众的价值判断和立场——可以是引导价值观（价值观引导）、说服接受观点（说服）、或构建身份认同（身份认同构建）。态度改变的修辞基础是 Persuade 和 Ethos（人格诉求），需要建立信任感或情绪触发。",
+        "why_it_matters": "态度决定选择。改变态度是改变行为的前提。",
+        "common_mistakes": "骑墙不敢表态；只讲道理不触动情绪；忽略受众原有态度",
+        "related_terms": [
+            "Purpose_Layer",
+            "Value_Guidance",
+            "Persuasion",
+            "Identity_Construction"
+        ],
+        "source_file": "2.0_Intent_Factor_System.md"
+    },
+    {
+        "term_en": "Behavior Change",
+        "term_cn": "行为改变",
+        "definition_short": "让受众采取具体行动或改变行为习惯",
+        "definition_deep": "行为改变是四大目的层之一。核心目标是推动受众做出具体动作——可以是行动号召（点赞、购买、关注）或决策引导（帮助做选择）。行为改变的修辞基础是 Call to Action，需要紧迫感和明确指引。行为改变是最难的目的层，因为让人动起来比让人想通难得多。",
+        "why_it_matters": "内容的终极价值是改变行为。认知和态度改变如果不能转化为行动，就是空谈。",
+        "common_mistakes": "CTA不够具体；缺乏紧迫感；行动门槛太高",
+        "related_terms": [
+            "Purpose_Layer",
+            "Call_to_Action",
+            "Decision_Guidance",
+            "CTA_Intensity"
+        ],
+        "source_file": "2.0_Intent_Factor_System.md"
+    },
+    {
+        "term_en": "Emotional Fulfillment",
+        "term_cn": "情感满足",
+        "definition_short": "让受众获得情感层面的满足或共鸣",
+        "definition_deep": "情感满足是四大目的层之一。核心目标是让受众在情感上获得满足——可以是被理解（情感共鸣）、宣泄情绪（情绪宣泄）、获得娱乐（娱乐消遣）、或被认可（认知验证）。情感满足的修辞基础是 Pathos（情感诉求）和外围路径处理，不需要深度思考，情绪共振即可。",
+        "why_it_matters": "情感满足建立粘性。观众记住的是你让他感受到了什么，不是你说了什么。",
+        "common_mistakes": "情绪太假不真诚；全程煽情没有节奏；忽略受众真实情感需求",
+        "related_terms": [
+            "Purpose_Layer",
+            "Emotional_Resonance",
+            "Emotional_Catharsis",
+            "Entertainment",
+            "Validation"
+        ],
+        "source_file": "2.0_Intent_Factor_System.md"
+    },
+    {
+        "term_en": "Concept Clarification",
+        "term_cn": "概念澄清",
+        "definition_short": "让受众真正理解一个概念的本质，消除误解",
+        "definition_deep": "概念澄清是认知改变类的意图因子。核心问题是：受众之前的理解哪里有偏差？正确理解是什么？典型手法包括对比错误vs正确、用类比简化、拆解底层逻辑。概念澄清需要高简化能力和高类比使用，同时保持严谨性。",
+        "why_it_matters": "概念是思考的基础。概念不清，后续的推理和判断都会出错。",
+        "common_mistakes": "解释太学术观众听不懂；只给正确定义不解释为什么原来的理解是错的",
+        "related_terms": [
+            "Cognitive_Change",
+            "Simplification",
+            "Analogy_Usage",
+            "Knowledge_Transfer"
+        ],
+        "source_file": "2.0_Intent_Factor_System.md"
+    },
+    {
+        "term_en": "Hidden Information Reveal",
+        "term_cn": "信息揭示",
+        "definition_short": "揭示表面之下的隐藏信息、潜规则或被忽视的事实",
+        "definition_deep": "信息揭示是认知改变类的意图因子。核心问题是：什么是大多数人不知道但应该知道的？典型场景包括揭示行业潜规则、指出被媒体忽视的事实、揭露现象背后的真实原因。信息揭示天然适配冲突悬念型钩子，需要制造'我们 vs 他们'的张力。",
+        "why_it_matters": "人对被隐瞒的信息有本能的好奇。揭秘内容天然有吸引力。",
+        "common_mistakes": "揭示的信息其实大家都知道；没有可信的信息来源；对立方不够明确",
+        "related_terms": [
+            "Cognitive_Change",
+            "Conflict_Suspense_Hook",
+            "Conflict_Intensity",
+            "Source_Quality"
+        ],
+        "source_file": "2.0_Intent_Factor_System.md"
+    },
+    {
+        "term_en": "Cognitive Disruption",
+        "term_cn": "认知颠覆",
+        "definition_short": "打破受众的固有认知，提出反直觉观点",
+        "definition_deep": "认知颠覆是认知改变类的意图因子。核心问题是：受众普遍相信什么？为什么是错的？公式是'冲击力 = 常识X 与 真相Y 的距离'。距离越大冲击越强，但太大会失去可信度，需要用证据填补。认知颠覆需要高来源质量和高严谨性。",
+        "why_it_matters": "认知颠覆制造最强的认知冲突，让人必须看下去解决冲突。",
+        "common_mistakes": "颠覆变成胡说八道没有依据；Y不够震撼；只颠覆不重建",
+        "related_terms": [
+            "Cognitive_Change",
+            "Counter_Intuitive_Hook",
+            "Source_Quality",
+            "Rigor"
+        ],
+        "source_file": "2.0_Intent_Factor_System.md"
+    },
+    {
+        "term_en": "Knowledge Transfer",
+        "term_cn": "知识传递",
+        "definition_short": "系统性地传授知识、技能或方法",
+        "definition_deep": "知识传递是认知改变类的意图因子。核心问题是：受众需要学会什么？怎么教最有效？典型场景包括教授技能、科普领域、分享方法论。知识传递需要结构化（Step by Step）、简化（降维）、可操作（学完能用）。",
+        "why_it_matters": "知识传递是教程类内容的核心意图，决定内容是否有干货价值。",
+        "common_mistakes": "太抽象没有案例；结构混乱没有层次；学完还是不会操作",
+        "related_terms": [
+            "Cognitive_Change",
+            "Simplification",
+            "Structure_Type",
+            "Rigor"
+        ],
+        "source_file": "2.0_Intent_Factor_System.md"
+    },
+    {
+        "term_en": "Value Guidance",
+        "term_cn": "价值观引导",
+        "definition_short": "有目的性地引导受众的价值判断和道德取向",
+        "definition_deep": "价值观引导是态度改变类的意图因子。核心问题是：希望受众认为什么是对的/好的/值得的？典型场景包括引导对生活方式的态度、建立对群体的看法、传递价值取向。价值观引导需要高态度鲜明度和高我们视角，用情绪强化记忆。",
+        "why_it_matters": "价值观是选择的底层逻辑。引导价值观就是引导长期行为。",
+        "common_mistakes": "说教感太强引发抵触；价值观太抽象没有共鸣；忽略受众原有价值观",
+        "related_terms": [
+            "Attitude_Change",
+            "Attitude_Strength",
+            "We_Perspective",
+            "Emotion_Peaks"
+        ],
+        "source_file": "2.0_Intent_Factor_System.md"
+    },
+    {
+        "term_en": "Persuasion",
+        "term_cn": "观点说服",
+        "definition_short": "让受众认同作者的具体观点或立场",
+        "definition_deep": "观点说服是态度改变类的意图因子。核心问题是：希望受众相信什么结论？说服的核心是立场鲜明——禁止骑墙、禁止两边都对、禁止因人而异。当 persuasion >= 0.7 时，attitude_strength 必须 >= 0.8，fence_sitting_tolerance 必须 <= 0.2。",
+        "why_it_matters": "有立场的内容才有记忆点。观众记住的是你敢说什么，不是你分析了什么。",
+        "common_mistakes": "骑墙两边讨好；立场在内容后半部分才出现；用'这个问题很复杂'逃避",
+        "related_terms": [
+            "Attitude_Change",
+            "Attitude_Strength",
+            "Fence_Sitting_Tolerance",
+            "Source_Quality"
+        ],
+        "source_file": "2.0_Intent_Factor_System.md"
+    },
+    {
+        "term_en": "Identity Construction",
+        "term_cn": "身份认同构建",
+        "definition_short": "帮助受众构建或强化某种身份认同",
+        "definition_deep": "身份认同构建是态度改变类的意图因子。核心问题是：受众是谁？他们想成为谁？典型场景包括强化现有身份（打工人）、构建理想身份（独立思考者）、建立圈层归属（我们这类人）。身份认同构建需要高我们视角和中高痛点深度，用共同痛点强化认同。",
+        "why_it_matters": "身份认同是粘性的来源。让人觉得'你是我的人'，他就会持续关注。",
+        "common_mistakes": "身份标签太宽泛；强化的身份不是受众真正认同的；排斥了潜在观众",
+        "related_terms": [
+            "Attitude_Change",
+            "We_Perspective",
+            "Pain_Point_Depth",
+            "Identity_Hook"
+        ],
+        "source_file": "2.0_Intent_Factor_System.md"
+    },
+    {
+        "term_en": "Call to Action",
+        "term_cn": "行动号召",
+        "definition_short": "推动受众采取具体行动",
+        "definition_deep": "行动号召是行为改变类的意图因子。核心问题是：希望受众做什么具体动作？典型场景包括引导购买、推动互动（点赞/关注/分享）、鼓励尝试。行动号召需要高 CTA 强度和高紧迫感，结尾必须有明确的行动指引，行动必须具体可执行。",
+        "why_it_matters": "内容如果不能推动行动，就只是信息传递。行动号召把内容转化为价值。",
+        "common_mistakes": "CTA 太模糊（'希望对你有帮助'）；缺乏紧迫感；行动门槛太高",
+        "related_terms": [
+            "Behavior_Change",
+            "CTA_Intensity",
+            "Urgency_Level"
+        ],
+        "source_file": "2.0_Intent_Factor_System.md"
+    },
+    {
+        "term_en": "Decision Guidance",
+        "term_cn": "决策引导",
+        "definition_short": "帮助受众在选择中做出决策",
+        "definition_deep": "决策引导是行为改变类的意图因子。核心问题是：受众面临什么选择？应该选哪个？典型场景包括产品对比推荐、职业选择建议、方案利弊分析。决策引导的关键是给结论而不是只列选项，需要高严谨性和高来源质量。",
+        "why_it_matters": "选择困难是现代人的普遍痛点。帮人做决策是巨大价值。",
+        "common_mistakes": "只列优缺点不给结论；分析不够全面；忽略受众的决策场景",
+        "related_terms": [
+            "Behavior_Change",
+            "Rigor",
+            "Source_Quality",
+            "Attitude_Strength"
+        ],
+        "source_file": "2.0_Intent_Factor_System.md"
+    },
+    {
+        "term_en": "Emotional Resonance",
+        "term_cn": "情感共鸣",
+        "definition_short": "唤起受众的情感认同，让他们感到被理解",
+        "definition_deep": "情感共鸣是情感满足类的意图因子。核心问题是：受众有什么未被表达的情感？典型场景包括说出心声、让人被理解、引发情绪共鸣。情感共鸣需要高我们视角、高情绪高潮点设计、高痛点深度。执行规则是必须设计至少2个情绪高潮点，使用'我们/咱们'视角。",
+        "why_it_matters": "被理解的感觉会建立强烈的情感连接和信任。",
+        "common_mistakes": "情感太假不真诚；痛点不够普遍；全程煽情没有节奏",
+        "related_terms": [
+            "Emotional_Fulfillment",
+            "We_Perspective",
+            "Emotion_Peaks",
+            "Pain_Point_Depth"
+        ],
+        "source_file": "2.0_Intent_Factor_System.md"
+    },
+    {
+        "term_en": "Emotional Catharsis",
+        "term_cn": "情绪宣泄",
+        "definition_short": "替受众宣泄情绪，提供情绪出口",
+        "definition_deep": "情绪宣泄是情感满足类的意图因子。核心问题是：受众压抑着什么情绪？与情感共鸣不同，情绪宣泄更强烈——不是让人感到被理解，是替人骂出来。典型场景包括替受众骂、表达共同愤怒、提供发泄出口。需要高情绪高潮点、高态度鲜明度、高冲突强度。",
+        "why_it_matters": "替人说出心里话会赢得强烈的认同感和同盟感。",
+        "common_mistakes": "情绪宣泄变成纯抱怨没有价值；宣泄的点不是普遍痛点；太激进失去理性",
+        "related_terms": [
+            "Emotional_Fulfillment",
+            "Emotion_Peaks",
+            "Attitude_Strength",
+            "Conflict_Intensity"
+        ],
+        "source_file": "2.0_Intent_Factor_System.md"
+    },
+    {
+        "term_en": "Entertainment",
+        "term_cn": "娱乐消遣",
+        "definition_short": "让受众获得轻松愉快的体验",
+        "definition_deep": "娱乐消遣是情感满足类的意图因子。核心问题是：怎么让内容有趣/好玩/轻松？典型场景包括讲有趣故事、用幽默说正经事、制造惊喜和趣味。娱乐消遣可以打破常规结构，需要高口语化权重让内容更轻松。",
+        "why_it_matters": "娱乐是最容易建立初次连接的方式。让人笑比让人学更容易。",
+        "common_mistakes": "硬尬幽默反而尴尬；娱乐和正题脱节；全程娱乐没有价值",
+        "related_terms": [
+            "Emotional_Fulfillment",
+            "Oral_Language_Weight",
+            "Structure_Type"
+        ],
+        "source_file": "2.0_Intent_Factor_System.md"
+    },
+    {
+        "term_en": "Validation",
+        "term_cn": "认知验证",
+        "definition_short": "验证受众已有的想法，让他们感到'我早就这么想了'",
+        "definition_deep": "认知验证是情感满足类的意图因子。核心问题是：受众已经相信什么？如何强化？与说服不同，认知验证的起点是受众已经认同——你的工作是强化而非翻转。典型场景包括强化已有观点、为做法提供理论支持、让人感到自己是对的。",
+        "why_it_matters": "人都喜欢被认可。验证已有想法比改变想法容易得多，粘性也更强。",
+        "common_mistakes": "验证的观点太小众不普遍；变成无脑吹捧失去可信度",
+        "related_terms": [
+            "Emotional_Fulfillment",
+            "Attitude_Strength",
+            "We_Perspective"
+        ],
+        "source_file": "2.0_Intent_Factor_System.md"
+    },
+    {
+        "term_en": "Central Route",
+        "term_cn": "中心路径",
+        "definition_short": "受众深度思考时的信息处理方式",
+        "definition_deep": "中心路径是精细加工可能性模型(ELM)的核心概念。当受众有动机且有能力深度思考时，会走中心路径——仔细分析论据、评估逻辑、形成持久的态度改变。中心路径适用于概念澄清、知识传递、认知颠覆等需要逻辑说服的意图。",
+        "why_it_matters": "知道受众走哪条路径，才知道该用逻辑还是用情绪。",
+        "common_mistakes": "对短视频用户用中心路径策略（他们根本不会深度思考）",
+        "related_terms": [
+            "Peripheral_Route",
+            "ELM",
+            "Logos",
+            "Cognitive_Change"
+        ],
+        "source_file": "2.0_Intent_Factor_System.md"
+    },
+    {
+        "term_en": "Peripheral Route",
+        "term_cn": "外围路径",
+        "definition_short": "受众浅层处理时的信息处理方式",
+        "definition_deep": "外围路径是精细加工可能性模型(ELM)的核心概念。当受众没有动机或没有能力深度思考时，会走外围路径——依赖情绪、印象、信任等外围线索做判断。态度改变可能快但不持久。外围路径适用于情感共鸣、娱乐消遣、情绪宣泄等情感类意图。",
+        "why_it_matters": "短视频场景下，大部分受众走的是外围路径。情绪比逻辑重要。",
+        "common_mistakes": "对走外围路径的受众堆砌论据（他们根本不看）",
+        "related_terms": [
+            "Central_Route",
+            "ELM",
+            "Pathos",
+            "Emotional_Fulfillment"
+        ],
+        "source_file": "2.0_Intent_Factor_System.md"
+    },
+    {
+        "term_en": "PIE Model",
+        "term_cn": "PIE模型",
+        "definition_short": "亚里士多德的三大传播目的：说服/告知/娱乐",
+        "definition_deep": "PIE模型是古典修辞学的基础框架，由亚里士多德提出。P代表Persuade（说服），让受众接受你的观点；I代表Inform（告知），让受众获得新知识；E代表Entertain（娱乐），让受众获得愉悦。意图因子系统是PIE模型的现代扩展，把这三大目的细化为13个可量化的因子。",
+        "why_it_matters": "2000年前的框架至今有效，说明传播的本质从未改变。",
+        "common_mistakes": "以为只能选一个（其实是组合）；以为现代传播和古典修辞学无关",
+        "related_terms": [
+            "Purpose_Layer",
+            "Logos",
+            "Pathos",
+            "Ethos"
+        ],
+        "source_file": "2.0_Intent_Factor_System.md"
+    },
+    {
+        "term_en": "Logos",
+        "term_cn": "逻辑诉求",
+        "definition_short": "用证据和推理说服的方式",
+        "definition_deep": "Logos是亚里士多德三大诉求之一。通过逻辑推理、数据证据、因果分析来说服受众。Logos对应中心路径处理，适用于认知改变类意图（概念澄清、知识传递、认知颠覆）。Logos需要高严谨性和高来源质量。",
+        "why_it_matters": "Logos是建立可信度的基础。没有逻辑的说服是空洞的。",
+        "common_mistakes": "只有Logos没有Pathos（太干缺乏感染力）；Logos不严谨被反驳",
+        "related_terms": [
+            "Pathos",
+            "Ethos",
+            "Central_Route",
+            "Rigor"
+        ],
+        "source_file": "2.0_Intent_Factor_System.md"
+    },
+    {
+        "term_en": "Pathos",
+        "term_cn": "情感诉求",
+        "definition_short": "用情绪和共鸣打动的方式",
+        "definition_deep": "Pathos是亚里士多德三大诉求之一。通过激发情绪（愤怒、同情、恐惧、希望）来打动受众。Pathos对应外围路径处理，适用于情感满足类意图（情感共鸣、情绪宣泄、娱乐消遣）。Pathos需要高情绪设计和高我们视角。",
+        "why_it_matters": "Pathos是记忆的关键。人记住的是你让他感受到了什么。",
+        "common_mistakes": "只有Pathos没有Logos（煽情但空洞）；情绪太假不真诚",
+        "related_terms": [
+            "Logos",
+            "Ethos",
+            "Peripheral_Route",
+            "Emotion_Peaks"
+        ],
+        "source_file": "2.0_Intent_Factor_System.md"
+    },
+    {
+        "term_en": "Ethos",
+        "term_cn": "人格诉求",
+        "definition_short": "用身份和信任背书的方式",
+        "definition_deep": "Ethos是亚里士多德三大诉求之一。通过建立可信度、展示专业性、表现品格来赢得信任。Ethos适用于态度改变类意图（价值观引导、说服），是让人愿意听你说话的前提。Ethos可以通过来源引用、个人经历、专业展示来建立。",
+        "why_it_matters": "没有Ethos，Logos和Pathos都无效。受众首先要信任你。",
+        "common_mistakes": "过度卖弄专业引发反感；没有任何可信度背书就开始说服",
+        "related_terms": [
+            "Logos",
+            "Pathos",
+            "Source_Quality",
+            "Attitude_Change"
+        ],
+        "source_file": "2.0_Intent_Factor_System.md"
+    },
+    {
+        "term_en": "Traffic Pool",
+        "term_cn": "流量池",
+        "definition_short": "抖音/快手的分层曝光测试机制",
+        "definition_deep": "流量池是抖音/快手推荐算法的核心机制。新视频发布后首先进入冷启动流量池（300-500曝光），系统根据完播率、互动率等数据判断视频质量。达标后进入下一级流量池（1000-5000），层层递进直至热门池（百万级）。流量池机制确保优质内容能获得持续曝光，同时淘汰低质内容。",
+        "why_it_matters": "理解流量池机制是在抖音/快手获取流量的前提。不达标就被困在初始池。",
+        "common_mistakes": "发布后不管冷启动数据；视频太长导致完播率崩塌；不理解晋级条件",
+        "related_terms": [
+            "Completion_Rate",
+            "Engagement_Rate",
+            "Cold_Start"
+        ],
+        "source_file": "Platform_Distribution_Strategy.md"
+    },
+    {
+        "term_en": "Completion Rate",
+        "term_cn": "完播率",
+        "definition_short": "视频被完整播放的比例，抖音核心指标",
+        "definition_deep": "完播率=完整播放次数/总播放次数。在抖音的推荐机制中，完播率是决定视频能否进入下一级流量池的关键指标。冷启动阶段完播率需达到40%以上才能晋级。完播率受视频长度、开头钩子、节奏控制等因素影响。新账号建议制作较短视频（15-30秒）以更容易达到高完播率。",
+        "why_it_matters": "完播率是抖音算法判断内容价值的首要信号。完播率低=内容无价值=不推荐。",
+        "common_mistakes": "视频过长（新账号>60秒）；开头太慢流失观众；没有设计完整观看的理由",
+        "related_terms": [
+            "Traffic_Pool",
+            "Watch_Time",
+            "Engagement_Rate"
+        ],
+        "source_file": "Platform_Distribution_Strategy.md"
+    },
+    {
+        "term_en": "Watch Time",
+        "term_cn": "观看时长",
+        "definition_short": "用户观看视频的累计时长，YouTube核心指标",
+        "definition_deep": "观看时长是YouTube算法最重视的指标，代表用户在视频上投入的实际时间。YouTube的目标是让用户在平台停留更久，因此长视频（>10分钟）若能保持高留存率，比短视频更容易获得推荐。观看时长=视频时长×观众留存率×播放量。优化观看时长需要在内容密度和节奏控制上下功夫。",
+        "why_it_matters": "观看时长是YouTube判断内容价值的核心标准。时长越长，算法越认为内容有价值。",
+        "common_mistakes": "为追求长度而注水；前期流失严重拉低平均时长；不设置章节导航",
+        "related_terms": [
+            "CTR",
+            "Retention_Rate",
+            "Engagement"
+        ],
+        "source_file": "Platform_Distribution_Strategy.md"
+    },
+    {
+        "term_en": "CTR",
+        "term_cn": "点击率",
+        "definition_short": "缩略图被点击的概率，衡量封面吸引力",
+        "definition_deep": "CTR（Click-Through Rate）=点击数/展示数。在YouTube中，CTR决定视频能否获得初始流量——缩略图和标题吸引人，用户才会点击。健康CTR范围2-10%，优秀标准>10%。提升CTR需要优化：高对比缩略图、大脸+情绪表情、引发好奇的标题、简洁的文字元素。CTR与观看时长共同决定YouTube排名。",
+        "why_it_matters": "高CTR=高初始流量。没有点击，内容再好也无人问津。",
+        "common_mistakes": "缩略图模糊或与标题重复；标题党但不兑现（高CTR低留存）；忽略A/B测试",
+        "related_terms": [
+            "Watch_Time",
+            "Thumbnail",
+            "Title_Optimization"
+        ],
+        "source_file": "Platform_Distribution_Strategy.md"
+    },
+    {
+        "term_en": "E-E-A-T",
+        "term_cn": "经验/专业/权威/可信",
+        "definition_short": "Google评估内容质量的四维框架",
+        "definition_deep": "E-E-A-T是Google Search Quality Guidelines的核心概念：Experience（经验）=作者有第一手经验；Expertise（专业）=内容展示专业知识；Authoritativeness（权威）=作者/网站被同行认可；Trustworthiness（可信）=信息准确可靠。E-E-A-T对YMYL（涉及金钱/健康）内容尤为重要。提升E-E-A-T需要展示作者身份、引用权威来源、保持内容准确性。",
+        "why_it_matters": "E-E-A-T是Google判断内容质量的核心框架。低E-E-A-T内容难以获得排名。",
+        "common_mistakes": "匿名发布无作者信息；无来源引用；内容过时不更新；专业话题用非专业口吻",
+        "related_terms": [
+            "SEO",
+            "Core_Web_Vitals",
+            "Backlinks"
+        ],
+        "source_file": "Platform_Distribution_Strategy.md"
+    },
+    {
+        "term_en": "Triple-like",
+        "term_cn": "一键三连",
+        "definition_short": "B站点赞+投币+收藏的复合互动",
+        "definition_deep": "一键三连是B站特有的互动机制，用户可通过长按点赞图标同时完成点赞、投币（消耗硬币资源）、收藏三个操作。三连是对内容的高度认可信号，因为投币有机会成本。三连率（三连数/播放量）是B站算法判断视频价值的重要指标。UP主常在结尾引导观众三连，并设计值得收藏的内容（如教程）提升收藏率。",
+        "why_it_matters": "三连是B站最有价值的互动。三连多=内容有收藏价值=算法加权推荐。",
+        "common_mistakes": "乞讨式请求三连（反感）；内容没有收藏价值却期望三连；忽略弹幕互动",
+        "related_terms": [
+            "Engagement_Rate",
+            "Bullet_Comments",
+            "Playlist"
+        ],
+        "source_file": "Platform_Distribution_Strategy.md"
+    },
+    {
+        "term_en": "Cold Start",
+        "term_cn": "冷启动",
+        "definition_short": "新内容获取初始曝光的测试阶段",
+        "definition_deep": "冷启动是各平台推荐系统的共同机制。新发布的内容没有历史数据参考，算法会将其推荐给一小批测试用户（抖音300-500次曝光，小红书200-500次），根据这批用户的反馈（完播率、互动率）决定是否继续推荐。冷启动表现决定内容能否进入更大的流量池。黄金窗口通常在发布后30分钟-1小时。",
+        "why_it_matters": "冷启动是内容命运的分水岭。初始数据差就被淘汰，不会有第二次机会。",
+        "common_mistakes": "发布后不管不顾；在非活跃时段发布；忽略前30分钟的数据表现",
+        "related_terms": [
+            "Traffic_Pool",
+            "Completion_Rate",
+            "Engagement_Rate"
+        ],
+        "source_file": "Platform_Distribution_Strategy.md"
+    },
+    {
+        "term_en": "Hot Score",
+        "term_cn": "热度分",
+        "definition_short": "Reddit计算帖子排名的算法分数",
+        "definition_deep": "Hot Score是Reddit Hot排序的核心算法，公式接近：Hot Score = log(upvotes - downvotes) + age_factor。关键点：1）使用对数函数，意味着早期upvotes比后期更有价值；2）时间衰减因子让旧帖子失去竞争力（6-12小时后权重下降）；3）upvote速度比总数更重要。因此Reddit成功的关键是在发布后快速获得upvotes。",
+        "why_it_matters": "理解Hot Score才能在Reddit有效推广。速度>总数，时机决定一切。",
+        "common_mistakes": "在非活跃时段发布；忽略早期互动的重要性；帖子内容过于广告化被downvote",
+        "related_terms": [
+            "Upvote_Velocity",
+            "Subreddit_Rules",
+            "Karma"
+        ],
+        "source_file": "Platform_Distribution_Strategy.md"
+    },
+    {
+        "term_en": "RealGraph",
+        "term_cn": "真实图谱",
+        "definition_short": "X/Twitter内部用户关系评分系统",
+        "definition_deep": "RealGraph是X（Twitter）算法的核心组件，为每个用户-内容对计算相关性分数。系统分析用户过去与某账号的互动频率、内容类型偏好、回复/转发/点赞历史等，预测用户与新推文的互动概率。RealGraph分数决定推文在For You信息流中的排名。提升RealGraph需要持续发布内容并与目标用户互动。",
+        "why_it_matters": "RealGraph决定你的推文被谁看到。不互动的粉丝看不到你的内容。",
+        "common_mistakes": "只发布不互动；忽略回复（回复权重最高）；发布太多链接（降权）",
+        "related_terms": [
+            "For_You_Feed",
+            "Engagement",
+            "Verified_Account"
+        ],
+        "source_file": "Platform_Distribution_Strategy.md"
+    },
+    {
+        "term_en": "Double Tower Model",
+        "term_cn": "双塔模型",
+        "definition_short": "小红书推荐系统的核心架构",
+        "definition_deep": "双塔模型是小红书2024年升级的推荐算法架构，包含用户兴趣塔和内容质量塔两个独立的深度学习模型。用户兴趣塔分析用户历史行为、偏好和画像；内容质量塔评估笔记的原创度、专业度和基础质量分。两个塔的向量相似度乘以实时反馈加权，决定内容分发。前30分钟数据占60%权重，'黄金3分钟'完播率决定初始流量池。",
+        "why_it_matters": "理解双塔模型才能在小红书精准优化。内容质量和用户匹配缺一不可。",
+        "common_mistakes": "只关注内容忽略用户匹配；忽略前30分钟黄金窗口；账号垂直度不够",
+        "related_terms": [
+            "Note_Weight",
+            "Keyword_SEO",
+            "Account_Authority"
+        ],
+        "source_file": "Platform_Distribution_Strategy.md"
+    },
+    {
+        "term_en": "Core Web Vitals",
+        "term_cn": "核心网页指标",
+        "definition_short": "Google衡量网页体验的技术指标",
+        "definition_deep": "Core Web Vitals是Google用于评估网页用户体验的三个核心指标：LCP（Largest Contentful Paint，最大内容渲染，<2.5秒为佳）、FID（First Input Delay，首次输入延迟，<100毫秒为佳）、CLS（Cumulative Layout Shift，累计布局偏移，<0.1为佳）。这些指标从2021年起成为排名因素。优化方法包括压缩图片、使用CDN、减少JavaScript阻塞等。",
+        "why_it_matters": "Core Web Vitals直接影响Google排名。网站体验差=用户流失=排名下降。",
+        "common_mistakes": "图片未优化导致LCP过高；第三方脚本拖慢FID；广告/图片未预设尺寸导致CLS",
+        "related_terms": [
+            "E-E-A-T",
+            "Mobile_First",
+            "Page_Speed"
+        ],
+        "source_file": "Platform_Distribution_Strategy.md"
+    },
+    {
+        "term_en": "DOU+",
+        "term_cn": "DOU+",
+        "definition_short": "抖音官方内容加热工具",
+        "definition_deep": "DOU+是抖音推出的付费推广工具，帮助创作者提升视频曝光量和互动量。DOU+可以将优质内容从初始流量池推向更大的自然流量池（如从5000+推向5万-50万）。科学投放DOU+的账号涨粉速度可达自然流量的3.2倍。投放时可选择不同目标：'点赞评论'放大互动，'粉丝增长'精准筛选长期粉丝，'主页访问'建立认知。注意：DOU+只能助推本身有潜力的内容，无法让劣质内容起死回生。",
+        "why_it_matters": "DOU+是撬动自然流量的杠杆。用好DOU+可以让优质内容突破冷启动。",
+        "common_mistakes": "用DOU+推劣质内容（浪费钱）；投放目标选错；投放时机不对（内容已过热期）",
+        "related_terms": [
+            "Traffic_Pool",
+            "Cold_Start",
+            "Paid_Promotion"
+        ],
+        "source_file": "Platform_Distribution_Strategy.md"
+    },
+    {
+        "term_en": "Engagement Rate",
+        "term_cn": "互动率",
+        "definition_short": "互动数/展示数，衡量内容引发行动的能力",
+        "definition_deep": "互动率=（点赞+评论+分享+收藏）/总曝光量。互动率是各平台算法判断内容价值的通用指标。高互动率意味着内容引发了用户行动，算法会给予更多推荐。不同平台对不同互动的权重不同：Instagram重视保存/分享，抖音重视评论/转发，B站重视投币/收藏。提升互动率需要在内容中设计互动点（提问、争议、实用价值）。",
+        "why_it_matters": "互动率是内容价值的直接证明。高互动=用户认可=算法推荐。",
+        "common_mistakes": "乞讨式请求互动（反感）；内容没有互动点；忽略回复用户评论",
+        "related_terms": [
+            "CTR",
+            "Completion_Rate",
+            "Save_Rate"
+        ],
+        "source_file": "Platform_Distribution_Strategy.md"
+    },
+    {
+        "term_en": "Platform Native",
+        "term_cn": "平台原生化",
+        "definition_short": "内容必须适配平台调性而非跨平台复制粘贴",
+        "definition_deep": "平台原生化是内容分发的核心原则。每个平台有独特的用户期望、内容格式和算法规则。同一内容原封不动发到不同平台通常效果不佳。原生化意味着：抖音要竖屏快节奏、小红书要精美图片+关键词、YouTube要横屏长内容、Twitter要短文本+话题。原生内容让用户感觉'这就是给这个平台做的'，而非'从别处搬来的'。",
+        "why_it_matters": "非原生内容难以获得平台推荐。用户也能感知出'不属于这里'的违和感。",
+        "common_mistakes": "一条内容发所有平台；横屏视频不裁剪直接发抖音；忽略平台话语体系差异",
+        "related_terms": [
+            "Cross_Platform",
+            "Content_Adaptation",
+            "Distribution"
+        ],
+        "source_file": "Platform_Distribution_Strategy.md"
+    },
+    {
+        "term_en": "Search-Recommendation Loop",
+        "term_cn": "搜索推荐联动",
+        "definition_short": "用户搜索行为反哺推荐流量的机制",
+        "definition_deep": "搜索推荐联动是抖音/小红书2024年的重要算法更新。用户的搜索行为会影响推荐内容——搜索过某关键词的用户更容易在推荐流中看到相关内容。反过来，围绕用户搜索需求创作的内容能获得额外分发流量。这意味着关键词SEO不仅影响搜索排名，也间接影响推荐流量。创作者需要：1）研究目标用户的搜索词；2）在内容中自然嵌入这些关键词。",
+        "why_it_matters": "搜索和推荐不再是两个独立系统。搜索优化也能带来推荐流量。",
+        "common_mistakes": "只关注推荐忽略搜索；关键词堆砌而非自然嵌入；不研究用户搜索意图",
+        "related_terms": [
+            "Keyword_SEO",
+            "Double_Tower_Model",
+            "Traffic_Pool"
+        ],
+        "source_file": "Platform_Distribution_Strategy.md"
+    },
+    {
+        "term_en": "COPE",
+        "term_cn": "一次创作，多处发布",
+        "definition_short": "Create Once, Publish Everywhere的缩写，核心内容分发方法论",
+        "definition_deep": "COPE（Create Once, Publish Everywhere）是一种内容生产方法论：创建一个高价值的'支柱内容'（如长视频、深度文章），然后将其拆解成多种格式，分发到多个平台。COPE的核心不是复制粘贴，而是'变形'——每个平台的版本都针对该平台的算法和用户期望做了优化。这种方法可以将内容生产效率提升3-5倍，同时保证每个平台都是'原生'内容。",
+        "why_it_matters": "COPE是个人创作者对抗机构团队的唯一方法。一个人做出10个人的产出。",
+        "common_mistakes": "把COPE理解为复制粘贴；忽略平台适配；不做原子化设计",
+        "related_terms": [
+            "Pillar_Content",
+            "Content_Atomization",
+            "Platform_Native"
+        ],
+        "source_file": "Platform_Distribution_Strategy.md"
+    },
+    {
+        "term_en": "Content Atomization",
+        "term_cn": "内容原子化",
+        "definition_short": "将完整内容拆解成独立可传播的'原子单元'",
+        "definition_deep": "内容原子化是将一个完整的长内容拆解成多个独立的'原子'，每个原子可以独立存在、独立传播、独立获取流量。例如，一个10分钟的YouTube视频可以原子化为：5条抖音金句切片、3条X Thread、1篇小红书图文、1篇知乎讨论帖。原子化的关键是在创作阶段就'埋入切片点'——设计完整的金句、清晰的步骤、独立的争议点，便于后期拆解。",
+        "why_it_matters": "原子化让一份创作获得10倍曝光。不原子化=浪费80%的创作价值。",
+        "common_mistakes": "事后才想切片（素材不适合）；原子不独立（需要上下文才能理解）",
+        "related_terms": [
+            "COPE",
+            "Pillar_Content",
+            "Platform_Native"
+        ],
+        "source_file": "Platform_Distribution_Strategy.md"
+    },
+    {
+        "term_en": "Pillar Content",
+        "term_cn": "支柱内容",
+        "definition_short": "高价值长内容，是所有分发原子的'母体'",
+        "definition_deep": "支柱内容是COPE方法论的核心——一个经过精心策划的高价值长内容（通常是长视频、深度文章、播客、直播录像）。支柱内容的特点：1）信息密度高，足够拆解成多个原子；2）结构清晰，便于切片；3）观点鲜明，每个片段都有独立价值；4）格式多样，可以转化为视频/图文/音频。支柱内容是创作者的'内容资产'，一个好的支柱可以持续产出原子数月。",
+        "why_it_matters": "没有支柱内容，分发就是无源之水。支柱的质量决定原子的上限。",
+        "common_mistakes": "支柱太浅（无法拆解）；支柱太松散（没有可切片的高密度点）",
+        "related_terms": [
+            "COPE",
+            "Content_Atomization"
+        ],
+        "source_file": "Platform_Distribution_Strategy.md"
+    },
+    {
+        "term_en": "Platform-First Production",
+        "term_cn": "平台优先生产法",
+        "definition_short": "根据平台特性反向设计内容，而非做完再适配",
+        "definition_deep": "平台优先生产法是一种'反向设计'的创作思维：不是'先做内容再适配平台'，而是'先确定分发平台，再设计内容结构'。如果主平台是抖音，那创作时就用竖屏拍摄、设计15-60秒的独立片段、在前3秒放钩子；如果主平台是YouTube，就用横屏、设计8-15分钟的章节结构、注重观看时长。平台优先让'适配'变成'原生'，效率和效果都更好。",
+        "why_it_matters": "平台优先让创作效率翻倍。事后适配既费力又效果差。",
+        "common_mistakes": "所有平台用同一格式录制；不预埋切片点；忽略平台核心指标",
+        "related_terms": [
+            "Platform_Native",
+            "COPE",
+            "Content_Atomization"
+        ],
+        "source_file": "Platform_Distribution_Strategy.md"
+    },
+    {
+        "term_en": "Benign Violation",
+        "term_cn": "良性违规",
+        "definition_short": "幽默发生的条件——违反规范但无害",
+        "definition_deep": "良性违规理论（Benign Violation Theory）由Peter McGraw和Caleb Warren提出，解释了幽默产生的心理机制。核心观点：幽默发生需要同时满足两个条件——1）违规（Violation）：打破期望、规范或逻辑；2）无害（Benign）：这个违规是安全的、可接受的。只有违规没有无害=冒犯/愤怒；只有无害没有违规=无聊。两者同时存在=笑。",
+        "why_it_matters": "理解良性违规能帮你设计出既能打破期望又不会翻车的幽默内容。",
+        "common_mistakes": "违规太过变成冒犯；或者太安全变得无聊",
+        "related_terms": [
+            "Incongruity",
+            "Absurdist_Content",
+            "Meme"
+        ],
+        "source_file": "Absurdist_Content_Style.md"
+    },
+    {
+        "term_en": "Incongruity Theory",
+        "term_cn": "不协调理论",
+        "definition_short": "期望与现实不符产生的惊讶效果导致幽默",
+        "definition_deep": "不协调理论是最古老的幽默心理学理论之一。核心观点：当大脑的期望被打破——现实与预期不符时——会产生一个'惊讶-解析'循环。大脑首先惊讶，然后尝试解析这个不协调，当解析成功时（恍然大悟），会释放多巴胺产生愉悦感。这解释了为什么'反转'类内容特别吸引注意力——期望越强+反转越大=多巴胺越多。",
+        "why_it_matters": "设计'反转'和'出人意料'是抓住注意力的核心技巧。",
+        "common_mistakes": "反转太刻意/太突兀导致观众困惑而非惊喜",
+        "related_terms": [
+            "Benign_Violation",
+            "Hook",
+            "Surprise"
+        ],
+        "source_file": "Absurdist_Content_Style.md"
+    },
+    {
+        "term_en": "Meme Literacy",
+        "term_cn": "梗素养",
+        "definition_short": "理解和使用互联网梗的能力",
+        "definition_deep": "梗素养指一个人理解、使用和创造互联网meme的能力。高梗素养意味着：1）能识别当前流行的梗及其含义；2）能判断梗的时效性（过时的梗会让你显得落伍）；3）能在适当的语境中使用梗；4）能创造新梗。梗素养是一种隐性的文化资本，在年轻受众中尤其重要。对于内容创作者，梗素养决定了你能否与Z世代受众建立共鸣。",
+        "why_it_matters": "梗用对了是共鸣，用错了是尴尬。梗素养决定圈层沟通能力。",
+        "common_mistakes": "用过时的梗；用自己不懂的梗；堆砌太多梗",
+        "related_terms": [
+            "Meme",
+            "In_Group_Signaling",
+            "Brainrot"
+        ],
+        "source_file": "Absurdist_Content_Style.md"
+    },
+    {
+        "term_en": "Brainrot",
+        "term_cn": "脑腐内容",
+        "definition_short": "无意义但令人上瘾的互联网内容",
+        "definition_deep": "Brainrot是Z世代/Alpha世代用来描述无意义但令人沉迷的互联网内容的自嘲式说法。特征：1）碎片化、快节奏、无深度；2）大量meme、荒诞元素；3）观看时需要'关闭大脑'；4）容易上瘾。Brainrot的流行反映了注意力经济时代的内容特征——平台算法优化的是停留时长而非信息质量。年轻人一边自嘲被'脑腐'，一边继续刷——这本身就是后现代的反讽。",
+        "why_it_matters": "理解Brainrot能帮你理解Z世代的内容消费心理。",
+        "common_mistakes": "把Brainrot理解为贬义；忽视其作为圈层文化符号的功能",
+        "related_terms": [
+            "Meme_Literacy",
+            "Shitposting",
+            "Post_Irony"
+        ],
+        "source_file": "Absurdist_Content_Style.md"
+    },
+    {
+        "term_en": "Shitposting",
+        "term_cn": "水贴/抽象发言",
+        "definition_short": "故意发布无意义或荒诞内容",
+        "definition_deep": "Shitposting是一种互联网行为——故意发布低质量、无意义、挑衅或荒诞的内容。它可以是纯粹的搞破坏，也可以是一种后现代的表达形式。Shitposting的'反幽默'特质使其成为一种亚文化信号——懂的人会心一笑，不懂的人摸不着头脑。从内容策略角度，Shitposting代表了一种'故意的低质量'美学，与追求完美的主流内容形成对照。",
+        "why_it_matters": "Shitposting是圈层信号的极端形式，理解它能帮你理解亚文化传播机制。",
+        "common_mistakes": "把Shitposting等同于无脑；忽视其背后的社群功能和讽刺意图",
+        "related_terms": [
+            "Brainrot",
+            "Post_Irony",
+            "Abstract_Culture"
+        ],
+        "source_file": "Absurdist_Content_Style.md"
+    },
+    {
+        "term_en": "Post-Irony",
+        "term_cn": "后反讽",
+        "definition_short": "故意的低质量本身成为幽默",
+        "definition_deep": "后反讽是一种超越传统讽刺的表达形式。在传统讽刺中，你说A其实想表达非A；在后反讽中，你说A，观众知道你在讽刺，但你又不完全是在讽刺——真诚和讽刺的边界被模糊了。Z世代的meme文化大量使用后反讽：故意做出的'烂图'比精心制作的图更受欢迎，因为'烂'本身就是一种态度。理解后反讽是理解当代网络幽默的关键。",
+        "why_it_matters": "后反讽是当代网络幽默的主流形式，理解它才能与年轻受众对话。",
+        "common_mistakes": "用传统讽刺的逻辑理解后反讽；或者模仿形式但丢失态度",
+        "related_terms": [
+            "Shitposting",
+            "Brainrot",
+            "Meme_Literacy"
+        ],
+        "source_file": "Absurdist_Content_Style.md"
+    },
+    {
+        "term_en": "Abstract Culture",
+        "term_cn": "抽象文化",
+        "definition_short": "中文互联网特有的荒诞亚文化，源于6324直播间",
+        "definition_deep": "抽象文化起源于2015年斗鱼6324直播间，以孙笑川等人为代表人物。最初以'嘴臭'和审丑为特征，后来演变为一种广泛的互联网亚文化。抽象文化的特点：1）抽象话——用emoji、缩写、谐音规避审查的加密语言；2）解构权威——用荒诞消解严肃；3）圈层暗语——只有'懂的人'才能理解；4）情绪宣泄——用无厘头化解焦虑。抽象文化已从小众亚文化渗透到主流话语中。",
+        "why_it_matters": "抽象文化是理解当代中国年轻人表达方式的重要入口。",
+        "common_mistakes": "认为抽象=纯粹的恶意；忽视其作为亚文化的系统性",
+        "related_terms": [
+            "Shitposting",
+            "Meme_Literacy",
+            "Post_Irony"
+        ],
+        "source_file": "Absurdist_Content_Style.md"
+    },
+    {
+        "term_en": "In-group Signaling",
+        "term_cn": "圈层信号",
+        "definition_short": "用meme表明群体归属",
+        "definition_deep": "圈层信号是社会心理学概念在互联网语境中的应用。当你使用一个特定圈层的meme时，你在向这个圈层的成员发送信号：'我是自己人'。成功的信号能获得圈层认可（点赞、转发）；失败的信号（用错梗、用过时的梗）会暴露你是'外人'。圈层信号解释了为什么懂梗的人会有强烈的分享欲——分享行为本身是一种身份确认。",
+        "why_it_matters": "理解圈层信号能帮你设计更有传播力的meme内容。",
+        "common_mistakes": "用自己不属于的圈层的梗；误解梗的真实含义",
+        "related_terms": [
+            "Meme_Literacy",
+            "Abstract_Culture"
+        ],
+        "source_file": "Absurdist_Content_Style.md"
+    },
+    {
+        "term_en": "Bone Conduction",
+        "term_cn": "骨传导",
+        "definition_short": "声音通过颅骨振动传到内耳的路径，让你觉得自己声音比实际更低沉",
+        "definition_deep": "骨传导是声音通过声带振动经颅骨直接传到内耳的传播方式。因为骨传导会额外叠加低频共振成分，你平时听自己说话感觉声音浑厚饱满。但录音设备只捕捉空气传导声波，丢失了骨传导的低频部分，所以回听录音会觉得'又薄又尖'。这不是你声音不好，而是你从来没有真正听过别人耳中的你的声音。理解这个机制是克服'声音焦虑'的第一步。",
+        "why_it_matters": "不理解骨传导差异会导致录制者陷入'我声音不好听'的自我否定循环，放弃录制。",
+        "common_mistakes": "认为录音里的声音是失真的；试图模仿自己脑海中的声音来录制（会导致发声不自然）",
+        "related_terms": ["Mirror_Image_Effect", "Camera_Anxiety", "Voice_Projection"],
+        "source_file": "3.0_Video_Recording_Execution.md"
+    },
+    {
+        "term_en": "Mirror Image Effect",
+        "term_cn": "镜像效应",
+        "definition_short": "你习惯了镜子中左右反转的自己，所以看到视频中未翻转的真实形象会觉得'不像自己'",
+        "definition_deep": "镜像效应源于心理学中的纯粹曝光效应（Mere Exposure Effect）。你每天照镜子看到的是左右反转的自己，大脑已经习惯并偏好这个版本。而视频呈现的是未翻转的真实形象——也就是别人每天看到的你。微妙的面部不对称在翻转后变得陌生，导致你觉得'这不是我'。实际上视频里的你才是别人认识的你。",
+        "why_it_matters": "不理解镜像效应会让人对视频中的自己产生不必要的外貌焦虑，从而抗拒出镜。",
+        "common_mistakes": "认为自己'不上镜'；反复盯着视频中自己的脸分析哪里不好看；试图通过化妆改变而非接受",
+        "related_terms": ["Bone_Conduction", "Camera_Anxiety"],
+        "source_file": "3.0_Video_Recording_Execution.md"
+    },
+    {
+        "term_en": "Camera Anxiety",
+        "term_cn": "镜头焦虑",
+        "definition_short": "面对镜头时大脑杏仁核触发的轻微战斗-逃跑反应，导致肌肉紧张、表情僵硬",
+        "definition_deep": "镜头焦虑是进化心理学在口播场景中的表现。一个黑洞洞的圆形物体（镜头）持续注视你，大脑的杏仁核会将其识别为潜在威胁并触发战斗-逃跑反应（Fight-or-Flight Response）。结果包括：肌肉紧张导致表情僵硬、声带收紧导致声音发紧发尖、交感神经兴奋导致语速加快。这不是心理素质差，而是正常的神经反应，可以通过系统脱敏训练克服。",
+        "why_it_matters": "把镜头焦虑误判为'我不适合出镜'会导致从业者永远无法突破。",
+        "common_mistakes": "认为紧张是因为自己不行；试图靠意志力强撑而非系统训练；录制前不做热身",
+        "related_terms": ["Bone_Conduction", "Mirror_Image_Effect", "Diaphragmatic_Breathing"],
+        "source_file": "3.0_Video_Recording_Execution.md"
+    },
+    {
+        "term_en": "Diaphragmatic Breathing",
+        "term_cn": "腹式呼吸",
+        "definition_short": "用横膈膜而非胸腔呼吸，让气息下沉，声音更稳定有力",
+        "definition_deep": "腹式呼吸是专业播音和声乐训练的基础。普通人习惯胸式呼吸（吸气时肩膀上提、胸腔扩张），这种方式气量小、声音发飘、容易断气。腹式呼吸要求吸气时横膈膜下压、腹部鼓起，呼气时腹部收缩将气息稳定推出。这样气息量更大、更可控，能支撑更长的句子和更稳定的音量，消除说话时的气喘和断句感。",
+        "why_it_matters": "气息是声音的燃料。没有稳定的腹式呼吸，所有声音技巧都是空中楼阁。",
+        "common_mistakes": "吸气时耸肩（胸式呼吸）；只在录制时刻意用腹式呼吸而日常不练；气息不足时加快语速弥补",
+        "related_terms": ["Voice_Projection", "Oral_Resonance", "Chest_Resonance"],
+        "source_file": "3.0_Video_Recording_Execution.md"
+    },
+    {
+        "term_en": "Oral Resonance",
+        "term_cn": "口腔共鸣",
+        "definition_short": "利用口腔空间放大声音，让咬字更清晰、声音更圆润",
+        "definition_deep": "口腔共鸣是声音经过声带振动后在口腔空腔内产生的二次放大效果。通过调整口腔开合度、舌位和软腭位置，可以让声音在口腔内充分共振，产生更饱满圆润的音色。口腔共鸣是三种共鸣（口腔、胸腔、头腔）中最容易掌握的，也是日常口播最常用的。训练方法包括'打哈欠'状态下说话、咬苹果状发音等。",
+        "why_it_matters": "没有口腔共鸣的声音扁平无力，像在嘟囔，观众听着累。",
+        "common_mistakes": "嘴巴张不开导致声音闷在里面；过度追求共鸣变成播音腔；忽略口部热身操",
+        "related_terms": ["Chest_Resonance", "Head_Resonance", "Diaphragmatic_Breathing"],
+        "source_file": "3.0_Video_Recording_Execution.md"
+    },
+    {
+        "term_en": "Chest Resonance",
+        "term_cn": "胸腔共鸣",
+        "definition_short": "声音在胸腔产生低频共振，增加声音的厚度和权威感",
+        "definition_deep": "胸腔共鸣是声音在胸腔空腔内产生的低频振动效果。当你用胸腔共鸣说话时，可以感觉胸骨在轻微振动。胸腔共鸣赋予声音浑厚感和权威感，特别适合口播中需要表达观点、强调重点的段落。训练方法：用手贴住胸口发'嗯——'，感受振动逐步放大。注意胸腔共鸣不是压低嗓子说话，而是让声音自然落到胸腔。",
+        "why_it_matters": "纯口腔共鸣的声音缺乏厚度，在表达严肃观点时缺少说服力。",
+        "common_mistakes": "刻意压低声音模仿胸腔共鸣（会损伤声带）；全程使用胸腔共鸣导致语调单一",
+        "related_terms": ["Oral_Resonance", "Head_Resonance", "Voice_Projection"],
+        "source_file": "3.0_Video_Recording_Execution.md"
+    },
+    {
+        "term_en": "Head Resonance",
+        "term_cn": "头腔共鸣",
+        "definition_short": "声音在鼻腔和头部空腔共振，增加穿透力和明亮感",
+        "definition_deep": "头腔共鸣是声音在鼻腔、额窦等头部空腔内产生的高频共振效果。你发'嗯？'（上扬的疑问音）时感受到的鼻梁和额头的振动就是头腔共鸣。头腔共鸣让声音更明亮、更有穿透力，适合口播中需要表达惊讶、疑问或情绪高涨的段落。三种共鸣的灵活切换是专业播音员和优秀口播博主的核心声音技能。",
+        "why_it_matters": "缺少头腔共鸣的声音暗淡沉闷，情绪表达能力有限。",
+        "common_mistakes": "过度使用变成鼻音；不会在三种共鸣间自然切换；忽略头腔共鸣的训练",
+        "related_terms": ["Oral_Resonance", "Chest_Resonance", "Emotion_Tag"],
+        "source_file": "3.0_Video_Recording_Execution.md"
+    },
+    {
+        "term_en": "Filler Words",
+        "term_cn": "语气词/口头禅",
+        "definition_short": "说话中无意识填充的'嗯''啊''就是''然后'等词，削弱表达力",
+        "definition_deep": "语气词是大脑在组织语言时用来填充思考空白的无意识发声。少量语气词是自然的，但高频出现（如每句话都有'嗯''啊'）会严重影响口播质量：一是削弱专业感，二是占用信息密度，三是打断观众的接收节奏。根治方法不是硬憋（会更紧张），而是用停顿代替语气词——该思考时不说话，用沉默给自己反应时间。",
+        "why_it_matters": "语气词过多是口播'业余感'的第一大来源，后期也很难剪干净。",
+        "common_mistakes": "试图完全消除（不现实也不自然）；不知道自己有口头禅（需要回看录像才能发现）；用更快的语速来避免",
+        "related_terms": ["Voice_Projection", "Emotion_Tag", "Segmented_Recording"],
+        "source_file": "3.0_Video_Recording_Execution.md"
+    },
+    {
+        "term_en": "Stress and Emphasis",
+        "term_cn": "重音与强调",
+        "definition_short": "通过音量、音高、语速变化突出关键词，让表达有层次感",
+        "definition_deep": "重音与强调是口播表达力的核心技术。平铺直叙的阅读感是口播最大的杀手——每个字音量相同、语速相同，观众的大脑会自动降低注意力。重音技术包括：音量重音（关键词加大音量）、音高重音（关键词升调或降调）、语速重音（关键词前后放慢节奏形成对比）。高手还会用停顿作为强调手段——在关键词之前留半秒空白，制造悬念感。",
+        "why_it_matters": "没有重音变化的口播等于把文字念出来，观众宁可自己看文字版。",
+        "common_mistakes": "全程高能没有重点；只会加大音量一种方式；重音位置不对强调了错误的词",
+        "related_terms": ["Emotion_Tag", "Filler_Words", "Voice_Projection"],
+        "source_file": "3.0_Video_Recording_Execution.md"
+    },
+    {
+        "term_en": "Emotion Tag",
+        "term_cn": "情绪标记",
+        "definition_short": "在文稿上标注每句话应有的情绪（愤怒/疑惑/兴奋等），录制时按标记执行",
+        "definition_deep": "情绪标记是将文案从'文字'转化为'表演'的桥梁技术。在录制前通读文稿，在每一句或每一段旁边标注该处应传达的情绪（如：[愤怒] [疑惑] [兴奋] [心疼] [坚定]），录制时按标记调整声音的音量、语速、音高和面部表情。这个方法能有效解决'读稿感'——因为你不是在读字，而是在表演一系列情绪。",
+        "why_it_matters": "没有情绪标记的录制会退化为'朗读'，即使内容很好也显得无聊。",
+        "common_mistakes": "全篇标同一种情绪；标了但录制时忘了执行；情绪切换太突兀不自然",
+        "related_terms": ["Stress_and_Emphasis", "Filler_Words", "Camera_Anxiety"],
+        "source_file": "3.0_Video_Recording_Execution.md"
+    },
+    {
+        "term_en": "Segmented Recording",
+        "term_cn": "分段录制",
+        "definition_short": "将口播按段落分别录制，而非追求一镜到底，降低心理压力并提高质量",
+        "definition_deep": "分段录制是将完整的口播文稿拆分为多个独立段落（通常每段30秒-2分钟），逐段录制后在后期剪辑拼接的方法。这个方法有三大优势：一是降低心理压力（只需要'说好这一段'而非'完美说完全部'），二是允许对每一段进行状态调整和多次重录，三是后期可以挑选每段的最佳版本。对于新手来说，分段录制是唯一合理的工作流。",
+        "why_it_matters": "追求一镜到底是新手最大的心理障碍，分段录制直接消除了这个压力。",
+        "common_mistakes": "段落切分不在自然停顿点导致剪辑突兀；每段开头状态不一致；分太碎导致后期工作量爆炸",
+        "related_terms": ["Teleprompter", "Jump_Cut", "Camera_Anxiety"],
+        "source_file": "3.0_Video_Recording_Execution.md"
+    },
+    {
+        "term_en": "Teleprompter",
+        "term_cn": "提词器",
+        "definition_short": "安装在镜头前方的文字提示设备，让你看词的同时保持与镜头的眼神接触",
+        "definition_deep": "提词器是口播录制的关键辅助设备。物理提词器通过半透半反玻璃将手机/平板上的文字反射到镜头前方，让你在阅读文稿的同时眼睛直视镜头，解决了'低头看稿'和'背稿紧张'两大问题。软件提词器（如手机App）可以放在镜头旁边作为平替。提词器的正确使用方式不是逐字朗读，而是看关键词后用自己的话展开。",
+        "why_it_matters": "没有提词器的新手只能背稿或看稿，两种方式都会严重影响自然度和效率。",
+        "common_mistakes": "完全依赖提词器逐字念（读稿感）；滚动速度不对导致眼神频繁移动；提词器离镜头太远导致视线偏移明显",
+        "related_terms": ["Segmented_Recording", "Camera_Anxiety", "Eye_Contact"],
+        "source_file": "3.0_Video_Recording_Execution.md"
+    },
+    {
+        "term_en": "Rule of Thirds",
+        "term_cn": "三分法构图",
+        "definition_short": "将画面分为3×3网格，把人物放在交叉点上，比居中更有视觉张力",
+        "definition_deep": "三分法是摄影和视频构图的基础法则。将画面用两条水平线和两条垂直线等分为九宫格，四个交叉点就是视觉焦点。口播中常用的构图是将人物眼睛放在上方1/3线，身体偏向画面一侧（左三分之一或右三分之一），留出另一侧空间放文字或让画面'呼吸'。比正中心构图更有动态感和专业感。",
+        "why_it_matters": "构图直接决定画面的专业感。死居中的构图会显得业余且无聊。",
+        "common_mistakes": "始终死居中；头顶留太多空间（'头重脚轻'）；切掉额头或下巴",
+        "related_terms": ["Key_Light", "Camera_Anxiety"],
+        "source_file": "3.0_Video_Recording_Execution.md"
+    },
+    {
+        "term_en": "Key Light",
+        "term_cn": "主光源",
+        "definition_short": "照亮面部的主要光源，决定口播画面的明亮度和面部立体感",
+        "definition_deep": "主光源是口播画面中照亮人脸的最重要光源。正确的主光源应该在人物正前方偏上45°角的位置，形成自然的面部光影。环形灯（Ring Light）是最常见的口播主光源，特点是光线均匀、眼睛有环形眼神光。更高级的布光会加补光灯（Fill Light）减轻阴影和轮廓光（Rim Light）勾勒轮廓。光线质量对画面专业感的影响远大于相机本身。",
+        "why_it_matters": "光线差的画面即使用最贵的相机也显得业余。好的光线用手机也能拍出专业感。",
+        "common_mistakes": "头顶直射光（显老显丑）；逆光导致脸黑；只有自然光导致亮度不稳定",
+        "related_terms": ["Rule_of_Thirds"],
+        "source_file": "3.0_Video_Recording_Execution.md"
+    },
+    {
+        "term_en": "Voice Projection",
+        "term_cn": "声音投射",
+        "definition_short": "将声音有意识地'投'向远处，让声音有力量感和穿透力",
+        "definition_deep": "声音投射是播音训练的核心概念。不是'大声说话'，而是通过腹式呼吸提供充足气息、口腔共鸣放大声音、加上有意识地将声音'送'向远处目标来实现。训练方法是想象你对面5米处有一个人，你要让他清楚听到你说话但不是在喊。好的声音投射让你的声音在录音中听起来清晰有力，而不是有气无力或歇斯底里。",
+        "why_it_matters": "没有投射的声音在录音中发飘发虚，缺乏感染力和说服力。",
+        "common_mistakes": "用喊的方式代替投射（伤嗓子且刺耳）；气息不足导致投射无力；离麦克风太远或太近",
+        "related_terms": ["Diaphragmatic_Breathing", "Oral_Resonance", "Chest_Resonance"],
+        "source_file": "3.0_Video_Recording_Execution.md"
+    },
+    {
+        "term_en": "Half-Yawn Technique",
+        "term_cn": "半打哈欠技术",
+        "definition_short": "模拟打哈欠时的口腔打开状态来激活共鸣腔体，是快速热嗓的核心方法",
+        "definition_deep": "半打哈欠技术是播音和声乐训练中最实用的热嗓方法之一。做一个打哈欠的动作但只做到一半——此时你的软腭抬起、喉头下降、口腔空间最大化，这正是发声共鸣最充分的口腔状态。在这个状态下发声，你会感觉声音明显更圆润饱满。每次录制前做5-10次半打哈欠发声练习，可以快速激活口腔共鸣腔体。",
+        "why_it_matters": "不热嗓直接录制就像不热身直接跑步——声带还没进入最佳状态。",
+        "common_mistakes": "打哈欠打全了变成真正打哈欠；只做动作不同时发声；做了几次觉得没用就放弃",
+        "related_terms": ["Oral_Resonance", "Voice_Projection", "Diaphragmatic_Breathing"],
+        "source_file": "3.0_Video_Recording_Execution.md"
+    },
+    {
+        "term_en": "Jump Cut",
+        "term_cn": "跳剪",
+        "definition_short": "同一机位直接剪掉中间部分拼接，口播最常用的剪辑手法",
+        "definition_deep": "跳剪是在同一个镜头角度下剪掉说错的、停顿过长的、语气词过多的片段，直接拼接前后内容的剪辑方式。在口播中，跳剪是最基本也是最高频使用的剪辑技术。它允许录制者不必追求完美录制——说错了、卡壳了直接停下来，从出错的位置重新开始说，后期用跳剪处理。跳剪的节奏感也能让口播更紧凑有力，消除拖沓感。",
+        "why_it_matters": "跳剪是分段录制的技术保障。不会跳剪就只能追求一镜到底，压力爆表。",
+        "common_mistakes": "跳剪点选在句子中间（不自然）；前后语气状态差异太大（穿帮）；跳剪过于频繁导致'机关枪'感",
+        "related_terms": ["Segmented_Recording", "Teleprompter"],
+        "source_file": "3.0_Video_Recording_Execution.md"
+    }
+]

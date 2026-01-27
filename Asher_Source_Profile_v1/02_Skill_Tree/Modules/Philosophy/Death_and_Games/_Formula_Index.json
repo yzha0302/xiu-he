@@ -1,0 +1,100 @@
+[
+    {
+        "formula_name_en": "Jouissance Generation Formula",
+        "formula_name_cn": "圆乐生成公式",
+        "equation": "Jouissance = Death_Exposure × Self_Agency × Skill_Mastery",
+        "variables": {
+            "Death_Exposure": "死亡揭示程度——活动让你多接近'真实的死'(身体极限或同一性瓦解)",
+            "Self_Agency": "自主感——活动是自愿选择还是被迫参与",
+            "Skill_Mastery": "技能掌控度——你在这个领域的精进程度"
+        },
+        "mechanism": "圆乐来自三者的乘积效应。只接近死亡但不自主(被迫冒险)会产生恐惧而非圆乐；自主但没有技能(blind courage)会导致失败挫败；有技能但不接近死亡(舒适区)只产生欢愉而非圆乐。三者兼备时，你在极限处体验到同一性瓦解带来的解放感和重新诞生感。",
+        "application": "诊断某项活动为何不带来圆乐：是死亡揭示不够(太安全)、自主性不够(被迫)、还是技能不够(搞不定)？针对性提升。",
+        "anti_pattern": "追求'安全的刺激'(如过山车)——死亡揭示是假的，自主性也是假的，只能获得欢愉而非圆乐。",
+        "source_file": "Death_and_Games.md"
+    },
+    {
+        "formula_name_en": "Falling Depth Formula",
+        "formula_name_cn": "沉沦深度公式",
+        "equation": "Falling_Depth = Pleasure_Frequency × Identity_Attachment ÷ Authentic_Moments",
+        "variables": {
+            "Pleasure_Frequency": "欢愉频率——每天消费型娱乐的次数和时长",
+            "Identity_Attachment": "身份执着——你有多在意学历、职称、财产等符号身份",
+            "Authentic_Moments": "本真时刻——每天进行无限游戏、创作、深度思考的时间"
+        },
+        "mechanism": "沉沦深度与欢愉频率和身份执着成正比，与本真时刻成反比。商业文明通过提高欢愉频率(无处不在的娱乐)和强化身份执着(社交比较)来加深沉沦；觉醒的路径是增加本真时刻(无限游戏)来稀释沉沦。",
+        "application": "自我诊断：计算自己的沉沦深度。如果分子远大于分母，需要增加本真时刻；如果身份执着过高，需要反思'哪些我在意的东西其实不属于我'。",
+        "anti_pattern": "试图通过'更多身份符号'来缓解焦虑——这会让分子(Identity_Attachment)暴增，沉沦更深。",
+        "source_file": "Death_and_Games.md"
+    },
+    {
+        "formula_name_en": "Infinite Game Identification",
+        "formula_name_cn": "无限游戏判定公式",
+        "equation": "Infinite_Game = Autonomy × Differential_Repetition × Production_Potential",
+        "variables": {
+            "Autonomy": "自主性——1(完全可被剥夺)到10(完全不可剥夺)",
+            "Differential_Repetition": "差异性重复——1(纯同一性)到10(每次都有新发现)",
+            "Production_Potential": "生产潜力——1(纯消费)到10(可转化为高价值作品)"
+        },
+        "mechanism": "只有三者都高分的活动才是真正的无限游戏。缺少自主性(如职业电竞被俱乐部控制)会退化为有限游戏；缺少差异性重复(如机械练习)会导致厌倦和无进步；缺少生产潜力(如纯娱乐)无法转化为时间生产，只能消耗生命。",
+        "application": "对当前投入最多精力的活动进行评分。如果总分<500(三项各满分10，乘积1000)，考虑调整活动结构或换一个游戏。",
+        "anti_pattern": "选择看起来'高端'但实际缺乏自主性的活动(如为公司打工做创意工作)——创意是真的，但作品归属是假的。",
+        "source_file": "Death_and_Games.md"
+    },
+    {
+        "formula_name_en": "Flow Trigger Formula",
+        "formula_name_cn": "心流触发公式",
+        "equation": "Flow = Difficulty_Match × (1 - Self_Awareness) × Feedback_Speed",
+        "variables": {
+            "Difficulty_Match": "难度匹配度——挑战与技能的匹配程度(1最差，10最佳)",
+            "Self_Awareness": "自我意识强度——0(完全忘我)到1(极度自觉)",
+            "Feedback_Speed": "反馈速度——1(延迟反馈)到10(即时反馈)"
+        },
+        "mechanism": "心流触发的关键是难度匹配能逼退自我意识。当难度恰好在能力边缘，大脑没有余力进行自我叙事，就进入忘我状态。反馈速度则保证闭环，让动作和结果紧密联结。自我意识越强(越想'进入心流')，心流越难触发——这是心流的核心悖论。",
+        "application": "设计触发心流的条件：1)选择恰好足够难的任务；2)减少干扰(手机、思绪)让自我意识有机会消退；3)设置即时可见的反馈机制。",
+        "anti_pattern": "任务太简单(无聊→自我意识活跃)或太难(焦虑→自我意识活跃)都无法触发心流。",
+        "source_file": "Death_and_Games.md"
+    },
+    {
+        "formula_name_en": "Work-to-Artwork Conversion",
+        "formula_name_cn": "作品转化公式",
+        "equation": "Artwork = Differential_Repetition × Time_Crystallization × Distribution_Reach",
+        "variables": {
+            "Differential_Repetition": "差异性重复次数——练习精进的程度",
+            "Time_Crystallization": "时间凝固度——多少生命时间被压缩进作品",
+            "Distribution_Reach": "分发触达——作品被多少人消费(1最低，无上限)"
+        },
+        "mechanism": "成为时间生产者的路径是：通过差异性重复持续精进→将练习成果凝固成可复制的作品→利用技术扩大分发。三者是乘法关系：即使练习再多，不凝固成作品就是消耗时间；即使作品再好，不分发就无法成为'他人消费的时间'。",
+        "application": "自我诊断：现在处于三阶段的哪一步？如果只在练习没有作品，需要输出；如果有作品没分发，需要推广；如果没练习，一切都白搭。",
+        "anti_pattern": "只练习不输出(完美主义陷阱)；只输出不练习(量产垃圾)；只追求分发不管内容(流量思维)。",
+        "source_file": "Death_and_Games.md"
+    },
+    {
+        "formula_name_en": "Immortality Illusion Intensity",
+        "formula_name_cn": "永生幻象强度公式",
+        "equation": "Illusion_Intensity = Σ(Identity_Symbols) × Social_Validation × Comparison_Frequency",
+        "variables": {
+            "Identity_Symbols": "身份符号总量——学历、职称、财产、成就等",
+            "Social_Validation": "社会认可度——他人对你身份符号的认可程度",
+            "Comparison_Frequency": "比较频率——每天进行社会比较的次数"
+        },
+        "mechanism": "永生幻象强度与三者成正比。符号越多、认可越高、比较越频繁，'我不会死'的幻觉越强——同时，失去这些符号的焦虑也越强。这是一体两面的：永生幻象越强，死亡焦虑(以身份丧失形式出现)也越强。",
+        "application": "反向操作：减少身份符号的积累欲望；降低对社会认可的依赖；减少刷社交媒体的频率——这些都能削弱永生幻象，悖论性地也削弱了死亡焦虑。",
+        "anti_pattern": "试图通过'更成功'来获得安全感——这会让幻象强度指数级上升，焦虑也指数级上升。",
+        "source_file": "Death_and_Games.md"
+    },
+    {
+        "formula_name_en": "Dream Layer Diagnosis",
+        "formula_name_cn": "梦境层级诊断公式",
+        "equation": "Layer = f(Source_of_Goals, Source_of_Meaning, Source_of_Satisfaction)",
+        "variables": {
+            "Source_of_Goals": "目标来源——外界强加(L1)/商业许诺(L2)/自主创造(L3)",
+            "Source_of_Meaning": "意义来源——匮乏逃避(L1)/身份认同(L2)/过程本身(L3)",
+            "Source_of_Satisfaction": "满足来源——基本需求(L1)/欢愉(L2)/圆乐(L3)"
+        },
+        "mechanism": "三个维度综合判断你处于哪一层梦境。第一层梦境的人被现实匮乏驱动，追求基本生存；第二层梦境的人被商业幻象驱动，追求身份和欢愉；第三层梦境的人自主创造目标，从过程本身获得意义和圆乐。大多数人在L1和L2之间震荡。",
+        "application": "每天问自己：今天追求的目标是谁定义的？意义感来自哪里？满足感是欢愉还是圆乐？持续追踪，逐渐向L3迁移。",
+        "anti_pattern": "误以为自己在L3(我做的是我喜欢的事)，实际上'喜欢'是被商业文化塑造的——这是L2最隐蔽的形式。",
+        "source_file": "Death_and_Games.md"
+    }
+]

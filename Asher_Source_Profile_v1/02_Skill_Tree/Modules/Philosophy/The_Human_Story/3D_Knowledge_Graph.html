@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>3D Knowledge Graph - The Human Story</title>
+    <!-- 
+        ASHER KNOWLEDGE GRAPH STANDARD v2.1
+        - Dynamic Category System: AI assigns groups based on concept domain
+        - Collapsible Legend with total count
+        - HUD with close button
+        - Tube-style links with particles
+        - Bilingual HUD
+    -->
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #000005;
+            overflow: hidden;
+        }
+
+        /* HUD: Top-Left */
+        #hud {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 400px;
+            background: rgba(10, 15, 25, 0.95);
+            border: 1px solid #334466;
+            border-left: 3px solid #00ffff;
+            border-radius: 4px;
+            padding: 25px;
+            color: #eef;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            display: none;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        #hud h2 {
+            margin: 0 0 5px 0;
+            font-size: 24px;
+            padding-right: 30px;
+        }
+
+        #hud .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.2s;
+            font-size: 20px;
+            color: #889;
+            text-align: center;
+            line-height: 24px;
+        }
+
+        #hud .close-btn:hover {
+            opacity: 1;
+            color: #ff5555;
+        }
+
+        #hud .sub-header {
+            font-size: 14px;
+            color: #8899aa;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #334455;
+            padding-bottom: 10px;
+        }
+
+        #hud .section-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #556677;
+            letter-spacing: 2px;
+            margin-top: 15px;
+            margin-bottom: 8px;
+        }
+
+        #hud .content-block {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #ccd;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        #hud .en {
+            color: #fff;
+        }
+
+        #hud .cn {
+            color: #88aacc;
+            font-size: 13px;
+        }
+
+        #hud .keyword {
+            color: #00ffff;
+            font-weight: bold;
+        }
+
+        #hud .scene-tag {
+            display: inline-block;
+            font-size: 12px;
+            background: #223344;
+            color: #aab;
+            padding: 4px 8px;
+            border-radius: 12px;
+            margin: 3px 5px 3px 0;
+            border: 1px solid #334455;
+        }
+
+        #hud .related-tag {
+            display: inline-block;
+            font-size: 11px;
+            background: #224433;
+            color: #8ca;
+            padding: 3px 8px;
+            border-radius: 8px;
+            margin: 2px 4px 2px 0;
+            border: 1px solid #335544;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        #hud .related-tag:hover {
+            background: #337755;
+            color: #afa;
+        }
+
+        #hud .warning-block {
+            font-size: 13px;
+            line-height: 1.6;
+            color: #faa;
+            background: rgba(80, 20, 20, 0.3);
+            padding: 10px;
+            border-radius: 4px;
+            border-left: 2px solid #f55;
+        }
+
+        #hud .insight-block {
+            font-size: 13px;
+            line-height: 1.6;
+            color: #afc;
+            background: rgba(20, 60, 30, 0.3);
+            padding: 10px;
+            border-radius: 4px;
+            border-left: 2px solid #5a5;
+        }
+
+        /* Legend: Bottom-Left (Collapsible) */
+        #legend {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(10, 15, 25, 0.9);
+            border: 1px solid #334466;
+            border-radius: 4px;
+            padding: 15px 20px;
+            color: #ccd;
+            backdrop-filter: blur(10px);
+            min-width: 180px;
+        }
+
+        #legend h3 {
+            margin: 0;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #778;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        #legend h3::after {
+            content: '▼';
+            font-size: 10px;
+            transition: transform 0.3s;
+        }
+
+        #legend.collapsed h3::after {
+            transform: rotate(-90deg);
+        }
+
+        #legend .legend-items {
+            max-height: 200px;
+            overflow-y: auto;
+            transition: max-height 0.3s ease;
+        }
+
+        #legend.collapsed .legend-items {
+            max-height: 0;
+        }
+
+        #legend .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 6px 0;
+            font-size: 13px;
+        }
+
+        #legend .legend-color {
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+            margin-right: 10px;
+        }
+
+        #legend .legend-label {
+            color: #aab;
+        }
+
+        #legend .legend-count {
+            margin-left: auto;
+            color: #667;
+            font-size: 11px;
+        }
+
+        #legend .legend-total {
+            font-size: 11px;
+            color: #667;
+            margin-left: 10px;
+        }
+
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #00ffff;
+            font-family: monospace;
+            letter-spacing: 2px;
+        }
+    </style>
+    <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/3d-force-graph"></script>
+    <script src="https://unpkg.com/three-spritetext@1.8.1/dist/three-spritetext.min.js"></script>
+    <script src="https://unpkg.com/dat.gui"></script>
+</head>
+
+<body>
+    <div id="loading">INITIALIZING...</div>
+    <div id="3d-graph"></div>
+
+    <!-- HUD with Close Button -->
+    <div id="hud">
+        <span class="close-btn" onclick="hideHUD()">×</span>
+        <h2 id="hud-title">Title</h2>
+        <div id="hud-cn" class="sub-header">Subtitle</div>
+        <div class="section-title">Definition 定义</div>
+        <div id="hud-desc" class="content-block"></div>
+        <div class="section-title">Deep Dive 深度解析</div>
+        <div id="hud-notes" class="content-block" style="border-left: 2px solid #00ffff;"></div>
+        <div class="section-title">Why It Matters 为什么重要</div>
+        <div id="hud-why" class="insight-block"></div>
+        <div class="section-title">Common Mistakes 常见误区</div>
+        <div id="hud-mistakes" class="warning-block"></div>
+        <div class="section-title">Related Terms 关联术语</div>
+        <div id="hud-related"></div>
+        <div class="section-title">Scenarios 应用场景</div>
+        <div id="hud-scenes"></div>
+    </div>
+
+    <!-- Legend (Collapsible) -->
+    <div id="legend">
+        <h3 onclick="toggleLegend()">Domain 领域 <span id="legend-total"></span></h3>
+        <div id="legend-items" class="legend-items"></div>
+    </div>
+
+    <script>
+        // === CATEGORY CONFIGURATION ===
+        const CATEGORY_CONFIG = {
+            "History": { color: "#ffcc00", label_en: "History", label_cn: "历史" },
+            "Philosophy": { color: "#aa00ff", label_en: "Philosophy", label_cn: "哲学" },
+            "Sociology": { color: "#00ff00", label_en: "Sociology", label_cn: "社会学" },
+            "Economics": { color: "#ff8800", label_en: "Economics", label_cn: "经济学" }
+        };
+
+        const COLOR_PALETTE = [
+            "#00ffff", "#00ff00", "#ff0055", "#ff8800", "#aa00ff",
+            "#ffff00", "#00ffaa", "#ff00aa", "#88ff00", "#0088ff"
+        ];
+        let colorIndex = 0;
+
+        function getCategory(groupName, labelCn = groupName) {
+            if (CATEGORY_CONFIG[groupName]) {
+                return CATEGORY_CONFIG[groupName];
+            }
+            if (!CATEGORY_CONFIG[groupName]) {
+                CATEGORY_CONFIG[groupName] = {
+                    color: COLOR_PALETTE[colorIndex % COLOR_PALETTE.length],
+                    label_en: groupName,
+                    label_cn: labelCn
+                };
+                colorIndex++;
+            }
+            return CATEGORY_CONFIG[groupName];
+        }
+
+        function toggleLegend() {
+            document.getElementById('legend').classList.toggle('collapsed');
+        }
+
+        function buildLegend() {
+            const container = document.getElementById('legend-items');
+            container.innerHTML = '';
+            const counts = {};
+            let total = 0;
+            nodes.forEach(n => { counts[n.group] = (counts[n.group] || 0) + 1; total++; });
+            document.getElementById('legend-total').innerText = `(${Object.keys(counts).length} 域 / ${total} 点)`;
+            for (const [group, count] of Object.entries(counts)) {
+                const cat = getCategory(group);
+                const item = document.createElement('div');
+                item.className = 'legend-item';
+                item.innerHTML = `
+                    <div class="legend-color" style="background:${cat.color}"></div>
+                    <span class="legend-label">${cat.label_en} ${cat.label_cn}</span>
+                    <span class="legend-count">${count}</span>
+                `;
+                container.appendChild(item);
+            }
+        }
+
+        // --- DATA INJECTION POINT ---
+        const nodes = [
+            {
+                id: "Intersubjective_Reality",
+                en: "Intersubjective Reality",
+                cn: "主体间现实",
+                group: "Philosophy",
+                val: 40,
+                desc_en: "Reality existing in shared imagination",
+                desc_cn: "存在于人类共同想象网络中的现实",
+                notes_cn: "不同于客观现实（如放射性）和主观现实（如头痛），主体间现实存在于许多人的交流网络中。它依赖于群体共识，如果那个交际网络中的人死亡或改变了信仰，主体间现实就会消散或改变。国家、法律、货币、公司、神，都是典型的主体间现实。它是智人能够进行大规模灵活协作的根本原因。",
+                why_matters: "理解它，你就能理解为什么‘虚构’的东西（如美元、法律）能有‘物理’力量。",
+                mistakes: "认为它是‘假的’或‘不存在的’。只要大家信，它就有生杀予夺的真实力量。",
+                related: ["Shared_Fictions", "Imagined_Order", "Cognitive_Revolution"],
+                scenes_en: ["Laws", "Money", "Corporations"],
+                scenes_cn: ["法律判决时", "使用货币时", "公司运作时"]
+            },
+            {
+                id: "Cognitive_Revolution",
+                en: "Cognitive Revolution",
+                cn: "认知革命",
+                group: "History",
+                val: 35,
+                desc_en: "Ability to talk about fictions",
+                desc_cn: "智人学会谈论‘不存在事物’的转折点",
+                notes_cn: "约7万年前，智人出现了一种新的思维和沟通方式。最关键的不是能传达‘河边有狮子’（客观），而是能传达‘狮子是我们的守护神’（虚构）。这种能力使得智人能够突破150人的邓巴数限制，建立起成千上万人的部落、城市和帝国。这被归因于某种偶然的基因突变（知识树突变）。",
+                why_matters: "这是人类历史的起点，也是我们统治世界的根本原因。",
+                mistakes: "认为是因为我们更聪明或强壮。尼安德特人脑容量更大、更强壮，但输在不会讲故事。",
+                related: ["Intersubjective_Reality", "Shared_Fictions"],
+                scenes_en: ["Storytelling", "Myth Creation"],
+                scenes_cn: ["讲故事聚拢人心", "创造企业愿景"]
+            },
+            {
+                id: "Agricultural_Revolution",
+                en: "Agricultural Revolution",
+                cn: "农业革命",
+                group: "History",
+                val: 35,
+                desc_en: "Domestication of humans by wheat",
+                desc_cn: "史上最大骗局，小麦驯化了人类",
+                notes_cn: "约1.2万年前，从采集狩猎转向农耕的转折点。传统观点认为这是进步，Harari认为是‘陷阱’。虽然由于食物盈余，人类基因拷贝数大增，但个体不得不从事更繁重的劳动，饮食更单一，疾病更多，社会等级制度也随之出现。奢侈品（更多食物）变成了必需品（养活更多人）。",
+                why_matters: "重新定义了‘成功’的标准：演化成功≠ 个体幸福。",
+                mistakes: "认为古代农民比采集者生活得更好。事实恰恰相反。",
+                related: ["The_Luxury_Trap", "Happiness_Trap"],
+                scenes_en: ["Urbanization", "Overwork"],
+                scenes_cn: ["城市化进程", "996工作制"]
+            },
+            {
+                id: "Scientific_Revolution",
+                en: "Scientific Revolution",
+                cn: "科学革命",
+                group: "History",
+                val: 35,
+                desc_en: "Ignorance + Capital + Empire",
+                desc_cn: "承认无知 + 帝国 + 资本 = 力量",
+                notes_cn: "约500年前，人类承认‘我不知道’，并开始用观察和数学寻找答案。科学与帝国（提供保护和市场）和资本（提供资金）结盟，创造了现代世界。",
+                why_matters: "塑造了现代世界的底层操作系统。",
+                mistakes: "认为科学只是纯粹的知识探索。它始终也是政治和经济活动。",
+                related: ["The_Discovery_of_Ignorance", "Empire", "Capital"],
+                scenes_en: ["R&D Funding", "Colonial Expansion"],
+                scenes_cn: ["科技研发融资", "市场扩张"]
+            },
+            {
+                id: "The_Luxury_Trap",
+                en: "The Luxury Trap",
+                cn: "奢侈陷阱",
+                group: "History",
+                val: 30,
+                desc_en: "Luxuries become necessities",
+                desc_cn: "奢侈品一旦习惯就变成必需品，并带来新负担",
+                notes_cn: "历史的铁律：奢侈品往往倾向于成为必需品，并产生新的义务。农业革命是典型的例子。智人为了追求更稳定的食物来源（奢侈），结果导致人口暴涨，不得不更辛苦地劳作。",
+                why_matters: "提醒我们警惕技术进步带来的生活质量下降。",
+                mistakes: "认为节省时间的技术一定会让人更悠闲。",
+                related: ["Agricultural_Revolution", "Consumerism"],
+                scenes_en: ["Email Dependency", "Smartphones"],
+                scenes_cn: ["邮件依赖症", "智能手机成瘾"]
+            },
+            {
+                id: "Shared_Fictions",
+                en: "Shared Fictions",
+                cn: "共同虚构",
+                group: "Sociology",
+                val: 30,
+                desc_en: "Myths that enable cooperation",
+                desc_cn: "构建社会秩序的故事",
+                notes_cn: "指那些并非物理存在，而是由人类讲述并共同相信的故事。如法律、神话、公司。只要故事一变，社会秩序就会重组。",
+                why_matters: "人类社会最强大的力量。",
+                mistakes: "把‘虚构’等同于‘谎言’。谎言是个体欺骗，虚构是群体共识。",
+                related: ["Intersubjective_Reality", "Imagined_Order"],
+                scenes_en: ["Brand Value", "National Borders"],
+                scenes_cn: ["品牌价值", "国界线"]
+            },
+            {
+                id: "Imagined_Order",
+                en: "Imagined Order",
+                cn: "想象的秩序",
+                group: "Sociology",
+                val: 30,
+                desc_en: "Hierarchy based on myths",
+                desc_cn: "基于神话而非生物学建立的社会等级",
+                notes_cn: "所有大规模社会合作都需要等级制度，而这些制度（如种姓制度、阶级）都是‘想象的’。它们不是自然法则，而是为了维持秩序而编造的神话。",
+                why_matters: "揭示了社会公正往往是某种神话的产物。",
+                mistakes: "认为社会等级是‘自然’的。",
+                related: ["Intersubjective_Reality", "Shared_Fictions"],
+                scenes_en: ["Caste System", "Social Classes"],
+                scenes_cn: ["种姓制度", "社会阶层"]
+            },
+            {
+                id: "Liberal_Humanism",
+                en: "Liberal Humanism",
+                cn: "自由人文主义",
+                group: "Philosophy",
+                val: 30,
+                desc_en: "Worship of humanity",
+                desc_cn: "崇拜‘人性’和‘个人’的现代宗教",
+                notes_cn: "现代世界最主流的‘宗教’。相信‘人’是神圣的，个人的内心体验是意义的来源。主张人权、自由意志。但这套故事并没有科学基础。",
+                why_matters: "我们大多数人都笃信它，却意识不到它也是一个‘故事’。",
+                mistakes: "认为这就是客观真理，而非一种信仰体系。",
+                related: ["Romanticism", "Consumerism", "Scientific_Revolution"],
+                scenes_en: ["Human Rights", "Voting"],
+                scenes_cn: ["人权宣言", "民主投票"]
+            },
+            {
+                id: "Consumerism",
+                en: "Consumerism",
+                cn: "消费主义",
+                group: "Economics",
+                val: 30,
+                desc_en: "Buying is happiness",
+                desc_cn: "相信幸福可以通过购买产品和服务获得的信仰",
+                notes_cn: "史上第一个信徒言行一致的宗教。它与浪漫主义结盟，告诉我们通过购买体验来解决空虚。",
+                why_matters: "经济增长的动力，心理空虚的源头。",
+                mistakes: "认为购买是出于自由意志。其实是被营销塑造的欲望。",
+                related: ["Romanticism", "Capitalism", "Liberal_Humanism"],
+                scenes_en: ["Shopping Therapy", "Luxury Goods"],
+                scenes_cn: ["购物疗法", "奢侈品消费"]
+            },
+            {
+                id: "Romanticism",
+                en: "Romanticism",
+                cn: "浪漫主义",
+                group: "Philosophy",
+                val: 30,
+                desc_en: "Experience is meaning",
+                desc_cn: "相信个人情感和多元体验即是意义",
+                notes_cn: "告诉我们要‘听从内心’，要‘尽可能多地体验人生’。它为消费主义提供了‘销售体验’的市场。",
+                why_matters: "塑造了现代人的生活理想（旅游、恋爱、冒险）。",
+                mistakes: "以为想去旅游是自己的想法。这其实是19世纪浪漫主义的产物。",
+                related: ["Consumerism", "Liberal_Humanism"],
+                scenes_en: ["Travel", "Falling in Love"],
+                scenes_cn: ["环球旅行", "追求真爱"]
+            },
+            {
+                id: "Empire",
+                en: "Empire",
+                cn: "帝国",
+                group: "History",
+                val: 30,
+                desc_en: "Political order of diversity",
+                desc_cn: "统治不同民族、疆域灵活扩张的政治秩序",
+                notes_cn: "帝国是过去2500年最常见的政治形式。它是文化融合的熔炉，也是科学的保护者。",
+                why_matters: "我们现在的文化大多是帝国的遗产。",
+                mistakes: "简单地将帝国视为‘邪恶’。",
+                related: ["Scientific_Revolution", "Capital", "Imagined_Order"],
+                scenes_en: ["Global Trade", "Cultural Exchange"],
+                scenes_cn: ["全球贸易网络", "文化融合"]
+            },
+            {
+                id: "Capital",
+                en: "Capital",
+                cn: "资本",
+                group: "Economics",
+                val: 30,
+                desc_en: "Wealth invested in production",
+                desc_cn: "投入生产以创造更多财富的金钱",
+                notes_cn: "资本不同于单纯的财富（宝藏）。它是基于对未来增长的信任（Credit）而投入再生产的钱。",
+                why_matters: "现代经济的核心引擎。",
+                mistakes: "混淆有钱人和资本家。",
+                related: ["Credit", "Scientific_Revolution", "Empire"],
+                scenes_en: ["Investment", "Startups"],
+                scenes_cn: ["风险投资", "创业公司"]
+            },
+            {
+                id: "Credit",
+                en: "Credit",
+                cn: "信贷",
+                group: "Economics",
+                val: 30,
+                desc_en: "Trust in future",
+                desc_cn: "对未来的信任的货币化",
+                notes_cn: "基于‘明天会更好’的假设，让我们今天能花明天的钱。没有它，增长就无法启动。",
+                why_matters: "现代经济奇迹的基石。",
+                mistakes: "认为信贷只是借钱。它是对未来的信仰。",
+                related: ["Capital", "Modern_Growth_Formula"],
+                scenes_en: ["Loans", "Mortgages"],
+                scenes_cn: ["银行贷款", "按揭买房"]
+            },
+            {
+                id: "The_Discovery_of_Ignorance",
+                en: "The Discovery of Ignorance",
+                cn: "发现无知",
+                group: "History",
+                val: 25,
+                desc_en: "Admitting we don't know",
+                desc_cn: "承认‘我们不知道’，现代科学的起点",
+                notes_cn: "打破了‘所有知识都在经典中’的传统，释放了探索的力量。",
+                why_matters: "科学革命的心理基础。",
+                mistakes: "以为科学等于真理。",
+                related: ["Scientific_Revolution"],
+                scenes_en: ["Research", "Exploration"],
+                scenes_cn: ["科学研究", "地理探险"]
+            },
+            {
+                id: "Happiness_Trap",
+                en: "Happiness Trap",
+                cn: "快乐陷阱",
+                group: "Philosophy",
+                val: 30,
+                desc_en: "Progress != Happiness",
+                desc_cn: "客观条件变好，主观快乐未必增加",
+                notes_cn: "快乐由生物化学决定（恒温器）。期望随现实升高，导致快乐水平不随历史进步而提升。",
+                why_matters: "质疑了‘进步’的终极意义。",
+                mistakes: "认为有钱就会快乐。",
+                related: ["Happiness_Formula", "Agricultural_Revolution"],
+                scenes_en: ["Rat Race", "Hedonic Treadmill"],
+                scenes_cn: ["内卷", "享乐适应"]
+            },
+            // === FORMULAS ===
+            {
+                id: "Cooperation_Scale_Formula",
+                en: "Cooperation Scale Formula",
+                cn: "协作规模公式",
+                group: "Sociology",
+                val: 35,
+                desc_en: "Scale = Story x Tech",
+                desc_cn: "协作规模 = 故事信度 × 通信技术",
+                notes_cn: "突破邓巴数限制的关键。故事越强，技术越好，组织越大。",
+                why_matters: "解释了宗教、国家、公司的规模差异。",
+                mistakes: "只重技术不重故事。",
+                related: ["Intersubjective_Reality", "Shared_Fictions"],
+                scenes_en: ["Corporate Scaling", "Nation Building"],
+                scenes_cn: ["公司扩张", "国家建设"]
+            },
+            {
+                id: "Modern_Growth_Formula",
+                en: "Modern Growth Formula",
+                cn: "现代增长公式",
+                group: "Economics",
+                val: 35,
+                desc_en: "Growth = Credit + Science + Empire",
+                desc_cn: "增长 = 信贷 + 科学 + 帝国",
+                notes_cn: "现代经济的三驾马车。信贷启动，科学做大，帝国护航。",
+                why_matters: "分析国家崛起的框架。",
+                mistakes: "缺一不可。",
+                related: ["Scientific_Revolution", "Capital", "Empire", "Credit"],
+                scenes_en: ["Economic Policy", "Development Strategy"],
+                scenes_cn: ["经济政策制定", "发展战略"]
+            },
+            {
+                id: "Reality_Spectrum_Formula",
+                en: "Reality Spectrum Formula",
+                cn: "现实光谱判定",
+                group: "Philosophy",
+                val: 35,
+                desc_en: "Obj | Subj | Intersubj",
+                desc_cn: "现实 = 客观 | 主观 | 主体间",
+                notes_cn: "区分三种现实。关键在于Intersubjective拥有改变物理世界的力量。",
+                why_matters: "避免分类错误导致的认知偏差。",
+                mistakes: "把主体间现实当成客观现实。",
+                related: ["Intersubjective_Reality", "Shared_Fictions"],
+                scenes_en: ["Problem Solving", "Debate"],
+                scenes_cn: ["解决社会问题", "哲学辩论"]
+            },
+            {
+                id: "Luxury_Trap_Formula",
+                en: "Luxury Trap Formula",
+                cn: "奢侈陷阱公式",
+                group: "History",
+                val: 35,
+                desc_en: "Luxury -> Necessity",
+                desc_cn: "奢侈 → 习惯 → 必需 → 依赖",
+                notes_cn: "技术进步往往导致长期依赖和不自由。",
+                why_matters: "警惕技术的反向驯化。",
+                mistakes: "以为工具只是工具。",
+                related: ["The_Luxury_Trap", "Agricultural_Revolution"],
+                scenes_en: ["Tech Adoption", "Lifestyle Creep"],
+                scenes_cn: ["采纳新技术", "生活方式通胀"]
+            },
+            {
+                id: "Happiness_Formula",
+                en: "Happiness Formula",
+                cn: "快乐公式",
+                group: "Philosophy",
+                val: 35,
+                desc_en: "H = Bio + (R - E)",
+                desc_cn: "快乐 = 生物基准 + (现实 - 预期)",
+                notes_cn: "解释了为什么快乐水车效应存在。",
+                why_matters: "指导个人追求真正的幸福。",
+                mistakes: "只关注改变现实，忽略管理预期和生物机制。",
+                related: ["Happiness_Trap"],
+                scenes_en: ["Life Satisfaction", "Mental Health"],
+                scenes_cn: ["生活满意度", "心理健康管理"]
+            }
+        ];
+
+        const links = [];
+
+        // Generate links from 'related' field
+        nodes.forEach(sourceNode => {
+            if (sourceNode.related) {
+                sourceNode.related.forEach(targetId => {
+                    const targetNode = nodes.find(n =>
+                        n.id === targetId ||
+                        n.en === targetId ||
+                        n.id === targetId.replace(/ /g, '_')
+                    );
+
+                    if (targetNode) {
+                        links.push({
+                            source: sourceNode.id,
+                            target: targetNode.id,
+                            label: "related"
+                        });
+                    }
+                });
+            }
+        });
+
+        // Manual Links for key structures (Bridge Links)
+        links.push(
+            { source: "Cognitive_Revolution", target: "Intersubjective_Reality", label: "Enabled" },
+            { source: "Intersubjective_Reality", target: "Shared_Fictions", label: "Example" },
+            { source: "Scientific_Revolution", target: "The_Discovery_of_Ignorance", label: "Started with" },
+            { source: "Liberal_Humanism", target: "Romanticism", label: "Partner" },
+            { source: "Romanticism", target: "Consumerism", label: "Fuel" },
+            { source: "Capital", target: "Credit", label: "Requires" },
+            { source: "Empire", target: "Scientific_Revolution", label: "Funded" },
+            { source: "Agricultural_Revolution", target: "The_Luxury_Trap", label: "Caused" },
+            { source: "Shared_Fictions", target: "Imagined_Order", label: "Creates" },
+            { source: "Capital", target: "Scientific_Revolution", label: "Invests in" }
+        );
+
+        // --- CONFIGURATION ---
+        const settings = { linkDistance: 80, chargeStrength: -200, labelSize: 1.0, opacity: 0.8, autoRotate: true };
+
+        // --- ENGINE ---
+        const elem = document.getElementById('3d-graph');
+        const Graph = ForceGraph3D()(elem)
+            .graphData({ nodes, links })
+            .backgroundColor('#000005')
+            .showNavInfo(false)
+            .nodeThreeObject(node => {
+                const cat = getCategory(node.group);
+                const text = `${node.en}\n${node.cn}`;
+                const sprite = new SpriteText(text);
+                sprite.color = cat.color;
+                sprite.textHeight = (node.val / 2) * settings.labelSize;
+                sprite.fontFace = 'Arial'; sprite.fontWeight = 'bold';
+                sprite.backgroundColor = `rgba(0,0,0,${settings.opacity / 2})`;
+                sprite.padding = 4;
+                sprite.userData = { baseSize: node.val / 2 };
+                return sprite;
+            })
+            // Updated link width to match template standard better
+            .linkWidth(link => 2.5)
+            .linkColor(link => {
+                const sourceNode = nodes.find(n => n.id === link.source || n.id === link.source.id);
+                if (sourceNode) return getCategory(sourceNode.group).color + '88';
+                return '#445566';
+            })
+            .linkOpacity(0.7)
+            .linkCurvature(0.12)
+            .linkCurveRotation(link => {
+                const hash = (link.source?.id || link.source) + (link.target?.id || link.target);
+                let sum = 0;
+                for (let i = 0; i < hash.length; i++) sum += hash.charCodeAt(i);
+                return (sum % 360) * (Math.PI / 180);
+            })
+            .linkDirectionalArrowLength(5)
+            .linkDirectionalArrowRelPos(0.9)
+            .linkDirectionalArrowColor(link => {
+                const sourceNode = nodes.find(n => n.id === link.source || n.id === link.source.id);
+                if (sourceNode) return getCategory(sourceNode.group).color;
+                return '#ffffff';
+            })
+            .linkDirectionalParticles(3) // Increased particles to match standard
+            .linkDirectionalParticleSpeed(0.005)
+            .linkDirectionalParticleWidth(2)
+            .linkDirectionalParticleColor(link => {
+                const sourceNode = nodes.find(n => n.id === link.source || n.id === link.source.id);
+                if (sourceNode) return getCategory(sourceNode.group).color;
+                return '#ffffff';
+            })
+            .onNodeClick(node => { Graph.cameraPosition({ x: node.x + 50, y: node.y + 50, z: node.z + 50 }, node, 1500); showHUD(node); });
+
+        Graph.d3Force('link').distance(settings.linkDistance);
+        Graph.d3Force('charge').strength(settings.chargeStrength);
+
+        // --- CONTROLS ---
+        const gui = new dat.GUI();
+        const folder = gui.addFolder('Graph Settings');
+        folder.add(settings, 'linkDistance', 10, 300).onChange(val => { Graph.d3Force('link').distance(val); Graph.d3ReheatSimulation(); });
+        folder.add(settings, 'chargeStrength', -500, -10).onChange(val => { Graph.d3Force('charge').strength(val); Graph.d3ReheatSimulation(); });
+        folder.add(settings, 'labelSize', 0.1, 3.0).onChange(val => { Graph.scene().traverse(obj => { if (obj.userData?.baseSize) obj.textHeight = obj.userData.baseSize * val; }); });
+        folder.add(settings, 'opacity', 0.1, 1.0).onChange(val => { Graph.scene().traverse(obj => { if (obj.userData?.baseSize) obj.backgroundColor = `rgba(0,0,0,${val / 2})`; }); });
+        folder.add(settings, 'autoRotate').onChange(val => { Graph.controls().autoRotate = val; });
+        folder.open();
+
+        // --- HUD LOGIC ---
+        function showHUD(node) {
+            const el = (id) => document.getElementById(id);
+            const cat = getCategory(node.group);
+            el('hud').style.display = 'block';
+            el('hud-title').innerText = node.en;
+            el('hud-title').style.color = cat.color;
+            el('hud-cn').innerText = `${node.cn} [${node.group}]`;
+            el('hud-desc').innerHTML = `<div class="en">${node.desc_en || ''}</div><div class="cn">${node.desc_cn || ''}</div>`;
+            el('hud-notes').innerHTML = `<div class="en">${node.notes_en || ''}</div><div class="cn">${node.notes_cn || ''}</div>`;
+
+            // Why It Matters
+            const whyEl = el('hud-why');
+            if (node.why_matters) {
+                whyEl.innerHTML = node.why_matters;
+                whyEl.parentElement.style.display = 'block';
+            } else {
+                whyEl.innerHTML = '';
+                whyEl.parentElement.style.display = 'none';
+            }
+
+            // Common Mistakes
+            const mistakesEl = el('hud-mistakes');
+            if (node.mistakes) {
+                mistakesEl.innerHTML = node.mistakes;
+                mistakesEl.parentElement.style.display = 'block';
+            } else {
+                mistakesEl.innerHTML = '';
+                mistakesEl.parentElement.style.display = 'none';
+            }
+
+            // Related Terms
+            const relatedContainer = el('hud-related');
+            relatedContainer.innerHTML = '';
+            if (node.related && node.related.length > 0) {
+                node.related.forEach(term => {
+                    const tag = document.createElement('span');
+                    tag.className = 'related-tag';
+                    tag.innerText = term;
+                    tag.onclick = () => {
+                        const targetNode = nodes.find(n => n.id === term || n.en === term);
+                        if (targetNode) {
+                            Graph.cameraPosition({ x: targetNode.x + 50, y: targetNode.y + 50, z: targetNode.z + 50 }, targetNode, 1500);
+                            setTimeout(() => showHUD(targetNode), 1600);
+                        }
+                    };
+                    relatedContainer.appendChild(tag);
+                });
+                relatedContainer.parentElement.style.display = 'block';
+            } else {
+                relatedContainer.parentElement.style.display = 'none';
+            }
+
+            // Scenarios
+            const sceneContainer = el('hud-scenes');
+            sceneContainer.innerHTML = '';
+            if (node.scenes_en && node.scenes_en.length > 0) {
+                for (let i = 0; i < node.scenes_en.length; i++) {
+                    const tag = document.createElement('span');
+                    tag.className = 'scene-tag';
+                    tag.innerHTML = `${node.scenes_en[i]} <span style="color:#88aacc">${node.scenes_cn[i]}</span>`;
+                    sceneContainer.appendChild(tag);
+                }
+                sceneContainer.parentElement.style.display = 'block';
+            } else {
+                sceneContainer.parentElement.style.display = 'none';
+            }
+        }
+
+        function hideHUD() {
+            document.getElementById('hud').style.display = 'none';
+        }
+
+        // Initialize
+        buildLegend();
+        setTimeout(() => { document.getElementById('loading').style.display = 'none'; }, 1000);
+        Graph.controls().autoRotate = true;
+    </script>
+</body>
+
+</html>

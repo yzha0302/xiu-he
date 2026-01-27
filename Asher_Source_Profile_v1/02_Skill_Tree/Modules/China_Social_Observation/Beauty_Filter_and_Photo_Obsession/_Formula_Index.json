@@ -1,0 +1,88 @@
+[
+    {
+        "formula_en": "Reality Escape Formula",
+        "formula_cn": "逃避真实公式",
+        "equation": "Escape_Degree = Reality_Difficulty × Hope_Poverty",
+        "variables": {
+            "Escape_Degree": "逃避真实的程度",
+            "Reality_Difficulty": "现实艰难度",
+            "Hope_Poverty": "希望匮乏度"
+        },
+        "mechanism": "当现实变得越来越艰难，同时对未来的希望越来越少时，人们就会越来越倾向于逃避真实、沉溺于虚幻。这解释了为什么经济下行期创伤美学会盛行——不是人们审美变了，而是需要更强的安慰剂来对冲更大的现实痛苦。",
+        "application": "当发现自己越来越沉溺抖音/美颜/虚假叙事时，检查现实困境和希望感。",
+        "anti_pattern": "用更多虚幻来对抗现实痛苦。形成恶性循环，变得越来越脆弱。",
+        "source_file": "Beauty_Filter_and_Photo_Obsession.md"
+    },
+    {
+        "formula_en": "Sensory Capacity Formula",
+        "formula_cn": "感受力公式",
+        "equation": "Sensory_Capacity = Purity / Utilitarianism",
+        "variables": {
+            "Sensory_Capacity": "感受力",
+            "Purity": "单纯度",
+            "Utilitarianism": "功利度"
+        },
+        "mechanism": "感受力因单纯而存在，因功利而消失。当一个人越单纯——能够不带目的地沉浸于体验本身——感受力就越强；当一个人越功利——一切都要考虑有什么用、别人怎么看——感受力就越弱。中国教育系统系统性地增加分母(功利度)、减少分子(单纯度)，从而摧毁感受力。",
+        "application": "增强感受力的关键是减少功利计算，增加单纯体验。",
+        "anti_pattern": "一切都问'这有什么用'。功利度越高，感受力越弱。",
+        "source_file": "Beauty_Filter_and_Photo_Obsession.md"
+    },
+    {
+        "formula_en": "Photo Dependency Formula",
+        "formula_cn": "拍照依赖公式",
+        "equation": "Photo_Dependency = External_Weight × Expression_Deficit × Meaning_Poverty",
+        "variables": {
+            "Photo_Dependency": "拍照依赖程度",
+            "External_Weight": "外部评价权重",
+            "Expression_Deficit": "自我表达缺失",
+            "Meaning_Poverty": "意义感匮乏"
+        },
+        "mechanism": "三个因素相乘决定拍照沉迷程度：越依赖外部评价(面子文化)、自我表达空间越贫瘠(从小只能听别人说)、意义感越匮乏(传统人生叙事集体失效)，拍照依赖就越强。三者是乘法关系——任何一项极高都会导致强烈的拍照沉迷。",
+        "application": "降低拍照依赖需要同时在三个维度下功夫。",
+        "anti_pattern": "把出片当做人生大事。三因素叠加导致无法沉浸体验生活本身。",
+        "source_file": "Beauty_Filter_and_Photo_Obsession.md"
+    },
+    {
+        "formula_en": "Hollow Person Formula",
+        "formula_cn": "空心人公式",
+        "equation": "Hollowness = Σ(External_Labels) - Sensory_Capacity",
+        "variables": {
+            "Hollowness": "空心程度",
+            "External_Labels": "外部标签(学历/收入/婚姻等)",
+            "Sensory_Capacity": "内在感受力"
+        },
+        "mechanism": "空心程度=外部标签总和-内在感受力。一个人追逐的外部标签越多，同时内在感受力越弱，就越空心。空心人外表光鲜(很多标签)，但无法从私密的个人体验中获得满足，内心实际上是空洞的。这是中国教育批量生产的人格类型。",
+        "application": "减少对外部标签的追逐，同时增强内在感受力。",
+        "anti_pattern": "用更多外部标签来填补空虚感。只会加剧空心。",
+        "source_file": "Beauty_Filter_and_Photo_Obsession.md"
+    },
+    {
+        "formula_en": "Disillusionment Formula",
+        "formula_cn": "幻灭公式",
+        "equation": "Disillusionment = Beauty_Narrative / Real_World",
+        "variables": {
+            "Disillusionment": "幻灭程度",
+            "Beauty_Narrative": "美颜叙事(被喂养的虚假叙事强度)",
+            "Real_World": "真实现实"
+        },
+        "mechanism": "幻灭程度=美颜叙事÷真实现实。被喂养的虚假叙事(好人好报/努力有回报/社会繁荣)越强，真实现实(法家/社达/失业)越残酷，两者落差越大，幻灭感就越强。这解释了为什么受美颜教育的年轻人进入社会后产生强烈的'大梦一场'感。",
+        "application": "从小接触真实的信息环境，减少美颜叙事的喂养。",
+        "anti_pattern": "用更多美颜叙事保护孩子。只会加大将来的幻灭冲击。",
+        "source_file": "Beauty_Filter_and_Photo_Obsession.md"
+    },
+    {
+        "formula_en": "Douyin Social Stabilizer Formula",
+        "formula_cn": "抖音稳定器公式",
+        "equation": "Stabilizing_Effect = Dopamine_Stimulation × Reality_Avoidance × Time_Consumption",
+        "variables": {
+            "Stabilizing_Effect": "社会稳定效果",
+            "Dopamine_Stimulation": "多巴胺刺激强度",
+            "Reality_Avoidance": "现实回避程度",
+            "Time_Consumption": "时间消耗量"
+        },
+        "mechanism": "抖音是'中华民族第五大发明'——没有化学成分的合法致幻剂，谋取暴利的社会稳定机。它通过三个因素相乘实现稳定效果：快速强烈的多巴胺刺激、对现实问题的高效回避、对空闲时间的大量消耗。有了抖音，人们不会在空虚中承受真实的折磨，也没有精力对生活进行终极追问。",
+        "application": "识别抖音对自己的麻醉效果，有意识地限制使用。",
+        "anti_pattern": "用抖音填充所有空闲时间。失去思考能力和面对真实的勇气。",
+        "source_file": "Beauty_Filter_and_Photo_Obsession.md"
+    }
+]

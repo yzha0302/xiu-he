@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cognitive Philosophy - 3D Knowledge Graph</title>
+    <!-- 
+        ASHER KNOWLEDGE GRAPH STANDARD v2.1
+        - Dynamic Category System: AI assigns groups based on concept domain
+        - Collapsible Legend with total count
+        - HUD with close button
+        - Tube-style links with particles
+        - Bilingual HUD
+    -->
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #000005;
+            overflow: hidden;
+        }
+
+        #hud {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 400px;
+            background: rgba(10, 15, 25, 0.95);
+            border: 1px solid #334466;
+            border-left: 3px solid #00ffff;
+            border-radius: 4px;
+            padding: 25px;
+            color: #eef;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            display: none;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        #hud h2 {
+            margin: 0 0 5px 0;
+            font-size: 24px;
+            padding-right: 30px;
+        }
+
+        #hud .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.2s;
+            font-size: 20px;
+            color: #889;
+            text-align: center;
+            line-height: 24px;
+        }
+
+        #hud .close-btn:hover {
+            opacity: 1;
+            color: #ff5555;
+        }
+
+        #hud .sub-header {
+            font-size: 14px;
+            color: #8899aa;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #334455;
+            padding-bottom: 10px;
+        }
+
+        #hud .section-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #556677;
+            letter-spacing: 2px;
+            margin-top: 15px;
+            margin-bottom: 8px;
+        }
+
+        #hud .content-block {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #ccd;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        #hud .en {
+            color: #fff;
+        }
+
+        #hud .cn {
+            color: #88aacc;
+            font-size: 13px;
+        }
+
+        #hud .keyword {
+            color: #00ffff;
+            font-weight: bold;
+        }
+
+        #hud .scene-tag {
+            display: inline-block;
+            font-size: 12px;
+            background: #223344;
+            color: #aab;
+            padding: 4px 8px;
+            border-radius: 12px;
+            margin: 3px 5px 3px 0;
+            border: 1px solid #334455;
+        }
+
+        #legend {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(10, 15, 25, 0.9);
+            border: 1px solid #334466;
+            border-radius: 4px;
+            padding: 15px 20px;
+            color: #ccd;
+            backdrop-filter: blur(10px);
+            min-width: 180px;
+        }
+
+        #legend h3 {
+            margin: 0;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #778;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        #legend h3::after {
+            content: '▼';
+            font-size: 10px;
+            transition: transform 0.3s;
+        }
+
+        #legend.collapsed h3::after {
+            transform: rotate(-90deg);
+        }
+
+        #legend .legend-items {
+            max-height: 200px;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        #legend.collapsed .legend-items {
+            max-height: 0;
+        }
+
+        #legend .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 6px 0;
+            font-size: 13px;
+        }
+
+        #legend .legend-color {
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+            margin-right: 10px;
+        }
+
+        #legend .legend-label {
+            color: #aab;
+        }
+
+        #legend .legend-count {
+            margin-left: auto;
+            color: #667;
+            font-size: 11px;
+        }
+
+        #legend .legend-total {
+            font-size: 11px;
+            color: #667;
+            margin-left: 10px;
+        }
+
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #00ffff;
+            font-family: monospace;
+            letter-spacing: 2px;
+        }
+    </style>
+    <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/3d-force-graph"></script>
+    <script src="https://unpkg.com/three-spritetext@1.8.1/dist/three-spritetext.min.js"></script>
+    <script src="https://unpkg.com/dat.gui"></script>
+</head>
+
+<body>
+    <div id="loading">INITIALIZING...</div>
+    <div id="3d-graph"></div>
+
+    <!-- HUD with Close Button -->
+    <div id="hud">
+        <span class="close-btn" onclick="hideHUD()">×</span>
+        <h2 id="hud-title">Title</h2>
+        <div id="hud-cn" class="sub-header">Subtitle</div>
+        <div class="section-title">Definition 定义</div>
+        <div id="hud-desc" class="content-block"></div>
+        <div class="section-title">Deep Dive 深度解析</div>
+        <div id="hud-notes" class="content-block" style="border-left: 2px solid #00ffff;"></div>
+        <div class="section-title">Scenarios 应用场景</div>
+        <div id="hud-scenes"></div>
+    </div>
+
+    <!-- Legend (Collapsible) -->
+    <div id="legend">
+        <h3 onclick="toggleLegend()">Domain 领域 <span id="legend-total"></span></h3>
+        <div id="legend-items" class="legend-items"></div>
+    </div>
+
+    <script>
+        // === CATEGORY CONFIGURATION ===
+        const CATEGORY_CONFIG = {
+            "Philosophy": { color: "#aa00ff", label_en: "Philosophy", label_cn: "哲学" },
+            "Tool": { color: "#00ffff", label_en: "Tool", label_cn: "思维工具" },
+            "Science": { color: "#00ff00", label_en: "Science", label_cn: "科学" },
+            "Trap": { color: "#ff0055", label_en: "Trap", label_cn: "陷阱" },
+            "Structure": { color: "#ffffff", label_en: "Structure", label_cn: "结构" },
+            "Concept": { color: "#ff8800", label_en: "Concept", label_cn: "概念" }
+        };
+
+        const COLOR_PALETTE = [
+            "#00ffff", "#00ff00", "#ff0055", "#ff8800", "#aa00ff",
+            "#ffff00", "#00ffaa", "#ff00aa", "#88ff00", "#0088ff"
+        ];
+        let colorIndex = 0;
+
+        function getCategory(groupName, labelCn = groupName) {
+            if (!CATEGORY_CONFIG[groupName]) {
+                CATEGORY_CONFIG[groupName] = {
+                    color: COLOR_PALETTE[colorIndex % COLOR_PALETTE.length],
+                    label_en: groupName,
+                    label_cn: labelCn
+                };
+                colorIndex++;
+            }
+            return CATEGORY_CONFIG[groupName];
+        }
+
+        function toggleLegend() {
+            document.getElementById('legend').classList.toggle('collapsed');
+        }
+
+        function buildLegend() {
+            const container = document.getElementById('legend-items');
+            container.innerHTML = '';
+            const counts = {};
+            let total = 0;
+            nodes.forEach(n => { counts[n.group] = (counts[n.group] || 0) + 1; total++; });
+            document.getElementById('legend-total').innerText = `(${Object.keys(counts).length} 域 / ${total} 点)`;
+            for (const [group, count] of Object.entries(counts)) {
+                const cat = getCategory(group);
+                const item = document.createElement('div');
+                item.className = 'legend-item';
+                item.innerHTML = `
+                    <div class="legend-color" style="background:${cat.color}"></div>
+                    <span class="legend-label">${cat.label_en} ${cat.label_cn}</span>
+                    <span class="legend-count">${count}</span>
+                `;
+                container.appendChild(item);
+            }
+        }
+
+        // --- DATA INJECTION POINT ---
+        const nodes = [
+            // === ROOT: PHILOSOPHY ===
+            {
+                id: "Philosophy", en: "Philosophy", cn: "哲学", group: "Philosophy", val: 40,
+                desc_en: "The mother of all sciences. The root of reason.",
+                desc_cn: "万学之母，知识之树的根基。",
+                notes_en: "From Greek 'philo' (love) + 'sophia' (wisdom).",
+                notes_cn: "包含形而上学、认识论、伦理学等核心分支。",
+                scenes_en: ["Foundations", "Meta-Cognition"],
+                scenes_cn: ["基石", "元认知"]
+            },
+            {
+                id: "Epistemology", en: "Epistemology", cn: "认识论", group: "Philosophy", val: 30,
+                desc_en: "Study of knowledge: How do we know?",
+                desc_cn: "关于知识的研究：我们是如何知道的？",
+                notes_en: "The <span class='keyword'>diamond in the crown</span> of the First Critique.",
+                notes_cn: "第一批判皇冠上的<span class='keyword'>钻石</span>。",
+                scenes_en: ["Critical Thinking", "Science Validation"],
+                scenes_cn: ["批判性思维", "科学验证"]
+            },
+            {
+                id: "Metaphysics", en: "Metaphysics", cn: "形而上学", group: "Philosophy", val: 25,
+                desc_en: "Study of existence and reality.",
+                desc_cn: "研究存在和实体的本质。",
+                notes_en: "Beyond physics. The 'What is it?'.",
+                notes_cn: "物理学之后。",
+                scenes_en: ["Worldview"],
+                scenes_cn: ["世界观"]
+            },
+            {
+                id: "Ethics", en: "Ethics", cn: "伦理学", group: "Philosophy", val: 25,
+                desc_en: "Study of moral values and rules.",
+                desc_cn: "研究道德价值和行为准则。",
+                notes_en: "The domain of Kant's <span class='keyword'>Second Critique</span>.",
+                notes_cn: "康德<span class='keyword'>第二批判</span>的领域。",
+                scenes_en: ["Decision Making", "AI Safety"],
+                scenes_cn: ["决策", "AI安全"]
+            },
+
+            // === TRUNK: LOGIC & MATH ===
+            {
+                id: "Logic", en: "Logic", cn: "逻辑学", group: "Tool", val: 30,
+                desc_en: "The rules of valid reasoning.",
+                desc_cn: "有效推理的规则。",
+                notes_en: "Part of the <span class='keyword'>Trivium</span>. The CPU of the mind.",
+                notes_cn: "<span class='keyword'>三艺</span>之一。大脑的CPU。",
+                scenes_en: ["Programming", "Analysis"],
+                scenes_cn: ["编程", "分析"]
+            },
+            {
+                id: "Mathematics", en: "Mathematics", cn: "数学", group: "Tool", val: 30,
+                desc_en: "The language of the universe.",
+                desc_cn: "宇宙的语言。",
+                notes_en: "The foundation of all Natural Sciences.",
+                notes_cn: "所有自然科学的基础。",
+                scenes_en: ["Physics", "Economics"],
+                scenes_cn: ["物理", "经济"]
+            },
+
+            // === THE SEVEN LIBERAL ARTS (TRIVIUM) ===
+            {
+                id: "Trivium", en: "Trivium", cn: "三艺", group: "Tool", val: 28,
+                desc_en: "Grammar, Logic, Rhetoric.",
+                desc_cn: "语法、逻辑、修辞。",
+                notes_en: "The <span class='keyword'>Mental OS</span>.",
+                notes_cn: "心智操作系统。",
+                scenes_en: ["Education"],
+                scenes_cn: ["通识教育"]
+            },
+            {
+                id: "Grammar", en: "Grammar", cn: "语法", group: "Tool", val: 20,
+                desc_en: "System of language rules.",
+                desc_cn: "语言的结构规则。",
+                notes_en: "The <span class='keyword'>Input Parser</span>.",
+                notes_cn: "输入解析器。",
+                scenes_en: ["Reading", "Coding"],
+                scenes_cn: ["阅读", "代码"]
+            },
+            {
+                id: "Rhetoric", en: "Rhetoric", cn: "修辞", group: "Tool", val: 20,
+                desc_en: "Art of persuasion.",
+                desc_cn: "说服与表达的艺术。",
+                notes_en: "The <span class='keyword'>Output Driver</span>.",
+                notes_cn: "输出驱动器。",
+                scenes_en: ["influence", "Communication"],
+                scenes_cn: ["影响力", "沟通"]
+            },
+
+            // === THE SEVEN LIBERAL ARTS (QUADRIVIUM) ===
+            {
+                id: "Quadrivium", en: "Quadrivium", cn: "四艺", group: "Science", val: 25,
+                desc_en: "Arithmetic, Geometry, Astronomy, Music.",
+                desc_cn: "算术、几何、天文、音乐。",
+                notes_en: "Understanding the <span class='keyword'>Universe's Order</span>.",
+                notes_cn: "理解宇宙的秩序。",
+                scenes_en: ["Science"],
+                scenes_cn: ["科学"]
+            },
+            {
+                id: "Arithmetic", en: "Arithmetic", cn: "算术", group: "Science", val: 18,
+                desc_en: "Number (Pure).",
+                desc_cn: "数（纯粹的）。",
+                scenes_en: ["Math"], scenes_cn: ["数学"]
+            },
+            {
+                id: "Geometry", en: "Geometry", cn: "几何", group: "Science", val: 18,
+                desc_en: "Number in Space.",
+                desc_cn: "空间中的数。",
+                scenes_en: ["Architecture"], scenes_cn: ["建筑"]
+            },
+            {
+                id: "Astronomy", en: "Astronomy", cn: "天文", group: "Science", val: 18,
+                desc_en: "Number in Space & Time.",
+                desc_cn: "时空中的数。",
+                scenes_en: ["Physics"], scenes_cn: ["物理"]
+            },
+            {
+                id: "Music", en: "Music", cn: "音乐", group: "Science", val: 18,
+                desc_en: "Number in Time.",
+                desc_cn: "时间中的数（谐波）。",
+                scenes_en: ["Art"], scenes_cn: ["艺术"]
+            },
+
+            // === KANT'S SYSTEM ===
+            {
+                id: "Immanuel Kant", en: "Immanuel Kant", cn: "伊曼努尔·康德", group: "Philosophy", val: 35,
+                desc_en: "The 8000m Peak of Philosophy.",
+                desc_cn: "现代哲学的8000米高峰。",
+                notes_en: "Author of the <span class='keyword'>Three Critiques</span>.",
+                notes_cn: "三大批判的作者。",
+                scenes_en: ["Enlightenment"],
+                scenes_cn: ["启蒙运动"]
+            },
+            {
+                id: "Clean Reason", en: "Pure Reason", cn: "纯粹理性", group: "Philosophy", val: 28,
+                desc_en: "Faculty of knowing.",
+                desc_cn: "认识的能力。",
+                notes_en: "Subject of the <span class='keyword'>First Critique</span>.",
+                notes_cn: "第一批判的对象。",
+                scenes_en: ["Science"],
+                scenes_cn: ["科学基础"]
+            },
+            {
+                id: "Practical Reason", en: "Practical Reason", cn: "实践理性", group: "Philosophy", val: 28,
+                desc_en: "Faculty of willing/acting.",
+                desc_cn: "意志与行动的能力。",
+                notes_en: "Subject of the <span class='keyword'>Second Critique</span>.",
+                notes_cn: "第二批判的对象。",
+                scenes_en: ["Ethics"],
+                scenes_cn: ["道德"]
+            },
+            {
+                id: "Judgment", en: "Judgment", cn: "判断力", group: "Philosophy", val: 28,
+                desc_en: "Faculty of feeling pleasure/pain.",
+                desc_cn: "感受快乐与痛的能力。",
+                notes_en: "Subject of the <span class='keyword'>Third Critique</span>.",
+                notes_cn: "第三批判的对象。",
+                scenes_en: ["Aesthetics"],
+                scenes_cn: ["美学"]
+            },
+            {
+                id: "Sensibility", en: "Sensibility", cn: "感性", group: "Structure", val: 20,
+                desc_en: "Passive reception of data.",
+                desc_cn: "被动接收感官杂多。",
+                notes_en: "Space and Time are its forms.",
+                notes_cn: "空间和时间是其形式。",
+                scenes_en: ["Experience"],
+                scenes_cn: ["经验"]
+            },
+            {
+                id: "Understanding", en: "Understanding", cn: "知性", group: "Structure", val: 20,
+                desc_en: "Active processing via categories.",
+                desc_cn: "通过范畴主动处理信息。",
+                notes_en: "Makes nature possible.",
+                notes_cn: "使自然成为可能。",
+                scenes_en: ["Science"],
+                scenes_cn: ["科学定律"]
+            },
+
+            // === COGNITION & TRAPS (V4.0 Expanded) ===
+            {
+                id: "Systemic Cognition", en: "Systemic Cognition", cn: "系统性认知", group: "Structure", val: 32,
+                desc_en: "Networked understanding.",
+                desc_cn: "网状的理解。",
+                notes_en: "Opposite of <span class='keyword'>Labeling</span>.",
+                notes_cn: "<span class='keyword'>标签化</span>的对立面。",
+                scenes_en: ["Complex Systems"],
+                scenes_cn: ["复杂系统"]
+            },
+            {
+                id: "Apple Metaphor", en: "The Apple", cn: "那个苹果", group: "Concept", val: 15,
+                desc_en: "Example of cognitive depth.",
+                desc_cn: "认知深度的案例。",
+                notes_en: "From Fruit -> Biological Node.",
+                notes_cn: "从水果 -> 生物学节点。",
+                scenes_en: ["Metaphor"],
+                scenes_cn: ["隐喻"]
+            },
+            {
+                id: "Labeling Trap", en: "Labeling Trap", cn: "标签化陷阱", group: "Trap", val: 20,
+                desc_en: "Stopping at the name.",
+                desc_cn: "停留在名字上。",
+                notes_en: "Cognitive Miserliness.",
+                notes_cn: "认知吝啬。",
+                scenes_en: ["Error"],
+                scenes_cn: ["谬误"]
+            },
+            {
+                id: "Silo Trap", en: "Silo Trap", cn: "学科孤岛", group: "Trap", val: 20,
+                desc_en: "Isolation of disciplines.",
+                desc_cn: "学科间的隔离。",
+                notes_en: "Forgetting the root.",
+                notes_cn: "忘记了根。",
+                scenes_en: ["Specialization"],
+                scenes_cn: ["过度分科"]
+            },
+            {
+                id: "Poppers Net", en: "Popper's Net", cn: "波普尔之网", group: "Concept", val: 20,
+                desc_en: "Theory catch the world.",
+                desc_cn: "理论是捕捉世界的网。",
+                notes_en: "Finer mesh = better explanation.",
+                notes_cn: "网眼越细，解释越强。",
+                scenes_en: ["Metaphor"],
+                scenes_cn: ["隐喻"]
+            },
+            // V4.0 NEW NODES
+            {
+                id: "Context Expansion", en: "Context Expansion", cn: "语境扩张", group: "Tool", val: 22,
+                desc_en: "Fighting labeling by asking context.",
+                desc_cn: "通过追问背景来对抗标签化。",
+                notes_en: "Solution to <span class='keyword'>Labeling Trap</span>.",
+                notes_cn: "<span class='keyword'>标签化陷阱</span>的解药。",
+                scenes_en: ["Critical Thinking"],
+                scenes_cn: ["批判性思维"]
+            },
+            {
+                id: "Cross-Pollination", en: "Cross-Pollination", cn: "跨学科授粉", group: "Tool", val: 22,
+                desc_en: "Innovating at intersections.",
+                desc_cn: "在学科交叉点创新。",
+                notes_en: "Steve Jobs: Tech + Liberal Arts.",
+                notes_cn: "乔布斯：科技 + 人文。",
+                scenes_en: ["Innovation"],
+                scenes_cn: ["创新"]
+            },
+            {
+                id: "Cognitive Power", en: "Cognitive Power", cn: "认知力公式", group: "Structure", val: 24,
+                desc_en: "Power = Nodes * Connections.",
+                desc_cn: "认知力 = 节点数 * 连接数。",
+                notes_en: "The density of your knowledge graph.",
+                notes_cn: "你知识图谱的密度。",
+                scenes_en: ["Growth"],
+                scenes_cn: ["个人成长"]
+            }
+        ];
+
+        const links = [
+            // Roots & Branches
+            { source: "Philosophy", target: "Epistemology", label: "Part Of" },
+            { source: "Philosophy", target: "Metaphysics", label: "Part Of" },
+            { source: "Philosophy", target: "Ethics", label: "Part Of" },
+            { source: "Philosophy", target: "Logic", label: "Mother Of" },
+            { source: "Logic", target: "Mathematics", label: "Foundation Of" },
+
+            // Trivium
+            { source: "Trivium", target: "Grammar", label: "Step 1" },
+            { source: "Trivium", target: "Logic", label: "Step 2" },
+            { source: "Trivium", target: "Rhetoric", label: "Step 3" },
+            { source: "Trivium", target: "Quadrivium", label: "Prepares For" },
+
+            // Quadrivium
+            { source: "Mathematics", target: "Quadrivium", label: "Core Of" },
+            { source: "Quadrivium", target: "Arithmetic", label: "Part Of" },
+            { source: "Quadrivium", target: "Geometry", label: "Part Of" },
+            { source: "Quadrivium", target: "Astronomy", label: "Part Of" },
+            { source: "Quadrivium", target: "Music", label: "Part Of" },
+
+            // Kant
+            { source: "Immanuel Kant", target: "Philosophy", label: "Summit Of" },
+            { source: "Immanuel Kant", target: "Clean Reason", label: "wrote 1st Critique" },
+            { source: "Immanuel Kant", target: "Practical Reason", label: "wrote 2nd Critique" },
+            { source: "Immanuel Kant", target: "Judgment", label: "wrote 3rd Critique" },
+
+            // Cognitive Process (Kant)
+            { source: "Clean Reason", target: "Epistemology", label: "Defines" },
+            { source: "Sensibility", target: "Understanding", label: "Feeds" },
+            { source: "Understanding", target: "Clean Reason", label: "Part Of" },
+
+            // Systemic Cognition
+            { source: "Systemic Cognition", target: "Philosophy", label: "Rooted In" },
+            { source: "Systemic Cognition", target: "Poppers Net", label: "Uses" },
+            { source: "Systemic Cognition", target: "Cognitive Power", label: "Increases" },
+            { source: "Apple Metaphor", target: "Systemic Cognition", label: "Demonstrates" },
+            { source: "Apple Metaphor", target: "Labeling Trap", label: "Fixes" },
+            { source: "Labeling Trap", target: "Context Expansion", label: "Solution" },
+            { source: "Silo Trap", target: "Cross-Pollination", label: "Solution" },
+            { source: "Silo Trap", target: "Systemic Cognition", label: "Blocks" },
+            { source: "Logic", target: "Systemic Cognition", label: "Tools For" },
+
+            // === TANG ZHI: DIRECT VS INDIRECT ===
+            // New nodes from 1.1_Direct_vs_Indirect_People.md
+            { source: "Direct Person", target: "Philosophy", label: "Rooted In" },
+            { source: "Direct Person", target: "Systemic Cognition", label: "Practices" },
+            { source: "Indirect Person", target: "Labeling Trap", label: "Falls Into" },
+            { source: "Indirect Person", target: "Shallow Chaos", label: "Trapped By" },
+            { source: "Direct Person", target: "Profound Mystery", label: "Embraces" },
+            { source: "Digging Holes", target: "Direct Person", label: "Method Of" },
+            { source: "Building Towers", target: "Indirect Person", label: "Method Of" },
+            { source: "Layered Observation", target: "Indirect Person", label: "Creates" },
+            { source: "Discounting Mindset", target: "Layered Observation", label: "Drives" },
+            { source: "The Cheapening Object", target: "Discounting Mindset", label: "Enables" },
+            { source: "Profound Mystery", target: "Digging Holes", label: "Requires" },
+            { source: "Shallow Chaos", target: "Building Towers", label: "Leads To" },
+            { source: "Philosophy", target: "Digging Holes", label: "Tool For" },
+            { source: "Art", target: "Digging Holes", label: "Tool For" }
+        ];
+
+        // === TANG ZHI NODES (ADDED TO ORIGINAL NODES ARRAY) ===
+        // Insert these into the nodes array above the closing bracket
+        nodes.push(
+            {
+                id: "Direct Person", en: "Direct Person", cn: "直人", group: "Philosophy", val: 32,
+                desc_en: "Person of play and strolling, life has intrinsic purpose.",
+                desc_cn: "游戏的人、散步的人，生活有自身目的的直接性。",
+                notes_en: "Enters the <span class='keyword'>core</span> of things. Focuses on 'shi' (事) over 'wu' (物).",
+                notes_cn: "进入事物<span class='keyword'>内核</span>，专注于'事'而非'物'。",
+                scenes_en: ["Creation", "Art", "Philosophy"],
+                scenes_cn: ["创作", "艺术", "哲学"]
+            },
+            {
+                id: "Indirect Person", en: "Indirect Person", cn: "贱人", group: "Trap", val: 28,
+                desc_en: "Person of competition, means separated from ends.",
+                desc_cn: "竞争的人、赶路的人，手段与目的分离。",
+                notes_en: "Wanders in the <span class='keyword'>periphery</span>. Obsessed with tools over craft.",
+                notes_cn: "在<span class='keyword'>外围</span>游荡，沉溺于物而荒废其事。",
+                scenes_en: ["Gear Obsession", "Status Chase"],
+                scenes_cn: ["器材党", "地位焦虑"]
+            },
+            {
+                id: "Layered Observation", en: "Layered Observation", cn: "层层围观", group: "Structure", val: 26,
+                desc_en: "Pyramid structure: creators, critics, consumers.",
+                desc_cn: "金字塔认知结构：创作者、评论者、消费者。",
+                notes_en: "1 creator : 10 critics : 100 gear heads : 1000+ spectators.",
+                notes_cn: "1人创作 : 10人评价 : 100人研究装备 : 万人围观。",
+                scenes_en: ["Social Media", "Markets"],
+                scenes_cn: ["社交媒体", "市场"]
+            },
+            {
+                id: "The Cheapening Object", en: "The Cheapening Object", cn: "致贱之物", group: "Concept", val: 22,
+                desc_en: "Money: valueless thing that became value's measure.",
+                desc_cn: "金钱：自身无价值却成为价值度量的东西。",
+                notes_en: "The <span class='keyword'>fundamental inversion</span> of human culture.",
+                notes_cn: "人类文化中最根本的<span class='keyword'>倒错现象</span>。",
+                scenes_en: ["Economics", "Value Theory"],
+                scenes_cn: ["经济学", "价值论"]
+            },
+            {
+                id: "Discounting Mindset", en: "Discounting Mindset", cn: "贴现思维", group: "Trap", val: 24,
+                desc_en: "Judging present value by future expectations.",
+                desc_cn: "用未来预期评价当下价值。",
+                notes_en: "Turns <span class='keyword'>mystery into banality</span>, infinite into finite.",
+                notes_cn: "化<span class='keyword'>神秘为庸俗</span>，把无限残化为有限。",
+                scenes_en: ["Career Planning", "Investment"],
+                scenes_cn: ["职业规划", "投资"]
+            },
+            {
+                id: "Profound Mystery", en: "Profound Mystery", cn: "深刻的神秘", group: "Philosophy", val: 28,
+                desc_en: "Difficulty from infinity: no standard, infinite possibility.",
+                desc_cn: "无限导致的困难：无标准流程，无限可能性。",
+                notes_en: "The source of <span class='keyword'>true value</span>.",
+                notes_cn: "<span class='keyword'>真正价值</span>的源头。",
+                scenes_en: ["Art Creation", "Philosophy"],
+                scenes_cn: ["艺术创作", "哲学思考"]
+            },
+            {
+                id: "Shallow Chaos", en: "Shallow Chaos", cn: "肤浅的混乱", group: "Trap", val: 22,
+                desc_en: "Difficulty from scarcity: competition, limited resources.",
+                desc_cn: "有限导致的困难：资源有限，竞争白热化。",
+                notes_en: "Most are doomed to <span class='keyword'>frustration and anxiety</span>.",
+                notes_cn: "大多数人注定<span class='keyword'>挫败与焦虑</span>。",
+                scenes_en: ["Job Market", "Status Games"],
+                scenes_cn: ["就业市场", "地位游戏"]
+            },
+            {
+                id: "Digging Holes", en: "Digging Holes", cn: "挖洞", group: "Tool", val: 26,
+                desc_en: "Deep, negative effort: mysterious, attractive, transformative.",
+                desc_cn: "深刻的、否定性的努力：神秘性、吸引性。",
+                notes_en: "Dig deep, connect with others <span class='keyword'>at the bottom</span>.",
+                notes_cn: "深深挖洞，在<span class='keyword'>某处与别人连在一起</span>。",
+                scenes_en: ["Writing", "Philosophy", "Art"],
+                scenes_cn: ["写作", "哲学", "艺术"]
+            },
+            {
+                id: "Building Towers", en: "Building Towers", cn: "盖楼", group: "Trap", val: 22,
+                desc_en: "Shallow, positive effort: flashy, aggressive, competitive.",
+                desc_cn: "庸俗的、肯定性的努力：外显性、炫耀性。",
+                notes_en: "The <span class='keyword'>vulgar desire materialized</span> as skyscrapers.",
+                notes_cn: "<span class='keyword'>庸俗欲望的物化形态</span>。",
+                scenes_en: ["Status Display", "Competition"],
+                scenes_cn: ["炫耀", "竞争"]
+            },
+            {
+                id: "Art", en: "Art", cn: "艺术", group: "Philosophy", val: 25,
+                desc_en: "Tool for facing mystery, opposing banality.",
+                desc_cn: "直面神秘、对抗庸俗的工具。",
+                notes_en: "One of two <span class='keyword'>shovels</span> for digging.",
+                notes_cn: "挖洞的两把<span class='keyword'>铁锹</span>之一。",
+                scenes_en: ["Creation", "Expression"],
+                scenes_cn: ["创作", "表达"]
+            },
+            {
+                id: "Authenticity", en: "Authenticity", cn: "真诚", group: "Philosophy", val: 28,
+                desc_en: "The most precious quality for adults.",
+                desc_cn: "成年人最宝贵的品质。",
+                notes_en: "Achieved by <span class='keyword'>admitting inauthenticity</span>.",
+                notes_cn: "通过<span class='keyword'>承认不真诚</span>来展现。",
+                scenes_en: ["Self-Reflection", "Creation"],
+                scenes_cn: ["自省", "创作"]
+            },
+            {
+                id: "David Metaphor", en: "David in Stone", cn: "大卫在石头里", group: "Concept", val: 20,
+                desc_en: "Michelangelo: David was already in the stone.",
+                desc_cn: "米开朗琪罗：大卫本来就在石头里。",
+                notes_en: "Creation is <span class='keyword'>subtraction, not addition</span>.",
+                notes_cn: "创作是<span class='keyword'>雕刻删减</span>，而非堆积添加。",
+                scenes_en: ["Metaphor", "Creation"],
+                scenes_cn: ["隐喻", "创作"]
+            }
+        );
+
+        // Add additional links for new nodes
+        links.push(
+            { source: "Authenticity", target: "Digging Holes", label: "Required For" },
+            { source: "David Metaphor", target: "Digging Holes", label: "Illustrates" },
+            { source: "Art", target: "Philosophy", label: "Sister Of" }
+        );
+
+        // --- CONFIGURATION ---
+        const settings = { linkDistance: 80, chargeStrength: -200, labelSize: 1.0, opacity: 0.8, autoRotate: true };
+
+        // --- ENGINE ---
+        const elem = document.getElementById('3d-graph');
+        const Graph = ForceGraph3D()(elem)
+            .graphData({ nodes, links })
+            .backgroundColor('#000005')
+            .showNavInfo(false)
+            .nodeThreeObject(node => {
+                const cat = getCategory(node.group);
+                const text = `${node.en}\n${node.cn}`;
+                const sprite = new SpriteText(text);
+                sprite.color = cat.color;
+                sprite.textHeight = (node.val / 2) * settings.labelSize;
+                sprite.fontFace = 'Arial'; sprite.fontWeight = 'bold';
+                sprite.backgroundColor = `rgba(0,0,0,${settings.opacity / 2})`;
+                sprite.padding = 4;
+                sprite.userData = { baseSize: node.val / 2 };
+                return sprite;
+            })
+            .linkWidth(link => 2.5)
+            .linkColor(link => {
+                const sourceNode = nodes.find(n => n.id === link.source || n.id === link.source.id);
+                if (sourceNode) return getCategory(sourceNode.group).color + '88';
+                return '#445566';
+            })
+            .linkOpacity(0.7)
+            .linkCurvature(0.12)
+            .linkCurveRotation(link => {
+                const hash = (link.source?.id || link.source) + (link.target?.id || link.target);
+                let sum = 0;
+                for (let i = 0; i < hash.length; i++) sum += hash.charCodeAt(i);
+                return (sum % 360) * (Math.PI / 180);
+            })
+            .linkDirectionalArrowLength(5)
+            .linkDirectionalArrowRelPos(0.9)
+            .linkDirectionalArrowColor(link => {
+                const sourceNode = nodes.find(n => n.id === link.source || n.id === link.source.id);
+                if (sourceNode) return getCategory(sourceNode.group).color;
+                return '#ffffff';
+            })
+            .linkDirectionalParticles(3)
+            .linkDirectionalParticleSpeed(0.005)
+            .linkDirectionalParticleWidth(2)
+            .linkDirectionalParticleColor(link => {
+                const sourceNode = nodes.find(n => n.id === link.source || n.id === link.source.id);
+                if (sourceNode) return getCategory(sourceNode.group).color;
+                return '#ffffff';
+            })
+            .onNodeClick(node => {
+                // Maintain current zoom level - just rotate to face the node
+                const currentPos = Graph.cameraPosition();
+                const currentDistance = Math.hypot(currentPos.x, currentPos.y, currentPos.z);
+                const nodeDistance = Math.hypot(node.x, node.y, node.z) || 1;
+
+                const newX = (node.x / nodeDistance) * currentDistance;
+                const newY = (node.y / nodeDistance) * currentDistance;
+                const newZ = (node.z / nodeDistance) * currentDistance;
+
+                Graph.cameraPosition({ x: newX, y: newY, z: newZ }, node, 1500);
+                showHUD(node);
+            });
+
+        Graph.d3Force('link').distance(settings.linkDistance);
+        Graph.d3Force('charge').strength(settings.chargeStrength);
+
+        // --- CONTROLS ---
+        const gui = new dat.GUI();
+        const folder = gui.addFolder('Graph Settings');
+        folder.add(settings, 'linkDistance', 10, 300).onChange(val => { Graph.d3Force('link').distance(val); Graph.d3ReheatSimulation(); });
+        folder.add(settings, 'chargeStrength', -500, -10).onChange(val => { Graph.d3Force('charge').strength(val); Graph.d3ReheatSimulation(); });
+        folder.add(settings, 'labelSize', 0.1, 3.0).onChange(val => { Graph.scene().traverse(obj => { if (obj.userData?.baseSize) obj.textHeight = obj.userData.baseSize * val; }); });
+        folder.add(settings, 'opacity', 0.1, 1.0).onChange(val => { Graph.scene().traverse(obj => { if (obj.userData?.baseSize) obj.backgroundColor = `rgba(0,0,0,${val / 2})`; }); });
+        folder.add(settings, 'autoRotate').onChange(val => { Graph.controls().autoRotate = val; });
+        folder.open();
+
+        // --- HUD LOGIC ---
+        function showHUD(node) {
+            const el = (id) => document.getElementById(id);
+            const cat = getCategory(node.group);
+            el('hud').style.display = 'block';
+            el('hud-title').innerText = node.en;
+            el('hud-title').style.color = cat.color;
+            el('hud-cn').innerText = `${node.cn} [${node.group}]`;
+            el('hud-desc').innerHTML = `<div class="en">${node.desc_en}</div><div class="cn">${node.desc_cn}</div>`;
+            el('hud-notes').innerHTML = `<div class="en">${node.notes_en}</div><div class="cn">${node.notes_cn}</div>`;
+            const sceneContainer = el('hud-scenes');
+            sceneContainer.innerHTML = '';
+            if (node.scenes_en) {
+                for (let i = 0; i < node.scenes_en.length; i++) {
+                    const tag = document.createElement('span');
+                    tag.className = 'scene-tag';
+                    tag.innerHTML = `${node.scenes_en[i]} <span style="color:#88aacc">${node.scenes_cn[i]}</span>`;
+                    sceneContainer.appendChild(tag);
+                }
+            }
+        }
+
+        function hideHUD() {
+            document.getElementById('hud').style.display = 'none';
+        }
+
+        // Initialize
+        buildLegend();
+        setTimeout(() => { document.getElementById('loading').style.display = 'none'; }, 1000);
+        Graph.controls().autoRotate = true;
+    </script>
+</body>
+
+</html>

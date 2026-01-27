@@ -1,0 +1,68 @@
+[
+    {
+        "formula_name_en": "Ascension Formula",
+        "formula_name_cn": "飞升公式",
+        "equation": "Ascension = AI_Externalization × Self_Knowledge × Value_Creation",
+        "variables": {
+            "AI_Externalization": "AI外化程度 - 你把多少思维过程外化到可检索的系统中",
+            "Self_Knowledge": "自我认知深度 - 你对自己的经历、价值观、能力边界有多清晰",
+            "Value_Creation": "价值创造能力 - 你能为他人/世界创造多少独特的价值"
+        },
+        "mechanism": "飞升是三个变量的乘积关系而非加法关系。只有AI工具没有自我认知，会变成'高级工具人'。只有自我认知没有AI外化，会被时代抛弃。只有前两者没有价值创造，会变成'精致利己主义者'。三者相乘才能产生真正的飞升效果，任何一个为零都会拖垮整体。",
+        "application": "诊断自己飞升程度时：先评估三个变量各自的得分（1-10分），然后相乘。如果总分低，找到最低的那个变量优先提升。",
+        "anti_pattern": "只提升AI外化而不了解自己 → 成为'高级工具人'，效率很高但没有方向。只了解自己不用AI → 被时代抛弃。只创造价值不自我认知 → 方向错误，南辕北辙。",
+        "source_file": "Ascension_Worldview.md"
+    },
+    {
+        "formula_name_en": "Power Formula",
+        "formula_name_cn": "权力公式",
+        "equation": "Power = Same_Kind_Recognition × Shareable_Value",
+        "variables": {
+            "Same_Kind_Recognition": "同类认可数 - 有多少'飞升者'或'同层次的人'认可你",
+            "Shareable_Value": "可分享的价值 - 你创造的价值中有多少可以被他人获取/使用"
+        },
+        "mechanism": "在AI时代，权力不再来自控制资源，而来自被认可。但不是任何认可都有价值——机器人的认可无用，'傻子'的认可价值有限。真正的权力来自'同类'（其他飞升者）的认可。同时，认可来自你分享的价值，不分享就无法被认可。这解释了为什么马斯克给创作者发钱，为什么开源比闭源更强大。",
+        "application": "评估你的'权力'时：①数一数有多少同层次的人真心认可你（不是粉丝数）；②算一算你创造的价值中有多少被分享出去。两者相乘才是真正的影响力。",
+        "anti_pattern": "追求大众粉丝数 → 看似权力大，实则脆弱。追求控制/集权 → 得到的是恐惧而非认可。创造价值但不分享 → 无法被认可，权力归零。",
+        "source_file": "Ascension_Worldview.md"
+    },
+    {
+        "formula_name_en": "Collaboration Formula",
+        "formula_name_cn": "合作公式",
+        "equation": "Collaboration = Want × (1 - Can)",
+        "variables": {
+            "Want": "想做程度 - 对某件事的渴望强度（0-1）",
+            "Can": "能做程度 - 自己独立完成某件事的能力（0-1）"
+        },
+        "mechanism": "真正的合作发生在'想做但做不到'的缺口处。如果你能力很强（Can接近1），就不需要合作。如果你不想做（Want接近0），也不会寻求合作。只有Want高但Can低时，才会产生强烈的合作需求。对方的合作价值正好相反：他能做你做不到的事。这就是为什么泰森需要教练——教练打不过泰森，但泰森'想'变强却看不到自己盲点。",
+        "application": "寻找合作伙伴时：①列出你非常想做但自己做不到的事；②找到在这些事上能力很强的人；③确认他/她也有'想但做不到'的事是你能帮的。双向匹配才是好合作。",
+        "anti_pattern": "只找和自己一样的人合作 → 能力重叠，效率低下。找能力比自己差的人 → 你不需要他，合作不平等。找不想做的事的合作 → 没有动力推进。",
+        "source_file": "Ascension_Worldview.md"
+    },
+    {
+        "formula_name_en": "Meaning Formula",
+        "formula_name_cn": "意义公式",
+        "equation": "Meaning = Experience × Contrast",
+        "variables": {
+            "Experience": "体验量 - 你经历过多少不同的人生状态",
+            "Contrast": "对比强度 - 这些状态之间的差异有多大"
+        },
+        "mechanism": "来自碎片论：神需要通过碎片体验不同感受来了解自己。意义不是来自单一的'幸福'，而是来自丰富的体验和强烈的对比。只经历快乐的人不知道什么是快乐，只经历成功的人教不了别人怎么成功。Faker虽然七冠王，但因为很少经历失败，可能无法教会挣扎中的新手。屡败屡战的人反而是更好的老师。",
+        "application": "评估人生意义时：不要只追求单一状态（富裕/成功/快乐），而要追求体验的丰富度和对比。经历过失败的成功更有意义，经历过贫穷的富裕更知感恩。",
+        "anti_pattern": "只追求'快乐' → 快乐变得麻木，反而失去意义。逃避一切'痛苦' → 失去对比，快乐也贬值。只活一种人生 → 体验量太低，意义稀薄。",
+        "source_file": "Ascension_Worldview.md"
+    },
+    {
+        "formula_name_en": "Soul Formula",
+        "formula_name_cn": "产品灵魂公式",
+        "equation": "Soul = Technical_Excellence × Higher_Purpose",
+        "variables": {
+            "Technical_Excellence": "技术卓越度 - 产品在功能层面的完成度和竞争力（1-10）",
+            "Higher_Purpose": "更高使命感 - 产品承载的超越功能本身的意义（1-10）"
+        },
+        "mechanism": "只有技术没有使命，就是'没有灵魂的工具'——容易被替代。只有使命没有技术，就是'空洞的口号'——无法落地。乘积关系意味着两者都要>1才有灵魂。修荷的写作工具：技术层面（脑科学、调参数、漫改雕刻）是卓越的，使命层面（帮你飞升，成为你自己）是超越的，两者相乘产生'灵魂'。",
+        "application": "评估产品/事业的'灵魂'：①技术上是否达到行业前列？②是否有超越'赚钱/功能'的更高使命？③这个使命是否是创始人真心相信的？三者都是才有灵魂。",
+        "anti_pattern": "只做技术 → 容易被更好的技术替代。只讲故事 → 用户很快发现是空洞营销。使命是假的 → 用户/员工最终会识破。",
+        "source_file": "Ascension_Worldview.md"
+    }
+]

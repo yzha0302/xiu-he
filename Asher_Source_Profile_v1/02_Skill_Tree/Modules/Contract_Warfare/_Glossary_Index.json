@@ -1,0 +1,443 @@
+[
+    {
+        "term": "Contract",
+        "term_cn": "合同/契约",
+        "definition": "双方或多方之间有法律约束力的协议。一方承诺做某事，另一方承诺给予回报。合同一旦成立，双方都必须履行，否则就是违约。",
+        "example": "你和房东签的租房合同、你和公司签的劳动合同、你买东西的购物协议，都是合同。",
+        "source_file": "1.0_Contract_Anatomy.md"
+    },
+    {
+        "term": "Party",
+        "term_cn": "当事人/合同方",
+        "definition": "签订合同的人或组织。通常分为甲方(Party A)和乙方(Party B)。在中国，甲方通常指付款方/发包方，乙方指收款方/服务提供方。",
+        "example": "租房合同中：房东是甲方，租客是乙方。",
+        "source_file": "1.0_Contract_Anatomy.md"
+    },
+    {
+        "term": "Arbitration",
+        "term_cn": "仲裁",
+        "definition": "一种替代法院诉讼的争议解决方式。双方同意把争议交给一个中立的第三方（仲裁员）来裁决，仲裁员的决定具有法律约束力。比诉讼更快、更私密、往往更便宜。国际商业合同首选仲裁是因为仲裁裁决可以在全球160多个国家执行（纽约公约），而法院判决很难跨国执行。",
+        "example": "合同写'争议提交新加坡国际仲裁中心仲裁'，意思是有争议不去法院，去新加坡仲裁。",
+        "source_file": "6.0_Cross_Border_Contract_Law.md"
+    },
+    {
+        "term": "Litigation",
+        "term_cn": "诉讼",
+        "definition": "通过法院解决争议的方式。一方起诉另一方，法官审理后作出判决。诉讼通常是公开的（除非涉及隐私），时间较长，费用较高，但判决有国家强制力保障执行。",
+        "example": "你觉得对方违约了，去法院起诉他，这就是诉讼。",
+        "source_file": "6.0_Cross_Border_Contract_Law.md"
+    },
+    {
+        "term": "Jurisdiction",
+        "term_cn": "管辖权",
+        "definition": "指哪个法院或仲裁机构有权审理某个争议。跨境合同中，管辖权选择非常重要——在哪里打官司可能决定你赢还是输。",
+        "example": "合同写'争议由北京市朝阳区人民法院管辖'，意思是必须去那个法院打官司。",
+        "source_file": "6.0_Cross_Border_Contract_Law.md"
+    },
+    {
+        "term": "Governing Law",
+        "term_cn": "适用法律/准据法",
+        "definition": "用来解释和执行合同的法律体系。跨境合同可以选择任何国家的法律，不一定是双方所在国的法律。适用法律和管辖权可以分离。",
+        "example": "合同写'本协议适用英国法'，意思是按英国法律来解释合同条款，即使双方都是中国公司。",
+        "source_file": "6.0_Cross_Border_Contract_Law.md"
+    },
+    {
+        "term": "Consideration",
+        "term_cn": "对价/约因",
+        "definition": "英美法系合同成立的必要条件——合同必须有交换，你给我东西，我给你东西。没有对价的承诺（白送）通常不具有法律约束力。但中国和日本不需要对价，单方承诺也可能有约束力。",
+        "example": "我承诺付你10万，你承诺帮我做项目——双方都有付出，这就是对价。如果我只是承诺送你10万而你不需要做任何事，在美国这个承诺可能无效。",
+        "source_file": "6.0_Cross_Border_Contract_Law.md"
+    },
+    {
+        "term": "Breach of Contract",
+        "term_cn": "违约/违反合同",
+        "definition": "一方没有按照合同约定履行义务。违约方需要承担责任，可能包括赔偿损失、继续履行、支付违约金等。",
+        "example": "合同约定1月交货，结果3月才交，这就是违约。",
+        "source_file": "1.0_Contract_Anatomy.md"
+    },
+    {
+        "term": "Damages",
+        "term_cn": "损害赔偿",
+        "definition": "违约或侵权行为造成的损失，通常以金钱形式补偿。分为：实际损失(compensatory damages)、可预见损失(foreseeable damages)、惩罚性赔偿(punitive damages，美国特有)。",
+        "example": "对方违约导致你损失了10万，你可以要求对方赔偿这10万。",
+        "source_file": "1.0_Contract_Anatomy.md"
+    },
+    {
+        "term": "Specific Performance",
+        "term_cn": "特定履行/继续履行",
+        "definition": "法院命令违约方继续履行合同义务，而不是简单赔钱了事。在中国和印度比较常见，在美国和澳洲只在特殊情况下才判。",
+        "example": "你买了独一无二的艺术品，卖家反悔，法院可以判卖家必须把画卖给你，不能只赔钱。",
+        "source_file": "6.0_Cross_Border_Contract_Law.md"
+    },
+    {
+        "term": "Liquidated Damages",
+        "term_cn": "约定违约金",
+        "definition": "合同中预先约定的违约赔偿金额。好处是不需要事后证明损失，坏处是可能被法院认定过高而调整。",
+        "example": "合同约定'如乙方延期交付，每延期一天支付合同金额0.1%的违约金'。",
+        "source_file": "1.0_Contract_Anatomy.md"
+    },
+    {
+        "term": "Indemnification",
+        "term_cn": "赔偿/补偿条款",
+        "definition": "一方承诺如果发生某种情况，将补偿另一方的损失。通常用于分配第三方索赔的风险。",
+        "example": "合同约定'如因乙方提供的产品导致甲方被第三方起诉，乙方应赔偿甲方全部损失'。",
+        "source_file": "1.0_Contract_Anatomy.md"
+    },
+    {
+        "term": "Warranty",
+        "term_cn": "保证/担保",
+        "definition": "一方对某些事实或质量的承诺。如果保证不实，守约方可以要求赔偿。",
+        "example": "卖方保证产品没有质量缺陷，如果有，买方可以要求退换或赔偿。",
+        "source_file": "1.0_Contract_Anatomy.md"
+    },
+    {
+        "term": "Representation",
+        "term_cn": "陈述",
+        "definition": "签约时一方对事实的声明。如果陈述不实（misrepresentation），可能导致合同可撤销或要求赔偿。",
+        "example": "卖房时声明'房子没有漏水'，如果实际漏水，买家可以要求赔偿甚至解除合同。",
+        "source_file": "1.0_Contract_Anatomy.md"
+    },
+    {
+        "term": "Force Majeure",
+        "term_cn": "不可抗力",
+        "definition": "天灾人祸等不可预见、不可避免、不可克服的客观情况，如地震、战争、疫情等。发生不可抗力时，一方可以免责或延期履行。但具体什么算不可抗力，要看合同约定。",
+        "example": "新冠疫情导致工厂停工无法交货，可以援引不可抗力条款免责，但前提是合同里有这个条款且明确包含疫情。",
+        "source_file": "1.0_Contract_Anatomy.md"
+    },
+    {
+        "term": "Termination",
+        "term_cn": "终止/解除",
+        "definition": "结束合同关系。可以是到期自动终止、双方协商终止、一方违约被终止、或依据合同约定的终止条款终止。",
+        "example": "合同约定'任何一方提前30天书面通知可终止本协议'。",
+        "source_file": "1.0_Contract_Anatomy.md"
+    },
+    {
+        "term": "Renewal",
+        "term_cn": "续期/续约",
+        "definition": "合同到期后继续延长合同期限。有些合同约定自动续期（auto-renewal），需要特别注意。",
+        "example": "租房合同到期，双方同意再续一年，这就是续期。",
+        "source_file": "1.0_Contract_Anatomy.md"
+    },
+    {
+        "term": "Amendment",
+        "term_cn": "修订/变更",
+        "definition": "对现有合同条款的修改。通常需要双方书面同意。在英美法系，修改合同通常需要新的对价。",
+        "example": "原合同约定价格10万，双方协商后签补充协议改成12万。",
+        "source_file": "1.0_Contract_Anatomy.md"
+    },
+    {
+        "term": "Assignment",
+        "term_cn": "转让",
+        "definition": "将合同项下的权利或义务转让给第三方。很多合同禁止未经同意的转让。",
+        "example": "你欠银行钱，银行把这笔债权卖给了催收公司，这就是债权转让。",
+        "source_file": "1.0_Contract_Anatomy.md"
+    },
+    {
+        "term": "Confidentiality",
+        "term_cn": "保密义务",
+        "definition": "一方对另一方披露的信息负有保密责任，不得向第三方泄露。商业合同中非常常见。",
+        "example": "签服务合同时，服务商承诺对客户的商业秘密保密。",
+        "source_file": "1.0_Contract_Anatomy.md"
+    },
+    {
+        "term": "Non-Compete",
+        "term_cn": "竞业限制/竞业禁止",
+        "definition": "限制一方在一定时间和地域范围内从事竞争性业务。员工离职后的竞业限制在不同国家规则不同。中国要求雇主支付补偿金，加州直接禁止。",
+        "example": "离职后2年内不得加入竞争对手公司。",
+        "source_file": "6.0_Cross_Border_Contract_Law.md"
+    },
+    {
+        "term": "Non-Solicitation",
+        "term_cn": "禁止招揽",
+        "definition": "禁止一方拉走另一方的员工或客户。比竞业限制范围更窄，通常更容易执行。",
+        "example": "离职后不得招揽原公司的员工或联系原公司的客户。",
+        "source_file": "2.0_Attack_Defense_Playbook.md"
+    },
+    {
+        "term": "Intellectual Property",
+        "term_cn": "知识产权",
+        "definition": "创造性劳动成果所享有的权利，包括专利、商标、版权、商业秘密等。合同中需要明确知识产权归属。",
+        "example": "服务商为客户开发的软件代码，知识产权归谁？需要在合同中明确。",
+        "source_file": "1.0_Contract_Anatomy.md"
+    },
+    {
+        "term": "Liability",
+        "term_cn": "责任",
+        "definition": "法律上应承担的义务或赔偿责任。合同中常见责任限制条款（limitation of liability）。",
+        "example": "服务商的责任上限是合同金额的100%。",
+        "source_file": "1.0_Contract_Anatomy.md"
+    },
+    {
+        "term": "Unlimited Liability",
+        "term_cn": "无限责任",
+        "definition": "没有赔偿上限的责任条款，潜在损失不可预测。合同中的红旗条款，必须争取加上上限。",
+        "example": "合同约定'乙方应赔偿甲方因乙方违约遭受的一切损失'——这就是无限责任。",
+        "source_file": "1.0_Contract_Anatomy.md"
+    },
+    {
+        "term": "Joint and Several Liability",
+        "term_cn": "连带责任",
+        "definition": "多个责任人中，任何一个都可能被要求承担全部责任。债权人可以向任何一个责任人追讨全部债务。非常可怕的条款。",
+        "example": "三个合伙人对公司债务承担连带责任，债权人可以只找其中一个人要全部的钱。",
+        "source_file": "1.0_Contract_Anatomy.md"
+    },
+    {
+        "term": "Statute of Limitations",
+        "term_cn": "诉讼时效",
+        "definition": "法律规定的起诉期限。超过时效，就不能再起诉了。不同类型的案件时效不同。",
+        "example": "中国一般合同纠纷的诉讼时效是3年，从知道或应当知道权利被侵害时起算。",
+        "source_file": "6.0_Cross_Border_Contract_Law.md"
+    },
+    {
+        "term": "New York Convention",
+        "term_cn": "纽约公约",
+        "definition": "1958年联合国《承认及执行外国仲裁裁决公约》，目前有160多个成员国。仲裁裁决可以依据此公约在成员国之间相互执行，这是选择仲裁而非诉讼的主要原因。",
+        "example": "在新加坡的仲裁裁决，可以依据纽约公约在中国法院申请执行。",
+        "source_file": "6.0_Cross_Border_Contract_Law.md"
+    },
+    {
+        "term": "Common Law",
+        "term_cn": "普通法/英美法系",
+        "definition": "以判例法为主的法律体系，法官的判决本身就是法律来源。主要国家：美国、英国、澳大利亚、印度、马来西亚、香港、新加坡。特点：强调先例、合同自由度高。",
+        "example": "在美国，法官会参考之前相似案件的判决来决定这个案件。",
+        "source_file": "6.0_Cross_Border_Contract_Law.md"
+    },
+    {
+        "term": "Civil Law",
+        "term_cn": "大陆法系/民法法系",
+        "definition": "以成文法典为主的法律体系，法官的任务是适用法典，而非创造法律。主要国家：中国、日本、德国、法国、韩国。特点：法典体系完整、法官裁量权相对小。",
+        "example": "在中国，法官主要依据《民法典》来判案，而不是引用之前的判决。",
+        "source_file": "6.0_Cross_Border_Contract_Law.md"
+    },
+    {
+        "term": "Standard Terms",
+        "term_cn": "格式条款/标准条款",
+        "definition": "由一方预先拟定、用于多次使用的条款。在中国和澳洲，格式条款受到严格限制——不公平的格式条款可能无效。",
+        "example": "网站的用户服务协议、保险公司的保单条款，都是格式条款。",
+        "source_file": "6.0_Cross_Border_Contract_Law.md"
+    },
+    {
+        "term": "Unfair Contract Terms",
+        "term_cn": "不公平条款",
+        "definition": "在澳洲和中国，如果格式条款造成双方权利义务严重失衡，可能被认定无效。澳洲2023年后，使用不公平条款还可能面临巨额罚款。",
+        "example": "'最终解释权归甲方'这个条款在中国无效，因为它剥夺了乙方的权利。",
+        "source_file": "6.0_Cross_Border_Contract_Law.md"
+    },
+    {
+        "term": "At-Will Employment",
+        "term_cn": "随意雇佣",
+        "definition": "美国特有的雇佣制度——雇主可以无理由解雇员工，员工也可以无理由辞职。没有法定的解雇补偿。其他国家（中国、澳洲、日本）都有解雇保护。",
+        "example": "在美国，老板可以今天说'你被开除了'，明天你就不用来了，不需要理由，不需要赔偿。",
+        "source_file": "6.0_Cross_Border_Contract_Law.md"
+    },
+    {
+        "term": "N+1",
+        "term_cn": "N+1补偿",
+        "definition": "中国劳动法规定的解雇补偿计算方式。N=工作年限（每年一个月工资），+1=额外一个月工资作为代通知金。如员工工作5年，补偿6个月工资。",
+        "example": "员工在公司工作了3年，被无过错辞退，公司需要支付4个月工资的补偿（3+1）。",
+        "source_file": "6.0_Cross_Border_Contract_Law.md"
+    },
+    {
+        "term": "Punitive Damages",
+        "term_cn": "惩罚性赔偿",
+        "definition": "美国特有的赔偿类型——法院可以判决远超实际损失的赔偿金来惩罚恶意行为。其他国家很少有。这就是为什么在美国被起诉风险很高。",
+        "example": "麦当劳咖啡烫伤案，实际医疗费2万美元，最终判决270万美元（含惩罚性赔偿）。",
+        "source_file": "6.0_Cross_Border_Contract_Law.md"
+    },
+    {
+        "term": "Class Action",
+        "term_cn": "集体诉讼",
+        "definition": "多个受害者联合起诉同一被告的诉讼方式。美国常见，其他国家较少。在美国做生意的风险之一就是可能面临集体诉讼。",
+        "example": "一万个消费者联合起诉某公司产品有缺陷。",
+        "source_file": "6.0_Cross_Border_Contract_Law.md"
+    },
+    {
+        "term": "Good Faith",
+        "term_cn": "诚实信用/善意",
+        "definition": "法律要求当事人在签约和履约过程中诚实守信。在日本和中国，诚信原则非常重要，可能产生合同条款之外的义务。在美国，诚信义务较弱。",
+        "example": "日本民法典规定'权利的行使和义务的履行必须诚实进行'。",
+        "source_file": "6.0_Cross_Border_Contract_Law.md"
+    },
+    {
+        "term": "Stamp Duty",
+        "term_cn": "印花税",
+        "definition": "某些国家（如印度）要求在合同上贴印花税票。未贴足印花税的合同可能不能作为法院证据使用。",
+        "example": "在印度签租赁合同，必须按合同金额的一定比例贴印花税，否则合同在法院可能无效。",
+        "source_file": "6.0_Cross_Border_Contract_Law.md"
+    },
+    {
+        "term": "Company Seal",
+        "term_cn": "公章",
+        "definition": "中国和日本特有——公司的官方印章具有法律效力。在中国，盖公章比签字更重要，公章盖了就代表公司认可。",
+        "example": "中国公司签合同必须盖公章，只有个人签字可能被公司否认。",
+        "source_file": "6.0_Cross_Border_Contract_Law.md"
+    },
+    {
+        "term": "Inkan/Hanko",
+        "term_cn": "印章(日本)",
+        "definition": "日本的个人或公司印章，在正式文件上具有法律效力。分为実印（登记印章）、認印（普通印章）等。",
+        "example": "在日本签重要合同，需要用在政府登记的実印，并附上印鉴证明。",
+        "source_file": "6.0_Cross_Border_Contract_Law.md"
+    },
+    {
+        "term": "BATNA",
+        "term_cn": "最佳替代方案",
+        "definition": "Best Alternative To a Negotiated Agreement——如果这次谈判破裂，你的最佳替代选择是什么。BATNA越强，谈判力越大。",
+        "example": "你去应聘，手上还有另一个offer，这个offer就是你的BATNA，让你在谈薪水时更有底气。",
+        "source_file": "2.0_Attack_Defense_Playbook.md"
+    },
+    {
+        "term": "Anchoring",
+        "term_cn": "锚定效应",
+        "definition": "心理学效应——第一个被提出的数字会成为后续谈判的参照系。谁先出价，谁就设定了锚点。",
+        "example": "卖家开价100万，买家砍到80万成交。如果卖家开价80万，可能60万就成交了。",
+        "source_file": "2.0_Attack_Defense_Playbook.md"
+    },
+    {
+        "term": "Scope Creep",
+        "term_cn": "需求蔓延",
+        "definition": "项目范围在执行过程中不断扩大，但费用不变。服务提供商的大敌。必须在合同中明确范围边界和变更计费条款。",
+        "example": "原本说做一个网站，客户不断加功能，最后做成了APP，但费用还是原来的。",
+        "source_file": "2.0_Attack_Defense_Playbook.md"
+    },
+    {
+        "term": "Due Diligence",
+        "term_cn": "尽职调查",
+        "definition": "签约前对对方进行的全面调查，了解对方的真实情况。包括企业信用查询、诉讼记录查询、财务状况调查等。",
+        "example": "投资前调查目标公司的财务报表、法律纠纷、市场地位等。",
+        "source_file": "4.0_Risk_Warning_System.md"
+    },
+    {
+        "term": "Escrow",
+        "term_cn": "第三方托管",
+        "definition": "由中立第三方暂时保管资金或资产，在满足特定条件后再释放给某一方。用于保护买卖双方的交易安全。",
+        "example": "买房时，买家的首付款先打到托管账户，等房子过户完成后再转给卖家。",
+        "source_file": "4.0_Risk_Warning_System.md"
+    },
+    {
+        "term": "Milestone Payment",
+        "term_cn": "里程碑付款",
+        "definition": "按项目进度分阶段付款的方式。完成一个阶段，支付一部分款项。对服务提供商来说比完工后一次性付款更安全。",
+        "example": "项目分期：签约付30%，中期验收付40%，终验付30%。",
+        "source_file": "2.0_Attack_Defense_Playbook.md"
+    },
+    {
+        "term": "Retention",
+        "term_cn": "质保金/尾款",
+        "definition": "合同款项中暂时扣留的一部分，用于保证服务质量。在质保期结束后无问题才释放。",
+        "example": "工程完工付95%，剩余5%作为质保金，一年后无质量问题再支付。",
+        "source_file": "3.0_Loophole_Atlas.md"
+    },
+    {
+        "term": "Contra Proferentem",
+        "term_cn": "不利解释原则",
+        "definition": "拉丁语法律术语——当条款有歧义时，应作出对提供该条款一方不利的解释。保护弱势的签约方。",
+        "example": "保险公司的格式条款有歧义，法院会按对投保人有利、对保险公司不利的方式解释。",
+        "source_file": "3.0_Loophole_Atlas.md"
+    },
+    {
+        "term": "Waiver",
+        "term_cn": "弃权/豁免",
+        "definition": "放弃某项权利或不追究某项违约。但要注意：一次放弃不等于永远放弃，需要明确的书面声明。",
+        "example": "合同约定逾期付款要付利息，但这次我没收利息，不代表下次也不收。",
+        "source_file": "2.0_Attack_Defense_Playbook.md"
+    },
+    {
+        "term": "Severability",
+        "term_cn": "可分割性",
+        "definition": "合同中如果某个条款无效，不影响其他条款的效力。标准合同条款之一。",
+        "example": "合同中的竞业限制条款被法院认定无效，但合同其他部分仍然有效。",
+        "source_file": "1.0_Contract_Anatomy.md"
+    },
+    {
+        "term": "Entire Agreement",
+        "term_cn": "完整协议条款",
+        "definition": "声明书面合同是双方的全部约定，之前的口头或书面沟通不构成合同的一部分。防止对方事后说'当时还口头约定了XX'。",
+        "example": "合同最后写：本协议构成双方就此事项的全部协议，取代之前的所有口头或书面沟通。",
+        "source_file": "1.0_Contract_Anatomy.md"
+    },
+    {
+        "term": "Boilerplate",
+        "term_cn": "标准条款/锅炉板条款",
+        "definition": "合同末尾的标准法律条款，如管辖权、通知方式、转让限制等。虽然是'标准'的，但每一条都有实际意义，不能忽视。",
+        "example": "合同最后几页关于通知方式、不可抗力、完整协议等的条款。",
+        "source_file": "1.0_Contract_Anatomy.md"
+    },
+    {
+        "term": "Ultimate Beneficial Owner",
+        "term_cn": "实际控制人/最终受益人",
+        "definition": "穿透公司股权结构后，最终拥有或控制公司的自然人。尽职调查的核心目标之一就是找到实际控制人并核查其背景。",
+        "example": "某公司由A公司100%持股，A公司由B公司持股，B公司由张三个人持股——张三就是实际控制人。",
+        "source_file": "7.0_Cross_Border_Due_Diligence.md"
+    },
+    {
+        "term": "Dishonest Debtor",
+        "term_cn": "失信被执行人/老赖",
+        "definition": "中国法院认定的拒不履行生效法律文书确定义务的被执行人。被列入失信名单后会受到消费限制、不得担任公司高管等惩戒。与失信人签约风险极高。",
+        "example": "某公司老板欠债1000万拒不还款，被法院列为失信被执行人，不能坐飞机高铁，子女不能上私立学校。",
+        "source_file": "7.0_Cross_Border_Due_Diligence.md"
+    },
+    {
+        "term": "Credit Report",
+        "term_cn": "信用报告",
+        "definition": "由征信机构出具的公司或个人的信用历史和评分报告。包括借贷记录、还款情况、诉讼记录等。不同国家有不同的征信机构。",
+        "example": "美国D&B报告、中国央行征信、澳洲CTOS报告。",
+        "source_file": "7.0_Cross_Border_Due_Diligence.md"
+    },
+    {
+        "term": "Equity Penetration",
+        "term_cn": "股权穿透",
+        "definition": "追溯公司股东结构，一层层往上找，直到找到最终实际控制人的过程。用于识别隐藏的关联关系和真正的决策者。",
+        "example": "公司A由公司B持股，公司B由公司C持股，公司C由张三持股——穿透后发现张三是实际控制人。",
+        "source_file": "7.0_Cross_Border_Due_Diligence.md"
+    },
+    {
+        "term": "Red Flag",
+        "term_cn": "红旗/警示信号",
+        "definition": "尽职调查中发现的需要警惕的危险信号。根据严重程度分为红色(立即停止)、橙色(深度调查)、黄色(记录关注)。",
+        "example": "对方是失信被执行人(红色红旗)、对方有多起诉讼(橙色红旗)、对方公司刚成立1年(黄色红旗)。",
+        "source_file": "7.0_Cross_Border_Due_Diligence.md"
+    },
+    {
+        "term": "PACER",
+        "term_cn": "美国联邦法院电子档案系统",
+        "definition": "Public Access to Court Electronic Records，美国联邦法院的在线案件检索系统。可以低成本查询联邦法院的诉讼记录。",
+        "example": "在PACER上搜索目标公司名称，发现其在纽约联邦法院有一起专利侵权诉讼。",
+        "source_file": "7.0_Cross_Border_Due_Diligence.md"
+    },
+    {
+        "term": "UCC Filing",
+        "term_cn": "统一商法典登记",
+        "definition": "美国的担保权益登记系统。债权人在贷款时登记对借款人资产的担保权益。查询UCC可以了解目标公司资产是否已被抵押。",
+        "example": "查UCC发现公司所有设备都已抵押给银行——说明公司负债率很高。",
+        "source_file": "7.0_Cross_Border_Due_Diligence.md"
+    },
+    {
+        "term": "PPSR",
+        "term_cn": "澳洲个人财产担保登记",
+        "definition": "Personal Property Securities Register，澳洲的担保权益登记系统。类似美国的UCC，用于登记和查询对动产的担保权益。",
+        "example": "在PPSR查询发现目标公司的车辆和设备都已登记担保——需要警惕其偿债能力。",
+        "source_file": "7.0_Cross_Border_Due_Diligence.md"
+    },
+    {
+        "term": "ASIC",
+        "term_cn": "澳大利亚证券投资委员会",
+        "definition": "Australian Securities and Investments Commission，澳洲公司注册和监管的主要机构。类似美国的SEC。在ASIC可以查询公司注册信息、董事、股东等。",
+        "example": "在ASIC查询发现目标公司已被任命了外部管理人——说明公司可能面临清盘。",
+        "source_file": "7.0_Cross_Border_Due_Diligence.md"
+    },
+    {
+        "term": "MCA21",
+        "term_cn": "印度公司事务部在线系统",
+        "definition": "印度公司注册和披露的在线平台。可以查询公司注册、董事、财务报告等信息。但数据更新可能滞后。",
+        "example": "在MCA21查询发现目标公司已连续3年未提交年报——说明公司可能存在合规问题。",
+        "source_file": "7.0_Cross_Border_Due_Diligence.md"
+    },
+    {
+        "term": "Teikoku Databank",
+        "term_cn": "帝国数据银行(日本)",
+        "definition": "日本最大的商业信用调查公司。提供日本公司的信用评分、财务信息、经营历史等详细报告。费用较高但信息详尽。",
+        "example": "TDB报告显示目标公司信用评分为C级——需要谨慎考虑合作。",
+        "source_file": "7.0_Cross_Border_Due_Diligence.md"
+    }
+]

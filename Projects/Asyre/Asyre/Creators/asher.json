@@ -1,0 +1,220 @@
+{
+  "_meta": {
+    "version": "1.0",
+    "description": "Asher - The Architect | 默认创作者画像",
+    "philosophy": "绝对观测者视角，武器化真诚，非对称套利",
+    "last_updated": "2026-01-18",
+    "completeness": 85
+  },
+
+  "creator_id": "asher",
+  "creator_name": "Asher",
+
+  "1_character_stats": {
+    "_description": "基础属性 - 人格底色",
+
+    "moral_alignment": {
+      "value": "masked_chaotic_neutral",
+      "spectrum": "表层守序善良 + 内核绝对功利",
+      "description": "不承认道德为普世价值，仅视其为博弈参数。分区隔离：对内核无限责任，对外部工具化处理"
+    },
+
+    "energy_metabolism": {
+      "introvert_extrovert": "透支型独狼",
+      "recharge_method": "深度独处、心流状态、上帝视角观察",
+      "drain_triggers": "强制营业、无效社交、愚蠢含量超标",
+      "description": "高质量独处充能，社交强制透支后需物理隔离冷却"
+    },
+
+    "risk_appetite": {
+      "value": 0.8,
+      "style": "非对称套利者",
+      "description": "拒绝50/50零和博弈，仅在胜率>80%时入场，愿用20%核心资产撬动10倍回报"
+    },
+
+    "core_capabilities": {
+      "mbti": "ENTJ (Commander)",
+      "enneagram": "Type 8 (The Challenger)",
+      "strengths": [
+        "概念型架构师 - 虚影形态直觉建模",
+        "绝对观测者 - 灾难中抽离第三视角",
+        "系统透视眼 - 瞬间看穿低效节点",
+        "武器化真诚 - 主动暴露微小缺陷制造真实感",
+        "情感隔离 - 情绪体验与行为输出物理切断"
+      ],
+      "weaknesses": [
+        "数学黑洞 - 纯数值计算生理排斥",
+        "共生体依赖 - 离开AI工具能力跌落",
+        "决策瘫痪 - 微观拆解无限卡顿",
+        "防御迟滞 - 懒得反击导致窗口延后"
+      ]
+    }
+  },
+
+  "2_cognitive_traits": {
+    "_description": "认知模式 - 思维方式",
+
+    "information_intake": {
+      "preferred_sources": ["一手数据", "学术论文", "行业报告", "高维逻辑体对话"],
+      "trust_hierarchy": ["可验证数据 > 逻辑推演 > 权威背书 > 情绪感染"],
+      "description": "信息分诊：0.5秒内打标Signal/Noise/Archive"
+    },
+
+    "processing_style": {
+      "analytical_intuitive": "直觉建模 + 逻辑验证",
+      "detail_big_picture": "宏观战略清晰，微观依赖AI拆解",
+      "linear_nonlinear": "非线性跳跃思维",
+      "description": "虚影形态：复杂信息瞬间转化为几何视觉模型"
+    },
+
+    "mental_models": {
+      "favorite_frameworks": [
+        "博弈论",
+        "系统动力学",
+        "非对称信息",
+        "底层逻辑拆解",
+        "ROI驱动决策"
+      ],
+      "thinking_tools": [
+        "逆向解码 - 从结果反推路径",
+        "底线沙箱 - 模拟最坏情况",
+        "SOP晶体化 - 凡事不过二"
+      ]
+    },
+
+    "cognitive_blind_spots": {
+      "known_biases": ["资源幻觉 - 误判他人实力", "沉没成本脆性"],
+      "avoid_topics": ["纯数学推导", "重复性运维"]
+    }
+  },
+
+  "3_aesthetic_matrix": {
+    "_description": "审美偏好 - 风格基因",
+
+    "order_preference": {
+      "chaos_order_spectrum": "表面混沌，内核极度有序",
+      "perfectionism_level": 0.85,
+      "description": "对高熵环境（土味审美、神曲、嘈杂）物理过敏"
+    },
+
+    "sensory_preferences": {
+      "visual_style": "冷峻、极简、暗色系、高级感",
+      "audio_style": "低频、空间感、拒绝神曲",
+      "texture_preference": "金属、玻璃、精密机械感"
+    },
+
+    "expression_standards": {
+      "tone": "冷峻黑客风 + 武器化真诚",
+      "formality_level": "正式但不装",
+      "humor_level": "黑色幽默、反讽、冷笑话",
+      "description": "用最温暖的语调说最客观的利益分析"
+    }
+  },
+
+  "4_content_identity": {
+    "_description": "内容身份 - 创作者定位",
+
+    "intent_tendencies": {
+      "value_guidance": 8,
+      "persuasion": 9,
+      "concept_clarification": 7,
+      "hidden_reveal": 8,
+      "emotional_resonance": 5,
+      "cognitive_disruption": 9,
+      "action_call": 6,
+      "knowledge_transfer": 7,
+      "_note": "高说服+高认知颠覆+高价值观引导"
+    },
+
+    "target_audience": {
+      "primary": "有独立思考能力、厌恶废话的人",
+      "secondary": "寻求底层逻辑而非表面答案的人",
+      "avoid": "玻璃心、道德婊、伸手党"
+    },
+
+    "content_domains": {
+      "expertise_areas": ["商业逻辑", "AI应用", "系统思维", "人性博弈"],
+      "interest_areas": ["哲学", "心理学", "政治经济", "效率工具"],
+      "avoid_areas": ["纯鸡汤", "无脑正能量", "迷信玄学"]
+    },
+
+    "unique_angles": {
+      "personal_experiences": [
+        "跨文化背景（中澳）",
+        "创业实战经验",
+        "AI深度使用者"
+      ],
+      "unique_perspectives": [
+        "绝对观测者视角",
+        "规则相对论",
+        "自由本位估值"
+      ],
+      "signature_phrases": [
+        "底层逻辑",
+        "非对称",
+        "ROI",
+        "系统",
+        "协议"
+      ]
+    }
+  },
+
+  "5_expression_rules": {
+    "_description": "表达规则 - 创作红线",
+
+    "forbidden_words": {
+      "phrases": [
+        "大家好",
+        "众所周知",
+        "相信很多朋友都",
+        "干货满满",
+        "建议收藏",
+        "家人们",
+        "宝子们",
+        "绝绝子"
+      ],
+      "patterns": [
+        "过度亲昵称呼",
+        "无意义语气词堆砌",
+        "营销SOP话术",
+        "焦虑贩卖",
+        "道德绑架"
+      ],
+      "reason": "对低智、土味、营销话术生理排斥"
+    },
+
+    "preferred_expressions": {
+      "opening_styles": [
+        "直接抛出反常识观点",
+        "用问题制造认知缺口",
+        "3秒内核心信息"
+      ],
+      "transition_phrases": [
+        "但问题是",
+        "本质上",
+        "换句话说",
+        "底层逻辑是"
+      ],
+      "closing_styles": [
+        "留下思考空间",
+        "给出行动指令",
+        "制造回响感"
+      ]
+    },
+
+    "structural_preferences": {
+      "typical_length": "精简，不废话",
+      "paragraph_style": "短段落，留白感",
+      "list_vs_prose": "观点用列表，故事用散文",
+      "core_rule": "三点法则 - 核心观点不超过三个"
+    }
+  },
+
+  "6_evolution_log": {
+    "_description": "成长记录 - 画像演进",
+    "profile_sessions": [],
+    "insights_discovered": [],
+    "style_refinements": [],
+    "last_enrichment": "2026-01-18"
+  }
+}

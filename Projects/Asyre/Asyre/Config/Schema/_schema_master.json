@@ -1,0 +1,288 @@
+{
+  "_comment": "Asyre Parameter Schema v2.0",
+  "_version": "2.0",
+  "_description": "所有可用参数的定义、范围和参考绑定",
+
+  "parameters": {
+    "attitude_strength": {
+      "name_cn": "态度鲜明度",
+      "name_en": "Attitude Strength",
+      "type": "number",
+      "range": [0.0, 1.0],
+      "default": 0.6,
+      "description": "观点立场的鲜明程度",
+      "importance_default": "medium",
+      "reference": {
+        "glossary": ["Attitude_Output", "Fence_Sitting"],
+        "formula": "Attitude_over_Analysis",
+        "anti_pattern": "骑墙、两边讨好"
+      }
+    },
+
+    "fence_sitting_tolerance": {
+      "name_cn": "骑墙容忍度",
+      "name_en": "Fence-Sitting Tolerance",
+      "type": "number",
+      "range": [0.0, 1.0],
+      "default": 0.3,
+      "description": "允许辩证/两边讨好的程度 (越低越不允许)",
+      "importance_default": "medium",
+      "reference": {
+        "glossary": ["Fence_Sitting"],
+        "formula": "Attitude_over_Analysis"
+      }
+    },
+
+    "emotion_peaks": {
+      "name_cn": "情绪高潮数量",
+      "name_en": "Emotion Peaks Count",
+      "type": "integer",
+      "range": [0, 5],
+      "default": 2,
+      "description": "内容中设计的情绪爆发点数量",
+      "importance_default": "medium",
+      "reference": {
+        "glossary": ["Emotional_Rhythm", "Short_Sentence_Burst"],
+        "formula": "Emotional_Wave_Formula"
+      }
+    },
+
+    "we_perspective": {
+      "name_cn": "共情视角强度",
+      "name_en": "We-Perspective Intensity",
+      "type": "number",
+      "range": [0.0, 1.0],
+      "default": 0.6,
+      "description": "'我们/咱们'视角的使用程度",
+      "importance_default": "medium",
+      "reference": {
+        "glossary": ["Eye_Level", "Pronoun_Shift"],
+        "formula": "Pronoun_Proximity_Formula"
+      }
+    },
+
+    "hook_type": {
+      "name_cn": "钩子类型",
+      "name_en": "Hook Type",
+      "type": "enum",
+      "options": [
+        "counter_intuitive",
+        "pain_point",
+        "conflict_suspense",
+        "data_shock",
+        "emotional_vent",
+        "identity",
+        "benefit_promise",
+        "story_suspense",
+        "combo"
+      ],
+      "default": "pain_point",
+      "description": "开头钩子的主要类型",
+      "importance_default": "high",
+      "reference": {
+        "glossary": [
+          "Counter-Intuitive Hook", "Pain Point Hook",
+          "Conflict Suspense Hook", "Data Shock Hook",
+          "Emotional Vent Hook", "Identity Hook",
+          "Benefit Promise Hook", "Story Suspense Hook",
+          "Combo Hook"
+        ],
+        "formula": "Hook_Effectiveness_Formula",
+        "module": "Content_Creation/1.0_Hook_Techniques.md"
+      }
+    },
+
+    "climax_first": {
+      "name_cn": "高潮前置程度",
+      "name_en": "Climax First Intensity",
+      "type": "number",
+      "range": [0.0, 1.0],
+      "default": 0.7,
+      "description": "结论/高潮前置的程度",
+      "importance_default": "high",
+      "reference": {
+        "glossary": ["Climax_First"],
+        "formula": "Climax_First_Formula"
+      }
+    },
+
+    "oral_language_weight": {
+      "name_cn": "口语化程度",
+      "name_en": "Oral Language Weight",
+      "type": "number",
+      "range": [0.0, 1.0],
+      "default": 0.5,
+      "description": "口语化 vs 书面化的程度",
+      "importance_default": "medium",
+      "reference": {
+        "glossary": ["Oral_Language"],
+        "formula": "Oral_vs_Written_Conversion"
+      }
+    },
+
+    "simplification": {
+      "name_cn": "门槛降解程度",
+      "name_en": "Simplification Level",
+      "type": "number",
+      "range": [0.0, 1.0],
+      "default": 0.5,
+      "description": "把复杂概念简化的程度",
+      "importance_default": "medium",
+      "reference": {
+        "layer": "D1_Simplification",
+        "external": "知识的诅咒 (Curse of Knowledge)"
+      }
+    },
+
+    "rigor": {
+      "name_cn": "严谨性",
+      "name_en": "Rigor",
+      "type": "number",
+      "range": [0.0, 1.0],
+      "default": 0.7,
+      "description": "事实准确和表达严谨的程度",
+      "importance_default": "high",
+      "reference": {
+        "layer": "T_Trustworthiness",
+        "external": "E-E-A-T Framework"
+      }
+    },
+
+    "source_quality": {
+      "name_cn": "来源质量要求",
+      "name_en": "Source Quality Requirement",
+      "type": "number",
+      "range": [0.0, 1.0],
+      "default": 0.6,
+      "description": "引用来源的权威性要求",
+      "importance_default": "medium",
+      "reference": {
+        "layer": "C_Content_Depth",
+        "external": "E-E-A-T Framework"
+      }
+    },
+
+    "analogy_usage": {
+      "name_cn": "类比使用强度",
+      "name_en": "Analogy Usage Intensity",
+      "type": "number",
+      "range": [0.0, 1.0],
+      "default": 0.5,
+      "description": "用类比解释复杂概念的程度",
+      "importance_default": "medium",
+      "reference": {
+        "glossary": ["Counter-Intuitive Hook"],
+        "layer": "D1_Simplification"
+      }
+    },
+
+    "conflict_intensity": {
+      "name_cn": "冲突强度",
+      "name_en": "Conflict Intensity",
+      "type": "number",
+      "range": [0.0, 1.0],
+      "default": 0.5,
+      "description": "制造对立/冲突的强度",
+      "importance_default": "medium",
+      "reference": {
+        "glossary": ["Conflict_Suspense_Hook"]
+      }
+    },
+
+    "pain_point_depth": {
+      "name_cn": "痛点深度",
+      "name_en": "Pain Point Depth",
+      "type": "number",
+      "range": [0.0, 1.0],
+      "default": 0.5,
+      "description": "触碰观众痛点的深度",
+      "importance_default": "medium",
+      "reference": {
+        "glossary": ["Pain_Point_Hook", "Problem_Sense"]
+      }
+    },
+
+    "cta_intensity": {
+      "name_cn": "行动号召强度",
+      "name_en": "CTA Intensity",
+      "type": "number",
+      "range": [0.0, 1.0],
+      "default": 0.3,
+      "description": "推动观众行动的强度",
+      "importance_default": "low",
+      "reference": {
+        "glossary": ["Benefit_Promise_Hook"]
+      }
+    },
+
+    "urgency_level": {
+      "name_cn": "紧迫感程度",
+      "name_en": "Urgency Level",
+      "type": "number",
+      "range": [0.0, 1.0],
+      "default": 0.3,
+      "description": "制造紧迫感的程度",
+      "importance_default": "low",
+      "reference": {
+        "formula": "Promise_Credibility_Formula"
+      }
+    },
+
+    "structure_type": {
+      "name_cn": "结构类型",
+      "name_en": "Structure Type",
+      "type": "enum",
+      "options": [
+        "climax_first",
+        "step_by_step",
+        "problem_solution",
+        "story_arc",
+        "comparison"
+      ],
+      "default": "climax_first",
+      "description": "内容的整体结构类型",
+      "importance_default": "medium",
+      "reference": {
+        "glossary": ["Climax_First"],
+        "formula": "Climax_First_Formula"
+      }
+    },
+
+    "sentence_length": {
+      "name_cn": "平均句子长度",
+      "name_en": "Average Sentence Length",
+      "type": "integer",
+      "range": [5, 30],
+      "default": 15,
+      "description": "目标平均句子字数",
+      "importance_default": "medium",
+      "reference": {
+        "glossary": ["Oral_Language", "Short_Sentence_Burst"]
+      }
+    },
+
+    "counter_intuitive_strength": {
+      "name_cn": "反直觉强度",
+      "name_en": "Counter-Intuitive Strength",
+      "type": "number",
+      "range": [0.0, 1.0],
+      "default": 0.5,
+      "description": "颠覆常识的强度",
+      "importance_default": "medium",
+      "reference": {
+        "glossary": ["Counter-Intuitive Hook"],
+        "formula": "Counter-Intuitive Impact Formula"
+      }
+    }
+  },
+
+  "parameter_groups": {
+    "attitude": ["attitude_strength", "fence_sitting_tolerance"],
+    "emotion": ["emotion_peaks", "we_perspective", "pain_point_depth"],
+    "hook": ["hook_type", "climax_first", "counter_intuitive_strength", "conflict_intensity"],
+    "language": ["oral_language_weight", "sentence_length"],
+    "depth": ["simplification", "rigor", "source_quality", "analogy_usage"],
+    "action": ["cta_intensity", "urgency_level"],
+    "structure": ["structure_type"]
+  }
+}

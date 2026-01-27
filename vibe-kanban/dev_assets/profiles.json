@@ -1,0 +1,22 @@
+{
+  "executors": {
+    "CLAUDE_CODE": {
+      "DEFAULT": {
+        "CLAUDE_CODE": {
+          "append_prompt": null,
+          "dangerously_skip_permissions": true,
+          "disable_api_key": true
+        }
+      },
+      "APPROVALS": {
+        "CLAUDE_CODE": {
+          "append_prompt": null,
+          "claude_code_router": true,
+          "plan": true,
+          "approvals": true,
+          "model": "opus"
+        }
+      }
+    }
+  }
+}

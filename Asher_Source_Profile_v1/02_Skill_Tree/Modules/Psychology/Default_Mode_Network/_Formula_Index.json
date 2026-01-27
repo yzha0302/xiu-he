@@ -1,0 +1,169 @@
+[
+    {
+        "formula_name_en": "Creativity Generation Formula",
+        "formula_name_cn": "创意生成公式",
+        "equation": "Creativity = Input × DMN_Time × Connectivity",
+        "variables": {
+            "Input": "学过的知识量——你读过多少书、见过多少人、经历过多少事",
+            "DMN_Time": "DMN 活跃时间——你留出多少时间给'无刺激放空'",
+            "Connectivity": "网络连接性——可以通过冥想和运动增强"
+        },
+        "mechanism": "DMN 只能处理你已经知道的东西。它像一个后台程序，把你输入的信息碎片进行远程联想和整合。输入越多，连接的可能性越大；DMN 运行时间越长，处理越充分；连接性越强，整合能力越好。三者相乘决定创意产出。",
+        "application": "当创意枯竭时，用这个公式诊断问题：是输入不够（需要多读书）？还是 DMN 时间不够（需要少刷手机）？还是连接性弱（需要冥想/运动）？",
+        "anti_pattern": "只输入不孵化：书呆子型，知道很多但想不出新点子。只孵化不输入：空想型，整天发呆但脑子里没货。都会导致创意产出为零。",
+        "source_file": "Default_Mode_Network.md"
+    },
+    {
+        "formula_name_en": "Incubation Effect Formula",
+        "formula_name_cn": "孵化效应公式",
+        "equation": "Insight_Probability = f(Problem_Immersion, Rest_Quality)",
+        "variables": {
+            "Problem_Immersion": "问题浸泡程度——你在放下之前花了多少时间深度思考这个问题",
+            "Rest_Quality": "放空质量——是真正的无刺激放空，还是刷手机式的假休息"
+        },
+        "mechanism": "孵化效应不是魔法，它有两个前提条件：(1) 你必须先'浸泡'在问题中，把相关信息加载到大脑里；(2) 然后才能放下，让 DMN 在后台处理。如果你根本没深度思考过问题，DMN 没有素材可以处理，孵化就不会发生。如果你'休息'时刷手机，DMN 被阻止激活，孵化也不会发生。",
+        "application": "遇到难题时的正确流程：先花 1-2 小时深度思考，把问题'装进脑子里'→ 然后彻底放下，去散步/洗澡/睡觉（不要看手机）→ 等待灵感浮现（可能 15 分钟，可能第二天早上）→ 灵感来了立即记录。",
+        "anti_pattern": "没浸泡就放空：'我想了 5 分钟没想出来，还是睡一觉吧'——这不是孵化，这是逃避。或者浸泡后刷手机：'想累了刷会儿抖音休息'——这会打断 DMN，前功尽弃。",
+        "source_file": "Default_Mode_Network.md"
+    },
+    {
+        "formula_name_en": "Network Switching Formula",
+        "formula_name_cn": "网络切换公式",
+        "equation": "Cognitive_Efficiency = (DMN_Time × TPN_Time) / Switching_Friction",
+        "variables": {
+            "DMN_Time": "发散思维时间——用于创意、反思、规划",
+            "TPN_Time": "聚焦执行时间——用于任务、解题、产出",
+            "Switching_Friction": "切换摩擦——从一个模式切换到另一个模式的成本"
+        },
+        "mechanism": "高效大脑不是'一直专注'或'一直放松'，而是能在 DMN 和 TPN 之间灵活切换。显著性网络 (SN) 负责这个切换。切换摩擦越小，整体认知效率越高。冥想可以降低切换摩擦，因为它增强了 SN 与 DMN/TPN 的连接。",
+        "application": "设计你的工作节奏时，不要追求'整天深度工作'。而是：专注工作 50 分钟 → 无刺激放空 10 分钟 → 再专注 50 分钟。这让 DMN 和 TPN 都有机会运行，切换变得更顺滑。",
+        "anti_pattern": "极端模式：整天专注（TPN 过载，创意枯竭）或整天发呆（DMN 过载，产出为零）。或者频繁切换但每次都带高摩擦（如工作时不断被消息打断），导致两边都做不好。",
+        "source_file": "Default_Mode_Network.md"
+    },
+    {
+        "formula_name_en": "Rumination Risk Formula",
+        "formula_name_cn": "反刍风险公式",
+        "equation": "Rumination_Risk = DMN_Intensity / Regulation_Capacity",
+        "variables": {
+            "DMN_Intensity": "DMN 活跃强度——与个人性格、当前压力水平、历史创伤有关",
+            "Regulation_Capacity": "调节能力——通过冥想、运动、社会支持可以提升"
+        },
+        "mechanism": "DMN 是双刃剑。活跃的 DMN 可以带来创造力（远程联想），也可能带来反刍（负面循环）。决定结果的是'调节能力'——你能否在需要时激活 DMN，也能在它失控时平息它。调节能力弱的人容易陷入反刍；调节能力强的人能利用 DMN 的创造力同时避免它的阴暗面。",
+        "application": "如果你发现自己经常反刍（反复想负面的事），用这个公式诊断：不是 DMN 的错，是你的调节能力需要提升。冥想是提升调节能力最有效的方法——它训练你'觉察思维但不卷入'。",
+        "anti_pattern": "试图彻底压制 DMN 来避免反刍：这会同时杀死创造力。正确做法是提升调节能力，成为 DMN 的主人而不是把它关进地下室。",
+        "source_file": "Default_Mode_Network.md"
+    },
+    {
+        "formula_name_en": "Remote Association Potential",
+        "formula_name_cn": "远程联想潜力公式",
+        "equation": "Association_Potential = Semantic_Diversity × DMN_Connectivity × Relaxation_Depth",
+        "variables": {
+            "Semantic_Diversity": "语义多样性——你的知识库涵盖了多少不同领域",
+            "DMN_Connectivity": "DMN 连接性——神经网络之间的沟通效率",
+            "Relaxation_Depth": "放松深度——你有多彻底地脱离外部刺激"
+        },
+        "mechanism": "远程联想的本质是把两个'距离很远'的概念连接起来。这需要：(1) 你的知识库里有足够多不同领域的概念（语义多样性）；(2) DMN 能够高效地在这些概念之间游走（连接性）；(3) 你足够放松让 DMN 自由运行（放松深度）。跨领域学习者的远程联想潜力通常更高。",
+        "application": "想提高创造力？(1) 读你不熟悉的领域的书；(2) 冥想和运动增强连接性；(3) 真正放松而不是刷手机。三者缺一不可。",
+        "anti_pattern": "只在专业领域深耕，不接触其他领域——这限制了语义多样性，即使 DMN 连接性高也没有什么可连接的。",
+        "source_file": "Default_Mode_Network.md"
+    },
+    {
+        "formula_name_en": "Phone Trap Cost",
+        "formula_name_cn": "刷机陷阱成本公式",
+        "equation": "Opportunity_Cost = Screen_Time × (Potential_DMN_Output - Actual_Output)",
+        "variables": {
+            "Screen_Time": "刷屏时长——每天刷手机的时间",
+            "Potential_DMN_Output": "潜在 DMN 产出——如果这段时间用于无刺激放空可能产生的创意/洞察",
+            "Actual_Output": "实际产出——刷手机期间实际获得的有价值信息"
+        },
+        "mechanism": "刷手机的机会成本是巨大的。假设每天刷 2 小时，这 2 小时如果用于策略性放空，DMN 可能产生若干创意洞察；但刷手机的实际产出（有价值的信息）接近于零。差值就是真正的成本——你牺牲了创造力来交换无意义的刺激。",
+        "application": "下次想刷手机'休息'时，问自己：这段时间如果我去散步/发呆，可能会有意想不到的收获。刷手机我能得到什么？大概率是什么也得不到。",
+        "anti_pattern": "合理化：'我需要了解新闻''我在学习'。诚实统计一下你刷手机获取的真正有价值信息和消耗的时间，计算一下性价比。",
+        "source_file": "Default_Mode_Network.md"
+    },
+    {
+        "formula_name_en": "Meditation ROI",
+        "formula_name_cn": "冥想投资回报公式",
+        "equation": "Meditation_ROI = (Rumination_Reduction + Creativity_Boost + Focus_Improvement) / Time_Invested",
+        "variables": {
+            "Rumination_Reduction": "反刍减少——焦虑和负面思维循环的减少程度",
+            "Creativity_Boost": "创造力提升——因 DMN 调节能力增强带来的创意能力提升",
+            "Focus_Improvement": "专注力改善——因切换能力增强带来的专注质量提升",
+            "Time_Invested": "投入时间——每天用于冥想的时间"
+        },
+        "mechanism": "冥想的 ROI 是极高的。每天 10-20 分钟的正念冥想可以：(1) 减少反刍——通过降低 DMN 过度活跃；(2) 提升创造力——通过增强 DMN 连接性；(3) 改善专注——通过增强切换能力。这些收益远超投入的时间成本。",
+        "application": "把冥想看作'大脑的体育锻炼'——你不会质疑每天 20 分钟运动的价值，为什么质疑冥想？每天 5-10 分钟开始，逐渐增加。",
+        "anti_pattern": "'我没时间冥想'——但你有时间刷 2 小时手机？这是优先级问题，不是时间问题。",
+        "source_file": "Default_Mode_Network.md"
+    },
+    {
+        "formula_name_en": "Input-Output Balance",
+        "formula_name_cn": "输入输出平衡公式",
+        "equation": "Sustainable_Creativity = min(Input_Rate, Processing_Capacity) × Execution_Efficiency",
+        "variables": {
+            "Input_Rate": "输入速率——你每天吸收新信息的速度",
+            "Processing_Capacity": "处理能力——DMN 整合信息的能力（需要时间）",
+            "Execution_Efficiency": "执行效率——把灵感转化为实际输出的能力"
+        },
+        "mechanism": "可持续的创造力需要输入和处理的平衡。输入太快而处理不过来（整天学习不留放空时间），信息只是堆积而没有整合；处理能力强但输入不足（整天发呆但不学习），没有素材可以整合。最终产出还取决于执行效率——有灵感但不执行等于零。",
+        "application": "设计你的学习节奏：学习 2-3 小时后必须有放空时间；有了灵感必须立即记录和执行。不要只学不想，也不要只想不学，更不要只想不做。",
+        "anti_pattern": "知识焦虑型：疯狂学习但从不给整合时间，结果什么也记不住。或者拖延型：有了灵感但总是'等会儿再说'，结果灵感消失。",
+        "source_file": "Default_Mode_Network.md"
+    },
+    {
+        "formula_name_en": "Deep Work Output Formula",
+        "formula_name_cn": "深度工作产出公式",
+        "equation": "Output = Focus_Time × Focus_Intensity",
+        "variables": {
+            "Focus_Time": "无干扰的专注时长",
+            "Focus_Intensity": "任务难度与技能的匹配程度（越匹配强度越高）"
+        },
+        "mechanism": "高质量产出是时间和强度的乘积，而非只是时间。碎片化的 8 小时工作可能产出 < 完整的 4 小时深度工作。强度取决于任务的挑战性（太简单会无聊，太难会焦虑）和环境的无干扰程度。",
+        "application": "在评估工作日时，不要只看'工作了多少小时'，而要问'有多少小时是深度工作'？增加产出的最佳策略是增加深度工作时长+消除干扰提升强度。",
+        "anti_pattern": "追求长时间工作而忽视强度：在嘈杂环境中坐 10 小时 < 安静环境中专注 4 小时。或者：高强度任务但不断被打断，每次打断损失 23 分钟恢复时间。",
+        "source_file": "Task_Positive_Network.md"
+    },
+    {
+        "formula_name_en": "Attention Recovery Formula",
+        "formula_name_cn": "注意力恢复公式",
+        "equation": "Recovery_Time = 23min × Interruption_Count",
+        "variables": {
+            "23min": "每次被打断后完全恢复专注状态所需的时间",
+            "Interruption_Count": "工作期间被打断的次数"
+        },
+        "mechanism": "注意力残留效应：切换任务后，部分注意力仍'卡在'旧任务上。每次被打断（通知、同事、自己走神）都需要约 23 分钟才能完全回到原任务的专注水平。10 次打断 = 损失近 4 小时有效工作时间。",
+        "application": "计算你每天真正的'有效工作时间'：8 小时 - (23分钟 × 打断次数)。如果每小时被打断 2 次，8 小时工作日只有 ~1.5 小时有效深度工作。解决方案：批量处理通知、设定'免打扰时段'、关闭手机。",
+        "anti_pattern": "认为'看一眼手机没关系'。每次'看一眼'都触发注意力残留，即使只用 30 秒，也需要 23 分钟恢复。一天 10 次'看一眼' = 损失近 4 小时。",
+        "source_file": "Task_Positive_Network.md"
+    },
+    {
+        "formula_name_en": "Flow Trigger Formula",
+        "formula_name_cn": "心流触发公式",
+        "equation": "Flow = Clear_Goal + Immediate_Feedback + (Skill ≈ Challenge)",
+        "variables": {
+            "Clear_Goal": "知道要做什么、完成标准是什么",
+            "Immediate_Feedback": "能立刻知道做得对不对",
+            "Skill ≈ Challenge": "技能与挑战匹配（挑战略高于技能约 4%）"
+        },
+        "mechanism": "心流不是随机发生的，它有可预测的触发条件。三个条件同时满足时，TPN 高度激活、DMN 被抑制、前额叶部分'下线'（停止自我监控），多巴胺和内啡肽释放，进入忘我愉悦的心流状态。",
+        "application": "设计工作任务时刻意创造心流条件：(1) 开始前明确'今天要完成什么'；(2) 选择能给即时反馈的任务（如写代码跑测试）；(3) 选择'努力一下能完成'的难度。缺一不可。",
+        "anti_pattern": "目标模糊：'今天要努力工作'——TPN 不知道追踪什么。反馈延迟：写论文要几周后才知道结果——考虑分解为更小的、有即时反馈的子任务。挑战-技能失衡：太简单会无聊走神，太难会焦虑放弃。",
+        "source_file": "Task_Positive_Network.md"
+    },
+    {
+        "formula_name_en": "Multitasking Cost Formula",
+        "formula_name_cn": "多任务成本公式",
+        "equation": "Effective_Work = Total_Time - (Switch_Count × 23min) - (Context_Load × Friction)",
+        "variables": {
+            "Total_Time": "工作总时长",
+            "Switch_Count": "任务切换次数",
+            "23min": "每次切换的注意力恢复时间",
+            "Context_Load": "不同任务之间的认知差异",
+            "Friction": "切换摩擦（取决于任务相似性）"
+        },
+        "mechanism": "多任务的真实成本远高于直觉。每次切换不仅损失恢复时间，还增加错误率和认知负荷。任务之间差异越大（如从写代码切到回邮件），摩擦越高。看似'高效'的多任务实际上是用低质量的跳跃工作替代高质量的深度工作。",
+        "application": "批量处理同类任务：把所有邮件集中在固定时段回复，而非全天随到随回。减少切换次数 → 减少恢复时间 → 增加有效工作时间。相似任务连续做，降低切换摩擦。",
+        "anti_pattern": "'我是多任务高手'——研究表明，自认为擅长多任务的人实际表现更差（Dunning-Kruger 效应）。真正的高效是单任务的深度工作。",
+        "source_file": "Task_Positive_Network.md"
+    }
+]

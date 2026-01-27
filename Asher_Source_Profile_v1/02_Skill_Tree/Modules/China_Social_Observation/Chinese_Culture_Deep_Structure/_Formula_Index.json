@@ -1,0 +1,89 @@
+[
+    {
+        "formula_en": "Formalism Aesthetics Formula",
+        "formula_cn": "形式主义审美公式",
+        "equation": "Emotional_Impact = Uniformity × Scale × Power_Symbolism",
+        "variables": {
+            "Emotional_Impact": "感动程度",
+            "Uniformity": "统一性程度（越整齐分数越高）",
+            "Scale": "规模（参与人数/场面大小）",
+            "Power_Symbolism": "权力象徵强度（仪式感、秩序感）"
+        },
+        "mechanism": "中国文化的审美偏好是被程式化和象徵化塑造的。当上千人整齐划一地做同一个动作时，三个因素同时最大化：统一性达到极致、规模宏大、权力象徵（秩序、服从、集体）强烈。这会触发'震撼''感动''骄傲'的情绪反应，而西方个性化表演因为三项都低，对中国观众来说'没有感觉'。",
+        "application": "分析自己为什么被某些表演/仪式感动时，检查是否是这三个因素在起作用。",
+        "anti_pattern": "把'被整齐划一感动'当作正常审美反应。实际上是被训练出来的文化偏好。",
+        "source_file": "Chinese_Culture_Deep_Structure.md"
+    },
+    {
+        "formula_en": "Relational Value Formula",
+        "formula_cn": "关系价值公式",
+        "equation": "Personal_Value = Σ(Relationship_Weight × Counterpart_Status)",
+        "variables": {
+            "Personal_Value": "你在社会中的'价值'",
+            "Relationship_Weight": "关系权重（亲/疏/远/近）",
+            "Counterpart_Status": "关系对方的社会地位"
+        },
+        "mechanism": "在关系取向的文化中，你的价值不由你自己决定，而由你与谁有关系来决定。你爹是谁、你老丈人是谁、你领导是谁——这些关系的权重乘以对方地位的总和，决定了你在社会中的'分量'。这解释了为什么公务员配偶那么吃香、为什么'拼爹'如此重要。",
+        "application": "分析自己在某个环境中的'地位'时，可以用这个公式拆解来源。",
+        "anti_pattern": "认为个人价值只由个人能力决定。在中国社会，关系网络是隐性资本。",
+        "source_file": "Chinese_Culture_Deep_Structure.md"
+    },
+    {
+        "formula_en": "Knowledge Accumulation Barrier Formula",
+        "formula_cn": "知识积累障碍公式",
+        "equation": "Accumulability = Transmittability × Verifiability",
+        "variables": {
+            "Accumulability": "知识的可积累性",
+            "Transmittability": "可言传性（能否用语言精确表达）",
+            "Verifiability": "可验证性（能否被独立验证）"
+        },
+        "mechanism": "'道可道非常道'——只可意会不可言传的知识，Transmittability≈0。'感悟优于论证'——无法被独立验证的知识，Verifiability≈0。任何一项趋近于0，Accumulability就趋近于0。这解释了为什么中国传统智慧难以形成可复制、可积累的知识体系，每代人都要重新'悟'一遍。",
+        "application": "评估某种'智慧'是否有价值时，检查它的可言传性和可验证性。",
+        "anti_pattern": "把'只可意会'当作高级智慧。知识无法积累意味着每代人都要从零开始。",
+        "source_file": "Chinese_Culture_Deep_Structure.md"
+    },
+    {
+        "formula_en": "Subjectivity Dissolution Formula",
+        "formula_cn": "主体性消解公式",
+        "equation": "Subjectivity = Self_Cognition - Relational_Embedding_Depth",
+        "variables": {
+            "Subjectivity": "个体主体性程度",
+            "Self_Cognition": "自我认知强度（'我是谁'的清晰度）",
+            "Relational_Embedding_Depth": "关系嵌套深度（身份由多少层关系定义）"
+        },
+        "mechanism": "当一个人的身份完全由关系定义时（我是某某的儿子/某某的下属/某某的朋友），Relational_Embedding_Depth很高。如果Self_Cognition没有独立于这些关系发展，那么Subjectivity就会被压到很低。这解释了为什么很多领导退休后抑郁——失去社会角色=失去自我定义。",
+        "application": "问自己：如果所有社会关系消失，我还知道我是谁吗？",
+        "anti_pattern": "完全通过社会角色定义自己。角色消失时会产生存在性危机。",
+        "source_file": "Chinese_Culture_Deep_Structure.md"
+    },
+    {
+        "formula_en": "Science Possibility Formula",
+        "formula_cn": "科学产生可能性公式",
+        "equation": "Science_Possibility = Argumentation_Tradition × Individual_Independence × Right_to_Question",
+        "variables": {
+            "Science_Possibility": "现代科学产生的可能性",
+            "Argumentation_Tradition": "论证传统强度（证据+逻辑链条）",
+            "Individual_Independence": "个体独立性（契约人vs嵌入人）",
+            "Right_to_Question": "质疑权（能否挑战权威观点）"
+        },
+        "mechanism": "西方社会强大不是因为技术强大，而是因为具备产生技术的思想条件。三项相乘：论证传统（亚里士多德→笛卡尔→培根→波普尔）强，个体独立性（契约人，权力主体）高，质疑权（观点需经得起质疑）大。中国文化三项都弱：感悟优于论证、嵌入人而非契约人、标准答案不可挑战。",
+        "application": "教育孩子时，有意识地训练论证能力、独立思考、敢于质疑。",
+        "anti_pattern": "认为'感悟'比'论证'更高级。没有论证的感悟无法积累成科学。",
+        "source_file": "Chinese_Culture_Deep_Structure.md"
+    },
+    {
+        "formula_en": "Rule vs Relationship Formula",
+        "formula_cn": "规则vs关系公式",
+        "equation": "Effective_Rule_Authority = Rule_Clarity × Enforcement_Consistency / Guanxi_Override_Power",
+        "variables": {
+            "Effective_Rule_Authority": "规则的实际权威性",
+            "Rule_Clarity": "规则的明确程度",
+            "Enforcement_Consistency": "执行的一致性（对所有人相同）",
+            "Guanxi_Override_Power": "关系能覆盖规则的力度"
+        },
+        "mechanism": "在关系取向社会中，Guanxi_Override_Power很高——有关系的人可以绕过规则，没关系的人则被规则严格约束。即使Rule_Clarity和Enforcement_Consistency都很高，被Guanxi_Override_Power一除，Effective_Rule_Authority也会很低。这就是'规则是虚的，关系是实的'的数学表达。",
+        "application": "评估一个环境时，观察'有关系的人'和'没关系的人'受到的待遇差异。",
+        "anti_pattern": "相信'规则面前人人平等'而不经营关系。在关系社会中会吃亏。",
+        "source_file": "Chinese_Culture_Deep_Structure.md"
+    }
+]

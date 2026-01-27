@@ -1,0 +1,74 @@
+[
+    {
+        "formula_name_en": "Cooperation Scale Formula",
+        "formula_name_cn": "协作规模公式",
+        "equation": "Scale = Story_Strength × Communication_Tech",
+        "variables": {
+            "Scale": "协作网络的人数上限",
+            "Story_Strength": "故事（主体间现实）的可信度和普及度",
+            "Communication_Tech": "信息传递的效率（如语言、文字、互联网）"
+        },
+        "mechanism": "单独靠八卦（生物本能），人类只能维持150人的协作（邓巴数）。要突破这个限制，必须依靠‘虚构的故事’（如宗教、法律）。故事越强（大家都信神），技术越强（能把神谕传得更远），协作规模就越大。",
+        "application": "评估一个组织的凝聚力时，看它的‘故事’是否还被成员相信。",
+        "anti_pattern": "只修路（提升技术）不讲故事（提升信度），组织会散架。",
+        "source_file": "The_Human_Story.md"
+    },
+    {
+        "formula_name_en": "Modern Growth Formula",
+        "formula_name_cn": "现代增长公式",
+        "equation": "Growth = Credit(Trust) + Science + Empire",
+        "variables": {
+            "Growth": "经济总量的持续增加",
+            "Credit": "对未来的信任（相信明天饼会更大）",
+            "Science": "将资源转化为能力的技术",
+            "Empire": "保障市场和秩序的暴力/政治力量"
+        },
+        "mechanism": "前现代经济是零和游戏，现代经济是基于增长的信贷游戏。信贷提供启动资金，科学提供增长动力（做大蛋糕），帝国提供保护。这三者缺一不可。",
+        "application": "分析一个国家或公司的崛起，看这三要素的配合。",
+        "anti_pattern": "只有信贷没有科学（庞氏骗局）；只有帝国没有信贷（苏联模式）。",
+        "source_file": "The_Human_Story.md"
+    },
+    {
+        "formula_name_en": "Reality Spectrum Formula",
+        "formula_name_cn": "现实光谱判定",
+        "equation": "Reality = (Objective) OR (Subjective) OR (Intersubjective)",
+        "variables": {
+            "Objective": "你不信它还在（放射性）",
+            "Subjective": "你不信它就没了（头痛）",
+            "Intersubjective": "你不信它还在，但大家都不信它就没了（法律/钱）"
+        },
+        "mechanism": "区分世界上的三种存在形式。大多数社会学概念（国家、公司）都属于第三种。关键在于‘Intersubjective’具有改变物理世界的力量。",
+        "application": "判断一个概念的属性，避免用错对待方式（不能用物理对抗法律）。",
+        "anti_pattern": "把 Intersubjective 当成 Objective（认为种姓制度是天生的）。",
+        "source_file": "The_Human_Story.md"
+    },
+    {
+        "formula_name_en": "Luxury Trap Formula",
+        "formula_name_cn": "奢侈陷阱公式",
+        "equation": "Luxury → Habit → Necessity → Dependency",
+        "variables": {
+            "Luxury": "提供便利的新技术/资源",
+            "Habit": "习惯成自然",
+            "Necessity": "没它不行",
+            "Dependency": "产生新的生存义务"
+        },
+        "mechanism": "人类总是追求更轻松的生活，但结果往往是陷入更深的依赖。小麦让我们不用天天打猎（轻松），结果人口暴涨，不得不天天种地（依赖）。",
+        "application": "在引入任何‘省力’工具时，预判它可能带来的长期锁死。",
+        "anti_pattern": "以为拥有了工具就是拥有了自由。其实是被工具占有了。",
+        "source_file": "The_Human_Story.md"
+    },
+    {
+        "formula_name_en": "Happiness Formula",
+        "formula_name_cn": "快乐公式",
+        "equation": "Happiness = Biological_Set_Point + (Reality - Expectation)",
+        "variables": {
+            "Biological_Set_Point": "由多巴胺/血清素决定的基准线",
+            "Reality": "客观条件（钱、地位）",
+            "Expectation": "对现实的预期"
+        },
+        "mechanism": "客观条件的改善（Reality上升）通常会导致预期（Expectation）同步上升，导致(Reality-Expectation)差值不变。且生物基准线（Set Point）会迅速把情绪拉回稳态。这就是‘快乐水车’效应。",
+        "application": "管理快乐的关键不是无限提升 Reality，而是管理 Expectation 和了解生物机制。",
+        "anti_pattern": "拼命赚钱追求快乐，却不知道由于适应性，快乐并不会随财富线性增长。",
+        "source_file": "The_Human_Story.md"
+    }
+]

@@ -1,0 +1,32 @@
+.DS_Store
+# System Folders
+.agent/
+.agent_suite/
+.claude/
+.cursor/
+.codex/
+.gemini/
+.obsidian/
+node_modules/
+dist/
+build/
+*.log
+.env
+
+# Skills Library (Keep root visible, ignore internals)
+AI_Skills_Library/.agents/
+AI_Skills_Library/.agent/keys/
+AI_Skills_Library/.claude/
+AI_Skills_Library/.cursor/
+SECRET_Key_Vault.md
+
+# Temporary Scripts
+analyze_pdf.py
+check_libs.py
+modify_pdf.py
+__pycache__/
+*.pyc
+
+# Database
+*.sqlite
+vibe-kanban/dev_assets/db.sqlite

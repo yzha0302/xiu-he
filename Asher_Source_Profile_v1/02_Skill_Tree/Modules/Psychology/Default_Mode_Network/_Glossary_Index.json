@@ -1,0 +1,599 @@
+[
+    {
+        "term_en": "Default Mode Network",
+        "term_cn": "默认模式网络",
+        "definition_short": "大脑的'待机程序'，在你不干活时最活跃",
+        "definition_deep": "DMN 是由内侧前额叶皮质 (mPFC)、后扣带皮层 (PCC)、楔前叶和角回组成的大规模脑网络。它在 1990 年代末通过 fMRI 研究被发现，最初被认为是大脑的'休息状态'。但后来研究发现，DMN 活跃时大脑反而消耗了总能量的 60-80%，因此被称为'大脑的暗能量'。DMN 负责自我反思、记忆提取、未来规划、社会认知等内向型心理活动，与创造力的'孵化效应'密切相关。",
+        "why_it_matters": "理解 DMN 能让你重新认识'走神'的价值——它不是效率的敌人，而是创造力的温床。你可以主动利用 DMN 来激发灵感，而不是盲目追求 100% 专注。",
+        "common_mistakes": "以为刷手机、看视频是在'休息'和激活 DMN。错！手机提供持续的外部刺激，会阻止 DMN 激活。真正的 DMN 激活需要无刺激的活动：散步、洗澡、发呆。",
+        "related_terms": [
+            "TPN",
+            "mPFC",
+            "PCC",
+            "Incubation",
+            "MindWandering",
+            "SalienceNetwork"
+        ],
+        "source_file": "Default_Mode_Network.md"
+    },
+    {
+        "term_en": "Task-Positive Network",
+        "term_cn": "任务正网络",
+        "definition_short": "DMN 的反面，在你专注干活时激活",
+        "definition_deep": "TPN 是 DMN 的对立面，在执行外部导向、目标明确的任务时被激活（如做数学题、写代码）。TPN 与 DMN 呈'跷跷板'关系：一个活跃时另一个就被抑制。这种交替是正常的大脑运作模式。问题在于现代人过度使用 TPN（持续专注工作 + 休息时刷手机），导致 DMN 从未真正激活，创造力枯竭。",
+        "why_it_matters": "你需要在 TPN 和 DMN 之间灵活切换。纯粹追求'深度工作'而消灭一切走神是错误的——你需要的是'有节奏的切换'，而不是'单一模式的极端'。",
+        "common_mistakes": "认为 TPN 越活跃越好，追求整天专注。这会导致创意枯竭和认知疲劳。大脑需要'发散'时间来整合信息。",
+        "related_terms": [
+            "DMN",
+            "SalienceNetwork",
+            "Focus",
+            "DeepWork"
+        ],
+        "source_file": "Default_Mode_Network.md"
+    },
+    {
+        "term_en": "mPFC (Medial Prefrontal Cortex)",
+        "term_cn": "内侧前额叶皮质",
+        "definition_short": "DMN 核心脑区，负责想自己、想别人、想未来",
+        "definition_deep": "内侧前额叶皮质是 DMN 的核心节点之一，位于大脑前部内侧。它在自我参照思维（想'我是谁'）、社会认知（想别人怎么想）和未来规划（想明天要做什么）时高度活跃。mPFC 也参与情绪调节和道德判断。当你在做白日梦、想象未来或共情他人时，mPFC 正在活跃工作。",
+        "why_it_matters": "mPFC 是'自我'的神经学基础。理解它能帮你认识：为什么走神时总是在想自己的事？因为 mPFC 天生就倾向于自我参照。",
+        "common_mistakes": "认为'想自己'是自私或无意义的。实际上，自我反思是健康心理的重要组成部分，mPFC 的正常功能对心理健康至关重要。",
+        "related_terms": [
+            "DMN",
+            "PCC",
+            "SelfReflection",
+            "SocialCognition"
+        ],
+        "source_file": "Default_Mode_Network.md"
+    },
+    {
+        "term_en": "PCC (Posterior Cingulate Cortex)",
+        "term_cn": "后扣带皮层",
+        "definition_short": "DMN 核心脑区，整合自我相关信息和记忆",
+        "definition_deep": "后扣带皮层是 DMN 的另一个核心节点，位于大脑内侧后部。它负责整合自我相关的信息、自传体记忆提取、以及维护自我连续感。PCC 活动与内省、自我参照思维高度相关。阿尔茨海默病患者的 PCC 最早出现功能异常，这解释了为什么他们会失去自我意识和记忆。",
+        "why_it_matters": "PCC 是'记忆与自我'的交汇点。它让你感觉'我还是昨天的我'。理解它能帮你认识为什么回忆过去时会有强烈的自我感。",
+        "common_mistakes": "忽视记忆在自我认同中的作用。很多人以为自我只是'此刻的我'，但实际上自我是建立在记忆整合之上的。",
+        "related_terms": [
+            "DMN",
+            "mPFC",
+            "AutobiographicalMemory",
+            "SelfContinuity"
+        ],
+        "source_file": "Default_Mode_Network.md"
+    },
+    {
+        "term_en": "Precuneus",
+        "term_cn": "楔前叶",
+        "definition_short": "DMN 脑区，参与自我意识和空间推理",
+        "definition_deep": "楔前叶位于大脑顶部后方，是 DMN 的组成部分之一。它参与自我意识、空间推理、视觉心像（在脑中构建画面）和情景记忆。当你想象一个场景（如明天的会议室）或回忆过去的经历时，楔前叶会高度活跃。它与 PCC 紧密协作，共同整合自我相关信息。",
+        "why_it_matters": "楔前叶是'心理时间旅行'的关键——它让你能在脑中模拟未来场景或重温过去经历。这对规划和决策至关重要。",
+        "common_mistakes": "认为'想象'只是娱乐没有实际价值。实际上，在脑中模拟场景是高级认知能力，对规划和预测有重要作用。",
+        "related_terms": [
+            "DMN",
+            "PCC",
+            "Imagery",
+            "EpisodicMemory"
+        ],
+        "source_file": "Default_Mode_Network.md"
+    },
+    {
+        "term_en": "Angular Gyrus",
+        "term_cn": "角回",
+        "definition_short": "DMN 脑区，负责语言、数字和多感官整合",
+        "definition_deep": "角回位于大脑顶叶后部，是 DMN 的组成部分之一。它参与语言理解（尤其是语义处理）、数字处理、多感官信息整合。角回也与心理地图和空间认知有关。损伤角回会导致失读症（无法阅读）和计算障碍。它是大脑中'整合不同信息流'的枢纽。",
+        "why_it_matters": "角回是'意义生成'的中心——它帮助你把不同来源的信息整合成有意义的整体。这对阅读理解和创意思维都很重要。",
+        "common_mistakes": "把语言能力看作孤立的技能。实际上，语言理解依赖于多个脑区的协作，角回在其中起整合作用。",
+        "related_terms": [
+            "DMN",
+            "SemanticProcessing",
+            "MultimodalIntegration"
+        ],
+        "source_file": "Default_Mode_Network.md"
+    },
+    {
+        "term_en": "Incubation Effect",
+        "term_cn": "孵化效应",
+        "definition_short": "放下问题去做别的事，答案反而自己跳出来",
+        "definition_deep": "孵化效应指的是：当你深度思考一个问题后暂时放下它，去做低认知负荷的活动（散步、洗澡、睡觉），一段时间后答案会突然'跳出来'。这个现象的神经学基础是 DMN——当你放松时，DMN 接管大脑，在后台继续处理问题，进行远程联想，直到找到解决方案。阿基米德的'尤里卡'、凯库勒发现苯环结构，都是孵化效应的经典案例。",
+        "why_it_matters": "孵化效应是你对抗'卡住'的秘密武器。当你强行思考无果时，正确的做法不是更用力，而是暂时放下，让 DMN 在后台工作。这就是为什么'睡一觉再想'往往管用。",
+        "common_mistakes": "认为孵化 = 偷懒。错！孵化的前提是你已经'浸泡'在问题中——先深度思考，输入足够的信息，然后才能有效孵化。没有输入的孵化是无效的。",
+        "related_terms": [
+            "DMN",
+            "RemoteAssociation",
+            "StrategicRest",
+            "InputPhase",
+            "Eureka"
+        ],
+        "source_file": "Default_Mode_Network.md"
+    },
+    {
+        "term_en": "Remote Association",
+        "term_cn": "远程联想",
+        "definition_short": "在看似不相关的概念之间建立连接——创造力的本质",
+        "definition_deep": "远程联想是创造力的核心机制：把两个表面上毫无关系的概念连接起来，产生新的洞察。例如，把'苹果'和'计算机'连接起来。DMN 在远程联想中起关键作用——它让大脑在分散的记忆痕迹之间自由游走，检索和筛选不同类型的信息，在看似无关的概念之间建立联系。研究表明，DMN 与语义记忆网络的同步性越强，产生新颖联想的效率越高。",
+        "why_it_matters": "如果你想更有创造力，就需要两件事：(1) 扩大知识面，给 DMN 更多素材；(2) 留出放空时间，让 DMN 做远程联想。只有输入没有孵化，或者只有孵化没有输入，都不会产生创意。",
+        "common_mistakes": "认为创造力是'灵感突降'，是天赋。错！创造力是可以训练的——通过增加输入、留出孵化时间、提高 DMN 连接性（冥想/运动）。",
+        "related_terms": [
+            "DMN",
+            "Incubation",
+            "Creativity",
+            "SemanticMemory",
+            "DivergentThinking"
+        ],
+        "source_file": "Default_Mode_Network.md"
+    },
+    {
+        "term_en": "Mind Wandering",
+        "term_cn": "走神",
+        "definition_short": "与当前任务无关的自发思维——DMN 的主要表现",
+        "definition_deep": "走神是 DMN 活跃的典型表现：思维从当前任务飘走，进入与外部环境无关的内部世界。走神是一把双刃剑：有生产力的走神（productive mind wandering）能激发创意和解决问题；但失控的走神可能变成反刍（rumination），反复想负面的事，与抑郁焦虑相关。关键不是消灭走神，而是发展'调节能力'——能在需要时激活 DMN，也能在需要时平息它。",
+        "why_it_matters": "不要把走神一棍子打死。开会时走神可能是灵感来临，但焦虑时走神可能是反刍。学会区分'有价值的走神'和'有害的走神'，并发展切换能力（冥想可以帮助）。",
+        "common_mistakes": "把所有走神都视为'分心'，用番茄钟等工具彻底消灭它。这会扼杀创造力。正确做法是给走神'留出时间和空间'——比如工作间隙不刷手机，而是发呆。",
+        "related_terms": [
+            "DMN",
+            "Rumination",
+            "Meditation",
+            "Creativity",
+            "Daydreaming"
+        ],
+        "source_file": "Default_Mode_Network.md"
+    },
+    {
+        "term_en": "Daydreaming",
+        "term_cn": "白日梦",
+        "definition_short": "清醒时的自发幻想——DMN 高度活跃的状态",
+        "definition_deep": "白日梦是走神的一种特殊形式，特点是伴随生动的心理图像和叙事。当你开会时幻想周末去哪里玩，或者上课时想象自己成为明星，这就是白日梦。白日梦时 DMN 高度活跃，大脑在进行'心理模拟'——在脑中构建和预演场景。这种能力对未来规划、创意写作、问题解决都有重要价值。",
+        "why_it_matters": "白日梦不是懒惰的表现，而是大脑在进行高级认知活动。很多伟大的发明都是在白日梦中萌芽的。给自己留出'白日梦时间'可以提升创造力。",
+        "common_mistakes": "把白日梦等同于'不务正业'。实际上，适度的白日梦是心理健康和创造力的重要组成部分。",
+        "related_terms": [
+            "MindWandering",
+            "DMN",
+            "Imagination",
+            "FuturePlanning"
+        ],
+        "source_file": "Default_Mode_Network.md"
+    },
+    {
+        "term_en": "Rumination",
+        "term_cn": "反刍",
+        "definition_short": "反复想同一件负面的事——DMN 过度活跃的病态表现",
+        "definition_deep": "反刍是 DMN 的'阴暗面'：当 DMN 过度活跃且失去调节时，思维会陷入负面循环，反复想同一件坏事。'为什么我这么失败？''他为什么那样对我？'——这些想法像旋涡一样把人越卷越深。研究表明，反刍与抑郁症、焦虑症高度相关。DMN 功能障碍是多种精神疾病的共同特征。",
+        "why_it_matters": "当你发现自己反复想同一件负面的事，这是 DMN 失控的信号。你需要'打断'它——冥想、运动、与人交谈，都是有效的方法。长期来看，冥想训练可以提升你对 DMN 的调节能力。",
+        "common_mistakes": "试图'用想来解决想'——越分析越焦虑。反刍不是理性思考，不能用理性思考来解决。需要的是'打断模式'：做一些需要注意力的事，激活 TPN，让 DMN 冷静下来。",
+        "related_terms": [
+            "DMN",
+            "MindWandering",
+            "Meditation",
+            "Anxiety",
+            "Depression"
+        ],
+        "source_file": "Default_Mode_Network.md"
+    },
+    {
+        "term_en": "Strategic Rest",
+        "term_cn": "策略性放空",
+        "definition_short": "主动安排低认知负荷活动以激活 DMN",
+        "definition_deep": "策略性放空是主动利用 DMN 的技术：在需要创意解决方案时，刻意安排低认知负荷的活动（散步、洗澡、做家务、发呆），让 DMN 有机会运行。注意：这不是'休息'——刷手机、看视频不算，因为它们提供持续的外部刺激，阻止 DMN 激活。真正的策略性放空需要'无刺激'环境。",
+        "why_it_matters": "把策略性放空纳入你的工作流程。在深度工作之后，不要立刻看手机，而是去散步、发呆 10-15 分钟。这段时间 DMN 在后台处理你刚才学到的东西，很可能带来意想不到的洞察。",
+        "common_mistakes": "把'刷手机'当作'休息'。手机让大脑持续处于接收外部刺激的状态，DMN 完全没有机会运行。你以为在放松，实际上大脑在加班。",
+        "related_terms": [
+            "DMN",
+            "Incubation",
+            "PhoneTrap",
+            "Exercise",
+            "InputOutputCycle"
+        ],
+        "source_file": "Default_Mode_Network.md"
+    },
+    {
+        "term_en": "Meditation",
+        "term_cn": "冥想",
+        "definition_short": "调节 DMN 活动的练习——减少反刍，增强创造力",
+        "definition_deep": "冥想对 DMN 有双向调节作用：(1) 降低 DMN 过度活跃——减少反刍、焦虑、自我批评；(2) 增强 DMN 与其他网络的连接性——提高在不同模式之间灵活切换的能力。长期冥想者的大脑扫描显示，其 DMN 活动更受控，与显著性网络、中央执行网络的连接更强。简单说，冥想让你成为 DMN 的'主人'而不是'奴隶'。",
+        "why_it_matters": "如果你既想利用 DMN 的创造力，又不想被反刍折磨，冥想是最有效的训练方法。每天 5-10 分钟的正念冥想就能产生可测量的大脑变化。",
+        "common_mistakes": "认为冥想是'清空大脑'或'什么都不想'。错！冥想是'觉察思维但不卷入'。走神了不要自责，轻轻拉回来就好。这个'拉回来'的动作就是在训练调节能力。",
+        "related_terms": [
+            "DMN",
+            "Rumination",
+            "SalienceNetwork",
+            "Regulation",
+            "AlphaWave",
+            "ThetaWave"
+        ],
+        "source_file": "Default_Mode_Network.md"
+    },
+    {
+        "term_en": "Mindfulness Meditation",
+        "term_cn": "正念冥想",
+        "definition_short": "关注当下感受而不评判的冥想方式",
+        "definition_deep": "正念冥想是冥想的一种具体形式，核心是'对当下体验保持觉知而不评判'。典型练习是关注呼吸：注意吸气、呼气的感觉，走神了就轻轻拉回来。正念冥想可以降低 DMN 的内侧前额叶和后扣带皮层活动，减少与反刍和焦虑相关的自我参照思维。同时，它增强 DMN 与显著性网络的连接，提高注意力灵活性。",
+        "why_it_matters": "正念冥想是'训练大脑调节能力'的有效方法。它不需要特殊设备或环境，每天 5 分钟就能开始。对于容易焦虑、反刍的人尤其有价值。",
+        "common_mistakes": "追求'完美的空白心境'。冥想不是不走神，而是'走神后能拉回来'。每次拉回来都是一次训练，所以走神并非失败。",
+        "related_terms": [
+            "Meditation",
+            "DMN",
+            "PresentMoment",
+            "Attention",
+            "Regulation"
+        ],
+        "source_file": "Default_Mode_Network.md"
+    },
+    {
+        "term_en": "Salience Network",
+        "term_cn": "显著性网络",
+        "definition_short": "检测重要刺激并在 DMN 和 TPN 之间切换的脑网络",
+        "definition_deep": "显著性网络 (SN) 是大脑的'调度中心'，负责检测内外环境中的重要刺激，并决定激活 DMN（内部处理）还是 TPN（外部任务）。SN 的核心脑区包括前扣带皮层和岛叶。当 SN 功能正常时，你能在'专注'和'发散'之间灵活切换；当 SN 功能障碍时，可能表现为难以集中注意力或难以从某种状态中'切出来'。",
+        "why_it_matters": "理解 SN 能帮你优化工作节奏：不是'一直专注'或'一直放松'，而是让 SN 帮你灵活切换。冥想可以增强 SN 与 DMN/TPN 的连接，提高切换效率。",
+        "common_mistakes": "忽视'切换'的重要性，只追求某一种状态的极端（如纯粹的深度工作或纯粹的放松）。大脑需要的是有节奏的切换。",
+        "related_terms": [
+            "DMN",
+            "TPN",
+            "Meditation",
+            "Attention",
+            "ACC",
+            "Insula"
+        ],
+        "source_file": "Default_Mode_Network.md"
+    },
+    {
+        "term_en": "Central Executive Network",
+        "term_cn": "中央执行网络",
+        "definition_short": "负责注意力控制和目标导向行为的脑网络",
+        "definition_deep": "中央执行网络 (CEN) 是大脑的'执行中心'，负责工作记忆、目标设定、计划执行、注意力分配等高阶认知功能。它包括背外侧前额叶和后顶叶皮层。CEN 与 TPN 高度重叠，在执行复杂任务时被激活。DMN 和 CEN 通常呈反相关——一个活跃时另一个被抑制。但冥想者可以同时调动两者，表现出更高的认知灵活性。",
+        "why_it_matters": "CEN 是'做事'的神经基础。但它不能无限运转——需要 DMN 的'充电时间'来整合信息和恢复资源。",
+        "common_mistakes": "认为高效率 = 不断激活 CEN。实际上，过度使用 CEN 会导致认知疲劳。CEN 和 DMN 需要交替运作。",
+        "related_terms": [
+            "TPN",
+            "DMN",
+            "WorkingMemory",
+            "ExecutiveFunction",
+            "DLPFC"
+        ],
+        "source_file": "Default_Mode_Network.md"
+    },
+    {
+        "term_en": "Phone Scrolling Trap",
+        "term_cn": "刷手机陷阱",
+        "definition_short": "把刷手机误以为是休息——实际上阻止了 DMN 激活",
+        "definition_deep": "刷手机陷阱是现代人最常见的认知误区之一：以为刷手机、看短视频是在'休息大脑'，实际上恰恰相反。手机提供持续的外部刺激（新信息、通知、互动），让大脑一直处于TPN激活状态，DMN完全没有机会运行。结果是：你'休息'了1小时，但大脑没有进行任何内部整合，创意为零，反而更累。",
+        "why_it_matters": "这是现代人创造力下降的主要原因之一。很多人抱怨'没有灵感'，却在每个休息间隙都拿起手机。把刷手机替换成无刺激活动（散步、发呆），创造力会显著提升。",
+        "common_mistakes": "认为'我只是放松一下''刷手机很被动不费脑子'。错！被动接收外部刺激和让大脑内部整合是两回事。",
+        "related_terms": [
+            "DMN",
+            "StrategicRest",
+            "TPN",
+            "DigitalDetox"
+        ],
+        "source_file": "Default_Mode_Network.md"
+    },
+    {
+        "term_en": "Input Phase",
+        "term_cn": "输入阶段",
+        "definition_short": "创意孵化前的学习/研究阶段",
+        "definition_deep": "输入阶段是创意生成流程的第一步：在期望产生创意之前，必须先进行大量的阅读、研究、收集素材。这是因为 DMN 只能整合和连接你已经知道的东西——它不能无中生有。阿基米德能在洗澡时顿悟，是因为他之前已经深度思考过皇冠体积问题。没有输入的孵化是空白的孵化。",
+        "why_it_matters": "很多人期望'灵感突降'，却没有做好输入工作。创意公式是：输入 × 孵化 = 产出。任何一项为零，结果都是零。",
+        "common_mistakes": "只要孵化不要输入（整天发呆但不学习），或者只要输入不要孵化（拼命学习但不留放空时间）。两者都会导致创意枯竭。",
+        "related_terms": [
+            "Incubation",
+            "DMN",
+            "OutputPhase",
+            "CreativeProcess"
+        ],
+        "source_file": "Default_Mode_Network.md"
+    },
+    {
+        "term_en": "Output Phase",
+        "term_cn": "输出阶段",
+        "definition_short": "灵感浮现后立即执行的阶段",
+        "definition_deep": "输出阶段是创意生成流程的最后一步：当灵感在孵化期浮现后，必须立即记录和执行。灵感是短暂的——如果不及时捕捉，它很快就会消失。这就是为什么随身携带记录工具（笔记本、手机备忘录）很重要。输出阶段主要激活 TPN（任务正网络），因为它需要目标导向的执行力。",
+        "why_it_matters": "很多人有灵感但不立即执行，结果灵感消失。'趁热打铁'不是口号，而是神经科学的建议——灵感浮现时的神经活动模式是短暂的。",
+        "common_mistakes": "有了灵感后说'等会儿再说''回去再写'。等你'回去'的时候，灵感已经模糊了。",
+        "related_terms": [
+            "InputPhase",
+            "Incubation",
+            "TPN",
+            "Execution"
+        ],
+        "source_file": "Default_Mode_Network.md"
+    },
+    {
+        "term_en": "Seesaw Relationship",
+        "term_cn": "跷跷板关系",
+        "definition_short": "DMN 和 TPN 交替激活、互相抑制的动态平衡",
+        "definition_deep": "跷跷板关系是 DMN 和 TPN 之间的核心动态：当一个网络活跃时，另一个会被抑制。这种交替是正常的大脑运作模式——你不能同时专注外部任务和做白日梦。问题出在失衡：现代生活（持续工作 + 刷手机式休息）导致 TPN 过载而 DMN 饥饿。恢复跷跷板的平衡需要主动安排 DMN 时间。",
+        "why_it_matters": "理解跷跷板关系能帮你设计更好的工作节奏：专注工作（TPN）→ 无刺激放空（DMN）→ 专注工作。而不是：专注工作→刷手机（还是TPN）→专注工作。",
+        "common_mistakes": "认为高效率 = 一直激活 TPN。实际上，长期压制 DMN 会导致创造力枯竭和认知疲劳。",
+        "related_terms": [
+            "DMN",
+            "TPN",
+            "NetworkBalance",
+            "CognitiveFatigue"
+        ],
+        "source_file": "Default_Mode_Network.md"
+    },
+    {
+        "term_en": "Dark Energy of the Brain",
+        "term_cn": "大脑的暗能量",
+        "definition_short": "DMN 消耗的大量能量——占大脑总能量的 60-80%",
+        "definition_deep": "'大脑的暗能量'是对 DMN 能量消耗的形象比喻。虽然 DMN 在'休息'时激活，但它消耗的能量比执行任务时更多——占大脑总能耗的 60-80%。这说明'什么都不做'时大脑反而在做大量内部工作：整合记忆、自我反思、预测未来。这个发现彻底改变了我们对'休息'的理解。",
+        "why_it_matters": "这个概念提醒你：大脑的'休息'不是停机，而是换了一种工作模式。给 DMN 足够的运行时间，不是偷懒，而是大脑的必需。",
+        "common_mistakes": "认为'休息'='大脑休息'。实际上，真正的休息是让大脑从 TPN 模式切换到 DMN 模式，而不是关机。",
+        "related_terms": [
+            "DMN",
+            "EnergyConsumption",
+            "RestingState",
+            "InternalProcessing"
+        ],
+        "source_file": "Default_Mode_Network.md"
+    },
+    {
+        "term_en": "Alpha Wave",
+        "term_cn": "α波",
+        "definition_short": "与平静、放松相关的脑电波 (8-12Hz)",
+        "definition_deep": "Alpha 波是一种脑电波频率（8-12Hz），与平静、放松、警觉但不紧张的状态相关。冥想时大脑会产生更多 Alpha 波。Alpha 波的增加与 DMN 活动的调节有关——它标志着大脑从'紧张的外部专注'转向'放松的内部处理'。在创意思维的孵化阶段，Alpha 波活动会增强。",
+        "why_it_matters": "Alpha 波水平可以作为'放松程度'的客观指标。如果你觉得自己在'休息'但 Alpha 波不高（比如刷手机时），说明大脑并没有真正放松。",
+        "common_mistakes": "追求'刺激'而忽视'放松'。持续高强度刺激会压制 Alpha 波，长期对认知健康不利。",
+        "related_terms": [
+            "ThetaWave",
+            "Meditation",
+            "Relaxation",
+            "DMN"
+        ],
+        "source_file": "Default_Mode_Network.md"
+    },
+    {
+        "term_en": "Theta Wave",
+        "term_cn": "θ波",
+        "definition_short": "与深度冥想、内省和创造力相关的脑电波 (4-8Hz)",
+        "definition_deep": "Theta 波是一种较慢的脑电波频率（4-8Hz），与深度冥想、入睡前的半梦半醒状态、以及创意灵感的涌现相关。Theta 波时大脑处于'门槛意识'状态——意识和潜意识的边界变得模糊，有助于远程联想和创意产生。很多'顿悟时刻'（洗澡灵感、睡前灵感）都发生在 Theta 波增强时。",
+        "why_it_matters": "Theta 波是'创意友好'的脑电状态。入睡前、洗澡时、深度冥想时 Theta 波增强，这解释了为什么这些时刻容易有灵感。",
+        "common_mistakes": "忽视睡前/醒后的'门槛时刻'。很多人错过了这个创意高峰期，因为他们一醒来就看手机。",
+        "related_terms": [
+            "AlphaWave",
+            "Meditation",
+            "Creativity",
+            "HypnagogicState"
+        ],
+        "source_file": "Default_Mode_Network.md"
+    },
+    {
+        "term_en": "Divergent Thinking",
+        "term_cn": "发散性思维",
+        "definition_short": "从一个起点生成多种可能性的思维方式——创造力的关键",
+        "definition_deep": "发散性思维是创造力的核心组件：从一个问题或概念出发，生成尽可能多的不同答案、想法或解决方案。与'聚合思维'（收敛到唯一正确答案）相对。DMN 在发散性思维中起关键作用——它负责远程联想，让思维自由游走。研究表明，刺激 DMN 可以提升发散思维测试的得分。",
+        "why_it_matters": "在需要创意的阶段，要激活发散思维（这需要 DMN）；在需要执行的阶段，要激活聚合思维（这需要 TPN）。两种思维模式服务于不同目的。",
+        "common_mistakes": "在发散阶段就开始评判和筛选（'这个想法不行'）。这会过早激活 TPN，抑制 DMN，扼杀创意。先发散，后聚合。",
+        "related_terms": [
+            "ConvergentThinking",
+            "DMN",
+            "Creativity",
+            "RemoteAssociation"
+        ],
+        "source_file": "Default_Mode_Network.md"
+    },
+    {
+        "term_en": "Convergent Thinking",
+        "term_cn": "聚合思维",
+        "definition_short": "收敛到单一最佳答案的思维方式——执行的关键",
+        "definition_deep": "聚合思维是与发散思维互补的思维模式：从多个选项中筛选、评估，最终收敛到单一的最佳答案。标准化考试主要测试聚合思维。TPN（任务正网络）在聚合思维中起主导作用——它负责目标导向的评估和决策。创意过程需要先发散后聚合：用 DMN 生成想法，用 TPN 评估想法。",
+        "why_it_matters": "纯粹的发散没有落地，纯粹的聚合没有创新。成功的创意过程是两者的结合：先自由探索，再严格筛选。",
+        "common_mistakes": "全程高评判（聚合模式开太早）或全程不决策（发散模式关不掉）。需要有意识地在两种模式间切换。",
+        "related_terms": [
+            "DivergentThinking",
+            "TPN",
+            "Decision",
+            "Execution"
+        ],
+        "source_file": "Default_Mode_Network.md"
+    },
+    {
+        "term_en": "Autobiographical Memory",
+        "term_cn": "自传体记忆",
+        "definition_short": "关于个人经历的记忆——构成'我是谁'的素材",
+        "definition_deep": "自传体记忆是对个人经历的记忆（我上周做了什么、我小时候发生过什么），区别于语义记忆（巴黎是法国首都）。DMN 的后扣带皮层和内侧前额叶在自传体记忆提取中起关键作用。走神时我们经常回忆过去或想象未来——这都依赖自传体记忆系统。自传体记忆是'自我认同'的重要组成部分。",
+        "why_it_matters": "自传体记忆让你感觉'我还是我'。丧失自传体记忆（如阿尔茨海默病）会导致自我认同危机。DMN 帮助你整合这些记忆，维护自我连续感。",
+        "common_mistakes": "认为'活在当下'就该忘记过去。实际上，健康的自我需要过去、现在、未来的整合。",
+        "related_terms": [
+            "PCC",
+            "mPFC",
+            "SelfIdentity",
+            "EpisodicMemory"
+        ],
+        "source_file": "Default_Mode_Network.md"
+    },
+    {
+        "term_en": "Semantic Memory",
+        "term_cn": "语义记忆",
+        "definition_short": "关于事实和概念的记忆——远程联想的素材库",
+        "definition_deep": "语义记忆是关于世界的一般知识（巴黎是法国首都、水的分子式是H2O），区别于自传体记忆。DMN 在远程联想时会调用语义记忆——把看似不相关的概念连接起来。语义记忆网络与DMN有密切的功能连接，高创造力个体的这种连接更强。这解释了为什么'博学'有助于创造力——更多的语义记忆意味着更多可连接的素材。",
+        "why_it_matters": "你的语义记忆库就是 DMN 进行远程联想的'原材料仓库'。持续学习新知识可以丰富这个仓库，增加创意产生的可能性。",
+        "common_mistakes": "认为'知识已过时，搜索就够了'。但远程联想发生在大脑内部，需要知识内化才能被 DMN 调用。",
+        "related_terms": [
+            "AutobiographicalMemory",
+            "RemoteAssociation",
+            "DMN",
+            "Knowledge"
+        ],
+        "source_file": "Default_Mode_Network.md"
+    },
+    {
+        "term_en": "dlPFC (Dorsolateral Prefrontal Cortex)",
+        "term_cn": "背外侧前额叶皮质",
+        "definition_short": "TPN 的'首席执行官'，负责工作记忆和决策",
+        "definition_deep": "dlPFC 是 TPN 的核心节点，位于前额叶的外侧上部。它像电脑的 RAM+CPU，既负责暂存信息（工作记忆），又负责处理运算（决策）。dlPFC 还负责目标维持（记住'我现在要做什么'）、认知灵活性（根据新信息调整策略）和抑制控制（压制冲动和干扰）。损伤 dlPFC 会导致执行功能障碍。",
+        "why_it_matters": "dlPFC 是'专注能力'的神经学基础。理解它能帮你认识：为什么疲劳时更容易分心（dlPFC 资源耗尽）？为什么运动后更容易专注（增加 dlPFC 血流）？",
+        "common_mistakes": "把 dlPFC 当成无限资源。它的运作需要葡萄糖和氧气，会疲劳，需要休息。不能无限调用。",
+        "related_terms": [
+            "TPN",
+            "WorkingMemory",
+            "ExecutiveFunction",
+            "CognitiveControl"
+        ],
+        "source_file": "Task_Positive_Network.md"
+    },
+    {
+        "term_en": "PPC-TPN (Posterior Parietal Cortex)",
+        "term_cn": "后顶叶皮层(TPN)",
+        "definition_short": "TPN 的'感知整合中心'，负责空间注意力",
+        "definition_deep": "PPC 位于大脑顶叶后部，是 TPN 的重要组成部分。它负责空间注意力（决定'关注哪里'）、多感官整合（把视觉、听觉、触觉信息整合）、视觉引导的动作和数字处理（直觉数量感知）。PPC 损伤会导致'忽视综合征'——患者会忽略身体或视野的一侧。",
+        "why_it_matters": "PPC 决定你把注意力'投射'到哪里。环境设计（如把手机放另一个房间）就是在减少 PPC 被无关刺激吸引的可能。",
+        "common_mistakes": "忽视物理环境对注意力的影响。PPC 会自动被显著刺激吸引，手机振动就是典型的干扰源。",
+        "related_terms": [
+            "TPN",
+            "SpatialAttention",
+            "IPS",
+            "VisualAttention"
+        ],
+        "source_file": "Task_Positive_Network.md"
+    },
+    {
+        "term_en": "Deep Work",
+        "term_cn": "深度工作",
+        "definition_short": "无干扰、高专注的工作状态，产出高质量",
+        "definition_deep": "深度工作是由 Cal Newport 提出的概念：在无干扰状态下进行职业活动，使个人认知能力达到极限，从而创造新价值、提升技能且难以复制。深度工作需要 TPN 持续高度激活，DMN 被抑制。它与'浮浅工作'（如回复邮件）相对，后者不需要深度认知投入。深度工作的产出公式：产出 = 专注时间 × 专注强度。",
+        "why_it_matters": "在知识经济时代，深度工作能力是最稀缺的技能之一。能够进入深度工作状态的人可以在更短时间内产出更高质量的成果。",
+        "common_mistakes": "把'长时间工作'等同于'深度工作'。碎片化的 8 小时价值 < 完整的 4 小时深度工作。关键是强度，不是时长。",
+        "related_terms": [
+            "TPN",
+            "FlowState",
+            "FocusedAttention",
+            "Productivity"
+        ],
+        "source_file": "Task_Positive_Network.md"
+    },
+    {
+        "term_en": "Flow State",
+        "term_cn": "心流状态",
+        "definition_short": "全神贯注的最优体验状态，忘我、愉悦",
+        "definition_deep": "心流是由心理学家 Mihaly Csikszentmihalyi 提出的概念：当个体全神贯注于某项活动时体验到的最优心理状态。特征包括：意识与行动融为一体、自我意识消失、时间感扭曲、强烈的自主感和内在愉悦。心流状态下 TPN 高度激活、DMN 强烈抑制、前额叶部分'下线'（停止自我监控），同时多巴胺和内啡肽释放。",
+        "why_it_matters": "心流是工作满足感和高效产出的来源。能够频繁进入心流的人，工作既高效又愉悦。心流触发条件是可以主动设计的。",
+        "common_mistakes": "期望心流随时可得。心流需要特定条件：清晰目标、即时反馈、技能与挑战匹配。不满足条件就无法触发。",
+        "related_terms": [
+            "TPN",
+            "DeepWork",
+            "Dopamine",
+            "Endorphin"
+        ],
+        "source_file": "Task_Positive_Network.md"
+    },
+    {
+        "term_en": "Attention Residue",
+        "term_cn": "注意力残留",
+        "definition_short": "任务切换后，注意力还'卡在'旧任务",
+        "definition_deep": "注意力残留是由 Sophie Leroy 提出的概念：当你从任务 A 切换到任务 B 时，部分注意力仍然'卡在'任务 A 上，导致任务 B 的处理效率下降。研究表明，每次任务切换后需要约 23 分钟才能完全回到原任务的专注水平。未完成的任务会产生更强的残留（Zeigarnik 效应）。",
+        "why_it_matters": "注意力残留是多任务工作效率低下的神经学解释。理解它能帮你：避免频繁切换、在切换前完成一个里程碑、批量处理同类任务。",
+        "common_mistakes": "低估切换成本。'我就看一眼手机'——这一眼可能让你损失 20+ 分钟的深度专注。",
+        "related_terms": [
+            "TPN",
+            "Multitasking",
+            "TaskSwitching",
+            "ZeigarnikEffect"
+        ],
+        "source_file": "Task_Positive_Network.md"
+    },
+    {
+        "term_en": "Working Memory",
+        "term_cn": "工作记忆",
+        "definition_short": "脑中的'便签纸'，暂存和处理信息",
+        "definition_deep": "工作记忆是大脑用于暂时保存和操作信息的认知系统。它像电脑的 RAM——容量有限（约 7±2 个信息单元），需要持续刷新。工作记忆主要由 dlPFC 和顶叶支持。当你心算 37×24 或记住刚才听到的电话号码时，工作记忆正在运作。工作记忆容量与一般智力高度相关。",
+        "why_it_matters": "工作记忆是'思考'的神经学基础。理解其有限性能帮你设计更好的工作流程：把复杂任务分解、使用外部工具（笔记）、减少干扰。",
+        "common_mistakes": "高估自己的工作记忆容量。'我能记住'往往是错觉。写下来比记住更可靠。",
+        "related_terms": [
+            "dlPFC",
+            "TPN",
+            "CognitiveLoad",
+            "Chunking"
+        ],
+        "source_file": "Task_Positive_Network.md"
+    },
+    {
+        "term_en": "Cognitive Control",
+        "term_cn": "认知控制",
+        "definition_short": "抑制干扰、维持目标的能力",
+        "definition_deep": "认知控制是大脑主动调节思维和行为以服务目标的能力。它包括抑制控制（压制无关信息和冲动）、工作记忆更新（刷新相关信息）和认知灵活性（在任务之间切换）。认知控制主要由 dlPFC 和 ACC 支持，是执行功能的核心组成部分。认知控制能力与学业成就、职业成功高度相关。",
+        "why_it_matters": "认知控制是'意志力'的神经学基础。好消息是它可以通过训练增强：冥想、运动、睡眠都能提升认知控制能力。",
+        "common_mistakes": "把认知控制当成固定特质。错！它是可以训练的技能，而且会因疲劳、压力、睡眠不足而波动。",
+        "related_terms": [
+            "dlPFC",
+            "ACC",
+            "ExecutiveFunction",
+            "Inhibition"
+        ],
+        "source_file": "Task_Positive_Network.md"
+    },
+    {
+        "term_en": "Executive Function",
+        "term_cn": "执行功能",
+        "definition_short": "高级认知能力的统称：计划、决策、抑制",
+        "definition_deep": "执行功能是一组涉及目标导向行为的高级认知过程，包括工作记忆（暂存和操作信息）、抑制控制（压制冲动）、认知灵活性（任务切换）、计划（组织行动步骤）、决策（权衡选项）和问题解决。执行功能主要由前额叶皮层支持，在儿童期和青少年期发展成熟。",
+        "why_it_matters": "执行功能影响生活的方方面面：学业、职业、人际关系、健康习惯。它可以通过训练增强，也可能因脑损伤、精神疾病而受损。",
+        "common_mistakes": "忽视对执行功能的保护。长期压力、睡眠不足、不良饮食都会损害前额叶功能，进而损害执行功能。",
+        "related_terms": [
+            "dlPFC",
+            "WorkingMemory",
+            "CognitiveControl",
+            "PFC"
+        ],
+        "source_file": "Task_Positive_Network.md"
+    },
+    {
+        "term_en": "Pomodoro Technique",
+        "term_cn": "番茄工作法",
+        "definition_short": "25 分钟专注 + 5 分钟休息的时间管理法",
+        "definition_deep": "番茄工作法是由 Francesco Cirillo 在 1980 年代发明的时间管理方法：设定 25 分钟计时器专注工作，响铃后休息 5 分钟，每 4 个番茄钟后休息 15-30 分钟。从神经科学角度，25 分钟足够让 TPN 进入高效状态，5 分钟休息让 TPN 微恢复（但不足以让 DMN 充分激活）。",
+        "why_it_matters": "番茄工作法是进入专注状态的'脚手架'——对于难以持续专注的人，它提供了明确的结构。但对于已经能进入心流的人，25 分钟可能太短。",
+        "common_mistakes": "在 5 分钟休息时刷手机。这让 TPN 继续工作，就失去了休息的意义。应该做无刺激的活动。",
+        "related_terms": [
+            "DeepWork",
+            "TPN",
+            "TimeManagement",
+            "Focus"
+        ],
+        "source_file": "Task_Positive_Network.md"
+    },
+    {
+        "term_en": "Ultradian Rhythm",
+        "term_cn": "超日节律/90分钟周期",
+        "definition_short": "人体自然的精力波动周期，约 90 分钟一个循环",
+        "definition_deep": "超日节律是人体生理周期的一种，指在一天内多次重复、周期短于 24 小时的节律。最著名的是 90-120 分钟的 BRAC 周期（基本休息-活动周期），与睡眠中的 REM 周期相同。在清醒时，这个周期表现为精力和专注力的自然波动。顶尖表演者（如运动员、音乐家）倾向于按 90 分钟周期工作。",
+        "why_it_matters": "理解超日节律能帮你设计更符合生理的工作节奏：50-90 分钟深度工作 + 15-20 分钟恢复，比连续 8 小时低效工作更有产出。",
+        "common_mistakes": "对抗自然节律。在疲劳期硬撑会降低效率和增加错误率。不如暂停恢复，再继续。",
+        "related_terms": [
+            "BRAC",
+            "DeepWork",
+            "EnergyManagement",
+            "Rest"
+        ],
+        "source_file": "Task_Positive_Network.md"
+    },
+    {
+        "term_en": "IPS (Intraparietal Sulcus)",
+        "term_cn": "顶内沟",
+        "definition_short": "注意力的'分配器'，决定认知资源往哪里投放",
+        "definition_deep": "顶内沟是大脑顶叶内的一条沟，是 TPN 的重要组成部分。它参与注意力的空间分配（决定关注哪里）、数字认知（直觉数量感知）和眼手协调。IPS 与视觉皮层、运动皮层紧密连接，在视觉搜索、空间推理中起关键作用。",
+        "why_it_matters": "IPS 决定你把有限的注意力资源投向哪里。理解它能帮你设计环境：把重要的东西放在视野中心，把干扰物移出视野。",
+        "common_mistakes": "忽视物理环境的影响。IPS 会自动被显著刺激吸引。把手机放在视野内就是在主动制造干扰。",
+        "related_terms": [
+            "PPC",
+            "TPN",
+            "VisualAttention",
+            "SpatialAttention"
+        ],
+        "source_file": "Task_Positive_Network.md"
+    },
+    {
+        "term_en": "FEF (Frontal Eye Fields)",
+        "term_cn": "额叶眼动区",
+        "definition_short": "控制眼球运动和视觉注意力的脑区",
+        "definition_deep": "额叶眼动区位于前额叶后部，是 TPN 的组成部分之一。它负责控制眼睛的随意运动（如在阅读时从一个词跳到下一个词），也参与视觉注意力的空间定向——即使眼睛不动，也能通过 FEF 活动把注意力'投射'到特定位置。视觉搜索任务高度依赖 FEF。",
+        "why_it_matters": "FEF 是'看哪里'的控制中心。阅读困难、视觉搜索慢可能与 FEF 功能有关。练习冥想可以增强 FEF 对眼动的控制。",
+        "common_mistakes": "忽视眼动在专注中的作用。如果眼睛在跳动（如扫视手机通知），TPN 就无法稳定激活。",
+        "related_terms": [
+            "TPN",
+            "VisualAttention",
+            "EyeMovement",
+            "Reading"
+        ],
+        "source_file": "Task_Positive_Network.md"
+    }
+]

@@ -1,0 +1,212 @@
+[
+    {
+        "term_en": "Trauma Aesthetics",
+        "term_cn": "创伤美学",
+        "definition_short": "经济下行期用华丽不真实的审美作为集体安慰剂",
+        "definition_deep": "当现实变得艰难、人生找不到答案时，虚幻的繁荣和美丽成为集体选择的安慰剂。功能强大的美颜外挂、全是橡皮娃娃的影视作品、燈火輝煌的唐宋古城——这些看起来更加华丽、更加不现实的审美，就是创伤美学。它是疲惫灵魂的刚需，是视觉完美和刺激对经济下行期心理创伤的补偿。",
+        "why_it_matters": "创伤美学解释了为什么审美在经济下行期反而变得更加浮夸华丽。",
+        "common_mistakes": "认为华丽审美是社会进步的标志。实际上它可能是集体创伤的症状。",
+        "related_terms": [
+            "Social Filter",
+            "Beauty Filter",
+            "Escaping Reality"
+        ],
+        "source_file": "Beauty_Filter_and_Photo_Obsession.md"
+    },
+    {
+        "term_en": "Sensory Capacity",
+        "term_cn": "感受力",
+        "definition_short": "对美和幸福的私密的自我信任的体验能力",
+        "definition_deep": "一种不可以被语言和评价统治的、充分沉浸于体验的能力。关键特征是私密、自我信任——我的感受不可以被任何其他东西统治，我的感受就是我的。这种能力因单纯而存在，因功利而消失。中国孩子从小被切断的第一个东西就是这种私密的、百分百信任自己体验的感受力。",
+        "why_it_matters": "感受力是不被外部标签绑架、体验真实幸福的根基。",
+        "common_mistakes": "认为感受力是天生的不会改变。它会被功利教育系统性地摧毁。",
+        "related_terms": [
+            "Private Happiness",
+            "Binary Opposition",
+            "Hollow Person"
+        ],
+        "source_file": "Beauty_Filter_and_Photo_Obsession.md"
+    },
+    {
+        "term_en": "Hollow Person",
+        "term_cn": "空心人",
+        "definition_short": "没有内在感受力，只追逐外部标签的人",
+        "definition_deep": "在残忍关闭自己的感受之后，迅速臣服二元对立体系，成为的一种人格状态。空心人不断追追追外在标签（学历/收入/结婚/生子），认为它们是活得幸福的证据。但内心实际上是空洞的，无法从私密的个人体验中获得满足。空心程度=外部标签总和-内在感受力。",
+        "why_it_matters": "空心人是中国教育和社会文化批量生产的人格类型。",
+        "common_mistakes": "认为空心人只是'务实'或'现实主义'。实际上是感受力被摧毁后的残缺状态。",
+        "related_terms": [
+            "Sensory Capacity",
+            "Binary Opposition",
+            "Like Dependency"
+        ],
+        "source_file": "Beauty_Filter_and_Photo_Obsession.md"
+    },
+    {
+        "term_en": "Binary Opposition",
+        "term_cn": "二元对立",
+        "definition_short": "非此即彼的思维模式，摧毁感受力的根源",
+        "definition_deep": "一种非常坏的思维模式：一方面生产二极体，极度追求观点确定性；另一方面让人不相信自己的感受。从小被教育什么是光荣/羞耻、什么工作有面子/丢人、有钱是幸福/没钱是不幸——'我作为一个人为什么好'这个底层问题的话语权被徹底掌握在别人手里。二元对立教育是感受力被切断的根源。",
+        "why_it_matters": "理解二元对立是理解感受力为何丧失的钥匙。",
+        "common_mistakes": "认为二元对立是'有主见'。它是精神殖民。",
+        "related_terms": [
+            "Sensory Capacity",
+            "Hollow Person",
+            "Strong vs Weak Beauty"
+        ],
+        "source_file": "Beauty_Filter_and_Photo_Obsession.md"
+    },
+    {
+        "term_en": "Private Happiness",
+        "term_cn": "私密幸福",
+        "definition_short": "不需分享、不需认可的内在满足感",
+        "definition_deep": "一种私密的自我信任的幸福模式：我一个人爬山，没告诉任何人也没拍照，但我知道我感受到了极大的幸福；我读某个小众领域的书，没人知道，但沉浸其中感到深深的感恩和满足——因为我知道这就是我想要的全部。'我活得很幸福'这句话永远在脑子里很大声。这种模式在个人权益受尊重的环境普遍存在，但在中国不被承认。",
+        "why_it_matters": "私密幸福是不依赖外部认可的真正幸福。",
+        "common_mistakes": "认为私密幸福是'孤僻'或'不合群'。它是心理成熟的标志。",
+        "related_terms": [
+            "Sensory Capacity",
+            "Like Dependency",
+            "Meaning Poverty"
+        ],
+        "source_file": "Beauty_Filter_and_Photo_Obsession.md"
+    },
+    {
+        "term_en": "Meaning Poverty",
+        "term_cn": "意义感匮乏",
+        "definition_short": "传统人生敘事(学业/婚姻/事业)集体失效",
+        "definition_deep": "中国人作为现实主义民族，意义感很大程度来源于可见的世俗性东西：学业、婚姻、事业。但现在上学不一定找到好工作、婚姻不再相信爱情、事业35岁淘汰——三种重要人生敘事集体缺乏希望时，人们发现找不到奔头，人生匱乏意义，不知道在忙什么。同时工作时长极长(周均48小时以上)，没有闲暇创造有意义的生活。",
+        "why_it_matters": "意义感匮乏解释了为什么中国人用拍照来装扮人生。",
+        "common_mistakes": "认为'努力就有意义'。当努力普遍没有回报时，意义来源需要重建。",
+        "related_terms": [
+            "Photo Obsession",
+            "Private Happiness",
+            "Like Dependency"
+        ],
+        "source_file": "Beauty_Filter_and_Photo_Obsession.md"
+    },
+    {
+        "term_en": "Social Filter",
+        "term_cn": "社会滤镜",
+        "definition_short": "笼罩整个社会的对真实的系统性美化",
+        "definition_deep": "不仅是个人照片开美颜，整个社会都笼罩着一个更大、更密不透风的滤镜。学到的、读到的、看到的、听到的、相信的、讨论的，都被全面美化了：容貌美颜(白幼瘦)、历史美颜(燈火輝煌的唐宋)、道德美颜(三观正/好人好报)、文艺作品美颜(无瑕疵俊男美女)。如果这个巨大滤镜突然消失，人们会像看到真实的自己那样感到恐懼、厌恶、幻灭。",
+        "why_it_matters": "社会滤镜是理解为什么中国人集体逃避真实的宏观视角。",
+        "common_mistakes": "认为社会滤镜是'正能量'。它是对真实的系统性否认。",
+        "related_terms": [
+            "Trauma Aesthetics",
+            "History Beautification",
+            "Moral Beautification"
+        ],
+        "source_file": "Beauty_Filter_and_Photo_Obsession.md"
+    },
+    {
+        "term_en": "Like Dependency",
+        "term_cn": "点赞依赖",
+        "definition_short": "把自我价值外包给社交媒体互动",
+        "definition_deep": "点赞文化在全世界都让人上头，但对中国人更上头——因为点赞=认可，被很多人点赞=被很多人认可，被认可=有价值。这是'通过外部评价衡量自己价值'的现代表现形式。发照片后反复刷新看点赞数，点赞少就焦虑——价值感完全外包给他人，内在空虚加剧。",
+        "why_it_matters": "点赞依赖是面子文化在社交媒体时代的延伸。",
+        "common_mistakes": "认为点赞多就是成功。点赞数与内在价值无关。",
+        "related_terms": [
+            "Face Culture",
+            "Photo Obsession",
+            "External Validation"
+        ],
+        "source_file": "Beauty_Filter_and_Photo_Obsession.md"
+    },
+    {
+        "term_en": "Strong vs Weak Beauty",
+        "term_cn": "强美弱美",
+        "definition_short": "教育推崇宏大胜利的美，压制脆弱自然的美",
+        "definition_deep": "中国教育推崇'强美'鄙视'弱美'——强化意识形态上的美、弱化真实自然的美。作文必须是宏大的、胜利的、正能量的、整齐划一的、充满希望的、波澜壮阔的。不允许脆弱、憂愁、孤独、彷徨、憤怒。这是一种美学上的样板戏，也是个人感受的剥削和专制——集体情绪不允许多元，只被允许有正能量这一种情绪。",
+        "why_it_matters": "强美弱美二分法解释了为什么中国人审美趋于单一。",
+        "common_mistakes": "认为'负面情绪不是美'。脆弱憂伤孤独也有可能是美的。",
+        "related_terms": [
+            "Binary Opposition",
+            "Sensory Capacity",
+            "Emotional Numbness"
+        ],
+        "source_file": "Beauty_Filter_and_Photo_Obsession.md"
+    },
+    {
+        "term_en": "History Beautification",
+        "term_cn": "历史美颜",
+        "definition_short": "把古代中国描绘得比现代还繁华富有",
+        "definition_deep": "在当今敘事中，古代中国人早就变了：高大、富有、俊朗、身穿绫罗绸缎，古代城市燈火通明(用蜡烛的时代比用电的时代还亮)，古代战争宏大先进(照这气势秦始皇能统一全球)。但真实的古人——清代王公大臣的照片——才是真实的中国人形象。历史美颜是社会滤镜的重要组成部分。",
+        "why_it_matters": "历史美颜让人失去对真实历史的认知能力。",
+        "common_mistakes": "认为历史美颜'只是艺术加工'。它是集体对真实的回避。",
+        "related_terms": [
+            "Social Filter",
+            "Trauma Aesthetics",
+            "Moral Beautification"
+        ],
+        "source_file": "Beauty_Filter_and_Photo_Obsession.md"
+    },
+    {
+        "term_en": "Moral Beautification",
+        "term_cn": "道德美颜",
+        "definition_short": "影视作品中好人坏人二元对立、善有善报恶有惡报",
+        "definition_deep": "90-2000年代的写实片(来来往往/蜗居/大明王朝等)认真讨论'人是什么'，好人有阴暗部分坏人有发光时刻，出轨/贪婪/懦弱被当做人性正常部分而非必须受惩罚的负面教材。现在的影片一味追求三观正：好人是好人坏人是坏人，善有善报恶有惡报，正义战胜邪恶主角永不言败。目的是弥补人们权利和道德得不到保障的匮乏感，代价是削弱对真实世界复杂性的理解能力。",
+        "why_it_matters": "道德美颜让年轻人成为无法理解复杂问题的道德斗士。",
+        "common_mistakes": "认为三观正是'好的教育'。它制造对真实世界的幻灭感。",
+        "related_terms": [
+            "Social Filter",
+            "Binary Opposition",
+            "Disillusionment"
+        ],
+        "source_file": "Beauty_Filter_and_Photo_Obsession.md"
+    },
+    {
+        "term_en": "Disillusionment",
+        "term_cn": "幻灭感",
+        "definition_short": "美颜叙事与真实现实落差导致的心理危机",
+        "definition_deep": "当受美颜叙事教育的年轻人进入社会，发现外面是集法家、儒家、马基亚维利主义和社会达尔文主义于一体的社会，努力没有回报的社会，失业问题频发的社会——他们对社会的幻觉就会被撕碎。幻灭程度=美颜叙事÷真实现实。表现为大梦一场的抑郁、被欺骗的愤怒和无力感：'我的前半生又算什么呢？'",
+        "why_it_matters": "幻灭感是社会滤镜最终破裂的必然结果。",
+        "common_mistakes": "认为幻灭感是'年轻人脆弱'。根源在于被喂养的虚假叙事。",
+        "related_terms": [
+            "Moral Beautification",
+            "Social Filter",
+            "Reality Avoidance"
+        ],
+        "source_file": "Beauty_Filter_and_Photo_Obsession.md"
+    },
+    {
+        "term_en": "Photo Obsession",
+        "term_cn": "拍照沉迷",
+        "definition_short": "中国人出片热情远超世界其他地区的现象",
+        "definition_deep": "吃饭要出片、喝咖啡要出片、游泳要出片、旅游要出片——出片成为独立的大事，重要性超过活动本身。三层心理动机：1)展示我漂亮、让别人觉得我过得好；2)对美好的瞬间占有；3)加强对自己存在的感知。三个中国特殊原因：通过外部评价衡量价值、自我表达空间贫瘠、意义感匮乏。",
+        "why_it_matters": "拍照沉迷表面是爱好，实际反映感受力的全面坍塌。",
+        "common_mistakes": "认为拍照沉迷是'热爱生活'。可能恰恰说明无法沉浸体验生活。",
+        "related_terms": [
+            "Like Dependency",
+            "Meaning Poverty",
+            "Sensory Capacity"
+        ],
+        "source_file": "Beauty_Filter_and_Photo_Obsession.md"
+    },
+    {
+        "term_en": "Prefrontal Cortex Underdevelopment",
+        "term_cn": "前额叶发育不良",
+        "definition_short": "长期慢性压力导致决策和冲动控制能力受损",
+        "definition_deep": "在长期慢性压力下，人负责控制决策和冲动的前额叶皮质和负责学习的海马体都不能正常发育。后果是：不能理性决策、不能控制冲动、不能耐心学习。导致高度情绪化，对复杂抽象事物产生冷漠甚至敌意——因为生存太重要，高级认知活动被视为剥削生存资源的'有罪'行为，必须强烈排斥。",
+        "why_it_matters": "前额叶发育不良解释了为什么简中网络戾气重。",
+        "common_mistakes": "认为戾气是'素质问题'。根源在于慢性压力对大脑的物理损伤。",
+        "related_terms": [
+            "Chronic Stress",
+            "Emotional Volatility",
+            "Reality Avoidance"
+        ],
+        "source_file": "Beauty_Filter_and_Photo_Obsession.md"
+    },
+    {
+        "term_en": "External Validation Dependency",
+        "term_cn": "外部认可依赖",
+        "definition_short": "被他人认可成为中国人唯一的自我评价价值来源",
+        "definition_deep": "中国人在思想根源上不相信一个人不靠他人认可和看见就可以过得很好。单身=不完整，没孩子=不完整，一个人的生活=可怜(形单影只/孤儿寡母)。根深蒂固认为人只能从关系中获得意义，不能从个人体验中获得意义。这导致从小很少以自己私密的精神体验为自我骄傲。",
+        "why_it_matters": "外部认可依赖是中国人心理困境的集大成者。",
+        "common_mistakes": "认为这是'重视关系'。它是对个体价值的系统性否认。",
+        "related_terms": [
+            "Face Culture",
+            "Like Dependency",
+            "Private Happiness"
+        ],
+        "source_file": "Beauty_Filter_and_Photo_Obsession.md"
+    }
+]

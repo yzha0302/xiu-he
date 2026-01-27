@@ -1,0 +1,255 @@
+[
+  {
+    "formula_name_en": "Recovery Rate Formula",
+    "formula_name_cn": "回本盈利率公式",
+    "equation": "Recovery_Rate = Loss_Rate / (1 - Loss_Rate)",
+    "variables": {
+      "Recovery_Rate": "回本所需的盈利率",
+      "Loss_Rate": "当前的亏损幅度（小数形式，如20%=0.2）"
+    },
+    "mechanism": "这个公式揭示了亏损与回本之间的非线性关系。亏损越大，回本需要的盈利率呈指数级增长。这是因为本金已经变小，同样的涨幅对应的绝对金额变少了。例如100元亏50%变成50元，涨50%只能变成75元，需要涨100%才能回到100元。",
+    "application": "用于评估当前亏损的严重性，判断是否应该止损而非继续等待回本。当回本所需盈利率超过30%时，应该认真考虑是否止损。",
+    "anti_pattern": "忽视这个公式，在深度亏损时幻想'涨回来就好了'，结果资金被长期套牢丧失流动性。",
+    "source_file": "1.0_Trading_Fundamentals.md"
+  },
+  {
+    "formula_name_en": "Risk-Reward Ratio Formula",
+    "formula_name_cn": "风险收益比公式",
+    "equation": "RRR = (Target_Price - Entry_Price) / (Entry_Price - Stop_Loss_Price)",
+    "variables": {
+      "RRR": "风险收益比",
+      "Target_Price": "目标止盈价格",
+      "Entry_Price": "买入价格",
+      "Stop_Loss_Price": "止损价格"
+    },
+    "mechanism": "这个公式计算的是每承担1单位风险能获得多少单位收益。RRR的核心洞察是：交易成功的关键不是胜率，而是盈亏比。即使胜率只有33%，只要RRR达到2:1，长期依然盈利。这改变了思维方式：从'我要预测对'变成'我要管理好风险收益比'。",
+    "application": "在决定是否进场前计算RRR。铁律：不做RRR低于2:1的交易。用于筛选交易机会，只进入有利可图的交易。",
+    "anti_pattern": "只关注胜率，忽视RRR。结果是高胜率但平均每次赢得少输得多，长期依然亏损。",
+    "source_file": "1.0_Trading_Fundamentals.md"
+  },
+  {
+    "formula_name_en": "Expected Value Formula",
+    "formula_name_cn": "期望值公式",
+    "equation": "EV = (Win_Rate × Avg_Win) - (Loss_Rate × Avg_Loss)",
+    "variables": {
+      "EV": "期望值（每次交易的平均盈亏）",
+      "Win_Rate": "胜率（赢的次数/总次数）",
+      "Avg_Win": "平均每次盈利的金额",
+      "Loss_Rate": "败率（1-胜率）",
+      "Avg_Loss": "平均每次亏损的金额"
+    },
+    "mechanism": "期望值是概率论的核心概念，它告诉你一个策略长期来看是赚钱还是亏钱。只要EV>0，执行足够多次后一定盈利。这解释了为什么赌场永远赢——每个游戏的EV对赌场都是正的。同样，交易者应该只执行正期望值的策略，即使短期可能亏损。",
+    "application": "评估交易策略的有效性。回测历史数据计算EV，只采用EV>0的策略。如果当前策略EV为负，要么改进策略要么放弃。",
+    "anti_pattern": "追求高胜率而忽视期望值。90%胜率但每次赢1元输20元的策略，EV = 0.9×1 - 0.1×20 = -1.1，长期必亏。",
+    "source_file": "1.0_Trading_Fundamentals.md"
+  },
+  {
+    "formula_name_en": "Position Sizing Formula",
+    "formula_name_cn": "单笔风险仓位公式",
+    "equation": "Position_Size = (Total_Capital × Risk_Ratio) / Risk_Per_Unit",
+    "variables": {
+      "Position_Size": "应买入的数量/金额",
+      "Total_Capital": "总可投资资金",
+      "Risk_Ratio": "单笔交易愿意承担的风险比例（通常1-2%）",
+      "Risk_Per_Unit": "每单位资产的风险（买入价-止损价）"
+    },
+    "mechanism": "这个公式基于'先确定风险再确定仓位'的思维方式。它确保无论标的波动性多大，每笔交易的最大亏损都控制在总资金的固定比例内（如2%）。这样即使连续亏损10次，也只损失20%的资金，还有机会翻盘。这是专业交易员的标准做法。",
+    "application": "每次开仓前用这个公式计算应买入的数量。先设定止损点，然后反推仓位大小，确保最大亏损在可接受范围内。",
+    "anti_pattern": "先决定仓位再考虑风险，或根据'感觉'决定仓位。结果是风险敞口不可控，一次大亏损就元气大伤。",
+    "source_file": "1.0_Trading_Fundamentals.md"
+  },
+  {
+    "formula_name_en": "Cost Averaging Formula",
+    "formula_name_cn": "摊平成本公式",
+    "equation": "New_Avg_Cost = (Old_Cost × Old_Qty + New_Cost × New_Qty) / (Old_Qty + New_Qty)",
+    "variables": {
+      "New_Avg_Cost": "补仓后的新平均成本",
+      "Old_Cost": "原有持仓的成本价",
+      "Old_Qty": "原有持仓数量",
+      "New_Cost": "新买入的价格",
+      "New_Qty": "新买入的数量"
+    },
+    "mechanism": "当价格下跌后补仓，你的平均成本会被摊低。这个公式计算补仓后的新成本，帮助你判断是否值得补仓、补多少仓。关键洞察：补仓能降低回本所需的涨幅，但同时也增加了风险敞口——如果继续下跌，你亏的更多。所以补仓必须配合止损策略。",
+    "application": "在考虑补仓时计算：补仓后成本是多少？需要涨多少才能回本？风险敞口增加了多少？据此做出理性决策。",
+    "anti_pattern": "盲目补仓摊成本，不设止损。结果是越补越多、越套越深，直到资金耗尽或标的归零。",
+    "source_file": "1.0_Trading_Fundamentals.md"
+  },
+  {
+    "formula_name_en": "Break-Even Win Rate Formula",
+    "formula_name_cn": "盈亏平衡胜率公式",
+    "equation": "Break_Even_Win_Rate = 1 / (1 + RRR)",
+    "variables": {
+      "Break_Even_Win_Rate": "不亏不赚所需的最低胜率",
+      "RRR": "风险收益比"
+    },
+    "mechanism": "这个公式告诉你：给定一个RRR，你需要多高的胜率才能不亏钱。RRR越高，所需胜率越低。例如RRR=2:1时，胜率只需33%就能打平；RRR=3:1时，胜率只需25%就能打平。这揭示了一个反直觉的真相：高胜率不重要，高RRR才重要。",
+    "application": "评估当前策略的可行性。如果你的历史胜率是40%，那你需要RRR > 1.5:1才能盈利。用于设定合理的止盈止损位置。",
+    "anti_pattern": "执着于提高胜率而忽视RRR。追求80%胜率但RRR只有0.5:1的策略，长期必亏。",
+    "source_file": "1.0_Trading_Fundamentals.md"
+  },
+  {
+    "formula_name_en": "Simple Moving Average Formula",
+    "formula_name_cn": "简单移动平均线公式",
+    "equation": "SMA = (P1 + P2 + ... + Pn) / n",
+    "variables": {
+      "SMA": "简单移动平均值",
+      "P1...Pn": "过去n个周期的收盘价",
+      "n": "周期数（如5日、20日、200日）"
+    },
+    "mechanism": "SMA是最基础的均线计算方法，将过去n个周期的收盘价相加后除以n。每个数据点权重相同，所以对价格变化反应较慢但更平滑。SMA用于识别趋势方向：价格在SMA上方通常是涨势，下方是跌势。常用周期包括MA5(周线)、MA20(月线)、MA200(年线/牛熊分界线)。",
+    "application": "判断趋势方向、识别动态支撑阻力、产生交易信号（金叉/死叉）。长周期SMA适合判断大趋势，短周期SMA适合短线操作。",
+    "anti_pattern": "在震荡市过度依赖均线信号，导致频繁假信号止损。只用单一均线判断，忽视多均线系统的综合分析。",
+    "source_file": "2.0_Technical_Analysis.md"
+  },
+  {
+    "formula_name_en": "Exponential Moving Average Formula",
+    "formula_name_cn": "指数移动平均线公式",
+    "equation": "EMA = Price_today × K + EMA_yesterday × (1 - K), where K = 2 / (n + 1)",
+    "variables": {
+      "EMA": "指数移动平均值",
+      "Price_today": "今日收盘价",
+      "EMA_yesterday": "昨日的EMA值",
+      "K": "平滑系数",
+      "n": "周期数"
+    },
+    "mechanism": "EMA通过指数加权的方式给予近期价格更高的权重，使得均线对价格变化反应更快。平滑系数K决定了近期价格的权重，周期越短K越大，反应越敏感。EMA比SMA更适合捕捉趋势转折，MACD指标就是基于EMA(12)和EMA(26)计算的。",
+    "application": "短线交易中替代SMA使用，更快捕捉趋势变化。计算MACD等复合指标。在快速变化的市场中比SMA更有效。",
+    "anti_pattern": "在震荡市中EMA可能产生更多假信号（因为反应太快）。不理解EMA和SMA的区别盲目使用。",
+    "source_file": "2.0_Technical_Analysis.md"
+  },
+  {
+    "formula_name_en": "RSI Formula",
+    "formula_name_cn": "相对强弱指数公式",
+    "equation": "RSI = 100 - [100 / (1 + RS)], where RS = Avg_Gain / Avg_Loss",
+    "variables": {
+      "RSI": "相对强弱指数（0-100）",
+      "RS": "相对强度（平均上涨幅度/平均下跌幅度）",
+      "Avg_Gain": "过去n期的平均上涨幅度",
+      "Avg_Loss": "过去n期的平均下跌幅度",
+      "n": "周期数（通常14）"
+    },
+    "mechanism": "RSI通过比较上涨和下跌力度来衡量价格动量。当上涨力度远大于下跌力度时RSI趋近100（超买），反之趋近0（超卖）。RSI的核心价值在于：1)识别超买超卖区（>70超买，<30超卖）2)发现背离信号（价格新高/低但RSI不新高/低）。",
+    "application": "判断短期超买超卖，识别反转预警（背离）。在震荡市中效果较好。可与趋势指标配合使用，在超卖区结合支撑位买入更可靠。",
+    "anti_pattern": "在强势趋势中RSI会长期钝化在超买/超卖区，此时RSI信号失效。看到超买就做空或超卖就买入是危险的。",
+    "source_file": "2.0_Technical_Analysis.md"
+  },
+  {
+    "formula_name_en": "MACD Formula",
+    "formula_name_cn": "MACD指标公式",
+    "equation": "DIF = EMA(12) - EMA(26); DEA = EMA(DIF, 9); MACD_Histogram = (DIF - DEA) × 2",
+    "variables": {
+      "DIF": "快线/MACD线，短期与长期EMA的差值",
+      "DEA": "慢线/信号线，DIF的9日EMA",
+      "MACD_Histogram": "MACD柱，快慢线差值的2倍",
+      "EMA(12)": "12日指数移动平均",
+      "EMA(26)": "26日指数移动平均"
+    },
+    "mechanism": "MACD通过计算短期和长期均线的差值来追踪趋势动量。DIF反映短期趋势相对长期趋势的变化，DEA是DIF的平滑版本，柱状图直观显示快慢线的距离。DIF>0表示短期趋势强于长期（多头），DIF<0表示空头。金叉(DIF上穿DEA)看涨，死叉(DIF下穿DEA)看跌。",
+    "application": "趋势跟踪和动量判断。零轴上方金叉是强买入信号，零轴下方死叉是强卖出信号。MACD柱背离是重要的反转预警。",
+    "anti_pattern": "MACD信号滞后，不适合短线交易。在震荡市中频繁金叉死叉导致假信号。过度依赖MACD忽视其他指标和价格形态。",
+    "source_file": "2.0_Technical_Analysis.md"
+  },
+  {
+    "formula_name_en": "Bollinger Bands Formula",
+    "formula_name_cn": "布林带公式",
+    "equation": "Middle = MA(20); Upper = Middle + 2σ; Lower = Middle - 2σ",
+    "variables": {
+      "Middle": "中轨，20日移动平均线",
+      "Upper": "上轨，中轨加2倍标准差",
+      "Lower": "下轨，中轨减2倍标准差",
+      "σ": "标准差（Standard Deviation），衡量价格波动程度"
+    },
+    "mechanism": "布林带基于统计学原理，假设价格呈正态分布，约95%的价格应落在2倍标准差范围内。当波动率增加时布林带张开，波动率减少时收窄。布林带收窄是波动率降低的信号，通常预示着大行情即将来临。价格触及上下轨本身不是买卖信号，需要结合趋势判断。",
+    "application": "判断波动率高低（收窄=低波动，张开=高波动）。识别超买超卖区域。在震荡市中，价格触及下轨可考虑买入，触及上轨可考虑卖出。在趋势市中，价格沿轨道运行是趋势延续信号。",
+    "anti_pattern": "把触及上轨直接当卖出信号（强势上涨时价格会沿上轨运行）。忽视布林带收窄的预警意义。",
+    "source_file": "2.0_Technical_Analysis.md"
+  },
+  {
+    "formula_name_en": "Head and Shoulders Target Price Formula",
+    "formula_name_cn": "头肩形态目标价公式",
+    "equation": "Target_Price = Neckline - (Head_Price - Neckline)",
+    "variables": {
+      "Target_Price": "形态完成后的目标价格",
+      "Neckline": "颈线价格（连接两个低点的水平线）",
+      "Head_Price": "头部最高价"
+    },
+    "mechanism": "头肩形态目标价的计算基于'形态高度等距投射'原理。头部到颈线的距离代表了多方力量的极限，跌破颈线后空方力量会继续推动价格向下相同的距离。这是一种对称性原则，假设多空力量转换后会有相等的反向运动。头肩底的目标价计算类似，只是方向相反。",
+    "application": "当头肩顶形态确认（跌破颈线）后，计算下跌目标位用于设定止盈或评估风险。头肩底确认后计算上涨目标位。注意目标价是理论值，实际可能达不到或超过。",
+    "anti_pattern": "在形态未确认（未跌破颈线）时就按目标价操作。过度相信目标价一定会达到。",
+    "source_file": "2.0_Technical_Analysis.md"
+  },
+  {
+    "formula_name_en": "Prospect Theory Value Function",
+    "formula_name_cn": "前景理论价值函数",
+    "equation": "V(x) = x^α if x≥0; V(x) = -λ(-x)^β if x<0",
+    "variables": {
+      "V(x)": "主观价值感知",
+      "x": "客观收益或损失金额",
+      "α": "收益敏感度参数（约0.88）",
+      "β": "损失敏感度参数（约0.88）",
+      "λ": "损失厌恶系数（约2.25）"
+    },
+    "mechanism": "前景理论的核心公式，由Kahneman和Tversky提出。该函数揭示了人类对收益和损失的不对称感知：损失带来的痛苦约是同等收益带来快乐的2.25倍（λ≈2.25）。函数在收益区间是凹函数（风险厌恶），在损失区间是凸函数（风险偏好），这解释了为什么人们在盈利时倾向于锁定利润，而在亏损时反而更愿意冒险。",
+    "application": "理解为何投资者不愿止损（确认损失的心理成本过高）、为何过早止盈（害怕利润变成损失）、为何在亏损时冒更大风险（想要回本）。用于设计克服损失厌恶的交易规则。",
+    "anti_pattern": "被损失厌恶支配导致死扛亏损、为避免小确定损失而承担大潜在损失。",
+    "source_file": "3.0_Market_Psychology.md"
+  },
+  {
+    "formula_name_en": "Kelly Criterion",
+    "formula_name_cn": "凯利公式",
+    "equation": "f* = (bp - q) / b",
+    "variables": {
+      "f*": "最优投注比例（占总资金的百分比）",
+      "b": "赔率（盈亏比，即盈利/亏损）",
+      "p": "胜率（获胜概率）",
+      "q": "败率（1-p）"
+    },
+    "mechanism": "凯利公式是数学家约翰·凯利在1956年提出的最优资金管理公式。它计算的是在长期重复博弈中，能够最大化资金增长率的最优下注比例。核心洞察是：下注比例既不能太大（可能爆仓），也不能太小（浪费优势），存在一个数学上最优的平衡点。当f*为负时，说明该博弈期望值为负，不应参与。",
+    "application": "用于计算每笔交易应投入的资金比例。例如：胜率60%，盈亏比2:1，则f* = (2×0.6 - 0.4) / 2 = 0.4，即最多投入40%资金。实践中通常使用半凯利（f*/2）以增加安全边际。",
+    "anti_pattern": "忽视凯利公式的结果重仓操作，或在期望值为负时继续下注。",
+    "source_file": "3.0_Market_Psychology.md"
+  },
+  {
+    "formula_name_en": "Fear and Greed Index Components",
+    "formula_name_cn": "恐惧贪婪指数构成",
+    "equation": "FGI = Σ(Wi × Ii) / ΣWi",
+    "variables": {
+      "FGI": "恐惧贪婪指数（0-100）",
+      "Wi": "第i个指标的权重",
+      "Ii": "第i个指标的标准化值（0-100）"
+    },
+    "mechanism": "恐惧贪婪指数是综合多个市场情绪指标计算出的单一数值，用于量化市场的整体情绪状态。常用指标包括：股票价格动量、股票价格强度、股票价格宽度、看跌/看涨期权比率、垃圾债券需求、市场波动率(VIX)、避险资产需求。0表示极度恐惧，100表示极度贪婪，50表示中性。",
+    "application": "判断市场情绪周期位置。FGI<20时市场极度恐惧，可能是底部，考虑买入；FGI>80时市场极度贪婪，可能是顶部，考虑卖出。'在别人恐惧时贪婪，在别人贪婪时恐惧'的量化版本。",
+    "anti_pattern": "机械地只根据FGI操作而忽视基本面，或在极端情绪可能持续时过早反向操作。",
+    "source_file": "3.0_Market_Psychology.md"
+  },
+  {
+    "formula_name_en": "Sentiment Ratio Formula",
+    "formula_name_cn": "情绪比率公式",
+    "equation": "Sentiment_Ratio = Bulls / (Bulls + Bears)",
+    "variables": {
+      "Sentiment_Ratio": "情绪比率（0-1）",
+      "Bulls": "看多人数或看多资金量",
+      "Bears": "看空人数或看空资金量"
+    },
+    "mechanism": "情绪比率是衡量市场多空力量对比的简单指标。当比率接近1时，几乎所有人都看多，通常是危险的顶部信号（谁来接盘？）；当比率接近0时，几乎所有人都看空，通常是底部信号（谁还在卖？）。这反映了群体心理的极端化——当共识达到极端时，往往意味着趋势即将反转。",
+    "application": "作为逆向指标使用。当情绪比率>0.8时警惕顶部，当情绪比率<0.2时关注底部。可以使用各种来源的数据：期货多空比、调查问卷、社交媒体情绪分析等。",
+    "anti_pattern": "在极端情绪中顺势操作（在所有人都看多时买入），或过早逆向操作而被趋势碾压。",
+    "source_file": "3.0_Market_Psychology.md"
+  },
+  {
+    "formula_name_en": "Bayes' Theorem",
+    "formula_name_cn": "贝叶斯定理",
+    "equation": "P(H|E) = P(E|H) × P(H) / P(E)",
+    "variables": {
+      "P(H|E)": "后验概率（看到证据后假设成立的概率）",
+      "P(E|H)": "似然度（假设成立时看到该证据的概率）",
+      "P(H)": "先验概率（看到证据前假设成立的概率）",
+      "P(E)": "证据出现的边际概率"
+    },
+    "mechanism": "贝叶斯定理是理性更新信念的数学框架。它告诉我们如何在获得新信息后正确调整自己的判断概率。核心思想是：新的信念应该基于先验概率和新证据的综合，而非只看新证据。这与确认偏误相反——确认偏误者只看支持自己观点的证据，而贝叶斯更新者会考虑所有证据并正确调整。",
+    "application": "用于克服确认偏误。当看到新消息时，问自己：1) 如果我的判断是对的，看到这个消息的概率是多少？2) 如果我的判断是错的，看到这个消息的概率是多少？3) 根据这两个概率的比值调整我的信心。",
+    "anti_pattern": "只看到支持自己观点的证据就大幅提高确信度（确认偏误），或完全忽视与预期不符的证据。",
+    "source_file": "3.0_Market_Psychology.md"
+  }
+]
