@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Investment Trading Knowledge Graph</title>
+    <!--
+        ASHER KNOWLEDGE GRAPH STANDARD v2.1
+        Module: Investment Trading Fundamentals
+    -->
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #000005;
+            overflow: hidden;
+        }
+
+        /* HUD: Top-Left */
+        #hud {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 400px;
+            background: rgba(10, 15, 25, 0.95);
+            border: 1px solid #334466;
+            border-left: 3px solid #00ffff;
+            border-radius: 4px;
+            padding: 25px;
+            color: #eef;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            display: none;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        #hud h2 {
+            margin: 0 0 5px 0;
+            font-size: 24px;
+            padding-right: 30px;
+        }
+
+        #hud .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.2s;
+            font-size: 20px;
+            color: #889;
+            text-align: center;
+            line-height: 24px;
+        }
+
+        #hud .close-btn:hover {
+            opacity: 1;
+            color: #ff5555;
+        }
+
+        #hud .sub-header {
+            font-size: 14px;
+            color: #8899aa;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #334455;
+            padding-bottom: 10px;
+        }
+
+        #hud .section-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #556677;
+            letter-spacing: 2px;
+            margin-top: 15px;
+            margin-bottom: 8px;
+        }
+
+        #hud .content-block {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #ccd;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        #hud .en {
+            color: #fff;
+        }
+
+        #hud .cn {
+            color: #88aacc;
+            font-size: 13px;
+        }
+
+        #hud .keyword {
+            color: #00ffff;
+            font-weight: bold;
+        }
+
+        #hud .scene-tag {
+            display: inline-block;
+            font-size: 12px;
+            background: #223344;
+            color: #aab;
+            padding: 4px 8px;
+            border-radius: 12px;
+            margin: 3px 5px 3px 0;
+            border: 1px solid #334455;
+        }
+
+        #hud .related-tag {
+            display: inline-block;
+            font-size: 11px;
+            background: #224433;
+            color: #8ca;
+            padding: 3px 8px;
+            border-radius: 8px;
+            margin: 2px 4px 2px 0;
+            border: 1px solid #335544;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        #hud .related-tag:hover {
+            background: #337755;
+            color: #afa;
+        }
+
+        #hud .warning-block {
+            font-size: 13px;
+            line-height: 1.6;
+            color: #faa;
+            background: rgba(80, 20, 20, 0.3);
+            padding: 10px;
+            border-radius: 4px;
+            border-left: 2px solid #f55;
+        }
+
+        #hud .insight-block {
+            font-size: 13px;
+            line-height: 1.6;
+            color: #afc;
+            background: rgba(20, 60, 30, 0.3);
+            padding: 10px;
+            border-radius: 4px;
+            border-left: 2px solid #5a5;
+        }
+
+        /* Legend: Bottom-Left (Collapsible) */
+        #legend {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(10, 15, 25, 0.9);
+            border: 1px solid #334466;
+            border-radius: 4px;
+            padding: 15px 20px;
+            color: #ccd;
+            backdrop-filter: blur(10px);
+            min-width: 180px;
+        }
+
+        #legend h3 {
+            margin: 0;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #778;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        #legend h3::after {
+            content: '▼';
+            font-size: 10px;
+            transition: transform 0.3s;
+        }
+
+        #legend.collapsed h3::after {
+            transform: rotate(-90deg);
+        }
+
+        #legend .legend-items {
+            max-height: 200px;
+            overflow-y: auto;
+            transition: max-height 0.3s ease;
+        }
+
+        #legend.collapsed .legend-items {
+            max-height: 0;
+        }
+
+        #legend .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 6px 0;
+            font-size: 13px;
+        }
+
+        #legend .legend-color {
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+            margin-right: 10px;
+        }
+
+        #legend .legend-label {
+            color: #aab;
+        }
+
+        #legend .legend-count {
+            margin-left: auto;
+            color: #667;
+            font-size: 11px;
+        }
+
+        #legend .legend-total {
+            font-size: 11px;
+            color: #667;
+            margin-left: 10px;
+        }
+
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #00ffff;
+            font-family: monospace;
+            letter-spacing: 2px;
+        }
+    </style>
+    <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/3d-force-graph"></script>
+    <script src="https://unpkg.com/three-spritetext@1.8.1/dist/three-spritetext.min.js"></script>
+    <script src="https://unpkg.com/dat.gui"></script>
+</head>
+
+<body>
+    <div id="loading">INITIALIZING...</div>
+    <div id="3d-graph"></div>
+
+    <!-- HUD with Close Button -->
+    <div id="hud">
+        <span class="close-btn" onclick="hideHUD()">×</span>
+        <h2 id="hud-title">Title</h2>
+        <div id="hud-cn" class="sub-header">Subtitle</div>
+        <div class="section-title">Definition 定义</div>
+        <div id="hud-desc" class="content-block"></div>
+        <div class="section-title">Deep Dive 深度解析</div>
+        <div id="hud-notes" class="content-block" style="border-left: 2px solid #00ffff;"></div>
+        <div class="section-title">Why It Matters 为什么重要</div>
+        <div id="hud-why" class="insight-block"></div>
+        <div class="section-title">Common Mistakes 常见误区</div>
+        <div id="hud-mistakes" class="warning-block"></div>
+        <div class="section-title">Related Terms 关联术语</div>
+        <div id="hud-related"></div>
+        <div class="section-title">Scenarios 应用场景</div>
+        <div id="hud-scenes"></div>
+    </div>
+
+    <!-- Legend (Collapsible) -->
+    <div id="legend">
+        <h3 onclick="toggleLegend()">Domain 领域 <span id="legend-total"></span></h3>
+        <div id="legend-items" class="legend-items"></div>
+    </div>
+
+    <script>
+        // === CATEGORY CONFIGURATION ===
+        const CATEGORY_CONFIG = {
+            "Direction": { color: "#00ffff", label_en: "Direction", label_cn: "方向操作" },
+            "Position": { color: "#00ff00", label_en: "Position", label_cn: "仓位管理" },
+            "Risk": { color: "#ff0055", label_en: "Risk Management", label_cn: "风险管理" },
+            "Strategy": { color: "#ff8800", label_en: "Strategy", label_cn: "策略方法" },
+            "Psychology": { color: "#aa00ff", label_en: "Psychology", label_cn: "交易心理" },
+            "Indicator": { color: "#ffff00", label_en: "Indicator", label_cn: "核心指标" },
+            "Technical": { color: "#00ffaa", label_en: "Technical", label_cn: "K线形态" },
+            "Trend": { color: "#ff00aa", label_en: "Trend", label_cn: "趋势分析" },
+            "Structure": { color: "#88ff00", label_en: "Structure", label_cn: "结构分析" },
+            "Volume": { color: "#0088ff", label_en: "Volume", label_cn: "成交量" },
+            "Pattern": { color: "#ffaa00", label_en: "Pattern", label_cn: "形态分析" }
+        };
+
+        // Pre-defined color palette for new categories
+        const COLOR_PALETTE = [
+            "#00ffff", "#00ff00", "#ff0055", "#ff8800", "#aa00ff",
+            "#ffff00", "#00ffaa", "#ff00aa", "#88ff00", "#0088ff"
+        ];
+        let colorIndex = 0;
+
+        function getCategory(groupName, labelCn = groupName) {
+            if (!CATEGORY_CONFIG[groupName]) {
+                CATEGORY_CONFIG[groupName] = {
+                    color: COLOR_PALETTE[colorIndex % COLOR_PALETTE.length],
+                    label_en: groupName,
+                    label_cn: labelCn
+                };
+                colorIndex++;
+            }
+            return CATEGORY_CONFIG[groupName];
+        }
+
+        function toggleLegend() {
+            document.getElementById('legend').classList.toggle('collapsed');
+        }
+
+        function buildLegend() {
+            const container = document.getElementById('legend-items');
+            container.innerHTML = '';
+            const counts = {};
+            let total = 0;
+            nodes.forEach(n => { counts[n.group] = (counts[n.group] || 0) + 1; total++; });
+            document.getElementById('legend-total').innerText = `(${Object.keys(counts).length} 域 / ${total} 点)`;
+            for (const [group, count] of Object.entries(counts)) {
+                const cat = getCategory(group);
+                const item = document.createElement('div');
+                item.className = 'legend-item';
+                item.innerHTML = `
+                    <div class="legend-color" style="background:${cat.color}"></div>
+                    <span class="legend-label">${cat.label_en} ${cat.label_cn}</span>
+                    <span class="legend-count">${count}</span>
+                `;
+                container.appendChild(item);
+            }
+        }
+
+        // --- DATA INJECTION POINT ---
+        const nodes = [
+            // === Direction 方向操作 ===
+            {
+                id: "Long",
+                en: "Long Position",
+                cn: "做多",
+                group: "Direction",
+                val: 35,
+                desc_en: "Buy first, sell later when price rises",
+                desc_cn: "看涨买入，涨了卖出赚差价",
+                notes_en: "The most basic trading operation. <span class='keyword'>Maximum loss is 100%</span> (price goes to zero), but potential gain is unlimited.",
+                notes_cn: "最基础的交易操作。最大亏损是本金归零，但理论上收益无上限。类比：像买房等涨再卖。",
+                why_matters: "做多是所有投资的基础，不理解做多就无法理解其他概念",
+                mistakes: "在下跌趋势中做多（逆势操作），或在高位追涨买入",
+                related: ["Short", "Entry", "Exit"],
+                scenes_en: ["Bull market investing", "Value investing"],
+                scenes_cn: ["牛市投资", "价值投资"]
+            },
+            // === Technical Analysis 技术分析 ===
+            {
+                id: "Candlestick",
+                en: "Candlestick/K-Line",
+                cn: "K线/蜡烛图",
+                group: "Technical",
+                val: 40,
+                desc_en: "Chart unit showing Open, Close, High, Low prices",
+                desc_cn: "显示开盘、收盘、最高、最低四个价格的图表单位",
+                notes_en: "Invented by Japanese rice traders in 18th century. <span class='keyword'>Each candle tells a story of bull-bear battle</span>. Body shows open/close difference, shadows show intraday extremes.",
+                notes_cn: "由18世纪日本米商发明。每根K线都是多空博弈的结果。实体显示开收盘差，影线显示盘中极值。",
+                why_matters: "K线是所有技术分析的基础，不懂K线就无法读懂任何图表",
+                mistakes: "只看K线颜色不看形态、忽视影线的重要信息",
+                related: ["Doji", "Hammer", "Engulfing", "Volume"],
+                scenes_en: ["Chart reading", "Pattern recognition"],
+                scenes_cn: ["看盘分析", "形态识别"]
+            },
+            {
+                id: "Doji",
+                en: "Doji",
+                cn: "十字星",
+                group: "Technical",
+                val: 30,
+                desc_en: "Candle where open equals close, showing indecision",
+                desc_cn: "开盘价等于收盘价的K线，表示多空平衡",
+                notes_en: "Key reversal signal. <span class='keyword'>Doji at trend extremes signals potential reversal</span>. Variants: long-legged doji, dragonfly doji, gravestone doji.",
+                notes_cn: "重要反转信号。出现在趋势极端位置的十字星暗示可能反转。变体包括长脚十字星、蜻蜓十字星、墓碑十字星。",
+                why_matters: "十字星是重要的犹豫和反转信号，尤其在趋势关键位置出现时",
+                mistakes: "孤立看十字星不看位置、忽视十字星后的确认K线",
+                related: ["Candlestick", "Hammer", "ShootingStar"],
+                scenes_en: ["Reversal detection", "Trend exhaustion"],
+                scenes_cn: ["反转识别", "趋势衰竭"]
+            },
+            {
+                id: "Hammer",
+                en: "Hammer",
+                cn: "锤子线",
+                group: "Technical",
+                val: 28,
+                desc_en: "Small body + long lower shadow at bottom, bullish reversal",
+                desc_cn: "小实体+长下影线出现在底部的看涨反转形态",
+                notes_en: "Classic bottom reversal pattern. <span class='keyword'>Long shadow shows bears tried but bulls fought back</span>. Requires confirmation from next candle. Bullish hammer more reliable than bearish.",
+                notes_cn: "经典底部反转形态。长下影表示空方杀跌后被多方拉回。需要后续阳线确认。阳线锤子比阴线锤子更可靠。",
+                why_matters: "锤子线是最经典的底部反转信号之一，识别它能帮你抓住底部",
+                mistakes: "在顶部看到类似形态误判为锤子（那是上吊线）、不等确认就买入",
+                related: ["HangingMan", "ShootingStar", "Doji"],
+                scenes_en: ["Bottom fishing", "Reversal trading"],
+                scenes_cn: ["抄底信号", "反转交易"]
+            },
+            {
+                id: "ShootingStar",
+                en: "Shooting Star",
+                cn: "射击之星",
+                group: "Technical",
+                val: 28,
+                desc_en: "Small body + long upper shadow at top, bearish reversal",
+                desc_cn: "小实体+长上影线出现在顶部的看跌反转形态",
+                notes_en: "Top reversal pattern. <span class='keyword'>Long upper shadow shows bulls tried to push higher but failed</span>. More reliable if it's a bearish candle. Wait for confirmation.",
+                notes_cn: "顶部反转形态。长上影表示多方冲高失败被打压。阴线射击之星更可靠。需要后续确认。",
+                why_matters: "射击之星是经典的顶部反转信号，长上影代表强烈的卖压",
+                mistakes: "在底部看到类似形态误判为射击之星（那是倒锤子）、忽视确认信号",
+                related: ["Hammer", "HangingMan", "Engulfing"],
+                scenes_en: ["Top detection", "Exit timing"],
+                scenes_cn: ["顶部识别", "卖出时机"]
+            },
+            {
+                id: "Engulfing",
+                en: "Engulfing Pattern",
+                cn: "吞没形态",
+                group: "Technical",
+                val: 32,
+                desc_en: "Second candle body completely engulfs first candle body",
+                desc_cn: "后一根K线实体完全包裹前一根K线实体",
+                notes_en: "Strong reversal signal. <span class='keyword'>Bullish engulfing at bottom = strong buy signal</span>. Bearish engulfing at top = strong sell signal. Size of engulfing candle indicates reversal strength.",
+                notes_cn: "强反转信号。底部看涨吞没是强买入信号，顶部看跌吞没是强卖出信号。吞没K线越大，反转力度越强。",
+                why_matters: "吞没形态是最可靠的双K线反转信号之一，尤其在关键位置出现时",
+                mistakes: "只看颜色不看是否真正'吞没'、在趋势中间误判吞没形态",
+                related: ["Candlestick", "MorningStar", "EveningStar"],
+                scenes_en: ["Reversal confirmation", "Entry timing"],
+                scenes_cn: ["反转确认", "进场时机"]
+            },
+            {
+                id: "MorningStar",
+                en: "Morning Star",
+                cn: "早晨之星",
+                group: "Technical",
+                val: 30,
+                desc_en: "Three-candle bottom reversal: long bearish → small body → long bullish",
+                desc_cn: "三根K线组成的底部反转形态：长阴→小实体→长阳",
+                notes_en: "Strong bottom reversal. First candle continues downtrend, second shows indecision, third confirms reversal. <span class='keyword'>Third candle should close into first candle's body by 50%+</span>.",
+                notes_cn: "强烈底部反转形态。第一根延续下跌，第二根犹豫，第三根确认反转。第三根阳线最好深入第一根阴线实体50%以上。",
+                why_matters: "早晨之星是最强烈的底部反转信号之一，三根K线确认增加可靠性",
+                mistakes: "形态不标准就强行认定、忽视形态出现的位置和趋势背景",
+                related: ["EveningStar", "Doji", "Engulfing"],
+                scenes_en: ["Bottom reversal", "Trend change"],
+                scenes_cn: ["底部反转", "趋势转变"]
+            },
+            {
+                id: "EveningStar",
+                en: "Evening Star",
+                cn: "黄昏之星",
+                group: "Technical",
+                val: 30,
+                desc_en: "Three-candle top reversal: long bullish → small body → long bearish",
+                desc_cn: "三根K线组成的顶部反转形态：长阳→小实体→长阴",
+                notes_en: "Strong top reversal, mirror of Morning Star. <span class='keyword'>Signals exhaustion of buying power</span>. Appears at resistance levels or after extended rallies.",
+                notes_cn: "强烈顶部反转形态，是早晨之星的镜像。暗示多方力量耗尽。常出现在阻力位或长期上涨后。",
+                why_matters: "黄昏之星是最强烈的顶部反转信号之一，是止盈的重要参考",
+                mistakes: "在上涨中途误判黄昏之星、第三根阴线不够深入就认定",
+                related: ["MorningStar", "Doji", "ShootingStar"],
+                scenes_en: ["Top reversal", "Exit signal"],
+                scenes_cn: ["顶部反转", "卖出信号"]
+            },
+            // === Moving Averages 均线系统 ===
+            {
+                id: "MA",
+                en: "Moving Average",
+                cn: "均线",
+                group: "Trend",
+                val: 40,
+                desc_en: "Average of closing prices over N periods",
+                desc_cn: "过去N个周期收盘价的平均值连成的线",
+                notes_en: "Foundation of trend analysis. <span class='keyword'>Price above MA = uptrend, below = downtrend</span>. Common periods: MA5(weekly), MA20(monthly), MA200(yearly/bull-bear line).",
+                notes_cn: "趋势分析的基础。价格在均线上方通常是涨势，下方是跌势。常用周期：MA5(周线)、MA20(月线)、MA200(牛熊分界线)。",
+                why_matters: "均线是判断趋势和支撑阻力的核心工具，是技术分析的基石",
+                mistakes: "只用单一均线判断、在震荡市过度依赖均线信号",
+                related: ["SMA", "EMA", "GoldenCross", "DeathCross"],
+                scenes_en: ["Trend identification", "Dynamic support/resistance"],
+                scenes_cn: ["趋势判断", "动态支撑阻力"]
+            },
+            {
+                id: "GoldenCross",
+                en: "Golden Cross",
+                cn: "金叉",
+                group: "Trend",
+                val: 35,
+                desc_en: "Short-term MA crosses above long-term MA",
+                desc_cn: "短期均线从下方向上穿越长期均线",
+                notes_en: "Classic buy signal. <span class='keyword'>MA50 crossing above MA200 is the 'true' golden cross</span> - strong bull market signal. More reliable after a downtrend correction.",
+                notes_cn: "经典买入信号。MA50上穿MA200是真正的'黄金交叉'，是强烈牛市信号。在下跌趋势回调后出现更可靠。",
+                why_matters: "金叉是最经典的买入信号之一，尤其是MA50/MA200金叉代表趋势转变",
+                mistakes: "每次金叉都买入（震荡市金叉多假信号）、不等金叉确认就提前入场",
+                related: ["DeathCross", "MA", "Support"],
+                scenes_en: ["Trend reversal", "Entry signal"],
+                scenes_cn: ["趋势反转", "买入信号"]
+            },
+            {
+                id: "DeathCross",
+                en: "Death Cross",
+                cn: "死叉",
+                group: "Trend",
+                val: 35,
+                desc_en: "Short-term MA crosses below long-term MA",
+                desc_cn: "短期均线从上方向下穿越长期均线",
+                notes_en: "Classic sell signal. <span class='keyword'>MA50 crossing below MA200 is 'death cross'</span> - strong bear market warning. Don't ignore but avoid panic selling in bull corrections.",
+                notes_cn: "经典卖出信号。MA50下穿MA200是'死亡交叉'，是强烈熊市预警。不要忽视但也避免在牛市回调中恐慌卖出。",
+                why_matters: "死叉是最经典的卖出信号之一，尤其是MA50/MA200死叉预示熊市",
+                mistakes: "恐慌式每次死叉都卖出、在牛市回调中误判死叉",
+                related: ["GoldenCross", "MA", "Resistance"],
+                scenes_en: ["Bear market warning", "Exit signal"],
+                scenes_cn: ["熊市预警", "卖出信号"]
+            },
+            // === Support & Resistance 支撑阻力 ===
+            {
+                id: "Support",
+                en: "Support Level",
+                cn: "支撑位",
+                group: "Structure",
+                val: 35,
+                desc_en: "Price level where buying pressure prevents further decline",
+                desc_cn: "价格下跌时遇到的托住价格的水平区域",
+                notes_en: "Like a floor for prices. Formed by: previous lows, psychological numbers, high-volume areas. <span class='keyword'>Broken support becomes resistance</span> (support-resistance flip).",
+                notes_cn: "像地板一样托住价格。形成原因：前期低点、心理整数关口、高成交密集区。跌破后支撑变阻力（支撑阻力互换）。",
+                why_matters: "支撑位是关键的买入位置和止损参考位，跌破支撑是重要的看跌信号",
+                mistakes: "把支撑位当作精确价格点、支撑位跌破后继续持有不止损",
+                related: ["Resistance", "Breakout", "FalseBreakout"],
+                scenes_en: ["Entry planning", "Stop loss setting"],
+                scenes_cn: ["进场规划", "止损设置"]
+            },
+            {
+                id: "Resistance",
+                en: "Resistance Level",
+                cn: "阻力位",
+                group: "Structure",
+                val: 35,
+                desc_en: "Price level where selling pressure prevents further rise",
+                desc_cn: "价格上涨时遇到的压住价格的水平区域",
+                notes_en: "Like a ceiling for prices. Formed by: previous highs, psychological numbers, trapped traders wanting to exit. <span class='keyword'>Broken resistance becomes support</span>.",
+                notes_cn: "像天花板一样压住价格。形成原因：前期高点、心理整数关口、套牢盘解套卖压。突破后阻力变支撑。",
+                why_matters: "阻力位是关键的卖出位置和止盈参考位，突破阻力是重要的看涨信号",
+                mistakes: "在阻力位追涨买入、忽视突破后的回踩确认",
+                related: ["Support", "Breakout", "FalseBreakout"],
+                scenes_en: ["Exit planning", "Take profit setting"],
+                scenes_cn: ["退出规划", "止盈设置"]
+            },
+            {
+                id: "Breakout",
+                en: "Breakout",
+                cn: "突破",
+                group: "Structure",
+                val: 32,
+                desc_en: "Price effectively crosses support or resistance level",
+                desc_cn: "价格有效穿越支撑或阻力水平",
+                notes_en: "Key trend signal. Valid breakout requires: <span class='keyword'>closing price break + volume increase + continuation</span>. Wait for retest to confirm before entering.",
+                notes_cn: "关键趋势信号。有效突破需要：收盘价突破+成交量放大+持续确认。等待回踩确认后再入场。",
+                why_matters: "突破是趋势开始或加速的信号，是重要的入场时机",
+                mistakes: "追突破不等确认、不分辨真突破和假突破",
+                related: ["Support", "Resistance", "FalseBreakout", "Volume"],
+                scenes_en: ["Trend following", "Entry timing"],
+                scenes_cn: ["趋势跟随", "进场时机"]
+            },
+            {
+                id: "FalseBreakout",
+                en: "False Breakout",
+                cn: "假突破",
+                group: "Structure",
+                val: 30,
+                desc_en: "Price briefly breaks level then quickly reverses back",
+                desc_cn: "价格短暂突破支撑/阻力后快速反转回原区间",
+                notes_en: "Trap for trend followers. Causes: stop hunting, weak momentum, liquidity grab. <span class='keyword'>Watch for low volume breakouts - often false</span>. Can be traded as reversal signal.",
+                notes_cn: "趋势跟随者的陷阱。成因：主力诱多/诱空、动能不足、流动性抓取。缩量突破往往是假突破。可以反向交易。",
+                why_matters: "识别假突破能避免追高被套，甚至可以反向操作获利",
+                mistakes: "每次突破都追入不等确认、被假突破止损后不敢再入场",
+                related: ["Breakout", "Support", "Resistance", "Volume"],
+                scenes_en: ["Reversal trading", "Risk management"],
+                scenes_cn: ["反转交易", "风险管理"]
+            },
+            // === Volume 成交量 ===
+            {
+                id: "Volume",
+                en: "Volume",
+                cn: "成交量",
+                group: "Volume",
+                val: 38,
+                desc_en: "Total shares/contracts traded in a period",
+                desc_cn: "某周期内成交的股数/合约数/金额总量",
+                notes_en: "Second most important data after price. <span class='keyword'>Volume precedes price</span> - volume changes often lead price changes. Volume confirms or denies price moves.",
+                notes_cn: "仅次于价格的第二重要数据。量在价先——成交量变化往往先于价格变化。成交量确认或否定价格走势。",
+                why_matters: "成交量是验证价格走势真实性的关键指标，量价配合是判断趋势健康度的标准",
+                mistakes: "只看价格不看量、忽视量价背离的警告信号",
+                related: ["VolumeSurge", "VolumeDivergence", "Breakout"],
+                scenes_en: ["Trend confirmation", "Breakout validation"],
+                scenes_cn: ["趋势确认", "突破验证"]
+            },
+            {
+                id: "VolumeSurge",
+                en: "Volume Surge",
+                cn: "放量",
+                group: "Volume",
+                val: 28,
+                desc_en: "Volume significantly higher than recent average",
+                desc_cn: "成交量明显高于近期平均水平",
+                notes_en: "Signals increased participation. <span class='keyword'>Volume surge on breakout = valid breakout</span>. Volume surge at highs (climax volume) may signal top. Context matters.",
+                notes_cn: "表示参与度增加。突破时放量=有效突破。高位天量（极端放量）可能是见顶信号。需要结合位置判断。",
+                why_matters: "放量是市场情绪和资金流向的直接反映，是验证突破的关键",
+                mistakes: "不关注放量的位置和背景、忽视天量可能是反转信号",
+                related: ["Volume", "Breakout", "VolumeDivergence"],
+                scenes_en: ["Breakout confirmation", "Climax detection"],
+                scenes_cn: ["突破确认", "高潮识别"]
+            },
+            {
+                id: "VolumeDivergence",
+                en: "Volume Divergence",
+                cn: "量价背离",
+                group: "Volume",
+                val: 30,
+                desc_en: "Price and volume moving in opposite directions",
+                desc_cn: "价格与成交量方向不一致的现象",
+                notes_en: "Warning signal. <span class='keyword'>Price rising on declining volume = weak rally, potential reversal</span>. Price falling on declining volume = selling exhaustion, potential bottom.",
+                notes_cn: "警告信号。价涨量缩=上涨乏力，可能反转。价跌量缩=抛压耗尽，可能见底。",
+                why_matters: "量价背离是趋势健康度的重要警示，忽视可能导致追顶抄底",
+                mistakes: "忽视量价背离继续追涨、不等确认就基于背离操作",
+                related: ["Volume", "Divergence", "RSI"],
+                scenes_en: ["Trend weakness detection", "Reversal warning"],
+                scenes_cn: ["趋势衰弱识别", "反转预警"]
+            },
+            // === Technical Indicators 技术指标 ===
+            {
+                id: "RSI",
+                en: "RSI",
+                cn: "相对强弱指数",
+                group: "Indicator",
+                val: 38,
+                desc_en: "Momentum oscillator measuring speed of price changes (0-100)",
+                desc_cn: "衡量价格涨跌强度的振荡器，判断超买超卖",
+                notes_en: "Classic momentum indicator. <span class='keyword'>RSI>70 = overbought, RSI<30 = oversold</span>. More importantly: RSI divergence with price is powerful reversal signal.",
+                notes_cn: "经典动量指标。RSI>70超买，RSI<30超卖。更重要的是：RSI与价格背离是强烈反转信号。",
+                why_matters: "RSI是最常用的超买超卖指标，背离信号是强烈的反转预警",
+                mistakes: "趋势强劲时RSI会钝化（长期超买/超卖）、孤立使用RSI不结合趋势",
+                related: ["Divergence", "MACD", "Overbought", "Oversold"],
+                scenes_en: ["Overbought/oversold", "Divergence detection"],
+                scenes_cn: ["超买超卖判断", "背离识别"]
+            },
+            {
+                id: "MACD",
+                en: "MACD",
+                cn: "指数平滑异同移动平均线",
+                group: "Indicator",
+                val: 40,
+                desc_en: "Trend-following indicator based on moving average differences",
+                desc_cn: "基于均线差值的趋势跟踪指标",
+                notes_en: "Combines trend and momentum. DIF = EMA(12) - EMA(26), DEA = EMA(DIF,9). <span class='keyword'>MACD histogram divergence is one of the most reliable reversal signals</span>.",
+                notes_cn: "结合趋势和动量。DIF=EMA(12)-EMA(26)，DEA=DIF的EMA(9)。MACD柱背离是最可靠的反转信号之一。",
+                why_matters: "MACD是最经典的趋势跟踪指标，金叉死叉是广泛使用的交易信号",
+                mistakes: "MACD信号滞后，不适合短线、震荡市中MACD假信号多",
+                related: ["GoldenCross", "DeathCross", "Divergence", "EMA"],
+                scenes_en: ["Trend following", "Momentum analysis"],
+                scenes_cn: ["趋势跟踪", "动量分析"]
+            },
+            {
+                id: "BollingerBands",
+                en: "Bollinger Bands",
+                cn: "布林带",
+                group: "Indicator",
+                val: 35,
+                desc_en: "Dynamic price channel based on standard deviation",
+                desc_cn: "基于标准差的动态价格通道",
+                notes_en: "Volatility indicator. Upper = MA20 + 2σ, Lower = MA20 - 2σ. <span class='keyword'>Band squeeze = low volatility, big move coming</span>. Price walking the band = strong trend.",
+                notes_cn: "波动率指标。上轨=MA20+2倍标准差，下轨=MA20-2倍标准差。布林带收窄=低波动，大行情即将来临。价格沿轨道运行=强趋势。",
+                why_matters: "布林带是判断波动率和超买超卖的直观工具，收窄是大行情前兆",
+                mistakes: "把触及上轨直接当卖出信号（强势时价格沿上轨运行）、忽视布林带收窄的预警",
+                related: ["MA", "Volatility", "Support", "Resistance"],
+                scenes_en: ["Volatility analysis", "Squeeze detection"],
+                scenes_cn: ["波动率分析", "收窄预警"]
+            },
+            {
+                id: "Divergence",
+                en: "Divergence",
+                cn: "背离",
+                group: "Indicator",
+                val: 35,
+                desc_en: "Price and indicator moving in opposite directions",
+                desc_cn: "价格走势与技术指标走势相反的现象",
+                notes_en: "Powerful reversal signal. <span class='keyword'>Bearish divergence: price new high, indicator not new high</span>. Bullish divergence: price new low, indicator not new low. Multi-indicator divergence stronger.",
+                notes_cn: "强烈反转信号。顶背离：价格创新高，指标不创新高。底背离：价格创新低，指标不创新低。多指标同时背离更可靠。",
+                why_matters: "背离是最强烈的反转预警信号之一，多指标同时背离更可靠",
+                mistakes: "背离出现就立即操作不等确认、忽视背离可能持续多个周期",
+                related: ["RSI", "MACD", "VolumeDivergence"],
+                scenes_en: ["Reversal prediction", "Trend exhaustion"],
+                scenes_cn: ["反转预测", "趋势衰竭"]
+            },
+            // === Chart Patterns 形态分析 ===
+            {
+                id: "HeadShoulders",
+                en: "Head and Shoulders",
+                cn: "头肩形态",
+                group: "Pattern",
+                val: 35,
+                desc_en: "Three-peak reversal pattern with middle peak highest",
+                desc_cn: "三峰反转形态，中间峰最高/最低",
+                notes_en: "Most reliable reversal pattern. H&S Top: left shoulder → head → right shoulder, neckline break confirms. <span class='keyword'>Target = neckline - (head to neckline distance)</span>.",
+                notes_cn: "最可靠的反转形态。头肩顶：左肩→头部→右肩，跌破颈线确认。目标价=颈线-(头部到颈线距离)。",
+                why_matters: "头肩形态是最可靠的反转形态之一，跌破/突破颈线是重要交易信号",
+                mistakes: "形态不标准强行认定、不等颈线突破确认就操作",
+                related: ["DoubleTop", "DoubleBottom", "Neckline"],
+                scenes_en: ["Major reversal", "Target calculation"],
+                scenes_cn: ["重大反转", "目标价计算"]
+            },
+            {
+                id: "DoubleTop",
+                en: "Double Top",
+                cn: "双顶/M顶",
+                group: "Pattern",
+                val: 32,
+                desc_en: "Two equal highs forming M-shape, bearish reversal",
+                desc_cn: "两个等高高点组成的顶部反转形态",
+                notes_en: "Common top reversal. Two peaks at similar level with trough between. <span class='keyword'>Second peak often on lower volume = weakness</span>. Confirmed when neckline breaks.",
+                notes_cn: "常见顶部反转。两个高度相近的高点，中间一个回调低点。第二个高点成交量通常更小=动能衰减。跌破颈线确认。",
+                why_matters: "双顶是常见且可靠的顶部反转形态，是止盈或做空的重要参考",
+                mistakes: "在形成过程中过早认定双顶、忽视成交量配合",
+                related: ["DoubleBottom", "HeadShoulders", "Resistance"],
+                scenes_en: ["Top identification", "Exit signal"],
+                scenes_cn: ["顶部识别", "卖出信号"]
+            },
+            {
+                id: "DoubleBottom",
+                en: "Double Bottom",
+                cn: "双底/W底",
+                group: "Pattern",
+                val: 32,
+                desc_en: "Two equal lows forming W-shape, bullish reversal",
+                desc_cn: "两个等低低点组成的底部反转形态",
+                notes_en: "Common bottom reversal. Two lows at similar level with peak between. <span class='keyword'>Second low on declining volume = selling exhausted</span>. Confirmed when neckline breaks.",
+                notes_cn: "常见底部反转。两个高度相近的低点，中间一个反弹高点。第二个低点成交量更小=抛压耗尽。突破颈线确认。",
+                why_matters: "双底是常见且可靠的底部反转形态，是买入的重要参考",
+                mistakes: "在形成过程中过早抄底、不等颈线突破确认",
+                related: ["DoubleTop", "HeadShoulders", "Support"],
+                scenes_en: ["Bottom identification", "Entry signal"],
+                scenes_cn: ["底部识别", "买入信号"]
+            },
+            {
+                id: "Triangle",
+                en: "Triangle Pattern",
+                cn: "三角形态",
+                group: "Pattern",
+                val: 30,
+                desc_en: "Converging price action forming triangle shape",
+                desc_cn: "价格在收敛区间内震荡形成的三角形整理形态",
+                notes_en: "Continuation pattern. Types: Symmetrical (neutral), <span class='keyword'>Ascending (bullish)</span>, Descending (bearish). Usually breaks in direction of prior trend. Wait for breakout.",
+                notes_cn: "持续形态。类型：对称三角形（中性）、上升三角形（偏多）、下降三角形（偏空）。通常沿原趋势方向突破。等待突破。",
+                why_matters: "三角形态预示着突破即将来临，识别类型可预判突破方向",
+                mistakes: "在三角形内部频繁操作、不等突破确认就押注方向",
+                related: ["Breakout", "Support", "Resistance", "Flag"],
+                scenes_en: ["Consolidation trading", "Breakout preparation"],
+                scenes_cn: ["盘整交易", "突破准备"]
+            },
+            {
+                id: "Short",
+                en: "Short Position",
+                cn: "做空",
+                group: "Direction",
+                val: 35,
+                desc_en: "Borrow and sell first, buy back when price drops",
+                desc_cn: "看跌先卖，跌了买回赚差价",
+                notes_en: "Reverse operation. <span class='keyword'>Risk is theoretically unlimited</span> because price can rise infinitely. Common in futures and derivatives.",
+                notes_cn: "反向操作策略。风险比做多大——价格理论上可无限上涨（亏损无上限）。期货和衍生品市场广泛使用。",
+                why_matters: "理解做空让你在熊市也能赚钱，同时理解市场空头力量",
+                mistakes: "在上涨趋势中做空，或不设止损导致爆仓",
+                related: ["Long", "Leverage", "Liquidation"],
+                scenes_en: ["Bear market hedging", "Arbitrage trading"],
+                scenes_cn: ["熊市对冲", "套利交易"]
+            },
+            // === Position 仓位管理 ===
+            {
+                id: "Position",
+                en: "Position Size",
+                cn: "仓位",
+                group: "Position",
+                val: 40,
+                desc_en: "Percentage of total capital invested",
+                desc_cn: "你投入资金占总资金的比例",
+                notes_en: "The first line of defense in risk management. <span class='keyword'>Position size determines maximum loss</span>. Common levels: Empty(0%), Light(10-30%), Half(50%), Heavy(70-90%), Full(100%).",
+                notes_cn: "风险管理第一道防线。仓位大小决定最大亏损。常见仓位：空仓(0%)、轻仓(10-30%)、半仓(50%)、重仓(70-90%)、满仓(100%)。",
+                why_matters: "仓位管理是风险控制的第一道防线，决定了你最多能亏多少",
+                mistakes: "因为过度自信而重仓/满仓单一标的",
+                related: ["AllIn", "RiskManagement", "Diversification"],
+                scenes_en: ["Portfolio allocation", "Risk budgeting"],
+                scenes_cn: ["投资组合配置", "风险预算分配"]
+            },
+            {
+                id: "AllIn",
+                en: "All-In",
+                cn: "梭哈",
+                group: "Position",
+                val: 30,
+                desc_en: "Invest all capital in one position",
+                desc_cn: "把全部资金一次性投入",
+                notes_en: "<span class='keyword'>Highest risk operation</span>. Psychological roots: overconfidence, FOMO, gambler mentality. Professional rule: single position max 30% of total capital.",
+                notes_cn: "风险最高的操作。心理根源：过度自信、FOMO、赌徒心态。专业规则：单一标的最大仓位不超过总资金30%。",
+                why_matters: "梭哈是新手亏损的最常见原因，一次错误就可能归零",
+                mistakes: "因为'这次一定赚'而梭哈、不给自己留退路",
+                related: ["Position", "RiskManagement", "Liquidation"],
+                scenes_en: ["Gambler behavior", "FOMO decisions"],
+                scenes_cn: ["赌徒行为", "FOMO决策"]
+            },
+            // === Risk Management 风险管理 ===
+            {
+                id: "StopLoss",
+                en: "Stop Loss",
+                cn: "止损",
+                group: "Risk",
+                val: 45,
+                desc_en: "Auto-sell when price hits preset floor",
+                desc_cn: "跌到底线价自动卖出控制损失",
+                notes_en: "Core risk management tool. <span class='keyword'>Stop loss is not admitting defeat, it's preserving capital</span>. Psychological barrier: loss aversion makes people resist executing stop loss.",
+                notes_cn: "风险管理核心工具。止损的本质不是认输，而是保存实力等待下一次机会。心理障碍：损失厌恶让人抗拒执行止损。",
+                why_matters: "止损决定了你的生存能力。不止损一次爆仓，十年努力白费",
+                mistakes: "不设止损、止损设得太近频繁被打掉、情绪化取消止损",
+                related: ["TakeProfit", "RRR", "LossAversion"],
+                scenes_en: ["Every trade", "Position management"],
+                scenes_cn: ["每一笔交易", "持仓管理"]
+            },
+            {
+                id: "TakeProfit",
+                en: "Take Profit",
+                cn: "止盈",
+                group: "Risk",
+                val: 35,
+                desc_en: "Auto-sell when price hits preset target",
+                desc_cn: "涨到目标价自动卖出锁定利润",
+                notes_en: "Profit locking tool. <span class='keyword'>Unrealized gains are not real money</span>. Essence: accept you can't sell at the highest point, settling for sub-optimal is more practical than chasing perfection.",
+                notes_cn: "利润锁定工具。浮盈不是真钱，只有卖出锁定后才是真正的利润。本质：接受你不可能卖在最高点。",
+                why_matters: "浮盈不是真钱，只有卖出锁定后才是真正的利润",
+                mistakes: "贪心不设止盈、止盈设得太近错过大行情",
+                related: ["StopLoss", "UnrealizedPL", "RRR"],
+                scenes_en: ["Profit taking", "Target setting"],
+                scenes_cn: ["获利了结", "目标设定"]
+            },
+            {
+                id: "Drawdown",
+                en: "Drawdown",
+                cn: "回撤",
+                group: "Risk",
+                val: 35,
+                desc_en: "Drop from historical high to low",
+                desc_cn: "从历史最高点跌落的幅度",
+                notes_en: "Key risk indicator. <span class='keyword'>Reflects worst-case scenario</span>. A 50% drawdown requires 100% gain to recover. Many quit during drawdowns, missing the recovery.",
+                notes_cn: "衡量策略风险的重要指标。50%的回撤需要100%的涨幅才能回本。很多人在回撤过程中就放弃了。",
+                why_matters: "回撤决定了你能否在心理上和资金上撑过最困难的时期",
+                mistakes: "只看收益率不看回撤、低估自己对回撤的心理承受能力",
+                related: ["Recovery", "RiskManagement", "Psychology"],
+                scenes_en: ["Strategy evaluation", "Risk assessment"],
+                scenes_cn: ["策略评估", "风险评估"]
+            },
+            {
+                id: "Leverage",
+                en: "Leverage",
+                cn: "杠杆",
+                group: "Risk",
+                val: 35,
+                desc_en: "Borrow money to amplify position size",
+                desc_cn: "借钱放大投资规模",
+                notes_en: "Double-edged sword: <span class='keyword'>amplifies both gains AND losses</span>. 10x leverage: 10% rise = 100% gain, but 10% drop = total loss (liquidation). Does not create value, only amplifies volatility.",
+                notes_cn: "双刃剑：收益和亏损都会被放大。10倍杠杆下，涨10%赚100%，跌10%就爆仓。杠杆不创造价值，只放大波动。",
+                why_matters: "杠杆是放大器，放大收益也放大风险，是爆仓的主要原因",
+                mistakes: "过度使用杠杆、不理解杠杆风险就使用",
+                related: ["Liquidation", "Margin", "RiskManagement"],
+                scenes_en: ["Futures trading", "Margin trading"],
+                scenes_cn: ["期货交易", "保证金交易"]
+            },
+            {
+                id: "Liquidation",
+                en: "Liquidation",
+                cn: "爆仓",
+                group: "Risk",
+                val: 40,
+                desc_en: "Forced close when loss exceeds margin",
+                desc_cn: "杠杆交易中亏损超过保证金被强制平仓",
+                notes_en: "Margin call mechanism. <span class='keyword'>Liquidation = game over</span>. Means total or near-total loss of principal. Prevention: lower leverage, strict stop loss, sufficient margin buffer.",
+                notes_cn: "强制平仓机制。爆仓 = 归零。避免方法：降低杠杆倍数、严格止损、留足保证金缓冲。",
+                why_matters: "爆仓 = 归零，是投资交易中最致命的结果之一",
+                mistakes: "高杠杆+不止损、在高波动期间使用杠杆",
+                related: ["Leverage", "Margin", "StopLoss"],
+                scenes_en: ["Crypto crashes", "Market black swans"],
+                scenes_cn: ["加密货币暴跌", "市场黑天鹅"]
+            },
+            // === Strategy 策略方法 ===
+            {
+                id: "DCA",
+                en: "Dollar-Cost Averaging",
+                cn: "定投",
+                group: "Strategy",
+                val: 35,
+                desc_en: "Fixed amount at fixed intervals, regardless of price",
+                desc_cn: "固定时间固定金额买入，不管涨跌",
+                notes_en: "Passive strategy. Math: <span class='keyword'>buy more when cheap, less when expensive</span>. Best advantage: eliminates emotional interference, avoids timing failure. Ideal for those without strong market views.",
+                notes_cn: "被动投资策略。数学原理：价格低时买得多，价格高时买得少。最大优势：排除情绪干扰，避免择时失败。",
+                why_matters: "定投是普通人最实用的投资策略，简单且能克服人性弱点",
+                mistakes: "在明显下跌趋势中盲目定投、中途放弃导致前功尽弃",
+                related: ["Pyramiding", "Position", "Entry"],
+                scenes_en: ["Long-term investing", "Index funds"],
+                scenes_cn: ["长期投资", "指数基金投资"]
+            },
+            {
+                id: "Pyramiding",
+                en: "Pyramiding",
+                cn: "金字塔加仓",
+                group: "Strategy",
+                val: 30,
+                desc_en: "Add positions in decreasing amounts",
+                desc_cn: "按层级递减的方式分批买入",
+                notes_en: "Position management strategy. Two types: <span class='keyword'>upward pyramid</span> (add on confirmation) and <span class='keyword'>downward pyramid</span> (add on dips). Key: downward must have absolute stop loss line.",
+                notes_cn: "仓位管理策略。两种用法：上涨金字塔（趋势确认后加仓）和下跌金字塔（抄底用）。关键：下跌金字塔必须配合绝对止损线。",
+                why_matters: "金字塔加仓让你在不确定性中保持灵活，降低择时失败的代价",
+                mistakes: "下跌金字塔不设止损（无限抄底）、加仓比例不递减",
+                related: ["DCA", "Position", "StopLoss"],
+                scenes_en: ["Trend following", "Bottom fishing"],
+                scenes_cn: ["趋势跟随", "抄底策略"]
+            },
+            // === Psychology 交易心理 ===
+            {
+                id: "LossAversion",
+                en: "Loss Aversion",
+                cn: "损失厌恶",
+                group: "Psychology",
+                val: 35,
+                desc_en: "Pain of loss is 2x the joy of equal gain",
+                desc_cn: "亏损的痛苦是同等盈利快乐的2倍",
+                notes_en: "Core behavioral economics concept. <span class='keyword'>Losing 100 requires 200 gain to offset emotionally</span>. Causes: refusing to stop loss, premature profit taking, irrational risk decisions.",
+                notes_cn: "行为经济学核心概念。亏100元的痛苦，需要赚200元的快乐才能抵消。导致：不愿止损、过早止盈、风险决策不理性。",
+                why_matters: "损失厌恶是投资者不愿止损的心理根源，理解它才能克服它",
+                mistakes: "被损失厌恶驱动而死扛亏损、为避免小损失而承担大风险",
+                related: ["StopLoss", "SunkCost", "Psychology"],
+                scenes_en: ["Refusing to stop loss", "Fear of selling"],
+                scenes_cn: ["拒绝止损", "不敢卖出"]
+            },
+            {
+                id: "SunkCost",
+                en: "Sunk Cost Fallacy",
+                cn: "沉没成本谬误",
+                group: "Psychology",
+                val: 30,
+                desc_en: "Continue investing because already invested too much",
+                desc_cn: "因为已经投入太多而继续投入",
+                notes_en: "Cognitive bias. <span class='keyword'>Past investment is sunk, cannot be recovered</span>. Correct thinking: current decision should only be based on future expected returns, not past inputs.",
+                notes_cn: "认知偏差。表现：'我都亏这么多了，现在卖太亏了'。正确思维：过去的投入是沉没成本，当前决策应基于未来预期收益。",
+                why_matters: "沉没成本谬误是深度套牢的心理根源，识别它才能做出理性决策",
+                mistakes: "把'已经亏了多少'作为不止损的理由",
+                related: ["LossAversion", "StopLoss", "AnchoringEffect"],
+                scenes_en: ["Averaging down endlessly", "Refusing to cut losses"],
+                scenes_cn: ["无限补仓", "拒绝割肉"]
+            },
+            {
+                id: "AnchoringEffect",
+                en: "Anchoring Effect",
+                cn: "锚定效应",
+                group: "Psychology",
+                val: 30,
+                desc_en: "Over-relying on first obtained information (like entry price)",
+                desc_cn: "过度依赖第一个获得的信息（如买入价）",
+                notes_en: "Cognitive bias where we fixate on initial reference points. <span class='keyword'>Common anchors: entry price, historical highs, round numbers</span>. Prevents objective evaluation of current value.",
+                notes_cn: "认知偏差，过度依赖初始参考点。常见锚点：买入价、历史高点、整数关口。导致无法客观评估当前价值。",
+                why_matters: "锚定效应让你被历史价格束缚，无法客观判断当前是否值得买卖",
+                mistakes: "用买入价作为卖出参考、认为'跌了很多所以便宜了'",
+                related: ["LossAversion", "ConfirmationBias", "SunkCost"],
+                scenes_en: ["Waiting to break even", "Bottom fishing traps"],
+                scenes_cn: ["等待回本", "抄底陷阱"]
+            },
+            {
+                id: "ConfirmationBias",
+                en: "Confirmation Bias",
+                cn: "确认偏误",
+                group: "Psychology",
+                val: 32,
+                desc_en: "Only seeing information that supports your existing view",
+                desc_cn: "只看支持自己观点的信息，忽视反面证据",
+                notes_en: "Selective search, interpretation, and memory of information. <span class='keyword'>We find what we want to find</span>. Leads to overconfidence and ignoring risk signals.",
+                notes_cn: "选择性搜索、解读和记忆信息。我们会找到我们想找的。导致过度自信和忽视风险信号。",
+                why_matters: "确认偏误让你看不到风险，导致过度自信和重仓操作",
+                mistakes: "买入后不断找利好安慰自己、只和看法一致的人交流",
+                related: ["Overconfidence", "AnchoringEffect", "HindsightBias"],
+                scenes_en: ["Echo chambers", "Ignoring stop loss signals"],
+                scenes_cn: ["信息茧房", "忽视止损信号"]
+            },
+            {
+                id: "Overconfidence",
+                en: "Overconfidence",
+                cn: "过度自信",
+                group: "Psychology",
+                val: 32,
+                desc_en: "Overestimating your judgment ability and prediction accuracy",
+                desc_cn: "高估自己的判断能力和预测准确率",
+                notes_en: "Three forms: overprecision, overestimation, overplacement. <span class='keyword'>90% of traders think they're above average</span>. Leads to heavy positions and ignoring stop loss.",
+                notes_cn: "三种形态：过度精确、过度估计、过度定位。90%的交易者认为自己高于平均水平。导致重仓和忽视止损。",
+                why_matters: "过度自信是重仓爆仓的主要原因，让你承担超出能力的风险",
+                mistakes: "因为'这次一定对'而重仓、忽视止损因为'我知道会涨'",
+                related: ["ConfirmationBias", "AllIn", "Leverage"],
+                scenes_en: ["Early leverage use", "Heavy single positions"],
+                scenes_cn: ["过早上杠杆", "重仓单一标的"]
+            },
+            {
+                id: "HindsightBias",
+                en: "Hindsight Bias",
+                cn: "后见之明偏差",
+                group: "Psychology",
+                val: 28,
+                desc_en: "Feeling 'I knew it all along' after the fact",
+                desc_cn: "事后觉得'我早就知道会这样'",
+                notes_en: "Also called 'Monday morning quarterback'. <span class='keyword'>Looking at charts, every top and bottom seems 'obvious'</span>. Prevents learning from mistakes.",
+                notes_cn: "又叫'马后炮'。看历史图表时，每个顶和底都'很明显'。阻碍从错误中学习。",
+                why_matters: "后见之明让你高估自己能力，下次更敢冒险，最终吃大亏",
+                mistakes: "复盘时觉得信号'很明显'、把成功归因于能力而非运气",
+                related: ["Overconfidence", "OutcomeBias", "ConfirmationBias"],
+                scenes_en: ["Chart review", "Strategy evaluation"],
+                scenes_cn: ["图表复盘", "策略评估"]
+            },
+            {
+                id: "DispositionEffect",
+                en: "Disposition Effect",
+                cn: "处置效应",
+                group: "Psychology",
+                val: 35,
+                desc_en: "Selling winners too early, holding losers too long",
+                desc_cn: "赚了想跑，亏了死扛",
+                notes_en: "Combination of loss aversion and risk preference reversal. <span class='keyword'>Results in 'small wins, big losses' = long-term losing</span>. Average win 10%, average loss 30% needs 75% win rate to break even.",
+                notes_cn: "损失厌恶和风险偏好反转的综合体现。结果是'赚小钱亏大钱'=长期必亏。平均赚10%就卖，平均亏30%才卖，需要75%胜率才能保本。",
+                why_matters: "处置效应导致'赚小钱亏大钱'，是散户长期亏损的主要原因",
+                mistakes: "浮盈10%就急着锁定、浮亏30%还在死扛等解套",
+                related: ["LossAversion", "TakeProfit", "StopLoss"],
+                scenes_en: ["Profit taking decisions", "Loss holding"],
+                scenes_cn: ["止盈决策", "持亏不卖"]
+            },
+            {
+                id: "FOMO",
+                en: "FOMO",
+                cn: "错失恐惧症",
+                group: "Psychology",
+                val: 35,
+                desc_en: "Fear of missing out on profit opportunities",
+                desc_cn: "害怕错过赚钱机会的焦虑",
+                notes_en: "Triggers: seeing others profit, consecutive green days, 'insider tips'. <span class='keyword'>FOMO-driven buys usually happen at highs</span> because the rise itself triggers FOMO.",
+                notes_cn: "触发场景：看到别人晒收益、连涨几天、听说'内幕消息'。FOMO驱动的买入往往发生在价格高位——因为正是上涨本身触发了FOMO。",
+                why_matters: "FOMO是追高被套的心理根源，理解它才能避免冲动买入",
+                mistakes: "看到上涨就冲动买入、因为'不能再错过了'而追涨",
+                related: ["Greed", "HerdingBehavior", "MarketSentiment"],
+                scenes_en: ["Bull market FOMO", "Seeing others profit"],
+                scenes_cn: ["牛市追涨", "看别人赚钱"]
+            },
+            {
+                id: "FUD",
+                en: "FUD",
+                cn: "恐惧不确定怀疑",
+                group: "Psychology",
+                val: 32,
+                desc_en: "Fear, Uncertainty, Doubt causing panic selling",
+                desc_cn: "由负面消息引发的恐慌情绪",
+                notes_en: "Sources: media FUD, competitor rumors, macro uncertainty, regulatory risks. <span class='keyword'>FUD amplified by social media creates panic selling cycle</span>. Smart money often buys during peak FUD.",
+                notes_cn: "来源：媒体渲染、竞争对手谣言、宏观不确定性、监管风险。FUD被社交媒体放大后引发恐慌抛售循环。聪明钱往往在FUD高峰时抄底。",
+                why_matters: "识别FUD和真风险的区别，避免在恐慌中低位割肉",
+                mistakes: "被媒体渲染吓到恐慌卖出、不验证消息来源就操作",
+                related: ["Fear", "PanicSelling", "MarketSentiment"],
+                scenes_en: ["Bear market panic", "Negative news reaction"],
+                scenes_cn: ["熊市恐慌", "负面消息反应"]
+            },
+            {
+                id: "Greed",
+                en: "Greed",
+                cn: "贪婪",
+                group: "Psychology",
+                val: 35,
+                desc_en: "Excessive desire for returns",
+                desc_cn: "对收益的过度渴望",
+                notes_en: "Moderate greed drives reasonable returns. <span class='keyword'>Excessive greed leads to overleveraging and ignoring risks</span>. Greed cycle: initial profit → overconfidence → leverage → bigger profits → more greed → crash.",
+                notes_cn: "适度贪婪驱动合理收益。过度贪婪导致过度杠杆和忽视风险。贪婪周期：初期盈利→过度自信→加杠杆→更大盈利→更大贪婪→崩盘。",
+                why_matters: "贪婪是使用过高杠杆和不止盈的根源，导致一次归零",
+                mistakes: "赚了还想更多不止盈、使用超出承受能力的杠杆",
+                related: ["Leverage", "TakeProfit", "Overconfidence", "FOMO"],
+                scenes_en: ["Leverage abuse", "No take profit"],
+                scenes_cn: ["滥用杠杆", "不止盈"]
+            },
+            {
+                id: "Fear",
+                en: "Fear",
+                cn: "恐惧",
+                group: "Psychology",
+                val: 35,
+                desc_en: "Excessive worry about losses",
+                desc_cn: "对损失的过度担忧",
+                notes_en: "Opposite of greed in the emotion cycle. <span class='keyword'>Fear peaks at bottoms, greed peaks at tops</span>. 'Be greedy when others are fearful' - Buffett.",
+                notes_cn: "与贪婪构成情绪周期的两极。恐惧在底部达到高峰，贪婪在顶部达到高峰。'在别人恐惧时贪婪'——巴菲特。",
+                why_matters: "恐惧导致在底部恐慌卖出或不敢买入，错过最佳机会",
+                mistakes: "在下跌中恐慌割肉、因为害怕而不敢在低位买入",
+                related: ["FUD", "PanicSelling", "Capitulation", "Greed"],
+                scenes_en: ["Bear market bottoms", "Panic selling"],
+                scenes_cn: ["熊市底部", "恐慌卖出"]
+            },
+            {
+                id: "HerdingBehavior",
+                en: "Herding Behavior",
+                cn: "羊群效应",
+                group: "Psychology",
+                val: 35,
+                desc_en: "Following the crowd instead of thinking independently",
+                desc_cn: "跟随大众行动而非独立思考",
+                notes_en: "Causes: information asymmetry, social proof, responsibility diffusion, FOMO. <span class='keyword'>Herding creates bubbles</span>: few buy → price rises → media → more buy → FOMO → bubble → smart money exits → crash.",
+                notes_cn: "原因：信息不对称、社会证明、责任分散、FOMO。羊群效应导致泡沫：少数人买入→价格上涨→媒体报道→更多人买入→FOMO→泡沫→聪明钱卖出→崩盘。",
+                why_matters: "羊群效应是泡沫形成和崩盘的推动力，理解它才能逆向操作",
+                mistakes: "因为'大家都在买'而买入、在狂热顶部跟风入场",
+                related: ["FOMO", "MarketSentiment", "Reflexivity"],
+                scenes_en: ["Bubble formation", "Crowd following"],
+                scenes_cn: ["泡沫形成", "跟风操作"]
+            },
+            {
+                id: "MarketSentiment",
+                en: "Market Sentiment",
+                cn: "市场情绪",
+                group: "Psychology",
+                val: 38,
+                desc_en: "Collective emotional state of market participants",
+                desc_cn: "市场参与者的集体情绪状态",
+                notes_en: "Emotion cycle: despair/capitulation (bottom) → doubt/caution → hope/optimism → excitement/greed → euphoria/complacency (top) → anxiety/denial → fear/panic → despair. <span class='keyword'>Markets born in despair, die in euphoria</span>.",
+                notes_cn: "情绪周期：绝望/投降(底部)→怀疑/谨慎→希望/乐观→兴奋/贪婪→狂热/自满(顶部)→焦虑/否认→恐惧/恐慌→绝望。市场在绝望中诞生，在狂热中消亡。",
+                why_matters: "识别市场情绪周期，可以在极端位置逆向操作获利",
+                mistakes: "在狂热时入场、在绝望时离场，完全跟随情绪操作",
+                related: ["Fear", "Greed", "HerdingBehavior", "Capitulation"],
+                scenes_en: ["Cycle identification", "Contrarian trading"],
+                scenes_cn: ["周期识别", "逆向交易"]
+            },
+            {
+                id: "Reflexivity",
+                en: "Reflexivity",
+                cn: "反身性",
+                group: "Psychology",
+                val: 32,
+                desc_en: "Market expectations and reality mutually influence each other",
+                desc_cn: "市场预期和市场现实相互影响",
+                notes_en: "Soros's theory. <span class='keyword'>Positive feedback: price up → confidence up → more buying → price up more</span>. Negative feedback: price down → panic → selling → price down more. Explains bubbles and crashes.",
+                notes_cn: "索罗斯的理论。正反馈循环：价格上涨→信心增强→更多买入→价格继续上涨。负反馈循环：价格下跌→信心崩溃→恐慌卖出→价格继续下跌。解释了泡沫和崩盘。",
+                why_matters: "理解反身性可以识别市场何时处于自我强化阶段，预判拐点",
+                mistakes: "在反身性阶段试图用'理性分析'对抗趋势",
+                related: ["MarketSentiment", "HerdingBehavior", "PanicSelling"],
+                scenes_en: ["Bubble analysis", "Crash prediction"],
+                scenes_cn: ["泡沫分析", "崩盘预判"]
+            },
+            {
+                id: "PanicSelling",
+                en: "Panic Selling",
+                cn: "恐慌性抛售",
+                group: "Psychology",
+                val: 32,
+                desc_en: "Irrational selling driven by fear",
+                desc_cn: "由恐惧驱动的非理性卖出",
+                notes_en: "Characteristics: huge volume spike, rapid price drop, selling regardless of price, extreme fear. <span class='keyword'>Panic selling often marks the end of decline</span> - last sellers are cleared out.",
+                notes_cn: "特征：成交量急剧放大、价格快速下跌、不计价格卖出、情绪极度恐惧。恐慌性抛售往往标志着下跌的尾声——最后的卖盘被清出市场。",
+                why_matters: "恐慌性抛售是底部的信号之一，识别它可以避免低位割肉",
+                mistakes: "在恐慌中跟随卖出、把恐慌性抛售误判为新下跌的开始",
+                related: ["Fear", "FUD", "Capitulation", "MarketSentiment"],
+                scenes_en: ["Market crashes", "Black swan events"],
+                scenes_cn: ["市场崩盘", "黑天鹅事件"]
+            },
+            {
+                id: "Capitulation",
+                en: "Capitulation",
+                cn: "投降",
+                group: "Psychology",
+                val: 30,
+                desc_en: "Market participants give up resistance, mass selling",
+                desc_cn: "市场参与者放弃抵抗，集体卖出",
+                notes_en: "Bottom signal. Characteristics: long-term holders start selling, extreme volume, extreme pessimism, media declares 'never coming back'. <span class='keyword'>When last bear covers, bottom forms</span>.",
+                notes_cn: "底部信号。特征：长期持有者开始卖出、极端高成交量、极度悲观、媒体宣称'永远涨不回来'。当最后一个空头回补时，底部就形成了。",
+                why_matters: "投降是底部的重要信号，识别它可以在底部抄底",
+                mistakes: "在投降阶段跟随卖出、把投降误判为新一轮下跌的开始",
+                related: ["PanicSelling", "Fear", "MarketSentiment"],
+                scenes_en: ["Bear market bottoms", "Extreme pessimism"],
+                scenes_cn: ["熊市底部", "极度悲观"]
+            },
+            {
+                id: "RevengeTrading",
+                en: "Revenge Trading",
+                cn: "报复性交易",
+                group: "Psychology",
+                val: 30,
+                desc_en: "Impulsive trading to 'win back' losses",
+                desc_cn: "亏损后急于'赚回来'的冲动交易",
+                notes_en: "Psychology: loss aversion (want to eliminate pain fast), illusion of control, gambler's fallacy. <span class='keyword'>Revenge traders increase position size, trade frequency, lower standards</span> = small loss becomes big loss.",
+                notes_cn: "心理机制：损失厌恶(想尽快消除痛苦)、控制幻觉、赌徒谬误。报复性交易者加大仓位、提高频率、降低标准=把小亏变成大亏。",
+                why_matters: "报复性交易是把小亏变成大亏的主要原因，必须通过纪律避免",
+                mistakes: "亏损后立即加大仓位想回本、连续亏损后情绪化加仓",
+                related: ["LossAversion", "EmotionalTrading", "GamblersFallacy"],
+                scenes_en: ["After losing streak", "Trying to break even"],
+                scenes_cn: ["连续亏损后", "急于回本"]
+            },
+            {
+                id: "GamblersFallacy",
+                en: "Gambler's Fallacy",
+                cn: "赌徒谬误",
+                group: "Psychology",
+                val: 28,
+                desc_en: "Believing independent events are causally related",
+                desc_cn: "认为独立事件之间有因果关系",
+                notes_en: "Example: 'dropped 5 days, must rise tomorrow'. <span class='keyword'>Each day's movement is relatively independent</span>. Yesterday's drop doesn't affect today's probability. Brain over-seeks patterns even when none exist.",
+                notes_cn: "例如：'跌了5天肯定要涨了'。每一天的涨跌是相对独立的事件，昨天跌不影响今天的概率。人脑过度追求规律，即使规律不存在。",
+                why_matters: "赌徒谬误导致基于错误假设的操作，应该用客观指标判断",
+                mistakes: "'跌了这么多天肯定要涨了'、'这次一定轮到我赢'",
+                related: ["RevengeTrading", "OutcomeBias", "EmotionalTrading"],
+                scenes_en: ["Bottom guessing", "Pattern seeking"],
+                scenes_cn: ["猜底", "寻找规律"]
+            },
+            {
+                id: "OutcomeBias",
+                en: "Outcome Bias",
+                cn: "结果导向偏差",
+                group: "Psychology",
+                val: 28,
+                desc_en: "Judging decision quality by results",
+                desc_cn: "用结果评判决策质量",
+                notes_en: "Example: 'made money so decision was right, lost money so decision was wrong'. <span class='keyword'>Good decisions can have bad outcomes (low probability event)</span>. Evaluate process, not single results.",
+                notes_cn: "例如：'赚了所以决策正确，亏了所以决策错误'。正确的决策也可能亏钱（低概率事件发生）。应该评估过程而非单次结果。",
+                why_matters: "结果导向让你无法从经验中正确学习，应该评估过程而非结果",
+                mistakes: "因为赚钱就认为决策正确、因为亏钱就否定正确的策略",
+                related: ["HindsightBias", "GamblersFallacy", "ExpectedValue"],
+                scenes_en: ["Strategy evaluation", "Learning from trades"],
+                scenes_cn: ["策略评估", "从交易中学习"]
+            },
+            {
+                id: "EmotionalTrading",
+                en: "Emotional Trading",
+                cn: "情绪化交易",
+                group: "Psychology",
+                val: 35,
+                desc_en: "Trading decisions based on emotions rather than logic",
+                desc_cn: "基于情绪而非逻辑的交易决策",
+                notes_en: "Market volatility triggers fight-or-flight response. Profits trigger dopamine (excitement), losses activate amygdala (fear). <span class='keyword'>Solution: pre-made trading plan, forced waiting when emotional, checklist</span>.",
+                notes_cn: "市场波动触发战或逃反应。盈利时多巴胺分泌产生兴奋，亏损时杏仁核激活产生恐惧。解决方法：提前制定交易计划、情绪激动时强制等待、用清单检查。",
+                why_matters: "情绪化交易是散户亏损的主要原因，必须通过纪律和规则克服",
+                mistakes: "看到上涨就兴奋买入、看到下跌就恐慌卖出",
+                related: ["Fear", "Greed", "RevengeTrading", "StopLoss"],
+                scenes_en: ["Volatile markets", "News reactions"],
+                scenes_cn: ["波动市场", "消息反应"]
+            },
+            // === Indicator 核心指标 ===
+            {
+                id: "RRR",
+                en: "Risk-Reward Ratio",
+                cn: "风险收益比",
+                group: "Indicator",
+                val: 40,
+                desc_en: "Expected gain divided by expected loss",
+                desc_cn: "预期收益与预期亏损的比值",
+                notes_en: "Core trading metric. Formula: (Target - Entry) / (Entry - StopLoss). <span class='keyword'>Golden rule: never take trades with RRR below 2:1</span>. With 2:1 RRR, you only need 33% win rate to be profitable.",
+                notes_cn: "核心交易指标。公式：(目标价-买入价)/(买入价-止损价)。铁律：不做RRR低于2:1的交易。2:1的RRR只需33%胜率即可盈利。",
+                why_matters: "RRR决定了你可以用较低的胜率实现长期盈利",
+                mistakes: "只看胜率不看RRR、设定不切实际的止盈目标",
+                related: ["StopLoss", "TakeProfit", "ExpectedValue"],
+                scenes_en: ["Trade evaluation", "Entry decision"],
+                scenes_cn: ["交易评估", "进场决策"]
+            },
+            {
+                id: "ExpectedValue",
+                en: "Expected Value",
+                cn: "期望值",
+                group: "Indicator",
+                val: 35,
+                desc_en: "Long-term average profit per trade",
+                desc_cn: "长期来看每次交易的平均盈亏",
+                notes_en: "Probability concept. Formula: <span class='keyword'>EV = WinRate × AvgWin - LossRate × AvgLoss</span>. Positive EV strategy will be profitable over many trades. Changes thinking: from 'predict correctly' to 'manage risk-reward'.",
+                notes_cn: "概率论核心概念。公式：胜率×平均盈利 - 败率×平均亏损。正期望值策略执行足够多次后长期一定赚钱。",
+                why_matters: "期望值是判断交易策略是否值得执行的终极标准",
+                mistakes: "只追求高胜率而忽视期望值、样本量太小就下结论",
+                related: ["RRR", "WinRate", "ProbabilityThinking"],
+                scenes_en: ["Strategy backtesting", "System evaluation"],
+                scenes_cn: ["策略回测", "系统评估"]
+            },
+            {
+                id: "UnrealizedPL",
+                en: "Unrealized P&L",
+                cn: "浮盈浮亏",
+                group: "Indicator",
+                val: 25,
+                desc_en: "Paper profit/loss before selling",
+                desc_cn: "还没卖出的账面盈亏",
+                notes_en: "Also called paper wealth. <span class='keyword'>Unrealized gain is not real money</span> until you sell and lock it in. Common mistake: treating unrealized gains as already earned.",
+                notes_cn: "也叫纸面富贵。浮盈不是真钱，没有卖出就不是真的赚了。常见错误：把浮盈当成已经到手的钱。",
+                why_matters: "区分浮盈和实际盈利是保持理性投资心态的关键",
+                mistakes: "把浮盈当真钱花掉、因为'只是浮亏'而不执行止损",
+                related: ["TakeProfit", "StopLoss", "Position"],
+                scenes_en: ["Daily P&L tracking", "Position monitoring"],
+                scenes_cn: ["每日盈亏追踪", "持仓监控"]
+            },
+            {
+                id: "RecoveryRate",
+                en: "Recovery Rate",
+                cn: "回本盈利率",
+                group: "Indicator",
+                val: 30,
+                desc_en: "Gain needed to recover from loss",
+                desc_cn: "亏损后回本需要的涨幅",
+                notes_en: "Formula: Loss / (1 - Loss). <span class='keyword'>Non-linear relationship</span>: -20% needs +25% to recover, -50% needs +100%, -90% needs +900%. This is why stop loss is critical.",
+                notes_cn: "公式：亏损率/(1-亏损率)。非线性关系：亏20%需涨25%回本，亏50%需涨100%，亏90%需涨900%。这就是为什么止损是铁律。",
+                why_matters: "理解这个公式才能理解为什么不能让亏损失控",
+                mistakes: "忽视这个公式，幻想'涨回来就好了'",
+                related: ["StopLoss", "Drawdown", "RiskManagement"],
+                scenes_en: ["Loss assessment", "Stop loss decision"],
+                scenes_cn: ["亏损评估", "止损决策"]
+            }
+        ];
+
+        const links = [
+            // Direction relationships
+            { source: "Long", target: "Short", label: "对立操作" },
+
+            // Position relationships
+            { source: "Position", target: "AllIn", label: "极端形式" },
+            { source: "Position", target: "StopLoss", label: "配合使用" },
+            { source: "AllIn", target: "Liquidation", label: "高风险导致" },
+
+            // Risk relationships
+            { source: "StopLoss", target: "TakeProfit", label: "配套使用" },
+            { source: "StopLoss", target: "RRR", label: "决定" },
+            { source: "Leverage", target: "Liquidation", label: "可能导致" },
+            { source: "Drawdown", target: "RecoveryRate", label: "决定" },
+
+            // Strategy relationships
+            { source: "DCA", target: "Pyramiding", label: "类似策略" },
+            { source: "Pyramiding", target: "StopLoss", label: "必须配合" },
+
+            // Psychology relationships
+            { source: "LossAversion", target: "StopLoss", label: "阻碍执行" },
+            { source: "SunkCost", target: "LossAversion", label: "相关偏差" },
+            { source: "LossAversion", target: "TakeProfit", label: "导致过早" },
+
+            // Indicator relationships
+            { source: "RRR", target: "ExpectedValue", label: "组成部分" },
+            { source: "ExpectedValue", target: "DCA", label: "评估策略" },
+            { source: "UnrealizedPL", target: "TakeProfit", label: "需要锁定" },
+            { source: "RecoveryRate", target: "StopLoss", label: "证明必要性" },
+
+            // Cross-domain relationships
+            { source: "Short", target: "Leverage", label: "常用" },
+            { source: "Position", target: "RRR", label: "影响" },
+            { source: "Drawdown", target: "LossAversion", label: "触发" },
+
+            // === Market Psychology Relationships ===
+            // Cognitive Bias Chain
+            { source: "AnchoringEffect", target: "SunkCost", label: "相关偏差" },
+            { source: "AnchoringEffect", target: "LossAversion", label: "强化" },
+            { source: "ConfirmationBias", target: "Overconfidence", label: "导致" },
+            { source: "ConfirmationBias", target: "AnchoringEffect", label: "相关偏差" },
+            { source: "Overconfidence", target: "AllIn", label: "导致" },
+            { source: "Overconfidence", target: "Leverage", label: "滥用" },
+            { source: "HindsightBias", target: "Overconfidence", label: "强化" },
+            { source: "HindsightBias", target: "OutcomeBias", label: "相关偏差" },
+            { source: "DispositionEffect", target: "LossAversion", label: "源于" },
+            { source: "DispositionEffect", target: "TakeProfit", label: "导致过早" },
+            { source: "DispositionEffect", target: "StopLoss", label: "阻碍执行" },
+
+            // Emotion relationships
+            { source: "FOMO", target: "Greed", label: "源于" },
+            { source: "FOMO", target: "HerdingBehavior", label: "驱动" },
+            { source: "FUD", target: "Fear", label: "源于" },
+            { source: "FUD", target: "PanicSelling", label: "触发" },
+            { source: "Greed", target: "Fear", label: "对立情绪" },
+            { source: "Greed", target: "TakeProfit", label: "阻碍执行" },
+            { source: "Greed", target: "Leverage", label: "驱动使用" },
+            { source: "Fear", target: "StopLoss", label: "过早执行" },
+            { source: "Fear", target: "Capitulation", label: "最终导致" },
+
+            // Group Psychology
+            { source: "HerdingBehavior", target: "MarketSentiment", label: "影响" },
+            { source: "HerdingBehavior", target: "FOMO", label: "被驱动" },
+            { source: "MarketSentiment", target: "Greed", label: "顶部表现" },
+            { source: "MarketSentiment", target: "Fear", label: "底部表现" },
+            { source: "MarketSentiment", target: "Reflexivity", label: "解释机制" },
+            { source: "Reflexivity", target: "HerdingBehavior", label: "放大效应" },
+            { source: "Reflexivity", target: "PanicSelling", label: "负反馈导致" },
+            { source: "PanicSelling", target: "Capitulation", label: "最终阶段" },
+            { source: "PanicSelling", target: "Volume", label: "伴随放量" },
+            { source: "Capitulation", target: "MarketSentiment", label: "底部信号" },
+
+            // Trading behavior psychology
+            { source: "RevengeTrading", target: "LossAversion", label: "源于" },
+            { source: "RevengeTrading", target: "GamblersFallacy", label: "伴随" },
+            { source: "RevengeTrading", target: "EmotionalTrading", label: "类型之一" },
+            { source: "GamblersFallacy", target: "OutcomeBias", label: "相关谬误" },
+            { source: "OutcomeBias", target: "ExpectedValue", label: "错误评估" },
+            { source: "EmotionalTrading", target: "StopLoss", label: "需要克服" },
+            { source: "EmotionalTrading", target: "Greed", label: "表现之一" },
+            { source: "EmotionalTrading", target: "Fear", label: "表现之一" },
+
+            // === Technical Analysis Relationships ===
+            // K线形态关系
+            { source: "Candlestick", target: "Doji", label: "形态之一" },
+            { source: "Candlestick", target: "Hammer", label: "形态之一" },
+            { source: "Candlestick", target: "ShootingStar", label: "形态之一" },
+            { source: "Candlestick", target: "Engulfing", label: "形态之一" },
+            { source: "Doji", target: "MorningStar", label: "组成部分" },
+            { source: "Doji", target: "EveningStar", label: "组成部分" },
+            { source: "Hammer", target: "ShootingStar", label: "镜像形态" },
+            { source: "MorningStar", target: "EveningStar", label: "镜像形态" },
+
+            // 均线系统关系
+            { source: "MA", target: "GoldenCross", label: "产生信号" },
+            { source: "MA", target: "DeathCross", label: "产生信号" },
+            { source: "GoldenCross", target: "DeathCross", label: "对立信号" },
+            { source: "MA", target: "Support", label: "动态形成" },
+            { source: "MA", target: "Resistance", label: "动态形成" },
+
+            // 支撑阻力关系
+            { source: "Support", target: "Resistance", label: "互换转化" },
+            { source: "Support", target: "Breakout", label: "被突破" },
+            { source: "Resistance", target: "Breakout", label: "被突破" },
+            { source: "Breakout", target: "FalseBreakout", label: "可能变成" },
+            { source: "Support", target: "StopLoss", label: "设置参考" },
+            { source: "Resistance", target: "TakeProfit", label: "设置参考" },
+
+            // 成交量关系
+            { source: "Volume", target: "VolumeSurge", label: "状态之一" },
+            { source: "Volume", target: "VolumeDivergence", label: "产生信号" },
+            { source: "VolumeSurge", target: "Breakout", label: "验证有效" },
+            { source: "VolumeDivergence", target: "Divergence", label: "类型之一" },
+
+            // 技术指标关系
+            { source: "RSI", target: "Divergence", label: "产生信号" },
+            { source: "MACD", target: "Divergence", label: "产生信号" },
+            { source: "MACD", target: "GoldenCross", label: "产生信号" },
+            { source: "MACD", target: "DeathCross", label: "产生信号" },
+            { source: "BollingerBands", target: "MA", label: "基于计算" },
+            { source: "BollingerBands", target: "Support", label: "动态形成" },
+            { source: "BollingerBands", target: "Resistance", label: "动态形成" },
+
+            // 形态分析关系
+            { source: "HeadShoulders", target: "DoubleTop", label: "类似形态" },
+            { source: "HeadShoulders", target: "DoubleBottom", label: "类似形态" },
+            { source: "DoubleTop", target: "DoubleBottom", label: "镜像形态" },
+            { source: "Triangle", target: "Breakout", label: "等待" },
+
+            // 技术分析与交易操作关系
+            { source: "Candlestick", target: "Long", label: "指导操作" },
+            { source: "Candlestick", target: "Short", label: "指导操作" },
+            { source: "Divergence", target: "StopLoss", label: "预警信号" },
+            { source: "RSI", target: "TakeProfit", label: "辅助判断" }
+        ];
+
+        // --- CONFIGURATION ---
+        const settings = { linkDistance: 80, chargeStrength: -200, labelSize: 1.0, opacity: 0.8, autoRotate: true };
+
+        // --- ENGINE ---
+        const elem = document.getElementById('3d-graph');
+        const Graph = ForceGraph3D()(elem)
+            .graphData({ nodes, links })
+            .backgroundColor('#000005')
+            .showNavInfo(false)
+            .nodeThreeObject(node => {
+                const cat = getCategory(node.group);
+                const text = `${node.en}\n${node.cn}`;
+                const sprite = new SpriteText(text);
+                sprite.color = cat.color;
+                sprite.textHeight = (node.val / 2) * settings.labelSize;
+                sprite.fontFace = 'Arial'; sprite.fontWeight = 'bold';
+                sprite.backgroundColor = `rgba(0,0,0,${settings.opacity / 2})`;
+                sprite.padding = 4;
+                sprite.userData = { baseSize: node.val / 2 };
+                return sprite;
+            })
+            .linkWidth(link => 2.5)
+            .linkColor(link => {
+                const sourceNode = nodes.find(n => n.id === link.source || n.id === link.source.id);
+                if (sourceNode) return getCategory(sourceNode.group).color + '88';
+                return '#445566';
+            })
+            .linkOpacity(0.7)
+            .linkCurvature(0.12)
+            .linkCurveRotation(link => {
+                const hash = (link.source?.id || link.source) + (link.target?.id || link.target);
+                let sum = 0;
+                for (let i = 0; i < hash.length; i++) sum += hash.charCodeAt(i);
+                return (sum % 360) * (Math.PI / 180);
+            })
+            .linkDirectionalArrowLength(5)
+            .linkDirectionalArrowRelPos(0.9)
+            .linkDirectionalArrowColor(link => {
+                const sourceNode = nodes.find(n => n.id === link.source || n.id === link.source.id);
+                if (sourceNode) return getCategory(sourceNode.group).color;
+                return '#ffffff';
+            })
+            .linkDirectionalParticles(3)
+            .linkDirectionalParticleSpeed(0.005)
+            .linkDirectionalParticleWidth(2)
+            .linkDirectionalParticleColor(link => {
+                const sourceNode = nodes.find(n => n.id === link.source || n.id === link.source.id);
+                if (sourceNode) return getCategory(sourceNode.group).color;
+                return '#ffffff';
+            })
+            .onNodeClick(node => {
+                // Maintain current zoom level - just rotate to face the node
+                const currentPos = Graph.cameraPosition();
+                const currentDistance = Math.hypot(currentPos.x, currentPos.y, currentPos.z);
+                const nodeDistance = Math.hypot(node.x, node.y, node.z) || 1;
+
+                const newX = (node.x / nodeDistance) * currentDistance;
+                const newY = (node.y / nodeDistance) * currentDistance;
+                const newZ = (node.z / nodeDistance) * currentDistance;
+
+                Graph.cameraPosition({ x: newX, y: newY, z: newZ }, node, 1500);
+                showHUD(node);
+            });
+
+        Graph.d3Force('link').distance(settings.linkDistance);
+        Graph.d3Force('charge').strength(settings.chargeStrength);
+
+        // --- CONTROLS ---
+        const gui = new dat.GUI();
+        const folder = gui.addFolder('Graph Settings');
+        folder.add(settings, 'linkDistance', 10, 300).onChange(val => { Graph.d3Force('link').distance(val); Graph.d3ReheatSimulation(); });
+        folder.add(settings, 'chargeStrength', -500, -10).onChange(val => { Graph.d3Force('charge').strength(val); Graph.d3ReheatSimulation(); });
+        folder.add(settings, 'labelSize', 0.1, 3.0).onChange(val => { Graph.scene().traverse(obj => { if (obj.userData?.baseSize) obj.textHeight = obj.userData.baseSize * val; }); });
+        folder.add(settings, 'opacity', 0.1, 1.0).onChange(val => { Graph.scene().traverse(obj => { if (obj.userData?.baseSize) obj.backgroundColor = `rgba(0,0,0,${val / 2})`; }); });
+        folder.add(settings, 'autoRotate').onChange(val => { Graph.controls().autoRotate = val; });
+        folder.open();
+
+        // --- HUD LOGIC ---
+        function showHUD(node) {
+            const el = (id) => document.getElementById(id);
+            const cat = getCategory(node.group);
+            el('hud').style.display = 'block';
+            el('hud-title').innerText = node.en;
+            el('hud-title').style.color = cat.color;
+            el('hud-cn').innerText = `${node.cn} [${node.group}]`;
+            el('hud-desc').innerHTML = `<div class="en">${node.desc_en || ''}</div><div class="cn">${node.desc_cn || ''}</div>`;
+            el('hud-notes').innerHTML = `<div class="en">${node.notes_en || ''}</div><div class="cn">${node.notes_cn || ''}</div>`;
+
+            // Why It Matters
+            const whyEl = el('hud-why');
+            if (node.why_matters) {
+                whyEl.innerHTML = node.why_matters;
+                whyEl.parentElement.style.display = 'block';
+            } else {
+                whyEl.innerHTML = '';
+                whyEl.parentElement.style.display = 'none';
+            }
+
+            // Common Mistakes
+            const mistakesEl = el('hud-mistakes');
+            if (node.mistakes) {
+                mistakesEl.innerHTML = node.mistakes;
+                mistakesEl.parentElement.style.display = 'block';
+            } else {
+                mistakesEl.innerHTML = '';
+                mistakesEl.parentElement.style.display = 'none';
+            }
+
+            // Related Terms
+            const relatedContainer = el('hud-related');
+            relatedContainer.innerHTML = '';
+            if (node.related && node.related.length > 0) {
+                node.related.forEach(term => {
+                    const tag = document.createElement('span');
+                    tag.className = 'related-tag';
+                    tag.innerText = term;
+                    tag.onclick = () => {
+                        const targetNode = nodes.find(n => n.id === term || n.en === term);
+                        if (targetNode) {
+                            Graph.cameraPosition({ x: targetNode.x + 50, y: targetNode.y + 50, z: targetNode.z + 50 }, targetNode, 1500);
+                            setTimeout(() => showHUD(targetNode), 1600);
+                        }
+                    };
+                    relatedContainer.appendChild(tag);
+                });
+                relatedContainer.parentElement.style.display = 'block';
+            } else {
+                relatedContainer.parentElement.style.display = 'none';
+            }
+
+            // Scenarios
+            const sceneContainer = el('hud-scenes');
+            sceneContainer.innerHTML = '';
+            if (node.scenes_en && node.scenes_en.length > 0) {
+                for (let i = 0; i < node.scenes_en.length; i++) {
+                    const tag = document.createElement('span');
+                    tag.className = 'scene-tag';
+                    tag.innerHTML = `${node.scenes_en[i]} <span style="color:#88aacc">${node.scenes_cn[i]}</span>`;
+                    sceneContainer.appendChild(tag);
+                }
+                sceneContainer.parentElement.style.display = 'block';
+            } else {
+                sceneContainer.parentElement.style.display = 'none';
+            }
+        }
+
+        function hideHUD() {
+            document.getElementById('hud').style.display = 'none';
+        }
+
+        // Initialize
+        buildLegend();
+        setTimeout(() => { document.getElementById('loading').style.display = 'none'; }, 1000);
+        Graph.controls().autoRotate = true;
+    </script>
+</body>
+
+</html>

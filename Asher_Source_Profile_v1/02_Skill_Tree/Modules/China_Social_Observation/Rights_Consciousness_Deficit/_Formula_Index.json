@@ -1,0 +1,88 @@
+[
+    {
+        "formula_en": "Qualification Anxiety Formula",
+        "formula_cn": "资格焦虑公式",
+        "equation": "Qualification_Anxiety = External_Attack × Internalized_Unworthiness",
+        "variables": {
+            "Qualification_Anxiety": "资格焦虑程度",
+            "External_Attack": "外在资格攻击频率和强度",
+            "Internalized_Unworthiness": "内化的不配得感程度"
+        },
+        "mechanism": "资格焦虑是外在资格攻击文化和内化不配得感的乘积效应。在条件社会中，人们从小被'你配吗'的话语攻击，同时内化了'我不配'的信念。两者相互强化：外在攻击越多，内化越深；内化越深，越容易触发外在攻击。这解释了为什么中国人普遍自我审查——先审查自己，再审查别人。",
+        "application": "当感到资格焦虑时，区分这是外在攻击还是内化信念，针对性处理。",
+        "anti_pattern": "用'变得更配得'来解决。问题不在于配不配，而在于权利意识。",
+        "source_file": "Rights_Consciousness_Deficit.md"
+    },
+    {
+        "formula_en": "Rights Cognition Formula",
+        "formula_cn": "权利认知公式",
+        "equation": "Rights_Cognition = 0 (当 Rights = Privilege in Culture)",
+        "variables": {
+            "Rights_Cognition": "权利认知程度",
+            "Rights": "权利概念",
+            "Privilege": "特权概念",
+            "Culture": "文化环境"
+        },
+        "mechanism": "在集权等级社会中，权利被理解为特权——由上面的人赏赐，可随时剥夺。当文化把'权利=特权'作为默认假设时，普通人就不会认为自己'有权利'，因为他们不是'有权力的人'。这是权利意识缺失的文化根源。只有打破'权利=特权'的等式，才能建立天赋人权意识。",
+        "application": "自检：我是否把某些权利当成了需要'配得'的特权？",
+        "anti_pattern": "等待'上面授权'才行使权利。权利是天赋的，不需要授权。",
+        "source_file": "Rights_Consciousness_Deficit.md"
+    },
+    {
+        "formula_en": "Emotional Exploitation Formula",
+        "formula_cn": "感情剥削公式",
+        "equation": "Rights_Loss = (Emotional_Blackmail × Moral_Pressure) / Rights_Consciousness",
+        "variables": {
+            "Rights_Loss": "权利丧失程度",
+            "Emotional_Blackmail": "感情绑架强度",
+            "Moral_Pressure": "道德压制强度",
+            "Rights_Consciousness": "权利意识程度"
+        },
+        "mechanism": "感情绑架('我是为你好')和道德压制('你不孝顺')是剥夺权利的两大武器。它们的乘积效应除以权利意识，决定了权利丧失程度。权利意识越弱（分母越小），越容易被剥夺。这解释了为什么提高权利意识是抵抗精神控制的关键——它增大分母，减小整体结果。",
+        "application": "当被感情/道德绑架时，问自己：这是关于权利还是关于感情？",
+        "anti_pattern": "用内疚让自己感觉高尚。捍卫权利才是高尚。",
+        "source_file": "Rights_Consciousness_Deficit.md"
+    },
+    {
+        "formula_en": "Boundary Clarity Formula",
+        "formula_cn": "边界清晰度公式",
+        "equation": "Boundary_Clarity = Spiritual_Independence × Rights_Consciousness",
+        "variables": {
+            "Boundary_Clarity": "边界清晰度",
+            "Spiritual_Independence": "精神世界独立程度",
+            "Rights_Consciousness": "权利意识程度"
+        },
+        "mechanism": "边界清晰度取决于两个因素的乘积：精神世界的独立性（是否把精神从肉体分离出来）和权利意识（是否知道自己有什么权利）。身心合一思维限制了精神独立性，权利=特权的文化限制了权利意识。两者都弱时，边界清晰度趋近于0，极易被精神控制。",
+        "application": "建立边界需要同时提高精神独立性和权利意识。",
+        "anti_pattern": "把边界模糊归因于'我太软弱'。问题是结构性的，不是个人性格。",
+        "source_file": "Rights_Consciousness_Deficit.md"
+    },
+    {
+        "formula_en": "Compensatory Consumption Formula",
+        "formula_cn": "补偿消费公式",
+        "equation": "Consumption_Desire = Reality_Rights_Deficit × Disposable_Income",
+        "variables": {
+            "Consumption_Desire": "消费欲望强度",
+            "Reality_Rights_Deficit": "现实权利缺失程度",
+            "Disposable_Income": "可支配收入"
+        },
+        "mechanism": "当人们在现实生活中无法满足权利需求时，会转向消费战场寻求补偿——因为在消费中'我是自由的、可以掌控的、是物品的主人'。现实权利缺失越严重，消费欲望越强。这解释了为什么经济发展与消费主义往往同步——收入提高放大了补偿消费的可能性。",
+        "application": "识别消费背后的权利补偿动机，从根源解决权利缺失问题。",
+        "anti_pattern": "用消费填补权利空缺。真正的解决方案是建立权利意识。",
+        "source_file": "Rights_Consciousness_Deficit.md"
+    },
+    {
+        "formula_en": "Collective Trauma Formula",
+        "formula_cn": "集体创伤公式",
+        "equation": "Trauma_Normalization = Σ(Individual_Trauma) / Social_Rights_Consciousness",
+        "variables": {
+            "Trauma_Normalization": "创伤正常化程度",
+            "Individual_Trauma": "个体创伤数量",
+            "Social_Rights_Consciousness": "社会整体权利意识"
+        },
+        "mechanism": "当社会整体权利意识低时，大量个体创伤无法被识别为'侵权'而被正常化。一个家庭有问题是父母问题，10万个家庭有问题是社会问题——因为家庭是社会的文化代理人。社会权利意识越低，越多的创伤行为被合理化，形成集体创伤文化。",
+        "application": "当怀疑'是不是我的问题'时，检视社会权利意识水平。",
+        "anti_pattern": "把集体创伤归因于'原生家庭'。根源是社会权利意识缺失。",
+        "source_file": "Rights_Consciousness_Deficit.md"
+    }
+]

@@ -1,0 +1,212 @@
+[
+    {
+        "term_en": "Conditional Society",
+        "term_cn": "条件社会",
+        "definition_short": "享受任何美好事物都需要满足特定条件",
+        "definition_deep": "中国社会的核心特征之一。在这个社会中，被爱需要做'乖孩子'，被尊重需要有地位，自信需要有'资格'。一切美好都是有条件的特权，而非无条件的权利。这导致普遍的资格焦虑和不配得感。与西方'天赋人权'理念形成鲜明对比。",
+        "why_it_matters": "识别条件社会是理解中国人普遍缺乏自信的第一步。",
+        "common_mistakes": "认为'有条件的爱'是'正常的教育方式'。它系统性地摧毁自我价值感。",
+        "related_terms": [
+            "Qualification Anxiety",
+            "Unworthiness",
+            "Rights Consciousness"
+        ],
+        "source_file": "Rights_Consciousness_Deficit.md"
+    },
+    {
+        "term_en": "Qualification Anxiety",
+        "term_cn": "资格焦虑",
+        "definition_short": "担心自己不够格、不配得的焦虑状态",
+        "definition_deep": "条件社会的心理产物。表现为：在追求任何东西之前先问'我配吗？'，担心自己不够好，总把眼光放在羡慕别人上。从攻击别人的资格到内化的资格焦虑，几乎成为社会文化。我们之所以审查别人，是因为我们先审查了自己。",
+        "why_it_matters": "资格焦虑是低自尊、讨好型人格的核心驱动力。",
+        "common_mistakes": "认为资格焦虑是'谦虚'或'自知之明'。实际上它是权利意识缺失的症状。",
+        "related_terms": [
+            "Conditional Society",
+            "Unworthiness",
+            "Qualification Attack"
+        ],
+        "source_file": "Rights_Consciousness_Deficit.md"
+    },
+    {
+        "term_en": "Unworthiness",
+        "term_cn": "不配得感",
+        "definition_short": "内化的'我不配'信念",
+        "definition_deep": "资格焦虑的内化形态。当事人觉得自己不配得到爱/钱/幸福/成功，拥有后也担忧失去，总觉得自己哪哪都不够好。本质上是对权利概念的缺失——不知道这些是自己本该拥有的，而非需要'配得'的。",
+        "why_it_matters": "不配得感是很多心理问题的根源，识别它是治愈的第一步。",
+        "common_mistakes": "用'更努力变得配得'来解决。问题不在于'配不配'，而在于权利意识。",
+        "related_terms": [
+            "Qualification Anxiety",
+            "Low Self-Worth",
+            "Rights Consciousness"
+        ],
+        "source_file": "Rights_Consciousness_Deficit.md"
+    },
+    {
+        "term_en": "Qualification Attack",
+        "term_cn": "资格攻击",
+        "definition_short": "通过质疑对方资格来贬低对方的攻击方式",
+        "definition_deep": "中国文化中极其普遍的语言攻击模式。代表性话语：'你配吗？''你算老几？''你是哪根葱？''癞蛤蟆想吃天鹅肉'。特点：1)高频普遍；2)不攻击能力而直接攻击社会地位/阶层；3)否定对话资格，迅速占据权力高位。",
+        "why_it_matters": "分析骂人方式揭示文化最深层的焦虑——资格/身份/等级。",
+        "common_mistakes": "认为这只是'说话难听'。它是身份压迫的语言形式。",
+        "related_terms": [
+            "Identity Oppression",
+            "Qualification Anxiety",
+            "Power Hierarchy"
+        ],
+        "source_file": "Rights_Consciousness_Deficit.md"
+    },
+    {
+        "term_en": "Rights Consciousness",
+        "term_cn": "权利意识",
+        "definition_short": "知道自己有什么不可剥夺的权利的意识",
+        "definition_deep": "个体认识到自己拥有某些不依赖他人授予、不可随意剥夺的行为自由和利益。包括：生存权（不被打杀）、言论自由、财产权、尊严权等。中国人权利意识普遍薄弱，很多人分不清权利和权力，认为权利是当官的人才有的。",
+        "why_it_matters": "权利意识是建立边界感、抵抗精神控制的基础。",
+        "common_mistakes": "把'权利'和'权力'混为一谈。权利是天赋的，权力是授予的。",
+        "related_terms": [
+            "Rights",
+            "Power",
+            "Natural Rights"
+        ],
+        "source_file": "Rights_Consciousness_Deficit.md"
+    },
+    {
+        "term_en": "Rights vs Power Confusion",
+        "term_cn": "权利权力混淆",
+        "definition_short": "分不清权利(rights)和权力(power)",
+        "definition_deep": "中国人普遍存在的认知混乱。权利=个体应当拥有的、不可剥夺的自由或利益；权力=支配他人的能力、由上位者授予。混淆原因：在集权等级社会，权利被理解为特权，由上面赏赐，可随时剥夺。普通人觉得自己'没有权利'因为上面没给。",
+        "why_it_matters": "分清权利和权力是建立主体性的前提。",
+        "common_mistakes": "认为混淆只是因为'同音词'。根源是文化结构。",
+        "related_terms": [
+            "Rights Consciousness",
+            "Privilege",
+            "Natural Rights"
+        ],
+        "source_file": "Rights_Consciousness_Deficit.md"
+    },
+    {
+        "term_en": "Identity Oppression",
+        "term_cn": "身份压迫",
+        "definition_short": "用社会地位直接压制对方的对话资格",
+        "definition_deep": "资格攻击的核心机制。不针对对方的论点或能力发起攻击，而是直接攻击对方所处的社会地位、阶层、权力位阶。效果是：直接否定对方与自己对话的资格，迅速贬低对方，占据权力高位。这是等级社会的语言武器。",
+        "why_it_matters": "识别身份压迫有助于在对话中维护自己的权利。",
+        "common_mistakes": "陷入对方的框架开始'证明自己有资格'。应该拒绝资格审查本身。",
+        "related_terms": [
+            "Qualification Attack",
+            "Power Hierarchy",
+            "Conditional Society"
+        ],
+        "source_file": "Rights_Consciousness_Deficit.md"
+    },
+    {
+        "term_en": "Natural Rights",
+        "term_cn": "天赋人权",
+        "definition_short": "人生而拥有的、不需要任何人授权的权利",
+        "definition_deep": "西方政治哲学核心概念。主张人的某些基本权利（生命、自由、财产等）是与生俱来的，不是由政府或任何权威授予的，因此也不能被任意剥夺。与中国传统'权利=上面赏赐'的观念形成根本对立。理解天赋人权是建立主体性的思想基础。",
+        "why_it_matters": "没有天赋人权意识，就无法真正建立边界感和主体性。",
+        "common_mistakes": "认为这是'西方价值观'所以不适用于中国人。权利是普世的。",
+        "related_terms": [
+            "Rights Consciousness",
+            "Rights vs Power Confusion",
+            "Subjectivity"
+        ],
+        "source_file": "Rights_Consciousness_Deficit.md"
+    },
+    {
+        "term_en": "Emotional Exploitation",
+        "term_cn": "感情剥削",
+        "definition_short": "用感情绑架来压制正当权利诉求",
+        "definition_deep": "典型话术：'我是为你好'。机制：你想追求权利→对方用感情压制→你感到内疚→放弃权利。表现：老师打你→'老师是为你好'；父母控制你→'父母是为你好'；老板剥削你→'我栽培你这么多年'。由于理性/感性不分化，很难区分'真的为我好'还是'控制我'。",
+        "why_it_matters": "识别感情剥削是捍卫权利的关键技能。",
+        "common_mistakes": "用内疚让自己感觉高尚。捍卫权利才是真正的高尚。",
+        "related_terms": [
+            "Rights Consciousness",
+            "Boundary Blurring",
+            "Moral Exploitation"
+        ],
+        "source_file": "Rights_Consciousness_Deficit.md"
+    },
+    {
+        "term_en": "Moral-Institutional Conflation",
+        "term_cn": "道德制度混同",
+        "definition_short": "用道德来弥补制度的落后",
+        "definition_deep": "中国思维特征。修身齐家治国平天下，以德服人，唯德动天——始终期待用个人道德的高尚来弥补制度的不足。后果：1)期待清官圣人而非完善制度；2)职业道德化变成压制权利的工具（医生=白衣天使=高要求低待遇）；3)无法接受人的复杂性（公德私德不分）。",
+        "why_it_matters": "只有分清道德和制度，才能正确捍卫权利。",
+        "common_mistakes": "用道德高帽压制权利诉求。'不懂感恩''不够努力'都是道德绑架。",
+        "related_terms": [
+            "Emotional Exploitation",
+            "Rights Consciousness",
+            "Institutional Thinking"
+        ],
+        "source_file": "Rights_Consciousness_Deficit.md"
+    },
+    {
+        "term_en": "Low Self-Worth",
+        "term_cn": "低价值感",
+        "definition_short": "觉得自己没价值、不自信、不配得的人格倾向",
+        "definition_deep": "权利意识缺失的第一大人格创伤。表现：没有'我有权'的思维，极端追求他人认可，他人认同=自己有价值、他人不认同=自己没价值。形成原因：从小没人告诉你'你有权'，只告诉你'你要配得'。对凤姐的嘲讽就是全社会的自信资格审查。",
+        "why_it_matters": "低价值感是很多心理问题的根源。",
+        "common_mistakes": "试图通过'变得更优秀'来获得价值感。问题在于权利意识，不在于优秀程度。",
+        "related_terms": [
+            "Unworthiness",
+            "Qualification Anxiety",
+            "Rights Consciousness"
+        ],
+        "source_file": "Rights_Consciousness_Deficit.md"
+    },
+    {
+        "term_en": "Boundary Blurring",
+        "term_cn": "边界感模糊",
+        "definition_short": "无法清晰划分自己和他人的权利边界",
+        "definition_deep": "权利意识缺失的第二大人格创伤。原因：精神世界没有从肉体独立出来形成独立的权利边界。表现：容易被血缘/权威关系模糊界限，被精神控制而不自知。例如：高中生一天学16小时不敢上厕所（怕老师不高兴）——却不知道休息是不可剥夺的权利。",
+        "why_it_matters": "边界模糊是被精神控制的根源。",
+        "common_mistakes": "用'孝顺''服从'合理化边界模糊。边界是权利问题，不是道德问题。",
+        "related_terms": [
+            "Rights Consciousness",
+            "Emotional Exploitation",
+            "Learned Helplessness"
+        ],
+        "source_file": "Rights_Consciousness_Deficit.md"
+    },
+    {
+        "term_en": "Distorted Power Identification",
+        "term_cn": "扭曲的权力认同",
+        "definition_short": "因现实权利缺失而产生的对权力的病态认同",
+        "definition_deep": "权利意识缺失的第四大人格创伤。表现：看清宫剧喜欢帝王视角，刷短视频看富人玩弄小人物，知识付费找大佬。机制：现实中没有权利→消费成为唯一自由战场→在消费中补偿权利缺失。消费不再是消费，而是权利得不到满足的补偿性发泄。",
+        "why_it_matters": "识别扭曲的权力认同有助于理解消费主义的心理根源。",
+        "common_mistakes": "用消费补偿权利缺失。真正的解决方案是建立权利意识。",
+        "related_terms": [
+            "Rights Consciousness",
+            "Compensatory Consumption",
+            "Power Worship"
+        ],
+        "source_file": "Rights_Consciousness_Deficit.md"
+    },
+    {
+        "term_en": "Collective Trauma Culture",
+        "term_cn": "集体创伤文化",
+        "definition_short": "当大多数人都有创伤性人格时形成的文化",
+        "definition_deep": "当整个社会普遍缺乏权利意识时，创伤行为被合理化、正常化。表现：权利侵犯被当作'正常教育'，精神虐待被当作'为你好'，大家无法分辨彼此的创伤。很多人终其一生都不知道：我的自卑、压抑、愤怒、焦虑，不是因为我不好，而是因为我从来没有被允许成为一个有权利的人。",
+        "why_it_matters": "理解集体创伤有助于摆脱'都是我的问题'的自责。",
+        "common_mistakes": "归咎于'原生家庭'。10万个原生家庭有问题，那是社会问题。",
+        "related_terms": [
+            "Rights Consciousness",
+            "Conditional Society",
+            "Normalization of Abuse"
+        ],
+        "source_file": "Rights_Consciousness_Deficit.md"
+    },
+    {
+        "term_en": "Confidence as Human Right",
+        "term_cn": "自信即人权",
+        "definition_short": "自信是每个人天生拥有的权利，不需要任何资格",
+        "definition_deep": "本模块的核心主张。在条件社会中，自信被当作需要'配得'的特权——普通人自信就是'普信'会被嘲笑。但自信本应是一项基本人权：不需要优秀、不需要成功、不需要符合任何标准，每个人都有权自信。'为什么你那么普通又那么自信？'——这句话应该对所有人振聋发聩。",
+        "why_it_matters": "理解自信是人权，是打破资格焦虑的关键认知突破。",
+        "common_mistakes": "认为'有资本才能自信'。自信不需要资本，它是权利。",
+        "related_terms": [
+            "Qualification Anxiety",
+            "Natural Rights",
+            "Conditional Society"
+        ],
+        "source_file": "Rights_Consciousness_Deficit.md"
+    }
+]

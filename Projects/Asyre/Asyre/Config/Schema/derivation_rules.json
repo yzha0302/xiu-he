@@ -1,0 +1,305 @@
+{
+  "_comment": "Asyre Derivation Rules v2.0",
+  "_version": "2.0",
+  "_description": "意图因子 → 参数的推导规则",
+
+  "importance_levels": {
+    "critical": {
+      "description": "必须满足，不满足则任务失败",
+      "numeric": 4
+    },
+    "high": {
+      "description": "强烈建议，偏离需要明确理由",
+      "numeric": 3
+    },
+    "medium": {
+      "description": "建议遵循，可根据情况调整",
+      "numeric": 2
+    },
+    "low": {
+      "description": "可选参考，可忽略",
+      "numeric": 1
+    }
+  },
+
+  "rules": [
+    {
+      "rule_id": "R001",
+      "name": "说服+价值引导 → 态度必须鲜明",
+      "description": "当目的是说服观众并引导价值观时，态度模糊会失败",
+      "condition": {
+        "operator": "AND",
+        "factors": [
+          { "factor": "persuasion", "op": ">=", "value": 0.7 },
+          { "factor": "value_guidance", "op": ">=", "value": 0.6 }
+        ]
+      },
+      "effect": {
+        "parameters": [
+          {
+            "param": "attitude_strength",
+            "importance": "critical",
+            "target_range": [0.8, 1.0]
+          },
+          {
+            "param": "fence_sitting_tolerance",
+            "importance": "critical",
+            "target_range": [0.0, 0.2]
+          }
+        ],
+        "execution_rules": [
+          "禁止'一方面...另一方面'句式",
+          "必须在前30%内明确立场",
+          "禁止使用'因人而异'逃避判断"
+        ]
+      },
+      "reference": {
+        "glossary": ["Attitude_Output", "Fence_Sitting"],
+        "formula": "Attitude_over_Analysis",
+        "module": "Content_Creation/Oral_Script_Style.md"
+      }
+    },
+
+    {
+      "rule_id": "R002",
+      "name": "概念澄清+认知颠覆 → 需要深度参考和简化能力",
+      "description": "解释复杂概念并颠覆认知需要权威来源和降解能力",
+      "condition": {
+        "operator": "AND",
+        "factors": [
+          { "factor": "concept_clarification", "op": ">=", "value": 0.7 },
+          { "factor": "cognitive_disruption", "op": ">=", "value": 0.5 }
+        ]
+      },
+      "effect": {
+        "parameters": [
+          {
+            "param": "source_quality",
+            "importance": "critical",
+            "target_range": [0.8, 1.0]
+          },
+          {
+            "param": "simplification",
+            "importance": "high",
+            "target_range": [0.6, 0.8]
+          },
+          {
+            "param": "analogy_usage",
+            "importance": "high",
+            "target_range": [0.7, 1.0]
+          }
+        ],
+        "execution_rules": [
+          "必须引用权威来源",
+          "复杂概念必须配类比",
+          "每个术语必须有人话解释"
+        ]
+      },
+      "reference": {
+        "glossary": ["Counter-Intuitive Hook"],
+        "formula": "Counter-Intuitive Impact Formula",
+        "module": "Content_Creation/Human_Like_Expression.md",
+        "reference_level": 3
+      }
+    },
+
+    {
+      "rule_id": "R003",
+      "name": "情感共鸣高 → 情绪节奏设计",
+      "description": "追求情感共鸣时需要设计情绪曲线",
+      "condition": {
+        "operator": "SINGLE",
+        "factors": [
+          { "factor": "emotional_resonance", "op": ">=", "value": 0.7 }
+        ]
+      },
+      "effect": {
+        "parameters": [
+          {
+            "param": "emotion_peaks",
+            "importance": "critical",
+            "target_range": [2, 4]
+          },
+          {
+            "param": "we_perspective",
+            "importance": "high",
+            "target_range": [0.7, 1.0]
+          },
+          {
+            "param": "pain_point_depth",
+            "importance": "high",
+            "target_range": [0.6, 0.9]
+          }
+        ],
+        "execution_rules": [
+          "必须设计至少2个情绪高潮点",
+          "使用'我们/咱们'视角",
+          "开头使用痛点共鸣型钩子"
+        ]
+      },
+      "reference": {
+        "glossary": ["Emotional_Rhythm", "Eye_Level", "Pain_Point_Hook"],
+        "formula": "Emotional_Wave_Formula",
+        "module": "Content_Creation/Oral_Script_Style.md"
+      }
+    },
+
+    {
+      "rule_id": "R004",
+      "name": "信息揭示 → 冲突悬念钩子",
+      "description": "揭示隐藏信息时需要制造悬念和对立",
+      "condition": {
+        "operator": "SINGLE",
+        "factors": [
+          { "factor": "hidden_reveal", "op": ">=", "value": 0.6 }
+        ]
+      },
+      "effect": {
+        "parameters": [
+          {
+            "param": "hook_type",
+            "importance": "high",
+            "target_value": "conflict_suspense"
+          },
+          {
+            "param": "conflict_intensity",
+            "importance": "high",
+            "target_range": [0.6, 0.9]
+          }
+        ],
+        "execution_rules": [
+          "开头暗示'有内幕'",
+          "建立'我们 vs 他们'的对立",
+          "高潮前置，先给结论再解释"
+        ]
+      },
+      "reference": {
+        "glossary": ["Conflict_Suspense_Hook", "Climax_First"],
+        "formula": "Climax_First_Formula",
+        "module": "Content_Creation/1.0_Hook_Techniques.md"
+      }
+    },
+
+    {
+      "rule_id": "R005",
+      "name": "行动号召高 → CTA 设计",
+      "description": "需要观众行动时必须设计明确的行动指引",
+      "condition": {
+        "operator": "SINGLE",
+        "factors": [
+          { "factor": "action_call", "op": ">=", "value": 0.7 }
+        ]
+      },
+      "effect": {
+        "parameters": [
+          {
+            "param": "cta_intensity",
+            "importance": "critical",
+            "target_range": [0.7, 1.0]
+          },
+          {
+            "param": "urgency_level",
+            "importance": "high",
+            "target_range": [0.5, 0.8]
+          }
+        ],
+        "execution_rules": [
+          "结尾必须有明确的行动指引",
+          "行动必须具体可执行",
+          "可加入紧迫感但不能过度"
+        ]
+      },
+      "reference": {
+        "glossary": ["Benefit_Promise_Hook"],
+        "formula": "Promise_Credibility_Formula"
+      }
+    },
+
+    {
+      "rule_id": "R006",
+      "name": "知识传递 → 结构化和严谨性",
+      "description": "系统传授知识时需要清晰结构和事实准确",
+      "condition": {
+        "operator": "SINGLE",
+        "factors": [
+          { "factor": "knowledge_transfer", "op": ">=", "value": 0.7 }
+        ]
+      },
+      "effect": {
+        "parameters": [
+          {
+            "param": "structure_type",
+            "importance": "high",
+            "target_value": "step_by_step"
+          },
+          {
+            "param": "rigor",
+            "importance": "high",
+            "target_range": [0.7, 1.0]
+          },
+          {
+            "param": "simplification",
+            "importance": "high",
+            "target_range": [0.6, 0.8]
+          }
+        ],
+        "execution_rules": [
+          "内容需要分步骤/分层次",
+          "事实陈述需要可验证",
+          "术语需要解释"
+        ]
+      },
+      "reference": {
+        "glossary": ["Oral_Language"],
+        "formula": "Oral_vs_Written_Conversion",
+        "module": "Content_Creation/Human_Like_Expression.md"
+      }
+    },
+
+    {
+      "rule_id": "R007",
+      "name": "口播场景 → 语言口语化",
+      "description": "所有口播内容必须口语化",
+      "condition": {
+        "operator": "CONTEXT",
+        "context": "output_format == 'oral_script'"
+      },
+      "effect": {
+        "parameters": [
+          {
+            "param": "oral_language_weight",
+            "importance": "critical",
+            "target_range": [0.8, 1.0]
+          },
+          {
+            "param": "sentence_length",
+            "importance": "high",
+            "target_range": [5, 15]
+          }
+        ],
+        "execution_rules": [
+          "禁止使用书面套话",
+          "句子长度控制在15字以内",
+          "必须能流畅朗读"
+        ]
+      },
+      "reference": {
+        "glossary": ["Oral_Language"],
+        "formula": "Oral_vs_Written_Conversion",
+        "module": "Content_Creation/Oral_Script_Style.md"
+      }
+    }
+  ],
+
+  "_placeholder_rules": [
+    {
+      "rule_id": "R_PLACEHOLDER",
+      "description": "待通过学习和实践补充更多规则",
+      "examples": [
+        "娱乐性内容的节奏规则",
+        "争议性话题的风险控制规则",
+        "不同平台的适配规则"
+      ]
+    }
+  ]
+}

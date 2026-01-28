@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>3D Knowledge Graph - Chinese Dating & Relationship Building</title>
+    <!--
+        ASHER KNOWLEDGE GRAPH STANDARD v2.1
+        Module: Chinese Dating Culture
+        - Dynamic Category System: AI assigns groups based on concept domain
+        - Collapsible Legend with total count
+        - HUD with close button
+        - Tube-style links with particles
+        - Bilingual HUD
+    -->
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #000005;
+            overflow: hidden;
+        }
+
+        /* HUD: Top-Left */
+        #hud {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 400px;
+            background: rgba(10, 15, 25, 0.95);
+            border: 1px solid #334466;
+            border-left: 3px solid #00ffff;
+            border-radius: 4px;
+            padding: 25px;
+            color: #eef;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            display: none;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        #hud h2 {
+            margin: 0 0 5px 0;
+            font-size: 24px;
+            padding-right: 30px;
+        }
+
+        #hud .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.2s;
+            font-size: 20px;
+            color: #889;
+            text-align: center;
+            line-height: 24px;
+        }
+
+        #hud .close-btn:hover {
+            opacity: 1;
+            color: #ff5555;
+        }
+
+        #hud .sub-header {
+            font-size: 14px;
+            color: #8899aa;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #334455;
+            padding-bottom: 10px;
+        }
+
+        #hud .section-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #556677;
+            letter-spacing: 2px;
+            margin-top: 15px;
+            margin-bottom: 8px;
+        }
+
+        #hud .content-block {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #ccd;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        #hud .en {
+            color: #fff;
+        }
+
+        #hud .cn {
+            color: #88aacc;
+            font-size: 13px;
+        }
+
+        #hud .keyword {
+            color: #00ffff;
+            font-weight: bold;
+        }
+
+        #hud .scene-tag {
+            display: inline-block;
+            font-size: 12px;
+            background: #223344;
+            color: #aab;
+            padding: 4px 8px;
+            border-radius: 12px;
+            margin: 3px 5px 3px 0;
+            border: 1px solid #334455;
+        }
+
+        #hud .related-tag {
+            display: inline-block;
+            font-size: 11px;
+            background: #224433;
+            color: #8ca;
+            padding: 3px 8px;
+            border-radius: 8px;
+            margin: 2px 4px 2px 0;
+            border: 1px solid #335544;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        #hud .related-tag:hover {
+            background: #337755;
+            color: #afa;
+        }
+
+        #hud .warning-block {
+            font-size: 13px;
+            line-height: 1.6;
+            color: #faa;
+            background: rgba(80, 20, 20, 0.3);
+            padding: 10px;
+            border-radius: 4px;
+            border-left: 2px solid #f55;
+        }
+
+        #hud .insight-block {
+            font-size: 13px;
+            line-height: 1.6;
+            color: #afc;
+            background: rgba(20, 60, 30, 0.3);
+            padding: 10px;
+            border-radius: 4px;
+            border-left: 2px solid #5a5;
+        }
+
+        /* Legend: Bottom-Left (Collapsible) */
+        #legend {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(10, 15, 25, 0.9);
+            border: 1px solid #334466;
+            border-radius: 4px;
+            padding: 15px 20px;
+            color: #ccd;
+            backdrop-filter: blur(10px);
+            min-width: 180px;
+        }
+
+        #legend h3 {
+            margin: 0;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #778;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        #legend h3::after {
+            content: '\25BC';
+            font-size: 10px;
+            transition: transform 0.3s;
+        }
+
+        #legend.collapsed h3::after {
+            transform: rotate(-90deg);
+        }
+
+        #legend .legend-items {
+            max-height: 200px;
+            overflow-y: auto;
+            transition: max-height 0.3s ease;
+        }
+
+        #legend.collapsed .legend-items {
+            max-height: 0;
+        }
+
+        #legend .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 6px 0;
+            font-size: 13px;
+        }
+
+        #legend .legend-color {
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+            margin-right: 10px;
+        }
+
+        #legend .legend-label {
+            color: #aab;
+        }
+
+        #legend .legend-count {
+            margin-left: auto;
+            color: #667;
+            font-size: 11px;
+        }
+
+        #legend .legend-total {
+            font-size: 11px;
+            color: #667;
+            margin-left: 10px;
+        }
+
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #00ffff;
+            font-family: monospace;
+            letter-spacing: 2px;
+        }
+    </style>
+    <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/3d-force-graph"></script>
+    <script src="https://unpkg.com/three-spritetext@1.8.1/dist/three-spritetext.min.js"></script>
+    <script src="https://unpkg.com/dat.gui"></script>
+</head>
+
+<body>
+    <div id="loading">INITIALIZING...</div>
+    <div id="3d-graph"></div>
+
+    <!-- HUD with Close Button -->
+    <div id="hud">
+        <span class="close-btn" onclick="hideHUD()">×</span>
+        <h2 id="hud-title">Title</h2>
+        <div id="hud-cn" class="sub-header">Subtitle</div>
+        <div class="section-title">Definition 定义</div>
+        <div id="hud-desc" class="content-block"></div>
+        <div class="section-title">Deep Dive 深度解析</div>
+        <div id="hud-notes" class="content-block" style="border-left: 2px solid #00ffff;"></div>
+        <div class="section-title">Why It Matters 为什么重要</div>
+        <div id="hud-why" class="insight-block"></div>
+        <div class="section-title">Common Mistakes 常见误区</div>
+        <div id="hud-mistakes" class="warning-block"></div>
+        <div class="section-title">Related Terms 关联术语</div>
+        <div id="hud-related"></div>
+        <div class="section-title">Scenarios 应用场景</div>
+        <div id="hud-scenes"></div>
+    </div>
+
+    <!-- Legend (Collapsible) -->
+    <div id="legend">
+        <h3 onclick="toggleLegend()">Domain 领域 <span id="legend-total"></span></h3>
+        <div id="legend-items" class="legend-items"></div>
+    </div>
+
+    <script>
+        // === CATEGORY CONFIGURATION ===
+        const CATEGORY_CONFIG = {
+            "Culture": { color: "#00ffff", label_en: "Culture", label_cn: "文化基础" },
+            "Psychology": { color: "#00ff00", label_en: "Psychology", label_cn: "心理学" },
+            "Stage": { color: "#ff8800", label_en: "Stage", label_cn: "关系阶段" },
+            "Skill": { color: "#aa00ff", label_en: "Skill", label_cn: "核心技能" },
+            "Ritual": { color: "#ff0055", label_en: "Ritual", label_cn: "仪式与符号" },
+            "AntiPattern": { color: "#ffff00", label_en: "Anti-Pattern", label_cn: "常见陷阱" }
+        };
+
+        // Pre-defined color palette for new categories
+        const COLOR_PALETTE = [
+            "#00ffff", "#00ff00", "#ff0055", "#ff8800", "#aa00ff",
+            "#ffff00", "#00ffaa", "#ff00aa", "#88ff00", "#0088ff"
+        ];
+        let colorIndex = 0;
+
+        function getCategory(groupName, labelCn = groupName) {
+            if (!CATEGORY_CONFIG[groupName]) {
+                CATEGORY_CONFIG[groupName] = {
+                    color: COLOR_PALETTE[colorIndex % COLOR_PALETTE.length],
+                    label_en: groupName,
+                    label_cn: labelCn
+                };
+                colorIndex++;
+            }
+            return CATEGORY_CONFIG[groupName];
+        }
+
+        function toggleLegend() {
+            document.getElementById('legend').classList.toggle('collapsed');
+        }
+
+        function buildLegend() {
+            const container = document.getElementById('legend-items');
+            container.innerHTML = '';
+            const counts = {};
+            let total = 0;
+            nodes.forEach(n => { counts[n.group] = (counts[n.group] || 0) + 1; total++; });
+            document.getElementById('legend-total').innerText = `(${Object.keys(counts).length} 域 / ${total} 点)`;
+            for (const [group, count] of Object.entries(counts)) {
+                const cat = getCategory(group);
+                const item = document.createElement('div');
+                item.className = 'legend-item';
+                item.innerHTML = `
+                    <div class="legend-color" style="background:${cat.color}"></div>
+                    <span class="legend-label">${cat.label_en} ${cat.label_cn}</span>
+                    <span class="legend-count">${count}</span>
+                `;
+                container.appendChild(item);
+            }
+        }
+
+        // --- DATA INJECTION POINT ---
+        const nodes = [
+            {
+                id: "HighContextCulture", en: "High-Context Culture", cn: "高语境文化", group: "Culture", val: 35,
+                desc_en: "A cultural communication style where meaning is conveyed through context, relationships, and non-verbal cues rather than explicit words.",
+                desc_cn: "一种通过语境、关系和非言语线索而非明确语言来传达信息的文化沟通方式。中国是典型的高语境文化。",
+                notes_en: "In Chinese dating, <span class='keyword'>what she says</span> and <span class='keyword'>what she means</span> are often different. Understanding this gap is the foundation of all romantic communication in China.",
+                notes_cn: "在中国恋爱中，<span class='keyword'>她说的</span>和<span class='keyword'>她的意思</span>往往不一样。理解这个差距是所有恋爱沟通的基础。",
+                why_matters: "不理解高语境文化就无法正确解读中国恋爱中的潜台词和非言语信号，会产生系统性误判。",
+                mistakes: "用低语境文化(西方直接表达)的方式解码高语境文化的信号，把所有话都按字面意思理解。",
+                related: ["SubtextReading", "FilialPiety", "AmbiguityPhase"],
+                scenes_en: ["Decoding 'I'm fine' signals", "Understanding indirect rejection", "Reading non-verbal cues on dates"],
+                scenes_cn: ["解读'我没事'的信号", "理解间接拒绝", "约会中读取非言语线索"]
+            },
+            {
+                id: "FilialPiety", en: "Filial Piety", cn: "孝道", group: "Culture", val: 30,
+                desc_en: "The Confucian virtue of respect and obligation toward parents, deeply influencing dating and marriage decisions in China.",
+                desc_cn: "儒家文化中对父母的尊重和义务，深刻影响着中国人的恋爱和婚姻决策。",
+                notes_en: "Even among the most modern Chinese women, <span class='keyword'>parental opinion</span> carries significant weight in relationship decisions. It's not blind obedience but a cultural negotiation mechanism.",
+                notes_cn: "即使是最现代化的中国女生，<span class='keyword'>父母意见</span>在恋爱决策中仍占重要权重。这不是盲目服从，而是文化中的协商机制。",
+                why_matters: "理解孝道才能理解为什么中国女生如此重视父母对恋爱对象的看法，以及为什么见家长是关键里程碑。",
+                mistakes: "把孝道理解为'没有主见'或'被控制'，忽略了它是家庭系统中的合理决策协商机制。",
+                related: ["MenDangHuDui", "MeetParents", "FamilySystem"],
+                scenes_en: ["Understanding her family dynamics", "Preparing for parent meetings", "Navigating family expectations"],
+                scenes_cn: ["理解她的家庭关系", "准备见家长", "应对家庭期望"]
+            },
+            {
+                id: "MenDangHuDui", en: "Men Dang Hu Dui", cn: "门当户对", group: "Culture", val: 28,
+                desc_en: "Traditional Chinese concept of socioeconomic matching in marriage — families of similar status make better matches.",
+                desc_cn: "中国传统的婚恋匹配标准——社会经济地位相当的家庭结合更稳定。",
+                notes_en: "Not just about wealth. Modern interpretation includes <span class='keyword'>education</span>, <span class='keyword'>career trajectory</span>, and <span class='keyword'>value alignment</span>. It's the family's risk management strategy for marriage.",
+                notes_cn: "不只是关于财富。现代解读包括<span class='keyword'>教育背景</span>、<span class='keyword'>职业发展</span>和<span class='keyword'>价值观匹配</span>。这是家庭对婚姻的风险管理策略。",
+                why_matters: "这是中国父母评估女儿男朋友时最常用的框架之一，忽视它可能导致严重的家庭阻力。",
+                mistakes: "以为门当户对只是'拜金'或封建残余，忽略了其背后的风险管理逻辑。",
+                related: ["FilialPiety", "MeetParents", "FamilyApproval"],
+                scenes_en: ["When her parents evaluate you", "Understanding 'are you good enough' pressure", "Career and education discussions"],
+                scenes_cn: ["她父母评估你的时候", "理解'配不配得上'的压力", "职业和教育背景的讨论"]
+            },
+            {
+                id: "AmbiguityPhase", en: "Ambiguity Phase", cn: "暧昧期", group: "Stage", val: 40,
+                desc_en: "The critical grey zone between friendship and romance. The most important infrastructure phase in Chinese dating.",
+                desc_cn: "友情和恋情之间的关键灰色地带。中国恋爱中最重要的基础设施阶段。",
+                notes_en: "Skipping the ambiguity phase is like <span class='keyword'>building a house without a foundation</span>. It serves as trust testing, compatibility verification, and family pre-screening. This is NOT wasted time.",
+                notes_cn: "跳过暧昧期就像<span class='keyword'>不打地基就盖房子</span>。它承担着信任测试、兼容性验证和家庭预审的功能。这不是浪费时间。",
+                why_matters: "暧昧期是中国恋爱文化中最独特也最重要的阶段，决定了告白的成功率。",
+                mistakes: "急于跳过暧昧期直接告白，或者在暧昧期中不敢推进导致窗口关闭。",
+                related: ["Confession", "PushPull", "SignalReading", "TrustBuilding"],
+                scenes_en: ["Building emotional connection", "Testing compatibility", "Reading interest signals"],
+                scenes_cn: ["建立情感连接", "测试兼容性", "解读兴趣信号"]
+            },
+            {
+                id: "Confession", en: "Confession", cn: "告白", group: "Stage", val: 35,
+                desc_en: "The formal, ritual declaration of romantic feelings. A critical transition point from ambiguity to official relationship.",
+                desc_cn: "正式的、仪式性的情感表达。从暧昧期到正式关系的关键转折点。",
+                notes_en: "Success rate = <span class='keyword'>90% ambiguity quality + 10% technique</span>. Confession is 'picking ripe fruit', not 'planting seeds'. If rejected, the problem is usually in the ambiguity phase, not the confession itself.",
+                notes_cn: "成功率 = <span class='keyword'>90%暧昧质量 + 10%技巧</span>。告白是'摘已经熟了的果子'，不是'播种'。被拒绝通常说明暧昧期的问题。",
+                why_matters: "告白是中国恋爱中从模糊到明确的关键仪式节点，没有告白就没有正式关系。",
+                mistakes: "在没有充分暧昧铺垫时突然告白，或暧昧太久不告白导致窗口关闭。",
+                related: ["AmbiguityPhase", "SignalReading", "RitualSense"],
+                scenes_en: ["Choosing the right moment", "Reading readiness signals", "Handling rejection gracefully"],
+                scenes_cn: ["选择正确的时机", "解读准备就绪的信号", "优雅地处理拒绝"]
+            },
+            {
+                id: "MeetParents", en: "Meet Parents", cn: "见家长", group: "Stage", val: 30,
+                desc_en: "The milestone of introducing your partner to your parents. A bidirectional interview in Chinese dating culture.",
+                desc_cn: "把伴侣介绍给父母的里程碑。在中国恋爱文化中是一场双向面试。",
+                notes_en: "Not a formality but a <span class='keyword'>bidirectional interview</span>. Her parents evaluate you as a potential son-in-law while you learn about her family environment. Preparation is everything.",
+                notes_cn: "不是走过场，而是一场<span class='keyword'>双向面试</span>。她的父母在评估你作为潜在女婿的资格，你也在了解她的家庭环境。准备就是一切。",
+                why_matters: "在中国恋爱中，见家长是关系进入正式阶段的必经门槛，家庭认可直接影响关系稳定性。",
+                mistakes: "空手上门、不了解礼仪、在饭桌上玩手机、不尊重长辈。",
+                related: ["FilialPiety", "MenDangHuDui", "FamilyApproval"],
+                scenes_en: ["First meeting with her parents", "Gift selection protocol", "Table manners and etiquette"],
+                scenes_cn: ["第一次见她父母", "礼物选择策略", "餐桌礼仪"]
+            },
+            {
+                id: "AttachmentTheory", en: "Attachment Theory", cn: "依恋理论", group: "Psychology", val: 35,
+                desc_en: "Bowlby & Ainsworth's theory: childhood caregiver patterns shape adult romantic relationship styles (Secure, Anxious, Avoidant).",
+                desc_cn: "Bowlby和Ainsworth的理论：童年照顾模式塑造成年后的恋爱关系模式（安全型、焦虑型、回避型）。",
+                notes_en: "Three styles: <span class='keyword'>Secure</span> (trusts partner), <span class='keyword'>Anxious</span> (fears abandonment, needs reassurance), <span class='keyword'>Avoidant</span> (fears intimacy, needs space). Research shows avoidant Chinese youth <span class='keyword'>improve through intimacy-building activities</span>.",
+                notes_cn: "三种类型：<span class='keyword'>安全型</span>（信任伴侣）、<span class='keyword'>焦虑型</span>（害怕被抛弃，需要确认）、<span class='keyword'>回避型</span>（害怕亲密，需要空间）。研究显示回避型中国年轻人可以<span class='keyword'>通过亲密感建立活动得到改善</span>。",
+                why_matters: "理解依恋类型能帮助你识别对方的行为模式并做出正确的回应，而非误读为'不在乎'或'太粘人'。",
+                mistakes: "把依恋类型当成不可改变的标签，或者不了解自己的依恋类型导致无意识地触发对方的不安全感。",
+                related: ["EFT", "Zuo", "EmotionalMirroring"],
+                scenes_en: ["Understanding her 'clingy' behavior", "Handling her sudden coldness", "Building secure connection"],
+                scenes_cn: ["理解她的'粘人'行为", "处理她突然的冷淡", "建立安全连接"]
+            },
+            {
+                id: "EFT", en: "Emotionally Focused Therapy", cn: "情感聚焦疗法", group: "Psychology", val: 30,
+                desc_en: "Dr. Sue Johnson's therapy approach focused on building secure emotional bonds. Increases relationship satisfaction by ~70%.",
+                desc_cn: "Sue Johnson博士的疗法，专注于建立安全的情感连接。能提高约70%的关系满意度。",
+                notes_en: "Core insight: surface conflicts mask <span class='keyword'>deeper attachment needs</span>. When she's upset about you being late, the real issue is 'Am I important enough for you to prioritize me?'",
+                notes_cn: "核心洞察：表面冲突掩盖着<span class='keyword'>更深层的依恋需求</span>。当她因为你迟到而生气，真正的问题是'我是否重要到让你优先考虑我？'",
+                why_matters: "EFT提供了理解和建立健康情感连接的科学框架，不只是凭感觉。",
+                mistakes: "把冲突理解为'对方不讲理'而非'对方的依恋需求没被满足'。",
+                related: ["AttachmentTheory", "EmotionalMirroring", "SecureBase"],
+                scenes_en: ["De-escalating arguments", "Understanding emotional needs", "Building secure bonds"],
+                scenes_cn: ["化解争吵", "理解情感需求", "建立安全纽带"]
+            },
+            {
+                id: "SubtextReading", en: "Subtext Reading", cn: "听话听音", group: "Skill", val: 35,
+                desc_en: "The skill of understanding meaning beyond literal words. Critical in Chinese high-context communication.",
+                desc_cn: "理解字面意思背后真实含义的技能。在中国高语境沟通中至关重要。",
+                notes_en: "Key principle: When <span class='keyword'>words and body language disagree</span>, trust body language. 'I'm fine' + unhappy face = she's NOT fine. Build your personal <span class='keyword'>subtext dictionary</span>.",
+                notes_cn: "核心原则：当<span class='keyword'>语言和肢体语言不一致</span>时，相信肢体语言。'我没事' + 不开心的表情 = 她有事。建立你的个人<span class='keyword'>潜台词词典</span>。",
+                why_matters: "在中国恋爱沟通中，真实含义常常藏在潜台词里而非字面上，不会读就会系统性误判。",
+                mistakes: "按字面意思理解所有话，或者过度解读把每句话都当成潜台词。",
+                related: ["HighContextCulture", "EmotionalMirroring", "SignalReading"],
+                scenes_en: ["When she says 'whatever'", "When she says 'I'm fine'", "Reading between the lines on WeChat"],
+                scenes_cn: ["当她说'随便'时", "当她说'我没事'时", "在微信聊天中读出弦外之音"]
+            },
+            {
+                id: "PushPull", en: "Push-Pull", cn: "推拉", group: "Skill", val: 28,
+                desc_en: "The dynamic balance between showing interest and maintaining distance during the ambiguity phase.",
+                desc_cn: "暧昧期在表达好感和保持距离之间找到动态平衡的技术。",
+                notes_en: "Not manipulation but <span class='keyword'>natural rhythm maintenance</span>. Goal: let her know you like her, but keep her <span class='keyword'>uncertain about how much</span>. Too much push = pressure. Too much pull = disinterest.",
+                notes_cn: "不是操控而是<span class='keyword'>自然节奏维护</span>。目标：让她知道你喜欢她，但保持她<span class='keyword'>不确定你有多喜欢</span>。推太多=压力。拉太多=不在乎。",
+                why_matters: "掌握推拉节奏是暧昧期维持吸引力的核心技术。",
+                mistakes: "把推拉理解为'玩游戏'或'欲擒故纵'，变成操控而非自然节奏。",
+                related: ["AmbiguityPhase", "SignalReading", "AttractionFormula"],
+                scenes_en: ["Managing texting frequency", "Deciding when to initiate vs wait", "Balancing availability"],
+                scenes_cn: ["管理发消息频率", "决定何时主动何时等待", "平衡可获得性"]
+            },
+            {
+                id: "EmotionalMirroring", en: "Emotional Mirroring", cn: "情绪镜像", group: "Skill", val: 30,
+                desc_en: "Reflecting her emotions back to her before offering solutions. The #1 skill for emotional connection.",
+                desc_cn: "在给建议之前先反射她的情绪。建立情感连接的第一技能。",
+                notes_en: "'Sounds like you had a tough day' is <span class='keyword'>100x more effective</span> than 'You should do X'. In Chinese culture, women test if you 'get her' by sharing emotions and seeing if you <span class='keyword'>catch the emotional ball</span>.",
+                notes_cn: "'听起来你今天压力很大'比'你应该这样做'<span class='keyword'>有效100倍</span>。在中国文化中，女生通过分享情绪来测试你是否'懂她'——看你能否<span class='keyword'>接住情绪的球</span>。",
+                why_matters: "情绪镜像是EFT的核心实操工具，也是在中国恋爱中建立'懂你'感的最有效方式。",
+                mistakes: "她说不开心就急着给解决方案，把情感问题当逻辑问题处理。",
+                related: ["EFT", "SubtextReading", "AttachmentTheory"],
+                scenes_en: ["When she shares work stress", "When she's upset about something", "When she needs comfort not solutions"],
+                scenes_cn: ["她分享工作压力时", "她因为某事不开心时", "她需要安慰而非方案时"]
+            },
+            {
+                id: "SignalReading", en: "Signal Reading", cn: "信号解读", group: "Skill", val: 32,
+                desc_en: "The ability to read and interpret positive/negative signals throughout the relationship stages.",
+                desc_cn: "在关系各阶段解读正向/负向信号的能力。",
+                notes_en: "Key signals: <span class='keyword'>Initiates contact</span> (interest), <span class='keyword'>shares daily life</span> (building intimacy), <span class='keyword'>no phone on dates</span> (full engagement), <span class='keyword'>mentions you to friends</span> (social integration).",
+                notes_cn: "关键信号：<span class='keyword'>主动联系</span>（有兴趣）、<span class='keyword'>分享日常</span>（建立亲近感）、<span class='keyword'>约会不看手机</span>（全心投入）、<span class='keyword'>和朋友提到你</span>（社交融入）。",
+                why_matters: "关系推进应该由信号质量而非日历时间驱动，读不懂信号就无法正确把握节奏。",
+                mistakes: "忽视信号按时间强行推进，或者过度解读普通友好行为。",
+                related: ["AmbiguityPhase", "Confession", "PushPull", "SubtextReading"],
+                scenes_en: ["Judging confession timing", "Determining interest level", "Recognizing rejection signals"],
+                scenes_cn: ["判断告白时机", "确定好感程度", "识别拒绝信号"]
+            },
+            {
+                id: "RitualSense", en: "Ritual Sense", cn: "仪式感", group: "Ritual", val: 30,
+                desc_en: "Creating special meaning through carefully arranged moments. A mandatory practice in Chinese dating culture.",
+                desc_cn: "通过精心安排的时刻赋予特殊意义。中国恋爱文化中的必修课。",
+                notes_en: "Not optional but <span class='keyword'>mandatory</span>. Includes: festival gifts, anniversary celebrations, WeChat Moments announcements. Core principle: <span class='keyword'>thoughtfulness > money spent</span>.",
+                notes_cn: "不是可选项而是<span class='keyword'>必修课</span>。包括：节日礼物、纪念日庆祝、朋友圈官宣。核心原则：<span class='keyword'>用心 > 花钱</span>。",
+                why_matters: "仪式感是中国恋爱关系维护的核心工具，缺少它会让对方觉得你不够用心。",
+                mistakes: "以为仪式感等于花钱，或者觉得'没必要'而忽略它。",
+                related: ["520", "CoupleOutfits", "WeChatMoments"],
+                scenes_en: ["Valentine's Day planning", "Anniversary celebrations", "Daily rituals (morning/night texts)"],
+                scenes_cn: ["情人节策划", "纪念日庆祝", "日常仪式（早安晚安）"]
+            },
+            {
+                id: "KaoPu", en: "Reliable (Kao Pu)", cn: "靠谱", group: "Skill", val: 35,
+                desc_en: "The quality of being reliable and keeping promises. The highest-weight trait in Chinese dating culture.",
+                desc_cn: "可靠、说到做到的品质。中国恋爱文化中权重最高的特质。",
+                notes_en: "In Chinese dating, <span class='keyword'>reliable > interesting > romantic</span>. Built through <span class='keyword'>consistent small actions</span> over time, not grand gestures. One broken promise destroys more trust than ten kept ones build.",
+                notes_cn: "在中国恋爱中，<span class='keyword'>靠谱 > 有趣 > 浪漫</span>。通过<span class='keyword'>长期稳定的小行为</span>积累，而非一次壮举。一次食言的破坏力大于十次守信的建设力。",
+                why_matters: "靠谱是中国恋爱市场中最核心的竞争力，比外表和经济条件更持久。",
+                mistakes: "以为靠谱就是无聊，忽略了它本身就是一种稀缺且极具吸引力的品质。",
+                related: ["TrustBuilding", "ConsistencySignals", "AttachmentTheory"],
+                scenes_en: ["Keeping daily routines", "Following through on promises", "Being emotionally stable"],
+                scenes_cn: ["保持每日惯例", "兑现承诺", "情绪稳定"]
+            },
+            {
+                id: "Zuo", en: "Zuo (Emotional Testing)", cn: "作", group: "Psychology", val: 25,
+                desc_en: "Emotional testing behavior in relationships — testing partner's patience and care through provocative actions.",
+                desc_cn: "恋爱中的情绪化试探行为——通过挑衅性行为测试对方的耐心和在乎程度。",
+                notes_en: "Usually a sign of <span class='keyword'>anxious attachment</span>. She's not being 'unreasonable' — she's asking 'Do you care enough to tolerate my worst?' The correct response is <span class='keyword'>firm boundaries + emotional validation</span>.",
+                notes_cn: "通常是<span class='keyword'>焦虑型依恋</span>的表现。她不是'不讲理'——她在问'你是否在乎到能包容我最差的样子？'正确回应是<span class='keyword'>坚定的边界 + 情感确认</span>。",
+                why_matters: "理解'作'的心理机制能帮助你在面对时做出正确反应而不是激化冲突。",
+                mistakes: "简单归类为'不讲理'，没有看到背后的情感需求是'确认你在乎我'。",
+                related: ["AttachmentTheory", "EmotionalMirroring", "EFT"],
+                scenes_en: ["When she ignores your messages on purpose", "When she picks fights over nothing", "When she tests your patience"],
+                scenes_cn: ["她故意不回你消息时", "她无理取闹时", "她试探你的耐心时"]
+            },
+            {
+                id: "WeChatMoments", en: "WeChat Moments", cn: "朋友圈", group: "Ritual", val: 25,
+                desc_en: "WeChat's social feed — serves as silent resume, interaction platform, and relationship announcement platform in dating.",
+                desc_cn: "微信社交动态——在恋爱中充当无声简历、互动平台和关系官宣平台。",
+                notes_en: "Three roles: <span class='keyword'>Silent resume</span> (she checks your history), <span class='keyword'>interaction platform</span> (likes/comments as low-cost interest signals), <span class='keyword'>announcement platform</span> (going public = official).",
+                notes_cn: "三重角色：<span class='keyword'>无声简历</span>（她会翻你的历史）、<span class='keyword'>互动平台</span>（点赞评论是低成本好感表达）、<span class='keyword'>官宣平台</span>（公开发布=正式确认）。",
+                why_matters: "朋友圈是中国社交生态的核心组件，在恋爱中承担着展示、互动和确认的多重功能。",
+                mistakes: "不经营朋友圈或发布低质量内容，忽略了它在对方评估你时的重要性。",
+                related: ["RitualSense", "520", "CoupleOutfits"],
+                scenes_en: ["Curating your online presence", "Going public with relationship", "Reading her activity for signals"],
+                scenes_cn: ["经营你的线上形象", "公开恋爱关系", "通过她的动态读取信号"]
+            },
+            {
+                id: "FamilyApproval", en: "Family Approval", cn: "家庭认可", group: "Culture", val: 30,
+                desc_en: "Gaining the approval of her family — a multiplier that either strengthens or undermines the relationship.",
+                desc_cn: "获得她家庭的认可——一个能增强或削弱关系的乘数因子。",
+                notes_en: "Family approval is a <span class='keyword'>multiplier, not an add-on</span>. Coefficient ranges from 0.5 (opposition) to 2.0 (strong support). Ignoring family = ignoring 50%+ of decision weight.",
+                notes_cn: "家庭认可是<span class='keyword'>乘数而非加法项</span>。系数从0.5（反对）到2.0（强力支持）。忽视家庭=忽视50%以上的决策权重。",
+                why_matters: "在中国文化中，家庭认可直接决定关系能否长期稳定发展。",
+                mistakes: "完全忽视家庭因素，以为恋爱只是两个人的事。",
+                related: ["FilialPiety", "MenDangHuDui", "MeetParents"],
+                scenes_en: ["Building relationship with her parents", "Navigating family opposition", "Demonstrating reliability to family"],
+                scenes_cn: ["和她父母建立关系", "应对家庭反对", "向家庭展示靠谱"]
+            },
+            {
+                id: "TrustBuilding", en: "Trust Building", cn: "信任建立", group: "Skill", val: 28,
+                desc_en: "The cumulative process of building trust through consistent actions over time.",
+                desc_cn: "通过长期一致性行为积累信任的过程。",
+                notes_en: "Formula: Trust = <span class='keyword'>Sum of Consistent Actions / Time</span>. One broken promise destroys more than ten kept ones build. Focus on <span class='keyword'>small daily promises</span>, not grand gestures.",
+                notes_cn: "公式：信任 = <span class='keyword'>一致性行为总和 / 时间</span>。一次食言的破坏力大于十次守信。专注于<span class='keyword'>每天的小承诺</span>，而非壮举。",
+                why_matters: "信任是所有稳定关系的基石，在中国恋爱文化中通过'靠谱'来体现。",
+                mistakes: "偶尔做一次大的浪漫举动但日常不靠谱，信任值依然为零。",
+                related: ["KaoPu", "AmbiguityPhase", "AttachmentTheory"],
+                scenes_en: ["Keeping morning/night text routine", "Following through on date plans", "Being consistent in communication"],
+                scenes_cn: ["保持早安晚安惯例", "兑现约会安排", "沟通频率一致"]
+            },
+            {
+                id: "520", en: "520 Valentine", cn: "520情人节", group: "Ritual", val: 20,
+                desc_en: "May 20th — Chinese internet Valentine's Day, because 520 sounds like 'I love you' (wo ai ni) in Mandarin.",
+                desc_cn: "5月20日——中国网络情人节，因为520的发音接近'我爱你'。",
+                notes_en: "Part of a series of <span class='keyword'>mandatory romantic dates</span>: Feb 14, Qixi (Chinese Valentine), 520, anniversaries, birthdays. Forgetting any = 'you don't care about us'.",
+                notes_cn: "中国恋爱中的<span class='keyword'>必要浪漫节日</span>之一：2月14日、七夕、520、纪念日、生日。忘记任何一个='你不在乎我们'。",
+                why_matters: "忘记这些日子在中国恋爱文化中等同于'不重视这段关系'。",
+                mistakes: "认为这些节日'没必要'或忘记了，导致对方觉得你不够在乎。",
+                related: ["RitualSense", "WeChatMoments", "CoupleOutfits"],
+                scenes_en: ["Planning 520 surprises", "Gift selection for festivals", "Anniversary celebrations"],
+                scenes_cn: ["策划520惊喜", "节日礼物选择", "纪念日庆祝"]
+            }
+        ];
+
+        const links = [
+            // Culture foundations
+            { source: "HighContextCulture", target: "SubtextReading", label: "Requires" },
+            { source: "HighContextCulture", target: "AmbiguityPhase", label: "Shapes" },
+            { source: "FilialPiety", target: "MeetParents", label: "Drives" },
+            { source: "FilialPiety", target: "FamilyApproval", label: "Foundation" },
+            { source: "MenDangHuDui", target: "FamilyApproval", label: "Evaluation Framework" },
+            { source: "FamilyApproval", target: "MeetParents", label: "Tested At" },
+
+            // Stage progression
+            { source: "AmbiguityPhase", target: "Confession", label: "Leads To" },
+            { source: "Confession", target: "MeetParents", label: "Eventually" },
+            { source: "SignalReading", target: "Confession", label: "Timing Gate" },
+            { source: "AmbiguityPhase", target: "TrustBuilding", label: "Built During" },
+
+            // Psychology connections
+            { source: "AttachmentTheory", target: "Zuo", label: "Explains" },
+            { source: "AttachmentTheory", target: "EFT", label: "Foundation For" },
+            { source: "EFT", target: "EmotionalMirroring", label: "Core Tool" },
+            { source: "Zuo", target: "EmotionalMirroring", label: "Best Response" },
+
+            // Skill connections
+            { source: "SubtextReading", target: "SignalReading", label: "Enables" },
+            { source: "PushPull", target: "AmbiguityPhase", label: "Used In" },
+            { source: "EmotionalMirroring", target: "TrustBuilding", label: "Builds" },
+            { source: "KaoPu", target: "TrustBuilding", label: "Core Of" },
+            { source: "TrustBuilding", target: "FamilyApproval", label: "Enables" },
+
+            // Ritual connections
+            { source: "RitualSense", target: "520", label: "Expressed Through" },
+            { source: "RitualSense", target: "WeChatMoments", label: "Platform" },
+            { source: "WeChatMoments", target: "SignalReading", label: "Data Source" },
+
+            // Cross-domain
+            { source: "KaoPu", target: "FamilyApproval", label: "Demonstrates" },
+            { source: "HighContextCulture", target: "Zuo", label: "Context For" },
+            { source: "PushPull", target: "SignalReading", label: "Guided By" }
+        ];
+
+        // --- CONFIGURATION ---
+        const settings = { linkDistance: 80, chargeStrength: -200, labelSize: 1.0, opacity: 0.8, autoRotate: true };
+
+        // --- ENGINE ---
+        const elem = document.getElementById('3d-graph');
+        const Graph = ForceGraph3D()(elem)
+            .graphData({ nodes, links })
+            .backgroundColor('#000005')
+            .showNavInfo(false)
+            .nodeThreeObject(node => {
+                const cat = getCategory(node.group);
+                const text = `${node.en}\n${node.cn}`;
+                const sprite = new SpriteText(text);
+                sprite.color = cat.color;
+                sprite.textHeight = (node.val / 2) * settings.labelSize;
+                sprite.fontFace = 'Arial'; sprite.fontWeight = 'bold';
+                sprite.backgroundColor = `rgba(0,0,0,${settings.opacity / 2})`;
+                sprite.padding = 4;
+                sprite.userData = { baseSize: node.val / 2 };
+                return sprite;
+            })
+            .linkWidth(link => 2.5)
+            .linkColor(link => {
+                const sourceNode = nodes.find(n => n.id === link.source || n.id === link.source.id);
+                if (sourceNode) return getCategory(sourceNode.group).color + '88';
+                return '#445566';
+            })
+            .linkOpacity(0.7)
+            .linkCurvature(0.12)
+            .linkCurveRotation(link => {
+                const hash = (link.source?.id || link.source) + (link.target?.id || link.target);
+                let sum = 0;
+                for (let i = 0; i < hash.length; i++) sum += hash.charCodeAt(i);
+                return (sum % 360) * (Math.PI / 180);
+            })
+            .linkDirectionalArrowLength(5)
+            .linkDirectionalArrowRelPos(0.9)
+            .linkDirectionalArrowColor(link => {
+                const sourceNode = nodes.find(n => n.id === link.source || n.id === link.source.id);
+                if (sourceNode) return getCategory(sourceNode.group).color;
+                return '#ffffff';
+            })
+            .linkDirectionalParticles(3)
+            .linkDirectionalParticleSpeed(0.005)
+            .linkDirectionalParticleWidth(2)
+            .linkDirectionalParticleColor(link => {
+                const sourceNode = nodes.find(n => n.id === link.source || n.id === link.source.id);
+                if (sourceNode) return getCategory(sourceNode.group).color;
+                return '#ffffff';
+            })
+            .onNodeClick(node => {
+                const currentPos = Graph.cameraPosition();
+                const currentDistance = Math.hypot(currentPos.x, currentPos.y, currentPos.z);
+                const nodeDistance = Math.hypot(node.x, node.y, node.z) || 1;
+
+                const newX = (node.x / nodeDistance) * currentDistance;
+                const newY = (node.y / nodeDistance) * currentDistance;
+                const newZ = (node.z / nodeDistance) * currentDistance;
+
+                Graph.cameraPosition({ x: newX, y: newY, z: newZ }, node, 1500);
+                showHUD(node);
+            });
+
+        Graph.d3Force('link').distance(settings.linkDistance);
+        Graph.d3Force('charge').strength(settings.chargeStrength);
+
+        // --- CONTROLS ---
+        const gui = new dat.GUI();
+        const folder = gui.addFolder('Graph Settings');
+        folder.add(settings, 'linkDistance', 10, 300).onChange(val => { Graph.d3Force('link').distance(val); Graph.d3ReheatSimulation(); });
+        folder.add(settings, 'chargeStrength', -500, -10).onChange(val => { Graph.d3Force('charge').strength(val); Graph.d3ReheatSimulation(); });
+        folder.add(settings, 'labelSize', 0.1, 3.0).onChange(val => { Graph.scene().traverse(obj => { if (obj.userData?.baseSize) obj.textHeight = obj.userData.baseSize * val; }); });
+        folder.add(settings, 'opacity', 0.1, 1.0).onChange(val => { Graph.scene().traverse(obj => { if (obj.userData?.baseSize) obj.backgroundColor = `rgba(0,0,0,${val / 2})`; }); });
+        folder.add(settings, 'autoRotate').onChange(val => { Graph.controls().autoRotate = val; });
+        folder.open();
+
+        // --- HUD LOGIC ---
+        function showHUD(node) {
+            const el = (id) => document.getElementById(id);
+            const cat = getCategory(node.group);
+            el('hud').style.display = 'block';
+            el('hud-title').innerText = node.en;
+            el('hud-title').style.color = cat.color;
+            el('hud-cn').innerText = `${node.cn} [${node.group}]`;
+            el('hud-desc').innerHTML = `<div class="en">${node.desc_en || ''}</div><div class="cn">${node.desc_cn || ''}</div>`;
+            el('hud-notes').innerHTML = `<div class="en">${node.notes_en || ''}</div><div class="cn">${node.notes_cn || ''}</div>`;
+
+            const whyEl = el('hud-why');
+            if (node.why_matters) {
+                whyEl.innerHTML = node.why_matters;
+                whyEl.parentElement.style.display = 'block';
+            } else {
+                whyEl.innerHTML = '';
+                whyEl.parentElement.style.display = 'none';
+            }
+
+            const mistakesEl = el('hud-mistakes');
+            if (node.mistakes) {
+                mistakesEl.innerHTML = node.mistakes;
+                mistakesEl.parentElement.style.display = 'block';
+            } else {
+                mistakesEl.innerHTML = '';
+                mistakesEl.parentElement.style.display = 'none';
+            }
+
+            const relatedContainer = el('hud-related');
+            relatedContainer.innerHTML = '';
+            if (node.related && node.related.length > 0) {
+                node.related.forEach(term => {
+                    const tag = document.createElement('span');
+                    tag.className = 'related-tag';
+                    tag.innerText = term;
+                    tag.onclick = () => {
+                        const targetNode = nodes.find(n => n.id === term || n.en === term);
+                        if (targetNode) {
+                            Graph.cameraPosition({ x: targetNode.x + 50, y: targetNode.y + 50, z: targetNode.z + 50 }, targetNode, 1500);
+                            setTimeout(() => showHUD(targetNode), 1600);
+                        }
+                    };
+                    relatedContainer.appendChild(tag);
+                });
+                relatedContainer.parentElement.style.display = 'block';
+            } else {
+                relatedContainer.parentElement.style.display = 'none';
+            }
+
+            const sceneContainer = el('hud-scenes');
+            sceneContainer.innerHTML = '';
+            if (node.scenes_en && node.scenes_en.length > 0) {
+                for (let i = 0; i < node.scenes_en.length; i++) {
+                    const tag = document.createElement('span');
+                    tag.className = 'scene-tag';
+                    tag.innerHTML = `${node.scenes_en[i]} <span style="color:#88aacc">${node.scenes_cn[i]}</span>`;
+                    sceneContainer.appendChild(tag);
+                }
+                sceneContainer.parentElement.style.display = 'block';
+            } else {
+                sceneContainer.parentElement.style.display = 'none';
+            }
+        }
+
+        function hideHUD() {
+            document.getElementById('hud').style.display = 'none';
+        }
+
+        // Initialize
+        buildLegend();
+        setTimeout(() => { document.getElementById('loading').style.display = 'none'; }, 1000);
+        Graph.controls().autoRotate = true;
+    </script>
+</body>
+
+</html>

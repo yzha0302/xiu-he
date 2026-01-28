@@ -1,0 +1,277 @@
+[
+  {
+    "term": "Mister Market (市场先生)",
+    "definition": "并非一个真实的人，而是无数消费者心理活动的集合体，也是最大的不可控变量。",
+    "source_file": "1.1_Market_Psychology.md"
+  },
+  {
+    "term": "Symbolic Value (符号价值)",
+    "definition": "区别于好用(使用价值)和值钱(交换价值)，指用了这个东西能证明'我是谁'的社会价值。",
+    "source_file": "1.1_Market_Psychology.md"
+  },
+  {
+    "term": "Baudrillard's Evolution (鲍德里亚演化)",
+    "definition": "价值演化轨迹: 使用价值 -> 交换价值 -> 符号价值。",
+    "source_file": "1.1_Market_Psychology.md"
+  },
+  {
+    "term": "Style Syntax (风格语法)",
+    "definition": "像语言一样，把衣服、车子、生活方式组合起来的一套规则。懂规则的人看起来像老钱，不懂的像暴发户。",
+    "source_file": "1.1_Market_Psychology.md"
+  },
+  {
+    "term": "Solopreneur (一人公司)",
+    "definition": "并非指'一个人干所有事'，而是指用系统和杠杆替代自己的时间，最终实现一个人控制一家能自动运转的公司。",
+    "source_file": "1.2_Solopreneur_System.md"
+  },
+  {
+    "term": "Leverage (杠杆)",
+    "definition": "商业的放大器。产出 = 投入 x 杠杆率。包括代码、媒体、人力、资本四种形式。",
+    "source_file": "1.2_Solopreneur_System.md"
+  },
+  {
+    "term": "Code & Media (代码与媒体)",
+    "definition": "无需许可的杠杆 (Permissionless Leverage)。边际成本为零，是普通人致富的最佳工具。",
+    "source_file": "1.2_Solopreneur_System.md"
+  },
+  {
+    "term": "MVP (最小可行性产品)",
+    "definition": "用最少的资源验证核心假设的产品版本。目的不是做完美，而是快速获取市场反馈。",
+    "source_file": "1.2_Solopreneur_System.md"
+  },
+  {
+    "term": "Productized Service (产品化服务)",
+    "definition": "将服务打包成固定价格、固定范围的标准化产品。是降低服务业边际成本的关键。",
+    "source_file": "1.2_Solopreneur_System.md"
+  },
+  {
+    "term": "Passive Income (被动收入)",
+    "definition": "与时间投入脱钩的收入。通常需要前期的高固定成本投入，维护成本极低。",
+    "source_file": "1.2_Solopreneur_System.md"
+  },
+  {
+    "term": "SOP (标准作业程序)",
+    "definition": "把脑子里的经验变成文档，让任何新手都能按流程执行。SOP 是规模化的前提。",
+    "source_file": "1.2_Solopreneur_System.md"
+  },
+  {
+    "term": "Marginal Cost (边际成本)",
+    "definition": "每多生产一份产品或服务所需的额外成本。数字产品的边际成本趋近于零（做一次，卖无限次）。",
+    "source_file": "1.2_Solopreneur_System.md"
+  },
+  {
+    "term": "The Machine (机器隐喻)",
+    "definition": "企业是一台为了服务特定目标而被精密设计出来的机器。由'设计'和'人'两个核心部分组成。",
+    "source_file": "1.0_Core_Framework.md"
+  },
+  {
+    "term": "Drucker's 3 Assumptions (德鲁克三假设)",
+    "definition": "环境、使命、核心能力。任何企业成立的前提是这三个假设暂时正确。",
+    "source_file": "1.0_Core_Framework.md"
+  },
+  {
+    "term": "Value Proposition (价值主张)",
+    "definition": "对痛点的解决方案。价值 = 痛点烈度 x 解题精度。",
+    "source_file": "1.0_Core_Framework.md"
+  },
+  {
+    "term": "Time Machine (时光机理论)",
+    "definition": "利用不同市场的发展阶段差进行套利。将发达市场的今天变成新兴市场的明天。",
+    "source_file": "1.0_Core_Framework.md"
+  },
+  {
+    "term": "Cultural DNA (文化基因)",
+    "definition": "文化由第一个员工决定。创始人与第一号员工的协作模式会像基因一样被后来者复制。",
+    "source_file": "1.0_Core_Framework.md"
+  },
+  {
+    "term": "Power Formula (权力公式)",
+    "definition": "权力 = 资源 + 规则。不仅仅是拥有资源，还要设定分配资源的算法。",
+    "source_file": "1.0_Core_Framework.md"
+  },
+  {
+    "term": "Strategic Pause (战略暂停)",
+    "definition": "强制停止执行，通过思考来避免'战术勤奋掩盖战略懒惰'。",
+    "source_file": "1.0_Core_Framework.md"
+  },
+  {
+    "term": "AI Agent (智能体)",
+    "definition": "不是简单的聊天机器人，而是能够自主规划、执行任务、与外部世界交互的 AI 程序。好比家用电器，是对'电'（大模型）的更高级应用。",
+    "source_file": "1.3_AI_Agent_Revolution.md"
+  },
+  {
+    "term": "LLM (大语言模型)",
+    "definition": "底层的通用人工智能能力，好比'电'。不同公司有不同版本（风电、水电、火电）。",
+    "source_file": "1.3_AI_Agent_Revolution.md"
+  },
+  {
+    "term": "Attention Chain (注意力链条)",
+    "definition": "注意力 → 影响力 → 决策权。谁拥有了你的注意力，谁就能影响你的决策。传统广告和自媒体的商业模式基础。",
+    "source_file": "1.3_AI_Agent_Revolution.md"
+  },
+  {
+    "term": "Mid-Office (中台部门)",
+    "definition": "企业内部不直接面向客户、也不直接创造产品，但负责标准化支撑的部门，如财务、HR、行政。标准化程度高，最容易被 Agent 取代。",
+    "source_file": "1.3_AI_Agent_Revolution.md"
+  },
+  {
+    "term": "Disruptive Innovation (颠覆式创新)",
+    "definition": "科技创新 + 模式创新 + 范式创新 三期叠加产生的创新，会重塑整个行业乃至生活方式。",
+    "source_file": "1.3_AI_Agent_Revolution.md"
+  },
+  {
+    "term": "Cambrian Explosion (寒武纪大爆发)",
+    "definition": "生物演化史上物种多样性急剧增加的时期。此处比喻 AI Agent 细分场景应用的涌现。",
+    "source_file": "1.3_AI_Agent_Revolution.md"
+  },
+  {
+    "term": "Technology Innovation (科技创新)",
+    "definition": "基于技术、材料、算法、工程学的创新，解决'能不能做出来'的问题。高研发投入、长周期、形成技术壁垒。",
+    "source_file": "2.0_Capital_Leverage.md"
+  },
+  {
+    "term": "Model Innovation (模式创新)",
+    "definition": "改变怎么卖、怎么赚、怎么组织，解决效率和价值分配的问题。见效快、门槛低、依赖网络效应。",
+    "source_file": "2.0_Capital_Leverage.md"
+  },
+  {
+    "term": "Paradigm Innovation (范式创新)",
+    "definition": "改变人们看待事物的底层逻辑 (Mental Model)，重新定义行业属性和产品本质。10 年难得一见。",
+    "source_file": "2.0_Capital_Leverage.md"
+  },
+  {
+    "term": "One Page / Teaser (执行摘要)",
+    "definition": "1~3 页的执行摘要，涵盖痛点、解决方案、市场规模、团队、融资需求，用于大范围传播。",
+    "source_file": "2.0_Capital_Leverage.md"
+  },
+  {
+    "term": "Pitch Deck (路演 PPT)",
+    "definition": "用于现场演示+答辩的 BP 版本，可呈现视频素材，关键在于应对现场提问。",
+    "source_file": "2.0_Capital_Leverage.md"
+  },
+  {
+    "term": "Elevator Pitch (电梯演讲)",
+    "definition": "30 秒~3 分钟的口述版 One Page。用人话，排除学术概念和行业黑话。",
+    "source_file": "2.0_Capital_Leverage.md"
+  },
+  {
+    "term": "CAC (Customer Acquisition Cost)",
+    "definition": "获客成本，即获取一个客户需要花多少钱。",
+    "source_file": "2.0_Capital_Leverage.md"
+  },
+  {
+    "term": "LTV (Lifetime Value)",
+    "definition": "客户生命周期价值，即一个客户一辈子给你贡献多少钱。健康模型 LTV/CAC > 3。",
+    "source_file": "2.0_Capital_Leverage.md"
+  },
+  {
+    "term": "Burn Rate (烧钱速度)",
+    "definition": "每个月消耗多少现金。Runway = Cash / Burn Rate。",
+    "source_file": "2.0_Capital_Leverage.md"
+  },
+  {
+    "term": "Traction (牵引力)",
+    "definition": "证明产品有市场需求的实际数据。当前市场融资的必要条件。",
+    "source_file": "2.0_Capital_Leverage.md"
+  },
+  {
+    "term": "Value Creator (价值创造者)",
+    "definition": "用脑子赚钱而非用时间。研究自己的痴迷，提炼学习成果，通过社交媒体分发。一个人的媒体公司。",
+    "source_file": "1.2_Solopreneur_System.md"
+  },
+  {
+    "term": "Synthesizer (综合者)",
+    "definition": "跨领域连接想法的人。现实不是隔离的，综合者通过连接全貌来帮助人们实现目标，创造新品类。",
+    "source_file": "1.2_Solopreneur_System.md"
+  },
+  {
+    "term": "MVO (最小可行报价)",
+    "definition": "第一个可变现的报价。单一技能 $500-1000 或 4次咨询套餐。立即开始变现，不要等。",
+    "source_file": "1.2_Solopreneur_System.md"
+  },
+  {
+    "term": "Domain of Mastery (精通领域)",
+    "definition": "3 个兴趣组合：1) 赚钱的 2) 让你兴奋的 3) 发展型的（心理学/哲学）。用于确定内容策略和赛道。",
+    "source_file": "1.2_Solopreneur_System.md"
+  },
+  {
+    "term": "Eternal Markets (永恒市场)",
+    "definition": "健康、财富、关系、幸福。大多数人追求崇高目标却有燃眉问题的地方，最赚钱的四大领域。",
+    "source_file": "1.0_Core_Framework.md"
+  },
+  {
+    "term": "Entrepreneurial Method (创业方法论)",
+    "definition": "发现问题 → 学习 → 记录 → 系统化 → 分享。类似科学方法但用于商业，解决自己的问题然后教给别人。",
+    "source_file": "1.0_Core_Framework.md"
+  },
+  {
+    "term": "PPP Framework (PPP框架)",
+    "definition": "Pull → Perspective → Punchline。用于短内容：吸引注意力 → 给出独特角度 → 金句收尾。",
+    "source_file": "1.2_Solopreneur_System.md"
+  },
+  {
+    "term": "Information Product (信息产品)",
+    "definition": "打包的知识。课程、电子书、训练营。你脑子里有10万美元，把经验打包成步骤系统来销售。",
+    "source_file": "2.0_Capital_Leverage.md"
+  },
+  {
+    "term": "Productized Self (产品化自我)",
+    "definition": "你就是你的品牌、赛道、内容和产品。品牌=目标，内容=问题，产品=系统，营销=好处。",
+    "source_file": "1.2_Solopreneur_System.md"
+  },
+  {
+    "term": "Flow State (心流状态)",
+    "definition": "被技能追求吸收的状态。动机启动，学习持续，创造力掌舵，心流涡轮增压。内在驱动的巅峰体验。",
+    "source_file": "1.1_Market_Psychology.md"
+  },
+  {
+    "term": "Self Reliance (自我依赖)",
+    "definition": "自己搞明白，别把别人的建议当法律。测试一切，相信你的经验。最伟大的价值观。",
+    "source_file": "1.0_Core_Framework.md"
+  },
+  {
+    "term": "Lifestyle Design (生活方式设计)",
+    "definition": "没有老板意味着你设计你的生活。安排日程以获得最大生产力+创造力，通过试错和实验迭代。",
+    "source_file": "1.2_Solopreneur_System.md"
+  },
+  {
+    "term": "Product Ladder (产品阶梯)",
+    "definition": "从免费到高价的产品结构。Free → Low-Ticket ($20-100) → Mid-Ticket ($300-1000) → Premium ($2000+)。",
+    "source_file": "1.2_Solopreneur_System.md"
+  },
+  {
+    "term": "Two Hour Writer (两小时作家)",
+    "definition": "Dan Koe 的内容系统。每天 2 小时写作，产出周报 → Thread → Tweets → YouTube，形成完整内容帝国。",
+    "source_file": "1.2_Solopreneur_System.md"
+  },
+  {
+    "term": "Imposter Syndrome (冒名顶替综合症)",
+    "definition": "认为'我没资格教别人'的心理障碍。解法：你不需要比所有人强，只需要比受众强一两步。",
+    "source_file": "1.2_Solopreneur_System.md"
+  },
+  {
+    "term": "Digital Twin (数字分身)",
+    "definition": "由AI驱动的个人人格复制品，能够在你缺席时代表你行动。不是工具，而是你的化身。",
+    "source_file": "2.1_Digital_Twin_Architecture.md"
+  },
+  {
+    "term": "Persona Parameters (人格参数)",
+    "definition": "定义一个人的所有维度信息——价值观、偏好、策略等。一个完整人格可能只需要不到1万行代码描述。",
+    "source_file": "2.1_Digital_Twin_Architecture.md"
+  },
+  {
+    "term": "Skill Encapsulation (技能封装)",
+    "definition": "将学习到的能力打包成可调用的模块，供数字分身随时装载，获得该领域的专家级能力。",
+    "source_file": "2.1_Digital_Twin_Architecture.md"
+  },
+  {
+    "term": "Weaponized Authenticity (武器化真诚)",
+    "definition": "一种表面真诚但本质是为了获得优势的社交策略。非人设的拟态。",
+    "source_file": "2.1_Digital_Twin_Architecture.md"
+  },
+  {
+    "term": "Avatar Principle (替身原则)",
+    "definition": "AI不是工具，而是你的化身。它用你的方式思考、用你的逻辑决策、用你的风格表达。",
+    "source_file": "2.1_Digital_Twin_Architecture.md"
+  }
+]

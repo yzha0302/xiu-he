@@ -1,0 +1,304 @@
+[
+    {
+        "formula_name_en": "Hook Formula",
+        "formula_name_cn": "钩子公式",
+        "equation": "Hook = 反直觉 + 痛点共鸣 + 问题感",
+        "variables": {
+            "反直觉": "颠覆常识的信息点",
+            "痛点共鸣": "观众正在经历的困扰",
+            "问题感": "让观众意识到有问题需要解决"
+        },
+        "mechanism": "钩子需要在3秒内同时激活观众的好奇心（反直觉）、情感共鸣（痛点）和紧迫感（问题感）。三者不需要全部具备，但至少要占一个。强度越高，停留时长越长。",
+        "application": "写开头时先问自己：这句话有反直觉吗？能戳到痛点吗？制造了问题感吗？如果三个都没有，重写。",
+        "anti_pattern": "用'大家好今天聊...'开头 = 三项全无 = 观众直接划走",
+        "source_file": "Oral_Script_Style.md"
+    },
+    {
+        "formula_name_en": "Climax First Formula",
+        "formula_name_cn": "高潮前置公式",
+        "equation": "口播顺序 = D → C → B → A",
+        "variables": {
+            "D": "最终结论/核心观点",
+            "C": "直接原因",
+            "B": "深层原因",
+            "A": "根本原因/背景"
+        },
+        "mechanism": "传统写作按逻辑推导（A→B→C→D），但口播观众没有耐心等完整链条。先把最刺激的结论D甩出来抓住注意力，再倒叙解释。这样即使观众中途离开，也至少听到了核心观点。",
+        "application": "写完初稿后，检查结论出现在哪里。如果在内容后半部分，把它移到开头。",
+        "anti_pattern": "按时间顺序从头讲到尾 = 高潮出现时观众早走了",
+        "source_file": "Oral_Script_Style.md"
+    },
+    {
+        "formula_name_en": "Attitude over Analysis",
+        "formula_name_cn": "态度大于分析公式",
+        "equation": "吸引力 = 态度鲜明度 × 情绪强度",
+        "variables": {
+            "态度鲜明度": "立场有多清晰（0=骑墙，10=斩钉截铁）",
+            "情绪强度": "表达的情感力度（平淡→激动）"
+        },
+        "mechanism": "口播的吸引力来自态度和情绪，不是'客观分析'。辩证=态度模糊=吸引力低。观众记住的是你敢说'这就是错的'，不是你说'问题很复杂'。分析可以有，但必须服务于态度表达，而不是取代态度。",
+        "application": "写完一段后问自己：我的态度是什么？如果答不上来，态度不够鲜明。",
+        "anti_pattern": "'一方面...另一方面...'= 态度=0 = 吸引力=0",
+        "source_file": "Oral_Script_Style.md"
+    },
+    {
+        "formula_name_en": "Emotional Wave Formula",
+        "formula_name_cn": "情绪波浪公式",
+        "equation": "节奏 = 酝酿 → 爆发 → 缓冲 → 再酝酿 → 再爆发 → 收尾",
+        "variables": {
+            "酝酿": "铺垫问题/积累情绪",
+            "爆发": "态度宣泄/短句高潮",
+            "缓冲": "案例/解释/平稳叙述",
+            "收尾": "金句/行动号召"
+        },
+        "mechanism": "人的注意力无法维持恒定状态。一直高能会疲劳，一直平淡会无聊。情绪节奏像心电图，有高有低才健康。设计内容时刻意安排2-3个爆发点，中间用解释和案例做缓冲。",
+        "application": "在内容中标记：这里是酝酿、这里是爆发、这里是缓冲。如果全是一种状态，需要调整。",
+        "anti_pattern": "从头到尾语气一样 = 像读PPT = 观众昏昏欲睡",
+        "source_file": "Oral_Script_Style.md"
+    },
+    {
+        "formula_name_en": "Pronoun Proximity Formula",
+        "formula_name_cn": "人称亲近公式",
+        "equation": "亲近感 = f(人称选择, 立场一致性)",
+        "variables": {
+            "咱们/我们": "最强同盟感 - '我们都是受害者'",
+            "我": "真实感 - '我也经历过'",
+            "你": "对话感 - '你有没有想过'",
+            "他们": "对立感 - '他们就是这样骗你的'"
+        },
+        "mechanism": "人称选择操控观众的心理位置。'咱们'把观众拉进同一阵营；'他们'制造共同敌人。熟练切换人称可以在不同段落引导观众的情感走向——先用'你'制造问题感，再用'咱们'建立同盟，最后用'他们'指向敌人。",
+        "application": "检查全文人称使用：是否全程用'人们''大家'这种疏离人称？该切换到'你'或'咱们'的地方是否切换了？",
+        "anti_pattern": "全程第三人称 = 观众觉得'跟我没关系'",
+        "source_file": "Oral_Script_Style.md"
+    },
+    {
+        "formula_name_en": "Oral vs Written Conversion",
+        "formula_name_cn": "口播语转换公式",
+        "equation": "口播语 = 书面语 - 套话 + 短句 + 人称",
+        "variables": {
+            "套话": "众所周知/综上所述/换言之等书面连接词",
+            "短句": "一句话一个点，不嵌套",
+            "人称": "大量使用你/我/咱们"
+        },
+        "mechanism": "口播语和书面语是两套系统。书面语追求完整和规范，口播语追求简洁和共鸣。转换时要做减法（删除书面套话）和加法（增加人称、拆成短句）。判断标准：这句话你会在和朋友聊天时说吗？",
+        "application": "写完后大声读一遍。听起来像'写的'还是'说的'？前者需要口播化改造。",
+        "anti_pattern": "直接把文章读出来 = 听起来像念稿 = 观众不爽",
+        "source_file": "Oral_Script_Style.md"
+    },
+    {
+        "formula_name_en": "Hook Effectiveness Formula",
+        "formula_name_cn": "钩子效力公式",
+        "equation": "效力 = 问题感 × 情绪强度 × 具体性",
+        "variables": {
+            "问题感": "让观众意识到'这跟我有关'的程度",
+            "情绪强度": "激发好奇/焦虑/共鸣的强度",
+            "具体性": "有场景/数字/画面感的程度"
+        },
+        "mechanism": "三个变量是乘法关系，任何一项为0都会导致整体效力崩塌。最常见的问题是缺乏具体性——抽象的话谁都会说，但没有画面感就没有冲击力。",
+        "application": "检验钩子时逐项打分：问题感(1-5)×情绪强度(1-5)×具体性(1-5)，低于50分需要重写。",
+        "anti_pattern": "抽象废话='众所周知这很重要'=具体性=0=效力=0",
+        "source_file": "1.0_Hook_Techniques.md"
+    },
+    {
+        "formula_name_en": "3-Second Decision Formula",
+        "formula_name_cn": "3秒决策公式",
+        "equation": "留存率 = f(信息密度, 相关性, 冲击力)",
+        "variables": {
+            "信息密度": "单位时间信息量，不能废话",
+            "相关性": "和观众的关联度",
+            "冲击力": "情绪或认知层面的冲击"
+        },
+        "mechanism": "观众在3秒内完成去留决策。这3秒必须同时满足：信息密度高（不废话）、相关性强（和我有关）、冲击力够（抓住注意力）。任何一项不足都会导致划走。",
+        "application": "删掉开头的一切废话，第一句就给冲击力最大的信息。",
+        "anti_pattern": "开头10秒都在铺垫=信息密度=0=观众已走",
+        "source_file": "1.0_Hook_Techniques.md"
+    },
+    {
+        "formula_name_en": "Counter-Intuitive Impact Formula",
+        "formula_name_cn": "反直觉冲击公式",
+        "equation": "冲击 = |常识X - 真相Y|",
+        "variables": {
+            "常识X": "观众普遍相信的认知",
+            "真相Y": "你要揭示的反常识信息"
+        },
+        "mechanism": "反直觉钩子的效力取决于X和Y之间的距离。距离越大冲击越强。但注意：Y必须有论据支撑，否则就是瞎说八道。",
+        "application": "列出目标观众的常见认知误区，选距离最大且你能论证的那个。",
+        "anti_pattern": "Y太保守=没什么反直觉的=冲击=0",
+        "source_file": "1.0_Hook_Techniques.md"
+    },
+    {
+        "formula_name_en": "Promise Credibility Formula",
+        "formula_name_cn": "承诺可信度公式",
+        "equation": "可信度 = 具体性 ÷ 夸张程度",
+        "variables": {
+            "具体性": "承诺内容的具体程度（有数字有场景）",
+            "夸张程度": "承诺和常识的偏离程度"
+        },
+        "mechanism": "利益承诺钩子的陷阱是过度承诺。承诺越具体可信度越高，但夸张过头可信度归零。'月入百万'不如'每天多出2小时'可信。",
+        "application": "检验承诺：这个我自己信吗？一个不太信的人会信吗？",
+        "anti_pattern": "夸张到离谱=可信度=0=观众直接划走",
+        "source_file": "1.0_Hook_Techniques.md"
+    },
+    {
+        "formula_name_en": "Intent Factor Weight Formula",
+        "formula_name_cn": "意图因子权重公式",
+        "equation": "总配置 = Σ(因子i × 权重i)",
+        "variables": {
+            "因子i": "单个意图因子（如说服、情感共鸣）",
+            "权重i": "该因子的重要性（0.0-1.0）"
+        },
+        "mechanism": "一篇内容的最终意图配置是所有意图因子的加权叠加。高权重因子（>=0.7）决定核心方向，中权重因子（0.4-0.6）提供补充，低权重因子（<=0.3）提供调味。加权后的配置触发推导规则，输出执行参数。",
+        "application": "设计内容时先列出所有可能的意图因子，给每个赋予权重，确保主意图明确。",
+        "anti_pattern": "所有因子权重都是0.7+ = 互相冲突 = AI精神分裂",
+        "source_file": "2.0_Intent_Factor_System.md"
+    },
+    {
+        "formula_name_en": "Rule Trigger Formula",
+        "formula_name_cn": "规则触发公式",
+        "equation": "触发 = (因子A >= 阈值A) AND (因子B >= 阈值B)",
+        "variables": {
+            "因子A/B": "参与条件判断的意图因子",
+            "阈值A/B": "触发该规则所需的最低权重"
+        },
+        "mechanism": "推导规则的触发是条件判断。例如 R001 规则：当 persuasion >= 0.7 AND value_guidance >= 0.6 时触发，推导出 attitude_strength 必须 >= 0.8。多条件必须同时满足才触发。",
+        "application": "检查你的意图因子配置，看会触发哪些规则，对应的执行要求是什么。",
+        "anti_pattern": "配置了高说服意图却不触发鲜明态度规则 = 配置错误",
+        "source_file": "2.0_Intent_Factor_System.md"
+    },
+    {
+        "formula_name_en": "Intent Conflict Detection",
+        "formula_name_cn": "意图冲突检测公式",
+        "equation": "冲突 = |因子A.参数需求 - 因子B.参数需求| > 阈值",
+        "variables": {
+            "因子A/B": "可能冲突的两个意图因子",
+            "参数需求": "该因子对某执行参数的要求（如rigor）",
+            "阈值": "允许的最大差异（通常0.4）"
+        },
+        "mechanism": "某些意图因子对同一参数有相反需求。比如娱乐消遣需要低rigor（轻松），知识传递需要高rigor（严谨）。当两个高权重因子对同一参数的需求差异超过阈值，系统应发出冲突警告。",
+        "application": "在配置意图因子前，检查是否有参数需求冲突的因子同时高权重。",
+        "anti_pattern": "娱乐(0.8) + 严谨科普(0.8) = rigor冲突 = 内容四不像",
+        "source_file": "2.0_Intent_Factor_System.md"
+    },
+    {
+        "formula_name_en": "Primary-Secondary Ratio Formula",
+        "formula_name_cn": "主次比例公式",
+        "equation": "主意图 >= 0.7, 次意图 <= 0.5, 高权重因子 <= 3",
+        "variables": {
+            "主意图": "核心目的，决定内容方向",
+            "次意图": "补充目的，提供层次",
+            "高权重因子数": "权重>=0.7的因子总数"
+        },
+        "mechanism": "一篇好内容有主有次。主意图必须足够强（>=0.7）才能明确方向，次意图必须有节制（<=0.5）才不会喧宾夺主。高权重因子超过3个会导致复杂度失控。",
+        "application": "检查配置：是否有一个明确的主意图？高权重因子是否太多？",
+        "anti_pattern": "8个因子全是0.7+ = 什么都想要 = 什么都做不好",
+        "source_file": "2.0_Intent_Factor_System.md"
+    },
+    {
+        "formula_name_en": "Persuasion Sharpness Formula",
+        "formula_name_cn": "说服鲜明度公式",
+        "equation": "鲜明度 = attitude_strength × (1 - fence_sitting_tolerance)",
+        "variables": {
+            "attitude_strength": "态度强度（0-1）",
+            "fence_sitting_tolerance": "骑墙容忍度（0-1）"
+        },
+        "mechanism": "说服类内容的效力取决于立场的鲜明度。态度越强、骑墙越少，鲜明度越高。当 persuasion >= 0.7 时，规则强制 attitude_strength >= 0.8, fence_sitting_tolerance <= 0.2，确保鲜明度 >= 0.64。",
+        "application": "写说服类内容时，先检查：我的结论是什么？有没有骑墙？",
+        "anti_pattern": "态度0.5 × (1-0.5) = 0.25 = 鲜明度不足 = 没有记忆点",
+        "source_file": "2.0_Intent_Factor_System.md"
+    },
+    {
+        "formula_name_en": "Emotional Resonance Formula",
+        "formula_name_cn": "情感共鸣公式",
+        "equation": "共鸣 = pain_point_depth × we_perspective × emotion_peaks",
+        "variables": {
+            "pain_point_depth": "痛点挖掘深度（0-1）",
+            "we_perspective": "我们视角强度（0-1）",
+            "emotion_peaks": "情绪高潮点数量（整数）"
+        },
+        "mechanism": "情感共鸣的效力是三个要素的乘积。痛点要深（说到观众心坎里）、视角要是'我们'（不是教育他们）、情绪要有高潮（不能一直平淡）。三者缺一效果大减。",
+        "application": "检查内容：痛点具体吗？用了'我们'视角吗？设计了几个情绪高潮点？",
+        "anti_pattern": "痛点浅(0.3) × 你视角(0.2) × 0个高潮 = 共鸣=0",
+        "source_file": "2.0_Intent_Factor_System.md"
+    },
+    {
+        "formula_name_en": "Combo Pattern Synergy Formula",
+        "formula_name_cn": "组合模式协同公式",
+        "equation": "组合效力 = 因子A效力 + 因子B效力 + 协同加成",
+        "variables": {
+            "因子A/B效力": "单个因子的效力",
+            "协同加成": "某些因子组合会产生的额外加成"
+        },
+        "mechanism": "某些意图因子组合有协同效应。比如'说服+情感共鸣'比单独说服更有力，因为情感让逻辑更容易被接受。'揭秘+情绪宣泄'天然配合，揭露内幕后宣泄愤怒。理解组合协同可以设计更有力的内容。",
+        "application": "选择意图因子时，考虑它们是否有协同效应，而不是随机组合。",
+        "anti_pattern": "随机堆砌 = 没有协同 = 1+1<2",
+        "source_file": "2.0_Intent_Factor_System.md"
+    },
+    {
+        "formula_name_en": "Traffic Pool Promotion Formula",
+        "formula_name_cn": "流量池晋级公式",
+        "equation": "完播率>40% + 互动率>3% → 进入下一流量池",
+        "variables": {
+            "完播率": "完整播放次数/总播放次数",
+            "互动率": "(点赞+评论+转发)/总曝光量"
+        },
+        "mechanism": "抖音/快手采用分层流量池机制。新视频进入冷启动池（300-500曝光），根据完播率和互动率决定是否进入更大的流量池（1000→5000→5万→50万→百万）。两个指标都达标才能晋级。",
+        "application": "发布短视频前，确保：1）视频足够短（新账号15-30秒）以保证完播率；2）有互动设计（提问、争议、实用）以提升互动率。",
+        "anti_pattern": "视频太长(2分钟) + 无互动设计 = 完播率20% + 互动率0.5% = 困死初始池",
+        "source_file": "Platform_Distribution_Strategy.md"
+    },
+    {
+        "formula_name_en": "YouTube Ranking Formula",
+        "formula_name_cn": "YouTube排名公式",
+        "equation": "排名 = 关键词匹配 × 视频表现 × 频道权威",
+        "variables": {
+            "关键词匹配": "标题/描述/标签与搜索词的相关度",
+            "视频表现": "CTR × 观看时长 × 互动率",
+            "频道权威": "历史表现、订阅数、更新频率"
+        },
+        "mechanism": "YouTube算法同时考虑SEO因素（关键词）和用户行为因素（视频表现）。CTR高说明封面吸引人，观看时长高说明内容有价值，互动多说明引发共鸣。三者相乘，任何一项为0都会导致排名失败。",
+        "application": "每个视频都要：1）标题包含核心关键词；2）缩略图高对比+大脸+情绪；3）内容保持紧凑避免流失。",
+        "anti_pattern": "标题党(高CTR) + 内容水(低观看时长) = 算法惩罚 = 不再推荐",
+        "source_file": "Platform_Distribution_Strategy.md"
+    },
+    {
+        "formula_name_en": "Content Distribution Value Formula",
+        "formula_name_cn": "内容分发价值公式",
+        "equation": "价值 = 创作质量 × 分发效率",
+        "variables": {
+            "创作质量": "内容本身的价值（七层质量模型）",
+            "分发效率": "平台匹配度 × 发布策略 × 优化执行"
+        },
+        "mechanism": "内容价值不仅取决于创作质量，还取决于分发效率。同样质量的内容，在错误的平台、错误的时间、错误的形式发布，价值归零。分发效率是乘法因子，不是加法因子。",
+        "application": "创作后，必须思考：1）这个内容最适合哪个平台？2）需要怎样变形？3）什么时候发布？4）如何优化SEO？",
+        "anti_pattern": "创作质量(0.9) × 分发效率(0.1) = 价值仅0.09 = 浪费优质内容",
+        "source_file": "Platform_Distribution_Strategy.md"
+    },
+    {
+        "formula_name_en": "Reddit Hot Score Formula",
+        "formula_name_cn": "Reddit热度公式",
+        "equation": "Hot Score = log(upvotes - downvotes) + age_factor",
+        "variables": {
+            "upvotes-downvotes": "净赞数",
+            "age_factor": "时间衰减因子（发布越久权重越低）"
+        },
+        "mechanism": "Reddit用对数函数计算热度，意味着早期的10个upvotes比后期的100个更有价值。加上时间衰减因子，旧帖子会快速失去竞争力（6-12小时后）。因此Reddit成功的关键是在发布后快速获得upvotes。",
+        "application": "在Reddit推广：1）选择目标受众活跃的时间发布（北美早晨）；2）内容不能太广告化；3）鼓励早期互动。",
+        "anti_pattern": "深夜发布 + 无人理会前2小时 = 永远上不了热门",
+        "source_file": "Platform_Distribution_Strategy.md"
+    },
+    {
+        "formula_name_en": "Xiaohongshu Note Weight Formula",
+        "formula_name_cn": "小红书笔记权重公式",
+        "equation": "权重 = 原创度(>60%) × 垂直度 × 互动率 × 活跃度",
+        "variables": {
+            "原创度": "内容原创程度，低于60%可能降权",
+            "垂直度": "账号定位与内容的一致性",
+            "互动率": "评论/收藏/点赞比例",
+            "活跃度": "账号更新频率和回复率"
+        },
+        "mechanism": "小红书笔记权重是多个维度的乘法关系。原创度是底线（<60%直接降权），垂直度决定账号标签准确性，互动率反映内容价值，活跃度体现账号健康度。四个维度需同时达标。",
+        "application": "在小红书运营：1）确保原创度>60%；2）坚持垂直领域；3）设计互动点；4）稳定更新频率。",
+        "anti_pattern": "搬运内容(原创度10%) × 跨领域(垂直度0.3) = 权重≈0 = 无曝光",
+        "source_file": "Platform_Distribution_Strategy.md"
+    }
+]

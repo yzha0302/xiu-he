@@ -1,0 +1,87 @@
+[
+    {
+        "formula_en": "Eating Bitterness Value Formula",
+        "formula_cn": "吃苦价值公式",
+        "equation": "Moral_Feeling = Endurance × Pain_Level",
+        "variables": {
+            "Moral_Feeling": "道德感/高尚感",
+            "Endurance": "忍耐程度",
+            "Pain_Level": "痛苦程度"
+        },
+        "mechanism": "在吃苦文化中，道德感=忍耐程度×痛苦程度——越忍耐越痛苦就越高尚。这是一种病态逻辑，把痛苦本身等同于价值。它让人不去思考为什么要承受这些痛苦、这些痛苦是否合理、是否有更好的选择，而是沉浸在'我在吃苦所以我高尚'的自我安慰中。这正是统治者需要的驯化效果。",
+        "application": "当发现自己在用'吃苦=高尚'安慰自己时，停下来问：这个苦值得吃吗？",
+        "anti_pattern": "用越痛苦越高尚来合理化不应承受的苦难。需要区分值得的挑战和不该承受的不公。",
+        "source_file": "Eating_Bitterness_and_Face_Culture.md"
+    },
+    {
+        "formula_en": "Face Dependence Formula",
+        "formula_cn": "面子依赖公式",
+        "equation": "Face_Need = Dignity_Loss × External_Sensitivity",
+        "variables": {
+            "Face_Need": "面子需求强度",
+            "Dignity_Loss": "尊严缺失程度",
+            "External_Sensitivity": "外部评价敏感度"
+        },
+        "mechanism": "面子需求=尊严缺失×外部评价敏感度。当内在尊严被系统性剝夺，人无法建立内在价值感，就会更加依赖外部符号——面子——来获得存在感。尊严缺失越严重，对外部评价越敏感，面子需求就越强。这解释了为什么中国人如此在意别人的看法——因为内在的尊严从未被建立。",
+        "application": "当发现自己过度在意面子时，检查内在尊严是否足够稳固。",
+        "anti_pattern": "用追求更多面子来填补尊严空缺。真正的解决方案是建立内在价值感。",
+        "source_file": "Eating_Bitterness_and_Face_Culture.md"
+    },
+    {
+        "formula_en": "Dependence Degree Formula",
+        "formula_cn": "依附程度公式",
+        "equation": "Dependence = Shame_Sensitivity / Inner_Value",
+        "variables": {
+            "Dependence": "依附程度",
+            "Shame_Sensitivity": "羞耻敏感度",
+            "Inner_Value": "内在价值感"
+        },
+        "mechanism": "依附程度=羞耻敏感度/内在价值感。羞耻越敏感（分子越大）且内在价值越低（分母越小），依附程度就越高。羞耻教育持续提高分子、降低分母，从而系统性地制造依附型人格。这样的人需要不断从外部获得认可来确认自己的存在价值，失去认可就会陷入巨大焦虑。",
+        "application": "增强内在价值感（分母）是降低依附程度的关键。",
+        "anti_pattern": "通过获得更多外部认可来减少焦虑。根源在于内在价值，不在于外部认可数量。",
+        "source_file": "Eating_Bitterness_and_Face_Culture.md"
+    },
+    {
+        "formula_en": "Power Addiction Formula",
+        "formula_cn": "官癮公式",
+        "equation": "Power_Addiction = Σ(Dignity_Deprivation) × Compensation_Desire",
+        "variables": {
+            "Power_Addiction": "官癮强度",
+            "Dignity_Deprivation": "尊严被剝夺经历",
+            "Compensation_Desire": "补偿渴望"
+        },
+        "mechanism": "官癮强度=尊严剝夺经历总和×补偿渴望。被剝夺得越多、补偿渴望越强，官癮就越重。这是一种病态的补偿性心理——不是去治愈创伤，而是去复制创伤。被上级羞辱过→也会羞辱下级；被权力碾压过→更执着于权力。这解释了'屠龙少年终成恶龙'的循环。",
+        "application": "识别自己对权力的渴望是否来自补偿心理。真正的治愈是建立内在尊严。",
+        "anti_pattern": "用获得权力来补偿尊严剝夺。往往会成为新的压迫者，复制创伤链条。",
+        "source_file": "Eating_Bitterness_and_Face_Culture.md"
+    },
+    {
+        "formula_en": "Subjectivity Formula",
+        "formula_cn": "主体性公式",
+        "equation": "Subjectivity = Self_Identity - External_Dependence",
+        "variables": {
+            "Subjectivity": "主体性",
+            "Self_Identity": "自我认同",
+            "External_Dependence": "外部依赖"
+        },
+        "mechanism": "主体性=自我认同-外部依赖。自我认同越强且外部依赖越低，主体性越强。吃苦文化和面子文化从两个方向同时削弱主体性：吃苦文化用'忍耐=高尚'销毁自我认同，面子文化用'面子=价值'增加外部依赖。两者叠加导致主体性被系统性摧毁。",
+        "application": "增强自我认同+降低外部依赖=恢复主体性。",
+        "anti_pattern": "用更多吃苦和更多面子来证明自己的价值。根本在于建立不依赖外部的自我认同。",
+        "source_file": "Eating_Bitterness_and_Face_Culture.md"
+    },
+    {
+        "formula_en": "Self Development Stage Formula",
+        "formula_cn": "自我发展阶段公式",
+        "equation": "Maturity = f(Internal_Value, External_Distinction, Integration)",
+        "variables": {
+            "Maturity": "心理成熟度",
+            "Internal_Value": "内在价值感",
+            "External_Distinction": "内外区分能力",
+            "Integration": "整合能力"
+        },
+        "mechanism": "心理成熟度是内在价值感、内外区分能力和整合能力的函数。第一阶段(依附性自我)三者都弱，完全依赖外部；第二阶段(分化性自我)能区分内外但尚未整合，'别人不喜欢我但我喜欢我自己'；第三阶段(整合性自我)三者都强，既能看见自己也能看见别人的价值。教育的目标应该是帮助人发展到第二、第三阶段。",
+        "application": "评估自己处于哪个发展阶段，有意识地向下一阶段发展。",
+        "anti_pattern": "把人批量压制在第一阶段。中国教育系统的核心问题。",
+        "source_file": "Eating_Bitterness_and_Face_Culture.md"
+    }
+]

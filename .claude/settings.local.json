@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__skill-server__list_skills",
+      "Bash(npm run build:*)",
+      "mcp__dida365__check-auth-status",
+      "mcp__dida365__list-projects",
+      "mcp__dida365__list-cached-data",
+      "mcp__dida365__list-tasks",
+      "mcp__dida365__create-task",
+      "mcp__dida365__get-task",
+      "mcp__dida365__update-task",
+      "mcp__dida365__delete-task",
+      "mcp__dida365__complete-task",
+      "Bash(claude mcp list:*)",
+      "Bash(claude mcp remove:*)",
+      "Bash(claude mcp add:*)",
+      "mcp__skill-server__use_skill"
+    ]
+  }
+}

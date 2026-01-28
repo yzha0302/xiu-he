@@ -1,0 +1,211 @@
+[
+    {
+        "term_en": "Eating Bitterness Culture",
+        "term_cn": "吃苦文化",
+        "definition_short": "把忍耐痛苦当作美德本身",
+        "definition_deep": "中国特有的文化现象：把对艰辛生活的忍耐、对个人权利尊嚴興趣的无限打压和压抑，上升为一种道德上的美德。吃苦不再是手段而成为目的本身。它是父权制集权和物质匮乏'交配'所产生的特殊宝宝——用道德高帽子让人忍受本不该忍受的痛苦。",
+        "why_it_matters": "吃苦文化是中国人丧失主体性的重要根源。",
+        "common_mistakes": "认为吃苦是普世价值。它是被外在环境强加的价值观，不是人的本性。",
+        "related_terms": [
+            "Mule Spirit",
+            "Shame Education",
+            "Subjectivity Loss"
+        ],
+        "source_file": "Eating_Bitterness_and_Face_Culture.md"
+    },
+    {
+        "term_en": "Mule Spirit",
+        "term_cn": "骡马精神",
+        "definition_short": "吃得少干得多脾气好——被驯化的理想状态",
+        "definition_deep": "用骡子(马和驴杂交)隐喻被吃苦文化驯化的理想人格。骡子结合马(力气大)和驴(吃得少)的优点：吃得少、干得多、脾气好、寿命长，没有生育能力。这是统治者眼中完美的被统治者形象——高效顺从不反抗，而且没有后代继承反抗基因。",
+        "why_it_matters": "骡马精神揭示了吃苦文化的统治功能。",
+        "common_mistakes": "认为骡马精神是'勤劳朴实'的美德。它是精神奴役的产物。",
+        "related_terms": [
+            "Eating Bitterness Culture",
+            "Subjectivity Loss",
+            "Servility"
+        ],
+        "source_file": "Eating_Bitterness_and_Face_Culture.md"
+    },
+    {
+        "term_en": "Face",
+        "term_cn": "面子",
+        "definition_short": "他人如何看我——向外看，捆绑羞耻感",
+        "definition_deep": "中国文化核心概念。面子关注的是外部评价，'他人如何看我'。它捆绑的情绪是羞耻感——别人看不起我会让我羞耻。面子是需要条件交换的，是昂贵的，只有通过努力才能拥有。面子是等级社会的衍生物，是社会控制的软机制，是尊严被剝夺后的病态补偿。",
+        "why_it_matters": "理解面子是理解中国社会运作逻辑的钥匙。",
+        "common_mistakes": "把面子等同于尊严。面子是外部的、有条件的；尊严是内在的、无条件的。",
+        "related_terms": [
+            "Dignity",
+            "Shame Education",
+            "Dependent Self"
+        ],
+        "source_file": "Eating_Bitterness_and_Face_Culture.md"
+    },
+    {
+        "term_en": "Dignity",
+        "term_cn": "尊严",
+        "definition_short": "我如何看我自己——向内看，天赋人权",
+        "definition_deep": "西方概念，20世纪初经日本翻译传入中国。尊严关注的是内在价值，'我如何看我自己'。它捆绑的情绪是愧疚感——我不认可此时此刻的自己。尊严是天赋的、与个人努力无关的——'上帝按照自己形象创造了人'，每个人不论贫富身份种族都拥有内在的不可剝夺的神圣价值。",
+        "why_it_matters": "尊严概念在中国文化中'没有根'，理解这一点是理解中国人心理困境的关键。",
+        "common_mistakes": "认为尊严需要通过努力获得。尊严是基础配置，不是奖励。",
+        "related_terms": [
+            "Face",
+            "Natural Rights",
+            "Integrated Self"
+        ],
+        "source_file": "Eating_Bitterness_and_Face_Culture.md"
+    },
+    {
+        "term_en": "Shame-based Education",
+        "term_cn": "羞耻教育",
+        "definition_short": "通过羞耻控制行为，而非培养内在价值",
+        "definition_deep": "中国教育和家庭教育的核心模式。核心逻辑是'你必须先否定自己，才配被认可'——我要听话才是好孩子，我要学习好才是好孩子。通过对自我的彻底放弃和对权威的彻底迎合来获得被肯定的感觉。长期导致永远得不到自己想要的，情绪冻结、思维冻结，失去思考能力。",
+        "why_it_matters": "羞耻教育是把孩子压制在依附性自我阶段的核心机制。",
+        "common_mistakes": "认为羞耻教育是'严格教育'。它系统性地摧毁内在价值感。",
+        "related_terms": [
+            "Face",
+            "Dependent Self",
+            "Emotional Freezing"
+        ],
+        "source_file": "Eating_Bitterness_and_Face_Culture.md"
+    },
+    {
+        "term_en": "Dependent Self",
+        "term_cn": "依附性自我",
+        "definition_short": "通过他人目光确认自己的心理阶段",
+        "definition_deep": "自我发展的第一阶段（通常10岁以下）。特征是'如果别人不喜欢我，我就会感到羞耻恐惧'。中国教育把孩子批量压抑在这个幼态阶段——即便体格长到1米8、博士学历，自我内核依然停留在五六岁，为别人一句评价感到羞耻恐惧。",
+        "why_it_matters": "依附性自我是理解中国人过度在意他人评价的心理根源。",
+        "common_mistakes": "认为在意他人评价是'成熟懂事'。过度在意是心理发育的停滞。",
+        "related_terms": [
+            "Differentiated Self",
+            "Integrated Self",
+            "Shame Education"
+        ],
+        "source_file": "Eating_Bitterness_and_Face_Culture.md"
+    },
+    {
+        "term_en": "Differentiated Self",
+        "term_cn": "分化性自我",
+        "definition_short": "通过自己眼光确认自己的心理阶段",
+        "definition_deep": "自我发展的第二阶段。特征是能区分外界评价和内在价值——'虽然别人不喜欢我，但我喜欢我自己'。当有这种心态时，分化性自我就建立了，内核变得稳定，情绪容易自我调节，更有勇气建立边界感。一个社会想要更多创新和成熟，这样的人需要占主流。",
+        "why_it_matters": "分化性自我是健康心理的标志。",
+        "common_mistakes": "认为'不在意别人评价'是冷漠或自大。它是心理成熟的表现。",
+        "related_terms": [
+            "Dependent Self",
+            "Integrated Self",
+            "Boundary"
+        ],
+        "source_file": "Eating_Bitterness_and_Face_Culture.md"
+    },
+    {
+        "term_en": "Integrated Self",
+        "term_cn": "整合性自我",
+        "definition_short": "内外平衡，我就是我的成熟心理阶段",
+        "definition_deep": "自我发展的第三阶段。不仅能理解自己的价值，也能看见别人的价值。能通过全局性的看见为自己创造健康的家庭关系和人际关系。在平等中享受彼此尊重的快乐，而不是通过比较和傾軋获得自我价值补偿。一个社会想要更多幸福和人文关怀，需要这样的人成为教育者、管理者、政策制定者。",
+        "why_it_matters": "整合性自我是心理成熟的最高阶段。",
+        "common_mistakes": "认为这个阶段是'圣人境界'。它是正常人应该达到的成熟状态。",
+        "related_terms": [
+            "Dependent Self",
+            "Differentiated Self",
+            "Dignity"
+        ],
+        "source_file": "Eating_Bitterness_and_Face_Culture.md"
+    },
+    {
+        "term_en": "Power Addiction",
+        "term_cn": "官癮",
+        "definition_short": "对权力地位的病态渴望——长期受辱后的补偿性心理",
+        "definition_deep": "受儒家思想影响越深、等级观念越强的地方，官癮越重。当一个人从小到大都生活在等级森严、无法被平等对待的环境中，就会极度渴望被尊重。但这种渴望是病态的——长久心理损伤后的补偿性心理。当官带来的虚幻尊重非常容易上癮，因为他终于体会到从小到大从未体会过的被尊重感觉。",
+        "why_it_matters": "官癮解释了为什么中国社会权力崇拜如此普遍。",
+        "common_mistakes": "认为官癮是'上进心'。它是尊严剝夺后的病态补偿。",
+        "related_terms": [
+            "Face",
+            "Dignity Deprivation",
+            "Shame Education"
+        ],
+        "source_file": "Eating_Bitterness_and_Face_Culture.md"
+    },
+    {
+        "term_en": "Dignity Deprivation",
+        "term_cn": "尊严剝夺",
+        "definition_short": "系统性地剝夺个体的内在价值感",
+        "definition_deep": "中国教育和社会的核心机制。三步走：1)没人告诉你你有尊严；2)从幼年开始剝夺尊严（红领巾分批、成绩排名等）；3)告诉你尊严要用条件交换。这种经历弥漫中国人一生——从来不知道尊严为何物，但幼小心灵早早经历了匮乏尊严的痛苦。",
+        "why_it_matters": "尊严剝夺是面子文化和官癮的根源。",
+        "common_mistakes": "认为这些是'正常的教育方式'。它们是系统性的精神虐待。",
+        "related_terms": [
+            "Face",
+            "Power Addiction",
+            "Shame Education"
+        ],
+        "source_file": "Eating_Bitterness_and_Face_Culture.md"
+    },
+    {
+        "term_en": "Spiritual Poverty",
+        "term_cn": "精神贫困化",
+        "definition_short": "大脑没有空间向深处走",
+        "definition_deep": "吃苦人格的第四大症状。当大量时间消耗在劳动和对生存的焦虑上，大脑就没法停下来向深处走，思索真正有价值的思想。有些老年人非常喜欢忙碌，忙碌到停不下来——因为当他忙碌下来凝视自己，才是真正的深渊：他会发现自己的世界'黑蕩蕩空洞洞，没有美没有向往'。",
+        "why_it_matters": "精神贫困化解释了为什么中国社会精神生活趋于单调。",
+        "common_mistakes": "用忙碌逃避内心空虚。真正的解决方案是面对自己、丰富精神世界。",
+        "related_terms": [
+            "Eating Bitterness Culture",
+            "Mule Spirit",
+            "Emotional Numbing"
+        ],
+        "source_file": "Eating_Bitterness_and_Face_Culture.md"
+    },
+    {
+        "term_en": "Emotional Numbing",
+        "term_cn": "情感麻木",
+        "definition_short": "为回避痛苦而封闭感受能力",
+        "definition_deep": "吃苦文化的社会效应之一。当你选择吃苦、长期在吃苦中，为了回避这种折磨和痛苦，就必须变得麻木。变麻木后会彻底变成生存主义、实用主义，关于美的追求、精神世界的探索都会被大脑判定为'没有意义的东西'从而不予关注。整个群体的娱乐生活和精神生活趋于单调一致。",
+        "why_it_matters": "情感麻木解释了为什么中国人'靈性干涸'。",
+        "common_mistakes": "认为麻木是'成熟稳重'。它是精神创伤的自我保护机制。",
+        "related_terms": [
+            "Spiritual Poverty",
+            "Eating Bitterness Culture"
+        ],
+        "source_file": "Eating_Bitterness_and_Face_Culture.md"
+    },
+    {
+        "term_en": "Slaying the Dragon",
+        "term_cn": "屠龙少年终成恶龙",
+        "definition_short": "曾被压迫者成为新的压迫者",
+        "definition_deep": "官癮的典型循环：被上级羞辱过→也会羞辱下级；被权力碾压过→更执着于权力；曾在屈辱中渴求尊严→但最终成为制造屈辱的人。最初可能因为单纯理想而上路，最终却因为文化的重力而万劫不复。补偿性心理让人不是去治愈创伤，而是去复制创伤。",
+        "why_it_matters": "屠龙少年理论解释了为什么压迫模式会代际传递。",
+        "common_mistakes": "认为'我曾被伤害所以我理解弱者'。没有治愈的创伤倾向于复制。",
+        "related_terms": [
+            "Power Addiction",
+            "Dignity Deprivation",
+            "Shame Education"
+        ],
+        "source_file": "Eating_Bitterness_and_Face_Culture.md"
+    },
+    {
+        "term_en": "Warrior of the Heart",
+        "term_cn": "心灵的勇士",
+        "definition_short": "菩萨在藏语中的含义——对心灵诚实和勇敢",
+        "definition_deep": "菩萨在藏语中的意思是'心灵的勇士'。对心灵的诚实和对勇敢的追求，是被中国文化大大低估的美德。希望每个人都能成为自己生命的菩萨，做自己心灵的勇士——发现并且享受自己心中正确的事。这是对吃苦文化和面子文化的根本超越。",
+        "why_it_matters": "心灵勇士是本模块提出的终极解决方案。",
+        "common_mistakes": "认为菩萨只是宗教概念。它是一种人格理想。",
+        "related_terms": [
+            "Dignity",
+            "Integrated Self",
+            "Inner Value"
+        ],
+        "source_file": "Eating_Bitterness_and_Face_Culture.md"
+    },
+    {
+        "term_en": "Social Control Soft Mechanism",
+        "term_cn": "社会控制软机制",
+        "definition_short": "用羞耻而非制度实现社会控制",
+        "definition_deep": "面子是极其高效的社会控制机制，大大降低了管控成本。它让人们不需要用制度约束，只需要用輿论/羞耻/丢脸就能让个体完成自我驯化。人们脑海里永远有两个关键字：害怕（不敢挑战权威）和羞耻（不敢试错）。为保持体面会压抑不同意见、维持表面和谐。久而久之丧失为尊严付出代价的能力，变得虚伪而软弱。",
+        "why_it_matters": "理解软机制是理解中国社会'潜规则'的钥匙。",
+        "common_mistakes": "认为面子只是'文化传统'。它是精密的社会控制工具。",
+        "related_terms": [
+            "Face",
+            "Shame Education",
+            "Self-Domestication"
+        ],
+        "source_file": "Eating_Bitterness_and_Face_Culture.md"
+    }
+]

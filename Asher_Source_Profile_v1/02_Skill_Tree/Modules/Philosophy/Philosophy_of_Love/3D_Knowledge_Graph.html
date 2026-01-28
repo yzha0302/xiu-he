@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Philosophy of Love - 3D Knowledge Graph</title>
+    <!-- 
+        ASHER KNOWLEDGE GRAPH - Philosophy of Love Module
+        Based on: 爱的发生学 (The Ontology of Love)
+        Source: https://www.youtube.com/watch?v=jU9Q0VTJ6rY
+    -->
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #000005;
+            overflow: hidden;
+        }
+
+        /* HUD: Top-Left */
+        #hud {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 400px;
+            background: rgba(10, 15, 25, 0.95);
+            border: 1px solid #334466;
+            border-left: 3px solid #00ffff;
+            border-radius: 4px;
+            padding: 25px;
+            color: #eef;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            display: none;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        #hud h2 {
+            margin: 0 0 5px 0;
+            font-size: 24px;
+            padding-right: 30px;
+        }
+
+        #hud .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.2s;
+            font-size: 20px;
+            color: #889;
+            text-align: center;
+            line-height: 24px;
+        }
+
+        #hud .close-btn:hover {
+            opacity: 1;
+            color: #ff5555;
+        }
+
+        #hud .sub-header {
+            font-size: 14px;
+            color: #8899aa;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #334455;
+            padding-bottom: 10px;
+        }
+
+        #hud .section-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #556677;
+            letter-spacing: 2px;
+            margin-top: 15px;
+            margin-bottom: 8px;
+        }
+
+        #hud .content-block {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #ccd;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        #hud .en {
+            color: #fff;
+        }
+
+        #hud .cn {
+            color: #88aacc;
+            font-size: 13px;
+        }
+
+        #hud .keyword {
+            color: #00ffff;
+            font-weight: bold;
+        }
+
+        #hud .scene-tag {
+            display: inline-block;
+            font-size: 12px;
+            background: #223344;
+            color: #aab;
+            padding: 4px 8px;
+            border-radius: 12px;
+            margin: 3px 5px 3px 0;
+            border: 1px solid #334455;
+        }
+
+        /* Legend: Bottom-Left (Collapsible) */
+        #legend {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(10, 15, 25, 0.9);
+            border: 1px solid #334466;
+            border-radius: 4px;
+            padding: 15px 20px;
+            color: #ccd;
+            backdrop-filter: blur(10px);
+            min-width: 180px;
+        }
+
+        #legend h3 {
+            margin: 0;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #778;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        #legend h3::after {
+            content: '▼';
+            font-size: 10px;
+            transition: transform 0.3s;
+        }
+
+        #legend.collapsed h3::after {
+            transform: rotate(-90deg);
+        }
+
+        #legend .legend-items {
+            max-height: 200px;
+            overflow-y: auto;
+            transition: max-height 0.3s ease;
+        }
+
+        #legend.collapsed .legend-items {
+            max-height: 0;
+        }
+
+        #legend .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 6px 0;
+            font-size: 13px;
+        }
+
+        #legend .legend-color {
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+            margin-right: 10px;
+        }
+
+        #legend .legend-label {
+            color: #aab;
+        }
+
+        #legend .legend-count {
+            margin-left: auto;
+            color: #667;
+            font-size: 11px;
+        }
+
+        #legend .legend-total {
+            font-size: 11px;
+            color: #667;
+            margin-left: 10px;
+        }
+
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #00ffff;
+            font-family: monospace;
+            letter-spacing: 2px;
+        }
+    </style>
+    <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/3d-force-graph"></script>
+    <script src="https://unpkg.com/three-spritetext@1.8.1/dist/three-spritetext.min.js"></script>
+    <script src="https://unpkg.com/dat.gui"></script>
+</head>
+
+<body>
+    <div id="loading">INITIALIZING...</div>
+    <div id="3d-graph"></div>
+
+    <!-- HUD with Close Button -->
+    <div id="hud">
+        <span class="close-btn" onclick="hideHUD()">×</span>
+        <h2 id="hud-title">Title</h2>
+        <div id="hud-cn" class="sub-header">Subtitle</div>
+        <div class="section-title">Definition 定义</div>
+        <div id="hud-desc" class="content-block"></div>
+        <div class="section-title">Deep Dive 深度解析</div>
+        <div id="hud-notes" class="content-block" style="border-left: 2px solid #00ffff;"></div>
+        <div class="section-title">Scenarios 应用场景</div>
+        <div id="hud-scenes"></div>
+    </div>
+
+    <!-- Legend (Collapsible) -->
+    <div id="legend">
+        <h3 onclick="toggleLegend()">Domain 领域 <span id="legend-total"></span></h3>
+        <div id="legend-items" class="legend-items"></div>
+    </div>
+
+    <script>
+        // === CATEGORY CONFIGURATION ===
+        const CATEGORY_CONFIG = {
+            "Psychology": { color: "#00ffff", label_en: "Psychology", label_cn: "心理学" },
+            "Philosophy": { color: "#ff0055", label_en: "Philosophy", label_cn: "哲学" },
+            "Attachment": { color: "#00ff00", label_en: "Attachment", label_cn: "依恋理论" },
+            "Existentialism": { color: "#ff8800", label_en: "Existentialism", label_cn: "存在主义" },
+            "Core": { color: "#aa00ff", label_en: "Core Concept", label_cn: "核心概念" }
+        };
+
+        const COLOR_PALETTE = [
+            "#00ffff", "#00ff00", "#ff0055", "#ff8800", "#aa00ff",
+            "#ffff00", "#00ffaa", "#ff00aa", "#88ff00", "#0088ff"
+        ];
+        let colorIndex = 0;
+
+        function getCategory(groupName, labelCn = groupName) {
+            if (!CATEGORY_CONFIG[groupName]) {
+                CATEGORY_CONFIG[groupName] = {
+                    color: COLOR_PALETTE[colorIndex % COLOR_PALETTE.length],
+                    label_en: groupName,
+                    label_cn: labelCn
+                };
+                colorIndex++;
+            }
+            return CATEGORY_CONFIG[groupName];
+        }
+
+        function toggleLegend() {
+            document.getElementById('legend').classList.toggle('collapsed');
+        }
+
+        function buildLegend() {
+            const container = document.getElementById('legend-items');
+            container.innerHTML = '';
+            const counts = {};
+            let total = 0;
+            nodes.forEach(n => { counts[n.group] = (counts[n.group] || 0) + 1; total++; });
+            document.getElementById('legend-total').innerText = `(${Object.keys(counts).length} 域 / ${total} 点)`;
+            for (const [group, count] of Object.entries(counts)) {
+                const cat = getCategory(group);
+                const item = document.createElement('div');
+                item.className = 'legend-item';
+                item.innerHTML = `
+                    <div class="legend-color" style="background:${cat.color}"></div>
+                    <span class="legend-label">${cat.label_en} ${cat.label_cn}</span>
+                    <span class="legend-count">${count}</span>
+                `;
+                container.appendChild(item);
+            }
+        }
+
+        const nodes = [
+            // === 核心概念 Core ===
+            {
+                id: "AdultLove", en: "Adult Romantic Love", cn: "成人之爱", group: "Core", val: 40,
+                desc_en: "The first encounter with a complete yet foreign Other in our lifetime.",
+                desc_cn: "我们生命中第一次遭遇到一个完整又陌生的他人时产生的特殊体验。",
+                notes_en: "Adult love is both <span class='keyword'>body (sexuality)</span> and <span class='keyword'>mind (revolution of identity)</span>. It liberates us from the cage of sameness.",
+                notes_cn: "成人之爱同时是<span class='keyword'>身体的(性欲)</span>和<span class='keyword'>精神的(同一性革命)</span>。它把我们从同一性牢笼中解放。",
+                scenes_en: ["First love", "Life partnership"],
+                scenes_cn: ["初恋", "人生伴侣"]
+            },
+            {
+                id: "Response", en: "Response", cn: "回应", group: "Core", val: 32,
+                desc_en: "The response to an individual's desire for closeness - the source of all security.",
+                desc_cn: "对个体亲近愿望的回应——一切安全感的来源。",
+                notes_en: "What you want from lovers is <span class='keyword'>essentially the same</span> as what you wanted from your parents.",
+                notes_cn: "你在恋人那里所要的东西，和在父母那里所要的东西<span class='keyword'>本质上一样</span>。",
+                scenes_en: ["Relationship maintenance", "Child development"],
+                scenes_cn: ["关系维护", "儿童发展"]
+            },
+            {
+                id: "Disenchantment", en: "Disenchantment", cn: "脱魅/贤者时间", group: "Core", val: 28,
+                desc_en: "The moment when mystery dissolves after climax. ! becomes ?",
+                desc_cn: "高潮后神秘性消失的虚无时刻。感叹号变成问号。",
+                notes_en: "'This is the answer!' becomes 'This is the answer?' The <span class='keyword'>exclamation mark becomes question mark</span>.",
+                notes_cn: "'这就是答案！'变成'这就是答案？'<span class='keyword'>叹号变成问号</span>。",
+                scenes_en: ["Post-orgasm", "Achievement emptiness"],
+                scenes_cn: ["性高潮后", "达成目标后的空虚"]
+            },
+            {
+                id: "Sublimation", en: "Sublimation", cn: "升华", group: "Core", val: 28,
+                desc_en: "Converting sexual energy and ambiguity into creativity and art.",
+                desc_cn: "将性能量和暧昧性转化为创造力和艺术。",
+                notes_en: "Neither domination by desire (rogue) nor repression by superego. <span class='keyword'>Transform energy, don't deny it.</span>",
+                notes_cn: "既不被欲望支配（流氓），也不被超我压抑。<span class='keyword'>转化能量，而非否定。</span>",
+                scenes_en: ["Artistic creation", "Productive channeling"],
+                scenes_cn: ["艺术创作", "能量引导"]
+            },
+            {
+                id: "SeductionDialectics", en: "Seduction Dialectics", cn: "诱惑的辩证法", group: "Core", val: 25,
+                desc_en: "The more you forbid, the more seductive it becomes.",
+                desc_cn: "越禁止越诱惑。遮蔽反而放大神秘性。",
+                notes_en: "Precisely because we're <span class='keyword'>ashamed to discuss sex</span>, seduction completes itself.",
+                notes_cn: "恰恰因为我们<span class='keyword'>羞于谈论性</span>，诱惑才得以完成。",
+                scenes_en: ["Sexual repression", "Taboo topics"],
+                scenes_cn: ["性压抑", "禁忌话题"]
+            },
+            // === 依恋理论 Attachment ===
+            {
+                id: "Attachment", en: "Attachment", cn: "依恋", group: "Attachment", val: 35,
+                desc_en: "The innate human need to form bonds and receive responses from others.",
+                desc_cn: "人生下来就想和别人建立连接、获得回应的本能需求。",
+                notes_en: "From <span class='keyword'>cradle to grave</span>, the attachment behavioral system remains active.",
+                notes_cn: "从<span class='keyword'>摇篮到坟墓</span>，依恋行为系统一直活跃。",
+                scenes_en: ["Romantic relationships", "Parent-child bonds"],
+                scenes_cn: ["恋爱关系", "亲子关系"]
+            },
+            {
+                id: "SecureAttachment", en: "Secure Attachment", cn: "安全型依恋", group: "Attachment", val: 25,
+                desc_en: "Attachment style formed through consistent, timely responses.",
+                desc_cn: "因为持续得到及时回应而形成的信任、开放的依恋风格。",
+                notes_en: "<span class='keyword'>Self-confidence is not faked, it's loved into being.</span>",
+                notes_cn: "<span class='keyword'>自信不是装出来的，自信是爱出来的。</span>",
+                scenes_en: ["Healthy relationships"],
+                scenes_cn: ["健康关系"]
+            },
+            {
+                id: "AnxiousAttachment", en: "Anxious Attachment", cn: "焦虑型依恋", group: "Attachment", val: 25,
+                desc_en: "Attachment style characterized by intense need and fear of rejection.",
+                desc_cn: "非常渴求又害怕受伤的纠结状态。",
+                notes_en: "Result of <span class='keyword'>hyperactivating strategy</span>.",
+                notes_cn: "<span class='keyword'>过度激活策略</span>的结果。",
+                scenes_en: ["Clingy behavior", "Jealousy"],
+                scenes_cn: ["黏人行为", "嫉妒"]
+            },
+            {
+                id: "AvoidantAttachment", en: "Avoidant Attachment", cn: "回避型依恋", group: "Attachment", val: 25,
+                desc_en: "Attachment style characterized by emotional numbness and denial of needs.",
+                desc_cn: "麻木将死的状态,表面自信骄傲,实则是补偿。",
+                notes_en: "Result of <span class='keyword'>deactivating strategy</span>.",
+                notes_cn: "<span class='keyword'>去激活策略</span>的结果。",
+                scenes_en: ["Emotional distancing", "Commitment phobia"],
+                scenes_cn: ["情感疏离", "承诺恐惧"]
+            },
+            {
+                id: "Hyperactivating", en: "Hyperactivating Strategy", cn: "过度激活策略", group: "Attachment", val: 20,
+                desc_en: "Desperately seeking closeness when responses fail.",
+                desc_cn: "得不到回应时，拼命索取、焦虑不安的心理策略。",
+                notes_en: "The anxious person <span class='keyword'>amplifies distress signals</span> hoping to get response.",
+                notes_cn: "焦虑者<span class='keyword'>放大痛苦信号</span>希望获得回应。",
+                scenes_en: ["Sending multiple texts"],
+                scenes_cn: ["连续发消息"]
+            },
+            {
+                id: "Deactivating", en: "Deactivating Strategy", cn: "去激活策略", group: "Attachment", val: 20,
+                desc_en: "Denying need for closeness when responses fail.",
+                desc_cn: "得不到回应时，干脆说'我不需要'的心理策略。",
+                notes_en: "'They don't care about me? Fine, <span class='keyword'>I don't care either</span>.'",
+                notes_cn: "'他们不在乎我？好吧，<span class='keyword'>我也不在乎</span>。'",
+                scenes_en: ["Emotional shutdown"],
+                scenes_cn: ["情感关闭"]
+            },
+            // === 存在主义 Existentialism ===
+            {
+                id: "Event", en: "Event", cn: "事件", group: "Existentialism", val: 32,
+                desc_en: "A rupture that breaks the everyday. What changes everything.",
+                desc_cn: "打破日常的断裂。改变一切的东西。",
+                notes_en: "Love is an <span class='keyword'>encounter</span>. That's why most languages describe it as <span class='keyword'>falling</span>.",
+                notes_cn: "爱情是一场<span class='keyword'>遭遇</span>。这就是为什么大多数语言把它描绘成<span class='keyword'>坠落</span>。",
+                scenes_en: ["Falling in love"],
+                scenes_cn: ["坠入爱河"]
+            },
+            {
+                id: "Contingency", en: "Contingency", cn: "偶然性", group: "Existentialism", val: 30,
+                desc_en: "The unpredictable encounter. Contingency is life's true color.",
+                desc_cn: "无法预测的遭遇。偶然性才是生命的底色。",
+                notes_en: "Love reveals: <span class='keyword'>contingency is the fundamental condition</span>.",
+                notes_cn: "爱情揭示：<span class='keyword'>偶然性才是根本</span>。",
+                scenes_en: ["Chance meetings"],
+                scenes_cn: ["偶遇"]
+            },
+            {
+                id: "Difference", en: "Difference", cn: "差异性", group: "Existentialism", val: 30,
+                desc_en: "The alternate perspective brought by the Other.",
+                desc_cn: "他者带来的不同视角。通过差异，世界重新生成。",
+                notes_en: "Lovers want to <span class='keyword'>see through each other's eyes</span>.",
+                notes_cn: "恋人想借对方的眼睛<span class='keyword'>看</span>世界。",
+                scenes_en: ["Shared experiences"],
+                scenes_cn: ["共享体验"]
+            },
+            // === 哲学 Philosophy ===
+            {
+                id: "Identity", en: "Identity", cn: "同一性", group: "Philosophy", val: 28,
+                desc_en: "The sense of stable self we desperately maintain.",
+                desc_cn: "我们拼命维护的'我是谁'的稳定感。",
+                notes_en: "Identity becomes both <span class='keyword'>armor and shackles</span>.",
+                notes_cn: "同一性成了我们的<span class='keyword'>铠甲与镣铐</span>。",
+                scenes_en: ["Adolescent crisis"],
+                scenes_cn: ["青春期危机"]
+            },
+            {
+                id: "Parallax", en: "Parallax", cn: "视差", group: "Philosophy", val: 22,
+                desc_en: "The difference when viewing from two positions.",
+                desc_cn: "从两个不同位置看同一物体时产生的差异。",
+                notes_en: "Prior stable <span class='keyword'>world-picture begins to quake</span>.",
+                notes_cn: "先前稳固的<span class='keyword'>世界图景开始松动</span>。",
+                scenes_en: ["Perspective taking"],
+                scenes_cn: ["换位思考"]
+            },
+            {
+                id: "Antithesis", en: "Antithesis", cn: "反体", group: "Philosophy", val: 25,
+                desc_en: "The element that negates the thesis in dialectics.",
+                desc_cn: "辩证法中对正题构成否定的要素。",
+                notes_en: "Her ordered face makes you feel your life is <span class='keyword'>chaotic, false, shallow</span>.",
+                notes_cn: "她有秩序感的面容让你觉得你的生活<span class='keyword'>混乱、虚假、表浅</span>。",
+                scenes_en: ["Encountering beauty"],
+                scenes_cn: ["遭遇美"]
+            },
+            {
+                id: "Synthesis", en: "Synthesis", cn: "合体", group: "Philosophy", val: 22,
+                desc_en: "The resolution of thesis and antithesis.",
+                desc_cn: "正题与反题的统一。求解释困惑的冲动。",
+                notes_en: "The desire to <span class='keyword'>understand and unite</span> with the source of confusion.",
+                notes_cn: "<span class='keyword'>理解并统一</span>困惑源头的欲望。",
+                scenes_en: ["Intimacy"],
+                scenes_cn: ["亲密"]
+            },
+            {
+                id: "Aletheia", en: "Aletheia", cn: "无蔽", group: "Philosophy", val: 30,
+                desc_en: "Heidegger's concept: when concealed and revealed merge into one.",
+                desc_cn: "海德格尔概念：显隐合一、秩序与神秘统一的时刻。",
+                notes_en: "Face and body <span class='keyword'>simultaneously present</span>. The false duality transcended.",
+                notes_cn: "面容与身体<span class='keyword'>同时在场</span>。虚假二元被超越。",
+                scenes_en: ["Intimate revelation"],
+                scenes_cn: ["亲密揭示"]
+            },
+            // === 符号学 Semiotics ===
+            {
+                id: "GeneralSeduction", en: "General Seduction Theory", cn: "普遍诱惑理论", group: "Semiotics", val: 35,
+                desc_en: "Laplanche's theory: adult signifiers invade children's cognition.",
+                desc_cn: "拉普朗什理论：成人世界的性符号入侵孩童认知。",
+                notes_en: "Seduction is <span class='keyword'>everywhere</span>: profanity, red lingerie, being covered in cinema.",
+                notes_cn: "诱惑<span class='keyword'>无处不在</span>：国骂、红色胸衣、电影院被蒙眼。",
+                scenes_en: ["Childhood experiences"],
+                scenes_cn: ["童年经验"]
+            },
+            {
+                id: "BlackBox", en: "Black Box", cn: "黑箱", group: "Semiotics", val: 28,
+                desc_en: "The mysterious zone transforming physiology into behavior.",
+                desc_cn: "把生理信号转化为行为的神秘加工区域。",
+                notes_en: "An <span class='keyword'>extremely important region</span> where motor, perceptual possibilities form.",
+                notes_cn: "一个<span class='keyword'>极为重要的区域</span>，运动、知觉的可能性在这里形成。",
+                scenes_en: ["Psychoanalysis"],
+                scenes_cn: ["精神分析"]
+            },
+            {
+                id: "EnigmaticSignifier", en: "Enigmatic Signifier", cn: "神秘信息", group: "Semiotics", val: 28,
+                desc_en: "Untranslatable sexual symbols from adults to children.",
+                desc_cn: "成人向孩童传递的无法被翻译的性符号。",
+                notes_en: "Mystery has <span class='keyword'>ambiguity</span>: understandable yet not understood.",
+                notes_cn: "神秘有<span class='keyword'>暧昧性</span>：可理解却不理解。",
+                scenes_en: ["Sexual awakening"],
+                scenes_cn: ["性启蒙"]
+            },
+            {
+                id: "ObjetA", en: "Objet petit a", cn: "对象a", group: "Semiotics", val: 30,
+                desc_en: "The 'something more' in desire that can never be satisfied.",
+                desc_cn: "欲望中'多出来的'那个永远无法满足的东西。",
+                notes_en: "Desire always <span class='keyword'>exceeds</span> need by something unspeakable.",
+                notes_cn: "欲望总是<span class='keyword'>多出来</span>某些无法言说的东西。",
+                scenes_en: ["Romantic longing"],
+                scenes_cn: ["浪漫渴望"]
+            },
+            {
+                id: "PanSexualism", en: "Pan-Sexualism", cn: "泛性论", group: "Semiotics", val: 22,
+                desc_en: "Sexual experience as prototype for all experiences.",
+                desc_cn: "性经验是其他经验的基本原型。",
+                notes_en: "Everyday = foreplay; Intercourse = truth. <span class='keyword'>The rogue's mind is universal</span>.",
+                notes_cn: "日常=前戏；交构=真性。<span class='keyword'>好色之徒的心智是普遍心智</span>。",
+                scenes_en: ["Consumer behavior"],
+                scenes_cn: ["消费行为"]
+            },
+            {
+                id: "Desire", en: "Desire", cn: "欲望", group: "Semiotics", val: 25,
+                desc_en: "Need transformed by symbolic order. Always exceeds satisfaction.",
+                desc_cn: "被符号秩序转化的需要。永远超出满足。",
+                notes_en: "Unlike need, desire can <span class='keyword'>never be fully satisfied</span>.",
+                notes_cn: "与需要不同，欲望<span class='keyword'>永远无法完全满足</span>。",
+                scenes_en: ["Longing"],
+                scenes_cn: ["渴望"]
+            },
+            {
+                id: "Need", en: "Need", cn: "需要", group: "Semiotics", val: 20,
+                desc_en: "Biological instinct that can be satisfied.",
+                desc_cn: "可以被满足的生物本能。",
+                notes_en: "Need is <span class='keyword'>satisfiable</span>. Hunger→eat→satisfied.",
+                notes_cn: "需要是<span class='keyword'>可满足的</span>。饿→吃→饱。",
+                scenes_en: ["Basic drives"],
+                scenes_cn: ["基本驱力"]
+            },
+            {
+                id: "Ambiguity", en: "Ambiguity", cn: "暧昧性", group: "Semiotics", val: 22,
+                desc_en: "The core structure of seduction. Understandable yet not understood.",
+                desc_cn: "诱惑的核心结构——可理解却不理解。",
+                notes_en: "Ambiguity <span class='keyword'>sustains desire</span> by always promising 'more'.",
+                notes_cn: "暧昧性通过暗示'还有更多'来<span class='keyword'>维持欲望</span>。",
+                scenes_en: ["Flirtation"],
+                scenes_cn: ["调情"]
+            },
+            // === 美学 Aesthetics ===
+            {
+                id: "OrderSense", en: "Order Sense", cn: "秩序感", group: "Aesthetics", val: 28,
+                desc_en: "Beautiful face = unnatural but ordered. Between boredom and chaos.",
+                desc_cn: "美丽的脸 = 不自然但有秩序。愉悦在于乏味和杂乱之间。",
+                notes_en: "Beauty deviates from average <span class='keyword'>without falling into disorder</span>.",
+                notes_cn: "美偏离均值<span class='keyword'>却没有落入杂乱</span>。",
+                scenes_en: ["Facial aesthetics"],
+                scenes_cn: ["面容审美"]
+            },
+            {
+                id: "Morphology", en: "Morphological Mapping", cn: "形态学映射", group: "Aesthetics", val: 22,
+                desc_en: "Correspondence between facial features and sexual organs.",
+                desc_cn: "面容与性器官之间的形态对应关系。",
+                notes_en: "Women have <span class='keyword'>two mouths and two sets of lips</span>.",
+                notes_cn: "女性有<span class='keyword'>两张嘴和两副唇</span>。",
+                scenes_en: ["Beauty standards"],
+                scenes_cn: ["审美标准"]
+            },
+            {
+                id: "Scarcity", en: "Scarcity", cn: "稀缺性", group: "Aesthetics", val: 20,
+                desc_en: "Key to beauty. Universal order loses value.",
+                desc_cn: "美的关键。普遍秩序失去价值。",
+                notes_en: "If order becomes <span class='keyword'>universal</span>, it retreats into non-order.",
+                notes_cn: "如果秩序变成<span class='keyword'>普遍</span>的，它就退隐成无秩序。",
+                scenes_en: ["Rarity value"],
+                scenes_cn: ["稀有价值"]
+            },
+            {
+                id: "FacialBeauty", en: "Facial Beauty", cn: "面容之美", group: "Aesthetics", val: 24,
+                desc_en: "The revealed, ordered aspect that triggers dialectical desire.",
+                desc_cn: "显露的、有秩序的方面，触发辩证欲望。",
+                notes_en: "The face is the <span class='keyword'>spiritual sex organ</span>.",
+                notes_cn: "面容是<span class='keyword'>精神意义上的性器官</span>。",
+                scenes_en: ["First impression"],
+                scenes_cn: ["第一印象"]
+            },
+            {
+                id: "BodilyMystery", en: "Bodily Mystery", cn: "肉身之谜", group: "Aesthetics", val: 24,
+                desc_en: "The concealed, mysterious aspect that dialectically pairs with face.",
+                desc_cn: "隐藏的、神秘的方面，与面容构成辩证对。",
+                notes_en: "Without hidden mystery, <span class='keyword'>visible order loses meaning</span>.",
+                notes_cn: "没有隐的神秘，<span class='keyword'>显的秩序就失去意义</span>。",
+                scenes_en: ["Anticipation"],
+                scenes_cn: ["期待"]
+            },
+            // === 心理学 Psychology ===
+            {
+                id: "TwoFactorTheory", en: "Two-Factor Theory", cn: "情绪二因说", group: "Psychology", val: 22,
+                desc_en: "Emotion = Physiological Arousal + Cognitive Interpretation.",
+                desc_cn: "情绪 = 生理唤醒 + 认知解释。",
+                notes_en: "The <span class='keyword'>Capilano Bridge Experiment</span> suggested love as misattribution.",
+                notes_cn: "<span class='keyword'>吊桥实验</span>暗示爱情可能是归因错误。",
+                scenes_en: ["Emotion research"],
+                scenes_cn: ["情绪研究"]
+            },
+            {
+                id: "CapilanoBridge", en: "Capilano Bridge Experiment", cn: "吊桥实验", group: "Psychology", val: 18,
+                desc_en: "Classic study: dangerous situation → misattributed attraction.",
+                desc_cn: "经典研究：危险情境→误归因为吸引力。",
+                notes_en: "Fear arousal was <span class='keyword'>mislabeled as attraction</span>.",
+                notes_cn: "恐惧唤醒被<span class='keyword'>误标记为吸引</span>。",
+                scenes_en: ["Research"],
+                scenes_cn: ["研究"]
+            },
+            // === 思想家 Thinkers ===
+            {
+                id: "Laplanche", en: "Jean Laplanche", cn: "拉普朗什", group: "Thinkers", val: 22,
+                desc_en: "French psychoanalyst. Developed General Seduction Theory.",
+                desc_cn: "法国精神分析师。发展了普遍诱惑理论。",
+                notes_en: "Extended Freud's seduction theory to <span class='keyword'>universal, everyday seduction</span>.",
+                notes_cn: "将弗洛伊德的诱惑理论扩展为<span class='keyword'>普遍的、日常的诱惑</span>。",
+                scenes_en: ["Psychoanalysis"],
+                scenes_cn: ["精神分析"]
+            },
+            {
+                id: "Lacan", en: "Jacques Lacan", cn: "拉康", group: "Thinkers", val: 24,
+                desc_en: "French psychoanalyst. Developed concepts of Desire and Objet a.",
+                desc_cn: "法国精神分析师。发展了欲望和对象a概念。",
+                notes_en: "<span class='keyword'>Desire is structured like a language.</span> Objet a is the cause of desire.",
+                notes_cn: "<span class='keyword'>欲望像语言一样被结构。</span>对象a是欲望的原因。",
+                scenes_en: ["Psychoanalysis"],
+                scenes_cn: ["精神分析"]
+            },
+            {
+                id: "MerleauPonty", en: "Merleau-Ponty", cn: "梅洛-庞蒂", group: "Thinkers", val: 20,
+                desc_en: "French phenomenologist. Body-subject and perception.",
+                desc_cn: "法国现象学家。身体主体与知觉。",
+                notes_en: "The body is not an object but <span class='keyword'>the vehicle of being-in-the-world</span>.",
+                notes_cn: "身体不是对象而是<span class='keyword'>在世存在的载体</span>。",
+                scenes_en: ["Phenomenology"],
+                scenes_cn: ["现象学"]
+            },
+            {
+                id: "Gombrich", en: "E.H. Gombrich", cn: "贡布里希", group: "Thinkers", val: 18,
+                desc_en: "Art historian. Wrote 'The Sense of Order'.",
+                desc_cn: "艺术史家。著有《秩序感》。",
+                notes_en: "Pleasure lies <span class='keyword'>between boredom and chaos</span>.",
+                notes_cn: "愉悦在于<span class='keyword'>乏味和杂乱之间</span>。",
+                scenes_en: ["Art theory"],
+                scenes_cn: ["艺术理论"]
+            },
+            {
+                id: "Irigaray", en: "Luce Irigaray", cn: "伊利格瑞", group: "Thinkers", val: 18,
+                desc_en: "Feminist philosopher. Sexual difference and morphology.",
+                desc_cn: "女性主义哲学家。性差异与形态学。",
+                notes_en: "Women have <span class='keyword'>two mouths</span>, drawing abyss everywhere.",
+                notes_cn: "女性有<span class='keyword'>两张嘴</span>，处处描绘深渊。",
+                scenes_en: ["Feminist theory"],
+                scenes_cn: ["女性主义理论"]
+            },
+            {
+                id: "Bowlby", en: "John Bowlby", cn: "鲍比", group: "Thinkers", val: 20,
+                desc_en: "British psychologist. Created Attachment Theory.",
+                desc_cn: "英国心理学家。创立依恋理论。",
+                notes_en: "Attachment system is active <span class='keyword'>from cradle to grave</span>.",
+                notes_cn: "依恋系统<span class='keyword'>从摇篮到坟墓</span>一直活跃。",
+                scenes_en: ["Developmental psychology"],
+                scenes_cn: ["发展心理学"]
+            },
+            {
+                id: "Erikson", en: "Erik Erikson", cn: "埃里克森", group: "Thinkers", val: 18,
+                desc_en: "Developmental psychologist. 8-stage theory, identity crisis.",
+                desc_cn: "发展心理学家。八阶段理论，同一性危机。",
+                notes_en: "Adolescence: <span class='keyword'>identity vs role confusion</span>.",
+                notes_cn: "青春期：<span class='keyword'>同一性对角色混乱</span>。",
+                scenes_en: ["Life stages"],
+                scenes_cn: ["人生阶段"]
+            },
+            {
+                id: "Badiou", en: "Alain Badiou", cn: "巴迪欧", group: "Thinkers", val: 20,
+                desc_en: "French philosopher. Love as Event and Two.",
+                desc_cn: "法国哲学家。爱作为事件与二。",
+                notes_en: "Love is an <span class='keyword'>encounter with the Two</span>.",
+                notes_cn: "爱是<span class='keyword'>与二相遇</span>。",
+                scenes_en: ["Philosophy of love"],
+                scenes_cn: ["爱的哲学"]
+            },
+            {
+                id: "Heidegger", en: "Martin Heidegger", cn: "海德格尔", group: "Thinkers", val: 18,
+                desc_en: "German philosopher. Aletheia (unconcealment) and Being.",
+                desc_cn: "德国哲学家。无蔽(真理)与存在。",
+                notes_en: "Truth is <span class='keyword'>aletheia</span> - unconcealment.",
+                notes_cn: "真理是<span class='keyword'>无蔽</span>。",
+                scenes_en: ["Phenomenology"],
+                scenes_cn: ["现象学"]
+            },
+            {
+                id: "Freud", en: "Sigmund Freud", cn: "弗洛伊德", group: "Thinkers", val: 22,
+                desc_en: "Father of psychoanalysis. Libido, repression, sublimation.",
+                desc_cn: "精神分析之父。力比多、压抑、升华。",
+                notes_en: "<span class='keyword'>Pan-sexualism</span>: sexuality underlies all motivation.",
+                notes_cn: "<span class='keyword'>泛性论</span>：性欲是一切动机的基础。",
+                scenes_en: ["Psychoanalysis"],
+                scenes_cn: ["精神分析"]
+            }
+        ];
+
+        const links = [
+            // 依恋系统
+            { source: "Attachment", target: "SecureAttachment", label: "success path" },
+            { source: "Attachment", target: "AnxiousAttachment", label: "hyperactivating" },
+            { source: "Attachment", target: "AvoidantAttachment", label: "deactivating" },
+            { source: "Response", target: "Attachment", label: "fulfills" },
+            { source: "Response", target: "SecureAttachment", label: "creates" },
+            { source: "Hyperactivating", target: "AnxiousAttachment", label: "produces" },
+            { source: "Deactivating", target: "AvoidantAttachment", label: "produces" },
+            { source: "Bowlby", target: "Attachment", label: "created" },
+            // 存在主义
+            { source: "Identity", target: "Event", label: "shattered by" },
+            { source: "Event", target: "Contingency", label: "manifests as" },
+            { source: "Event", target: "Difference", label: "manifests as" },
+            { source: "Contingency", target: "AdultLove", label: "element of" },
+            { source: "Difference", target: "AdultLove", label: "element of" },
+            { source: "Difference", target: "Parallax", label: "creates" },
+            { source: "AdultLove", target: "Attachment", label: "extends" },
+            { source: "AdultLove", target: "Identity", label: "disrupts" },
+            { source: "Badiou", target: "Event", label: "theorized" },
+            { source: "Erikson", target: "Identity", label: "theorized" },
+            // 诱惑理论
+            { source: "GeneralSeduction", target: "EnigmaticSignifier", label: "produces" },
+            { source: "EnigmaticSignifier", target: "ObjetA", label: "structures" },
+            { source: "GeneralSeduction", target: "BlackBox", label: "operates through" },
+            { source: "BlackBox", target: "PanSexualism", label: "explains" },
+            { source: "Laplanche", target: "GeneralSeduction", label: "created" },
+            { source: "MerleauPonty", target: "BlackBox", label: "describes" },
+            { source: "Lacan", target: "ObjetA", label: "conceived" },
+            { source: "Freud", target: "PanSexualism", label: "established" },
+            // 欲望系统
+            { source: "Need", target: "Desire", label: "transforms into" },
+            { source: "Desire", target: "ObjetA", label: "structured by" },
+            { source: "ObjetA", target: "Disenchantment", label: "dissolves in" },
+            { source: "Sublimation", target: "ObjetA", label: "channels" },
+            { source: "EnigmaticSignifier", target: "Ambiguity", label: "creates" },
+            { source: "Ambiguity", target: "Desire", label: "sustains" },
+            { source: "SeductionDialectics", target: "EnigmaticSignifier", label: "amplifies" },
+            // 美学辩证法
+            { source: "OrderSense", target: "Antithesis", label: "creates" },
+            { source: "Antithesis", target: "ObjetA", label: "triggers desire" },
+            { source: "Antithesis", target: "Synthesis", label: "demands" },
+            { source: "OrderSense", target: "Morphology", label: "relates to" },
+            { source: "Scarcity", target: "OrderSense", label: "enables" },
+            { source: "FacialBeauty", target: "OrderSense", label: "embodies" },
+            { source: "BodilyMystery", target: "FacialBeauty", label: "dialectic with" },
+            { source: "Aletheia", target: "Disenchantment", label: "precedes" },
+            { source: "AdultLove", target: "Aletheia", label: "reaches" },
+            { source: "GeneralSeduction", target: "AdultLove", label: "shapes" },
+            { source: "Gombrich", target: "OrderSense", label: "theorized" },
+            { source: "Irigaray", target: "Morphology", label: "theorized" },
+            { source: "Heidegger", target: "Aletheia", label: "revived" },
+            // 心理学
+            { source: "TwoFactorTheory", target: "Attachment", label: "challenged by" },
+            { source: "CapilanoBridge", target: "TwoFactorTheory", label: "supports" },
+            // 升华
+            { source: "PanSexualism", target: "AdultLove", label: "underlies" },
+            { source: "Sublimation", target: "Freud", label: "from" },
+            { source: "Lacan", target: "Desire", label: "theorized" }
+        ];
+
+        // --- CONFIGURATION ---
+        const settings = { linkDistance: 80, chargeStrength: -200, labelSize: 1.0, opacity: 0.8, autoRotate: true };
+
+        // --- ENGINE ---
+        const elem = document.getElementById('3d-graph');
+        const Graph = ForceGraph3D()(elem)
+            .graphData({ nodes, links })
+            .backgroundColor('#000005')
+            .showNavInfo(false)
+            .nodeThreeObject(node => {
+                const cat = getCategory(node.group);
+                const text = `${node.en}\n${node.cn}`;
+                const sprite = new SpriteText(text);
+                sprite.color = cat.color;
+                sprite.textHeight = (node.val / 2) * settings.labelSize;
+                sprite.fontFace = 'Arial'; sprite.fontWeight = 'bold';
+                sprite.backgroundColor = `rgba(0,0,0,${settings.opacity / 2})`;
+                sprite.padding = 4;
+                sprite.userData = { baseSize: node.val / 2 };
+                return sprite;
+            })
+            .linkWidth(link => 2.5)
+            .linkColor(link => {
+                const sourceNode = nodes.find(n => n.id === link.source || n.id === link.source.id);
+                if (sourceNode) return getCategory(sourceNode.group).color + '88';
+                return '#445566';
+            })
+            .linkOpacity(0.7)
+            .linkCurvature(0.12)
+            .linkCurveRotation(link => {
+                const hash = (link.source?.id || link.source) + (link.target?.id || link.target);
+                let sum = 0;
+                for (let i = 0; i < hash.length; i++) sum += hash.charCodeAt(i);
+                return (sum % 360) * (Math.PI / 180);
+            })
+            .linkDirectionalArrowLength(5)
+            .linkDirectionalArrowRelPos(0.9)
+            .linkDirectionalArrowColor(link => {
+                const sourceNode = nodes.find(n => n.id === link.source || n.id === link.source.id);
+                if (sourceNode) return getCategory(sourceNode.group).color;
+                return '#ffffff';
+            })
+            .linkDirectionalParticles(3)
+            .linkDirectionalParticleSpeed(0.005)
+            .linkDirectionalParticleWidth(2)
+            .linkDirectionalParticleColor(link => {
+                const sourceNode = nodes.find(n => n.id === link.source || n.id === link.source.id);
+                if (sourceNode) return getCategory(sourceNode.group).color;
+                return '#ffffff';
+            })
+            .onNodeClick(node => {
+                const currentPos = Graph.cameraPosition();
+                const currentDistance = Math.hypot(currentPos.x, currentPos.y, currentPos.z);
+                const nodeDistance = Math.hypot(node.x, node.y, node.z) || 1;
+
+                const newX = (node.x / nodeDistance) * currentDistance;
+                const newY = (node.y / nodeDistance) * currentDistance;
+                const newZ = (node.z / nodeDistance) * currentDistance;
+
+                Graph.cameraPosition({ x: newX, y: newY, z: newZ }, node, 1500);
+                showHUD(node);
+            });
+
+        Graph.d3Force('link').distance(settings.linkDistance);
+        Graph.d3Force('charge').strength(settings.chargeStrength);
+
+        // --- CONTROLS ---
+        const gui = new dat.GUI();
+        const folder = gui.addFolder('Graph Settings');
+        folder.add(settings, 'linkDistance', 10, 300).onChange(val => { Graph.d3Force('link').distance(val); Graph.d3ReheatSimulation(); });
+        folder.add(settings, 'chargeStrength', -500, -10).onChange(val => { Graph.d3Force('charge').strength(val); Graph.d3ReheatSimulation(); });
+        folder.add(settings, 'labelSize', 0.1, 3.0).onChange(val => { Graph.scene().traverse(obj => { if (obj.userData?.baseSize) obj.textHeight = obj.userData.baseSize * val; }); });
+        folder.add(settings, 'opacity', 0.1, 1.0).onChange(val => { Graph.scene().traverse(obj => { if (obj.userData?.baseSize) obj.backgroundColor = `rgba(0,0,0,${val / 2})`; }); });
+        folder.add(settings, 'autoRotate').onChange(val => { Graph.controls().autoRotate = val; });
+        folder.open();
+
+        // --- HUD LOGIC ---
+        function showHUD(node) {
+            const el = (id) => document.getElementById(id);
+            const cat = getCategory(node.group);
+            el('hud').style.display = 'block';
+            el('hud-title').innerText = node.en;
+            el('hud-title').style.color = cat.color;
+            el('hud-cn').innerText = `${node.cn} [${node.group}]`;
+            el('hud-desc').innerHTML = `<div class="en">${node.desc_en}</div><div class="cn">${node.desc_cn}</div>`;
+            el('hud-notes').innerHTML = `<div class="en">${node.notes_en}</div><div class="cn">${node.notes_cn}</div>`;
+            const sceneContainer = el('hud-scenes');
+            sceneContainer.innerHTML = '';
+            if (node.scenes_en) {
+                for (let i = 0; i < node.scenes_en.length; i++) {
+                    const tag = document.createElement('span');
+                    tag.className = 'scene-tag';
+                    tag.innerHTML = `${node.scenes_en[i]} <span style="color:#88aacc">${node.scenes_cn[i]}</span>`;
+                    sceneContainer.appendChild(tag);
+                }
+            }
+        }
+
+        function hideHUD() {
+            document.getElementById('hud').style.display = 'none';
+        }
+
+        // Initialize
+        buildLegend();
+        setTimeout(() => { document.getElementById('loading').style.display = 'none'; }, 1000);
+        Graph.controls().autoRotate = true;
+    </script>
+</body>
+
+</html>

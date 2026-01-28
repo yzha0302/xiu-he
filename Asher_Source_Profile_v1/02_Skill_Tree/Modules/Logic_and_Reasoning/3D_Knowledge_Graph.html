@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Logic and Reasoning 3D Knowledge Graph</title>
+    <!-- 
+        ASHER KNOWLEDGE GRAPH STANDARD v2.1
+        - Dynamic Category System: AI assigns groups based on concept domain
+        - Collapsible Legend with total count
+        - HUD with close button
+        - Tube-style links with particles
+        - Bilingual HUD
+    -->
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #000005;
+            overflow: hidden;
+        }
+
+        /* HUD: Top-Left */
+        #hud {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 400px;
+            background: rgba(10, 15, 25, 0.95);
+            border: 1px solid #334466;
+            border-left: 3px solid #00ffff;
+            border-radius: 4px;
+            padding: 25px;
+            color: #eef;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            display: none;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        #hud h2 {
+            margin: 0 0 5px 0;
+            font-size: 24px;
+            padding-right: 30px;
+        }
+
+        #hud .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.2s;
+            font-size: 20px;
+            color: #889;
+            text-align: center;
+            line-height: 24px;
+        }
+
+        #hud .close-btn:hover {
+            opacity: 1;
+            color: #ff5555;
+        }
+
+        #hud .sub-header {
+            font-size: 14px;
+            color: #8899aa;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #334455;
+            padding-bottom: 10px;
+        }
+
+        #hud .section-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #556677;
+            letter-spacing: 2px;
+            margin-top: 15px;
+            margin-bottom: 8px;
+        }
+
+        #hud .content-block {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #ccd;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        #hud .en {
+            color: #fff;
+        }
+
+        #hud .cn {
+            color: #88aacc;
+            font-size: 13px;
+        }
+
+        #hud .keyword {
+            color: #00ffff;
+            font-weight: bold;
+        }
+
+        #hud .scene-tag {
+            display: inline-block;
+            font-size: 12px;
+            background: #223344;
+            color: #aab;
+            padding: 4px 8px;
+            border-radius: 12px;
+            margin: 3px 5px 3px 0;
+            border: 1px solid #334455;
+        }
+
+        #hud .related-tag {
+            display: inline-block;
+            font-size: 11px;
+            background: #224433;
+            color: #8ca;
+            padding: 3px 8px;
+            border-radius: 8px;
+            margin: 2px 4px 2px 0;
+            border: 1px solid #335544;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        #hud .related-tag:hover {
+            background: #337755;
+            color: #afa;
+        }
+
+        #hud .warning-block {
+            font-size: 13px;
+            line-height: 1.6;
+            color: #faa;
+            background: rgba(80, 20, 20, 0.3);
+            padding: 10px;
+            border-radius: 4px;
+            border-left: 2px solid #f55;
+        }
+
+        #hud .insight-block {
+            font-size: 13px;
+            line-height: 1.6;
+            color: #afc;
+            background: rgba(20, 60, 30, 0.3);
+            padding: 10px;
+            border-radius: 4px;
+            border-left: 2px solid #5a5;
+        }
+
+        /* Legend: Bottom-Left (Collapsible) */
+        #legend {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(10, 15, 25, 0.9);
+            border: 1px solid #334466;
+            border-radius: 4px;
+            padding: 15px 20px;
+            color: #ccd;
+            backdrop-filter: blur(10px);
+            min-width: 180px;
+        }
+
+        #legend h3 {
+            margin: 0;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #778;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        #legend h3::after {
+            content: '▼';
+            font-size: 10px;
+            transition: transform 0.3s;
+        }
+
+        #legend.collapsed h3::after {
+            transform: rotate(-90deg);
+        }
+
+        #legend .legend-items {
+            max-height: 200px;
+            overflow-y: auto;
+            transition: max-height 0.3s ease;
+        }
+
+        #legend.collapsed .legend-items {
+            max-height: 0;
+        }
+
+        #legend .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 6px 0;
+            font-size: 13px;
+        }
+
+        #legend .legend-color {
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+            margin-right: 10px;
+        }
+
+        #legend .legend-label {
+            color: #aab;
+        }
+
+        #legend .legend-count {
+            margin-left: auto;
+            color: #667;
+            font-size: 11px;
+        }
+
+        #legend .legend-total {
+            font-size: 11px;
+            color: #667;
+            margin-left: 10px;
+        }
+
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #00ffff;
+            font-family: monospace;
+            letter-spacing: 2px;
+        }
+    </style>
+    <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/3d-force-graph"></script>
+    <script src="https://unpkg.com/three-spritetext@1.8.1/dist/three-spritetext.min.js"></script>
+    <script src="https://unpkg.com/dat.gui"></script>
+</head>
+
+<body>
+    <div id="loading">INITIALIZING...</div>
+    <div id="3d-graph"></div>
+
+    <!-- HUD with Close Button -->
+    <div id="hud">
+        <span class="close-btn" onclick="hideHUD()">×</span>
+        <h2 id="hud-title">Title</h2>
+        <div id="hud-cn" class="sub-header">Subtitle</div>
+        <div class="section-title">Definition 定义</div>
+        <div id="hud-desc" class="content-block"></div>
+        <div class="section-title">Deep Dive 深度解析</div>
+        <div id="hud-notes" class="content-block" style="border-left: 2px solid #00ffff;"></div>
+        <div class="section-title">Why It Matters 为什么重要</div>
+        <div id="hud-why" class="insight-block"></div>
+        <div class="section-title">Common Mistakes 常见误区</div>
+        <div id="hud-mistakes" class="warning-block"></div>
+        <div class="section-title">Related Terms 关联术语</div>
+        <div id="hud-related"></div>
+        <div class="section-title">Scenarios 应用场景</div>
+        <div id="hud-scenes"></div>
+    </div>
+
+    <!-- Legend (Collapsible) -->
+    <div id="legend">
+        <h3 onclick="toggleLegend()">Domain 领域 <span id="legend-total"></span></h3>
+        <div id="legend-items" class="legend-items"></div>
+    </div>
+
+    <script>
+        // === CATEGORY CONFIGURATION ===
+        const CATEGORY_CONFIG = {
+            "Logic": { color: "#00ffff", label_en: "Logic", label_cn: "逻辑学" },
+            "Cognitive_Science": { color: "#00ff00", label_en: "Cognitive Science", label_cn: "认知科学" },
+            "Philosophy": { color: "#aa00ff", label_en: "Philosophy", label_cn: "哲学" },
+            "Statistics": { color: "#ff8800", label_en: "Statistics", label_cn: "统计学" },
+            "Computation": { color: "#ff0088", label_en: "Computation", label_cn: "计算科学" },
+        };
+
+        const COLOR_PALETTE = [
+            "#00ffff", "#00ff00", "#ff0055", "#ff8800", "#aa00ff",
+            "#ffff00", "#00ffaa", "#ff00aa", "#88ff00", "#0088ff"
+        ];
+        let colorIndex = 0;
+
+        function getCategory(groupName, labelCn = groupName) {
+            if (CATEGORY_CONFIG[groupName]) {
+                return CATEGORY_CONFIG[groupName];
+            }
+            if (!CATEGORY_CONFIG[groupName]) {
+                CATEGORY_CONFIG[groupName] = {
+                    color: COLOR_PALETTE[colorIndex % COLOR_PALETTE.length],
+                    label_en: groupName,
+                    label_cn: labelCn
+                };
+                colorIndex++;
+            }
+            return CATEGORY_CONFIG[groupName];
+        }
+
+        function toggleLegend() {
+            document.getElementById('legend').classList.toggle('collapsed');
+        }
+
+        function buildLegend() {
+            const container = document.getElementById('legend-items');
+            container.innerHTML = '';
+            const counts = {};
+            let total = 0;
+            nodes.forEach(n => { counts[n.group] = (counts[n.group] || 0) + 1; total++; });
+            document.getElementById('legend-total').innerText = `(${Object.keys(counts).length} 域 / ${total} 点)`;
+            for (const [group, count] of Object.entries(counts)) {
+                const cat = getCategory(group);
+                const item = document.createElement('div');
+                item.className = 'legend-item';
+                item.innerHTML = `
+                    <div class="legend-color" style="background:${cat.color}"></div>
+                    <span class="legend-label">${cat.label_en} ${cat.label_cn}</span>
+                    <span class="legend-count">${count}</span>
+                `;
+                container.appendChild(item);
+            }
+        }
+
+        // --- DATA INJECTION POINT ---
+        const nodes = [
+            {
+                id: "Deductive_Logic",
+                en: "Deductive Logic",
+                cn: "演绎逻辑",
+                group: "Logic",
+                val: 30,
+                desc_en: "Logic of necessity",
+                desc_cn: "从大范畴必然推出小范畴的推理",
+                notes_cn: "演绎逻辑是从已知的一般性命题推导出特殊性结论的推理形式。其核心特征是'必然的导出'——只要前提为真且推理形式有效，结论必然为真。亚里士多德认为这是唯一符合'逻辑本质'的推理形式，因为大范畴的存在是小范畴存在的充分条件。从词项逻辑到命题逻辑再到数理逻辑，演绎逻辑构成了形式逻辑的核心，也是现代计算机和人工智能的理论基础。",
+                why_matters: "理解演绎逻辑是理解现代科技文明根基的关键——从AEIO到阿尔法Go的必然导出。",
+                mistakes: "认为学会演绎逻辑就能在日常生活中逻辑严密。实际上演绎逻辑是外挂，需要封闭系统和完整信息。",
+                related: ["Syllogism", "Propositional_Logic", "Boolean_Algebra", "Formal_Logic"]
+            },
+            {
+                id: "Inductive_Logic",
+                en: "Inductive Logic",
+                cn: "归纳逻辑",
+                group: "Logic",
+                val: 30,
+                desc_en: "Logic of probability",
+                desc_cn: "从个别到一般的推理，永远只能无限逼近",
+                notes_cn: "归纳逻辑是从特殊观察中得出一般性结论的推理形式，是人类高效思考的基础。它不具有演绎那样的必然有效性，只有'归纳强度'的差异。密尔五法（求同、求异、共变、剩余、并用）系统化了归纳方法。统计学的发展使归纳从定性走向定量，但皮尔逊的工作表明：因果可能只是相关的特例(r=1)，归纳永远存在那0.0001%的不确定性。这就是休谟之叉的深刻含义。",
+                why_matters: "归纳是我们日常决策的主要思维方式，理解其局限能避免把相关当因果。",
+                mistakes: "把统计相关当成因果关系。皮尔逊说因果是相关的特例，大多数相关只是共同受第三因素影响。",
+                related: ["Mills_Methods", "Correlation", "Bounded_Rationality", "Humes_Fork"]
+            },
+            {
+                id: "Analogical_Reasoning",
+                en: "Analogical Reasoning",
+                cn: "类比推理",
+                group: "Logic",
+                val: 40,
+                desc_en: "The core of thinking",
+                desc_cn: "在相似范畴间迁移理解，思维的真正引擎",
+                notes_cn: "类比推理是在相似的范畴之间进行的推理，是思维最基本、最基础、也是最重要的认知方式。侯世达认为'思维的核心就是类比'——人在思考时，每一秒钟都在做数不清的类比。类比分为属性类比（形容词）、关系类比（动词/介词）和结构类比（名词）。我们无时无刻不在用类比理解世界，但往往以隐喻的形式隐秘地运作。概念整合理论解释了类比如何通过结构映射创造新的理解。",
+                why_matters: "类比是人类比AI更智能于模糊情境的核心能力——基于原型的经验迁移。",
+                mistakes: "认为类比只是'不太严谨的推理'。它是触类旁通、不言而喻的认知基础。",
+                related: ["Metaphor", "Prototype", "Conceptual_Blending", "Family_Resemblance"]
+            },
+            {
+                id: "Syllogism",
+                en: "Syllogism",
+                cn: "三段论",
+                group: "Logic",
+                val: 20,
+                desc_en: "Classic deductive form",
+                desc_cn: "用规则在脑子里画圈圈，确保圈圈画对",
+                notes_cn: "三段论是由两个前提（大前提、小前提）和一个结论组成的演绎推理形式。它的实质是在我们的思维中澄清概念的外延关系——用三段式在脑子里画圈圈。256种三段论形式中只有15种是有效的，6条规则就能判断有效性（如'中项必须在前提中至少周延一次'）。关键区分：推理的有效≠内容的真假。逻辑只管形式，内容真假需要实证科学。",
+                why_matters: "三段论是演绎逻辑的基础形式，理解它才能理解'必然的导出'。",
+                mistakes: "认为'这还用逻辑吗，3岁小孩都懂'。哲学家正是通过追问这些'显而易见'的规律创造了形式逻辑。",
+                related: ["AEIO_Propositions", "Deductive_Logic", "Term_Logic"]
+            },
+            {
+                id: "Propositional_Logic",
+                en: "Propositional Logic",
+                cn: "命题逻辑",
+                group: "Logic",
+                val: 25,
+                desc_en: "Logic of propositions",
+                desc_cn: "研究命题之间关系的逻辑，用真值表穷尽可能性",
+                notes_cn: "命题逻辑关注命题之间的关系，而非概念之间的关系（那是词项逻辑）。它通过命题连接词（而且/或者/如果那么/并非）组合基本命题成复合命题。逻辑学家发明真值表穷尽了所有可能的真假判断规则——比如2个基本命题有4种真假状况组合、16种复合命题形式。命题演算是对命题逻辑的数学化处理，使符号代数运算成为可能。",
+                why_matters: "命题逻辑是从自然语言到符号运算的关键一步，是布尔代数的直接基础。",
+                mistakes: "用日常语言理解命题连接词。'如果节目好看，那么汤汁用心'='节目不好看或者汤汁用心'——这不是人话，是运算。",
+                related: ["Truth_Table", "Boolean_Algebra", "Propositional_Calculus"]
+            },
+            {
+                id: "Boolean_Algebra",
+                en: "Boolean Algebra",
+                cn: "布尔代数",
+                group: "Computation",
+                val: 35,
+                desc_en: "Logic as math",
+                desc_cn: "把逻辑变成1和0的运算，现代计算机的基础",
+                notes_cn: "1854年乔治·布尔发现，对逻辑命题的运算可以简化成符号代数运算：真/假=1/0，而且=乘法，或者=加法，否定=1减它。这三个运算符（与/或/非）可以表示所有复合命题形式。这个发现使'用数理符号规范自然语言'变成可期待的事，开启了逻辑学黄金时代。1936年香农发现布尔逻辑可以用电路开关实现（闭合=1，断开=0），这直接导致了现代计算机的诞生。",
+                why_matters: "布尔代数是形式脱离内容的关键时刻，使逻辑可以被'外包'给机器。",
+                mistakes: "认为布尔代数只是数学家的游戏。从布尔到香农到晶体管到AlphaGo，是必然的导出。",
+                related: ["Logic_Gates", "Shannon", "Propositional_Logic", "Binary_System"]
+            },
+            {
+                id: "Bounded_Rationality",
+                en: "Bounded Rationality",
+                cn: "有限理性",
+                group: "Cognitive_Science",
+                val: 35,
+                desc_en: "Rationality within limits",
+                desc_cn: "人只能在封闭的有限变量空间中有效决策",
+                notes_cn: "赫伯特·西蒙的核心理论：知识的使命是从所有逻辑可能性的总类中挑选出经验可能性较有限的子类，在变量之间建立功能联系，最终从当前状况推出唯一可能性。人的理性是有限的——无法处理无限变量，必须在有限变量的封闭空间中才能有效决策。这解释了为什么归纳和类比是日常思维的主要方式，而非演绎的完全析取推理。",
+                why_matters: "有限理性是认知科学和行为经济学的底层假设，理解它才能理解各种认知偏差。",
+                mistakes: "批评人的决策'不够理性'。有限理性不是缺陷，是高效思考的前提。",
+                related: ["Simon", "Cognitive_Miser", "Heuristics", "Inductive_Logic"]
+            },
+            {
+                id: "Confounding_Variable",
+                en: "Confounding Variable",
+                cn: "混杂因子",
+                group: "Statistics",
+                val: 25,
+                desc_en: "The third variable",
+                desc_cn: "同时影响因和果的第三因素，因果推断的大敌",
+                notes_cn: "混杂因子是同时影响自变量和因变量的第三因素，是妨碍因果推断的元凶。比如跑步和思维状态的关系中，睡眠、饮食、天气都可能是混杂因子——它们同时影响跑步意愿和思维状态。费舍尔发明随机对照试验就是为了通过随机取样稀释混杂因子的影响。讽刺的是，费舍尔本人因为是老烟枪而利用混杂因子理论反对'吸烟导致肺癌'的结论。",
+                why_matters: "识别混杂因子是避免把相关当因果的关键能力。",
+                mistakes: "看到相关就脑补因果。比如'吃巧克力的国家诺贝尔奖得主更多'不能说明巧克力让人聪明。",
+                related: ["Correlation", "Causation", "Randomized_Controlled_Trial", "Mills_Methods"]
+            },
+            {
+                id: "Correlation",
+                en: "Correlation",
+                cn: "相关性",
+                group: "Statistics",
+                val: 30,
+                desc_en: "Co-variation",
+                desc_cn: "变量之间的共变关系，因果可能只是r=1的特例",
+                notes_cn: "相关性是高尔顿在研究人体特征时发明的概念：身高高的人臂长也更长，但这不是因果关系，而是共同受遗传影响。皮尔逊进一步颠覆：'存在比因果更广泛的范畴即相关性，因果只是其中一个有限范畴。'因果在统计学上表现为相关系数=1或-1。这是世界观的反转：不是相关反映因果，而是因果反映相关。概率和相关是自然的语言，因果是人的观念。",
+                why_matters: "皮尔逊的颠覆改变了我们对科学知识本质的理解——我们漂浮在概率的暗海之上。",
+                mistakes: "认为'相关不等于因果'只是提醒语。皮尔逊是在说因果可能根本就是相关的特例。",
+                related: ["Causation", "Pearson", "Statistics", "Confounding_Variable"]
+            },
+            {
+                id: "Humes_Fork",
+                en: "Humes Fork",
+                cn: "休谟之叉",
+                group: "Philosophy",
+                val: 35,
+                desc_en: "Empirical vs Demonstrative",
+                desc_cn: "知识分为经验的和证明的，所有证明都依赖归纳的经验",
+                notes_cn: "休谟把知识分为两种：经验知识（通过归纳得来，如'所有天鹅都是白的'）和证明知识（理念性的，与事实无关，如'如果前者为真则后者必然'）。这把叉子插进知识深处摧毁了根基：所有演绎知识都基于归纳知识建立，所有归纳知识又受限于经验能力。密尔、皮尔逊、费舍尔的工作只是把叉子'捏得紧了一点'，那0.0001%的不确定性永远存在。",
+                why_matters: "休谟之叉是理解科学知识本质局限的关键——科学不是新的神话和宗教。",
+                mistakes: "把科学当成绝对真理。休谟之叉提醒我们：所有知识都植根于归纳的脆弱基础上。",
+                related: ["Empiricism", "Inductive_Logic", "Skepticism", "Probability"]
+            },
+            {
+                id: "Metaphor",
+                en: "Metaphor",
+                cn: "隐喻",
+                group: "Cognitive_Science",
+                val: 35,
+                desc_en: "Understanding one thing in terms of another",
+                desc_cn: "用一个概念网络理解另一个概念的类比迁移",
+                notes_cn: "隐喻是类比的隐身形态，无时无刻不在影响我们的思维和语言，而我们对此毫无察觉。核心隐喻'心理内容即物理实体'使我们能说'丢掉执念、重拾信心、收拾心情、扛不住压力'。由此衍生出'语言即容器'（他的话充满思想）、'视觉即认知'（想清楚、看法）、'思想即建筑'（构建理论、根基不牢）等系统性隐喻。莱考夫的《我们赖以生存的隐喻》详细论述了这一现象。",
+                why_matters: "隐喻是我们轻而易举理解抽象概念的秘密武器，也是锁定我们思维的隐形监狱。",
+                mistakes: "认为隐喻只是修辞手法。它是我们概念系统的基础架构，无时无刻不在运作。",
+                related: ["Conceptual_Blending", "Prototype", "Analogical_Reasoning", "Lakoff"]
+            },
+            {
+                id: "Prototype",
+                en: "Prototype",
+                cn: "原型",
+                group: "Cognitive_Science",
+                val: 30,
+                desc_en: "Typical example",
+                desc_cn: "范畴的典型实例，其他成员按与它的相似度被归类",
+                notes_cn: "原型是一个范畴的典型实例，其他成员是基于与原型的相似度被纳入同一范畴的。范畴以原型为中心，通过家族相似性向外扩展。那些越早在我们生命中出现的原型，位置越靠中间，关联节点越多，对我们的控制和影响就越大。比如'家庭'是最早的原型之一，我们用家庭类比社会，与男性上级的相处方式常常是与父亲相处方式的翻版。这就是'原生家庭'话题如此热门的原因。",
+                why_matters: "原型是我们围绕它建立概念网络的核心，理解它就理解了为什么某些信念如此根深蒂固。",
+                mistakes: "认为可以轻易改变根深蒂固的观念。原型的控制力来自它的早期出现和高频使用。",
+                related: ["Prototype_Theory", "Category", "Family_Resemblance"]
+            },
+            {
+                id: "Conceptual_Blending",
+                en: "Conceptual Blending",
+                cn: "概念整合",
+                group: "Cognitive_Science",
+                val: 30,
+                desc_en: "Blending spaces",
+                desc_cn: "两个输入空间通过共有结构融合出新理解",
+                notes_cn: "福康耶的概念整合理论解释了类比和隐喻的作用原理。两个心理对象的整合需要4个空间：两个输入空间（如爱情和战争）、一个类属空间（提取共有特征：双边互动、强弱分别、进攻防守）、一个融合空间（形成综合理解：战争式的爱情）。通过结构映射，我们把对旧情境（战争）的鲜活理解迁移到新情境（爱情），获得一种粗糙但稳定的理解——当然这种理解也会遮蔽某些可能性。",
+                why_matters: "概念整合解释了思维如何创造新的理解，也解释了隐喻如何锁定和限制我们。",
+                mistakes: "忽视融合过程中被遮蔽的部分。'爱情是战争'意味着必须有赢家——这是什么样的爱情？",
+                related: ["Metaphor", "Analogical_Reasoning", "Input_Space"]
+            },
+            {
+                id: "Family_Resemblance",
+                en: "Family Resemblance",
+                cn: "家族相似",
+                group: "Philosophy",
+                val: 25,
+                desc_en: "No sharp boundaries",
+                desc_cn: "概念之间有亲缘关系但无明确层次的关联方式",
+                notes_cn: "维特根斯坦后期的重要理论，用家族相似说明语言的模糊性和广泛关联性。概念之间像家族成员：'丢掉'是'放弃'他爹，'小学'是'中学'的邻居，'温柔'是'和蔼'的妹妹。它们有亲缘关系但没有明确的层次和等级，相对关系是在日常交流（语言游戏）中被暂时性确定的。这开启了从经典范畴论到原型范畴论的转向。",
+                why_matters: "家族相似解释了为什么词义会漂移、概念边界是模糊的、理解依赖语境。",
+                mistakes: "试图给所有概念下精确定义。维特根斯坦告诉我们：概念的边界本来就是模糊的。",
+                related: ["Wittgenstein", "Prototype", "Category"]
+            },
+            {
+                id: "Cognitive_Miser",
+                en: "Cognitive Miser",
+                cn: "认知吝啬鬼",
+                group: "Cognitive_Science",
+                val: 25,
+                desc_en: "Energy saving brain",
+                desc_cn: "人类默认用高效但粗糙的启发式代替精确的逻辑分析",
+                notes_cn: "斯坦诺维奇在《超越智商》中提出：人类都是认知吝啬鬼。这种吝啬体现在我们的大脑会完成高效而隐秘的综合，跳过细致的分析。比如'完全析取推理'测试中，80%的人因为直觉与C选项最相符就选C，而不去分析所有逻辑可能性。这不是缺陷而是特性——如果我们要对所有变量进行完全析取分析，就无法做任何决策。绝大多数人都是'归纳鬼才、类比高手和演绎残废'。",
+                why_matters: "理解认知吝啬就理解了为什么人容易犯逻辑错误，但也能高效处理复杂情境。",
+                mistakes: "批评自己'逻辑不好'。认知吝啬是人类智能的特性，不是bug。",
+                related: ["Bounded_Rationality", "Heuristics", "Stanovich"]
+            },
+            {
+                id: "Form_Over_Content",
+                en: "Form Over Content",
+                cn: "形式大于内容",
+                group: "Philosophy",
+                val: 30,
+                desc_en: "Form independence",
+                desc_cn: "逻辑的发展史就是形式不断膨胀直至脱离内容的历史",
+                notes_cn: "形式与内容的关系经历了几个阶段：(1)只有内容没有形式——混沌；(2)形式规范内容——三段论规则；(3)形式开始膨胀——256种组合；(4)形式脱离内容——数理逻辑中内容变成无意义占位符，判断变成计算；(5)形式可以外包——香农电路、计算机、AI。质变时刻是形式可以独立于具体内容运算时——一台电脑里没有魔法，我们循着有效形式从上帝给定的范畴中'必然导出'了手机。",
+                why_matters: "理解形式如何脱离内容创造了现代科技文明——这是演绎逻辑最惊人的威力。",
+                mistakes: "认为'形式大于内容'是贬义。在逻辑发展史中，形式的独立恰恰是威力的来源。",
+                related: ["Boolean_Algebra", "Shannon", "Computation"]
+            },
+            {
+                id: "Complete_Disjunctive_Inference",
+                en: "Complete Disjunctive Inference",
+                cn: "完全析取推理",
+                group: "Logic",
+                val: 25,
+                desc_en: "Exhaustive analysis",
+                desc_cn: "对所有逻辑可能性进行分析，演绎出必然结论",
+                notes_cn: "完全析取推理要求对所有逻辑可能性进行分析，然后演绎出一个必然包含在前提中的结论。比如'汤汁已婚盯着张三，张三盯着未婚的韩梅梅，问是否有已婚者盯着未婚者？'——张三要么已婚要么未婚，两种情况都有已婚者盯着未婚者，所以答案必然是'是'。计算机就是这么思考的，但80%的人会答错，因为这对人来说'非常不自然'。这就是为什么我们是'演绎残废'。",
+                why_matters: "完全析取推理揭示了人类思维与计算机思维的根本差异。",
+                mistakes: "轻视这种测试。80%的人答错，包括高材生，说明演绎逻辑不是人的本能。",
+                related: ["Deductive_Logic", "Cognitive_Miser", "Bounded_Rationality"]
+            },
+            {
+                id: "Mills_Methods",
+                en: "Mills Methods",
+                cn: "密尔五法",
+                group: "Logic",
+                val: 25,
+                desc_en: "Inductive methods",
+                desc_cn: "系统化归纳推理为研究因果的方法论",
+                notes_cn: "密尔在《逻辑体系》中为归纳梳理出5种方法：求同法（在不同情境中寻找共同因素）、求异法（在差异中寻找原因）、共变法（量的变化对应）、剩余法（排除已知找剩余）、并用法（综合运用）。这将归纳从不自觉的认知方式提炼成研究因果的方法，为实证科学奠定基础。注意：从求同/求异到共变是认知模式的转型——从定性走向定量，背后是统计学革命。",
+                why_matters: "密尔五法是理解现代科学方法论的基础。",
+                mistakes: "认为求同法就够用了。求同法有致命缺陷：因果难分、变量遗漏。",
+                related: ["Inductive_Logic", "Causation", "Correlation"]
+            },
+            {
+                id: "Randomized_Controlled_Trial",
+                en: "Randomized Controlled Trial",
+                cn: "随机对照试验",
+                group: "Statistics",
+                val: 30,
+                desc_en: "RCT",
+                desc_cn: "通过随机取样和对照组稀释混杂因子的实验方法",
+                notes_cn: "费舍尔发明的随机对照试验(RCT)是人类获得的最强实证手段之一。随机取样在最大限度上减少了混杂因子（同时影响因果的干扰因素）的影响——虽然个体可能有相似的生活环境和作息，但由于样本的随机性，这些变量对样本的影响被稀释。理论上，资源无限多时，可以得到一张表达所有行为与身心状态变化关系的表格。讽刺的是，RCT发明者费舍尔本人利用混杂因子理论反对吸烟致癌的结论。",
+                why_matters: "RCT是现代循证医学和社会科学的黄金标准。",
+                mistakes: "认为RCT可以证明因果。它只能在最大限度上控制混杂因子，提高归纳强度。",
+                related: ["Fisher", "Confounding_Variable", "Statistics"]
+            },
+            {
+                id: "Logic_Gates",
+                en: "Logic Gates",
+                cn: "逻辑门",
+                group: "Computation",
+                val: 25,
+                desc_en: "Physical boolean",
+                desc_cn: "用电路实现布尔与/或/非运算的物理结构",
+                notes_cn: "1936年香农发现布尔逻辑的真假值可以与电路开关对应：线路闭合(电流通过)=1，线路断开(电流受阻)=0。在电路中加入特定开关结构可以实现与/或/非的逻辑关系——这就是与门、或门、非门。早期用继电器控制线路闭合(每秒50次)，现代用纳米级晶体管(每秒数百亿次)。一块CPU装着几百亿个晶体管，AlphaGo有1000多个CPU，在最微观层面只是不断连通断开，宏观上却做出人都做不出的判断。",
+                why_matters: "逻辑门是从抽象逻辑到物理实现的关键桥梁，是数字时代的基石。",
+                mistakes: "认为计算机'有智能'。它在最底层只是在做布尔运算的物理实现。",
+                related: ["Boolean_Algebra", "Shannon", "Transistor", "CPU"]
+            },
+            // === FORMULAS ===
+            {
+                id: "Knowledge_Compression_Formula",
+                en: "Knowledge Compression Formula",
+                cn: "知识压缩公式",
+                group: "Cognitive_Science",
+                val: 40,
+                desc_en: "Infinite to Finite",
+                desc_cn: "有效知识 = 无限可能性 → 有限变量空间 → 功能联系",
+                notes_cn: "<strong>机制 Mechanism:</strong><br>赫伯特·西蒙的有限理性核心：人无法处理无限变量，知识的使命是把无限压缩成有限。整个归纳过程就是从无限的逻辑可能性中筛选出有限的经验可能性，建立功能联系，最终实现预测。<br><br><strong>应用 Application:</strong><br>当信息过载无法决策时，问自己：有哪些关键变量？它们之间有什么功能联系？",
+                why_matters: "解释了为什么知识永远只能'无限逼近'而非'达到'真理。",
+                mistakes: "试图考虑所有变量导致决策瘫痪。有限理性不是缺陷，是高效思考的前提。",
+                related: ["Bounded_Rationality", "Inductive_Logic"]
+            },
+            {
+                id: "Induction_Strength_Formula",
+                en: "Induction Strength Formula",
+                cn: "归纳强度公式",
+                group: "Statistics",
+                val: 40,
+                desc_en: "Strength factors",
+                desc_cn: "归纳强度 = 样本量 × 随机性 × 变量控制",
+                notes_cn: "<strong>机制 Mechanism:</strong><br>归纳强度不是有效/无效的二元判断，而是一个连续的光谱。费舍尔的随机对照试验通过最大化这三个因素来提高归纳强度。但无论归纳强度多高，终究只能无限逼近而非达到确定性。<br><br><strong>应用 Application:</strong><br>评估一项研究结论时，检查这三个因素：样本够大吗？足够随机吗？混杂因子控制得好吗？",
+                why_matters: "衡量研究结论可靠性的黄金标准。",
+                mistakes: "把高强度归纳当成确定性因果。即便是99.999%的置信度也不是100%。",
+                related: ["Randomized_Controlled_Trial", "Inductive_Logic", "Confounding_Variable"]
+            },
+            {
+                id: "Analogy_Validity_Formula",
+                en: "Analogy Validity Formula",
+                cn: "类比有效性公式",
+                group: "Logic",
+                val: 40,
+                desc_en: "Evaluating analogies",
+                desc_cn: "类比有效性 = 结构映射完整度 × 领域相关性",
+                notes_cn: "<strong>机制 Mechanism:</strong><br>概念整合理论的应用：类比通过结构映射将一个领域的理解迁移到另一个领域。映射越完整、领域越相关，类比越有效。但每个类比都有盲区——被映射遮蔽的部分。<br><br><strong>应用 Application:</strong><br>评估一个类比时问：共有结构是什么？映射了什么？遮蔽了什么？",
+                why_matters: "帮助我们批判性地使用和评估类比。",
+                mistakes: "过度依赖单一类比。任何类比都只是部分映射，需要用多个类比互补。",
+                related: ["Analogical_Reasoning", "Conceptual_Blending"]
+            },
+            {
+                id: "Prototype_Control_Formula",
+                en: "Prototype Control Formula",
+                cn: "原型控制力公式",
+                group: "Cognitive_Science",
+                val: 40,
+                desc_en: "Power of prototypes",
+                desc_cn: "控制力 = 出现时间(越早越大) × 使用频率 × 关联节点数",
+                notes_cn: "<strong>机制 Mechanism:</strong><br>原型范畴论的应用：越早在生命中出现的原型，位置越靠中间，关联越多，控制力越强。'家庭即社会'的隐喻如此根深蒂固，是因为家庭是最早、最频繁使用、关联最广的原型之一。<br><br><strong>应用 Application:</strong><br>当发现某个信念特别顽固时，追溯它的原型：是什么早期经验塑造了它？",
+                why_matters: "解释了为什么原生家庭影响如此深远，以及改变观念的难度。",
+                mistakes: "试图通过理性说服改变深层信念。需要从原型层面工作，提供替代隐喻。",
+                related: ["Prototype", "Family_Resemblance"]
+            },
+            {
+                id: "Metaphor_Detection_Formula",
+                en: "Metaphor Detection Formula",
+                cn: "隐喻识别公式",
+                group: "Cognitive_Science",
+                val: 40,
+                desc_en: "Spotting metaphors",
+                desc_cn: "隐喻暴露 = 问'共有结构是什么' + 问'遮蔽了什么'",
+                notes_cn: "<strong>机制 Mechanism:</strong><br>隐喻是无意识运作的，我们对它毫无察觉。要跳出隐喻的锁定，必须主动识别它。三步法：(1)问这个表达背后的隐喻是什么，共有结构是什么；(2)问这个隐喻遮蔽了什么可能性；(3)尝试替代隐喻看看能打开什么新视角。<br><br><strong>应用 Application:</strong><br>当感觉被某种思维方式困住时，用这三问检验当前隐喻。",
+                why_matters: "跳出隐喻锁定、获得认知自由的工具。",
+                mistakes: "认为自己的表达是'客观描述'而非隐喻。几乎所有抽象概念都通过隐喻理解。",
+                related: ["Metaphor", "Conceptual_Blending"]
+            },
+            {
+                id: "Cognitive_Efficiency_Formula",
+                en: "Cognitive Efficiency Formula",
+                cn: "认知效率公式",
+                group: "Cognitive_Science",
+                val: 40,
+                desc_en: "Why we are smart",
+                desc_cn: "效率 = 类比迁移有效率 × (1 / 完全析取分析需求)",
+                notes_cn: "<strong>机制 Mechanism:</strong><br>这个公式解释了为什么人类在模糊情境中比AI更智能。人类围绕原型建立了半封闭的概念空间，让经验迁移高效运行（分子大）；同时避免对每个决策进行完全析取分析（分母小）。<br><br><strong>应用 Application:</strong><br>在模糊情境中信任直觉，在明确情境中切换到分析模式。",
+                why_matters: "解释了'认知吝啬'其实是智能的表现。",
+                mistakes: "试图在所有情境中都进行完全析取分析。会导致决策瘫痪和效率崩溃。",
+                related: ["Cognitive_Miser", "Bounded_Rationality", "Complete_Disjunctive_Inference"]
+            },
+            {
+                id: "Causation_Inference_Formula",
+                en: "Causation Inference Formula",
+                cn: "因果推断公式",
+                group: "Statistics",
+                val: 40,
+                desc_en: "Establishing cause",
+                desc_cn: "因果置信度 = 统计证据 × 实验证据 × 机制证据",
+                notes_cn: "<strong>机制 Mechanism:</strong><br>吸烟与肺癌案例的教训：仅有统计证据不足以确立因果。需要形成完整证据链：(1)统计数据显示强相关；(2)对照实验证明因变量变化；(3)机制分析解释如何导致。<br><br><strong>应用 Application:</strong><br>评估因果论断时，检查这三类证据是否齐全。",
+                why_matters: "防止轻率得出因果结论。",
+                mistakes: "只有统计相关就下因果结论。'相关不等于因果'不只是提醒语。",
+                related: ["Correlation", "Randomized_Controlled_Trial", "Inductive_Logic"]
+            },
+            {
+                id: "Form_Independence_Formula",
+                en: "Form Independence Formula",
+                cn: "形式独立公式",
+                group: "Philosophy",
+                val: 40,
+                desc_en: "Power of abstraction",
+                desc_cn: "技术威力 = 形式抽象程度 × 物理实现能力 × 迭代速度",
+                notes_cn: "<strong>机制 Mechanism:</strong><br>从布尔代数到计算机的发展路径：(1)布尔把逻辑抽象成与/或/非的符号运算；(2)香农发现可以用电路开关实现；(3)晶体管极大提高了物理实现的迭代速度。三者相乘产生了AlphaGo这样的'魔法'。<br><br><strong>应用 Application:</strong><br>评估技术潜力时，看它在这三个维度的得分。",
+                why_matters: "解释了为什么形式脱离内容是威力的来源。",
+                mistakes: "只关注应用层而忽视形式层的抽象能力。",
+                related: ["Form_Over_Content", "Boolean_Algebra", "Computation"]
+            }
+        ];
+
+        const links = [
+            // === BRIDGE LINKS (Connecting the major blocks) ===
+            { source: "Deductive_Logic", target: "Inductive_Logic", label: "Contrast" },
+            { source: "Deductive_Logic", target: "Bounded_Rationality", label: "Limited by" },
+            { source: "Complete_Disjunctive_Inference", target: "Cognitive_Miser", label: "Avoids" },
+            { source: "Boolean_Algebra", target: "Form_Over_Content", label: "Exemplifies" },
+            { source: "Cognitive_Efficiency_Formula", target: "Complete_Disjunctive_Inference", label: "Denominator" },
+            { source: "Cognitive_Efficiency_Formula", target: "Analogical_Reasoning", label: "Numerator" },
+            { source: "Knowledge_Compression_Formula", target: "Inductive_Logic", label: "Mechanism" },
+            { source: "Humes_Fork", target: "Boolean_Algebra", label: "Contrast" }
+        ];
+
+        // Generate links from 'related' field
+        nodes.forEach(sourceNode => {
+            if (sourceNode.related) {
+                sourceNode.related.forEach(targetId => {
+                    // Find target node (loose match to handle spaces vs underscores)
+                    const targetNode = nodes.find(n =>
+                        n.id === targetId ||
+                        n.en === targetId ||
+                        n.id === targetId.replace(/ /g, '_') ||
+                        n.id.replace(/_/g, ' ') === targetId
+                    );
+
+                    if (targetNode) {
+                        links.push({
+                            source: sourceNode.id,
+                            target: targetNode.id,
+                            label: "related"
+                        });
+                    }
+                });
+            }
+        });
+
+        // --- CONFIGURATION ---
+        const settings = { linkDistance: 80, chargeStrength: -200, labelSize: 1.0, opacity: 0.8, autoRotate: true };
+
+        // --- ENGINE ---
+        const elem = document.getElementById('3d-graph');
+        const Graph = ForceGraph3D()(elem)
+            .graphData({ nodes, links })
+            .backgroundColor('#000005')
+            .showNavInfo(false)
+            .nodeThreeObject(node => {
+                const cat = getCategory(node.group);
+                const text = `${node.en}\n${node.cn}`;
+                const sprite = new SpriteText(text);
+                sprite.color = cat.color;
+                sprite.textHeight = (node.val / 2) * settings.labelSize;
+                sprite.fontFace = 'Arial'; sprite.fontWeight = 'bold';
+                sprite.backgroundColor = `rgba(0,0,0,${settings.opacity / 2})`;
+                sprite.padding = 4;
+                sprite.userData = { baseSize: node.val / 2 };
+                return sprite;
+            })
+            .linkWidth(link => 2.5)
+            .linkColor(link => {
+                const sourceNode = nodes.find(n => n.id === link.source || n.id === link.source.id);
+                if (sourceNode) return getCategory(sourceNode.group).color + '88';
+                return '#445566';
+            })
+            .linkOpacity(0.7)
+            .linkCurvature(0.12)
+            .linkCurveRotation(link => {
+                const hash = (link.source?.id || link.source) + (link.target?.id || link.target);
+                let sum = 0;
+                for (let i = 0; i < hash.length; i++) sum += hash.charCodeAt(i);
+                return (sum % 360) * (Math.PI / 180);
+            })
+            .linkDirectionalArrowLength(5)
+            .linkDirectionalArrowRelPos(0.9)
+            .linkDirectionalArrowColor(link => {
+                const sourceNode = nodes.find(n => n.id === link.source || n.id === link.source.id);
+                if (sourceNode) return getCategory(sourceNode.group).color;
+                return '#ffffff';
+            })
+            .linkDirectionalParticles(3)
+            .linkDirectionalParticleSpeed(0.005)
+            .linkDirectionalParticleWidth(2)
+            .linkDirectionalParticleColor(link => {
+                const sourceNode = nodes.find(n => n.id === link.source || n.id === link.source.id);
+                if (sourceNode) return getCategory(sourceNode.group).color;
+                return '#ffffff';
+            })
+            .onNodeClick(node => {
+                // Maintain current zoom level - just rotate to face the node
+                const currentPos = Graph.cameraPosition();
+                const currentDistance = Math.hypot(currentPos.x, currentPos.y, currentPos.z);
+                const nodeDistance = Math.hypot(node.x, node.y, node.z) || 1;
+
+                const newX = (node.x / nodeDistance) * currentDistance;
+                const newY = (node.y / nodeDistance) * currentDistance;
+                const newZ = (node.z / nodeDistance) * currentDistance;
+
+                Graph.cameraPosition({ x: newX, y: newY, z: newZ }, node, 1500);
+                showHUD(node);
+            });
+
+        Graph.d3Force('link').distance(settings.linkDistance);
+        Graph.d3Force('charge').strength(settings.chargeStrength);
+
+        // --- CONTROLS ---
+        const gui = new dat.GUI();
+        const folder = gui.addFolder('Graph Settings');
+        folder.add(settings, 'linkDistance', 10, 300).onChange(val => { Graph.d3Force('link').distance(val); Graph.d3ReheatSimulation(); });
+        folder.add(settings, 'chargeStrength', -500, -10).onChange(val => { Graph.d3Force('charge').strength(val); Graph.d3ReheatSimulation(); });
+        folder.add(settings, 'labelSize', 0.1, 3.0).onChange(val => { Graph.scene().traverse(obj => { if (obj.userData?.baseSize) obj.textHeight = obj.userData.baseSize * val; }); });
+        folder.add(settings, 'opacity', 0.1, 1.0).onChange(val => { Graph.scene().traverse(obj => { if (obj.userData?.baseSize) obj.backgroundColor = `rgba(0,0,0,${val / 2})`; }); });
+        folder.add(settings, 'autoRotate').onChange(val => { Graph.controls().autoRotate = val; });
+        folder.open();
+
+        // --- HUD LOGIC ---
+        function showHUD(node) {
+            const el = (id) => document.getElementById(id);
+            const cat = getCategory(node.group);
+            el('hud').style.display = 'block';
+            el('hud-title').innerText = node.en;
+            el('hud-title').style.color = cat.color;
+            el('hud-cn').innerText = `${node.cn} [${node.group}]`;
+            el('hud-desc').innerHTML = `<div class="en">${node.desc_en || ''}</div><div class="cn">${node.desc_cn || ''}</div>`;
+            el('hud-notes').innerHTML = `<div class="en">${node.notes_en || ''}</div><div class="cn">${node.notes_cn || ''}</div>`;
+
+            // Why It Matters
+            const whyEl = el('hud-why');
+            if (node.why_matters) {
+                whyEl.innerHTML = node.why_matters;
+                whyEl.parentElement.style.display = 'block';
+            } else {
+                whyEl.innerHTML = '';
+                whyEl.parentElement.style.display = 'none';
+            }
+
+            // Common Mistakes
+            const mistakesEl = el('hud-mistakes');
+            if (node.mistakes) {
+                mistakesEl.innerHTML = node.mistakes;
+                mistakesEl.parentElement.style.display = 'block';
+            } else {
+                mistakesEl.innerHTML = '';
+                mistakesEl.parentElement.style.display = 'none';
+            }
+
+            // Related Terms
+            const relatedContainer = el('hud-related');
+            relatedContainer.innerHTML = '';
+            if (node.related && node.related.length > 0) {
+                node.related.forEach(term => {
+                    const tag = document.createElement('span');
+                    tag.className = 'related-tag';
+                    tag.innerText = term;
+                    tag.onclick = () => {
+                        // Handle strict ID match or loose match
+                        const targetNode = nodes.find(n =>
+                            n.id === term ||
+                            n.en === term ||
+                            n.id === term.replace(/ /g, '_') ||
+                            n.id.replace(/_/g, ' ') === term
+                        );
+                        if (targetNode) {
+                            Graph.cameraPosition({ x: targetNode.x + 50, y: targetNode.y + 50, z: targetNode.z + 50 }, targetNode, 1500);
+                            setTimeout(() => showHUD(targetNode), 1600);
+                        }
+                    };
+                    relatedContainer.appendChild(tag);
+                });
+                relatedContainer.parentElement.style.display = 'block';
+            } else {
+                relatedContainer.parentElement.style.display = 'none';
+            }
+
+            // Scenarios
+            const sceneContainer = el('hud-scenes');
+            sceneContainer.innerHTML = '';
+            if (node.scenes_en && node.scenes_en.length > 0) {
+                for (let i = 0; i < node.scenes_en.length; i++) {
+                    const tag = document.createElement('span');
+                    tag.className = 'scene-tag';
+                    tag.innerHTML = `${node.scenes_en[i]} <span style="color:#88aacc">${node.scenes_cn[i]}</span>`;
+                    sceneContainer.appendChild(tag);
+                }
+                sceneContainer.parentElement.style.display = 'block';
+            } else {
+                sceneContainer.parentElement.style.display = 'none';
+            }
+        }
+
+        function hideHUD() {
+            document.getElementById('hud').style.display = 'none';
+        }
+
+        // Initialize
+        buildLegend();
+        setTimeout(() => { document.getElementById('loading').style.display = 'none'; }, 1000);
+        Graph.controls().autoRotate = true;
+    </script>
+</body>
+
+</html>

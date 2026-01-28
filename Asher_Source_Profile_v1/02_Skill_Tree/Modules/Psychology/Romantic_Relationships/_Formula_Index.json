@@ -1,0 +1,138 @@
+[
+  {
+    "formula_name_en": "Confession Success Rate Formula",
+    "formula_name_cn": "告白成功率公式",
+    "equation": "Success Rate = Ambiguity Quality × 0.9 + Confession Technique × 0.1",
+    "variables": {
+      "Ambiguity Quality": "暧昧期的情感连接深度和信号确认程度",
+      "Confession Technique": "告白的时机选择+场景布置+表达方式"
+    },
+    "mechanism": "告白的成功率90%取决于前期铺垫。因为在中国恋爱文化中，告白是一个'确认已有状态'的行为，而非'从零开始建立关系'的行为。暧昧期做得好，告白只是摘已经熟了的果子。",
+    "application": "在考虑告白之前，用这个公式自查：暧昧质量够不够？对方的正向信号是否已经足够明确？如果暧昧质量不够，应该投入更多时间在暧昧期而非急着告白。",
+    "anti_pattern": "暧昧质量为零就告白→直接被拒绝且关系尴尬到无法维持",
+    "source_file": "1.0_Chinese_Dating_Culture.md"
+  },
+  {
+    "formula_name_en": "Relationship Progression Formula",
+    "formula_name_cn": "关系推进公式",
+    "equation": "Progression Speed = f(Signal Quality) NOT f(Calendar Time)",
+    "variables": {
+      "Signal Quality": "对方正向反馈行为的频率和强度",
+      "Calendar Time": "认识的天数（不应该作为推进依据）"
+    },
+    "mechanism": "关系推进的速度应该由对方释放的信号质量决定，而非日历上过了多少天。因为每个人的节奏不同，每段关系的化学反应速度不同。按时间推进就像按固定速度开车而不看路况——必然出事。",
+    "application": "每个阶段都有'通关信号'，观察到信号才进入下一阶段。没有信号就继续在当前阶段积累。不要因为'都认识两个月了'就觉得应该告白了。",
+    "anti_pattern": "按日历强行推进→对方感到压力或你错过最佳窗口期",
+    "source_file": "1.0_Chinese_Dating_Culture.md"
+  },
+  {
+    "formula_name_en": "Family Approval Formula",
+    "formula_name_cn": "家庭认可公式",
+    "equation": "Relationship Stability = Personal Bond × Family Approval Coefficient",
+    "variables": {
+      "Personal Bond": "两人之间的情感连接强度",
+      "Family Approval Coefficient": "0.5(家庭反对)到2.0(家庭支持)的系数"
+    },
+    "mechanism": "在中国文化中，家庭认可不仅仅是'加分项'，而是一个乘数效应。家庭支持可以让关系更加稳固(系数>1)，家庭反对则会对关系产生持续的消耗(系数<1)。因为中国人的社会支持系统高度依赖家庭，失去家庭支持等于失去最重要的后盾。",
+    "application": "在恋爱初期就将'家庭认可'作为并行任务而非后续任务。了解对方家庭的期望，在行为中展现出你尊重对方的家庭。",
+    "anti_pattern": "完全忽视家庭因素→家庭反对成为关系的定时炸弹",
+    "source_file": "1.0_Chinese_Dating_Culture.md"
+  },
+  {
+    "formula_name_en": "Subtext Decoding Formula",
+    "formula_name_cn": "潜台词解码公式",
+    "equation": "True Meaning = Literal Meaning × Context Weight + Non-verbal Signals × Cultural Coefficient",
+    "variables": {
+      "Literal Meaning": "对方说的字面内容",
+      "Context Weight": "当时的情境和关系阶段赋予的权重",
+      "Non-verbal Signals": "表情、语气、行为等非言语信息",
+      "Cultural Coefficient": "高语境文化中非言语信息的编码密度(中国>1)"
+    },
+    "mechanism": "在中国高语境文化中，语言传达的信息只占总信息量的一部分。大量信息通过语境、非言语线索和文化共识来传递。因此解码时不能只看字面意思，必须综合考虑所有信息通道。文化系数越高，非言语信号的权重越大。",
+    "application": "当她的话和她的表情/行为不一致时，优先相信非言语信号。建立个人的'潜台词词典'并在实践中不断校准。",
+    "anti_pattern": "按字面意思理解所有话→系统性误判导致关系恶化",
+    "source_file": "1.0_Chinese_Dating_Culture.md"
+  },
+  {
+    "formula_name_en": "Ambiguity Phase Value Formula",
+    "formula_name_cn": "暧昧期价值公式",
+    "equation": "Relationship Strength = Shared Experiences × Emotional Depth × Quality Time",
+    "variables": {
+      "Shared Experiences": "一起做过的有意义的事情数量",
+      "Emotional Depth": "分享私密话题和脆弱面的程度",
+      "Quality Time": "高质量相处时间（不含低质量的纯消磨时间）"
+    },
+    "mechanism": "暧昧期的价值是三个变量的乘积而非加法，意味着任何一个变量为零都会导致总值为零。只有共同经历没有情感深度是'普通朋友'；只有情感深度没有时间投入是'网友'。三者缺一不可。",
+    "application": "在暧昧期有意识地同时提高三个变量：创造共同经历(一起做有意义的事)、加深情感连接(深度对话)、增加高质量时间(不只是吃饭看电影)。",
+    "anti_pattern": "只在一个维度投入→暧昧期虽然很长但没有实质进展",
+    "source_file": "1.0_Chinese_Dating_Culture.md"
+  },
+  {
+    "formula_name_en": "Trust Building Formula",
+    "formula_name_cn": "信任建立公式",
+    "equation": "Trust = Σ(Consistent Actions) / Time",
+    "variables": {
+      "Consistent Actions": "说到做到的行为次数",
+      "Time": "观察期长度"
+    },
+    "mechanism": "信任是通过长期一致性行为积累的，不是一次壮举能建立的。在中国恋爱文化中，'靠谱'比'浪漫'有更高的权重，而靠谱的本质就是一致性。每一次说到做到都在增加信任值，每一次食言都在大幅减少信任值（减分效应大于加分效应）。",
+    "application": "专注于每天的小承诺并100%兑现：说了早安就每天发，说了请吃饭就一定安排，说了等她就一定等到。不要许无法兑现的承诺。",
+    "anti_pattern": "偶尔做一次大的浪漫举动但日常不靠谱→信任值依然为零",
+    "source_file": "1.0_Chinese_Dating_Culture.md"
+  },
+  {
+    "formula_name_en": "Attraction Maintenance Formula",
+    "formula_name_cn": "吸引力维持公式",
+    "equation": "Attraction = Familiarity × (1 - Full Predictability) + Personal Growth",
+    "variables": {
+      "Familiarity": "安全感基础（认识和了解的程度）",
+      "Full Predictability": "完全可预测性（太高则无聊）",
+      "Personal Growth": "持续的个人进步和新鲜感"
+    },
+    "mechanism": "吸引力需要安全感（熟悉度）作为基础，但完全可预测会导致无聊。最佳状态是'大部分可预测+少量惊喜'。同时，个人成长提供了持续的新鲜感源头——一个一直在进步的人比一个一成不变的人有更持久的吸引力。",
+    "application": "在保持靠谱(可预测性)的同时，偶尔制造惊喜。持续投资自己的成长(学习新技能、拓展视野)，让自己保持有趣。",
+    "anti_pattern": "完全可预测+零成长→关系进入'无聊期'，对方觉得'就这样了'",
+    "source_file": "1.0_Chinese_Dating_Culture.md"
+  },
+  {
+    "formula_name_en": "Emotional Response Value Formula",
+    "formula_name_cn": "情绪响应价值公式",
+    "equation": "Emotional Connection += Recognition Accuracy × Response Timeliness × Response Quality",
+    "variables": {
+      "Recognition Accuracy": "能正确识别她真实感受的能力",
+      "Response Timeliness": "在她需要时出现的速度",
+      "Response Quality": "回应情绪而非只给解决方案的质量"
+    },
+    "mechanism": "情感连接是通过高质量的情绪响应累积的。每一次你准确识别了她的情绪、及时出现、并用共情而非建议来回应，都在为'情感账户'存款。三个变量是乘法关系——识别错了(给出错误回应)比不回应更糟糕。",
+    "application": "当她分享情绪时，先问自己三个问题：(1)她真正的感受是什么？(2)我现在回应来得及吗？(3)她需要的是共情还是方案？在80%的情况下，答案是共情。",
+    "anti_pattern": "她说不开心你立刻给方案→她觉得你不理解她→情感断联",
+    "source_file": "1.0_Chinese_Dating_Culture.md"
+  },
+  {
+    "formula_name_en": "Relationship Risk Formula",
+    "formula_name_cn": "关系风险公式",
+    "equation": "Relationship Risk = (Expectation Gap + Communication Barrier) × Cultural Misunderstanding",
+    "variables": {
+      "Expectation Gap": "双方对关系的期待差异",
+      "Communication Barrier": "潜台词误读频率",
+      "Cultural Misunderstanding": "文化背景差异导致的误解系数"
+    },
+    "mechanism": "关系风险是多个因素的乘积。文化误解是一个乘数——它会放大所有其他问题。一个小的期望差距在没有文化误解时可以通过沟通解决，但如果存在文化误解，这个小差距会被放大成不可调和的冲突。",
+    "application": "主动学习中国恋爱文化(降低文化误解系数)是最高效的风险管理策略，因为它能同时降低所有其他风险因素。",
+    "anti_pattern": "忽视文化因素只靠'真心'→文化误解持续放大每一个小矛盾",
+    "source_file": "1.0_Chinese_Dating_Culture.md"
+  },
+  {
+    "formula_name_en": "Ritual Sense ROI Formula",
+    "formula_name_cn": "仪式感投资回报公式",
+    "equation": "Emotional ROI = Thoughtfulness / Monetary Investment",
+    "variables": {
+      "Thoughtfulness": "是否记住了她的偏好并个性化了安排",
+      "Monetary Investment": "花了多少钱"
+    },
+    "mechanism": "在中国恋爱文化中，仪式感的价值不取决于花了多少钱，而取决于花了多少心思。一个记住了她提过的小细节并精心安排的惊喜，比一个昂贵但毫无个性的礼物有效得多。因为前者传达的信号是'我了解你、我在乎你'，后者传达的信号只是'我有钱'。",
+    "application": "在每次约会和节日安排中，优先投入'用心'而非'金钱'。建立一个对方偏好的记录，在合适的时机用这些细节制造惊喜。",
+    "anti_pattern": "用钱砸仪式感→对方感到你在'用钱解决问题'而非真正在乎",
+    "source_file": "1.0_Chinese_Dating_Culture.md"
+  }
+]

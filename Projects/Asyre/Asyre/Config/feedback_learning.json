@@ -1,0 +1,542 @@
+{
+  "_meta": {
+    "version": "1.2",
+    "description": "反馈学习系统 - 根据实际发布内容和数据动态优化",
+    "philosophy": "只记录能用于优化的数据，不记录垃圾",
+    "core_assumption": "用户永远不会直接使用AI生成的内容，会经过修改后发布",
+    "changelog": {
+      "v1.2": "新增播放量基线系统、组合诊断矩阵、学习闭环机制",
+      "v1.1": "新增内容分析维度，要求提交实际发布内容"
+    }
+  },
+
+  "feedback_schema": {
+    "_comment": "用户反馈时需要提交的内容",
+    "required_fields": {
+      "published_content": "实际发布的内容(图文稿/视频脚本)",
+      "platform": "发布平台(douyin/xiaohongshu/youtube/...)",
+      "metrics": "实际数据(completion_rate/engagement_rate/traffic等)"
+    },
+    "why_need_content": {
+      "reason": "AI生成的内容会被用户修改后发布，通过分析实际发布版本才能学习到有效的改动",
+      "analysis_points": [
+        "钩子是否被改写？改成了什么？",
+        "结构是否调整？",
+        "哪些表达被保留？哪些被删除？",
+        "用户增加了什么'私货'？"
+      ]
+    },
+    "metric_types": {
+      "completion_rate": {
+        "unit": "percentage",
+        "range": [0, 1],
+        "description": "完播率/阅读完成率"
+      },
+      "engagement_rate": {
+        "unit": "percentage",
+        "range": [0, 1],
+        "description": "互动率 = (点赞+评论+分享)/曝光"
+      },
+      "traffic": {
+        "unit": "views",
+        "description": "播放量/阅读量"
+      },
+      "conversion": {
+        "unit": "percentage",
+        "range": [0, 1],
+        "description": "转化率(关注/购买/行动)"
+      }
+    }
+  },
+
+  "baseline_system": {
+    "_comment": "播放量基线系统 - 解决'什么算低'的问题",
+    "_philosophy": "播放量高度依赖账号权重，没有绝对标准，只有相对基线",
+
+    "baseline_calculation": {
+      "method": "rolling_average",
+      "window": "last_10_posts",
+      "description": "基线 = 最近10条内容的平均播放量",
+      "initial_baseline": {
+        "new_account": "使用平台新号平均值",
+        "no_history": "要求用户提供3条历史数据建立基线"
+      }
+    },
+
+    "performance_bands": {
+      "excellent": {
+        "threshold": "> baseline × 2.0",
+        "description": "爆款 - 超出基线2倍"
+      },
+      "good": {
+        "threshold": "> baseline × 1.2",
+        "description": "表现良好 - 超出基线20%"
+      },
+      "normal": {
+        "threshold": "baseline × 0.8 ~ 1.2",
+        "description": "正常范围 - 基线±20%"
+      },
+      "below": {
+        "threshold": "< baseline × 0.8",
+        "description": "低于预期 - 低于基线20%"
+      },
+      "poor": {
+        "threshold": "< baseline × 0.5",
+        "description": "表现差 - 低于基线50%"
+      }
+    },
+
+    "baseline_update_rules": {
+      "include": "所有发布的内容",
+      "exclude": "明显异常值(爆款/扑街)不计入基线计算",
+      "anomaly_threshold": "> baseline × 3 或 < baseline × 0.3"
+    }
+  },
+
+  "combination_diagnosis": {
+    "_comment": "指标组合诊断 - 单指标不够，需要看组合",
+
+    "scenarios": [
+      {
+        "id": "high_traffic_low_completion",
+        "pattern": {
+          "traffic": "> baseline",
+          "completion_rate": "< threshold"
+        },
+        "diagnosis": "标题/封面吸引人，但内容不行",
+        "root_cause": "钩子过度承诺，正文交付不足",
+        "action": [
+          "降低标题承诺强度",
+          "强化正文开头的价值交付",
+          "检查是否标题党"
+        ]
+      },
+      {
+        "id": "low_traffic_high_completion",
+        "pattern": {
+          "traffic": "< baseline",
+          "completion_rate": "> threshold"
+        },
+        "diagnosis": "内容质量好，但没被推荐",
+        "root_cause": "封面/标题/SEO问题，或发布时间不对",
+        "action": [
+          "优化封面设计(更抓眼球)",
+          "优化标题(加入热点关键词)",
+          "调整发布时间",
+          "检查账号权重是否正常"
+        ]
+      },
+      {
+        "id": "high_completion_low_engagement",
+        "pattern": {
+          "completion_rate": "> threshold",
+          "engagement_rate": "< threshold"
+        },
+        "diagnosis": "看完了但不想互动",
+        "root_cause": "内容正确但无聊/无争议/无共鸣",
+        "action": [
+          "增加争议点或槽点",
+          "设计互动触发(结尾提问)",
+          "增加情绪峰值",
+          "加入个人观点表达"
+        ]
+      },
+      {
+        "id": "low_completion_high_engagement",
+        "pattern": {
+          "completion_rate": "< threshold",
+          "engagement_rate": "> threshold"
+        },
+        "diagnosis": "前面很吸引人，后面跑了",
+        "root_cause": "开头强但后续拖沓，或争议点在开头",
+        "action": [
+          "分析在哪个时间点流失",
+          "压缩时长或增加中段高潮",
+          "将争议点分散到全程"
+        ]
+      },
+      {
+        "id": "all_metrics_low",
+        "pattern": {
+          "traffic": "< baseline × 0.5",
+          "completion_rate": "< threshold",
+          "engagement_rate": "< threshold"
+        },
+        "diagnosis": "全面失败",
+        "root_cause": "选题问题 或 账号异常 或 发布时间极差",
+        "action": [
+          "首先排除账号问题(限流/违规)",
+          "反思选题是否有受众",
+          "检查发布时间",
+          "如果选题OK，考虑重新制作"
+        ]
+      },
+      {
+        "id": "all_metrics_excellent",
+        "pattern": {
+          "traffic": "> baseline × 2",
+          "completion_rate": "> excellent",
+          "engagement_rate": "> excellent"
+        },
+        "diagnosis": "爆款",
+        "root_cause": "选题+执行+时机都对了",
+        "action": [
+          "立即记录成功要素",
+          "分析这条内容与平时的差异",
+          "考虑做系列/续集",
+          "提取可复用的模式"
+        ]
+      }
+    ]
+  },
+
+  "content_analysis": {
+    "_comment": "分析用户实际发布内容的维度",
+    "analysis_dimensions": {
+      "hook_analysis": {
+        "check": "开头钩子与AI生成版本的差异",
+        "learn": "用户偏好的钩子风格"
+      },
+      "structure_analysis": {
+        "check": "段落结构和节奏变化",
+        "learn": "用户偏好的内容节奏"
+      },
+      "expression_analysis": {
+        "check": "被保留/删除/修改的表达方式",
+        "learn": "用户的语言风格偏好"
+      },
+      "addition_analysis": {
+        "check": "用户新增的内容(私货)",
+        "learn": "用户认为重要的元素"
+      },
+      "deletion_analysis": {
+        "check": "被删除的内容",
+        "learn": "用户认为冗余/不合适的元素"
+      }
+    }
+  },
+
+  "adjustment_rules": {
+    "_comment": "根据反馈数据自动调整参数的规则",
+
+    "completion_rate_low": {
+      "trigger": {
+        "metric": "completion_rate",
+        "condition": "< platform_config.algorithm.targets.completion_rate.threshold"
+      },
+      "diagnosis": [
+        {
+          "symptom": "前3秒流失严重",
+          "cause": "钩子无效",
+          "check_content": "分析实际发布内容的开头",
+          "adjustment": {
+            "target": "content_rules.hook",
+            "action": "强化钩子，缩短铺垫",
+            "param_change": {
+              "hook.window_seconds": -1,
+              "hook.intensity": "+0.2"
+            }
+          }
+        },
+        {
+          "symptom": "中段流失",
+          "cause": "节奏拖沓/信息密度低",
+          "check_content": "分析中段结构和信息密度",
+          "adjustment": {
+            "target": "content_rules.structure",
+            "action": "增加高潮频率，提高信息密度",
+            "param_change": {
+              "climax_interval_seconds": -5,
+              "pacing": "faster"
+            }
+          }
+        },
+        {
+          "symptom": "时长过长",
+          "cause": "超出平台最优时长",
+          "check_content": "对比实际时长与平台最优时长",
+          "adjustment": {
+            "target": "format.duration",
+            "action": "压缩时长，删减冗余",
+            "param_change": {
+              "duration.target": "platform_optimal"
+            }
+          }
+        }
+      ]
+    },
+
+    "engagement_rate_low": {
+      "trigger": {
+        "metric": "engagement_rate",
+        "condition": "< platform_config.algorithm.targets.engagement_rate.threshold"
+      },
+      "diagnosis": [
+        {
+          "symptom": "完播高但互动低",
+          "cause": "内容正确但无聊/无争议",
+          "check_content": "检查是否有争议点/互动触发设计",
+          "adjustment": {
+            "target": "content_rules.engagement_triggers",
+            "action": "增加争议点和互动触发",
+            "param_change": {
+              "controversy_point": true,
+              "question_at_end": true,
+              "emotion_peaks": "+1"
+            }
+          }
+        },
+        {
+          "symptom": "情绪唤醒不足",
+          "cause": "态度不够鲜明",
+          "check_content": "检查态度表达的强度",
+          "adjustment": {
+            "target": "derivation_rules.attitude_strength",
+            "action": "强化态度表达",
+            "param_change": {
+              "attitude_strength": "+0.15",
+              "fence_sitting_tolerance": "-0.1"
+            }
+          }
+        }
+      ]
+    },
+
+    "traffic_low": {
+      "trigger": {
+        "metric": "traffic",
+        "condition": "< baseline_system.performance_bands.below (< baseline × 0.8)"
+      },
+      "diagnosis": [
+        {
+          "symptom": "冷启动失败",
+          "cause": "前30分钟数据差，未进入推荐池",
+          "check_content": "检查发布时间、封面、标题",
+          "adjustment": {
+            "target": "publishing",
+            "action": "优化发布时间和冷启动策略",
+            "param_change": {
+              "publish_time": "参考 platform_config.publishing.best_times",
+              "cold_start_engagement": "前5分钟自己互动/找朋友互动"
+            }
+          }
+        },
+        {
+          "symptom": "SEO/关键词问题",
+          "cause": "搜索流量低，关键词匹配度差",
+          "check_content": "检查标题和正文的关键词布局",
+          "adjustment": {
+            "target": "seo",
+            "action": "优化标题和标签关键词",
+            "param_change": {
+              "title_keywords": "加入热搜关键词",
+              "hashtags": "使用平台推荐话题"
+            }
+          }
+        },
+        {
+          "symptom": "封面/标题CTR低",
+          "cause": "在信息流中不够吸引人",
+          "check_content": "对比封面和标题与爆款内容的差异",
+          "adjustment": {
+            "target": "content_rules.hook + thumbnail",
+            "action": "重新设计封面和标题",
+            "param_change": {
+              "thumbnail_style": "参考 platform_config.content_rules.thumbnail",
+              "title_pattern": "使用数字/悬念/利益点"
+            }
+          }
+        },
+        {
+          "symptom": "账号权重问题",
+          "cause": "账号被限流或权重降低",
+          "check_content": "检查最近是否有违规/投诉",
+          "adjustment": {
+            "target": "account_health",
+            "action": "排查账号状态，养号恢复权重"
+          }
+        }
+      ]
+    },
+
+    "performance_excellent": {
+      "trigger": {
+        "metric": "any",
+        "condition": "> platform_config.algorithm.targets.*.excellent"
+      },
+      "action": {
+        "type": "record_success_pattern",
+        "description": "分析实际发布内容，提取成功要素",
+        "store_to": "success_patterns",
+        "extract": [
+          "钩子写法",
+          "结构特点",
+          "表达风格",
+          "用户新增的元素"
+        ]
+      }
+    }
+  },
+
+  "success_patterns": {
+    "_comment": "记录效果优秀的实际发布内容特征",
+    "_format": {
+      "content_type": "内容类型",
+      "platform": "平台",
+      "published_content_features": {
+        "hook_style": "钩子风格特征",
+        "structure": "结构特点",
+        "expression_patterns": "高效表达模式",
+        "user_additions": "用户新增的有效元素"
+      },
+      "metrics": "实际指标",
+      "count": "成功次数"
+    },
+    "patterns": []
+  },
+
+  "learning_loop": {
+    "_comment": "学习闭环 - 让反馈真正影响下次创作",
+
+    "creator_feedback_history": {
+      "_description": "每个创作者的反馈历史存储",
+      "storage_path": "Asyre/Creators/[creator_id]/feedback_history.json",
+      "record_format": {
+        "timestamp": "反馈时间",
+        "platform": "平台",
+        "content_summary": "内容摘要(前50字)",
+        "hook_used": "使用的钩子类型",
+        "metrics": "各项指标",
+        "diagnosis": "诊断结果",
+        "lesson_learned": "本次学到的教训"
+      },
+      "retention": "保留最近30条反馈记录"
+    },
+
+    "pre_creation_check": {
+      "_description": "创作前自动检查历史教训",
+      "trigger": "Phase 1 意图解析后",
+      "action": [
+        "读取 feedback_history.json",
+        "检查是否有相同类型内容的失败记录",
+        "检查是否有相同平台的成功模式",
+        "输出提醒"
+      ],
+      "output_format": {
+        "header": "📚 历史经验提醒",
+        "sections": [
+          "⚠️ 上次类似内容的问题: [问题描述]",
+          "✅ 成功模式参考: [成功要素]",
+          "💡 本次创作建议: [具体建议]"
+        ]
+      }
+    },
+
+    "parameter_adjustment": {
+      "_description": "根据历史反馈动态调整创作参数",
+      "rules": [
+        {
+          "condition": "连续3条完播率低",
+          "adjustment": "默认提高 hook_intensity +0.2, 缩短 duration -15%"
+        },
+        {
+          "condition": "连续3条互动率低",
+          "adjustment": "默认开启 controversy_point, 强化 emotion_peaks"
+        },
+        {
+          "condition": "最近爆款的钩子类型是 X",
+          "adjustment": "优先推荐 hook_type = X"
+        }
+      ]
+    },
+
+    "baseline_tracking": {
+      "_description": "追踪播放量基线变化",
+      "metrics": [
+        "baseline_7day_avg",
+        "baseline_30day_avg",
+        "baseline_trend (上升/下降/稳定)"
+      ],
+      "alerts": {
+        "baseline_dropping": "基线连续下降3周 → 提醒检查账号健康度",
+        "baseline_rising": "基线连续上升3周 → 总结最近做对了什么"
+      }
+    }
+  },
+
+  "learning_protocol": {
+    "_comment": "用户反馈时的处理流程",
+
+    "step_1_receive": {
+      "action": "接收用户反馈",
+      "required": [
+        "实际发布的内容(图文稿)",
+        "平台",
+        "实际数据"
+      ],
+      "format": "用户发送: 实际发布内容 + '抖音完播率25%'"
+    },
+
+    "step_2_analyze_content": {
+      "action": "分析实际发布内容",
+      "output": {
+        "hook": "钩子特征",
+        "structure": "结构特点",
+        "expression": "表达风格",
+        "length": "实际长度/时长"
+      }
+    },
+
+    "step_3_compare_metrics": {
+      "action": "与平台目标阈值对比",
+      "source": "platform_config.json",
+      "output": "达标/未达标/优秀"
+    },
+
+    "step_4_diagnose": {
+      "action": "结合内容分析和数据诊断问题",
+      "output": "可能原因 + 内容层面的具体问题"
+    },
+
+    "step_5_suggest": {
+      "action": "输出具体优化建议",
+      "format": {
+        "content_diagnosis": "内容分析结论",
+        "problem": "诊断问题",
+        "cause": "可能原因",
+        "adjustment": "下次创作建议",
+        "action_items": "具体执行步骤"
+      }
+    },
+
+    "step_6_record": {
+      "action": "如果是成功案例，提取并记录成功要素",
+      "condition": "metrics > excellent_threshold",
+      "extract": "从实际发布内容中提取可复用的模式"
+    }
+  },
+
+  "output_template": {
+    "feedback_response": {
+      "header": "📊 数据反馈分析",
+      "sections": [
+        {
+          "name": "内容分析",
+          "format": "钩子: [特征] | 结构: [特点] | 时长: [实际值]"
+        },
+        {
+          "name": "指标状态",
+          "format": "[指标]: [数值] vs 目标 [阈值] → [达标/未达标/优秀]"
+        },
+        {
+          "name": "诊断结果",
+          "format": "基于内容分析 + 数据表现的诊断"
+        },
+        {
+          "name": "优化建议",
+          "format": "下次创作时的具体调整建议"
+        }
+      ]
+    }
+  }
+}

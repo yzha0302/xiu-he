@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Asher 3D Knowledge Galaxy</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #000005;
+            overflow: hidden;
+        }
+
+        /* HUD Overlay - Left Position */
+        #hud {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 420px;
+            background: rgba(10, 15, 25, 0.95);
+            border: 1px solid #334466;
+            border-left: 3px solid #00ffff;
+            border-radius: 4px;
+            padding: 25px;
+            color: #eef;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            display: none;
+            transition: opacity 0.3s;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        #hud h2 {
+            margin: 0 0 5px 0;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            padding-right: 30px;
+            /* Space for close button */
+        }
+
+        #hud .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.2s;
+            font-size: 20px;
+            color: #889;
+            text-align: center;
+            line-height: 24px;
+        }
+
+        #hud .close-btn:hover {
+            opacity: 1;
+            color: #ff5555;
+        }
+
+        #hud .sub-header {
+            font-size: 14px;
+            color: #8899aa;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #334455;
+            padding-bottom: 10px;
+        }
+
+        #hud .section-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #556677;
+            letter-spacing: 2px;
+            margin-top: 20px;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        #hud .content-block {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #ccd;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 12px;
+            border-radius: 4px;
+        }
+
+        #hud .en {
+            color: #ffffff;
+        }
+
+        #hud .cn {
+            color: #88aacc;
+            font-size: 13px;
+        }
+
+        #hud .keyword {
+            color: #00ffff;
+            font-weight: bold;
+            font-family: monospace;
+            background: rgba(0, 255, 255, 0.1);
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        #hud .scene-tag {
+            display: inline-block;
+            font-size: 12px;
+            background: #223344;
+            color: #aab;
+            padding: 4px 8px;
+            border-radius: 12px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            border: 1px solid #334455;
+        }
+
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #00ffff;
+            font-family: monospace;
+            letter-spacing: 2px;
+            pointer-events: none;
+        }
+
+        /* Legend: Bottom-Left */
+        #legend {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(10, 15, 25, 0.9);
+            border: 1px solid #334466;
+            border-radius: 4px;
+            padding: 15px 20px;
+            color: #ccd;
+            backdrop-filter: blur(10px);
+            min-width: 200px;
+        }
+
+        #legend h3 {
+            margin: 0;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #778;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        #legend h3::after {
+            content: '▼';
+            font-size: 10px;
+            transition: transform 0.3s;
+        }
+
+        #legend.collapsed h3::after {
+            transform: rotate(-90deg);
+        }
+
+        #legend .legend-items {
+            max-height: 200px;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        #legend.collapsed .legend-items {
+            max-height: 0;
+        }
+
+        #legend .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 6px 0;
+            font-size: 13px;
+        }
+
+        #legend .legend-color {
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+            margin-right: 10px;
+        }
+
+        #legend .legend-label {
+            color: #aab;
+        }
+
+        #legend .legend-count {
+            margin-left: auto;
+            color: #667;
+            font-size: 11px;
+        }
+
+        #legend .legend-total {
+            font-size: 11px;
+            color: #667;
+            margin-left: 10px;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0.5;
+            }
+        }
+    </style>
+    <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/3d-force-graph"></script>
+    <script src="https://unpkg.com/three-spritetext@1.8.1/dist/three-spritetext.min.js"></script>
+    <script src="https://unpkg.com/dat.gui"></script>
+</head>
+
+<body>
+    <div id="loading">INITIALIZING NEURAL LINK...</div>
+    <div id="3d-graph"></div>
+
+    <div id="hud">
+        <span class="close-btn" onclick="hideHUD()">×</span>
+        <h2 id="hud-title">Title</h2>
+        <div id="hud-cn" class="sub-header">Chinese Name</div>
+
+        <div class="section-title">Definition 定义</div>
+        <div id="hud-desc" class="content-block"></div>
+
+        <div class="section-title">Deep Dive 深度解析</div>
+        <div id="hud-notes" class="content-block" style="border-left: 2px solid #00ffff;"></div>
+
+        <div class="section-title">Scenarios 应用场景</div>
+        <div id="hud-scenes"></div>
+    </div>
+
+    <!-- Legend (Collapsible) -->
+    <div id="legend">
+        <h3 onclick="toggleLegend()">Domain 领域 <span id="legend-total"></span></h3>
+        <div id="legend-items" class="legend-items"></div>
+    </div>
+
+    <script>
+        // === CATEGORY CONFIGURATION ===
+        const CATEGORY_CONFIG = {
+            "Psychology": { color: "#00ffff", label_en: "Psychology", label_cn: "心理学" },
+            "System": { color: "#00ff00", label_en: "System", label_cn: "系统工程" },
+            "Core": { color: "#ff0055", label_en: "Core Framework", label_cn: "核心框架" },
+            "AI": { color: "#ff8800", label_en: "AI Revolution", label_cn: "智能体革命" },
+            "Capital": { color: "#aa00ff", label_en: "Capital Leverage", label_cn: "资本杠杆" }
+        };
+
+        function getCategory(groupName) {
+            return CATEGORY_CONFIG[groupName] || { color: "#ffffff", label_en: groupName, label_cn: groupName };
+        }
+
+        function toggleLegend() {
+            document.getElementById('legend').classList.toggle('collapsed');
+        }
+
+        function buildLegend() {
+            const container = document.getElementById('legend-items');
+            container.innerHTML = '';
+            const counts = {};
+            let total = 0;
+            nodes.forEach(n => { counts[n.group] = (counts[n.group] || 0) + 1; total++; });
+
+            // Show total in header
+            document.getElementById('legend-total').innerText = `(${Object.keys(counts).length} 域 / ${total} 点)`;
+
+            for (const [group, count] of Object.entries(counts)) {
+                const cat = getCategory(group);
+                const item = document.createElement('div');
+                item.className = 'legend-item';
+                item.innerHTML = `
+                    <div class="legend-color" style="background:${cat.color}"></div>
+                    <span class="legend-label">${cat.label_en} ${cat.label_cn}</span>
+                    <span class="legend-count">${count}</span>
+                `;
+                container.appendChild(item);
+            }
+        }
+
+        // --- 1. Data Layer (Bilingual) ---
+        const nodes = [
+            // === Domain: Psychology (Cyan) ===
+            {
+                id: "Mister Market", en: "Mister Market", cn: "市场先生", group: "Psychology", val: 20,
+                desc_en: "The collective, irrational consumer aggregate.",
+                desc_cn: "无数消费者心理活动的集合体，是最大的不可控变量。",
+                notes_en: "Market is not a calculator, but a <span class='keyword'>Manic-Depressive</span> patient. It overreacts to news (Manic) and over-corrects to fear (Depressed).",
+                notes_cn: "市场不是计算器，而是一个<span class='keyword'>躁郁症</span>患者。它对新闻过度反应（躁狂），对恐惧过度修正（抑郁）。",
+                scenes_en: ["Crisis Buying", "Bubble Identification"],
+                scenes_cn: ["危机抄底", "泡沫识别"]
+            },
+            {
+                id: "Symbolic Value", en: "Symbolic Value", cn: "符号价值", group: "Psychology", val: 25,
+                desc_en: "Value determined by <span class='keyword'>Social differentiation</span>, not utility.",
+                desc_cn: "由<span class='keyword'>社会区分</span>决定的价值，而非使用价值。",
+                notes_en: "Baudrillard's core argument. We consume not to use, but to 'signify' who we are. Price is irrelevant to cost; it's about the 'Statement'.",
+                notes_cn: "鲍德里亚的核心论点。我们消费不是为了使用，而是为了'表明'我们是谁。价格与成本无关，与'声明'有关。",
+                scenes_en: ["Luxury Branding", "NFT Valuation"],
+                scenes_cn: ["奢侈品定价", "NFT 估值"]
+            },
+            {
+                id: "Baudrillard's Evolution", en: "Baudrillard's Evolution", cn: "鲍德里亚演化", group: "Psychology", val: 15,
+                desc_en: "Value trajectory: Use → Exchange → Sign.",
+                desc_cn: "价值演化轨迹：使用价值 → 交换价值 → 符号价值。",
+                notes_en: "Stage 1: It keeps me warm. Stage 2: It's worth $10. Stage 3: It proves I'm rich. Modern economy is stuck in Stage 3.",
+                notes_cn: "阶段1：它让我暖和。阶段2：它值10块。阶段3：它证明我有钱。现代经济卡在了阶段3。",
+                scenes_en: ["Brand Strategy", "Economic History"],
+                scenes_cn: ["品牌战略", "经济史"]
+            },
+            {
+                id: "Style Syntax", en: "Style Syntax", cn: "风格语法", group: "Psychology", val: 15,
+                desc_en: "The grammar of status (clothing, lifestyle).",
+                desc_cn: "地位的语法规则（穿搭、生活方式的组合套路）。",
+                notes_en: "Like language, style has rules. Knowing them signals 'Old Money', breaking them signals 'Outsider'.",
+                notes_cn: "风格像语言一样有规则。懂规则的人看起来像老钱，不懂的像暴发户或局外人。",
+                scenes_en: ["Personal Branding", "Social Engineering"],
+                scenes_cn: ["个人品牌", "社交工程"]
+            },
+
+            // === Domain: System (Green) ===
+            {
+                id: "Solopreneur", en: "Solopreneur", cn: "一人公司", group: "System", val: 35,
+                desc_en: "Entity leveraged by Code & Media, not Labor.",
+                desc_cn: "靠代码和媒体撬动的实体，而非靠劳动力。",
+                notes_en: "Not 'doing everything yourself', but 'designing a system that does everything'. Goal: decouple Income from Time.",
+                notes_cn: "不是'一个人干所有事'，而是'设计一个能自己干所有事的系统'。目标：让收入与时间脱钩。",
+                scenes_en: ["SaaS Business", "Content Creator"],
+                scenes_cn: ["SaaS 创业", "内容创作者"]
+            },
+            {
+                id: "Leverage", en: "Leverage", cn: "杠杆", group: "System", val: 30,
+                desc_en: "The force multiplier. Output = Input × Leverage.",
+                desc_cn: "力量放大器。产出 = 投入 × 杠杆率。",
+                notes_en: "4 types: Code (Zero MC), Media (Zero MC), Labor (Permissioned), Capital (Permissioned).",
+                notes_cn: "四种形式：代码（零边际成本）、媒体（零边际成本）、人力（需许可）、资本（需许可）。",
+                scenes_en: ["Scaling", "Resource Allocation"],
+                scenes_cn: ["规模化", "资源配置"]
+            },
+            {
+                id: "Code & Media", en: "Code & Media", cn: "代码与媒体", group: "System", val: 25,
+                desc_en: "Permissionless Leverage with Zero Marginal Cost.",
+                desc_cn: "无需许可的杠杆，边际成本为零。",
+                notes_en: "The 'New Rich' leverage. You don't need anyone's permission to write code or record a video. It works while you sleep.",
+                notes_cn: "'新富'的杠杆。写代码、录视频不需要任何人批准。你睡觉时它还在工作。",
+                scenes_en: ["YouTube", "App Development"],
+                scenes_cn: ["短视频", "应用开发"]
+            },
+            {
+                id: "MVP", en: "MVP", cn: "最小可行性产品", group: "System", val: 20,
+                desc_en: "Minimum Viable Product.",
+                desc_cn: "用最少资源验证核心假设的产品版本。",
+                notes_en: "Don't build the Ferrari first. Build the Skateboard. Validate 'Pain' before 'Solution'.",
+                notes_cn: "别先造法拉利，先造滑板。验证'痛点'先于'解决方案'。",
+                scenes_en: ["Startup Launch", "Feature Test"],
+                scenes_cn: ["创业启动", "功能测试"]
+            },
+            {
+                id: "SOP", en: "SOP", cn: "标准作业程序", group: "System", val: 20,
+                desc_en: "Standard Operating Procedure. The DNA of a system.",
+                desc_cn: "系统的 DNA。把脑子里的经验变成文档。",
+                notes_en: "If it's not written down, it doesn't exist. SOP turns 'Art' into 'Process'. The prerequisite for hiring.",
+                notes_cn: "没写下来就等于不存在。SOP 把'艺术'变成'流程'。雇人的前提。",
+                scenes_en: ["Delegation", "Quality Control"],
+                scenes_cn: ["授权", "质量控制"]
+            },
+            {
+                id: "Passive Income", en: "Passive Income", cn: "被动收入", group: "System", val: 20,
+                desc_en: "Revenue decoupled from active time input.",
+                desc_cn: "与时间投入脱钩的收入。",
+                notes_en: "High initial <span class='keyword'>Fixed Cost</span> but near-zero maintenance. It's 'delayed compensation'.",
+                notes_cn: "前期需要高<span class='keyword'>固定成本</span>投入，但维护成本极低。是'延迟的报酬'。",
+                scenes_en: ["Investment", "Digital Products"],
+                scenes_cn: ["投资", "数字产品"]
+            },
+            {
+                id: "Marginal Cost", en: "Marginal Cost", cn: "边际成本", group: "System", val: 15,
+                desc_en: "Cost to replicate one more unit.",
+                desc_cn: "多生产一份的额外成本。",
+                notes_en: "Digital Economy's magic bullet. If MC=0, Profit flows purely to Scale.",
+                notes_cn: "数字经济的魔法子弹。如果边际成本=0，利润全部流向规模。",
+                scenes_en: ["Software Pricing", "Scale Strategy"],
+                scenes_cn: ["软件定价", "规模战略"]
+            },
+
+            // === Domain: Core (Red) ===
+            {
+                id: "The Machine", en: "The Machine", cn: "机器隐喻", group: "Core", val: 30,
+                desc_en: "Enterprise = Designed Machine.",
+                desc_cn: "企业 = 被设计出来的机器。",
+                notes_en: "A company is not a family; it's a machine. It consists of <span class='keyword'>Design</span> (Rules) + <span class='keyword'>People</span> (Energy).",
+                notes_cn: "公司不是家庭，而是机器。由<span class='keyword'>设计</span>（规则）+ <span class='keyword'>人</span>（能量）组成。",
+                scenes_en: ["Org Design", "Diagnosis"],
+                scenes_cn: ["组织设计", "诊断"]
+            },
+            {
+                id: "Drucker's 3 Assumptions", en: "Drucker's 3 Assumptions", cn: "德鲁克三假设", group: "Core", val: 28,
+                desc_en: "Environment + Mission + Competencies.",
+                desc_cn: "环境 + 使命 + 核心能力。",
+                notes_en: "1. How big is the pie? 2. Why us? 3. What's our weapon? If any is wrong, business collapses.",
+                notes_cn: "1. 盘子多大？2. 为什么是我们？3. 我们的武器是什么？任何一个假设错了，企业就会崩溃。",
+                scenes_en: ["Business Plan", "Strategic Pivot"],
+                scenes_cn: ["商业计划书", "战略转型"]
+            },
+            {
+                id: "Value Proposition", en: "Value Proposition", cn: "价值主张", group: "Core", val: 25,
+                desc_en: "Pain Magnitude × Solution Accuracy.",
+                desc_cn: "痛点烈度 × 解题精度。",
+                notes_en: "Is this a Vitamin (Nice to have) or Painkiller (Must have)?",
+                notes_cn: "这是维生素（可有可无）还是止痛药（必须要有）？",
+                scenes_en: ["Pitching", "PMF"],
+                scenes_cn: ["融资路演", "产品市场匹配"]
+            },
+            {
+                id: "Time Machine", en: "Time Machine", cn: "时光机理论", group: "Core", val: 20,
+                desc_en: "Predict future by looking at developed markets.",
+                desc_cn: "通过观察发达市场来预测未来。",
+                notes_en: "What's popular in the US today will likely be popular in Emerging Markets tomorrow. Don't invent; <span class='keyword'>Import</span>.",
+                notes_cn: "今天在美国流行的，明天大概率会在新兴市场流行。不要发明；<span class='keyword'>搬运</span>就好。",
+                scenes_en: ["Trend Prediction", "Market Entry"],
+                scenes_cn: ["趋势预测", "市场进入"]
+            },
+            {
+                id: "Cultural DNA", en: "Cultural DNA", cn: "文化基因", group: "Core", val: 20,
+                desc_en: "The First Person Law.",
+                desc_cn: "第一人定律。",
+                notes_en: "Culture is set by the First Employee. If you and #1 fight, #3 will fight. Irreversible.",
+                notes_cn: "文化由第一个员工决定。如果你和1号互撕，3号也会学。不可逆。",
+                scenes_en: ["Hiring", "Team Building"],
+                scenes_cn: ["招聘", "团队建设"]
+            },
+            {
+                id: "Power Formula", en: "Power Formula", cn: "权力公式", group: "Core", val: 25,
+                desc_en: "Power = Resources + Rules.",
+                desc_cn: "权力 = 资源 + 规则。",
+                notes_en: "Power is not just money (Resources). It is the ability to write the Rules. He who makes the rules, owns the players.",
+                notes_cn: "权力不仅仅是钱（资源）。而是制定规则的能力。谁制定规则，谁就拥有玩家。",
+                scenes_en: ["Negotiation", "Platform Design"],
+                scenes_cn: ["谈判", "平台设计"]
+            },
+
+            // === Domain: AI (Orange) ===
+            {
+                id: "AI Agent", en: "AI Agent", cn: "智能体", group: "AI", val: 35,
+                desc_en: "Autonomous task executor, not chatbot.",
+                desc_cn: "自主执行任务的程序，不是聊天机器人。",
+                notes_en: "LLM = Electricity. Agent = <span class='keyword'>Appliance</span>. It can plan, execute, and interact. The Cambrian Explosion of AI.",
+                notes_cn: "大语言模型 = 电。智能体 = <span class='keyword'>家用电器</span>。能规划、执行、与外部交互。这是 AI 的寒武纪大爆发。",
+                scenes_en: ["Travel Planning", "Enterprise Automation"],
+                scenes_cn: ["旅行规划", "企业自动化"]
+            },
+            {
+                id: "LLM", en: "LLM", cn: "大语言模型", group: "AI", val: 25,
+                desc_en: "The foundational 'Electricity' of AI.",
+                desc_cn: "AI 的基础'电力'。",
+                notes_en: "GPT, Gemini, Claude, Deepseek are like wind, water, nuclear electricity. Agent is the appliance.",
+                notes_cn: "GPT、Gemini、Claude、Deepseek 就像风电、水电、核电。智能体是用电的家电。",
+                scenes_en: ["General AI Use", "Chatbots"],
+                scenes_cn: ["通用 AI 应用", "聊天机器人"]
+            },
+            {
+                id: "Attention Chain", en: "Attention Chain", cn: "注意力链条", group: "AI", val: 28,
+                desc_en: "Attention → Influence → Decision Power.",
+                desc_cn: "注意力 → 影响力 → 决策权。",
+                notes_en: "Whoever owns your attention, owns your decision. <span class='keyword'>Agent breaks this chain.</span>",
+                notes_cn: "谁拥有你的注意力，谁就拥有你的决策。<span class='keyword'>智能体打断了这条链。</span>",
+                scenes_en: ["Advertising Analysis", "Platform Disruption"],
+                scenes_cn: ["广告分析", "平台颠覆"]
+            },
+            {
+                id: "Mid-Office", en: "Mid-Office", cn: "中台部门", group: "AI", val: 20,
+                desc_en: "High-standardization enterprise functions.",
+                desc_cn: "高度标准化的企业职能部门。",
+                notes_en: "HR, Finance, Admin. First to be replaced by Agents. But humans still needed for <span class='keyword'>Accountability</span>.",
+                notes_cn: "HR、财务、行政。最先被智能体取代。但仍需人类负责<span class='keyword'>担责</span>。",
+                scenes_en: ["HR Automation", "Finance Bots"],
+                scenes_cn: ["HR 自动化", "财务机器人"]
+            },
+            {
+                id: "Disruption", en: "Disruptive Innovation", cn: "颠覆式创新", group: "AI", val: 22,
+                desc_en: "Tech × Model × Paradigm Innovation.",
+                desc_cn: "科技创新 × 模式创新 × 范式创新。",
+                notes_en: "Three periods stacking. Causes mass extinction of old business models.",
+                notes_cn: "三期叠加。导致旧商业模式的大规模灭绝。",
+                scenes_en: ["Industry Analysis", "Trend Prediction"],
+                scenes_cn: ["行业分析", "趋势预测"]
+            },
+
+            // === Domain: Capital (Purple) ===
+            {
+                id: "Innovation Pyramid", en: "Innovation Pyramid", cn: "创新金字塔", group: "Capital", val: 30,
+                desc_en: "Technology → Model → Paradigm.",
+                desc_cn: "科技创新 → 模式创新 → 范式创新。",
+                notes_en: "Tech = Can we build it? Model = How to sell/earn? Paradigm = What are we even doing? (Philosophy)",
+                notes_cn: "科技=能不能做出来？模式=怎么卖/赚？范式=我们到底在做什么？（哲学问题）",
+                scenes_en: ["Startup Pitch", "Innovation Audit"],
+                scenes_cn: ["创业路演", "创新审计"]
+            },
+            {
+                id: "Three Documents", en: "Three Documents", cn: "资本三件套", group: "Capital", val: 28,
+                desc_en: "One Page + BP + Pitch Deck.",
+                desc_cn: "执行摘要 + 商业计划书 + 路演 PPT。",
+                notes_en: "One Page for mass distribution, BP for deep dive, Pitch Deck for live presentation + Q&A.",
+                notes_cn: "One Page 大范围发送，BP 深度研究，Pitch Deck 现场演示+答辩。",
+                scenes_en: ["Fundraising", "Road Show"],
+                scenes_cn: ["融资", "路演"]
+            },
+            {
+                id: "Unit Economics", en: "Unit Economics", cn: "单位经济学", group: "Capital", val: 25,
+                desc_en: "LTV / CAC > 3 = Healthy.",
+                desc_cn: "客户生命周期价值 / 获客成本 > 3 = 健康。",
+                notes_en: "Investors don't just look at revenue, they look at <span class='keyword'>unit economics</span>. Is each customer profitable?",
+                notes_cn: "投资人不只看收入，还看<span class='keyword'>单位经济学</span>。每个客户能赚钱吗？",
+                scenes_en: ["Financial Model", "Due Diligence"],
+                scenes_cn: ["财务模型", "尽调"]
+            },
+            {
+                id: "Traction", en: "Traction", cn: "牵引力", group: "Capital", val: 22,
+                desc_en: "Proof of market demand.",
+                desc_cn: "证明市场需求的实际数据。",
+                notes_en: "The days of PPT fundraising are over. You need <span class='keyword'>real customers paying real money</span>.",
+                notes_cn: "PPT 融资的时代已经过去了。你需要<span class='keyword'>真实客户付真实的钱</span>。",
+                scenes_en: ["Seed Round", "Angel Investment"],
+                scenes_cn: ["种子轮", "天使投资"]
+            },
+            {
+                id: "Time Machine Theory", en: "Time Machine Theory", cn: "时间机器理论-资本", group: "Capital", val: 20,
+                desc_en: "Copy from developed markets.",
+                desc_cn: "从发达市场复制。",
+                notes_en: "Not first-in-world, but first-in-China/segment. Localization + Scale = Your moat.",
+                notes_cn: "不是全球首发，但可以是国内首发/细分首发。本土化+规模化=你的护城河。",
+                scenes_en: ["Market Entry", "Competitive Analysis"],
+                scenes_cn: ["市场进入", "竞争分析"]
+            },
+
+            // === SYNCED FROM GLOSSARY (Missing Nodes) ===
+            {
+                id: "Productized Service", en: "Productized Service", cn: "产品化服务", group: "System", val: 18,
+                desc_en: "Service packaged as fixed-price, fixed-scope product.",
+                desc_cn: "将服务打包成固定价格、固定范围的标准化产品。",
+                notes_en: "The key to <span class='keyword'>reducing marginal cost</span> in service industries. Turns bespoke into scalable.",
+                notes_cn: "降低服务业<span class='keyword'>边际成本</span>的关键。把定制变成可规模化。",
+                scenes_en: ["Consulting Packages", "Agency Retainers"],
+                scenes_cn: ["咨询套餐", "代理月费"]
+            },
+            {
+                id: "Strategic Pause", en: "Strategic Pause", cn: "战略暂停", group: "Core", val: 18,
+                desc_en: "Force-stop execution to avoid tactical diligence masking strategic laziness.",
+                desc_cn: "强制停止执行，避免'战术勤奋掩盖战略懒惰'。",
+                notes_en: "Sometimes the best action is <span class='keyword'>no action</span>. Think before you build.",
+                notes_cn: "有时候最好的行动是<span class='keyword'>不行动</span>。先想后做。",
+                scenes_en: ["Quarterly Review", "Pivot Decision"],
+                scenes_cn: ["季度复盘", "转型决策"]
+            },
+            {
+                id: "Cambrian Explosion", en: "Cambrian Explosion", cn: "寒武纪大爆发", group: "AI", val: 18,
+                desc_en: "Rapid diversification of AI Agent applications.",
+                desc_cn: "AI Agent 细分场景应用的快速涌现。",
+                notes_en: "Like the biological event 500M years ago: sudden burst of <span class='keyword'>species diversity</span>. We're seeing it now with Agents.",
+                notes_cn: "类似5亿年前的生物事件：物种多样性的<span class='keyword'>突然爆发</span>。我们现在正见证 Agent 的同样情况。",
+                scenes_en: ["Agent Ecosystem", "Startup Landscape"],
+                scenes_cn: ["智能体生态", "创业版图"]
+            },
+            {
+                id: "Elevator Pitch", en: "Elevator Pitch", cn: "电梯演讲", group: "Capital", val: 15,
+                desc_en: "30s-3min oral version of One Page.",
+                desc_cn: "30 秒~3 分钟的口述版执行摘要。",
+                notes_en: "Use <span class='keyword'>human language</span>. No jargon. Make grandma understand.",
+                notes_cn: "用<span class='keyword'>人话</span>。不说行话。让奶奶都能听懂。",
+                scenes_en: ["Networking Events", "Chance Encounters"],
+                scenes_cn: ["社交活动", "偶遇机会"]
+            },
+            {
+                id: "CAC", en: "CAC", cn: "获客成本", group: "Capital", val: 15,
+                desc_en: "Customer Acquisition Cost.",
+                desc_cn: "获取一个客户需要花多少钱。",
+                notes_en: "If CAC > LTV, you're <span class='keyword'>burning money</span> to get customers. Classic startup death spiral.",
+                notes_cn: "如果 CAC > LTV，你就是在<span class='keyword'>烧钱</span>获客。经典创业死亡螺旋。",
+                scenes_en: ["Marketing ROI", "Growth Strategy"],
+                scenes_cn: ["营销 ROI", "增长策略"]
+            },
+            {
+                id: "Burn Rate", en: "Burn Rate", cn: "烧钱速度", group: "Capital", val: 15,
+                desc_en: "Monthly cash consumption. Runway = Cash / Burn Rate.",
+                desc_cn: "每月消耗多少现金。跑道 = 现金 / 烧钱速度。",
+                notes_en: "Know your <span class='keyword'>runway</span>. If it's 6 months, start fundraising NOW.",
+                notes_cn: "知道你的<span class='keyword'>跑道</span>有多长。如果只剩6个月，现在就开始融资。",
+                scenes_en: ["Cash Flow Management", "Fundraising Timing"],
+                scenes_cn: ["现金流管理", "融资时机"]
+            },
+            {
+                id: "Technology Innovation", en: "Technology Innovation", cn: "科技创新", group: "Capital", val: 20,
+                desc_en: "Innovation based on tech, materials, algorithms, engineering.",
+                desc_cn: "基于技术、材料、算法、工程学的创新。",
+                notes_en: "Solves 'Can we build it?' High R&D, long cycle, forms <span class='keyword'>tech moat</span>.",
+                notes_cn: "解决'能不能做出来'的问题。高研发、长周期、形成<span class='keyword'>技术壁垒</span>。",
+                scenes_en: ["SpaceX Rockets", "CATL Batteries"],
+                scenes_cn: ["SpaceX 火箭", "宁德时代电池"]
+            },
+            {
+                id: "Model Innovation", en: "Model Innovation", cn: "模式创新", group: "Capital", val: 20,
+                desc_en: "Innovation in how to sell, earn, organize.",
+                desc_cn: "改变怎么卖、怎么赚、怎么组织的创新。",
+                notes_en: "Fast results, low barrier, relies on <span class='keyword'>network effects</span>. Easy to copy.",
+                notes_cn: "见效快、门槛低、依赖<span class='keyword'>网络效应</span>。容易被模仿。",
+                scenes_en: ["Platform Economy", "Subscription Models"],
+                scenes_cn: ["平台经济", "订阅模式"]
+            },
+            {
+                id: "Paradigm Innovation", en: "Paradigm Innovation", cn: "范式创新", group: "Capital", val: 22,
+                desc_en: "Changes the Mental Model. Redefines industry essence.",
+                desc_cn: "改变人们的底层逻辑。重新定义行业本质。",
+                notes_en: "10 years rare. iPhone: Phone = Smart Terminal. Tesla: Car = Computer on Wheels.",
+                notes_cn: "10年难得一见。iPhone：手机=智能终端。Tesla：汽车=装轮子的电脑。",
+                scenes_en: ["iPhone Moment", "Tesla Effect"],
+                scenes_cn: ["iPhone 时刻", "特斯拉效应"]
+            },
+            {
+                id: "One Page", en: "One Page", cn: "执行摘要", group: "Capital", val: 16,
+                desc_en: "1-3 page executive summary for mass distribution.",
+                desc_cn: "1~3 页的执行摘要，用于大范围传播。",
+                notes_en: "Pain, Solution, Market, Team, Ask. Get it done in <span class='keyword'>under 1 minute</span>.",
+                notes_cn: "痛点、解决方案、市场、团队、融资需求。<span class='keyword'>1分钟内</span>讲清楚。",
+                scenes_en: ["Email Pitches", "Angel Outreach"],
+                scenes_cn: ["邮件联系", "天使接触"]
+            },
+            {
+                id: "Pitch Deck", en: "Pitch Deck", cn: "路演PPT", group: "Capital", val: 16,
+                desc_en: "Live presentation version of BP with Q&A.",
+                desc_cn: "用于现场演示+答辩的 BP 版本。",
+                notes_en: "Visual storytelling + video. The real test is the <span class='keyword'>Q&A after</span>.",
+                notes_cn: "视觉叙事+视频。真正的考验是<span class='keyword'>之后的答辩</span>。",
+                scenes_en: ["Demo Day", "Investor Meeting"],
+                scenes_cn: ["路演日", "投资人会议"]
+            },
+            {
+                id: "LTV", en: "LTV", cn: "客户生命周期价值", group: "Capital", val: 16,
+                desc_en: "Lifetime Value. How much one customer contributes forever.",
+                desc_cn: "一个客户一辈子给你贡献多少钱。",
+                notes_en: "Healthy: <span class='keyword'>LTV/CAC > 3</span>. If not, you're subsidizing customers.",
+                notes_cn: "健康模型：<span class='keyword'>LTV/CAC > 3</span>。否则你是在补贴客户。",
+                scenes_en: ["Subscription Business", "Retention Strategy"],
+                scenes_cn: ["订阅业务", "留存策略"]
+            },
+
+            // === SYNCED FROM TRANSCRIPT: One Person Business Model ===
+            {
+                id: "Value Creator", en: "Value Creator", cn: "价值创造者", group: "System", val: 28,
+                desc_en: "Earns with mind not time. Researches obsessions, distills learnings.",
+                desc_cn: "用脑子赚钱而非用时间。研究自己的痴迷，提炼学习成果。",
+                notes_en: "A <span class='keyword'>one-person media company</span>. Build name on social media, sell products from traffic.",
+                notes_cn: "一个人的<span class='keyword'>媒体公司</span>。在社交媒体上建立名声，从流量中销售产品。",
+                scenes_en: ["Creator Economy", "Personal Brand"],
+                scenes_cn: ["创作者经济", "个人品牌"]
+            },
+            {
+                id: "Synthesizer", en: "Synthesizer", cn: "综合者", group: "System", val: 22,
+                desc_en: "Connects ideas across domains. Creates new categories.",
+                desc_cn: "跨领域连接想法。创造新品类。",
+                notes_en: "Reality isn't compartmentalized. <span class='keyword'>Connect the full picture</span> to help people achieve goals.",
+                notes_cn: "现实不是隔离的。<span class='keyword'>连接全貌</span>来帮助人们实现目标。",
+                scenes_en: ["Cross-Domain Research", "Philosophy"],
+                scenes_cn: ["跨领域研究", "哲学"]
+            },
+            {
+                id: "MVO", en: "Minimum Viable Offer", cn: "最小可行报价", group: "System", val: 20,
+                desc_en: "First monetizable offer. Freelance skill or consulting pack.",
+                desc_cn: "第一个可变现的报价。自由技能或咨询套餐。",
+                notes_en: "Single skill for $500-1000 OR 4-call consulting pack. <span class='keyword'>Start monetizing immediately.</span>",
+                notes_cn: "单一技能 $500-1000 或 4次咨询套餐。<span class='keyword'>立即开始变现。</span>",
+                scenes_en: ["Freelance Start", "Coach Launch"],
+                scenes_cn: ["自由职业起步", "教练启动"]
+            },
+            {
+                id: "Domain of Mastery", en: "Domain of Mastery", cn: "精通领域", group: "System", val: 22,
+                desc_en: "3 interests: Money-making + Exciting + Development-based.",
+                desc_cn: "3 个兴趣：赚钱的 + 兴奋的 + 发展型的。",
+                notes_en: "Interest 1 = makes money. Interest 2 = excites you. Interest 3 = <span class='keyword'>psychology/philosophy</span>.",
+                notes_cn: "兴趣1=赚钱。兴趣2=让你兴奋。兴趣3=<span class='keyword'>心理学/哲学</span>。",
+                scenes_en: ["Content Strategy", "Niche Selection"],
+                scenes_cn: ["内容策略", "赛道选择"]
+            },
+            {
+                id: "Eternal Markets", en: "Eternal Markets", cn: "永恒市场", group: "Core", val: 25,
+                desc_en: "Health, Wealth, Relationships, Happiness.",
+                desc_cn: "健康、财富、关系、幸福。",
+                notes_en: "Where most people pursue <span class='keyword'>lofty goals with burning problems</span>. Most money is made here.",
+                notes_cn: "大多数人追求<span class='keyword'>崇高目标却有燃眉问题</span>的地方。最赚钱的地方。",
+                scenes_en: ["Market Selection", "Product Design"],
+                scenes_cn: ["市场选择", "产品设计"]
+            },
+            {
+                id: "Entrepreneurial Method", en: "Entrepreneurial Method", cn: "创业方法论", group: "Core", val: 20,
+                desc_en: "Find problem → Learn → Document → Systematize → Share.",
+                desc_cn: "发现问题 → 学习 → 记录 → 系统化 → 分享。",
+                notes_en: "Like scientific method but for business. <span class='keyword'>Solve your own problems, teach others.</span>",
+                notes_cn: "类似科学方法但用于商业。<span class='keyword'>解决自己的问题，教给别人。</span>",
+                scenes_en: ["Business Building", "Content Creation"],
+                scenes_cn: ["创业", "内容创作"]
+            },
+            {
+                id: "PPP Framework", en: "PPP Framework", cn: "PPP框架", group: "System", val: 18,
+                desc_en: "Pull → Perspective → Punchline.",
+                desc_cn: "吸引 → 视角 → 金句。",
+                notes_en: "For short-form content. Pull attention, give unique angle, <span class='keyword'>end with punch</span>.",
+                notes_cn: "用于短内容。吸引注意力，给出独特角度，<span class='keyword'>金句收尾</span>。",
+                scenes_en: ["Tweet Writing", "Short-form Video"],
+                scenes_cn: ["推文写作", "短视频"]
+            },
+            {
+                id: "Information Product", en: "Information Product", cn: "信息产品", group: "Capital", val: 22,
+                desc_en: "Packaged knowledge. Courses, ebooks, cohorts.",
+                desc_cn: "打包的知识。课程、电子书、训练营。",
+                notes_en: "You have <span class='keyword'>$100k in your head</span>. Package experience into step-by-step system.",
+                notes_cn: "你脑子里有<span class='keyword'>10万美元</span>。把经验打包成步骤系统。",
+                scenes_en: ["Course Creation", "Digital Product"],
+                scenes_cn: ["课程制作", "数字产品"]
+            },
+            {
+                id: "Productized Self", en: "Productized Self", cn: "产品化自我", group: "System", val: 25,
+                desc_en: "You are your brand, niche, content, and offer.",
+                desc_cn: "你就是你的品牌、赛道、内容和产品。",
+                notes_en: "Brand = goals. Content = problems. Product = system. <span class='keyword'>Marketing = benefits.</span>",
+                notes_cn: "品牌=目标。内容=问题。产品=系统。<span class='keyword'>营销=好处。</span>",
+                scenes_en: ["Personal Branding", "Creator Business"],
+                scenes_cn: ["个人品牌", "创作者生意"]
+            },
+            {
+                id: "Flow State", en: "Flow State", cn: "心流状态", group: "Psychology", val: 20,
+                desc_en: "Absorbed by skill pursuit. Intrinsically motivating.",
+                desc_cn: "被技能追求吸收。内在驱动。",
+                notes_en: "Motivation starts, learning continues, creativity steers, <span class='keyword'>flow turbo-boosts</span>.",
+                notes_cn: "动机启动，学习持续，创造力掌舵，<span class='keyword'>心流涡轮增压</span>。",
+                scenes_en: ["Deep Work", "Skill Mastery"],
+                scenes_cn: ["深度工作", "技能精通"]
+            },
+            {
+                id: "Self Reliance", en: "Self Reliance", cn: "自我依赖", group: "Psychology", val: 22,
+                desc_en: "Figure it out yourself. Don't follow others' advice as law.",
+                desc_cn: "自己搞明白。别把别人的建议当法律。",
+                notes_en: "The <span class='keyword'>greatest value</span>. Test everything, trust your experience.",
+                notes_cn: "<span class='keyword'>最伟大的价值观</span>。测试一切，相信你的经验。",
+                scenes_en: ["Decision Making", "Personal Growth"],
+                scenes_cn: ["决策", "个人成长"]
+            },
+            {
+                id: "Lifestyle Design", en: "Lifestyle Design", cn: "生活方式设计", group: "System", val: 20,
+                desc_en: "Structure days for max productivity + creativity.",
+                desc_cn: "安排日程以获得最大生产力+创造力。",
+                notes_en: "No manager = <span class='keyword'>you design your life</span>. Trial, error, experimentation.",
+                notes_cn: "没有老板=<span class='keyword'>你设计你的生活</span>。试错、实验。",
+                scenes_en: ["Time Freedom", "Remote Work"],
+                scenes_cn: ["时间自由", "远程工作"]
+            },
+            {
+                id: "Product Ladder", en: "Product Ladder", cn: "产品阶梯", group: "Capital", val: 22,
+                desc_en: "Free → Low-Ticket → Mid-Ticket → Premium structure.",
+                desc_cn: "从免费到高价的产品结构。",
+                notes_en: "Free (Newsletter) → Low ($20-100) → Mid ($300-1000) → <span class='keyword'>Premium ($2000+)</span>.",
+                notes_cn: "免费 (Newsletter) → 低价 ($20-100) → 中价 ($300-1000) → <span class='keyword'>高价 ($2000+)</span>。",
+                scenes_en: ["Revenue Scaling", "Course Business"],
+                scenes_cn: ["收入扩展", "课程生意"]
+            },
+            {
+                id: "Two Hour Writer", en: "Two Hour Writer", cn: "两小时作家", group: "System", val: 18,
+                desc_en: "Dan Koe's content system. 2 hours daily writing.",
+                desc_cn: "Dan Koe 的内容系统。每天 2 小时写作。",
+                notes_en: "Newsletter → Thread → Tweets → YouTube. <span class='keyword'>Complete content empire</span> from one writing session.",
+                notes_cn: "周报 → Thread → Tweets → YouTube。一次写作产出 <span class='keyword'>完整内容帝国</span>。",
+                scenes_en: ["Content Strategy", "Leverage Writing"],
+                scenes_cn: ["内容策略", "杠杆写作"]
+            },
+            {
+                id: "Imposter Syndrome", en: "Imposter Syndrome", cn: "冒名顶替综合症", group: "Psychology", val: 16,
+                desc_en: "Belief that you're not qualified to teach others.",
+                desc_cn: "认为没资格教别人的心理障碍。",
+                notes_en: "You don't need to be the best. Just <span class='keyword'>1-2 steps ahead</span> of your audience.",
+                notes_cn: "你不需要最强，只需要比受众 <span class='keyword'>领先一两步</span>。",
+                scenes_en: ["Creator Mindset", "Overcoming Fear"],
+                scenes_cn: ["创作者心态", "克服恐惧"]
+            },
+
+            // === SYNCED: Missing Glossary Terms ===
+            {
+                id: "Capital Path", en: "Capital Path", cn: "万人敌", group: "Capital", val: 22,
+                desc_en: "Startup path requiring capital, fighting incumbents.",
+                desc_cn: "需要借助资本力量、与既得利益者血战的创业路线。",
+                notes_en: "From 《史记·项羽本纪》. Requires <span class='keyword'>BP + Financial Model + Exit Strategy</span>.",
+                notes_cn: "出自《史记·项羽本纪》。需要 <span class='keyword'>BP + 财务模型 + 退出机制</span>。",
+                scenes_en: ["VC Funding", "Market Disruption"],
+                scenes_cn: ["风险投资", "市场颠覆"]
+            },
+            {
+                id: "Stress Test", en: "Stress Test", cn: "压力测试", group: "System", val: 18,
+                desc_en: "Founder disappears 1 week to 1 month to test system.",
+                desc_cn: "创始人主动消失一段时间，检验系统健壮性。",
+                notes_en: "If company survives <span class='keyword'>1 month without you</span>, it's an asset.",
+                notes_cn: "如果公司能在你消失 <span class='keyword'>1 个月后继续运转</span>，它就是资产。",
+                scenes_en: ["System Validation", "Exit Readiness"],
+                scenes_cn: ["系统验证", "退出准备"]
+            },
+
+            // === SYNCED: 4 Execution Phases ===
+            {
+                id: "Phase 1 Selection", en: "Selection & Validation", cn: "选品与验证", group: "System", val: 20,
+                desc_en: "Find high-leverage model, validate demand. 0 → 0.1",
+                desc_cn: "找到可脱钩时间的高利润模型，验证真实需求。",
+                notes_en: "Role: Product Manager + Sales. Output: <span class='keyword'>Validated Idea + First Revenue</span>.",
+                notes_cn: "角色：产品经理+销售。产出：<span class='keyword'>验证过的想法+第一笔收入</span>。",
+                scenes_en: ["MVP Testing", "Market Research"],
+                scenes_cn: ["MVP 测试", "市场调研"]
+            },
+            {
+                id: "Phase 2 Standardize", en: "Build & Standardize", cn: "构建与标准化", group: "System", val: 20,
+                desc_en: "Complete delivery, build SOPs. 0.1 → 0.5",
+                desc_cn: "完成交付后，将所有操作流程化、标准化。",
+                notes_en: "Role: All-rounder (hardest phase). Output: <span class='keyword'>Complete SOP Library</span>.",
+                notes_cn: "角色：全能执行者（最辛苦）。产出：<span class='keyword'>完整 SOP 文档库</span>。",
+                scenes_en: ["Process Documentation", "Quality Control"],
+                scenes_cn: ["流程文档化", "质量控制"]
+            },
+            {
+                id: "Phase 3 Automation", en: "Automation & Outsourcing", cn: "自动化与外包", group: "System", val: 20,
+                desc_en: "Replace yourself with tools and team. 0.5 → 0.9",
+                desc_cn: "用工具和团队替代你自己。",
+                notes_en: "Role: Architect + Recruiter. Output: <span class='keyword'>Automated Workflows + VA Team</span>.",
+                notes_cn: "角色：架构师+招聘官。产出：<span class='keyword'>自动化工作流+外包团队</span>。",
+                scenes_en: ["Zapier Automation", "Team Building"],
+                scenes_cn: ["Zapier 自动化", "团队搭建"]
+            },
+            {
+                id: "Phase 4 Exit", en: "De-founder & Exit", cn: "去创始人化与退出", group: "System", val: 22,
+                desc_en: "Cut dependency on founder. 0.9 → 1.0",
+                desc_cn: "切断公司对你的依赖，实现真正被动。",
+                notes_en: "Role: Chairman / Investor. Output: <span class='keyword'>COO + Reading Reports Only</span>.",
+                notes_cn: "角色：董事长/投资人。产出：<span class='keyword'>运营负责人+只看报表</span>。",
+                scenes_en: ["Passive Income", "Business Sale"],
+                scenes_cn: ["被动收入", "公司出售"]
+            },
+
+            // === SYNCED: 6 Anti-Pattern Traps ===
+            {
+                id: "Premature Automation Trap", en: "Premature Automation Trap", cn: "过早自动化陷阱", group: "Psychology", val: 14,
+                desc_en: "Building automation before validating demand.",
+                desc_cn: "在没有验证需求时就开始搞自动化。",
+                notes_en: "Engineer mindset: 'Build it and they will come'. <span class='keyword'>MVP First!</span>",
+                notes_cn: "工程师思维：做好产品就会有人买。<span class='keyword'>先验证再构建！</span>",
+                scenes_en: ["Startup Failure", "Wasted Effort"],
+                scenes_cn: ["创业失败", "浪费精力"]
+            },
+            {
+                id: "SOP-less Hiring Trap", en: "SOP-less Hiring Trap", cn: "无SOP招人陷阱", group: "System", val: 14,
+                desc_en: "Hiring without documentation. Can't explain, can't execute.",
+                desc_cn: "在没有 SOP 时就招人。讲不清楚，做不出来。",
+                notes_en: "Hidden cost: training, communication, correction. <span class='keyword'>Document First!</span>",
+                notes_cn: "隐性成本：培训、沟通、纠错。<span class='keyword'>先文档化再招人！</span>",
+                scenes_en: ["Team Chaos", "Quality Issues"],
+                scenes_cn: ["团队混乱", "质量问题"]
+            },
+            {
+                id: "Premature Exit Trap", en: "Premature Exit Trap", cn: "过早退出陷阱", group: "System", val: 14,
+                desc_en: "Wanting passive income before system is stable.",
+                desc_cn: "在没有稳定正向现金流时就想完全退出。",
+                notes_en: "Passive requires <span class='keyword'>active construction first</span>. Cash flow first!",
+                notes_cn: "被动需要<span class='keyword'>主动构建完成</span>为前提。现金流优先！",
+                scenes_en: ["Business Death", "Premature Freedom"],
+                scenes_cn: ["公司死亡", "过早自由"]
+            },
+            {
+                id: "Specialization Trap", en: "Specialization Trap", cn: "专业化陷阱", group: "Psychology", val: 14,
+                desc_en: "Limiting yourself to one narrow skill like a robot.",
+                desc_cn: "把自己限制在一个狭窄的技能里，像机器人一样。",
+                notes_en: "Traditional education brainwashing. <span class='keyword'>Be a synthesizer, not specialist</span>.",
+                notes_cn: "被传统教育洗脑。<span class='keyword'>成为综合者，而不是专家</span>。",
+                scenes_en: ["Automation Risk", "Income Ceiling"],
+                scenes_cn: ["自动化风险", "收入封顶"]
+            },
+            {
+                id: "Content Rat Race Trap", en: "Content Rat Race Trap", cn: "内容老鼠赛跑陷阱", group: "Psychology", val: 14,
+                desc_en: "Posting 10 tweets daily but never creating depth.",
+                desc_cn: "每天发10条推文，但从不写有深度的长内容。",
+                notes_en: "Growth anxiety > value. <span class='keyword'>Depth first, frequency second</span>.",
+                notes_cn: "增长焦虑 > 价值输出。<span class='keyword'>深度优先，频率其次</span>。",
+                scenes_en: ["Shallow Content", "No Authority"],
+                scenes_cn: ["浅薄内容", "没有权威"]
+            },
+            {
+                id: "Knowledge Hoarding Trap", en: "Knowledge Hoarding Trap", cn: "知识囤积陷阱", group: "Psychology", val: 14,
+                desc_en: "Reading 100 books but never creating anything.",
+                desc_cn: "读100本书但从不创造任何东西。",
+                notes_en: "Imposter syndrome + consumption addiction. <span class='keyword'>Learn → Create → Teach loop</span>.",
+                notes_cn: "冒名顶替+消费成瘾。<span class='keyword'>学习→创造→教学循环</span>。",
+                scenes_en: ["Information Overload", "No Output"],
+                scenes_cn: ["信息过载", "无产出"]
+            }
+        ];
+
+        const links = [
+            // Psych Flow
+            { source: "Baudrillard's Evolution", target: "Symbolic Value", label: "Defines" },
+            { source: "Mister Market", target: "Symbolic Value", label: "Determines" },
+            { source: "Style Syntax", target: "Symbolic Value", label: "Manifests" },
+
+            // System Flow
+            { source: "Leverage", target: "Solopreneur", label: "Powers" },
+            { source: "Code & Media", target: "Leverage", label: "Is A Type Of" },
+            { source: "Marginal Cost", target: "Code & Media", label: "Defines (Zero)" },
+            { source: "MVP", target: "Value Proposition", label: "Validates" },
+            { source: "SOP", target: "Solopreneur", label: "Scales" },
+            { source: "Marginal Cost", target: "Passive Income", label: "Enables" },
+            { source: "Productized Service", target: "Marginal Cost", label: "Reduces" },
+            { source: "Productized Service", target: "SOP", label: "Requires" },
+
+            // Core Flow
+            { source: "The Machine", target: "Solopreneur", label: "Abstracts" },
+            { source: "Drucker's 3 Assumptions", target: "The Machine", label: "Governs" },
+            { source: "Time Machine", target: "Drucker's 3 Assumptions", label: "Informs (Env)" },
+            { source: "Cultural DNA", target: "The Machine", label: "Animates (People)" },
+            { source: "Value Proposition", target: "The Machine", label: "Fuel (Mission)" },
+            { source: "Strategic Pause", target: "Drucker's 3 Assumptions", label: "Validates" },
+            { source: "Strategic Pause", target: "Value Proposition", label: "Recalibrates" },
+
+            // Cross-Domain (Original)
+            { source: "Symbolic Value", target: "Value Proposition", label: "Amplifies" },
+            { source: "Mister Market", target: "Value Proposition", label: "Validates" },
+            { source: "Power Formula", target: "Leverage", label: "Calculates" },
+
+            // AI Domain Flow
+            { source: "LLM", target: "AI Agent", label: "Powers (Electricity)" },
+            { source: "AI Agent", target: "Attention Chain", label: "Breaks" },
+            { source: "Attention Chain", target: "Code & Media", label: "Threatens" },
+            { source: "AI Agent", target: "Mid-Office", label: "Replaces (Partial)" },
+            { source: "Disruption", target: "AI Agent", label: "Drives" },
+            { source: "SOP", target: "Mid-Office", label: "Enables Replacement" },
+            { source: "Cambrian Explosion", target: "AI Agent", label: "Describes Era Of" },
+
+            // Capital Domain Flow
+            { source: "Innovation Pyramid", target: "Disruption", label: "Defines" },
+            { source: "Three Documents", target: "Innovation Pyramid", label: "Packages" },
+            { source: "Unit Economics", target: "Three Documents", label: "Validates" },
+            { source: "MVP", target: "Traction", label: "Generates" },
+            { source: "Traction", target: "Three Documents", label: "Strengthens" },
+            { source: "Time Machine Theory", target: "Innovation Pyramid", label: "Sources" },
+            { source: "Drucker's 3 Assumptions", target: "Three Documents", label: "Structures" },
+            { source: "Elevator Pitch", target: "Three Documents", label: "Summarizes" },
+            { source: "CAC", target: "Unit Economics", label: "Component Of" },
+            { source: "Burn Rate", target: "Traction", label: "Pressures" },
+
+            // NEW: Innovation Pyramid Breakdown
+            { source: "Technology Innovation", target: "Innovation Pyramid", label: "Base Layer" },
+            { source: "Model Innovation", target: "Innovation Pyramid", label: "Middle Layer" },
+            { source: "Paradigm Innovation", target: "Innovation Pyramid", label: "Top Layer" },
+            { source: "Paradigm Innovation", target: "Disruption", label: "Triggers" },
+
+            // NEW: Three Documents Breakdown
+            { source: "One Page", target: "Three Documents", label: "Is Part Of" },
+            { source: "Pitch Deck", target: "Three Documents", label: "Is Part Of" },
+            { source: "Elevator Pitch", target: "One Page", label: "Oral Version Of" },
+
+            // NEW: Unit Economics Breakdown
+            { source: "LTV", target: "Unit Economics", label: "Component Of" },
+            { source: "LTV", target: "CAC", label: "Must Exceed (3x)" },
+
+            // NEW: One Person Business Model Flow
+            { source: "Value Creator", target: "Solopreneur", label: "Is A Type Of" },
+            { source: "Value Creator", target: "Code & Media", label: "Uses" },
+            { source: "Synthesizer", target: "Value Creator", label: "Advanced Form Of" },
+            { source: "MVO", target: "MVP", label: "Monetization Layer Of" },
+            { source: "MVO", target: "Productized Service", label: "Starter Version Of" },
+            { source: "Domain of Mastery", target: "Value Creator", label: "Defines Content For" },
+            { source: "Eternal Markets", target: "Value Proposition", label: "Contains" },
+            { source: "Eternal Markets", target: "Domain of Mastery", label: "Guides" },
+            { source: "Entrepreneurial Method", target: "MVP", label: "Applies" },
+            { source: "Entrepreneurial Method", target: "SOP", label: "Creates" },
+            { source: "PPP Framework", target: "Attention Chain", label: "Captures" },
+            { source: "Information Product", target: "Passive Income", label: "Generates" },
+            { source: "Information Product", target: "Code & Media", label: "Is A Type Of" },
+            { source: "Productized Self", target: "Value Creator", label: "Philosophy Of" },
+            { source: "Productized Self", target: "Leverage", label: "Maximizes" },
+            { source: "Flow State", target: "Value Creator", label: "Enables Peak" },
+            { source: "Self Reliance", target: "Solopreneur", label: "Core Value Of" },
+            { source: "Lifestyle Design", target: "Solopreneur", label: "Goal Of" },
+            { source: "Lifestyle Design", target: "Passive Income", label: "Enabled By" },
+
+            // NEW: Extended Value Creator System
+            { source: "Product Ladder", target: "Information Product", label: "Structures" },
+            { source: "Product Ladder", target: "MVO", label: "Starts With" },
+            { source: "Product Ladder", target: "Passive Income", label: "Builds" },
+            { source: "Two Hour Writer", target: "PPP Framework", label: "Uses" },
+            { source: "Two Hour Writer", target: "Value Creator", label: "Method For" },
+            { source: "Two Hour Writer", target: "Code & Media", label: "Creates" },
+            { source: "Imposter Syndrome", target: "Self Reliance", label: "Overcome By" },
+            { source: "Imposter Syndrome", target: "Value Creator", label: "Blocks" },
+
+            // === NEW: Missing Glossary Term Links ===
+            { source: "Capital Path", target: "Solopreneur", label: "Alternative To" },
+            { source: "Capital Path", target: "Three Documents", label: "Requires" },
+            { source: "Capital Path", target: "The Machine", label: "Builds" },
+            { source: "Stress Test", target: "Phase 4 Exit", label: "Validates" },
+            { source: "Stress Test", target: "Passive Income", label: "Enables" },
+            { source: "Stress Test", target: "SOP", label: "Exposes Gaps In" },
+
+            // === NEW: Phase Sequence Chain ===
+            { source: "Phase 1 Selection", target: "Solopreneur", label: "First Step Of" },
+            { source: "Phase 1 Selection", target: "MVP", label: "Uses" },
+            { source: "Phase 2 Standardize", target: "Phase 1 Selection", label: "Follows" },
+            { source: "Phase 2 Standardize", target: "SOP", label: "Creates" },
+            { source: "Phase 3 Automation", target: "Phase 2 Standardize", label: "Follows" },
+            { source: "Phase 3 Automation", target: "Leverage", label: "Applies" },
+            { source: "Phase 4 Exit", target: "Phase 3 Automation", label: "Follows" },
+            { source: "Phase 4 Exit", target: "Passive Income", label: "Achieves" },
+
+            // === NEW: Anti-Pattern Trap Links ===
+            { source: "Premature Automation Trap", target: "Phase 1 Selection", label: "Skips" },
+            { source: "Premature Automation Trap", target: "MVP", label: "Fixed By" },
+            { source: "SOP-less Hiring Trap", target: "Phase 2 Standardize", label: "Skips" },
+            { source: "SOP-less Hiring Trap", target: "SOP", label: "Fixed By" },
+            { source: "Premature Exit Trap", target: "Phase 4 Exit", label: "Rushes" },
+            { source: "Premature Exit Trap", target: "Stress Test", label: "Fixed By" },
+            { source: "Specialization Trap", target: "Synthesizer", label: "Opposite Of" },
+            { source: "Specialization Trap", target: "Value Creator", label: "Blocks" },
+            { source: "Content Rat Race Trap", target: "Two Hour Writer", label: "Fixed By" },
+            { source: "Content Rat Race Trap", target: "PPP Framework", label: "Misuses" },
+            { source: "Knowledge Hoarding Trap", target: "Entrepreneurial Method", label: "Fixed By" },
+            { source: "Knowledge Hoarding Trap", target: "Imposter Syndrome", label: "Related To" }
+        ];
+
+        // --- 2. Configuration State ---
+        const settings = {
+            linkDistance: 100,
+            chargeStrength: -250,
+            labelSize: 1.0,
+            opacity: 0.8,
+            autoRotate: true
+        };
+
+        // --- 3. Visualization Engine ---
+        const elem = document.getElementById('3d-graph');
+        const Graph = ForceGraph3D()
+            (elem)
+            .graphData({ nodes, links })
+            .backgroundColor('#000005')
+            .showNavInfo(false)
+            .nodeThreeObject(node => {
+                let color = '#fff';
+                if (node.group === 'Psychology') color = '#00ffff';
+                if (node.group === 'System') color = '#00ff00';
+                if (node.group === 'Core') color = '#ff0055';
+                if (node.group === 'AI') color = '#ff8800';
+
+                // Bilingual Label
+                const text = `${node.en}\n${node.cn}`;
+                const sprite = new SpriteText(text);
+                sprite.color = color;
+                sprite.textHeight = (node.val / 2) * settings.labelSize;
+                sprite.fontFace = 'Arial';
+                sprite.fontWeight = 'bold';
+                sprite.backgroundColor = `rgba(0,0,0,${settings.opacity / 2})`;
+                sprite.padding = 4;
+                sprite.userData = { baseSize: node.val / 2 };
+                return sprite;
+            })
+            .linkWidth(link => 2.5)  // Tube thickness
+            .linkColor(link => {
+                // Gradient color based on source node
+                const sourceNode = nodes.find(n => n.id === link.source || n.id === link.source.id);
+                if (sourceNode) {
+                    const cat = getCategory(sourceNode.group);
+                    return cat.color + '88'; // Semi-transparent
+                }
+                return '#445566';
+            })
+            .linkOpacity(0.7)
+            .linkCurvature(0.12)  // Slight curve for visual depth
+            .linkCurveRotation(link => {
+                // Deterministic rotation based on source+target to prevent jitter
+                const hash = (link.source?.id || link.source) + (link.target?.id || link.target);
+                let sum = 0;
+                for (let i = 0; i < hash.length; i++) sum += hash.charCodeAt(i);
+                return (sum % 360) * (Math.PI / 180);
+            })
+            .linkDirectionalArrowLength(5)
+            .linkDirectionalArrowRelPos(0.9)
+            .linkDirectionalArrowColor(link => {
+                const sourceNode = nodes.find(n => n.id === link.source || n.id === link.source.id);
+                if (sourceNode) return getCategory(sourceNode.group).color;
+                return '#ffffff';
+            })
+            .linkDirectionalParticles(3)  // Flowing particles along links
+            .linkDirectionalParticleSpeed(0.005)
+            .linkDirectionalParticleWidth(2)
+            .linkDirectionalParticleColor(link => {
+                const sourceNode = nodes.find(n => n.id === link.source || n.id === link.source.id);
+                if (sourceNode) return getCategory(sourceNode.group).color;
+                return '#ffffff';
+            })
+            .onNodeClick(node => {
+                // Maintain current zoom level - just rotate to face the node
+                const currentPos = Graph.cameraPosition();
+                const currentDistance = Math.hypot(currentPos.x, currentPos.y, currentPos.z);
+                const nodeDistance = Math.hypot(node.x, node.y, node.z) || 1; // avoid divide by zero
+
+                // Normalize node direction and scale to current camera distance
+                const newX = (node.x / nodeDistance) * currentDistance;
+                const newY = (node.y / nodeDistance) * currentDistance;
+                const newZ = (node.z / nodeDistance) * currentDistance;
+
+                Graph.cameraPosition({ x: newX, y: newY, z: newZ }, node, 1500);
+                showHUD(node);
+            });
+
+        Graph.d3Force('link').distance(settings.linkDistance);
+        Graph.d3Force('charge').strength(settings.chargeStrength);
+
+        // --- 4. Controls UI (Dat.GUI) ---
+        const gui = new dat.GUI();
+        const folder = gui.addFolder('Graph Settings');
+        folder.add(settings, 'linkDistance', 10, 300).onChange(val => { Graph.d3Force('link').distance(val); Graph.d3ReheatSimulation(); });
+        folder.add(settings, 'chargeStrength', -500, -10).onChange(val => { Graph.d3Force('charge').strength(val); Graph.d3ReheatSimulation(); });
+        folder.add(settings, 'labelSize', 0.1, 3.0).onChange(val => { Graph.scene().traverse(obj => { if (obj.userData?.baseSize) obj.textHeight = obj.userData.baseSize * val; }); });
+        folder.add(settings, 'opacity', 0.1, 1.0).onChange(val => { Graph.scene().traverse(obj => { if (obj.userData?.baseSize) obj.backgroundColor = `rgba(0,0,0,${val / 2})`; }); });
+        folder.add(settings, 'autoRotate').onChange(val => { Graph.controls().autoRotate = val; });
+        folder.open();
+
+        // --- 5. HUD Logic (Bilingual) ---
+        function showHUD(node) {
+            const el = (id) => document.getElementById(id);
+            el('hud').style.display = 'block';
+            el('hud-title').innerText = node.en;
+            el('hud-title').style.color = node.group === 'Psychology' ? '#00ffff' : (node.group === 'System' ? '#00ff00' : (node.group === 'Core' ? '#ff0055' : '#ff8800'));
+            el('hud-cn').innerText = `${node.cn} [${node.group}]`;
+
+            // Bilingual Description
+            el('hud-desc').innerHTML = `<div class="en">${node.desc_en}</div><div class="cn">${node.desc_cn}</div>`;
+
+            // Bilingual Notes
+            el('hud-notes').innerHTML = `<div class="en">${node.notes_en}</div><div class="cn">${node.notes_cn}</div>`;
+
+            // Bilingual Scenarios
+            const sceneContainer = el('hud-scenes');
+            sceneContainer.innerHTML = '';
+            if (node.scenes_en && node.scenes_cn) {
+                for (let i = 0; i < node.scenes_en.length; i++) {
+                    const tag = document.createElement('span');
+                    tag.className = 'scene-tag';
+                    tag.innerHTML = `${node.scenes_en[i]} <span style="color:#88aacc">${node.scenes_cn[i]}</span>`;
+                    sceneContainer.appendChild(tag);
+                }
+            }
+        }
+
+        function hideHUD() {
+            document.getElementById('hud').style.display = 'none';
+        }
+
+        setTimeout(() => { document.getElementById('loading').style.display = 'none'; }, 1000);
+        buildLegend();
+        Graph.controls().autoRotate = true;
+        Graph.controls().autoRotateSpeed = 0.5;
+    </script>
+</body>
+
+</html>

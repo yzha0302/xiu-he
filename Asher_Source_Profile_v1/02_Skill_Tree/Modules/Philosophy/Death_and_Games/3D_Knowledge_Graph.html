@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Death and Games - 3D Knowledge Graph</title>
+    <!-- 
+        ASHER KNOWLEDGE GRAPH - Death and Games Module
+        死亡与游戏: 必死之人如何有意义地活好无意义的一生
+        - 核心概念: 沉沦/本真、有限/无限游戏、三重梦境
+        - 视觉主题: 深蓝为底，青色(Philosophy)、绿色(Game)、红色(Psychology)
+    -->
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #000005;
+            overflow: hidden;
+        }
+
+        /* HUD: Top-Left */
+        #hud {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 400px;
+            background: rgba(10, 15, 25, 0.95);
+            border: 1px solid #334466;
+            border-left: 3px solid #00ffff;
+            border-radius: 4px;
+            padding: 25px;
+            color: #eef;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            display: none;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        #hud h2 {
+            margin: 0 0 5px 0;
+            font-size: 24px;
+            padding-right: 30px;
+        }
+
+        #hud .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.2s;
+            font-size: 20px;
+            color: #889;
+            text-align: center;
+            line-height: 24px;
+        }
+
+        #hud .close-btn:hover {
+            opacity: 1;
+            color: #ff5555;
+        }
+
+        #hud .sub-header {
+            font-size: 14px;
+            color: #8899aa;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #334455;
+            padding-bottom: 10px;
+        }
+
+        #hud .section-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #556677;
+            letter-spacing: 2px;
+            margin-top: 15px;
+            margin-bottom: 8px;
+        }
+
+        #hud .content-block {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #ccd;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        #hud .en {
+            color: #fff;
+        }
+
+        #hud .cn {
+            color: #88aacc;
+            font-size: 13px;
+        }
+
+        #hud .keyword {
+            color: #00ffff;
+            font-weight: bold;
+        }
+
+        #hud .scene-tag {
+            display: inline-block;
+            font-size: 12px;
+            background: #223344;
+            color: #aab;
+            padding: 4px 8px;
+            border-radius: 12px;
+            margin: 3px 5px 3px 0;
+            border: 1px solid #334455;
+        }
+
+        #hud .related-tag {
+            display: inline-block;
+            font-size: 11px;
+            background: #224433;
+            color: #8ca;
+            padding: 3px 8px;
+            border-radius: 8px;
+            margin: 2px 4px 2px 0;
+            border: 1px solid #335544;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        #hud .related-tag:hover {
+            background: #337755;
+            color: #afa;
+        }
+
+        #hud .warning-block {
+            font-size: 13px;
+            line-height: 1.6;
+            color: #faa;
+            background: rgba(80, 20, 20, 0.3);
+            padding: 10px;
+            border-radius: 4px;
+            border-left: 2px solid #f55;
+        }
+
+        #hud .insight-block {
+            font-size: 13px;
+            line-height: 1.6;
+            color: #afc;
+            background: rgba(20, 60, 30, 0.3);
+            padding: 10px;
+            border-radius: 4px;
+            border-left: 2px solid #5a5;
+        }
+
+        /* Legend: Bottom-Left (Collapsible) */
+        #legend {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(10, 15, 25, 0.9);
+            border: 1px solid #334466;
+            border-radius: 4px;
+            padding: 15px 20px;
+            color: #ccd;
+            backdrop-filter: blur(10px);
+            min-width: 180px;
+        }
+
+        #legend h3 {
+            margin: 0;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #778;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        #legend h3::after {
+            content: '▼';
+            font-size: 10px;
+            transition: transform 0.3s;
+        }
+
+        #legend.collapsed h3::after {
+            transform: rotate(-90deg);
+        }
+
+        #legend .legend-items {
+            max-height: 200px;
+            overflow-y: auto;
+            transition: max-height 0.3s ease;
+        }
+
+        #legend.collapsed .legend-items {
+            max-height: 0;
+        }
+
+        #legend .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 6px 0;
+            font-size: 13px;
+        }
+
+        #legend .legend-color {
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+            margin-right: 10px;
+        }
+
+        #legend .legend-label {
+            color: #aab;
+        }
+
+        #legend .legend-count {
+            margin-left: auto;
+            color: #667;
+            font-size: 11px;
+        }
+
+        #legend .legend-total {
+            font-size: 11px;
+            color: #667;
+            margin-left: 10px;
+        }
+
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #00ffff;
+            font-family: monospace;
+            letter-spacing: 2px;
+        }
+    </style>
+    <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/3d-force-graph"></script>
+    <script src="https://unpkg.com/three-spritetext@1.8.1/dist/three-spritetext.min.js"></script>
+    <script src="https://unpkg.com/dat.gui"></script>
+</head>
+
+<body>
+    <div id="loading">INITIALIZING...</div>
+    <div id="3d-graph"></div>
+
+    <!-- HUD with Close Button -->
+    <div id="hud">
+        <span class="close-btn" onclick="hideHUD()">×</span>
+        <h2 id="hud-title">Title</h2>
+        <div id="hud-cn" class="sub-header">Subtitle</div>
+        <div class="section-title">Definition 定义</div>
+        <div id="hud-desc" class="content-block"></div>
+        <div class="section-title">Deep Dive 深度解析</div>
+        <div id="hud-notes" class="content-block" style="border-left: 2px solid #00ffff;"></div>
+        <div class="section-title">Why It Matters 为什么重要</div>
+        <div id="hud-why" class="insight-block"></div>
+        <div class="section-title">Common Mistakes 常见误区</div>
+        <div id="hud-mistakes" class="warning-block"></div>
+        <div class="section-title">Related Terms 关联术语</div>
+        <div id="hud-related"></div>
+        <div class="section-title">Scenarios 应用场景</div>
+        <div id="hud-scenes"></div>
+    </div>
+
+    <!-- Legend (Collapsible) -->
+    <div id="legend">
+        <h3 onclick="toggleLegend()">Domain 领域 <span id="legend-total"></span></h3>
+        <div id="legend-items" class="legend-items"></div>
+    </div>
+
+    <script>
+        // === CATEGORY CONFIGURATION ===
+        const CATEGORY_CONFIG = {
+            "Philosophy": { color: "#00ffff", label_en: "Philosophy", label_cn: "存在哲学" },
+            "Game": { color: "#00ff00", label_en: "Game Theory", label_cn: "游戏理论" },
+            "Psychology": { color: "#ff8800", label_en: "Psychology", label_cn: "心理学" },
+            "Social": { color: "#ff0055", label_en: "Social Critique", label_cn: "社会批判" },
+            "Experience": { color: "#aa00ff", label_en: "Experience", label_cn: "体验状态" }
+        };
+
+        // Pre-defined color palette for new categories
+        const COLOR_PALETTE = [
+            "#00ffff", "#00ff00", "#ff0055", "#ff8800", "#aa00ff",
+            "#ffff00", "#00ffaa", "#ff00aa", "#88ff00", "#0088ff"
+        ];
+        let colorIndex = 0;
+
+        function getCategory(groupName, labelCn = groupName) {
+            if (!CATEGORY_CONFIG[groupName]) {
+                CATEGORY_CONFIG[groupName] = {
+                    color: COLOR_PALETTE[colorIndex % COLOR_PALETTE.length],
+                    label_en: groupName,
+                    label_cn: labelCn
+                };
+                colorIndex++;
+            }
+            return CATEGORY_CONFIG[groupName];
+        }
+
+        function toggleLegend() {
+            document.getElementById('legend').classList.toggle('collapsed');
+        }
+
+        function buildLegend() {
+            const container = document.getElementById('legend-items');
+            container.innerHTML = '';
+            const counts = {};
+            let total = 0;
+            nodes.forEach(n => { counts[n.group] = (counts[n.group] || 0) + 1; total++; });
+            document.getElementById('legend-total').innerText = `(${Object.keys(counts).length} 域 / ${total} 点)`;
+            for (const [group, count] of Object.entries(counts)) {
+                const cat = getCategory(group);
+                const item = document.createElement('div');
+                item.className = 'legend-item';
+                item.innerHTML = `
+                    <div class="legend-color" style="background:${cat.color}"></div>
+                    <span class="legend-label">${cat.label_en} ${cat.label_cn}</span>
+                    <span class="legend-count">${count}</span>
+                `;
+                container.appendChild(item);
+            }
+        }
+
+        // --- DATA: NODES ---
+        const nodes = [
+            // === PHILOSOPHY DOMAIN ===
+            {
+                id: "Falling",
+                en: "Falling",
+                cn: "沉沦",
+                group: "Philosophy",
+                val: 35,
+                desc_en: "The state of being absorbed in everyday concerns, losing authentic existence",
+                desc_cn: "被日常秩序吞没、丧失本真存在的状态，虽生犹死",
+                notes_en: "Heidegger's concept from <span class='keyword'>Being and Time</span>. We are ruled by 'Das Man' (the They), doing what everyone does, thinking what everyone thinks. Falling is not moral failure but the <span class='keyword'>default structure</span> of human existence.",
+                notes_cn: "海德格尔《存在与时间》核心概念。我们被<span class='keyword'>常人(Das Man)</span>统治，逃避独特存在。沉沦不是道德批判，而是存在论描述——人类天生倾向于沉沦。",
+                why_matters: "识别沉沦是觉醒的第一步。如果你总在消费、刷手机却感到空虚，就是沉沦的信号。",
+                mistakes: "误以为沉沦是'堕落'或道德缺陷。实际上它是默认状态，关键是能否觉察并超越。",
+                related: ["Authenticity", "Immortality Illusion", "Das Man"],
+                scenes_en: ["Endless scrolling", "Shopping for comfort", "Chasing social validation"],
+                scenes_cn: ["无尽刷手机", "购物解压", "追逐社会认可"]
+            },
+            {
+                id: "Authenticity",
+                en: "Authenticity",
+                cn: "本真",
+                group: "Philosophy",
+                val: 35,
+                desc_en: "Facing death directly and living out one's unique existence",
+                desc_cn: "直面死亡，活出自己独特存在的本真状态",
+                notes_en: "The opposite of Falling. Key difference: in Falling, <span class='keyword'>life order conceals death order</span>; in Authenticity, <span class='keyword'>death order activates life order</span>. The authentic person doesn't escape death's inevitability but embraces it.",
+                notes_cn: "与沉沦相对。关键差别：沉沦状态下生命秩序遮蔽死亡秩序；本真状态下<span class='keyword'>死亡秩序激发生命秩序</span>。本真者承担死亡的必然性，获得自觉性和自主性。",
+                why_matters: "本真状态是克服死亡焦虑的核心。它不消灭焦虑，而是将焦虑转化为生命动力。",
+                mistakes: "误以为本真是'看透一切'或'做自己'。实际需要极大勇气直面死亡事实。",
+                related: ["Falling", "Being-toward-death", "Jouissance", "Infinite Game"],
+                scenes_en: ["Extreme sports", "Deep creative work", "Facing mortality in illness"],
+                scenes_cn: ["极限运动", "深度创作", "大病中直面死亡"]
+            },
+            {
+                id: "Being-toward-death",
+                en: "Being-toward-death",
+                cn: "向死而生",
+                group: "Philosophy",
+                val: 30,
+                desc_en: "Living authentically by accepting death as one's ownmost possibility",
+                desc_cn: "通过承认死亡作为最本己的可能性来本真地活着",
+                notes_en: "Death as the <span class='keyword'>most fundamental possibility</span> hovers over life at every moment. We cannot avoid it—we can only acknowledge and take on this inevitable possibility, entering a more authentic state.",
+                notes_cn: "死亡作为人<span class='keyword'>最根本的可能性</span>，时刻悬临于生命之中。无法回避，只能承认并承担这种必然的可能性，进入更本真的状态。",
+                why_matters: "向死而生可以非常具体地践行——极限运动者就在反复实践真正意义上的死里逃生。",
+                mistakes: "把'向死而生'当口号说完就忘，继续追求永生幻象。这是最常见的自欺。",
+                related: ["Authenticity", "Jouissance", "Eternal Recurrence"],
+                scenes_en: ["Rock climbing", "Writing a will", "Facing a terminal diagnosis"],
+                scenes_cn: ["徒手攀岩", "写遗嘱", "面对绝症诊断"]
+            },
+            {
+                id: "Immortality Illusion",
+                en: "Immortality Illusion",
+                cn: "永生幻象",
+                group: "Philosophy",
+                val: 32,
+                desc_en: "The illusion that equates oneself with immortal identity symbols",
+                desc_cn: "将自己等同于不死的符号身份的幻觉",
+                notes_en: "Commodities and symbols maintain our <span class='keyword'>identity</span>—degrees, titles, property. These don't die with the body. We unconsciously identify with them, creating 'everyone dies but I won't' illusion. Its shadow is <span class='keyword'>pervasive anxiety</span>.",
+                notes_cn: "商品与符号系统构建我们的<span class='keyword'>同一性身份</span>——学历、职称、财产。我们无意识地将自己等同于这些符号，产生'人人都会死但我不会'的幻觉。阴影面是泛化的焦虑。",
+                why_matters: "理解永生幻象能识别焦虑的真正来源——你焦虑的不是死亡，而是'失去身份'。",
+                mistakes: "误以为获得更多身份符号能减少焦虑。实际上符号越多，幻象越强，焦虑越深。",
+                related: ["Falling", "Death Anxiety", "Second Dream"],
+                scenes_en: ["Career ladder anxiety", "Status comparison", "Fear of bankruptcy"],
+                scenes_cn: ["职业晋升焦虑", "社会比较", "害怕破产"]
+            },
+
+            // === EXPERIENCE DOMAIN ===
+            {
+                id: "Pleasure",
+                en: "Pleasure",
+                cn: "欢愉",
+                group: "Experience",
+                val: 28,
+                desc_en: "False pleasure obtained by concealing death",
+                desc_cn: "通过遮蔽死亡获得的虚假快感",
+                notes_en: "Pleasure comes from <span class='keyword'>controlled surprise</span>—the 'unexpected that fits perfectly'. Its essence is 'pretending to break order to maintain order'. We think we've broken the mundane, but actually fall into deeper control.",
+                notes_cn: "欢愉来自<span class='keyword'>受控的惊喜</span>——'表现为意外惊奇的正合我意'。本质是'假装超越秩序来维持秩序'：以为打破了沉闷日常，实则陷入更精致的控制。",
+                why_matters: "识别欢愉与圆乐的区别，是选择真休息还是假放松的关键。",
+                mistakes: "误以为欢愉是有益的休息。实际上它加深沉沦，产生更大的空虚。",
+                related: ["Jouissance", "Falling", "Consumer Culture"],
+                scenes_en: ["Shopping spree", "Social media scrolling", "Binge watching"],
+                scenes_cn: ["疯狂购物", "刷社交媒体", "追剧"]
+            },
+            {
+                id: "Jouissance",
+                en: "Jouissance",
+                cn: "圆乐/绝爽",
+                group: "Experience",
+                val: 35,
+                desc_en: "True pleasure obtained by revealing death",
+                desc_cn: "通过揭示死亡获得的真实快感",
+                notes_en: "Lacanian concept meaning 'pleasure beyond the pleasure principle'. In this module: satisfaction from <span class='keyword'>being-toward-death experiences</span>. Unlike pleasure, jouissance comes from prior revelation of death. It makes the subject '<span class='keyword'>slip away</span>', dissolving identity.",
+                notes_cn: "拉康概念，原意'超越快感原则的快感'。本模块指向死而生的极限体验中获得的满足感。与欢愉相反，圆乐来自对死亡的<span class='keyword'>先行揭示</span>，让主体'开溜'，同一性瓦解。",
+                why_matters: "圆乐是无限游戏的核心奖励。追求圆乐而非欢愉，是活出本真生命的路径。",
+                mistakes: "误以为圆乐等于'找刺激'或'自虐'。实际是深层满足，来自真正挑战和超越。",
+                related: ["Pleasure", "Extreme Sports", "Flow", "Authenticity"],
+                scenes_en: ["Conquering a climbing route", "Completing a creative work", "Soulslike boss defeat"],
+                scenes_cn: ["攻克攀岩路线", "完成创作", "魂类游戏击败Boss"]
+            },
+            {
+                id: "Flow",
+                en: "Flow",
+                cn: "心流",
+                group: "Psychology",
+                val: 30,
+                desc_en: "Optimal experience where time and self-awareness disappear",
+                desc_cn: "全神贯注到时间感和自我意识消失的最佳体验",
+                notes_en: "Csikszentmihalyi's concept. Three elements: clear goals, immediate feedback, <span class='keyword'>desirable difficulty</span> (most crucial). The paradox: the more you chase flow, the harder it is—chasing IS self-awareness.",
+                notes_cn: "心理学家契克森米哈伊提出。三要素：明确目标、及时反馈、<span class='keyword'>必要难度</span>(最关键)。悖论：越刻意追求越难进入，因为追求本身就是自我意识。",
+                why_matters: "心流是无限游戏的核心奖励。设计能触发心流的活动，是高质量生活的关键。",
+                mistakes: "误以为心流就是'专注力'。实际是专注的极致，涉及自我意识的悖论性消解。",
+                related: ["Desirable Difficulty", "Jouissance", "Infinite Game"],
+                scenes_en: ["Deep coding session", "Intense sports match", "Absorbed in music"],
+                scenes_cn: ["深度编程", "激烈比赛", "沉浸演奏"]
+            },
+
+            // === GAME DOMAIN ===
+            {
+                id: "Finite Game",
+                en: "Finite Game",
+                cn: "有限游戏",
+                group: "Game",
+                val: 32,
+                desc_en: "Games with endpoints where qualifications can be revoked",
+                desc_cn: "有终点、可被剥夺资格的竞争性游戏",
+                notes_en: "Clear termination and preset goals. Key features: 1) <span class='keyword'>Revocable qualification</span>—operators can cancel your rights; 2) Rich surface, barren core—endless reskinning; 3) Operated—your flow is their cash flow.",
+                notes_cn: "明确的终止点和预设目标。关键特征：1)<span class='keyword'>资格可被剥夺</span>；2)外围丰饶内核匮乏——不断换皮但核心不变；3)被经营——你的心流是他人的现金流。",
+                why_matters: "识别哪些活动是有限游戏，能帮你避免在'别人的游戏'中浪费生命。",
+                mistakes: "误以为有限游戏'玩到顶'就能自由。实际没有真正终点，会陷入失落。",
+                related: ["Infinite Game", "Falling", "Time Consumer"],
+                scenes_en: ["Corporate ladder", "Mobile game rankings", "Social status competition"],
+                scenes_cn: ["职场晋升", "手游排行榜", "社会地位竞争"]
+            },
+            {
+                id: "Infinite Game",
+                en: "Infinite Game",
+                cn: "无限游戏",
+                group: "Game",
+                val: 35,
+                desc_en: "Self-purposive games without endpoints, unrevocable qualifications",
+                desc_cn: "无终点、不可剥夺资格的自成目的游戏",
+                notes_en: "No preset endpoints. Key features: 1) <span class='keyword'>Autonomy</span>—qualification cannot be revoked; 2) <span class='keyword'>Differential repetition</span>—each practice reveals new; 3) <span class='keyword'>Productivity</span>—can transform into works.",
+                notes_cn: "没有预设终点，目的是让游戏持续。关键特征：1)<span class='keyword'>自主性</span>——资格不可被剥夺；2)<span class='keyword'>差异性重复</span>——每次练习都有新发现；3)<span class='keyword'>生产性</span>——能转化为作品。",
+                why_matters: "找到并持续进行无限游戏，是克服死亡焦虑、成为时间生产者的核心路径。",
+                mistakes: "误以为某些活动'天然'是无限游戏。任何活动都可能被有限化，关键在于态度。",
+                related: ["Finite Game", "Authenticity", "Time Producer", "Differential Repetition"],
+                scenes_en: ["Writing", "Music practice", "Open source contribution"],
+                scenes_cn: ["写作", "音乐练习", "开源贡献"]
+            },
+            {
+                id: "Lusory Attitude",
+                en: "Lusory Attitude",
+                cn: "游戏态度",
+                group: "Game",
+                val: 28,
+                desc_en: "The attitude of voluntarily accepting unnecessary obstacles",
+                desc_cn: "自愿接受非必要障碍的心态",
+                notes_en: "Bernard Suits' core concept. Playing a game means '<span class='keyword'>voluntarily overcoming unnecessary obstacles</span>': could run straight to finish, but choose to hurdle; could carry ball into goal, but kick it from far away.",
+                notes_cn: "游戏哲学家Bernard Suits核心概念。玩游戏意味着'<span class='keyword'>自愿去克服非必要的障碍</span>'：明明可以直奔终点，非要绕圈跨栏；明明可以用手把球抱进球门，却规定只能用脚踢。",
+                why_matters: "游戏态度是将任何活动游戏化的关键。工作中保持游戏态度，能将打工人变成手艺人。",
+                mistakes: "误以为游戏态度是'不认真'。实际需要高度投入，只是目的是过程本身。",
+                related: ["Infinite Game", "Desirable Difficulty", "Grasshopper Paradox"],
+                scenes_en: ["Speedrunning", "Self-imposed challenges", "Artistic constraints"],
+                scenes_cn: ["速通挑战", "自我设限挑战", "艺术创作约束"]
+            },
+            {
+                id: "Desirable Difficulty",
+                en: "Desirable Difficulty",
+                cn: "必要难度",
+                group: "Game",
+                val: 30,
+                desc_en: "Paradoxical difficulty that triggers flow by pushing back self-awareness",
+                desc_cn: "恰好能逼退主体意识、触发心流的悖论性难度",
+                notes_en: "A <span class='keyword'>paradoxical</span> difficulty: from reality's view 'unnecessary' (game goals are meaningless), but precisely because no external coercion, participation becomes fully autonomous, creating 'true necessity'.",
+                notes_cn: "一种<span class='keyword'>悖论性</span>的困难：从现实角度看'没有必要'(游戏目标无意义)，但正因为没有外部强制，参与变得完全自主，因而产生了'真正的必要'。",
+                why_matters: "理解必要难度，能帮你设计触发心流的条件——恰到好处的挑战。",
+                mistakes: "误以为难度越高越好。必须匹配当前能力，否则产生挫败感而非心流。",
+                related: ["Flow", "Lusory Attitude", "Jouissance"],
+                scenes_en: ["Choosing a harder route", "Adding game rules", "Learning new language"],
+                scenes_cn: ["选择更难路线", "自加游戏规则", "学习新语言"]
+            },
+            {
+                id: "Eternal Recurrence",
+                en: "Eternal Recurrence",
+                cn: "永恒轮回",
+                group: "Game",
+                val: 32,
+                desc_en: "Game mechanism where failure is allowed through infinite resurrection",
+                desc_cn: "失败可复活、时间成圆形的游戏机制",
+                notes_en: "Nietzsche's concept applied to games. The most important game feedback: <span class='keyword'>failure is allowed</span>. This is delivered through 'eternal recurrence' (infinite respawn). If death anxiety comes from 'dread', game attitude is '<span class='keyword'>no big deal</span>'—I can revive.",
+                notes_cn: "尼采概念在游戏中的应用。游戏最重要的反馈只有一种：<span class='keyword'>失败是被允许的</span>。通过'永恒轮回'(无限复活)机制兑现。如果死亡焦虑来自'畏'，游戏态度就是'<span class='keyword'>无所谓</span>'。",
+                why_matters: "永恒轮回机制是游戏魔力的核心。它扩展容错空间，让玩家敢于挑战极限。",
+                mistakes: "误以为永恒轮回让失败'没意义'。正因可复活，才敢挑战有意义的困难。",
+                related: ["Circular Time", "Flow", "Hardcore Game", "Jouissance"],
+                scenes_en: ["Soulslike games", "Speedrun attempts", "Creative iteration"],
+                scenes_cn: ["魂类游戏", "速通尝试", "创作迭代"]
+            },
+            {
+                id: "Differential Repetition",
+                en: "Differential Repetition",
+                cn: "差异性的重复",
+                group: "Game",
+                val: 28,
+                desc_en: "Finding internal differences in apparently same actions",
+                desc_cn: "在表面相同中发现内在差异的精微练习",
+                notes_en: "Deleuze's concept. A subtle, autonomous repetition: we do the same thing repeatedly but discover <span class='keyword'>new differences each time</span>. This is the core mechanism of infinite games. Opposite is 'repetition of same'—endless reskinning.",
+                notes_cn: "德勒兹哲学概念。指精微的、自主的重复方式：反复做同一件事，却在每一次重复中发现<span class='keyword'>新的差异</span>。这是无限游戏的核心机制。与之相对的是'同一性的重复'。",
+                why_matters: "差异性重复是持续精进的秘密。硬核玩家、音乐家都在进行差异性重复。",
+                mistakes: "误以为'练习'就是机械重复。真正的练习需要感知每次的细微差异。",
+                related: ["Repetition of Same", "Practice", "Flow", "Hardcore Game"],
+                scenes_en: ["Piano scales", "Basketball shooting", "Code refactoring"],
+                scenes_cn: ["钢琴音阶练习", "篮球投篮", "代码重构"]
+            },
+
+            // === SOCIAL CRITIQUE DOMAIN ===
+            {
+                id: "First Dream",
+                en: "First Dream Layer",
+                cn: "第一重梦境",
+                group: "Social",
+                val: 25,
+                desc_en: "The mundane reality characterized by scarcity",
+                desc_cn: "平庸的现实，以匮乏感为特征的第一层梦境",
+                notes_en: "In the three-dream model, this is the base layer: <span class='keyword'>mundane life with scarcity</span>. People are trapped here, driven by basic needs. It's the territory of death order, characterized by barrenness.",
+                notes_cn: "三重梦境模型的底层：<span class='keyword'>平庸的生活，匮乏感</span>。人们被困在这里，被基本需求驱动。这是死亡秩序的领地，特征是荒凉。",
+                why_matters: "识别自己是否困在第一重梦境，是觉醒的起点。",
+                mistakes: "误以为摆脱匮乏就能觉醒。实际上可能只是进入第二重梦境。",
+                related: ["Second Dream", "Third Dream", "Death Order"],
+                scenes_en: ["Survival mode", "Paycheck to paycheck", "Basic needs anxiety"],
+                scenes_cn: ["生存模式", "月光族", "基本需求焦虑"]
+            },
+            {
+                id: "Second Dream",
+                en: "Second Dream Layer",
+                cn: "第二重梦境",
+                group: "Social",
+                val: 28,
+                desc_en: "The commercial promise of ideal life, characterized by self-deception",
+                desc_cn: "商业文明许诺的理想生活，以自欺为特征的第二层梦境",
+                notes_en: "Commercial civilization promises you 'escape' from the first dream into <span class='keyword'>ideal life</span>. But this is a false awakening—you're pushed into deeper slumber. Territory of false life order, characterized by <span class='keyword'>self-deception</span>.",
+                notes_cn: "商业文明许诺让你'逃离'第一重梦境，进入<span class='keyword'>理想人生</span>。但这是虚假的唤醒——把你推入更深的沉睡。伪生命秩序的领地，特征是<span class='keyword'>自欺</span>。",
+                why_matters: "大多数觉得自己'活得不错'的人其实在第二重梦境。识别自欺是关键。",
+                mistakes: "误以为拥有更多商品和认可就能觉醒。那只是加深第二重梦境。",
+                related: ["First Dream", "Third Dream", "Immortality Illusion"],
+                scenes_en: ["Lifestyle marketing", "Status symbols", "Success narrative"],
+                scenes_cn: ["生活方式营销", "身份符号", "成功叙事"]
+            },
+            {
+                id: "Third Dream",
+                en: "Third Dream Layer",
+                cn: "第三重梦境",
+                group: "Social",
+                val: 32,
+                desc_en: "The original dream you create yourself, true life order",
+                desc_cn: "自己说了算的原创梦，真正的生命秩序所在",
+                notes_en: "The deepest layer: <span class='keyword'>your own original dream</span>. True core, source of all human meaning. Every child is born in abundant dream until society trades it for commodities and concepts. Awakened ones return through infinite games.",
+                notes_cn: "最深层：<span class='keyword'>自己创造的原创梦</span>。真正的内核，一切意义的丰盛源头。每个孩童都生于丰饶之梦，直到社会用商品交换了想象力。觉醒者通过无限游戏重返。",
+                why_matters: "第三重梦境是生命的终极目标——不被他人定义、不可被剥夺的创造性生命。",
+                mistakes: "误以为第三重梦境是'逃避现实'。实际是最真实的存在。",
+                related: ["Authenticity", "Infinite Game", "Time Producer"],
+                scenes_en: ["Original creation", "Childhood play", "Self-directed learning"],
+                scenes_cn: ["原创创作", "童年游戏", "自主学习"]
+            },
+            {
+                id: "Time Producer",
+                en: "Time Producer",
+                cn: "时间生产者",
+                group: "Social",
+                val: 32,
+                desc_en: "Infinite game player who creates distributable works",
+                desc_cn: "创造可复制分发作品的无限游戏者",
+                notes_en: "Ultimate form of infinite game player. Through practice and creation, <span class='keyword'>crystallize life time into works</span>, then replicate and distribute with technology. Every product in stores is 'compressed time of others'.",
+                notes_cn: "无限游戏者的终极形态。通过练习和创作，将生命时间<span class='keyword'>凝固成作品</span>，再利用技术复制分发。书店商场里的每件商品都是'被技术压缩过的他人的时间'。",
+                why_matters: "成为时间生产者是克服死亡焦虑的终极路径——你的时间以作品形式延续。",
+                mistakes: "误以为时间生产需要'天赋'。任何人都可以通过无限游戏成为某领域的时间生产者。",
+                related: ["Time Consumer", "Infinite Game", "Work"],
+                scenes_en: ["Author", "Creator", "Open source contributor"],
+                scenes_cn: ["作者", "创作者", "开源贡献者"]
+            },
+            {
+                id: "Time Consumer",
+                en: "Time Consumer",
+                cn: "时间消费者",
+                group: "Social",
+                val: 25,
+                desc_en: "One who consumes others' works and is trapped in linear time",
+                desc_cn: "消费他人作品、困在线性时间焦虑中的人",
+                notes_en: "Opposite of time producer. Trapped in <span class='keyword'>linear time anxiety</span>—future threatens with death, past is irretrievable. Can only consume others' produced time for fleeting pleasure. Life time disappears with body.",
+                notes_cn: "与时间生产者相对。被困在<span class='keyword'>线性时间焦虑</span>中——未来以死相逼，过去无法挽回。只能消费他人生产的时间获得短暂欢愉。生命时间随肉身消亡而消失。",
+                why_matters: "识别自己是时间消费者还是生产者，是人生方向选择的关键判断。",
+                mistakes: "误以为'消费'本身是错。关键是生产与消费的比例，消费的是欢愉还是圆乐。",
+                related: ["Time Producer", "Finite Game", "Death Anxiety"],
+                scenes_en: ["Endless scrolling", "Passive entertainment", "Consumption addiction"],
+                scenes_cn: ["无尽刷屏", "被动娱乐", "消费成瘾"]
+            },
+            {
+                id: "Grasshopper Paradox",
+                en: "Grasshopper Paradox",
+                cn: "蚱蜢悖论",
+                group: "Game",
+                val: 28,
+                desc_en: "Work's ultimate goal is to eliminate work itself",
+                desc_cn: "工作的终极目标是消灭工作本身的悖论",
+                notes_en: "Bernard Suits' reversal of Aesop's fable. Traditional reading praises industrious ant. But: without 'winter' to guard against, <span class='keyword'>grasshopper's way is correct</span>. Work paradox: sacrifice to end sacrifice, work to end work.",
+                notes_cn: "Bernard Suits对伊索寓言的反转。传统解读赞扬勤劳蚂蚁。但：如果没有'冬天'需要防范，<span class='keyword'>蚱蜢的生活才是正确的</span>。工作悖论：牺牲是为了不再牺牲，工作是为了不再工作。",
+                why_matters: "蚱蜢悖论揭示工作与游戏的本质差异：工作是手段，游戏是目的。",
+                mistakes: "误以为这是鼓励'躺平'。核心是反思：哪些'工作'其实是伪装的有限游戏？",
+                related: ["Infinite Game", "Utopia", "Work", "Lusory Attitude"],
+                scenes_en: ["Retirement fantasy", "Financial freedom goal", "Work-life balance"],
+                scenes_cn: ["退休幻想", "财务自由目标", "工作生活平衡"]
+            },
+            {
+                id: "Hardcore Game",
+                en: "Hardcore Game",
+                cn: "硬核游戏/魂类游戏",
+                group: "Game",
+                val: 28,
+                desc_en: "High-difficulty games that reveal death and trigger jouissance",
+                desc_cn: "揭示死亡、触发圆乐的高难度游戏",
+                notes_en: "Soulslike games represent the closest to infinite games in commercial offerings. They <span class='keyword'>challenge rather than please</span>, invite you into the core, use maximum difficulty to evoke pure game attitude.",
+                notes_cn: "魂类游戏代表商业游戏中最接近无限游戏的类型。它们<span class='keyword'>挑战而非讨好</span>，邀请你进入内核，用必要难度的上限唤起最纯粹的游戏态度。",
+                why_matters: "硬核游戏是理解'差异性重复'和'圆乐'的最佳范例。",
+                mistakes: "误以为硬核游戏只是'难'。关键是它揭示了我们迷恋困难的真相。",
+                related: ["Jouissance", "Differential Repetition", "Eternal Recurrence"],
+                scenes_en: ["Elden Ring", "Dark Souls", "Sekiro"],
+                scenes_cn: ["艾尔登法环", "黑暗之魂", "只狼"]
+            },
+
+            // === ADDITIONAL PHILOSOPHY CONCEPTS ===
+            {
+                id: "Das Man",
+                en: "Das Man (The They)",
+                cn: "常人",
+                group: "Philosophy",
+                val: 26,
+                desc_en: "The anonymous 'They' that dictates how we should live",
+                desc_cn: "匿名的'人们'，决定着我们应该如何生活",
+                notes_en: "Heidegger's concept. We do what <span class='keyword'>one does</span>, think what <span class='keyword'>one thinks</span>. Das Man provides comfort through conformity but strips away authentic existence. It's the social force behind Falling.",
+                notes_cn: "海德格尔概念。我们做着<span class='keyword'>人们做的事</span>，想着<span class='keyword'>人们想的事</span>。常人通过从众提供舒适，却剥夺了本真存在。它是沉沦背后的社会力量。",
+                why_matters: "识别'常人'的影响，是从沉沦中觉醒的第一步。",
+                mistakes: "误以为'常人'是某个具体的群体。实际上它是弥散的社会规范，我们每个人都参与其中。",
+                related: ["Falling", "Authenticity", "Identity"],
+                scenes_en: ["Following trends", "Career choices by expectation", "Social media conformity"],
+                scenes_cn: ["追随潮流", "按期望选择职业", "社交媒体从众"]
+            },
+            {
+                id: "Death Anxiety",
+                en: "Death Anxiety",
+                cn: "死亡焦虑",
+                group: "Psychology",
+                val: 30,
+                desc_en: "The fundamental anxiety about mortality that drives human behavior",
+                desc_cn: "关于必死性的根本焦虑，驱动着人类行为",
+                notes_en: "The <span class='keyword'>root of all anxiety</span>. But in modern life, death anxiety is diffused into countless small anxieties about <span class='keyword'>losing identity</span>—job, status, relationships. Every 'small death' (loss of identity elements) triggers the primal fear.",
+                notes_cn: "<span class='keyword'>所有焦虑的根源</span>。但在现代生活中，死亡焦虑被泛化成无数关于<span class='keyword'>失去身份</span>的小焦虑——工作、地位、关系。每一次'小死'(身份要素的丧失)都会触发原始恐惧。",
+                why_matters: "理解所有焦虑的根源是死亡焦虑，能帮你识别真正需要处理的是什么。",
+                mistakes: "试图通过积累更多身份符号来缓解焦虑。这只会让焦虑更深。",
+                related: ["Immortality Illusion", "Falling", "Angst", "Time Consumer"],
+                scenes_en: ["Midlife crisis", "Job loss panic", "Relationship anxiety"],
+                scenes_cn: ["中年危机", "失业恐慌", "关系焦虑"]
+            },
+            {
+                id: "Angst",
+                en: "Angst (Dread)",
+                cn: "畏",
+                group: "Philosophy",
+                val: 28,
+                desc_en: "The fundamental mood that reveals our being-toward-death",
+                desc_cn: "揭示我们向死存在的根本情绪",
+                notes_en: "Heidegger's key concept. Not fear of something specific, but <span class='keyword'>dread of nothingness</span>. Angst rips us from everyday absorption and confronts us with our own finitude. It's the gateway to authenticity.",
+                notes_cn: "海德格尔核心概念。不是对具体事物的恐惧，而是对<span class='keyword'>虚无的畏惧</span>。畏把我们从日常沉溺中撕裂出来，让我们直面自己的有限性。它是通往本真的大门。",
+                why_matters: "畏是觉醒的契机。当你感到莫名的存在焦虑时，不要逃避，而要倾听它在说什么。",
+                mistakes: "把畏等同于普通的焦虑或抑郁。畏有揭示性的力量，而普通焦虑只是逃避的信号。",
+                related: ["Authenticity", "Being-toward-death", "Death Anxiety", "Falling"],
+                scenes_en: ["Existential crisis", "Sleepless nights", "Sudden meaninglessness"],
+                scenes_cn: ["存在危机", "失眠之夜", "突然的无意义感"]
+            },
+            {
+                id: "Black Humor",
+                en: "Black Humor",
+                cn: "黑色幽默",
+                group: "Experience",
+                val: 25,
+                desc_en: "Humor that exposes rather than conceals the absurdity of existence",
+                desc_cn: "暴露而非遮蔽存在荒诞性的幽默",
+                notes_en: "True humor is <span class='keyword'>black</span>—it doesn't try to transcend seriousness, but reveals the absurd core of seriousness itself. Comedy's core is tragedy. Laughing at chicken soup jokes only deepens Falling.",
+                notes_cn: "真正的幽默一定是<span class='keyword'>黑色的</span>——不试图超越严肃，而是暴露出严肃本身的荒诞内核。喜剧的内核是悲剧。为鸡汤段子发笑只会加深沉沦。",
+                why_matters: "黑色幽默是极限游戏的一种：它是对生活秩序的内爆，揭示幸福的内核是自欺。",
+                mistakes: "把普通幽默当成'解压'。普通幽默让你暂时逃避严肃，黑色幽默让你直面严肃。",
+                related: ["Jouissance", "Authenticity", "Self-deception"],
+                scenes_en: ["Absurdist comedy", "Gallows humor", "Dark satire"],
+                scenes_cn: ["荒诞喜剧", "绞刑架幽默", "黑暗讽刺"]
+            },
+            {
+                id: "Circular Time",
+                en: "Circular Time",
+                cn: "圆形时间",
+                group: "Philosophy",
+                val: 26,
+                desc_en: "Time experienced in games and flow, where past, present, future merge",
+                desc_cn: "游戏和心流中体验到的时间，过去、现在、未来合一",
+                notes_en: "'<span class='keyword'>One day in the circle, one year on the line</span>.' In eternal recurrence, linear time bends into a ring. No future threat, no past regret—only the eternal now of each retry. This is the temporal structure of flow.",
+                notes_cn: "'<span class='keyword'>圆中一天，线上一年</span>。'在永恒轮回中，线性时间弯折成圆圈。没有未来的威胁，没有过去的遗憾——只有每一次重来的永恒当下。这是心流的时间结构。",
+                why_matters: "进入圆形时间是克服死亡焦虑的体验性路径——在其中，死亡不再是终点。",
+                mistakes: "误以为圆形时间是'逃避现实'。它是一种更真实的时间体验，揭示了线性时间的人为建构。",
+                related: ["Eternal Recurrence", "Linear Time", "Flow"],
+                scenes_en: ["Deep gaming session", "Creative flow", "Meditation"],
+                scenes_cn: ["深度游戏时段", "创作心流", "冥想"]
+            },
+            {
+                id: "Linear Time",
+                en: "Linear Time",
+                cn: "线性时间",
+                group: "Philosophy",
+                val: 24,
+                desc_en: "Time as a one-way arrow, source of death anxiety",
+                desc_cn: "作为单向箭头的时间，死亡焦虑的来源",
+                notes_en: "The <span class='keyword'>default temporal structure</span> of Falling. Past is irretrievable, future threatens with death, present is squeezed between regret and anxiety. Time consumers are trapped here, watching life slip away.",
+                notes_cn: "沉沦的<span class='keyword'>默认时间结构</span>。过去无法挽回，未来以死相逼，当下被挤压在遗憾与焦虑之间。时间消费者困在这里，看着生命流逝。",
+                why_matters: "识别自己是否困在线性时间焦虑中，是摆脱时间消费者身份的起点。",
+                mistakes: "误以为线性时间是'客观事实'。它是一种体验模式，可以通过无限游戏转化为圆形时间。",
+                related: ["Circular Time", "Death Anxiety", "Time Consumer"],
+                scenes_en: ["Watching clock", "Deadline anxiety", "Aging fears"],
+                scenes_cn: ["看时钟", "DDL焦虑", "衰老恐惧"]
+            },
+            {
+                id: "Death Order",
+                en: "Death Order",
+                cn: "死亡秩序",
+                group: "Philosophy",
+                val: 28,
+                desc_en: "The fundamental order of mortality that structures existence",
+                desc_cn: "结构化存在的必死性根本秩序",
+                notes_en: "Death is the <span class='keyword'>most immovable order</span>. In Falling, life order conceals death order (through commodities and symbols). In Authenticity, <span class='keyword'>death order activates life order</span>—mortality becomes motivation.",
+                notes_cn: "死亡是<span class='keyword'>最无可撼动的秩序</span>。沉沦状态下，生命秩序遮蔽死亡秩序(通过商品和符号)。本真状态下，<span class='keyword'>死亡秩序激活生命秩序</span>——必死性成为动力。",
+                why_matters: "理解死亡秩序与生命秩序的关系，是理解沉沦与本真区别的关键。",
+                mistakes: "试图彻底'战胜'或'无视'死亡秩序。它不可战胜，只能转化利用。",
+                related: ["Life Order", "Authenticity", "Falling", "First Dream"],
+                scenes_en: ["Facing terminal illness", "War zone", "Natural disaster"],
+                scenes_cn: ["面对绝症", "战区", "自然灾害"]
+            },
+            {
+                id: "Life Order",
+                en: "Life Order",
+                cn: "生命秩序",
+                group: "Philosophy",
+                val: 28,
+                desc_en: "The order of living that can be authentic or fallen",
+                desc_cn: "可以是本真或沉沦的生存秩序",
+                notes_en: "Two types: 1) <span class='keyword'>False life order</span>—surface regularity hiding death anxiety, maintained by commodities/symbols; 2) <span class='keyword'>True life order</span>—activated by death order, source of authentic meaning and creativity.",
+                notes_cn: "两种类型：1)<span class='keyword'>伪生命秩序</span>——表面规律，隐藏死亡焦虑，由商品/符号维持；2)<span class='keyword'>真生命秩序</span>——由死亡秩序激活，是本真意义和创造力的源泉。",
+                why_matters: "区分真假生命秩序，是判断自己是在沉沦还是本真生活的关键。",
+                mistakes: "把'规律的生活'等同于'有意义的生活'。规律可能只是伪生命秩序的表征。",
+                related: ["Death Order", "Authenticity", "Falling", "Third Dream"],
+                scenes_en: ["Creative routine", "Meaningful work", "Deep relationships"],
+                scenes_cn: ["创作日程", "有意义的工作", "深度关系"]
+            },
+            {
+                id: "Consumer Culture",
+                en: "Consumer Culture",
+                cn: "消费文明/商业文明",
+                group: "Social",
+                val: 28,
+                desc_en: "The civilization that tames death anxiety through commodities",
+                desc_cn: "通过商品驯服死亡焦虑的文明",
+                notes_en: "The modern solution to death anxiety: <span class='keyword'>consume to death</span>. Commodities are adults' toys, providing controlled surprises that simulate escape from death order while actually deepening Falling.",
+                notes_cn: "死亡焦虑的现代解决方案：<span class='keyword'>消费至死</span>。商品是成人的玩具，提供受控的惊喜，假装逃离死亡秩序，实则加深沉沦。",
+                why_matters: "理解消费文明的运作机制，是识别自己被操控的第一步。",
+                mistakes: "完全拒绝消费。关键不是不消费，而是区分欢愉消费和圆乐消费。",
+                related: ["Pleasure", "Falling", "Second Dream", "Immortality Illusion"],
+                scenes_en: ["Black Friday", "Lifestyle marketing", "Influencer economy"],
+                scenes_cn: ["黑五购物", "生活方式营销", "网红经济"]
+            },
+            {
+                id: "Identity",
+                en: "Identity",
+                cn: "同一性身份",
+                group: "Psychology",
+                val: 26,
+                desc_en: "The symbolic self that creates immortality illusion",
+                desc_cn: "创造永生幻象的符号自我",
+                notes_en: "Degrees, titles, property, reputation—the <span class='keyword'>symbolic system</span> that defines 'who we are'. These don't die with the body, creating the illusion that 'we' won't die either. But losing any part triggers death anxiety.",
+                notes_cn: "学历、头衔、财产、名誉——定义'我们是谁'的<span class='keyword'>符号系统</span>。这些不随肉身消亡，制造了'我们'也不会死的幻觉。但失去任何一部分都会触发死亡焦虑。",
+                why_matters: "识别你的身份符号有哪些，能帮你理解焦虑的来源。",
+                mistakes: "试图建立'不依赖符号'的身份。关键不是消灭身份，而是不被身份所控。",
+                related: ["Immortality Illusion", "Das Man", "Death Anxiety"],
+                scenes_en: ["Resume writing", "Social introduction", "Career crisis"],
+                scenes_cn: ["写简历", "社交介绍", "职业危机"]
+            },
+            {
+                id: "Self-deception",
+                en: "Self-deception",
+                cn: "自欺",
+                group: "Psychology",
+                val: 25,
+                desc_en: "The mechanism that maintains the second dream layer",
+                desc_cn: "维持第二重梦境的机制",
+                notes_en: "To fully enjoy the <span class='keyword'>pseudo-surprise</span> of commodities, we need deep self-deception. We know the surprise isn't real, but pretend it is. This can be maintained until we meet people living more authentically.",
+                notes_cn: "为了充分享受商品的<span class='keyword'>伪惊喜</span>，我们需要深度自欺。我们知道惊喜不是真的，但假装它是真的。直到遇到活得更本真的人，自欺才会被动摇。",
+                why_matters: "自欺是第二重梦境的运作机制。识别自欺是觉醒的关键。",
+                mistakes: "认为自己'足够清醒'不会自欺。自欺的特点恰恰是当事人意识不到。",
+                related: ["Second Dream", "Pleasure", "Authenticity", "Black Humor"],
+                scenes_en: ["Rationalization", "Denial", "Comfortable lies"],
+                scenes_cn: ["自我合理化", "否认", "舒适的谎言"]
+            },
+            {
+                id: "Repetition of Same",
+                en: "Repetition of Same",
+                cn: "同一性的重复",
+                group: "Game",
+                val: 24,
+                desc_en: "Passive, coarse repetition where only surface changes",
+                desc_cn: "粗重的、被动的重复，只有表面在变化",
+                notes_en: "The opposite of differential repetition. <span class='keyword'>Endless reskinning</span>: new videos, new skins, new levels, but the core pattern stays the same. No real challenge, no genuine progress—only the illusion of novelty.",
+                notes_cn: "差异性重复的反面。<span class='keyword'>无尽换皮</span>：新视频、新皮肤、新关卡，但核心模式不变。没有真正的挑战，没有真正的进步——只有新鲜的幻觉。",
+                why_matters: "识别同一性重复，是摆脱沉沦型娱乐的第一步。",
+                mistakes: "把'内容多样'等同于'有价值'。判断标准是内核模式是否变化，而非外围形式。",
+                related: ["Differential Repetition", "Finite Game", "Falling", "Pleasure"],
+                scenes_en: ["Endless scrolling", "Mobile game grinding", "Binge watching"],
+                scenes_cn: ["无尽刷屏", "手游肝", "追剧"]
+            },
+            {
+                id: "Sisyphus",
+                en: "Sisyphus",
+                cn: "西西弗斯",
+                group: "Philosophy",
+                val: 26,
+                desc_en: "The mythical figure condemned to eternal meaningless labor",
+                desc_cn: "被判处永恒无意义劳动的神话人物",
+                notes_en: "Camus' interpretation: 'One must imagine <span class='keyword'>Sisyphus happy</span>.' The boulder-pushing is his infinite game—meaningless to gods, meaningful to him. A hardcore gamer's patron saint.",
+                notes_cn: "加缪的解读：'可以想象<span class='keyword'>西西弗斯是幸福的</span>。'推石头是他的无限游戏——对诸神无意义，对他自己有意义。硬核玩家的守护圣人。",
+                why_matters: "西西弗斯是理解'没有意义的有意义目标'的最佳范例。",
+                mistakes: "把西西弗斯故事理解为'人生虚无'。关键是他如何在虚无中创造意义。",
+                related: ["Infinite Game", "Jouissance", "Eternal Recurrence", "Hardcore Game"],
+                scenes_en: ["Speedrunning", "Skill grinding", "Creative iteration"],
+                scenes_cn: ["速通", "技能打磨", "创作迭代"]
+            },
+            {
+                id: "Game Degradation",
+                en: "Game Degradation",
+                cn: "游戏降级",
+                group: "Game",
+                val: 25,
+                desc_en: "The transition from childhood infinite games to adult finite games",
+                desc_cn: "从儿童无限游戏过渡到成人有限游戏的过程",
+                notes_en: "Most people experience this in growth: from child's <span class='keyword'>pure play</span> to adult's <span class='keyword'>operated games</span>. Society trades our imagination for commodities, our creativity for credentials.",
+                notes_cn: "大多数人在成长中经历这个过程：从儿童的<span class='keyword'>纯粹游戏</span>到成人的<span class='keyword'>被经营的游戏</span>。社会用商品交换我们的想象力，用证书交换我们的创造力。",
+                why_matters: "识别游戏降级是否发生在自己身上，是重返无限游戏的起点。",
+                mistakes: "认为游戏降级是'成熟'的必然结果。实际上它是社会幻象对个人的接管。",
+                related: ["Infinite Game", "Finite Game", "Third Dream", "Consumer Culture"],
+                scenes_en: ["Choosing 'practical' major", "Giving up hobbies", "Career over passion"],
+                scenes_cn: ["选'实用'专业", "放弃爱好", "工作优先于热情"]
+            },
+            {
+                id: "Extreme Sports",
+                en: "Extreme Sports",
+                cn: "极限运动",
+                group: "Experience",
+                val: 26,
+                desc_en: "Physical activities that practice being-toward-death literally",
+                desc_cn: "字面意义上实践向死而生的身体活动",
+                notes_en: "Rock climbing, deep diving, wingsuit flying—<span class='keyword'>literal death-and-rebirth</span>. Research shows extreme athletes are optimistic, energetic, creative, and highly confident. They believe they control their destiny.",
+                notes_cn: "徒手攀岩、深渊潜泳、翼装飞行——<span class='keyword'>字面意义上的死里逃生</span>。研究表明极限运动者乐观、精力充沛、热爱创新，高度自信。他们坚信自己可以掌控命运。",
+                why_matters: "极限运动是理解圆乐(Jouissance)的最直接范例。",
+                mistakes: "把极限运动等同于'作死'。关键是它如何唤起本真状态。",
+                related: ["Jouissance", "Being-toward-death", "Authenticity", "Flow"],
+                scenes_en: ["Free solo climbing", "Base jumping", "Deep cave diving"],
+                scenes_cn: ["徒手攀岩", "低空跳伞", "深洞潜水"]
+            },
+            {
+                id: "Work",
+                en: "Work",
+                cn: "工作",
+                group: "Social",
+                val: 26,
+                desc_en: "Instrumental activity whose goal is to eliminate itself",
+                desc_cn: "目标是消灭自身的工具性活动",
+                notes_en: "Work paradox: <span class='keyword'>sacrifice to end sacrifice, work to end work</span>. Medicine aims to eliminate disease (and thus itself), law aims to achieve justice (and thus become unnecessary). Work is means, game is end.",
+                notes_cn: "工作悖论：<span class='keyword'>牺牲是为了不再牺牲，工作是为了不再工作</span>。医学目标是消灭疾病(进而消灭医学自身)，法律目标是达成公正(进而变得不必要)。工作是手段，游戏是目的。",
+                why_matters: "理解工作的手段性，能帮你识别哪些'工作'其实是伪装的有限游戏。",
+                mistakes: "把工作等同于'痛苦'。关键在于工作是否能转化为无限游戏。",
+                related: ["Grasshopper Paradox", "Infinite Game", "Finite Game", "Time Producer"],
+                scenes_en: ["9-to-5 job", "Career building", "Professional practice"],
+                scenes_cn: ["朝九晚五", "职业发展", "专业实践"]
+            }
+        ];
+
+        // --- DATA: LINKS ---
+        const links = [
+            // Philosophy core relationships
+            { source: "Falling", target: "Authenticity", label: "Opposite 对立" },
+            { source: "Falling", target: "Immortality Illusion", label: "Generates 产生" },
+            { source: "Authenticity", target: "Being-toward-death", label: "Embodies 践行" },
+            { source: "Being-toward-death", target: "Jouissance", label: "Produces 产生" },
+
+            // Experience relationships
+            { source: "Pleasure", target: "Jouissance", label: "Opposite 对立" },
+            { source: "Pleasure", target: "Falling", label: "Deepens 加深" },
+            { source: "Jouissance", target: "Authenticity", label: "Leads to 通向" },
+            { source: "Flow", target: "Jouissance", label: "Similar 相似" },
+            { source: "Desirable Difficulty", target: "Flow", label: "Triggers 触发" },
+
+            // Game theory core
+            { source: "Finite Game", target: "Infinite Game", label: "Opposite 对立" },
+            { source: "Finite Game", target: "Falling", label: "Corresponds 对应" },
+            { source: "Infinite Game", target: "Authenticity", label: "Corresponds 对应" },
+            { source: "Lusory Attitude", target: "Infinite Game", label: "Enables 使能" },
+            { source: "Eternal Recurrence", target: "Infinite Game", label: "Mechanism 机制" },
+            { source: "Differential Repetition", target: "Infinite Game", label: "Core practice 核心实践" },
+            { source: "Grasshopper Paradox", target: "Infinite Game", label: "Justifies 论证" },
+
+            // Social critique
+            { source: "First Dream", target: "Second Dream", label: "False escape 虚假逃离" },
+            { source: "Second Dream", target: "Third Dream", label: "True awakening 真正觉醒" },
+            { source: "Third Dream", target: "Infinite Game", label: "Realized through 通过...实现" },
+            { source: "Time Consumer", target: "Time Producer", label: "Opposite 对立" },
+            { source: "Infinite Game", target: "Time Producer", label: "Becomes 成为" },
+            { source: "Finite Game", target: "Time Consumer", label: "Stays 停留" },
+
+            // Cross-domain connections
+            { source: "Immortality Illusion", target: "Second Dream", label: "Creates 制造" },
+            { source: "Flow", target: "Desirable Difficulty", label: "Requires 需要" },
+            { source: "Jouissance", target: "Hardcore Game", label: "Found in 体现于" },
+            { source: "Differential Repetition", target: "Hardcore Game", label: "Core of 核心" },
+            { source: "Eternal Recurrence", target: "Hardcore Game", label: "Enabled by 由...实现" },
+            { source: "Being-toward-death", target: "Hardcore Game", label: "Simulated by 模拟" },
+
+            // === NEW LINKS FOR EXPANDED NODES ===
+            // Das Man connections
+            { source: "Das Man", target: "Falling", label: "Causes 导致" },
+            { source: "Das Man", target: "Identity", label: "Shapes 塑造" },
+            { source: "Authenticity", target: "Das Man", label: "Escapes 逃离" },
+
+            // Death Anxiety connections
+            { source: "Death Anxiety", target: "Immortality Illusion", label: "Manifests as 表现为" },
+            { source: "Death Anxiety", target: "Time Consumer", label: "Traps 困住" },
+            { source: "Death Anxiety", target: "Linear Time", label: "Perceived through 通过...感知" },
+
+            // Angst connections
+            { source: "Angst", target: "Authenticity", label: "Gateway to 通往" },
+            { source: "Angst", target: "Being-toward-death", label: "Reveals 揭示" },
+            { source: "Falling", target: "Angst", label: "Flees from 逃避" },
+
+            // Time connections
+            { source: "Linear Time", target: "Circular Time", label: "Opposite 对立" },
+            { source: "Eternal Recurrence", target: "Circular Time", label: "Creates 创造" },
+            { source: "Flow", target: "Circular Time", label: "Enters 进入" },
+            { source: "Linear Time", target: "Death Anxiety", label: "Amplifies 放大" },
+
+            // Order connections
+            { source: "Death Order", target: "Life Order", label: "Structures 结构化" },
+            { source: "Authenticity", target: "Death Order", label: "Activates 激活" },
+            { source: "Falling", target: "Death Order", label: "Conceals 遮蔽" },
+            { source: "Life Order", target: "Third Dream", label: "Flourishes in 繁荣于" },
+
+            // Consumer Culture connections
+            { source: "Consumer Culture", target: "Pleasure", label: "Provides 提供" },
+            { source: "Consumer Culture", target: "Second Dream", label: "Maintains 维持" },
+            { source: "Consumer Culture", target: "Game Degradation", label: "Causes 导致" },
+
+            // Self-deception connections
+            { source: "Self-deception", target: "Second Dream", label: "Maintains 维持" },
+            { source: "Black Humor", target: "Self-deception", label: "Exposes 暴露" },
+            { source: "Authenticity", target: "Self-deception", label: "Transcends 超越" },
+
+            // Repetition connections
+            { source: "Repetition of Same", target: "Differential Repetition", label: "Opposite 对立" },
+            { source: "Finite Game", target: "Repetition of Same", label: "Characterized by 特征是" },
+            { source: "Repetition of Same", target: "Falling", label: "Deepens 加深" },
+
+            // Work and Game connections
+            { source: "Work", target: "Grasshopper Paradox", label: "Paradox of 悖论" },
+            { source: "Work", target: "Infinite Game", label: "Can become 可以成为" },
+            { source: "Game Degradation", target: "Finite Game", label: "Results in 导致" },
+
+            // Extreme Sports and Sisyphus
+            { source: "Extreme Sports", target: "Jouissance", label: "Produces 产生" },
+            { source: "Extreme Sports", target: "Being-toward-death", label: "Practices 践行" },
+            { source: "Sisyphus", target: "Infinite Game", label: "Symbol of 象征" },
+            { source: "Sisyphus", target: "Eternal Recurrence", label: "Embodies 体现" },
+            { source: "Sisyphus", target: "Hardcore Game", label: "Spirit of 精神" },
+
+            // Identity and anxiety
+            { source: "Identity", target: "Immortality Illusion", label: "Creates 制造" },
+            { source: "Identity", target: "Death Anxiety", label: "When lost triggers 失去时触发" },
+
+            // Black Humor connections
+            { source: "Black Humor", target: "Jouissance", label: "Type of 一种" },
+            { source: "Black Humor", target: "Authenticity", label: "Reveals 揭示" }
+        ];
+
+        // --- CONFIGURATION ---
+        const settings = { linkDistance: 80, chargeStrength: -200, labelSize: 1.0, opacity: 0.8, autoRotate: true };
+
+        // --- ENGINE ---
+        const elem = document.getElementById('3d-graph');
+        const Graph = ForceGraph3D()(elem)
+            .graphData({ nodes, links })
+            .backgroundColor('#000005')
+            .showNavInfo(false)
+            .nodeThreeObject(node => {
+                const cat = getCategory(node.group);
+                const text = `${node.en}\n${node.cn}`;
+                const sprite = new SpriteText(text);
+                sprite.color = cat.color;
+                sprite.textHeight = (node.val / 2) * settings.labelSize;
+                sprite.fontFace = 'Arial'; sprite.fontWeight = 'bold';
+                sprite.backgroundColor = `rgba(0,0,0,${settings.opacity / 2})`;
+                sprite.padding = 4;
+                sprite.userData = { baseSize: node.val / 2 };
+                return sprite;
+            })
+            .linkWidth(link => 2.5)
+            .linkColor(link => {
+                const sourceNode = nodes.find(n => n.id === link.source || n.id === link.source.id);
+                if (sourceNode) return getCategory(sourceNode.group).color + '88';
+                return '#445566';
+            })
+            .linkOpacity(0.7)
+            .linkCurvature(0.12)
+            .linkCurveRotation(link => {
+                const hash = (link.source?.id || link.source) + (link.target?.id || link.target);
+                let sum = 0;
+                for (let i = 0; i < hash.length; i++) sum += hash.charCodeAt(i);
+                return (sum % 360) * (Math.PI / 180);
+            })
+            .linkDirectionalArrowLength(5)
+            .linkDirectionalArrowRelPos(0.9)
+            .linkDirectionalArrowColor(link => {
+                const sourceNode = nodes.find(n => n.id === link.source || n.id === link.source.id);
+                if (sourceNode) return getCategory(sourceNode.group).color;
+                return '#ffffff';
+            })
+            .linkDirectionalParticles(3)
+            .linkDirectionalParticleSpeed(0.005)
+            .linkDirectionalParticleWidth(2)
+            .linkDirectionalParticleColor(link => {
+                const sourceNode = nodes.find(n => n.id === link.source || n.id === link.source.id);
+                if (sourceNode) return getCategory(sourceNode.group).color;
+                return '#ffffff';
+            })
+            .onNodeClick(node => {
+                const currentPos = Graph.cameraPosition();
+                const currentDistance = Math.hypot(currentPos.x, currentPos.y, currentPos.z);
+                const nodeDistance = Math.hypot(node.x, node.y, node.z) || 1;
+
+                const newX = (node.x / nodeDistance) * currentDistance;
+                const newY = (node.y / nodeDistance) * currentDistance;
+                const newZ = (node.z / nodeDistance) * currentDistance;
+
+                Graph.cameraPosition({ x: newX, y: newY, z: newZ }, node, 1500);
+                showHUD(node);
+            });
+
+        Graph.d3Force('link').distance(settings.linkDistance);
+        Graph.d3Force('charge').strength(settings.chargeStrength);
+
+        // --- CONTROLS ---
+        const gui = new dat.GUI();
+        const folder = gui.addFolder('Graph Settings');
+        folder.add(settings, 'linkDistance', 10, 300).onChange(val => { Graph.d3Force('link').distance(val); Graph.d3ReheatSimulation(); });
+        folder.add(settings, 'chargeStrength', -500, -10).onChange(val => { Graph.d3Force('charge').strength(val); Graph.d3ReheatSimulation(); });
+        folder.add(settings, 'labelSize', 0.1, 3.0).onChange(val => { Graph.scene().traverse(obj => { if (obj.userData?.baseSize) obj.textHeight = obj.userData.baseSize * val; }); });
+        folder.add(settings, 'opacity', 0.1, 1.0).onChange(val => { Graph.scene().traverse(obj => { if (obj.userData?.baseSize) obj.backgroundColor = `rgba(0,0,0,${val / 2})`; }); });
+        folder.add(settings, 'autoRotate').onChange(val => { Graph.controls().autoRotate = val; });
+        folder.open();
+
+        // --- HUD LOGIC ---
+        function showHUD(node) {
+            const el = (id) => document.getElementById(id);
+            const cat = getCategory(node.group);
+            el('hud').style.display = 'block';
+            el('hud-title').innerText = node.en;
+            el('hud-title').style.color = cat.color;
+            el('hud-cn').innerText = `${node.cn} [${node.group}]`;
+            el('hud-desc').innerHTML = `<div class="en">${node.desc_en || ''}</div><div class="cn">${node.desc_cn || ''}</div>`;
+            el('hud-notes').innerHTML = `<div class="en">${node.notes_en || ''}</div><div class="cn">${node.notes_cn || ''}</div>`;
+
+            // Why It Matters
+            const whyEl = el('hud-why');
+            if (node.why_matters) {
+                whyEl.innerHTML = node.why_matters;
+                whyEl.parentElement.style.display = 'block';
+            } else {
+                whyEl.innerHTML = '';
+                whyEl.parentElement.style.display = 'none';
+            }
+
+            // Common Mistakes
+            const mistakesEl = el('hud-mistakes');
+            if (node.mistakes) {
+                mistakesEl.innerHTML = node.mistakes;
+                mistakesEl.parentElement.style.display = 'block';
+            } else {
+                mistakesEl.innerHTML = '';
+                mistakesEl.parentElement.style.display = 'none';
+            }
+
+            // Related Terms
+            const relatedContainer = el('hud-related');
+            relatedContainer.innerHTML = '';
+            if (node.related && node.related.length > 0) {
+                node.related.forEach(term => {
+                    const tag = document.createElement('span');
+                    tag.className = 'related-tag';
+                    tag.innerText = term;
+                    tag.onclick = () => {
+                        const targetNode = nodes.find(n => n.id === term || n.en === term);
+                        if (targetNode) {
+                            Graph.cameraPosition({ x: targetNode.x + 50, y: targetNode.y + 50, z: targetNode.z + 50 }, targetNode, 1500);
+                            setTimeout(() => showHUD(targetNode), 1600);
+                        }
+                    };
+                    relatedContainer.appendChild(tag);
+                });
+                relatedContainer.parentElement.style.display = 'block';
+            } else {
+                relatedContainer.parentElement.style.display = 'none';
+            }
+
+            // Scenarios
+            const sceneContainer = el('hud-scenes');
+            sceneContainer.innerHTML = '';
+            if (node.scenes_en && node.scenes_en.length > 0) {
+                for (let i = 0; i < node.scenes_en.length; i++) {
+                    const tag = document.createElement('span');
+                    tag.className = 'scene-tag';
+                    tag.innerHTML = `${node.scenes_en[i]} <span style="color:#88aacc">${node.scenes_cn[i]}</span>`;
+                    sceneContainer.appendChild(tag);
+                }
+                sceneContainer.parentElement.style.display = 'block';
+            } else {
+                sceneContainer.parentElement.style.display = 'none';
+            }
+        }
+
+        function hideHUD() {
+            document.getElementById('hud').style.display = 'none';
+        }
+
+        // Initialize
+        buildLegend();
+        setTimeout(() => { document.getElementById('loading').style.display = 'none'; }, 1000);
+        Graph.controls().autoRotate = true;
+    </script>
+</body>
+
+</html>

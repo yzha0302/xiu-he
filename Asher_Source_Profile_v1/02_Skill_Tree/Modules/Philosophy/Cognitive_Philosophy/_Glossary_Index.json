@@ -1,0 +1,110 @@
+[
+    {
+        "term": "Systemic Cognition",
+        "term_cn": "系统性认知",
+        "definition": "超越单一标签，建立起能够整合、分析、预测并创造新知识的网状认知能力。",
+        "source_file": "1.0_Systemic_Cognition.md"
+    },
+    {
+        "term": "Labeling Cognition",
+        "term_cn": "标签化认知",
+        "definition": "认知吝啬者的默认模式。识别即终止，用简单符号覆盖复杂现实。",
+        "source_file": "1.0_Systemic_Cognition.md"
+    },
+    {
+        "term": "Epistemology",
+        "term_cn": "认识论",
+        "definition": "哲学分支，研究'知识'本身的本质、来源和边界。即'我们是如何知道我们知道的'。",
+        "source_file": "1.0_Systemic_Cognition.md"
+    },
+    {
+        "term": "Metaphysics",
+        "term_cn": "形而上学",
+        "definition": "物理学之后。研究存在（Being）本身的学问。科学研究'怎么做'，形而上学研究'是什么'。",
+        "source_file": "1.0_Systemic_Cognition.md"
+    },
+    {
+        "term": "Trivium",
+        "term_cn": "三艺",
+        "definition": "中世纪博雅教育的基础：语法(Grammar)、逻辑(Logic)、修辞(Rhetoric)。心智的操作系统。",
+        "source_file": "1.0_Systemic_Cognition.md"
+    },
+    {
+        "term": "Quadrivium",
+        "term_cn": "四艺",
+        "definition": "中世纪博雅教育的高级阶段：算术、几何、天文、音乐。理解宇宙秩序的工具。",
+        "source_file": "1.0_Systemic_Cognition.md"
+    },
+    {
+        "term": "Context Expansion",
+        "term_cn": "语境扩张",
+        "definition": "对抗标签化认知的手段。强制追问对象的背景、关系和演化路径。",
+        "source_file": "1.0_Systemic_Cognition.md"
+    },
+    {
+        "term": "Cross-Pollination",
+        "term_cn": "跨学科授粉",
+        "definition": "打破学科孤岛的手段。将不同领域的思维模型（如生物学+经济学）杂交以产生创新。",
+        "source_file": "1.0_Systemic_Cognition.md"
+    },
+    {
+        "term": "Cognitive Miser",
+        "term_cn": "认知吝啬者",
+        "definition": "大脑为了节省能量，倾向于把复杂个体简化为单一符号的心理机制。",
+        "source_file": "1.0_Systemic_Cognition.md"
+    },
+    {
+        "term": "Direct Person",
+        "term_cn": "直人",
+        "definition": "游戏的人、散步的人，生活有自身目的的直接性，进入事物内核。",
+        "source_file": "1.1_Direct_vs_Indirect_People.md"
+    },
+    {
+        "term": "Indirect Person",
+        "term_cn": "贱人",
+        "definition": "竞争的人、赶路的人，手段与目的分离，满足于外围游荡。",
+        "source_file": "1.1_Direct_vs_Indirect_People.md"
+    },
+    {
+        "term": "Layered Observation Structure",
+        "term_cn": "层层围观",
+        "definition": "人类社会中创作者、评论者、消费者形成的金字塔认知结构。",
+        "source_file": "1.1_Direct_vs_Indirect_People.md"
+    },
+    {
+        "term": "The Cheapening Object",
+        "term_cn": "致贱之物",
+        "definition": "金钱的本质，居于外围的外围，自身无价值却成为价值度量。",
+        "source_file": "1.1_Direct_vs_Indirect_People.md"
+    },
+    {
+        "term": "Discounting Mindset",
+        "term_cn": "贴现思维",
+        "definition": "用未来预期评价当下价值，化神秘为庸俗的思维方式。",
+        "source_file": "1.1_Direct_vs_Indirect_People.md"
+    },
+    {
+        "term": "Profound Mystery",
+        "term_cn": "深刻的神秘",
+        "definition": "无限导致的困难，不存在标准流程和评价体系。",
+        "source_file": "1.1_Direct_vs_Indirect_People.md"
+    },
+    {
+        "term": "Shallow Chaos",
+        "term_cn": "肤浅的混乱",
+        "definition": "有限导致的困难，资源有限竞争白热化。",
+        "source_file": "1.1_Direct_vs_Indirect_People.md"
+    },
+    {
+        "term": "Digging Holes",
+        "term_cn": "挖洞",
+        "definition": "深刻的、否定性的努力，神秘性、吸引性、能转化攻击。",
+        "source_file": "1.1_Direct_vs_Indirect_People.md"
+    },
+    {
+        "term": "Building Towers",
+        "term_cn": "盖楼",
+        "definition": "庸俗的、肯定性的努力，外显性、炫耀性、攻击性。",
+        "source_file": "1.1_Direct_vs_Indirect_People.md"
+    }
+]

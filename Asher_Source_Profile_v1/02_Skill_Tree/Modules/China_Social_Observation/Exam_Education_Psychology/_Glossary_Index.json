@@ -1,0 +1,212 @@
+[
+    {
+        "term_en": "Learned Helplessness",
+        "term_cn": "习得性无助",
+        "definition_short": "长期失败后形成的'无论努力都没用'的信念",
+        "definition_deep": "由Seligman提出的心理学概念。当个体反复经历无法控制的负面事件后，大脑会形成一种'无论我怎样努力都无法改变结果'的神经回路。这种信念一旦固化，即使环境已经改变、能力已经增强，个体仍会放弃尝试。在应试教育中，典型表现为：被绳子绑过的小象长大后不敢挣脱——低估自己的力量，高估绳子（权威）的力量。",
+        "why_it_matters": "识别习得性无助是打破它的第一步。很多'我不擅长'的信念其实是被训练出来的，而非天生局限。",
+        "common_mistakes": "误以为'我就是这样的人'。习得性无助是后天塑造的神经回路，可以通过'小成功积累'和'可控体验'逐渐重塑。",
+        "related_terms": [
+            "Amygdala",
+            "Chronic Fear",
+            "Authority Complex"
+        ],
+        "source_file": "Exam_Education_Psychology.md"
+    },
+    {
+        "term_en": "Amygdala Hypertrophy",
+        "term_cn": "杏仁核放大",
+        "definition_short": "恐惧中枢因长期激活而增大、过度敏感",
+        "definition_deep": "杏仁核是大腦中负责检测威胁、产生恐惧反应的核心区域。当一个人长期处于批评、评判、惩罚的环境中，杏仁核会被反复激活，导致其体积增大、活跃度提高、敏感度增强。结果是：个体在没有真实威胁的情况下也会感到警觉和不安，形成慢性恐惧状态，高估外界威胁、低估自身能力。",
+        "why_it_matters": "了解杏仁核机制能帮你识别：那些'莫名其妙的紧张'不是你在矫情，而是大脑被训练出来的自动反应。",
+        "common_mistakes": "认为'克服恐惧'只需要意志力。实际上需要通过安全体验重新训练杏仁核。",
+        "related_terms": [
+            "Chronic Fear",
+            "PFC Suppression",
+            "Servility"
+        ],
+        "source_file": "Exam_Education_Psychology.md"
+    },
+    {
+        "term_en": "Prefrontal Cortex Overload",
+        "term_cn": "前额叶超载",
+        "definition_short": "理性控制中心因长期压抑情绪而功能受损",
+        "definition_deep": "前额叶皮质是大脑的'CEO'，负责理性思考、情绪调节、计划执行。当孩子被要求长期压抑情绪以保持'成绩稳定'时，前额叶需要持续抑制杏仁核的信号，处于超负荷运转状态。长期如此会导致前额叶功能受损，表现为：对快乐/兴奋/爱感到麻木，情绪调节能力下降，决策能力受损。",
+        "why_it_matters": "这解释了为什么很多'高材生'在情绪管理上反而很弱——不是他们不努力，而是前额叶被过度消耗了。",
+        "common_mistakes": "认为'控制情绪'是好事。过度控制本身就是一种损伤，健康的情绪需要表达和流动。",
+        "related_terms": [
+            "Emotional Numbness",
+            "DMN Hijacking",
+            "Depression"
+        ],
+        "source_file": "Exam_Education_Psychology.md"
+    },
+    {
+        "term_en": "Default Mode Network Hijacking",
+        "term_cn": "DMN被劫持/自我网络劫持",
+        "definition_short": "休息时的自我想象系统被训练成自我批判系统",
+        "definition_deep": "DMN（默认模式网络）是大脑在休息、发呆时活跃的网络，正常功能包括：自我反思、自我想象、做白日梦、产生灵感。但在应试教育中，'空闲=浪费=负罪'的信念会将DMN重新训练为自我审问、自我批评、自我羞耻的工具。结果是：一旦停下来，内化的权威就会披上你的身份开始批判你——'你在堕落''你没有目标''你要被超越了'。",
+        "why_it_matters": "这解释了为什么很多人'不会放松'——不是不想，而是大脑被训练成一放松就自动攻击自己。",
+        "common_mistakes": "认为'高效利用时间'是美德。无结构的空白时间对创造力和心理健康至关重要。",
+        "related_terms": [
+            "Self-criticism",
+            "Leisure Guilt",
+            "Creativity Block"
+        ],
+        "source_file": "Exam_Education_Psychology.md"
+    },
+    {
+        "term_en": "Dopamine Pattern Distortion",
+        "term_cn": "多巴胺模式扭曲",
+        "definition_short": "奖励系统从'过程释放'被训练成'结果集中释放'",
+        "definition_deep": "正常学习中，多巴胺在好奇→探索→理解→结论的每个阶段分段释放，每一步都有快感。但应试教育将流程简化为'做题→对答案→打分'，多巴胺只在'得高分'那一刻集中释放。大脑因此学会跳过探索阶段（没快感甚至焦虑），直接奔向结论——形成'别废话上结论'的思维模式和对确定性的病态追求。",
+        "why_it_matters": "这解释了为什么很多人'没有好奇心'——不是天生无趣，而是多巴胺回路被重塑了。",
+        "common_mistakes": "认为'追求效率'就是好。跳过过程的效率实际上扼杀了探索的快乐和科学精神。",
+        "related_terms": [
+            "Exploration Deficit",
+            "Result Addiction",
+            "Certainty Seeking"
+        ],
+        "source_file": "Exam_Education_Psychology.md"
+    },
+    {
+        "term_en": "Decision Paralysis",
+        "term_cn": "决策瘫痪",
+        "definition_short": "高逻辑能力者面对不确定决策时的崩溃状态",
+        "definition_deep": "应试教育训练的核心不是逻辑能力，而是'规避风险的神经通路'——不出错的能力。这条通路一旦固化，会强烈抑制探索和决策。因为对这类人来说，错误带来的痛苦远大于探索带来的快乐。遇到不确定性决策时，避错焦虑会压倒理性分析，导致无法正常思考和决策——形成'聪明但懦弱'的性格。",
+        "why_it_matters": "识别这是后天训练而非'性格缺陷'，是开始改变的第一步。",
+        "common_mistakes": "认为'分析更多'能解决决策问题。实际需要的是提高对不确定性的接受力。",
+        "related_terms": [
+            "Risk Aversion",
+            "Error Phobia",
+            "Overthinking"
+        ],
+        "source_file": "Exam_Education_Psychology.md"
+    },
+    {
+        "term_en": "Comparative Relationship",
+        "term_cn": "比较型关系",
+        "definition_short": "以成绩/地位为唯一KPI的功利性人际模式",
+        "definition_deep": "当学习成绩成为唯一KPI时，人与人之间本质上不存在平等——从一年级开始就只能在比较中找平衡，而不是在平等中找欣赏。这种模式延续到成人社会，表现为：关系的波动性、功利性、阶段性；用GDP和学历量化人的价值；看不到具体的人，只能看到可量化的指标。两种典型障碍：焦虑型（拼命讨好）和回避型（主动疏离）。",
+        "why_it_matters": "文化可以切断构成某些关系的可能性。识别比较型关系是建立真挚友谊的前提。",
+        "common_mistakes": "把'还不错的人脉'当作友谊。真正的友谊不以实力/权力/功利为基础。",
+        "related_terms": [
+            "Anxious Attachment",
+            "Avoidant Attachment",
+            "Utilitarian Bond"
+        ],
+        "source_file": "Exam_Education_Psychology.md"
+    },
+    {
+        "term_en": "Sexual Stigmatization",
+        "term_cn": "性汙名化",
+        "definition_short": "在自然体验之前将性标记为'骯髒/不道德'",
+        "definition_deep": "应试教育为使学生'集中精力学习'，会汙名化恋爱和性——將其定性为骯髒、不道德。当负面概念先于自然体验被植入时，个体无法从容接纳自己的性冲动和性幻想，在性唤起时产生紧张和自责。这构成了整个社会性压抑的基本盘，并可能导致两种极端：持续压抑或病态补偿（性成瘾）。",
+        "why_it_matters": "健康的人格需要对性有自发的、积极的探索过程。这是人格健全的一部分。",
+        "common_mistakes": "认为'不谈性'就是保护年轻人。实际上汙名化造成的心理伤害远大于科学性教育。",
+        "related_terms": [
+            "Sexual Repression",
+            "Sexual Addiction",
+            "Compensatory Behavior"
+        ],
+        "source_file": "Exam_Education_Psychology.md"
+    },
+    {
+        "term_en": "Future as Command",
+        "term_cn": "未来即命令",
+        "definition_short": "未来被狭隘化为具体任务而非可能性空间",
+        "definition_deep": "在应试教育中，孩子从一年级起就被灌输'未来=考上好大学'。未来被非常狭小、精确地定义，只有一个路径、一个标准、一种正确。结果是：面对'未来'这个词时，孩子不会启动想象系统，而是启动任务执行系统。未来成为具体命令（好好学习→好大学→好工作→结婚生孩子），而非充满无穷可能性的创造空间。",
+        "why_it_matters": "当未来只能被计划而不能被想象时，意义系统就会坍縮。",
+        "common_mistakes": "认为'目标明确'就是好。过早窄化未来会扼杀想象力和意义感。",
+        "related_terms": [
+            "Imagination Atrophy",
+            "Meaning Collapse",
+            "Future Anxiety"
+        ],
+        "source_file": "Exam_Education_Psychology.md"
+    },
+    {
+        "term_en": "Meaning Collapse",
+        "term_cn": "意义系统坍縮",
+        "definition_short": "从'想象式人生'退化为'流程式人生'",
+        "definition_deep": "意义的生成高度依赖个人主体性和想象力——'我'主动把自己放进一个美好的预期当中。但当未来被定义为固定流程（学习→成绩→大学→工作→对象→结婚）时，内在没有一个积极、热情、丰富的'我'，因为美好感受需要想象的背景板来映射。结果是：黑色影子落在灰色背景板上，一个没有回声的黑洞——人到中年甚至大学毕业就陷入空虚。",
+        "why_it_matters": "流程式思维带不来任何意义感。恢复想象力是重建意义系统的关键。",
+        "common_mistakes": "认为'完成人生任务'就会满足。没有主体性参与的流程无法产生意义感。",
+        "related_terms": [
+            "Future as Command",
+            "Process Thinking",
+            "Midlife Crisis"
+        ],
+        "source_file": "Exam_Education_Psychology.md"
+    },
+    {
+        "term_en": "Servility",
+        "term_cn": "奴性/服从性",
+        "definition_short": "对权威无条件服从+对权力的极度渴望",
+        "definition_deep": "长期处于'权威即真理'的系统中，杏仁核被放大，人进入慢性恐惧状态，不断高估权威、低估自己。但奴性是一枚硬币的两面：被长期支配的人会在精神世界开始模仿支配者。因此服从性的镜像就是对权力的极度渴望——今天的受害者可能成为明天的加害者。",
+        "why_it_matters": "识别服从性是打破代际循环的关键。你不必在服从和支配之间二选一。",
+        "common_mistakes": "认为'反抗权威'就是答案。关键是超越服从/支配的二元对立。",
+        "related_terms": [
+            "Learned Helplessness",
+            "Power Addiction",
+            "Cycle of Abuse"
+        ],
+        "source_file": "Exam_Education_Psychology.md"
+    },
+    {
+        "term_en": "Chronic Fear State",
+        "term_cn": "慢性恐惧状态",
+        "definition_short": "无真实威胁时仍持续感到不安的神经状态",
+        "definition_deep": "当孩子长期处于精神高压、持续批判、缺乏安全感的环境中，杏仁核会被反复激活并变得过度敏感。即使威胁消失（毕业了、老师不在了），这种警觉状态仍会持续——表现为担心被批评、担心被评价、担心被否定的弥漫性不安。这是创伤后应激的一种形式，但因为发生在发育期，已成为人格的一部分。",
+        "why_it_matters": "理解慢性恐惧是神经层面的真实改变，而非'想太多'或'矫情'。",
+        "common_mistakes": "试图用'理性'压制恐惧。需要通过安全体验重新校准杏仁核。",
+        "related_terms": [
+            "Amygdala Hypertrophy",
+            "PTSD",
+            "Hypervigilance"
+        ],
+        "source_file": "Exam_Education_Psychology.md"
+    },
+    {
+        "term_en": "Leisure Guilt",
+        "term_cn": "休闲罪恶感",
+        "definition_short": "'放松=墮落'的内化信念导致的自我惩罚",
+        "definition_deep": "在应试教育的高效文化中，空闲被定义为浪费，放松被定义为墮落。这种信念一旦内化，任何休息时刻都会触发自我批判——'你在浪费时间''你没有目标''你要被超越了'。悖论是：如果没有什么事让你焦虑，你反而会更焦虑。焦虑成为安全区，闲暇反而让人难以忍受。",
+        "why_it_matters": "无法享受休闲是心理障碍的一种。真正的效率需要高质量的休息。",
+        "common_mistakes": "认为'忙碌'证明自己有价值。休息和创造力是正相关的。",
+        "related_terms": [
+            "DMN Hijacking",
+            "Workaholic",
+            "Burnout"
+        ],
+        "source_file": "Exam_Education_Psychology.md"
+    },
+    {
+        "term_en": "Tightening Spell",
+        "term_cn": "紧箍咒",
+        "definition_short": "外在控制内化为自我审查的心理机制",
+        "definition_deep": "来自《西游記》的隐喻。紧箍咒不仅是外在的控制工具，更是一种内化的心理机制——即使唐僧不念咒，孙悟空也会因为害怕被念咒而自我约束。这与应试教育的终极效果完全一致：外在权威内化为自我审查。毕业后没有老师打分了，但你依然会用内化的标准不断评判自己。吴承恩500年前写出的紧箍咒，正是中国人戴了几千年的心理控制结构。",
+        "why_it_matters": "识别紧箍咒的存在是取下它的第一步。关键问题：你的紧箍咒是什么？",
+        "common_mistakes": "认为'自律'都是好的。区分来自自我的自律和来自内化权威的自我惩罚。",
+        "related_terms": [
+            "Internalized Authority",
+            "Self-censorship",
+            "Mental Colonization"
+        ],
+        "source_file": "Exam_Education_Psychology.md"
+    },
+    {
+        "term_en": "Poverty Trifecta",
+        "term_cn": "三类贫困户",
+        "definition_short": "时间贫困户、意义贫困户、情感贫困户",
+        "definition_deep": "应试教育批量生产的三类人格受损者：1) 时间贫困户——所有时间用于满足当下指标，集体性缺乏对未来的畅想；2) 意义贫困户——行为模式被彻底工具化，无法感受活动本身的意义；3) 情感贫困户——无法感受他人的温度、感情和特有性格，只能分析可量化的指标。这三类贫困在经济、社会和个人层面分别表现为创新匮乏、权威崇拜和持续焦虑。",
+        "why_it_matters": "识别自己属于哪类贫困户，是对症下药的前提。",
+        "common_mistakes": "认为'成功'能解决这些问题。这些是人格层面的受损，需要专门修复。",
+        "related_terms": [
+            "Meaning Collapse",
+            "Emotional Numbness",
+            "Innovation Deficit"
+        ],
+        "source_file": "Exam_Education_Psychology.md"
+    }
+]

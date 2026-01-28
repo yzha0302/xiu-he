@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>3D Knowledge Graph - Contract Warfare</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #000005;
+            overflow: hidden;
+        }
+
+        #hud {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 420px;
+            background: rgba(10, 15, 25, 0.95);
+            border: 1px solid #334466;
+            border-left: 3px solid #00ffff;
+            border-radius: 4px;
+            padding: 25px;
+            color: #eef;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            display: none;
+            max-height: 75vh;
+            overflow-y: auto;
+        }
+
+        #hud h2 {
+            margin: 0 0 5px 0;
+            font-size: 24px;
+            padding-right: 30px;
+        }
+
+        #hud .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.2s;
+            font-size: 20px;
+            color: #889;
+            text-align: center;
+            line-height: 24px;
+        }
+
+        #hud .close-btn:hover {
+            opacity: 1;
+            color: #ff5555;
+        }
+
+        #hud .sub-header {
+            font-size: 14px;
+            color: #8899aa;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #334455;
+            padding-bottom: 10px;
+        }
+
+        #hud .section-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #556677;
+            letter-spacing: 2px;
+            margin-top: 15px;
+            margin-bottom: 8px;
+        }
+
+        #hud .content-block {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #ccd;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        #hud .en {
+            color: #fff;
+        }
+
+        #hud .cn {
+            color: #88aacc;
+            font-size: 13px;
+        }
+
+        #hud .keyword {
+            color: #00ffff;
+            font-weight: bold;
+        }
+
+        #hud .example {
+            color: #aaffaa;
+            font-style: italic;
+            font-size: 12px;
+            margin-top: 8px;
+            padding: 8px;
+            background: rgba(0, 100, 0, 0.2);
+            border-radius: 4px;
+        }
+
+        #hud .scene-tag {
+            display: inline-block;
+            font-size: 12px;
+            background: #223344;
+            color: #aab;
+            padding: 4px 8px;
+            border-radius: 12px;
+            margin: 3px 5px 3px 0;
+            border: 1px solid #334455;
+        }
+
+        #legend {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(10, 15, 25, 0.9);
+            border: 1px solid #334466;
+            border-radius: 4px;
+            padding: 15px 20px;
+            color: #ccd;
+            backdrop-filter: blur(10px);
+            min-width: 200px;
+        }
+
+        #legend h3 {
+            margin: 0;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #778;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        #legend h3::after {
+            content: '▼';
+            font-size: 10px;
+            transition: transform 0.3s;
+        }
+
+        #legend.collapsed h3::after {
+            transform: rotate(-90deg);
+        }
+
+        #legend .legend-items {
+            max-height: 250px;
+            overflow-y: auto;
+            transition: max-height 0.3s ease;
+        }
+
+        #legend.collapsed .legend-items {
+            max-height: 0;
+        }
+
+        #legend .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 6px 0;
+            font-size: 13px;
+        }
+
+        #legend .legend-color {
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+            margin-right: 10px;
+        }
+
+        #legend .legend-label {
+            color: #aab;
+        }
+
+        #legend .legend-count {
+            margin-left: auto;
+            color: #667;
+            font-size: 11px;
+        }
+
+        #legend .legend-total {
+            font-size: 11px;
+            color: #667;
+            margin-left: 10px;
+        }
+
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #00ffff;
+            font-family: monospace;
+            letter-spacing: 2px;
+        }
+    </style>
+    <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/3d-force-graph"></script>
+    <script src="https://unpkg.com/three-spritetext@1.8.1/dist/three-spritetext.min.js"></script>
+    <script src="https://unpkg.com/dat.gui"></script>
+</head>
+
+<body>
+    <div id="loading">INITIALIZING...</div>
+    <div id="3d-graph"></div>
+
+    <div id="hud">
+        <span class="close-btn" onclick="hideHUD()">×</span>
+        <h2 id="hud-title">Title</h2>
+        <div id="hud-cn" class="sub-header">Subtitle</div>
+        <div class="section-title">Definition 定义</div>
+        <div id="hud-desc" class="content-block"></div>
+        <div class="section-title">Deep Dive 深度解析</div>
+        <div id="hud-notes" class="content-block" style="border-left: 2px solid #00ffff;"></div>
+        <div id="hud-example-section">
+            <div class="section-title">Example 举例</div>
+            <div id="hud-example" class="example"></div>
+        </div>
+        <div class="section-title">Related 关联场景</div>
+        <div id="hud-scenes"></div>
+    </div>
+
+    <div id="legend">
+        <h3 onclick="toggleLegend()">Domain 领域 <span id="legend-total"></span></h3>
+        <div id="legend-items" class="legend-items"></div>
+    </div>
+
+    <script>
+        const CATEGORY_CONFIG = {
+            "Core": { color: "#00ffff", label_en: "Core Concepts", label_cn: "核心概念" },
+            "Basics": { color: "#ffffff", label_en: "Basic Terms", label_cn: "基础术语" },
+            "Structure": { color: "#ff8800", label_en: "Contract Structure", label_cn: "合同结构" },
+            "Attack": { color: "#ff0055", label_en: "Attack Tactics", label_cn: "攻击战术" },
+            "Defense": { color: "#00ff00", label_en: "Defense Tactics", label_cn: "防御战术" },
+            "Loophole": { color: "#aa00ff", label_en: "Loopholes", label_cn: "漏洞" },
+            "Risk": { color: "#ffff00", label_en: "Risk Management", label_cn: "风险管理" },
+            "Psychology": { color: "#0088ff", label_en: "Psychology", label_cn: "心理战术" },
+            "Asher": { color: "#ff00aa", label_en: "Asher Tactics", label_cn: "Asher专属" },
+            "CrossBorder": { color: "#00ffaa", label_en: "Cross-Border", label_cn: "跨境法律" },
+            "Dispute": { color: "#ffaa00", label_en: "Dispute Resolution", label_cn: "争议解决" },
+            "Employment": { color: "#88ff00", label_en: "Employment", label_cn: "劳动雇佣" }
+        };
+
+        const COLOR_PALETTE = [
+            "#00ffff", "#00ff00", "#ff0055", "#ff8800", "#aa00ff",
+            "#ffff00", "#00ffaa", "#ff00aa", "#88ff00", "#0088ff"
+        ];
+        let colorIndex = 0;
+
+        function getCategory(groupName, labelCn = groupName) {
+            if (!CATEGORY_CONFIG[groupName]) {
+                CATEGORY_CONFIG[groupName] = {
+                    color: COLOR_PALETTE[colorIndex % COLOR_PALETTE.length],
+                    label_en: groupName,
+                    label_cn: labelCn
+                };
+                colorIndex++;
+            }
+            return CATEGORY_CONFIG[groupName];
+        }
+
+        function toggleLegend() {
+            document.getElementById('legend').classList.toggle('collapsed');
+        }
+
+        function buildLegend() {
+            const container = document.getElementById('legend-items');
+            container.innerHTML = '';
+            const counts = {};
+            let total = 0;
+            nodes.forEach(n => { counts[n.group] = (counts[n.group] || 0) + 1; total++; });
+            document.getElementById('legend-total').innerText = `(${Object.keys(counts).length} 域 / ${total} 点)`;
+            for (const [group, count] of Object.entries(counts)) {
+                const cat = getCategory(group);
+                const item = document.createElement('div');
+                item.className = 'legend-item';
+                item.innerHTML = `
+                    <div class="legend-color" style="background:${cat.color}"></div>
+                    <span class="legend-label">${cat.label_en} ${cat.label_cn}</span>
+                    <span class="legend-count">${count}</span>
+                `;
+                container.appendChild(item);
+            }
+        }
+
+        // === DATA ===
+        const nodes = [
+            // === 基础术语 ===
+            {
+                id: "Contract", en: "Contract", cn: "合同/契约", group: "Basics", val: 35,
+                desc_en: "A legally binding agreement between two or more parties.",
+                desc_cn: "双方或多方之间有法律约束力的协议。一方承诺做某事，另一方承诺给予回报。",
+                notes_en: "The foundation of all commercial relationships.",
+                notes_cn: "所有商业关系的基础。合同一旦成立，双方都必须履行，否则就是<span class='keyword'>违约</span>。",
+                example: "租房合同、劳动合同、服务协议都是合同。",
+                scenes_en: ["All business", "Everyday life"], scenes_cn: ["所有商业场景", "日常生活"]
+            },
+            {
+                id: "Party", en: "Party", cn: "当事人/合同方", group: "Basics", val: 25,
+                desc_en: "A person or organization that signs a contract.",
+                desc_cn: "签订合同的人或组织。通常分为<span class='keyword'>甲方</span>(Party A)和<span class='keyword'>乙方</span>(Party B)。",
+                notes_en: "In China, Party A is usually the paying party.",
+                notes_cn: "在中国，甲方通常指付款方/发包方，乙方指收款方/服务提供方。",
+                example: "租房合同：房东是甲方，租客是乙方。",
+                scenes_en: ["Contract drafting"], scenes_cn: ["合同起草"]
+            },
+            {
+                id: "Breach", en: "Breach of Contract", cn: "违约", group: "Basics", val: 28,
+                desc_en: "Failure to perform obligations under a contract.",
+                desc_cn: "一方没有按照合同约定履行义务。违约方需要承担责任。",
+                notes_en: "Consequences include damages, specific performance, or termination.",
+                notes_cn: "后果包括<span class='keyword'>损害赔偿</span>、继续履行、支付违约金等。",
+                example: "合同约定1月交货，结果3月才交，这就是违约。",
+                scenes_en: ["Contract disputes"], scenes_cn: ["合同纠纷"]
+            },
+            {
+                id: "Damages", en: "Damages", cn: "损害赔偿", group: "Basics", val: 26,
+                desc_en: "Monetary compensation for losses caused by breach.",
+                desc_cn: "违约或侵权行为造成的损失，通常以金钱形式补偿。",
+                notes_en: "Types: compensatory, foreseeable, punitive (US only).",
+                notes_cn: "分类：实际损失、可预见损失、<span class='keyword'>惩罚性赔偿</span>（美国特有）。",
+                example: "对方违约导致你损失10万，可要求赔偿这10万。",
+                scenes_en: ["Litigation", "Arbitration"], scenes_cn: ["诉讼", "仲裁"]
+            },
+            // === 争议解决 ===
+            {
+                id: "Arbitration", en: "Arbitration", cn: "仲裁", group: "Dispute", val: 32,
+                desc_en: "A private dispute resolution method where a neutral arbitrator makes a binding decision.",
+                desc_cn: "一种替代法院诉讼的争议解决方式。双方同意把争议交给一个中立的第三方（仲裁员）来裁决，仲裁员的决定具有法律约束力。",
+                notes_en: "Faster, private, enforceable in 160+ countries via <span class='keyword'>New York Convention</span>.",
+                notes_cn: "比诉讼更快、更私密。国际首选是因为仲裁裁决可以在全球160+国家执行（<span class='keyword'>纽约公约</span>），而法院判决很难跨国执行。",
+                example: "合同写'争议提交新加坡国际仲裁中心仲裁'——有争议不去法院，去新加坡仲裁。",
+                scenes_en: ["International trade", "Large disputes"], scenes_cn: ["国际贸易", "大额争议"]
+            },
+            {
+                id: "Litigation", en: "Litigation", cn: "诉讼", group: "Dispute", val: 30,
+                desc_en: "Resolving disputes through court proceedings.",
+                desc_cn: "通过法院解决争议的方式。一方起诉另一方，法官审理后作出判决。",
+                notes_en: "Public, can appeal, but enforcement across borders is difficult.",
+                notes_cn: "诉讼通常是公开的，时间较长，费用较高，但判决有国家强制力保障执行。跨境执行困难。",
+                example: "你觉得对方违约了，去法院起诉他，这就是诉讼。",
+                scenes_en: ["Domestic disputes", "Appeal needed"], scenes_cn: ["国内纠纷", "需要上诉"]
+            },
+            {
+                id: "Jurisdiction", en: "Jurisdiction", cn: "管辖权", group: "Dispute", val: 28,
+                desc_en: "The authority of a court or arbitration body to hear a case.",
+                desc_cn: "指哪个法院或仲裁机构有权审理某个争议。跨境合同中，<span class='keyword'>管辖权选择</span>非常重要。",
+                notes_en: "Where you litigate can determine if you win or lose.",
+                notes_cn: "在哪里打官司可能决定你赢还是输。",
+                example: "合同写'争议由北京市朝阳区人民法院管辖'。",
+                scenes_en: ["Cross-border", "Contract drafting"], scenes_cn: ["跨境合同", "合同起草"]
+            },
+            {
+                id: "GoverningLaw", en: "Governing Law", cn: "适用法律", group: "Dispute", val: 28,
+                desc_en: "The legal system used to interpret and enforce a contract.",
+                desc_cn: "用来解释和执行合同的法律体系。跨境合同可以选择任何国家的法律。",
+                notes_en: "Governing law and jurisdiction can be separated.",
+                notes_cn: "<span class='keyword'>适用法律和管辖权可以分离</span>——可以选择A国法律+B国法院。",
+                example: "合同写'本协议适用英国法'，意思是按英国法解释，即使双方都是中国公司。",
+                scenes_en: ["Cross-border contracts"], scenes_cn: ["跨境合同"]
+            },
+            {
+                id: "NewYorkConvention", en: "New York Convention", cn: "纽约公约", group: "Dispute", val: 30,
+                desc_en: "1958 UN convention enabling enforcement of arbitration awards across 160+ countries.",
+                desc_cn: "1958年联合国公约，使仲裁裁决可以在160多个成员国之间相互执行。",
+                notes_en: "Main reason to choose arbitration over litigation for international contracts.",
+                notes_cn: "<span class='keyword'>选择仲裁而非诉讼的主要原因</span>——法院判决跨境执行极难。",
+                example: "在新加坡的仲裁裁决，可以依据纽约公约在中国法院申请执行。",
+                scenes_en: ["International arbitration"], scenes_cn: ["国际仲裁"]
+            },
+            // === 对价与合同成立 ===
+            {
+                id: "Consideration", en: "Consideration", cn: "对价/约因", group: "CrossBorder", val: 30,
+                desc_en: "Something of value exchanged between parties - required in Common Law countries.",
+                desc_cn: "英美法系合同成立的必要条件——合同必须有交换。<span class='keyword'>中国和日本不需要对价</span>。",
+                notes_en: "No consideration = no binding contract in US/UK/Australia.",
+                notes_cn: "没有对价的承诺在美国可能无效，但在中国和日本单方承诺也可能有约束力。",
+                example: "我付你10万，你帮我做项目——双方都有付出，这就是对价。",
+                scenes_en: ["Contract formation"], scenes_cn: ["合同成立"]
+            },
+            {
+                id: "SpecificPerformance", en: "Specific Performance", cn: "特定履行", group: "CrossBorder", val: 26,
+                desc_en: "Court order requiring the breaching party to perform their obligations.",
+                desc_cn: "法院命令违约方继续履行合同义务，而不是简单赔钱了事。",
+                notes_en: "Common in China/India, rare in US/Australia (damages preferred).",
+                notes_cn: "在<span class='keyword'>中国和印度</span>比较常见，在美国和澳洲只在特殊情况下才判。",
+                example: "你买了独一无二的艺术品，卖家反悔，法院可以判卖家必须把画卖给你。",
+                scenes_en: ["Unique goods", "Real estate"], scenes_cn: ["独特商品", "房产"]
+            },
+            // === 法系 ===
+            {
+                id: "CommonLaw", en: "Common Law", cn: "普通法/英美法系", group: "CrossBorder", val: 28,
+                desc_en: "Legal system based on judicial precedent (case law).",
+                desc_cn: "以判例法为主的法律体系，法官的判决本身就是法律来源。",
+                notes_en: "Countries: US, UK, Australia, India, Malaysia, Hong Kong, Singapore.",
+                notes_cn: "主要国家：美国、英国、澳大利亚、印度、马来西亚。特点：强调先例、<span class='keyword'>合同自由度高</span>。",
+                example: "在美国，法官会参考之前相似案件的判决来决定这个案件。",
+                scenes_en: ["US/UK/AU contracts"], scenes_cn: ["美英澳合同"]
+            },
+            {
+                id: "CivilLaw", en: "Civil Law", cn: "大陆法系", group: "CrossBorder", val: 28,
+                desc_en: "Legal system based on codified statutes.",
+                desc_cn: "以成文法典为主的法律体系，法官的任务是适用法典，而非创造法律。",
+                notes_en: "Countries: China, Japan, Germany, France, Korea.",
+                notes_cn: "主要国家：中国、日本、德国、法国、韩国。特点：法典体系完整、<span class='keyword'>法官裁量权相对小</span>。",
+                example: "在中国，法官主要依据《民法典》来判案，而不是引用之前的判决。",
+                scenes_en: ["China/Japan contracts"], scenes_cn: ["中日合同"]
+            },
+            // === 雇佣 ===
+            {
+                id: "AtWill", en: "At-Will Employment", cn: "随意雇佣", group: "Employment", val: 28,
+                desc_en: "US employment rule where employer can fire without reason.",
+                desc_cn: "<span class='keyword'>美国特有</span>——雇主可以无理由解雇员工，员工也可以无理由辞职。",
+                notes_en: "No severance required. Other countries (China, Australia, Japan) have employment protection.",
+                notes_cn: "没有法定的解雇补偿。其他国家都有解雇保护。",
+                example: "在美国，老板可以今天说'你被开除了'，不需要理由，不需要赔偿。",
+                scenes_en: ["US employment"], scenes_cn: ["美国雇佣"]
+            },
+            {
+                id: "N1", en: "N+1 Compensation", cn: "N+1补偿", group: "Employment", val: 26,
+                desc_en: "China's statutory severance formula: N years of service + 1 month salary.",
+                desc_cn: "<span class='keyword'>中国劳动法</span>规定的解雇补偿。N=工作年限（每年一个月工资），+1=额外一个月代通知金。",
+                notes_en: "Employee worked 5 years = 6 months salary as severance.",
+                notes_cn: "员工工作5年，被辞退需支付6个月工资（5+1）。",
+                example: "员工工作3年被无过错辞退，公司需支付4个月工资（3+1）。",
+                scenes_en: ["China employment"], scenes_cn: ["中国雇佣"]
+            },
+            {
+                id: "PunitiveDamages", en: "Punitive Damages", cn: "惩罚性赔偿", group: "CrossBorder", val: 28,
+                desc_en: "Damages exceeding actual loss to punish bad behavior - unique to US.",
+                desc_cn: "<span class='keyword'>美国特有</span>——法院可以判决远超实际损失的赔偿金来惩罚恶意行为。",
+                notes_en: "Why US litigation risk is extremely high.",
+                notes_cn: "这就是为什么在美国被起诉<span class='keyword'>风险极高</span>。",
+                example: "麦当劳咖啡烫伤案：实际医疗费2万美元，最终判决270万美元。",
+                scenes_en: ["US litigation"], scenes_cn: ["美国诉讼"]
+            },
+            // === 格式条款 ===
+            {
+                id: "StandardTerms", en: "Standard Terms", cn: "格式条款", group: "Structure", val: 26,
+                desc_en: "Pre-drafted terms used repeatedly by one party.",
+                desc_cn: "由一方预先拟定、用于多次使用的条款。在<span class='keyword'>中国和澳洲</span>，格式条款受到严格限制。",
+                notes_en: "Unfair standard terms may be void in China/Australia.",
+                notes_cn: "不公平的格式条款可能无效。",
+                example: "网站的用户服务协议、保险公司的保单条款。",
+                scenes_en: ["B2C contracts"], scenes_cn: ["对消费者合同"]
+            },
+            {
+                id: "UnfairTerms", en: "Unfair Contract Terms", cn: "不公平条款", group: "Structure", val: 28,
+                desc_en: "Terms creating significant imbalance - may be void in Australia/China.",
+                desc_cn: "造成双方权利义务严重失衡的条款，可能被认定<span class='keyword'>无效</span>。",
+                notes_en: "Australia 2023: Using unfair terms = up to AUD 50 million fine.",
+                notes_cn: "澳洲2023年后，使用不公平条款可能面临<span class='keyword'>5000万澳元罚款</span>。",
+                example: "'最终解释权归甲方'这个条款在中国无效。",
+                scenes_en: ["Australia/China"], scenes_cn: ["澳洲/中国"]
+            },
+            // === 印章文化 ===
+            {
+                id: "CompanySeal", en: "Company Seal", cn: "公章", group: "CrossBorder", val: 26,
+                desc_en: "Official company stamp with legal effect in China.",
+                desc_cn: "<span class='keyword'>中国特有</span>——公司的官方印章具有法律效力，盖公章比签字更重要。",
+                notes_en: "Signature without seal may be denied by company.",
+                notes_cn: "只有个人签字可能被公司否认。重要合同必须盖公章。",
+                example: "中国公司签合同必须盖公章，只有签字可能被否认。",
+                scenes_en: ["China contracts"], scenes_cn: ["中国合同"]
+            },
+            {
+                id: "Inkan", en: "Inkan/Hanko", cn: "印章(日本)", group: "CrossBorder", val: 24,
+                desc_en: "Personal or company seal used in Japan.",
+                desc_cn: "<span class='keyword'>日本</span>的个人或公司印章，在正式文件上具有法律效力。",
+                notes_en: "Jitsuin (registered seal) has highest legal effect.",
+                notes_cn: "実印（登记印章）效力最高，重要合同需附印鉴证明。",
+                example: "在日本签重要合同，需要用在政府登记的実印。",
+                scenes_en: ["Japan contracts"], scenes_cn: ["日本合同"]
+            },
+            // === 谈判相关 ===
+            {
+                id: "BATNA", en: "BATNA", cn: "最佳替代方案", group: "Psychology", val: 30,
+                desc_en: "Best Alternative To a Negotiated Agreement.",
+                desc_cn: "如果这次谈判破裂，你的最佳替代选择是什么。<span class='keyword'>BATNA越强，谈判力越大</span>。",
+                notes_en: "Always know your BATNA before negotiating.",
+                notes_cn: "谈判前永远要清楚自己的替代方案。",
+                example: "你去应聘，手上还有另一个offer，这个offer就是你的BATNA。",
+                scenes_en: ["All negotiations"], scenes_cn: ["所有谈判"]
+            },
+            {
+                id: "Anchoring", en: "Anchoring", cn: "锚定效应", group: "Psychology", val: 26,
+                desc_en: "First number sets reference point for negotiation.",
+                desc_cn: "心理学效应——第一个被提出的数字会成为后续谈判的参照系。",
+                notes_en: "Who anchors first, controls the range.",
+                notes_cn: "<span class='keyword'>谁先出价，谁就设定了锚点</span>。",
+                example: "卖家开价100万，最终80万成交。如果开价80万，可能60万成交。",
+                scenes_en: ["Price negotiation"], scenes_cn: ["价格谈判"]
+            },
+            {
+                id: "WeaponizedSincerity", en: "Weaponized Sincerity", cn: "武器化真诚", group: "Asher", val: 28,
+                desc_en: "Deliberately exposing small flaws to gain trust.",
+                desc_cn: "主动暴露小缺陷来换取对方降低防备，再拿关键利益。",
+                notes_en: "Asher's signature tactic.",
+                notes_cn: "<span class='keyword'>Asher专属战术</span>——用小弱点换大利益。",
+                example: "说'我们团队不大，但我会亲自跟进'——把弱点变卖点。",
+                scenes_en: ["Sales", "Partnership"], scenes_cn: ["销售", "合作谈判"]
+            },
+            {
+                id: "ColdEmpathy", en: "Cold Empathy", cn: "冷血共情", group: "Asher", val: 28,
+                desc_en: "Understanding emotions without being affected.",
+                desc_cn: "精准理解对方的恐惧与欲望，用同理心的外壳包装利益诉求，但<span class='keyword'>内心不被感染</span>。",
+                notes_en: "Use empathy as a tool, not a feeling.",
+                notes_cn: "同理心是工具，不是反应。",
+                example: "理解客户的焦虑，但把它转化为你解决方案的卖点。",
+                scenes_en: ["Negotiation"], scenes_cn: ["谈判"]
+            },
+            // === 风险管理 ===
+            {
+                id: "DueDiligence", en: "Due Diligence", cn: "尽职调查", group: "Risk", val: 28,
+                desc_en: "Comprehensive investigation before signing.",
+                desc_cn: "签约前对对方进行的全面调查。包括企业信用、诉讼记录、财务状况等。",
+                notes_en: "Never sign without due diligence.",
+                notes_cn: "<span class='keyword'>签约前必做</span>——合同只是纸，执行要靠人。",
+                example: "投资前调查目标公司的财务报表、法律纠纷、市场地位。",
+                scenes_en: ["Investment", "M&A"], scenes_cn: ["投资", "并购"]
+            },
+            {
+                id: "RedFlag", en: "Red Flag", cn: "红旗", group: "Risk", val: 26,
+                desc_en: "Warning signals in a contract.",
+                desc_cn: "合同中需要警惕的危险信号。分三级：🔴必须处理、🟠需要谈判、🟡记录关注。",
+                notes_en: "If something feels wrong, investigate.",
+                notes_cn: "任何让你'觉得不对劲'的条款都值得深挖。",
+                example: "无限责任、单方解约权、可得利益赔偿——都是红旗。",
+                scenes_en: ["Contract review"], scenes_cn: ["合同审阅"]
+            },
+            {
+                id: "StopLoss", en: "Stop-Loss Trigger", cn: "止损触发器", group: "Asher", val: 26,
+                desc_en: "Pre-set automatic response when conditions are met.",
+                desc_cn: "事先设定的'如果X发生，立即执行Y'的自动反应机制。",
+                notes_en: "Asher's decision framework for risk management.",
+                notes_cn: "<span class='keyword'>签约前就定义好退出条件</span>。",
+                example: "如果对方逾期付款超过30天，暂停服务，发催款函。",
+                scenes_en: ["Contract execution"], scenes_cn: ["合同执行"]
+            },
+            {
+                id: "ForceM", en: "Force Majeure", cn: "不可抗力", group: "Structure", val: 26,
+                desc_en: "Unforeseeable events beyond control (earthquakes, wars, pandemics).",
+                desc_cn: "天灾人祸等不可预见、不可避免、不可克服的客观情况。",
+                notes_en: "Whether pandemic counts depends on contract wording.",
+                notes_cn: "疫情是否算不可抗力要看<span class='keyword'>合同约定</span>。",
+                example: "新冠疫情导致工厂停工无法交货，可援引不可抗力免责——前提是合同有这个条款。",
+                scenes_en: ["All contracts"], scenes_cn: ["所有合同"]
+            },
+            {
+                id: "ScopeCreep", en: "Scope Creep", cn: "需求蔓延", group: "Attack", val: 26,
+                desc_en: "Project scope expanding without fee increase.",
+                desc_cn: "项目范围在执行过程中不断扩大，但费用不变。<span class='keyword'>服务提供商的大敌</span>。",
+                notes_en: "Must define scope boundaries and change fees in contract.",
+                notes_cn: "必须在合同中明确范围边界和变更计费条款。",
+                example: "原本说做一个网站，客户不断加功能，最后做成APP，但费用不变。",
+                scenes_en: ["Service contracts"], scenes_cn: ["服务合同"]
+            },
+            {
+                id: "Escrow", en: "Escrow", cn: "第三方托管", group: "Defense", val: 24,
+                desc_en: "Funds held by neutral third party until conditions are met.",
+                desc_cn: "由中立第三方暂时保管资金或资产，在满足特定条件后再释放。",
+                notes_en: "Protects both buyer and seller.",
+                notes_cn: "用于保护买卖双方的交易安全。",
+                example: "买房时，首付款先打到托管账户，等过户完成后再转给卖家。",
+                scenes_en: ["Large transactions"], scenes_cn: ["大额交易"]
+            },
+            {
+                id: "MilestonePayment", en: "Milestone Payment", cn: "里程碑付款", group: "Defense", val: 24,
+                desc_en: "Payment in stages based on project progress.",
+                desc_cn: "按项目进度分阶段付款。完成一个阶段，支付一部分款项。",
+                notes_en: "Safer than full payment at end for service providers.",
+                notes_cn: "对服务提供商来说比完工后一次性付款<span class='keyword'>更安全</span>。",
+                example: "签约付30%，中期验收付40%，终验付30%。",
+                scenes_en: ["Project contracts"], scenes_cn: ["项目合同"]
+            },
+            // === 尽职调查 Due Diligence ===
+            {
+                id: "UBO", en: "Ultimate Beneficial Owner", cn: "实际控制人", group: "DueDiligence", val: 28,
+                desc_en: "The natural person who ultimately owns or controls a company.",
+                desc_cn: "穿透公司股权结构后，最终拥有或控制公司的自然人。",
+                notes_en: "Core target of due diligence - who is REALLY behind the company?",
+                notes_cn: "尽职调查的核心目标——<span class='keyword'>谁才是公司背后真正的人</span>？",
+                example: "某公司由A公司持股，A由B公司持股，B由张三个人持股——张三就是实际控制人。",
+                scenes_en: ["Investment DD", "M&A"], scenes_cn: ["投资尽调", "并购"]
+            },
+            {
+                id: "DishonestDebtor", en: "Dishonest Debtor", cn: "失信被执行人", group: "DueDiligence", val: 28,
+                desc_en: "China's court-designated defaulters who refuse to comply with judgments.",
+                desc_cn: "中国法院认定的拒不履行法律文书的被执行人，俗称<span class='keyword'>老赖</span>。",
+                notes_en: "Immediate RED FLAG - stop all dealings immediately.",
+                notes_cn: "发现失信被执行人，<span class='keyword'>立即终止交易</span>——其承诺就是废纸。",
+                example: "某公司老板欠债1000万拒不还款，被列入失信名单，不能坐飞机高铁。",
+                scenes_en: ["China DD", "Contract signing"], scenes_cn: ["中国尽调", "签约前"]
+            },
+            {
+                id: "CreditReport", en: "Credit Report", cn: "信用报告", group: "DueDiligence", val: 26,
+                desc_en: "Credit history and score issued by credit bureaus.",
+                desc_cn: "由征信机构出具的公司或个人的信用历史和评分报告。",
+                notes_en: "Different countries have different credit bureaus: US (D&B), China (央行), Japan (TDB).",
+                notes_cn: "不同国家有不同征信机构：美国D&B、中国央行征信、日本帝国数据银行。",
+                example: "TDB报告显示目标公司信用评分为C级——需要谨慎。",
+                scenes_en: ["All DD"], scenes_cn: ["所有尽调"]
+            },
+            {
+                id: "EquityPenetration", en: "Equity Penetration", cn: "股权穿透", group: "DueDiligence", val: 26,
+                desc_en: "Process of tracing company ownership to find the UBO.",
+                desc_cn: "追溯公司股东结构，一层层往上找，直到找到最终实际控制人的过程。",
+                notes_en: "Essential for identifying hidden relationships and the real decision maker.",
+                notes_cn: "用于识别隐藏的关联关系和<span class='keyword'>真正的决策者</span>。",
+                example: "穿透后发现目标公司与其供应商竟然是同一个老板——存在利益输送风险。",
+                scenes_en: ["Investment DD", "Supplier DD"], scenes_cn: ["投资尽调", "供应商尽调"]
+            },
+            {
+                id: "PACER", en: "PACER", cn: "美国联邦法院系统", group: "DueDiligence", val: 22,
+                desc_en: "US Federal Court Electronic Records - for checking lawsuits.",
+                desc_cn: "Public Access to Court Electronic Records，美国联邦法院在线案件检索系统。",
+                notes_en: "Low cost way to check US federal litigation history.",
+                notes_cn: "低成本查询美国联邦法院诉讼记录。",
+                example: "在PACER搜索目标公司，发现其有专利侵权诉讼正在进行。",
+                scenes_en: ["US DD"], scenes_cn: ["美国尽调"]
+            },
+            {
+                id: "UCCFiling", en: "UCC Filing", cn: "统一商法典登记", group: "DueDiligence", val: 22,
+                desc_en: "US security interest registry - check if assets are pledged.",
+                desc_cn: "美国担保权益登记系统。债权人登记对借款人资产的担保权益。",
+                notes_en: "If many UCC filings, target company may be heavily leveraged.",
+                notes_cn: "如果UCC登记很多，说明公司<span class='keyword'>资产已被大量抵押</span>。",
+                example: "查UCC发现公司所有设备都已抵押给银行——负债率高。",
+                scenes_en: ["US DD"], scenes_cn: ["美国尽调"]
+            },
+            {
+                id: "PPSR", en: "PPSR", cn: "澳洲担保登记", group: "DueDiligence", val: 22,
+                desc_en: "Australia's Personal Property Securities Register.",
+                desc_cn: "澳洲个人财产担保登记系统，类似美国的UCC。",
+                notes_en: "Check if target company's assets are pledged as security.",
+                notes_cn: "查询目标公司资产是否已被抵押。",
+                example: "在PPSR查询发现目标公司的车辆和设备都已登记担保。",
+                scenes_en: ["Australia DD"], scenes_cn: ["澳洲尽调"]
+            },
+            {
+                id: "ASIC", en: "ASIC", cn: "澳洲证券投资委员会", group: "DueDiligence", val: 22,
+                desc_en: "Australian Securities and Investments Commission.",
+                desc_cn: "澳洲公司注册和监管的主要机构，类似美国的SEC。",
+                notes_en: "Check company status, directors, and if under external administration.",
+                notes_cn: "查询公司状态、董事信息、是否有外部管理人。",
+                example: "ASIC查询发现目标公司已被任命外部管理人——可能面临清盘。",
+                scenes_en: ["Australia DD"], scenes_cn: ["澳洲尽调"]
+            },
+            {
+                id: "TDB", en: "Teikoku Databank", cn: "帝国数据银行", group: "DueDiligence", val: 22,
+                desc_en: "Japan's largest commercial credit investigation company.",
+                desc_cn: "日本最大的商业信用调查公司，提供详细的企业信用报告。",
+                notes_en: "Expensive but comprehensive - the gold standard for Japan DD.",
+                notes_cn: "费用高但信息详尽——<span class='keyword'>日本尽调的金标准</span>。",
+                example: "TDB报告显示目标公司信用评分为B级，经营稳健。",
+                scenes_en: ["Japan DD"], scenes_cn: ["日本尽调"]
+            },
+            // === 股权术语 Equity ===
+            {
+                id: "Equity", en: "Equity", cn: "股权", group: "Equity", val: 30,
+                desc_en: "Ownership stake in a company.",
+                desc_cn: "公司所有权的份额。持有股权=拥有公司的一部分。",
+                notes_en: "Equity holders share in profits and losses.",
+                notes_cn: "股权持有者分享利润和承担亏损。<span class='keyword'>持股比例决定话语权</span>。",
+                example: "我持有公司10%的股权。",
+                scenes_en: ["Investment", "Partnerships"], scenes_cn: ["投资", "合伙"]
+            },
+            {
+                id: "Vesting", en: "Vesting", cn: "归属/成熟", group: "Equity", val: 28,
+                desc_en: "The process of earning equity over time.",
+                desc_cn: "股权逐渐解锁生效的机制。通常4年期，每年归属25%。",
+                notes_en: "Cliff = waiting period before vesting begins.",
+                notes_cn: "<span class='keyword'>1年cliff</span>意味着第一年一股都拿不到。",
+                example: "10万股期权4年vesting，1年cliff。",
+                scenes_en: ["ESOP", "Startup equity"], scenes_cn: ["期权", "创业股权"]
+            },
+            {
+                id: "Dilution", en: "Dilution", cn: "稀释", group: "Equity", val: 26,
+                desc_en: "Reduction in ownership percentage due to new share issuance.",
+                desc_cn: "新发行股份导致现有股东持股比例下降。",
+                notes_en: "Anti-dilution clauses protect investors.",
+                notes_cn: "融资必然稀释，<span class='keyword'>反稀释条款</span>保护投资人。",
+                example: "融资后我的股份从20%稀释到15%。",
+                scenes_en: ["Fundraising"], scenes_cn: ["融资"]
+            },
+            {
+                id: "ROFR", en: "Right of First Refusal", cn: "优先购买权", group: "Equity", val: 24,
+                desc_en: "Right to buy shares before others can.",
+                desc_cn: "当股东想卖股时，其他股东优先购买的权利。",
+                notes_en: "Prevents unwanted shareholders from joining.",
+                notes_cn: "防止不想要的人成为股东。",
+                example: "你想卖股，必须先问我要不要买。",
+                scenes_en: ["Shareholders agreement"], scenes_cn: ["股东协议"]
+            },
+            {
+                id: "TagAlong", en: "Tag-Along Right", cn: "跟售权", group: "Equity", val: 22,
+                desc_en: "Right to sell shares alongside majority shareholder.",
+                desc_cn: "大股东卖股时，小股东有权跟着一起卖。",
+                notes_en: "Protects minority shareholders.",
+                notes_cn: "<span class='keyword'>保护小股东</span>不被留下。",
+                example: "大股东要卖了，我可以跟着一起卖。",
+                scenes_en: ["Shareholders agreement"], scenes_cn: ["股东协议"]
+            },
+            {
+                id: "DragAlong", en: "Drag-Along Right", cn: "拖售权", group: "Equity", val: 22,
+                desc_en: "Right to force minority to sell alongside majority.",
+                desc_cn: "大股东卖股时，可以强制小股东一起卖。",
+                notes_en: "Helps facilitate M&A exits.",
+                notes_cn: "<span class='keyword'>便于整体出售公司</span>。",
+                example: "我卖股，你必须一起卖。",
+                scenes_en: ["M&A", "Exit"], scenes_cn: ["并购", "退出"]
+            },
+            // === 雇佣术语 Employment ===
+            {
+                id: "Severance", en: "Severance", cn: "遣散费", group: "Employment", val: 26,
+                desc_en: "Compensation paid upon termination.",
+                desc_cn: "解雇时支付的补偿。中国法定N+1。",
+                notes_en: "N = years of service, +1 = notice pay.",
+                notes_cn: "<span class='keyword'>N+1</span>是中国劳动法规定的最低标准。",
+                example: "工作3年被辞退，补偿4个月工资。",
+                scenes_en: ["Termination", "Layoff"], scenes_cn: ["解雇", "裁员"]
+            },
+            {
+                id: "NonCompete", en: "Non-Compete Clause", cn: "竞业限制", group: "Employment", val: 26,
+                desc_en: "Restriction on working for competitors after leaving.",
+                desc_cn: "离职后不得从事竞争业务的限制。",
+                notes_en: "California: mostly unenforceable. China: needs compensation.",
+                notes_cn: "<span class='keyword'>加州基本无效</span>，中国需支付补偿才有效。",
+                example: "2年内不能加入竞争对手。",
+                scenes_en: ["Employment contract"], scenes_cn: ["劳动合同"]
+            },
+            {
+                id: "ESOP", en: "Employee Stock Option Plan", cn: "员工期权计划", group: "Employment", val: 26,
+                desc_en: "Plan giving employees rights to purchase company stock.",
+                desc_cn: "授予员工以约定价格购买公司股票的权利。",
+                notes_en: "Usually with 4-year vesting and 1-year cliff.",
+                notes_cn: "期权不是签了就有，需要<span class='keyword'>vesting</span>。",
+                example: "授予10万股期权，行权价$1。",
+                scenes_en: ["Startup compensation"], scenes_cn: ["创业公司薪酬"]
+            },
+            {
+                id: "RSU", en: "Restricted Stock Units", cn: "限制性股票单位", group: "Employment", val: 24,
+                desc_en: "Stock granted after conditions are met.",
+                desc_cn: "满足条件后获得的股票。比期权更简单。",
+                notes_en: "No exercise price - just receive shares.",
+                notes_cn: "不用付钱买，到期直接<span class='keyword'>给股票</span>。",
+                example: "每年vest 25% RSU。",
+                scenes_en: ["Big tech compensation"], scenes_cn: ["大厂薪酬"]
+            },
+            // === 商业交易术语 Business ===
+            {
+                id: "MA", en: "M&A", cn: "并购", group: "Business", val: 28,
+                desc_en: "Mergers and Acquisitions - combining companies.",
+                desc_cn: "公司合并或收购。M=Merger合并，A=Acquisition收购。",
+                notes_en: "Major corporate transaction requiring extensive DD.",
+                notes_cn: "重大交易，需要<span class='keyword'>全面尽职调查</span>。",
+                example: "大公司M&A了这家创业公司。",
+                scenes_en: ["Corporate deals"], scenes_cn: ["企业交易"]
+            },
+            {
+                id: "VC", en: "Venture Capital", cn: "风险投资", group: "Business", val: 26,
+                desc_en: "Investment in high-growth potential startups.",
+                desc_cn: "投资于高增长潜力的初创公司。",
+                notes_en: "VC typically takes preferred stock with special rights.",
+                notes_cn: "VC通常拿<span class='keyword'>优先股</span>+各种保护条款。",
+                example: "获得A轮VC投资5000万。",
+                scenes_en: ["Fundraising"], scenes_cn: ["融资"]
+            },
+            {
+                id: "ValuationNode", en: "Valuation", cn: "估值", group: "Business", val: 26,
+                desc_en: "Estimated worth of a company.",
+                desc_cn: "公司的价值评估。Pre-money投前估值，Post-money投后估值。",
+                notes_en: "Post-money = Pre-money + Investment amount.",
+                notes_cn: "<span class='keyword'>投后估值 = 投前估值 + 投资额</span>。",
+                example: "投前估值1亿，投资2000万，投后估值1.2亿。",
+                scenes_en: ["Fundraising", "M&A"], scenes_cn: ["融资", "并购"]
+            },
+            {
+                id: "TermSheet", en: "Term Sheet", cn: "条款清单", group: "Business", val: 24,
+                desc_en: "Document outlining key terms before formal agreement.",
+                desc_cn: "列出主要交易条款的文件，通常无约束力。",
+                notes_en: "Non-binding but sets framework for negotiation.",
+                notes_cn: "签了term sheet不代表成交，还要签<span class='keyword'>definitive agreement</span>。",
+                example: "收到投资人的term sheet。",
+                scenes_en: ["Fundraising", "M&A"], scenes_cn: ["融资", "并购"]
+            },
+            {
+                id: "EarnOut", en: "Earn-out", cn: "对赌/业绩补偿", group: "Business", val: 24,
+                desc_en: "Additional payment based on future performance.",
+                desc_cn: "根据未来业绩确定部分价格。达标多给，不达标少给或回购。",
+                notes_en: "Bridges valuation gap between buyer and seller.",
+                notes_cn: "<span class='keyword'>对赌条款</span>是并购中常见的风险分担机制。",
+                example: "30%的收购价取决于未来3年业绩。",
+                scenes_en: ["M&A"], scenes_cn: ["并购"]
+            },
+            {
+                id: "NDA", en: "NDA", cn: "保密协议", group: "Basics", val: 24,
+                desc_en: "Non-Disclosure Agreement - protects confidential information.",
+                desc_cn: "不得泄露机密信息的协议。商业谈判的标准前置步骤。",
+                notes_en: "Sign before sharing any sensitive info.",
+                notes_cn: "谈任何机密事项前<span class='keyword'>先签NDA</span>。",
+                example: "请先签NDA，我再给你详细资料。",
+                scenes_en: ["Business negotiations"], scenes_cn: ["商业谈判"]
+            }
+        ];
+
+        const links = [
+            // === Contract 合同 核心连接 ===
+            { source: "Contract", target: "Party", label: "involves 涉及" },
+            { source: "Contract", target: "Breach", label: "may have 可能发生" },
+            { source: "Contract", target: "GoverningLaw", label: "specifies 规定" },
+            { source: "Contract", target: "Jurisdiction", label: "specifies 规定" },
+            { source: "Contract", target: "StandardTerms", label: "contains 包含" },
+            { source: "Contract", target: "ForceM", label: "includes 包括" },
+            { source: "Contract", target: "CompanySeal", label: "validated by (China)" },
+            { source: "Contract", target: "Inkan", label: "validated by (Japan)" },
+            { source: "Contract", target: "Consideration", label: "requires (Common Law)" },
+
+            // === Breach 违约 连接 ===
+            { source: "Breach", target: "Damages", label: "causes 导致" },
+            { source: "Breach", target: "SpecificPerformance", label: "may require 可能需要" },
+            { source: "Breach", target: "Arbitration", label: "resolved by 解决于" },
+            { source: "Breach", target: "Litigation", label: "resolved by 解决于" },
+            { source: "ForceM", target: "Breach", label: "may excuse 可免除" },
+
+            // === 争议解决 Dispute Resolution ===
+            { source: "Arbitration", target: "NewYorkConvention", label: "enabled by 依据" },
+            { source: "Arbitration", target: "Jurisdiction", label: "determines 决定" },
+            { source: "Arbitration", target: "Damages", label: "awards 裁决" },
+            { source: "Litigation", target: "Jurisdiction", label: "requires 需要" },
+            { source: "Litigation", target: "Damages", label: "awards 判决" },
+            { source: "Litigation", target: "PunitiveDamages", label: "may award (US)" },
+            { source: "GoverningLaw", target: "Jurisdiction", label: "separate from 区别于" },
+            { source: "GoverningLaw", target: "CommonLaw", label: "may be 可以是" },
+            { source: "GoverningLaw", target: "CivilLaw", label: "may be 可以是" },
+
+            // === 法系 Legal Systems ===
+            { source: "CommonLaw", target: "Consideration", label: "requires 要求" },
+            { source: "CommonLaw", target: "Damages", label: "prefers 偏好" },
+            { source: "CommonLaw", target: "AtWill", label: "includes (US)" },
+            { source: "CommonLaw", target: "PunitiveDamages", label: "allows (US)" },
+            { source: "CivilLaw", target: "SpecificPerformance", label: "prefers 偏好" },
+            { source: "CivilLaw", target: "N1", label: "includes (China)" },
+            { source: "CivilLaw", target: "CompanySeal", label: "requires (China)" },
+            { source: "CivilLaw", target: "Inkan", label: "uses (Japan)" },
+            { source: "CivilLaw", target: "UnfairTerms", label: "restricts 限制" },
+
+            // === 雇佣 Employment ===
+            { source: "AtWill", target: "Contract", label: "type of 属于" },
+            { source: "N1", target: "Contract", label: "type of 属于" },
+            { source: "AtWill", target: "Party", label: "affects 影响" },
+            { source: "N1", target: "Party", label: "protects 保护" },
+
+            // === 格式条款 Standard Terms ===
+            { source: "StandardTerms", target: "UnfairTerms", label: "may contain 可能包含" },
+            { source: "UnfairTerms", target: "Contract", label: "may void 可能无效" },
+            { source: "UnfairTerms", target: "RedFlag", label: "is a 是一种" },
+            { source: "StandardTerms", target: "ScopeCreep", label: "may hide 可能隐藏" },
+
+            // === 印章 Seals ===
+            { source: "CompanySeal", target: "CivilLaw", label: "required by 要求于" },
+            { source: "Inkan", target: "CivilLaw", label: "used in 使用于" },
+            { source: "CompanySeal", target: "Party", label: "represents 代表" },
+            { source: "Inkan", target: "Party", label: "represents 代表" },
+
+            // === 谈判 Negotiation ===
+            { source: "BATNA", target: "Contract", label: "before signing 签约前" },
+            { source: "BATNA", target: "Anchoring", label: "strengthens 加强" },
+            { source: "BATNA", target: "Party", label: "empowers 赋能" },
+            { source: "Anchoring", target: "Damages", label: "affects 影响" },
+            { source: "Anchoring", target: "Contract", label: "used in 用于" },
+            { source: "WeaponizedSincerity", target: "ColdEmpathy", label: "uses 使用" },
+            { source: "WeaponizedSincerity", target: "BATNA", label: "reveals fake 假装暴露" },
+            { source: "ColdEmpathy", target: "Party", label: "reads 解读" },
+            { source: "ColdEmpathy", target: "RedFlag", label: "detects 检测" },
+
+            // === 风险管理 Risk Management ===
+            { source: "DueDiligence", target: "Contract", label: "before 在之前" },
+            { source: "DueDiligence", target: "RedFlag", label: "identifies 识别" },
+            { source: "DueDiligence", target: "Party", label: "investigates 调查" },
+            { source: "DueDiligence", target: "UBO", label: "finds 发现" },
+            { source: "DueDiligence", target: "CreditReport", label: "uses 使用" },
+            { source: "DueDiligence", target: "EquityPenetration", label: "performs 执行" },
+            { source: "RedFlag", target: "StopLoss", label: "triggers 触发" },
+            { source: "RedFlag", target: "UnfairTerms", label: "includes 包括" },
+            { source: "RedFlag", target: "DishonestDebtor", label: "includes 包括" },
+            { source: "StopLoss", target: "Breach", label: "responds to 应对" },
+            { source: "StopLoss", target: "Contract", label: "built into 内置于" },
+
+            // === 防御机制 Defense ===
+            { source: "ScopeCreep", target: "MilestonePayment", label: "prevented by 防止于" },
+            { source: "ScopeCreep", target: "Contract", label: "hidden in 隐藏于" },
+            { source: "ScopeCreep", target: "RedFlag", label: "is a 是一种" },
+            { source: "Escrow", target: "MilestonePayment", label: "complements 配合" },
+            { source: "Escrow", target: "Breach", label: "protects from 保护于" },
+            { source: "Escrow", target: "Party", label: "protects 保护" },
+            { source: "MilestonePayment", target: "Contract", label: "built into 内置于" },
+            { source: "MilestonePayment", target: "Breach", label: "limits risk 限制风险" },
+
+            // === 纽约公约连接 ===
+            { source: "NewYorkConvention", target: "Damages", label: "enforces 执行" },
+            { source: "NewYorkConvention", target: "GoverningLaw", label: "transcends 超越" },
+
+            // === 对价与合同成立 ===
+            { source: "Consideration", target: "Contract", label: "forms 构成" },
+            { source: "Consideration", target: "Party", label: "exchanged by 交换于" },
+
+            // === 特定履行连接 ===
+            { source: "SpecificPerformance", target: "Damages", label: "alternative to 替代" },
+            { source: "SpecificPerformance", target: "CivilLaw", label: "preferred in 偏好于" },
+
+            // === 惩罚性赔偿连接 ===
+            { source: "PunitiveDamages", target: "Damages", label: "type of 属于" },
+            { source: "PunitiveDamages", target: "Litigation", label: "awarded in 判于" },
+            { source: "PunitiveDamages", target: "RedFlag", label: "risk of 风险" },
+
+            // === 不可抗力连接 ===
+            { source: "ForceM", target: "Contract", label: "clause in 条款于" },
+            { source: "ForceM", target: "StopLoss", label: "may trigger 可能触发" },
+
+            // === 尽职调查 Due Diligence ===
+            { source: "UBO", target: "Party", label: "behind 背后" },
+            { source: "UBO", target: "EquityPenetration", label: "found by 发现于" },
+            { source: "DishonestDebtor", target: "Party", label: "type of 属于" },
+            { source: "DishonestDebtor", target: "CivilLaw", label: "China only 中国特有" },
+            { source: "CreditReport", target: "Party", label: "about 关于" },
+            { source: "CreditReport", target: "DishonestDebtor", label: "reveals 揭示" },
+            { source: "EquityPenetration", target: "Party", label: "analyzes 分析" },
+            { source: "PACER", target: "DueDiligence", label: "tool for 工具" },
+            { source: "PACER", target: "CommonLaw", label: "US only 美国" },
+            { source: "UCCFiling", target: "DueDiligence", label: "tool for 工具" },
+            { source: "UCCFiling", target: "CommonLaw", label: "US only 美国" },
+            { source: "PPSR", target: "DueDiligence", label: "tool for 工具" },
+            { source: "ASIC", target: "DueDiligence", label: "tool for 工具" },
+            { source: "TDB", target: "DueDiligence", label: "tool for 工具" },
+            { source: "TDB", target: "CivilLaw", label: "Japan 日本" },
+
+            // === 股权术语连接 Equity ===
+            { source: "Equity", target: "Party", label: "owned by 属于" },
+            { source: "Equity", target: "Contract", label: "transferred by 通过合同转让" },
+            { source: "Vesting", target: "Equity", label: "unlocks 解锁" },
+            { source: "Vesting", target: "ESOP", label: "applies to 适用于" },
+            { source: "Dilution", target: "Equity", label: "reduces 减少" },
+            { source: "Dilution", target: "VC", label: "caused by 由...引起" },
+            { source: "ROFR", target: "Equity", label: "protects 保护" },
+            { source: "TagAlong", target: "Equity", label: "protects minority 保护小股东" },
+            { source: "DragAlong", target: "Equity", label: "enables exit 促成退出" },
+            { source: "DragAlong", target: "MA", label: "used in 用于" },
+
+            // === 雇佣术语连接 Employment ===
+            { source: "Severance", target: "N1", label: "calculated by 计算公式" },
+            { source: "Severance", target: "Party", label: "paid to 支付给" },
+            { source: "NonCompete", target: "Contract", label: "clause in 条款于" },
+            { source: "NonCompete", target: "CommonLaw", label: "varies by 因国而异" },
+            { source: "ESOP", target: "Equity", label: "grants 授予" },
+            { source: "ESOP", target: "Party", label: "for 给予" },
+            { source: "RSU", target: "Equity", label: "grants 授予" },
+            { source: "RSU", target: "Vesting", label: "requires 需要" },
+
+            // === 商业交易连接 Business ===
+            { source: "MA", target: "DueDiligence", label: "requires 需要" },
+            { source: "MA", target: "Contract", label: "documented by 通过合同" },
+            { source: "MA", target: "EarnOut", label: "may include 可能包括" },
+            { source: "VC", target: "Equity", label: "invests in 投资于" },
+            { source: "VC", target: "Dilution", label: "causes 导致" },
+            { source: "VC", target: "TermSheet", label: "starts with 从...开始" },
+            { source: "ValuationNode", target: "MA", label: "determines 决定" },
+            { source: "ValuationNode", target: "VC", label: "negotiated in 谈判于" },
+            { source: "TermSheet", target: "Contract", label: "leads to 导向" },
+            { source: "TermSheet", target: "DueDiligence", label: "triggers 触发" },
+            { source: "EarnOut", target: "MA", label: "used in 用于" },
+            { source: "NDA", target: "Contract", label: "type of 属于" },
+            { source: "NDA", target: "DueDiligence", label: "signed before 在...之前签" }
+        ];
+
+        // === ENGINE ===
+        const settings = { linkDistance: 120, chargeStrength: -300, labelSize: 1.0, opacity: 0.8, autoRotate: true };
+        const elem = document.getElementById('3d-graph');
+        const Graph = ForceGraph3D()(elem)
+            .graphData({ nodes, links })
+            .backgroundColor('#000005')
+            .showNavInfo(false)
+            .nodeThreeObject(node => {
+                const cat = getCategory(node.group);
+                const text = `${node.en}\n${node.cn}`;
+                const sprite = new SpriteText(text);
+                sprite.color = cat.color;
+                sprite.textHeight = (node.val / 2.5) * settings.labelSize;
+                sprite.fontFace = 'Arial';
+                sprite.fontWeight = 'bold';
+                sprite.backgroundColor = `rgba(0,0,0,${settings.opacity / 2})`;
+                sprite.padding = 4;
+                sprite.userData = { baseSize: node.val / 2.5 };
+                return sprite;
+            })
+            .linkWidth(2.5)
+            .linkColor(link => {
+                const sourceNode = nodes.find(n => n.id === link.source || n.id === link.source.id);
+                if (sourceNode) return getCategory(sourceNode.group).color + '88';
+                return '#445566';
+            })
+            .linkOpacity(0.7)
+            .linkCurvature(0.12)
+            .linkDirectionalArrowLength(5)
+            .linkDirectionalArrowRelPos(0.9)
+            .linkDirectionalParticles(3)
+            .linkDirectionalParticleSpeed(0.005)
+            .linkDirectionalParticleWidth(2)
+            .onNodeClick(node => {
+                const currentPos = Graph.cameraPosition();
+                const currentDistance = Math.hypot(currentPos.x, currentPos.y, currentPos.z);
+                const nodeDistance = Math.hypot(node.x, node.y, node.z) || 1;
+                const newX = (node.x / nodeDistance) * currentDistance;
+                const newY = (node.y / nodeDistance) * currentDistance;
+                const newZ = (node.z / nodeDistance) * currentDistance;
+                Graph.cameraPosition({ x: newX, y: newY, z: newZ }, node, 1500);
+                showHUD(node);
+            });
+
+        Graph.d3Force('link').distance(settings.linkDistance);
+        Graph.d3Force('charge').strength(settings.chargeStrength);
+
+        // === CONTROLS ===
+        const gui = new dat.GUI();
+        const folder = gui.addFolder('Graph Settings');
+        folder.add(settings, 'linkDistance', 50, 300).onChange(val => { Graph.d3Force('link').distance(val); Graph.d3ReheatSimulation(); });
+        folder.add(settings, 'chargeStrength', -600, -50).onChange(val => { Graph.d3Force('charge').strength(val); Graph.d3ReheatSimulation(); });
+        folder.add(settings, 'labelSize', 0.3, 2.0).onChange(val => { Graph.scene().traverse(obj => { if (obj.userData?.baseSize) obj.textHeight = obj.userData.baseSize * val; }); });
+        folder.add(settings, 'autoRotate').onChange(val => { Graph.controls().autoRotate = val; });
+        folder.open();
+
+        // === HUD ===
+        function showHUD(node) {
+            const el = (id) => document.getElementById(id);
+            const cat = getCategory(node.group);
+            el('hud').style.display = 'block';
+            el('hud-title').innerText = node.en;
+            el('hud-title').style.color = cat.color;
+            el('hud-cn').innerText = `${node.cn} [${node.group}]`;
+            el('hud-desc').innerHTML = `<div class="en">${node.desc_en}</div><div class="cn">${node.desc_cn}</div>`;
+            el('hud-notes').innerHTML = `<div class="en">${node.notes_en}</div><div class="cn">${node.notes_cn}</div>`;
+
+            // Example
+            if (node.example) {
+                el('hud-example-section').style.display = 'block';
+                el('hud-example').innerText = node.example;
+            } else {
+                el('hud-example-section').style.display = 'none';
+            }
+
+            const sceneContainer = el('hud-scenes');
+            sceneContainer.innerHTML = '';
+            if (node.scenes_en) {
+                for (let i = 0; i < node.scenes_en.length; i++) {
+                    const tag = document.createElement('span');
+                    tag.className = 'scene-tag';
+                    tag.innerHTML = `${node.scenes_en[i]} <span style="color:#88aacc">${node.scenes_cn[i]}</span>`;
+                    sceneContainer.appendChild(tag);
+                }
+            }
+        }
+
+        function hideHUD() {
+            document.getElementById('hud').style.display = 'none';
+        }
+
+        buildLegend();
+        setTimeout(() => { document.getElementById('loading').style.display = 'none'; }, 1000);
+        Graph.controls().autoRotate = true;
+    </script>
+</body>
+
+</html>

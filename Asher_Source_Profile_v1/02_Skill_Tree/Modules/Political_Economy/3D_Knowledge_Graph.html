@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>3D Knowledge Graph - Political Economy</title>
+    <!-- 
+        ASHER KNOWLEDGE GRAPH STANDARD v2.1
+        Module: Political Economy (货币哲学 + 资本主义变态史)
+    -->
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #000005;
+            overflow: hidden;
+        }
+
+        /* HUD: Top-Left */
+        #hud {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 400px;
+            background: rgba(10, 15, 25, 0.95);
+            border: 1px solid #334466;
+            border-left: 3px solid #00ffff;
+            border-radius: 4px;
+            padding: 25px;
+            color: #eef;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            display: none;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        #hud h2 {
+            margin: 0 0 5px 0;
+            font-size: 24px;
+            padding-right: 30px;
+        }
+
+        #hud .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.2s;
+            font-size: 20px;
+            color: #889;
+            text-align: center;
+            line-height: 24px;
+        }
+
+        #hud .close-btn:hover {
+            opacity: 1;
+            color: #ff5555;
+        }
+
+        #hud .sub-header {
+            font-size: 14px;
+            color: #8899aa;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #334455;
+            padding-bottom: 10px;
+        }
+
+        #hud .section-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #556677;
+            letter-spacing: 2px;
+            margin-top: 15px;
+            margin-bottom: 8px;
+        }
+
+        #hud .content-block {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #ccd;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        #hud .en {
+            color: #fff;
+        }
+
+        #hud .cn {
+            color: #88aacc;
+            font-size: 13px;
+        }
+
+        #hud .keyword {
+            color: #00ffff;
+            font-weight: bold;
+        }
+
+        #hud .scene-tag {
+            display: inline-block;
+            font-size: 12px;
+            background: #223344;
+            color: #aab;
+            padding: 4px 8px;
+            border-radius: 12px;
+            margin: 3px 5px 3px 0;
+            border: 1px solid #334455;
+        }
+
+        /* Legend: Bottom-Left (Collapsible) */
+        #legend {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(10, 15, 25, 0.9);
+            border: 1px solid #334466;
+            border-radius: 4px;
+            padding: 15px 20px;
+            color: #ccd;
+            backdrop-filter: blur(10px);
+            min-width: 180px;
+        }
+
+        #legend h3 {
+            margin: 0;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #778;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        #legend h3::after {
+            content: '▼';
+            font-size: 10px;
+            transition: transform 0.3s;
+        }
+
+        #legend.collapsed h3::after {
+            transform: rotate(-90deg);
+        }
+
+        #legend .legend-items {
+            max-height: 200px;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        #legend.collapsed .legend-items {
+            max-height: 0;
+        }
+
+        #legend .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 6px 0;
+            font-size: 13px;
+        }
+
+        #legend .legend-color {
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+            margin-right: 10px;
+        }
+
+        #legend .legend-label {
+            color: #aab;
+        }
+
+        #legend .legend-count {
+            margin-left: auto;
+            color: #667;
+            font-size: 11px;
+        }
+
+        #legend .legend-total {
+            font-size: 11px;
+            color: #667;
+            margin-left: 10px;
+        }
+
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #00ffff;
+            font-family: monospace;
+            letter-spacing: 2px;
+        }
+    </style>
+    <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/3d-force-graph"></script>
+    <script src="https://unpkg.com/three-spritetext@1.8.1/dist/three-spritetext.min.js"></script>
+    <script src="https://unpkg.com/dat.gui"></script>
+</head>
+
+<body>
+    <div id="loading">INITIALIZING...</div>
+    <div id="3d-graph"></div>
+
+    <!-- HUD with Close Button -->
+    <div id="hud">
+        <span class="close-btn" onclick="hideHUD()">×</span>
+        <h2 id="hud-title">Title</h2>
+        <div id="hud-cn" class="sub-header">Subtitle</div>
+        <div class="section-title">Definition 定义</div>
+        <div id="hud-desc" class="content-block"></div>
+        <div class="section-title">Deep Dive 深度解析</div>
+        <div id="hud-notes" class="content-block" style="border-left: 2px solid #00ffff;"></div>
+        <div class="section-title">Scenarios 应用场景</div>
+        <div id="hud-scenes"></div>
+    </div>
+
+    <!-- Legend (Collapsible) -->
+    <div id="legend">
+        <h3 onclick="toggleLegend()">Domain 领域 <span id="legend-total"></span></h3>
+        <div id="legend-items" class="legend-items"></div>
+    </div>
+
+    <script>
+        // === CATEGORY CONFIGURATION ===
+        const CATEGORY_CONFIG = {
+            "Core": { color: "#00ffff", label_en: "Core Concepts", label_cn: "核心概念" },
+            "Marx": { color: "#ff0055", label_en: "Marxist Theory", label_cn: "马克思理论" },
+            "Schumpeter": { color: "#ff8800", label_en: "Schumpeter", label_cn: "熊彼特" },
+            "Crisis": { color: "#aa00ff", label_en: "Economic Crisis", label_cn: "经济危机" },
+            "Finance": { color: "#00ff00", label_en: "Financial Capital", label_cn: "金融资本" },
+            "Philosophy": { color: "#ffff00", label_en: "Philosophy", label_cn: "哲学视角" },
+            "Cycle": { color: "#0088ff", label_en: "Cycle Theory", label_cn: "周期理论" }
+        };
+
+        const COLOR_PALETTE = [
+            "#00ffff", "#00ff00", "#ff0055", "#ff8800", "#aa00ff",
+            "#ffff00", "#00ffaa", "#ff00aa", "#88ff00", "#0088ff"
+        ];
+        let colorIndex = 0;
+
+        function getCategory(groupName, labelCn = groupName) {
+            if (!CATEGORY_CONFIG[groupName]) {
+                CATEGORY_CONFIG[groupName] = {
+                    color: COLOR_PALETTE[colorIndex % COLOR_PALETTE.length],
+                    label_en: groupName,
+                    label_cn: labelCn
+                };
+                colorIndex++;
+            }
+            return CATEGORY_CONFIG[groupName];
+        }
+
+        function toggleLegend() {
+            document.getElementById('legend').classList.toggle('collapsed');
+        }
+
+        function buildLegend() {
+            const container = document.getElementById('legend-items');
+            container.innerHTML = '';
+            const counts = {};
+            let total = 0;
+            nodes.forEach(n => { counts[n.group] = (counts[n.group] || 0) + 1; total++; });
+            document.getElementById('legend-total').innerText = `(${Object.keys(counts).length} 域 / ${total} 点)`;
+            for (const [group, count] of Object.entries(counts)) {
+                const cat = getCategory(group);
+                const item = document.createElement('div');
+                item.className = 'legend-item';
+                item.innerHTML = `
+                    <div class="legend-color" style="background:${cat.color}"></div>
+                    <span class="legend-label">${cat.label_en} ${cat.label_cn}</span>
+                    <span class="legend-count">${count}</span>
+                `;
+                container.appendChild(item);
+            }
+        }
+
+        // --- DATA INJECTION POINT ---
+        const nodes = [
+            // Core Concepts
+            {
+                id: "Antinomy", en: "Antinomy", cn: "二律背反", group: "Marx", val: 35,
+                desc_en: "Fundamental contradiction of capitalism: capitalists want low wages but need consumers with purchasing power.",
+                desc_cn: "资本主义的根本矛盾：资本家希望压低工资，但又需要消费者有购买力。",
+                notes_en: "Marx's key insight: <span class='keyword'>In equal rights, force decides</span>. The conflict between labor and capital is built into the system.",
+                notes_cn: "马克思的核心洞察：<span class='keyword'>在平等的权利之间，力量就起了决定的作用</span>。劳资冲突是系统内置的。",
+                scenes_en: ["Wage negotiation", "Economic policy", "Union bargaining"],
+                scenes_cn: ["工资谈判", "经济政策", "工会博弈"]
+            },
+            {
+                id: "HighPayFromLow", en: "High Pay from Low", cn: "高薪来自低筹", group: "Marx", val: 30,
+                desc_en: "One person's high salary always comes from another person's low wages.",
+                desc_cn: "一个人的高薪总是来自于另一个人的低筹。",
+                notes_en: "Tech companies pay high salaries because <span class='keyword'>Foxconn workers</span> provide cheap labor to produce the hardware ecosystem.",
+                notes_cn: "腾讯、苹果、LV能赚超额利润，是因为<span class='keyword'>富士康用低工资养活</span>大量需要消费的工人。",
+                scenes_en: ["Tech industry salary", "Global supply chain", "Luxury brands"],
+                scenes_cn: ["科技行业薪资", "全球供应链", "奢侈品牌"]
+            },
+            {
+                id: "SupremeIdeal", en: "Supreme Ideal", cn: "最高理想", group: "Marx", val: 28,
+                desc_en: "Reduce wage-earners, increase asset-holders. In plain words: use more machines, hire fewer people.",
+                desc_cn: "尽可能减少靠工资生活的人数，尽可能增加靠纯产品生活的人数。说人话：多用机器少雇人。",
+                notes_en: "Short-term profit but <span class='keyword'>long-term crisis</span>. When everyone follows this ideal, depression arrives.",
+                notes_cn: "短期提高利润率，但<span class='keyword'>长期导致经济危机</span>。所有人都这样干时，萧条就来了。",
+                scenes_en: ["Automation decisions", "Layoffs", "Industry 4.0"],
+                scenes_cn: ["自动化决策", "裁员", "工业4.0"]
+            },
+            {
+                id: "CreativeDestruction", en: "Creative Destruction", cn: "创造性破坏", group: "Schumpeter", val: 35,
+                desc_en: "Capitalism's essence: constantly destroying old structures to create new surplus value.",
+                desc_cn: "资本主义的本质：不断从内部破坏旧结构，创造新结构。",
+                notes_en: "Business schools sneakily rebranded it as <span class='keyword'>'Disruptive Innovation'</span> — a critical concept became a selling point.",
+                notes_cn: "商学院偷换成<span class='keyword'>'破坏性创新'</span>——一个批判性概念沦为兜售的方法。",
+                scenes_en: ["Startup strategy", "Industry disruption", "Career planning"],
+                scenes_cn: ["创业策略", "行业颠覆", "职业规划"]
+            },
+            {
+                id: "DestructiveExcellence", en: "Destructive Excellence", cn: "破坏性优秀", group: "Schumpeter", val: 30,
+                desc_en: "The only true definition of excellence: the ability to make others seem mediocre.",
+                desc_cn: "优秀的唯一真正定义：优秀是一种让他人显得平庸的能力。",
+                notes_en: "Value based on <span class='keyword'>negation</span>: iPhone's value = making Nokia worthless. Your value = making competitors irrelevant.",
+                notes_cn: "基于<span class='keyword'>否定关系</span>的价值：iPhone的价值=让诺基亚变得毫无价值。你的价值=让竞争者变得无关紧要。",
+                scenes_en: ["Job competition", "Product launch", "Personal branding"],
+                scenes_cn: ["求职竞争", "产品发布", "个人品牌"]
+            },
+            {
+                id: "Involution", en: "Involution", cn: "内卷", group: "Schumpeter", val: 28,
+                desc_en: "Innovation is not the way out of involution — innovation IS the cause of involution.",
+                desc_cn: "创新不是内卷的出路——创新恰恰是导致内卷的原因。",
+                notes_en: "Others' differences force us into <span class='keyword'>sameness</span>. Like Apple fans say: there are only two phones, iPhone and 'others'.",
+                notes_cn: "他人的差异让我们沦为<span class='keyword'>同一</span>。就像果粉说：世界上只有两款手机，iPhone和'其他'。",
+                scenes_en: ["996 culture", "Rat race", "Education competition"],
+                scenes_cn: ["996文化", "老鼠赛跑", "教育内卷"]
+            },
+            {
+                id: "JargonIdentity", en: "Jargon as Identity", cn: "黑话即身份", group: "Philosophy", val: 28,
+                desc_en: "To be truly unique, you must become a piece of jargon — indescribable, irreplaceable.",
+                desc_cn: "活成独一无二的方式：把自己活成一段黑话——不可描述、无法被同质化。",
+                notes_en: "Your <span class='keyword'>premium salary</span> comes from negative statements: 'We can't explain what's good about him, but things just don't work without him.'",
+                notes_cn: "你的<span class='keyword'>超额薪资</span>来自否定性陈述：'说不清这人哪里好，但有些事没他就是不行。'",
+                scenes_en: ["Salary negotiation", "Executive hiring", "Consulting"],
+                scenes_cn: ["薪资谈判", "高管招聘", "咨询行业"]
+            },
+            {
+                id: "GreatDepression", en: "Great Depression", cn: "大萧条", group: "Crisis", val: 32,
+                desc_en: "1929 crisis: when everyone follows the Supreme Ideal, difference disappears, surplus stops, world constipates.",
+                desc_cn: "1929危机：当所有人都践行最高理想时，差异消失，剩余停止，世界便秘。",
+                notes_en: "Hoover's reflection: Industry failed to pass <span class='keyword'>productivity gains</span> to consumers. Wages +2% while output +50%.",
+                notes_cn: "胡佛的反思：工业没能把<span class='keyword'>生产率提升</span>传递给消费者。工资+2%，产值+50%。",
+                scenes_en: ["Economic history", "Policy analysis", "Crisis prediction"],
+                scenes_cn: ["经济史", "政策分析", "危机预测"]
+            },
+            {
+                id: "Stagflation", en: "Stagflation", cn: "滞胀", group: "Crisis", val: 30,
+                desc_en: "High inflation + high unemployment + low growth. '胀' = too much shit, '滞' = can't shit it out.",
+                desc_cn: "高通胀+高失业+低增长。'胀'是屎太多，'滞'是拉不出去。",
+                notes_en: "70s crisis: capitalism too successful, <span class='keyword'>differences exhausted</span>, innovation involution, profit margins collapse.",
+                notes_cn: "70年代危机：资本主义太成功了，<span class='keyword'>差异被耗尽</span>，创新内卷化，利润空间坍塌。",
+                scenes_en: ["70s economy", "Current inflation", "Policy dilemma"],
+                scenes_cn: ["70年代经济", "当前通胀", "政策两难"]
+            },
+            {
+                id: "Fordism", en: "Fordism", cn: "福特主义", group: "Crisis", val: 26,
+                desc_en: "Post-Depression self-correction: let workers afford their own products to maintain consumption cycle.",
+                desc_cn: "大萧条后的自我修正：让工人买得起自己生产的产品，维持消费循环。",
+                notes_en: "Capitalism's <span class='keyword'>survival instinct</span>: to keep the rich getting richer, we can't let the poor get too poor.",
+                notes_cn: "资本主义的<span class='keyword'>求生本能</span>：为了让富人能够持续变富，我们不能让穷人变得太穷。",
+                scenes_en: ["Wage policy", "Consumer economy", "Middle class"],
+                scenes_cn: ["工资政策", "消费经济", "中产阶级"]
+            },
+            {
+                id: "MiddleClass", en: "Middle Class", cn: "中产阶级", group: "Crisis", val: 28,
+                desc_en: "Post-Depression innovation: 'producing people who produce people' — knowledge workers as new consumption force.",
+                desc_cn: "大萧条后的创新：'人生产人'——知识工作者成为新消费力量。",
+                notes_en: "Foucault: We must produce <span class='keyword'>people who don't yet exist</span>. The gap between poor-middle-rich must remain a mystery to keep us running.",
+                notes_cn: "福柯：我们必须生产<span class='keyword'>尚不存在的人</span>。穷人与中产、中产与富人的差异必须是个谜，才能驱动我们持续运行。",
+                scenes_en: ["Career aspiration", "Lifestyle marketing", "Social mobility"],
+                scenes_cn: ["职业追求", "生活方式营销", "社会流动"]
+            },
+            {
+                id: "Neoliberalism", en: "Neoliberalism", cn: "新自由主义", group: "Finance", val: 30,
+                desc_en: "80s ideology shift: deregulation, union busting, privatization. Capitalism runs wild globally.",
+                desc_cn: "80年代意识形态转向：打监管、踢工会、国有私化。资本主义如发春野马奔向全球。",
+                notes_en: "True innovation: <span class='keyword'>creative destruction of the economic system itself</span>. Died in 2008 when US bailed out banks.",
+                notes_cn: "真正的创新：<span class='keyword'>对经济制度本身的创造性破坏</span>。死于2008年美国政府用8500亿救银行。",
+                scenes_en: ["Globalization", "Financial deregulation", "Labor rights"],
+                scenes_cn: ["全球化", "金融去监管", "劳工权益"]
+            },
+            {
+                id: "Ponzification", en: "Ponzification", cn: "庞氏化", group: "Finance", val: 32,
+                desc_en: "The world operates like a Ponzi scheme — as long as no bank run, the game continues.",
+                desc_cn: "整个世界的运作逻辑和庞氏骗局如出一辙——只要不挤兑，就能继续玩。",
+                notes_en: "Banks vs Ponzi: Banks <span class='keyword'>honestly tell you they're cheating</span>. An admitted liar is paradoxically trustworthy.",
+                notes_cn: "银行vs庞氏骗子：银行<span class='keyword'>坦诚告诉你他在欺骗</span>。承认自己是骗子的骗子，反而值得信赖。",
+                scenes_en: ["Banking system", "Credit expansion", "Financial crisis"],
+                scenes_cn: ["银行系统", "信用扩张", "金融危机"]
+            },
+            {
+                id: "Bitcoin", en: "Bitcoin", cn: "比特币", group: "Finance", val: 30,
+                desc_en: "The world's most honest thing — a naked answer to the riddle of value.",
+                desc_cn: "世界上最真诚的东西——赤裸裸的谜底。",
+                notes_en: "Bitcoin openly declares: <span class='keyword'>stupid consensus is still consensus, hypocrisy is the true source of value</span>. We need this 'mystery' to feel normal.",
+                notes_cn: "比特币开诚布公：<span class='keyword'>傻的共识也是共识，虚伪才是真正的价值之源</span>。我们需要把它理解成谜，才能假装正常生活。",
+                scenes_en: ["Crypto investing", "Value philosophy", "Financial nihilism"],
+                scenes_cn: ["加密投资", "价值哲学", "金融虚无"]
+            },
+            {
+                id: "MoneyAsGod", en: "Money as God", cn: "货币的神圣主体性", group: "Philosophy", val: 28,
+                desc_en: "In crisis, money reveals itself as the true subject. We are just intermediaries for money to realize itself.",
+                desc_cn: "在危机中，货币展现出神圣的主体性。我们这些伪主体只是金钱用来实现自身的中介。",
+                notes_en: "Marx: Yesterday capitalists said only commodities are real. <span class='keyword'>Today they cry: only money is real!</span> Like deer thirsting for water.",
+                notes_cn: "马克思：昨天资本家说货币是幻象、商品才是货币。<span class='keyword'>今天满世界叫嚷：只有货币才是商品！</span>灵魂渴求货币如鹿渴求清水。",
+                scenes_en: ["Economic crisis", "Cash hoarding", "Asset panic"],
+                scenes_cn: ["经济危机", "现金囤积", "资产恐慌"]
+            },
+            {
+                id: "EconomicConstipation", en: "Economic Constipation", cn: "经济便秘", group: "Philosophy", val: 26,
+                desc_en: "When producer = consumer (difference disappears), surplus cannot be excreted. The world constipates.",
+                desc_cn: "当生产者=消费者（差异消失），剩余无法排泄，整个世界便秘。",
+                notes_en: "Profit = <span class='keyword'>surplus from difference</span>. No difference, no profit, no circulation. Crisis = divine revelation.",
+                notes_cn: "利润=<span class='keyword'>差异运动的剩余</span>。没有差异，没有利润，没有流通。危机=神迹显现。",
+                scenes_en: ["Deflation", "Liquidity trap", "Recession"],
+                scenes_cn: ["通缩", "流动性陷阱", "衰退"]
+            },
+            {
+                id: "CycleTheory", en: "Cycle Theory", cn: "周期理论", group: "Cycle", val: 30,
+                desc_en: "Zhou Jintao's prediction: 2025 = 5th Depression, 2030 = new prosperity. Hold cash in depression, buy assets at bottom.",
+                desc_cn: "周金涛预言：2025年第5次萧条，2030年新繁荣期。萧条持现金，底部换资产。",
+                notes_en: "<span class='keyword'>Unless it hinders making money, principles don't matter.</span> This is capitalism's true terror.",
+                notes_cn: "<span class='keyword'>除非妨碍搞钱，否则原理是不重要的。</span>这才是资本主义真正可怕的地方。",
+                scenes_en: ["Investment timing", "Asset allocation", "Market prediction"],
+                scenes_cn: ["投资择时", "资产配置", "市场预测"]
+            },
+            {
+                id: "PonziLifeView", en: "Ponzi Life View", cn: "庞氏人生观", group: "Philosophy", val: 28,
+                desc_en: "Our meaning system works like Ponzi: 'Once I get X, everything will be fine' → get X → crisis → new X.",
+                desc_cn: "我们的意义系统和庞氏骗局如出一辙：'得到X后一切都好'→得到X→便秘→新的X。",
+                notes_en: "Two extremes: <span class='keyword'>lying flat</span> (nothing matters) or <span class='keyword'>manic</span> (everything matters but actually just chasing money).",
+                notes_cn: "两极分化：<span class='keyword'>躺平</span>（什么都没意义）或<span class='keyword'>亢奋</span>（到处是意义，其实唯一目标是搞钱）。",
+                scenes_en: ["Quarter-life crisis", "Career anxiety", "Meaning of life"],
+                scenes_cn: ["四分之一人生危机", "职业焦虑", "人生意义"]
+            }
+        ];
+
+        const links = [
+            // Marx theory chain
+            { source: "Antinomy", target: "HighPayFromLow", label: "explains" },
+            { source: "Antinomy", target: "SupremeIdeal", label: "leads to" },
+            { source: "SupremeIdeal", target: "GreatDepression", label: "causes" },
+            { source: "HighPayFromLow", target: "Fordism", label: "solved by" },
+
+            // Schumpeter chain
+            { source: "CreativeDestruction", target: "DestructiveExcellence", label: "implies" },
+            { source: "CreativeDestruction", target: "Involution", label: "causes" },
+            { source: "DestructiveExcellence", target: "JargonIdentity", label: "requires" },
+            { source: "Involution", target: "Stagflation", label: "leads to" },
+
+            // Crisis evolution
+            { source: "GreatDepression", target: "Fordism", label: "triggers" },
+            { source: "Fordism", target: "MiddleClass", label: "creates" },
+            { source: "MiddleClass", target: "Stagflation", label: "exhausted in" },
+            { source: "Stagflation", target: "Neoliberalism", label: "triggers" },
+
+            // Financial capitalism
+            { source: "Neoliberalism", target: "Ponzification", label: "enables" },
+            { source: "Ponzification", target: "Bitcoin", label: "revealed by" },
+            { source: "Ponzification", target: "EconomicConstipation", label: "leads to" },
+
+            // Philosophy layer
+            { source: "EconomicConstipation", target: "MoneyAsGod", label: "reveals" },
+            { source: "MoneyAsGod", target: "CycleTheory", label: "exploited by" },
+            { source: "CycleTheory", target: "PonziLifeView", label: "reflects" },
+            { source: "JargonIdentity", target: "PonziLifeView", label: "perpetuates" },
+
+            // NEW: Glossary term connections
+            { source: "Mercantilism", target: "LaborTheoryOfValue", label: "challenged by" },
+            { source: "LaborTheoryOfValue", target: "RelativeValueTheory", label: "challenged by" },
+            { source: "RelativeValueTheory", target: "RealAbstraction", label: "leads to" },
+            { source: "RealAbstraction", target: "CommodityFetishism", label: "enables" },
+            { source: "CommodityFetishism", target: "MoneyAsGod", label: "manifests as" },
+            { source: "SurplusValue", target: "HighPayFromLow", label: "explains" },
+            { source: "SurplusValue", target: "Antinomy", label: "source of" },
+            { source: "DialecticOfEnlightenment", target: "MoneyAsGod", label: "critiques" },
+            { source: "HolyShit", target: "MoneyAsGod", label: "metaphor for" },
+            { source: "DiamondWaterParadox", target: "RelativeValueTheory", label: "illustrates" },
+            { source: "BrandPremium", target: "JargonIdentity", label: "economic form of" }
+        ];
+
+        // === NEW GLOSSARY NODES (synced from _Glossary_Index.json) ===
+        nodes.push(
+            {
+                id: "Mercantilism", en: "Mercantilism", cn: "重商主义", group: "Core", val: 22,
+                desc_en: "16-18th century belief that gold/silver IS wealth. Nations should accumulate precious metals.",
+                desc_cn: "16-18世纪的经济思想，认为金银本身就是财富，国家应累积贵金属。",
+                notes_en: "The <span class='keyword'>naive ancestor</span> of modern economics. Confused the symbol with reality.",
+                notes_cn: "现代经济学的<span class='keyword'>朴素祖先</span>。把符号和现实混为一谈。",
+                scenes_en: ["Economic History", "Trade Policy"],
+                scenes_cn: ["经济史", "贸易政策"]
+            },
+            {
+                id: "LaborTheoryOfValue", en: "Labor Theory of Value", cn: "劳动价值论", group: "Marx", val: 26,
+                desc_en: "Commodity value is determined by the labor time required to produce it.",
+                desc_cn: "商品价值由生产它所需的劳动时间决定。亚当斯密和李嘉图的核心观点。",
+                notes_en: "Marx built <span class='keyword'>exploitation theory</span> on top of this. Your unpaid labor = capitalist's profit.",
+                notes_cn: "马克思在此基础上构建了<span class='keyword'>剥削理论</span>。你的无偿劳动=资本家的利润。",
+                scenes_en: ["Wage Theory", "Marxist Economics"],
+                scenes_cn: ["工资理论", "马克思经济学"]
+            },
+            {
+                id: "RelativeValueTheory", en: "Relative Value Theory", cn: "相对价值论", group: "Core", val: 24,
+                desc_en: "Value comes from relations to other commodities, not intrinsic properties.",
+                desc_cn: "商品价值来自于它与其他商品的关系，而非内在属性。塞缪尔·贝利提出。",
+                notes_en: "Like language: 'beautiful' only means <span class='keyword'>not ugly</span>. Value is differential, not substantial.",
+                notes_cn: "像语言：'美'只意味着<span class='keyword'>不丑</span>。价值是差异性的，而非实体性的。",
+                scenes_en: ["Value Philosophy", "Pricing Strategy"],
+                scenes_cn: ["价值哲学", "定价策略"]
+            },
+            {
+                id: "RealAbstraction", en: "Real Abstraction", cn: "真实的抽象", group: "Marx", val: 24,
+                desc_en: "Money: abstract yet organizes real world order. Not any concrete thing, but organizes ALL concrete things.",
+                desc_cn: "货币：虽然抽象却组织了真实世界秩序。它不是任何具体存在，但它组织了一切具体存在。",
+                notes_en: "Marx's genius insight: money is <span class='keyword'>transcendental</span> — beyond but determining reality.",
+                notes_cn: "马克思的天才洞察：货币是<span class='keyword'>超验的</span>——超越但决定着现实。",
+                scenes_en: ["Monetary Theory", "Philosophy"],
+                scenes_cn: ["货币理论", "哲学"]
+            },
+            {
+                id: "CommodityFetishism", en: "Commodity Fetishism", cn: "商品拜物教", group: "Marx", val: 26,
+                desc_en: "Worshipping commodities as having mystical power, while ignoring the social relations behind them.",
+                desc_cn: "把商品当成具有神秘力量的对象来崇拜，而忽略了商品背后的社会关系。",
+                notes_en: "We see iPhone, not <span class='keyword'>Foxconn workers</span>. We see luxury, not exploitation.",
+                notes_cn: "我们看到iPhone，看不到<span class='keyword'>富士康工人</span>。我们看到奢侈品，看不到剥削。",
+                scenes_en: ["Consumer Culture", "Brand Psychology"],
+                scenes_cn: ["消费文化", "品牌心理学"]
+            },
+            {
+                id: "SurplusValue", en: "Surplus Value", cn: "剩余价值", group: "Marx", val: 28,
+                desc_en: "Value created by labor exceeding wages. Source of industrial capital profit.",
+                desc_cn: "劳动者创造的价值超出其工资的部分。产业资本利润的来源。",
+                notes_en: "Work 8 hours, get paid for 4. The other 4 hours = <span class='keyword'>boss's Ferrari</span>.",
+                notes_cn: "工作8小时，只拿4小时工资。另外4小时=<span class='keyword'>老板的法拉利</span>。",
+                scenes_en: ["Labor Economics", "Wage Negotiation"],
+                scenes_cn: ["劳动经济学", "薪资谈判"]
+            },
+            {
+                id: "DialecticOfEnlightenment", en: "Dialectic of Enlightenment", cn: "启蒙辩证法", group: "Philosophy", val: 22,
+                desc_en: "Enlightenment rationality, in opposing myths, became a new myth itself.",
+                desc_cn: "启蒙理性在反对神话之后自身变成了新的神话。霍克海默和阿多诺术语。",
+                notes_en: "We escaped God, but now worship <span class='keyword'>the Market</span>. Same structure, different deity.",
+                notes_cn: "我们逃离了上帝，现在却膜拜<span class='keyword'>市场</span>。结构相同，神不同。",
+                scenes_en: ["Critical Theory", "Modernity Critique"],
+                scenes_cn: ["批判理论", "现代性批判"]
+            },
+            {
+                id: "HolyShit", en: "Holy Shit", cn: "神圣的屎", group: "Philosophy", val: 20,
+                desc_en: "Money is both sacred command (like God) and excess waste (like feces). The contradiction defines our attitude.",
+                desc_cn: "金钱既是神圣的律令（像上帝），又是多余的排泄物（像粪便）。这个矛盾定义了我们对金钱的纠结态度。",
+                notes_en: "We <span class='keyword'>worship and despise</span> money simultaneously. The ultimate ambivalence.",
+                notes_cn: "我们同时<span class='keyword'>崇拜和鄙视</span>金钱。终极的矛盾心理。",
+                scenes_en: ["Psychology of Money", "Cultural Critique"],
+                scenes_cn: ["金钱心理学", "文化批判"]
+            },
+            {
+                id: "DiamondWaterParadox", en: "Diamond-Water Paradox", cn: "钻石与水的悖论", group: "Core", val: 22,
+                desc_en: "Water has high use-value but low exchange-value; diamonds are the opposite. Why?",
+                desc_cn: "水的使用价值极高但交换价值极低，钻石反之。为什么？亚当斯密提出的经济学悖论。",
+                notes_en: "Led to the <span class='keyword'>split</span> between use-value and exchange-value theories.",
+                notes_cn: "导致了使用价值和交换价值理论的<span class='keyword'>分裂</span>。",
+                scenes_en: ["Value Theory", "Pricing Puzzles"],
+                scenes_cn: ["价值论", "定价之谜"]
+            },
+            {
+                id: "BrandPremium", en: "Brand Premium", cn: "品牌溢价", group: "Core", val: 24,
+                desc_en: "Price exceeding functional value. Comes from '...' — the unsayable remainder of meaning.",
+                desc_cn: "商品价格超出其功能价值的部分。来源于'远不止于此'的省略号——那些无法被完全描述的剩余意义。",
+                notes_en: "<span class='keyword'>You pay for what cannot be explained</span>. The mystery is the product.",
+                notes_cn: "<span class='keyword'>你为无法解释的东西买单</span>。谜本身就是商品。",
+                scenes_en: ["Luxury Marketing", "Brand Strategy"],
+                scenes_cn: ["奢侈品营销", "品牌战略"]
+            }
+        );
+
+        // --- CONFIGURATION ---
+        const settings = { linkDistance: 100, chargeStrength: -250, labelSize: 1.0, opacity: 0.8, autoRotate: true };
+
+        // --- ENGINE ---
+        const elem = document.getElementById('3d-graph');
+        const Graph = ForceGraph3D()(elem)
+            .graphData({ nodes, links })
+            .backgroundColor('#000005')
+            .showNavInfo(false)
+            .nodeThreeObject(node => {
+                const cat = getCategory(node.group);
+                const text = `${node.en}\n${node.cn}`;
+                const sprite = new SpriteText(text);
+                sprite.color = cat.color;
+                sprite.textHeight = (node.val / 2) * settings.labelSize;
+                sprite.fontFace = 'Arial'; sprite.fontWeight = 'bold';
+                sprite.backgroundColor = `rgba(0,0,0,${settings.opacity / 2})`;
+                sprite.padding = 4;
+                sprite.userData = { baseSize: node.val / 2 };
+                return sprite;
+            })
+            .linkWidth(link => 2.5)
+            .linkColor(link => {
+                const sourceNode = nodes.find(n => n.id === link.source || n.id === link.source.id);
+                if (sourceNode) return getCategory(sourceNode.group).color + '88';
+                return '#445566';
+            })
+            .linkOpacity(0.7)
+            .linkCurvature(0.12)
+            .linkCurveRotation(link => {
+                const hash = (link.source?.id || link.source) + (link.target?.id || link.target);
+                let sum = 0;
+                for (let i = 0; i < hash.length; i++) sum += hash.charCodeAt(i);
+                return (sum % 360) * (Math.PI / 180);
+            })
+            .linkDirectionalArrowLength(5)
+            .linkDirectionalArrowRelPos(0.9)
+            .linkDirectionalArrowColor(link => {
+                const sourceNode = nodes.find(n => n.id === link.source || n.id === link.source.id);
+                if (sourceNode) return getCategory(sourceNode.group).color;
+                return '#ffffff';
+            })
+            .linkDirectionalParticles(3)
+            .linkDirectionalParticleSpeed(0.005)
+            .linkDirectionalParticleWidth(2)
+            .linkDirectionalParticleColor(link => {
+                const sourceNode = nodes.find(n => n.id === link.source || n.id === link.source.id);
+                if (sourceNode) return getCategory(sourceNode.group).color;
+                return '#ffffff';
+            })
+            .onNodeClick(node => {
+                const currentPos = Graph.cameraPosition();
+                const currentDistance = Math.hypot(currentPos.x, currentPos.y, currentPos.z);
+                const nodeDistance = Math.hypot(node.x, node.y, node.z) || 1;
+
+                const newX = (node.x / nodeDistance) * currentDistance;
+                const newY = (node.y / nodeDistance) * currentDistance;
+                const newZ = (node.z / nodeDistance) * currentDistance;
+
+                Graph.cameraPosition({ x: newX, y: newY, z: newZ }, node, 1500);
+                showHUD(node);
+            });
+
+        Graph.d3Force('link').distance(settings.linkDistance);
+        Graph.d3Force('charge').strength(settings.chargeStrength);
+
+        // --- CONTROLS ---
+        const gui = new dat.GUI();
+        const folder = gui.addFolder('Graph Settings');
+        folder.add(settings, 'linkDistance', 10, 300).onChange(val => { Graph.d3Force('link').distance(val); Graph.d3ReheatSimulation(); });
+        folder.add(settings, 'chargeStrength', -500, -10).onChange(val => { Graph.d3Force('charge').strength(val); Graph.d3ReheatSimulation(); });
+        folder.add(settings, 'labelSize', 0.1, 3.0).onChange(val => { Graph.scene().traverse(obj => { if (obj.userData?.baseSize) obj.textHeight = obj.userData.baseSize * val; }); });
+        folder.add(settings, 'opacity', 0.1, 1.0).onChange(val => { Graph.scene().traverse(obj => { if (obj.userData?.baseSize) obj.backgroundColor = `rgba(0,0,0,${val / 2})`; }); });
+        folder.add(settings, 'autoRotate').onChange(val => { Graph.controls().autoRotate = val; });
+        folder.open();
+
+        // --- HUD LOGIC ---
+        function showHUD(node) {
+            const el = (id) => document.getElementById(id);
+            const cat = getCategory(node.group);
+            el('hud').style.display = 'block';
+            el('hud-title').innerText = node.en;
+            el('hud-title').style.color = cat.color;
+            el('hud-cn').innerText = `${node.cn} [${node.group}]`;
+            el('hud-desc').innerHTML = `<div class="en">${node.desc_en}</div><div class="cn">${node.desc_cn}</div>`;
+            el('hud-notes').innerHTML = `<div class="en">${node.notes_en}</div><div class="cn">${node.notes_cn}</div>`;
+            const sceneContainer = el('hud-scenes');
+            sceneContainer.innerHTML = '';
+            if (node.scenes_en) {
+                for (let i = 0; i < node.scenes_en.length; i++) {
+                    const tag = document.createElement('span');
+                    tag.className = 'scene-tag';
+                    tag.innerHTML = `${node.scenes_en[i]} <span style="color:#88aacc">${node.scenes_cn[i]}</span>`;
+                    sceneContainer.appendChild(tag);
+                }
+            }
+        }
+
+        function hideHUD() {
+            document.getElementById('hud').style.display = 'none';
+        }
+
+        // Initialize
+        buildLegend();
+        setTimeout(() => { document.getElementById('loading').style.display = 'none'; }, 1000);
+        Graph.controls().autoRotate = true;
+    </script>
+</body>
+
+</html>

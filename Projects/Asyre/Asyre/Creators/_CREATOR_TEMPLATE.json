@@ -1,0 +1,164 @@
+{
+  "_meta": {
+    "version": "1.0",
+    "description": "创作者画像模板 - 基于 Asher_Source_Profile 结构设计",
+    "philosophy": "通过渐进式对话深入了解创作者，而非一次性填表",
+    "last_updated": null,
+    "completeness": 0
+  },
+
+  "creator_id": null,
+  "creator_name": null,
+
+  "1_character_stats": {
+    "_description": "基础属性 - 人格底色",
+
+    "moral_alignment": {
+      "value": null,
+      "spectrum": ["lawful_good", "neutral_good", "chaotic_good", "lawful_neutral", "true_neutral", "chaotic_neutral", "lawful_evil", "neutral_evil", "chaotic_evil"],
+      "description": "道德立场决定内容的价值观底色"
+    },
+
+    "energy_metabolism": {
+      "introvert_extrovert": null,
+      "recharge_method": null,
+      "description": "决定内容的能量感和表达密度"
+    },
+
+    "risk_appetite": {
+      "value": null,
+      "range": [0, 1],
+      "description": "决定内容的尖锐程度和争议容忍度"
+    },
+
+    "core_capabilities": {
+      "mbti": null,
+      "enneagram": null,
+      "strengths": [],
+      "weaknesses": []
+    }
+  },
+
+  "2_cognitive_traits": {
+    "_description": "认知模式 - 思维方式",
+
+    "information_intake": {
+      "preferred_sources": [],
+      "trust_hierarchy": [],
+      "description": "决定内容的信息来源偏好"
+    },
+
+    "processing_style": {
+      "analytical_intuitive": null,
+      "detail_big_picture": null,
+      "linear_nonlinear": null,
+      "description": "决定内容的逻辑结构"
+    },
+
+    "mental_models": {
+      "favorite_frameworks": [],
+      "thinking_tools": [],
+      "description": "决定内容的分析角度"
+    },
+
+    "cognitive_blind_spots": {
+      "known_biases": [],
+      "avoid_topics": [],
+      "description": "需要AI补充的认知盲区"
+    }
+  },
+
+  "3_aesthetic_matrix": {
+    "_description": "审美偏好 - 风格基因",
+
+    "order_preference": {
+      "chaos_order_spectrum": null,
+      "perfectionism_level": null,
+      "description": "决定内容的整洁度和结构感"
+    },
+
+    "sensory_preferences": {
+      "visual_style": null,
+      "audio_style": null,
+      "texture_preference": null,
+      "description": "决定内容的感官表达"
+    },
+
+    "expression_standards": {
+      "tone": null,
+      "formality_level": null,
+      "humor_level": null,
+      "description": "决定内容的语言风格"
+    }
+  },
+
+  "4_content_identity": {
+    "_description": "内容身份 - 创作者定位",
+
+    "intent_tendencies": {
+      "value_guidance": null,
+      "persuasion": null,
+      "concept_clarification": null,
+      "hidden_reveal": null,
+      "emotional_resonance": null,
+      "cognitive_disruption": null,
+      "action_call": null,
+      "knowledge_transfer": null,
+      "_note": "0-10 scale, 高分意图因子会被优先考虑"
+    },
+
+    "target_audience": {
+      "primary": null,
+      "secondary": null,
+      "avoid": null,
+      "description": "目标受众决定内容的难度和切入点"
+    },
+
+    "content_domains": {
+      "expertise_areas": [],
+      "interest_areas": [],
+      "avoid_areas": [],
+      "description": "内容领域边界"
+    },
+
+    "unique_angles": {
+      "personal_experiences": [],
+      "unique_perspectives": [],
+      "signature_phrases": [],
+      "description": "护城河 - AI无法替代的部分"
+    }
+  },
+
+  "5_expression_rules": {
+    "_description": "表达规则 - 创作红线",
+
+    "forbidden_words": {
+      "phrases": [],
+      "patterns": [],
+      "reason": "创作者厌恶的表达方式"
+    },
+
+    "preferred_expressions": {
+      "opening_styles": [],
+      "transition_phrases": [],
+      "closing_styles": [],
+      "description": "偏好的表达模式"
+    },
+
+    "structural_preferences": {
+      "typical_length": null,
+      "paragraph_style": null,
+      "list_vs_prose": null,
+      "description": "结构偏好"
+    }
+  },
+
+  "6_evolution_log": {
+    "_description": "成长记录 - 画像演进",
+
+    "profile_sessions": [],
+    "insights_discovered": [],
+    "style_refinements": [],
+    "last_enrichment": null
+  }
+}

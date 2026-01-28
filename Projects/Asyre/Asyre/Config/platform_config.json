@@ -1,0 +1,849 @@
+{
+  "_meta": {
+    "version": "1.0",
+    "description": "平台适配参数配置 - 各平台算法规则的量化参数",
+    "last_updated": "2026-01-13",
+    "source": "Platform_Distribution_Strategy.md + 平台官方数据"
+  },
+
+  "platforms": {
+    "douyin": {
+      "name": "抖音",
+      "type": "short_video",
+      "region": "china",
+
+      "format": {
+        "orientation": "vertical",
+        "aspect_ratio": "9:16",
+        "resolution": "1080x1920",
+        "duration": {
+          "min": 7,
+          "optimal": [15, 30],
+          "max": 60,
+          "unit": "seconds"
+        }
+      },
+
+      "algorithm": {
+        "core_metric": "completion_rate",
+        "traffic_pool_system": true,
+        "cold_start_window_minutes": 30,
+        "targets": {
+          "completion_rate": {
+            "pool_upgrade_threshold": 0.40,
+            "excellent": 0.60,
+            "description": "完播率 - 进入下一流量池的门槛"
+          },
+          "engagement_rate": {
+            "pool_upgrade_threshold": 0.03,
+            "excellent": 0.08,
+            "description": "互动率 = (点赞+评论+分享)/曝光"
+          },
+          "replay_rate": {
+            "weight": "high",
+            "description": "重复播放权重极高"
+          }
+        },
+        "ranking_factors": [
+          {"factor": "completion_rate", "weight": 0.35},
+          {"factor": "engagement_rate", "weight": 0.25},
+          {"factor": "replay_rate", "weight": 0.20},
+          {"factor": "follow_rate", "weight": 0.10},
+          {"factor": "share_rate", "weight": 0.10}
+        ]
+      },
+
+      "content_rules": {
+        "hook": {
+          "window_seconds": 3,
+          "must_contain": ["conflict", "curiosity", "benefit"],
+          "forbidden": ["大家好", "今天我们来聊", "众所周知"]
+        },
+        "structure": {
+          "climax_interval_seconds": 15,
+          "min_climax_count": 2,
+          "pacing": "fast"
+        },
+        "engagement_triggers": {
+          "controversy_point": true,
+          "question_at_end": true,
+          "deliberate_small_error": "optional"
+        }
+      },
+
+      "transformation": {
+        "from_master": {
+          "extract": "highlight_clips",
+          "max_clips": 5,
+          "clip_selection": ["peak_emotion", "key_insight", "controversy"],
+          "rewrite_hook": true,
+          "add_visual_cues": true
+        }
+      },
+
+      "publishing": {
+        "best_times": ["12:00", "18:00", "21:00"],
+        "timezone": "Asia/Shanghai",
+        "frequency": "daily",
+        "dou_plus_strategy": {
+          "trigger": "cold_start_data_good_but_stuck",
+          "avoid": ["cold_start_data_bad", "already_viral"]
+        }
+      },
+
+      "seo": {
+        "hashtag_count": [3, 5],
+        "title_max_length": 55,
+        "search_recommendation_weight": "increasing"
+      }
+    },
+
+    "kuaishou": {
+      "name": "快手",
+      "type": "short_video",
+      "region": "china",
+
+      "format": {
+        "orientation": "vertical",
+        "aspect_ratio": "9:16",
+        "resolution": "1080x1920",
+        "duration": {
+          "min": 15,
+          "optimal": [30, 60],
+          "max": 180,
+          "unit": "seconds"
+        }
+      },
+
+      "algorithm": {
+        "core_metric": "private_domain_engagement",
+        "traffic_pool_system": true,
+        "feature": "普惠原则 - 中小创作者友好",
+        "targets": {
+          "like_rate": {
+            "threshold": "above_average",
+            "description": "点赞率高于均值获加权"
+          },
+          "avg_watch_duration": {
+            "weight": "high",
+            "description": "次均播放时长"
+          },
+          "save_rate": {
+            "weight": "medium"
+          },
+          "follow_conversion": {
+            "weight": "high",
+            "description": "涨粉比 - 视频带来的粉丝增量"
+          }
+        },
+        "private_public_linkage": {
+          "enabled": true,
+          "description": "私域互动反哺公域曝光"
+        }
+      },
+
+      "content_rules": {
+        "hook": {
+          "window_seconds": 3,
+          "style": "relatable"
+        },
+        "structure": {
+          "pacing": "medium",
+          "storytelling_weight": "high"
+        }
+      },
+
+      "transformation": {
+        "from_master": {
+          "extract": "story_segments",
+          "style": "authentic",
+          "ip_building": true
+        }
+      },
+
+      "publishing": {
+        "best_times": ["19:00", "20:00", "21:00", "22:00"],
+        "timezone": "Asia/Shanghai",
+        "frequency": "daily"
+      }
+    },
+
+    "xiaohongshu": {
+      "name": "小红书",
+      "type": "image_text",
+      "region": "china",
+
+      "format": {
+        "primary": "image_text",
+        "secondary": "short_video",
+        "image": {
+          "count": [6, 9],
+          "aspect_ratio": ["1:1", "3:4"],
+          "cover_must_contain": ["text_overlay", "key_info"]
+        },
+        "text": {
+          "max_words": 1000,
+          "optimal_words": [600, 800]
+        },
+        "video": {
+          "duration": {
+            "optimal": [60, 180],
+            "unit": "seconds"
+          }
+        }
+      },
+
+      "algorithm": {
+        "core_metric": "search_ranking",
+        "model": "double_tower",
+        "cold_start_window_minutes": 30,
+        "first_30min_weight": 0.60,
+        "targets": {
+          "completion_rate": {
+            "weight": "highest",
+            "threshold": 0.50
+          },
+          "save_rate": {
+            "weight": "highest",
+            "excellent": 0.15,
+            "good": 0.05,
+            "description": "收藏率 - 实用价值证明"
+          },
+          "comment_rate": {
+            "weight": "high",
+            "excellent": 0.05,
+            "good": 0.02
+          },
+          "keyword_match": {
+            "weight": "high",
+            "description": "搜索意图匹配度"
+          }
+        },
+        "ranking_factors": [
+          {"factor": "first_30min_data", "weight": 0.60},
+          {"factor": "completion_rate", "weight": 0.15},
+          {"factor": "save_rate", "weight": 0.10},
+          {"factor": "comment_rate", "weight": 0.08},
+          {"factor": "account_weight", "weight": 0.07}
+        ],
+        "2024_updates": [
+          "知识类权重+30%",
+          "账号信誉分系统(低于8分限流)",
+          "原创度算法升级(<60%原创降权)"
+        ]
+      },
+
+      "content_rules": {
+        "hook": {
+          "cover_image": "must_be_informative",
+          "title_must_contain_keyword": true
+        },
+        "structure": {
+          "type": "listicle",
+          "sections": ["pain_point", "solution_steps", "summary"],
+          "use_emoji": true,
+          "use_bullet_points": true
+        },
+        "value_proposition": {
+          "actionable": true,
+          "saveable": true
+        }
+      },
+
+      "seo": {
+        "keyword_placement": {
+          "title": "required",
+          "first_paragraph": "required",
+          "body": "natural_embedding",
+          "hashtags": "required"
+        },
+        "hashtag_count": [3, 5],
+        "keyword_types": {
+          "core": {"position": "title", "count": 1},
+          "long_tail": {"position": "body", "count": [2, 4]},
+          "scene": {"position": "hashtag", "count": [1, 2]}
+        }
+      },
+
+      "transformation": {
+        "from_master": {
+          "extract": "actionable_steps",
+          "format": "listicle",
+          "add_cover_design": true,
+          "keyword_optimize": true,
+          "structure": {
+            "cover": "result_or_pain_point",
+            "slides": "step_by_step",
+            "last_slide": "summary_checklist"
+          }
+        }
+      },
+
+      "publishing": {
+        "best_times": ["19:00", "20:00", "21:00", "22:00"],
+        "timezone": "Asia/Shanghai",
+        "frequency": "3-5_per_week"
+      },
+
+      "account_health": {
+        "vertical_rate": {"min": 0.80, "excellent": 0.95},
+        "originality_rate": {"min": 0.60, "excellent": 0.90},
+        "engagement_rate": {"min": 0.03, "excellent": 0.08},
+        "reputation_score": {"min": 8, "max": 10}
+      }
+    },
+
+    "bilibili": {
+      "name": "B站",
+      "type": "mid_long_video",
+      "region": "china",
+
+      "format": {
+        "orientation": "horizontal",
+        "aspect_ratio": "16:9",
+        "resolution": "1920x1080",
+        "duration": {
+          "min": 60,
+          "optimal": [300, 900],
+          "max": 3600,
+          "unit": "seconds"
+        }
+      },
+
+      "algorithm": {
+        "core_metric": "triple_like",
+        "targets": {
+          "triple_like_rate": {
+            "description": "一键三连率 = 三连/播放量",
+            "weight": "highest"
+          },
+          "danmaku_density": {
+            "description": "弹幕数/视频时长",
+            "weight": "high"
+          },
+          "completion_rate": {
+            "weight": "high"
+          }
+        },
+        "time_sensitivity": {
+          "prefer_recent": true,
+          "description": "倾向推荐近期发布的视频"
+        }
+      },
+
+      "content_rules": {
+        "hook": {
+          "window_seconds": 10,
+          "style": "curiosity_or_value"
+        },
+        "structure": {
+          "use_chapters": true,
+          "series_format": "recommended",
+          "danmaku_triggers": ["槽点", "梗", "互动问题"]
+        },
+        "engagement_triggers": {
+          "triple_like_request": "end_of_video",
+          "danmaku_bait": true
+        }
+      },
+
+      "transformation": {
+        "from_master": {
+          "format": "full_with_chapters",
+          "add_chapter_markers": true,
+          "design_danmaku_points": true,
+          "series_potential": "evaluate"
+        }
+      },
+
+      "publishing": {
+        "best_times": ["weekend_afternoon", "evening"],
+        "timezone": "Asia/Shanghai",
+        "frequency": "1-2_per_week"
+      }
+    },
+
+    "youtube": {
+      "name": "YouTube",
+      "type": "long_video",
+      "region": "international",
+
+      "format": {
+        "orientation": "horizontal",
+        "aspect_ratio": "16:9",
+        "resolution": ["1920x1080", "3840x2160"],
+        "duration": {
+          "min": 300,
+          "optimal": [480, 900],
+          "max": null,
+          "unit": "seconds"
+        },
+        "shorts": {
+          "enabled": true,
+          "duration": {"max": 60},
+          "aspect_ratio": "9:16"
+        }
+      },
+
+      "algorithm": {
+        "core_metric": "watch_time",
+        "description": "满意度预测机 - 预测用户满意度而非内容质量",
+        "targets": {
+          "watch_time": {
+            "weight": "highest",
+            "description": "用户观看视频的总时长"
+          },
+          "ctr": {
+            "alert": {"below": 0.02},
+            "healthy": [0.02, 0.10],
+            "excellent": {"above": 0.10},
+            "description": "缩略图被点击的概率"
+          },
+          "retention_rate": {
+            "alert": {"below": 0.30},
+            "healthy": [0.30, 0.50],
+            "excellent": {"above": 0.50},
+            "description": "观看完成的百分比"
+          },
+          "engagement_rate": {
+            "alert": {"below": 0.01},
+            "healthy": [0.01, 0.05],
+            "excellent": {"above": 0.05}
+          },
+          "subscriber_conversion": {
+            "alert": {"below": 0.005},
+            "healthy": [0.005, 0.02],
+            "excellent": {"above": 0.02}
+          }
+        },
+        "ranking_factors": [
+          {"factor": "watch_time", "weight": 0.35},
+          {"factor": "ctr", "weight": 0.25},
+          {"factor": "retention_rate", "weight": 0.20},
+          {"factor": "engagement", "weight": 0.12},
+          {"factor": "channel_authority", "weight": 0.08}
+        ],
+        "2024_updates": [
+          "新频道快速测试(48小时)",
+          "系列内容加权+30%",
+          "多语言内容跨语言推荐",
+          "Shorts与长视频协同"
+        ]
+      },
+
+      "content_rules": {
+        "hook": {
+          "window_seconds": 30,
+          "pattern": "promise_deliver_loop",
+          "example": "0:00标题承诺→0:30兑现→2:00升级承诺→循环"
+        },
+        "structure": {
+          "use_chapters": true,
+          "retention_design": {
+            "micro_climax_interval_seconds": 30,
+            "no_safe_exit_point": true
+          }
+        },
+        "thumbnail": {
+          "face_ratio": 0.40,
+          "expression": "exaggerated_emotion",
+          "text_words_max": 3,
+          "colors": ["yellow", "red", "cyan"],
+          "contrast": "high"
+        },
+        "title": {
+          "pattern": "[number/time] + [core_value] + [emotion/suspense]",
+          "max_length": 60
+        }
+      },
+
+      "seo": {
+        "title_contains_keyword": true,
+        "description_first_200_chars": "critical",
+        "tags": [5, 15],
+        "chapters_with_timestamps": true
+      },
+
+      "transformation": {
+        "from_master": {
+          "format": "full_with_chapters",
+          "design_thumbnail": true,
+          "optimize_title_seo": true,
+          "add_retention_hooks": true,
+          "extract_shorts": {
+            "count": [3, 5],
+            "selection": ["peak_moments", "key_insights"]
+          }
+        }
+      },
+
+      "publishing": {
+        "best_times": ["weekend_afternoon"],
+        "timezone": "target_audience",
+        "frequency": "1-2_per_week"
+      },
+
+      "diagnostics": {
+        "low_impressions": {
+          "if_low_ctr": "optimize_thumbnail_title",
+          "if_normal_ctr": "seo_issue"
+        },
+        "high_impressions_low_watch_time": {
+          "early_drop": "hook_problem",
+          "mid_drop": "pacing_problem",
+          "end_drop": "acceptable"
+        },
+        "high_watch_time_slow_growth": {
+          "cause": "low_engagement_sharing",
+          "fix": "add_emotional_peaks"
+        }
+      }
+    },
+
+    "wechat_article": {
+      "name": "微信公众号",
+      "type": "long_form_text",
+      "region": "china",
+
+      "format": {
+        "type": "article",
+        "word_count": {
+          "min": 1500,
+          "optimal": [2000, 4000],
+          "max": null
+        },
+        "image_ratio": "1_per_300_words"
+      },
+
+      "algorithm": {
+        "core_metric": "read_depth_and_share",
+        "targets": {
+          "read_completion": {
+            "weight": "high"
+          },
+          "share_rate": {
+            "weight": "highest",
+            "description": "转发是最重要的传播指标"
+          },
+          "wow_rate": {
+            "weight": "medium",
+            "description": "在看率"
+          }
+        },
+        "distribution": {
+          "primary": "subscription_push",
+          "secondary": "share_viral"
+        }
+      },
+
+      "content_rules": {
+        "hook": {
+          "title_types": ["curiosity_gap", "benefit", "controversy"],
+          "first_paragraph": "must_hook"
+        },
+        "structure": {
+          "subheadings": true,
+          "bold_key_sentences": true,
+          "emotional_ending": true
+        },
+        "visual": {
+          "cover_image": "required",
+          "inline_images": "every_300_words",
+          "quote_blocks": "for_key_points"
+        }
+      },
+
+      "transformation": {
+        "from_master": {
+          "format": "long_article",
+          "add_subheadings": true,
+          "bold_golden_sentences": true,
+          "design_shareable_ending": true,
+          "extract_quote_cards": true
+        }
+      },
+
+      "publishing": {
+        "best_times": ["07:30", "12:00", "21:00"],
+        "timezone": "Asia/Shanghai",
+        "frequency": "2-4_per_month"
+      }
+    },
+
+    "twitter": {
+      "name": "X/Twitter",
+      "type": "micro_content",
+      "region": "international",
+
+      "format": {
+        "tweet": {
+          "max_chars": 280,
+          "optimal_chars": [200, 260]
+        },
+        "thread": {
+          "optimal_length": [5, 10],
+          "max_length": 20
+        },
+        "media": {
+          "image_boost": true,
+          "video_min_watch": 10
+        }
+      },
+
+      "algorithm": {
+        "core_metric": "reply_count",
+        "model": "RealGraph",
+        "targets": {
+          "reply_count": {
+            "weight": "highest",
+            "description": "回复量最重要"
+          },
+          "interaction_history": {
+            "weight": "high",
+            "description": "与目标用户的互动历史"
+          },
+          "media_engagement": {
+            "weight": "medium"
+          },
+          "video_watch_10s": {
+            "weight": "medium"
+          },
+          "recency": {
+            "weight": "medium",
+            "description": "实时性加成"
+          }
+        },
+        "negative_factors": [
+          "all_caps",
+          "too_many_links",
+          "repetitive_posting",
+          "muted_or_blocked"
+        ]
+      },
+
+      "content_rules": {
+        "hook": {
+          "first_line": "must_hook",
+          "pattern": "bold_statement_or_question"
+        },
+        "structure": {
+          "thread_format": "numbered_or_emoji",
+          "each_tweet_standalone": true,
+          "end_with_cta": true
+        },
+        "engagement_triggers": {
+          "ask_question": true,
+          "poll": "high_engagement",
+          "controversy": "use_carefully"
+        }
+      },
+
+      "transformation": {
+        "from_master": {
+          "extract": "key_insights_thread",
+          "format": "5-10_tweet_thread",
+          "first_tweet": "hook_with_promise",
+          "last_tweet": "summary_and_cta",
+          "golden_sentences": "standalone_tweets"
+        }
+      },
+
+      "publishing": {
+        "best_times": ["08:00", "09:00", "10:00"],
+        "timezone": "target_audience",
+        "frequency": "multiple_per_day"
+      }
+    },
+
+    "instagram": {
+      "name": "Instagram",
+      "type": "visual_social",
+      "region": "international",
+
+      "format": {
+        "reels": {
+          "duration": {"optimal": [15, 30], "max": 90},
+          "aspect_ratio": "9:16"
+        },
+        "carousel": {
+          "slides": [5, 10],
+          "aspect_ratio": ["1:1", "4:5"]
+        },
+        "stories": {
+          "duration": 15,
+          "series": true
+        }
+      },
+
+      "algorithm": {
+        "feed": {
+          "ranking": ["relationship", "interest", "recency"]
+        },
+        "reels": {
+          "ranking": ["watch_time", "sends_non_follower", "likes_follower"],
+          "targets": {
+            "watch_time": {"weight": "highest"},
+            "save_share": {"weight": "high"}
+          }
+        },
+        "stories": {
+          "ranking": ["view_history", "interaction_history", "closeness"]
+        }
+      },
+
+      "content_rules": {
+        "reels": {
+          "hook_seconds": 3,
+          "use_trending_audio": true,
+          "pacing": "fast"
+        },
+        "carousel": {
+          "first_slide": "hook",
+          "last_slide": "cta",
+          "swipe_motivation": "each_slide"
+        }
+      },
+
+      "transformation": {
+        "from_master": {
+          "reels": {
+            "extract": "visual_highlights",
+            "add_trending_audio": true
+          },
+          "carousel": {
+            "extract": "key_points_visual",
+            "design_slides": true
+          }
+        }
+      },
+
+      "publishing": {
+        "best_times": ["11:00", "19:00"],
+        "timezone": "target_audience",
+        "frequency": "daily",
+        "hashtags": [5, 8]
+      }
+    },
+
+    "reddit": {
+      "name": "Reddit",
+      "type": "community_discussion",
+      "region": "international",
+
+      "format": {
+        "post_types": ["text", "link", "image", "video"],
+        "text_length": "no_limit",
+        "title_importance": "critical"
+      },
+
+      "algorithm": {
+        "hot_score_formula": "log(upvotes - downvotes) + age_factor",
+        "core_metric": "upvote_velocity",
+        "targets": {
+          "upvote_speed": {
+            "weight": "highest",
+            "description": "早期快速获赞比总数更重要"
+          },
+          "comment_count": {
+            "weight": "high"
+          },
+          "time_decay": {
+            "period": "6-12_hours"
+          }
+        },
+        "karma_system": true
+      },
+
+      "content_rules": {
+        "subreddit_first": {
+          "must_match_community": true,
+          "read_rules_before_post": true
+        },
+        "tone": {
+          "native": true,
+          "no_obvious_promotion": true,
+          "value_first": true
+        }
+      },
+
+      "transformation": {
+        "from_master": {
+          "format": "discussion_post",
+          "extract": "controversial_or_insightful_angle",
+          "invite_discussion": true,
+          "subreddit_selection": "match_topic"
+        }
+      },
+
+      "publishing": {
+        "best_times": ["US_east_morning"],
+        "timezone": "America/New_York",
+        "frequency": "as_needed"
+      }
+    }
+  },
+
+  "atomization_rules": {
+    "description": "从核心版产出多平台内容的原子化规则",
+    "pillar_to_atoms": {
+      "golden_sentence_clips": {
+        "target_platforms": ["douyin", "kuaishou", "instagram_reels"],
+        "count": [3, 5],
+        "duration": [15, 30],
+        "selection_criteria": ["peak_emotion", "key_insight", "quotable"]
+      },
+      "image_text_breakdown": {
+        "target_platforms": ["xiaohongshu", "wechat_article"],
+        "format": "listicle",
+        "extract": "actionable_steps"
+      },
+      "opinion_thread": {
+        "target_platforms": ["twitter"],
+        "format": "5-10_tweets",
+        "extract": "core_argument_chain"
+      },
+      "deep_discussion": {
+        "target_platforms": ["reddit", "zhihu"],
+        "format": "discussion_post",
+        "extract": "controversial_angle"
+      },
+      "full_version": {
+        "target_platforms": ["youtube", "bilibili"],
+        "format": "chaptered_video",
+        "add": ["chapters", "retention_hooks"]
+      }
+    }
+  },
+
+  "quality_layer_mapping": {
+    "description": "质量层在平台适配中的保留/调整规则",
+    "T_layer": {
+      "rule": "preserve",
+      "description": "可信度层 - 所有平台必须保留"
+    },
+    "E_layer": {
+      "rule": "preserve",
+      "description": "经验层 - 核心价值不可删减"
+    },
+    "C_layer": {
+      "rule": "preserve_or_simplify",
+      "description": "深度层 - 短平台可简化但保留核心洞察"
+    },
+    "F_layer": {
+      "rule": "adapt",
+      "description": "受众层 - 根据平台用户画像调整"
+    },
+    "D_layer": {
+      "rule": "adapt",
+      "description": "表达层 - 根据平台调性调整"
+    },
+    "A_layer": {
+      "rule": "rebuild",
+      "description": "执行层 - 完全根据平台规则重建"
+    },
+    "B_layer": {
+      "rule": "adapt",
+      "description": "时机层 - 根据平台热点调整"
+    }
+  }
+}

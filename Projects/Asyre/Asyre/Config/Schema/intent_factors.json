@@ -1,0 +1,382 @@
+{
+  "_comment": "Asyre Intent Factors Schema v2.0 - 基于修辞学和传播学理论",
+  "_version": "2.0",
+  "_date": "2026-01-13",
+  "_description": "意图因子是创作目的的原子单位。每篇内容是多个意图因子的加权组合。",
+
+  "_theoretical_foundation": {
+    "classical_rhetoric": {
+      "source": "Aristotle",
+      "PIE_model": ["Persuade", "Inform", "Entertain"],
+      "appeals": ["Logos (逻辑)", "Pathos (情感)", "Ethos (人格)"]
+    },
+    "elaboration_likelihood_model": {
+      "source": "Cacioppo & Petty",
+      "central_route": "深度处理，基于论证内容",
+      "peripheral_route": "浅层处理，基于线索和情绪"
+    },
+    "modern_extension": {
+      "purposes": ["Explain", "Describe", "Educate", "Motivate", "Validate"]
+    }
+  },
+
+  "_taxonomy": {
+    "level_1": "目的层 (Purpose Layer) - 四大类",
+    "level_2": "意图因子 (Intent Factors) - 具体意图"
+  },
+
+  "purpose_categories": {
+    "cognitive_change": {
+      "name_cn": "认知改变",
+      "name_en": "Cognitive Change",
+      "description": "让受众获得新知识或改变认知结构",
+      "rhetoric_basis": "Logos (逻辑诉求) + Central Route (中心路径)"
+    },
+    "attitude_change": {
+      "name_cn": "态度改变",
+      "name_en": "Attitude Change",
+      "description": "让受众改变态度、价值观或立场",
+      "rhetoric_basis": "Persuade + Ethos (人格诉求)"
+    },
+    "behavior_change": {
+      "name_cn": "行为改变",
+      "name_en": "Behavior Change",
+      "description": "让受众采取具体行动或改变行为",
+      "rhetoric_basis": "Persuade + Call to Action"
+    },
+    "emotional_fulfillment": {
+      "name_cn": "情感满足",
+      "name_en": "Emotional Fulfillment",
+      "description": "让受众获得情感层面的满足或共鸣",
+      "rhetoric_basis": "Pathos (情感诉求) + Entertain + Peripheral Route"
+    }
+  },
+
+  "factors": {
+    "_comment_cognitive": "=== 认知改变类 ===",
+
+    "concept_clarification": {
+      "name_cn": "概念澄清",
+      "name_en": "Concept Clarification",
+      "category": "cognitive_change",
+      "description": "让受众真正理解一个概念的本质，消除误解",
+      "rhetoric_basis": "Inform + Explain",
+      "key_question": "受众之前的理解哪里有偏差？正确理解是什么？",
+      "examples": [
+        "解释'内卷'的真正含义",
+        "澄清一个被滥用的概念",
+        "区分容易混淆的两个概念"
+      ],
+      "related_parameters": ["simplification", "analogy_usage", "rigor", "source_quality"],
+      "typical_hooks": ["counter_intuitive", "data_shock"],
+      "weight_range": [0.0, 1.0]
+    },
+
+    "hidden_reveal": {
+      "name_cn": "信息揭示",
+      "name_en": "Hidden Information Reveal",
+      "category": "cognitive_change",
+      "description": "揭示表面之下的隐藏信息、潜规则或被忽视的事实",
+      "rhetoric_basis": "Inform + 信息不对称",
+      "key_question": "什么是大多数人不知道但应该知道的？",
+      "examples": [
+        "揭示行业潜规则",
+        "指出被媒体忽视的事实",
+        "揭露某个现象背后的真实原因"
+      ],
+      "related_parameters": ["conflict_intensity", "source_quality", "hook_type"],
+      "typical_hooks": ["conflict_suspense", "counter_intuitive"],
+      "weight_range": [0.0, 1.0]
+    },
+
+    "cognitive_disruption": {
+      "name_cn": "认知颠覆",
+      "name_en": "Cognitive Disruption",
+      "category": "cognitive_change",
+      "description": "打破受众的固有认知，提出反直觉观点",
+      "rhetoric_basis": "Challenge + Logos",
+      "key_question": "受众普遍相信什么？为什么是错的？",
+      "examples": [
+        "挑战常识性观点",
+        "提出与主流相反的结论",
+        "揭示认知偏差"
+      ],
+      "related_parameters": ["counter_intuitive_strength", "source_quality", "rigor"],
+      "typical_hooks": ["counter_intuitive", "data_shock"],
+      "weight_range": [0.0, 1.0]
+    },
+
+    "knowledge_transfer": {
+      "name_cn": "知识传递",
+      "name_en": "Knowledge Transfer",
+      "category": "cognitive_change",
+      "description": "系统性地传授知识、技能或方法",
+      "rhetoric_basis": "Inform + Educate",
+      "key_question": "受众需要学会什么？怎么教最有效？",
+      "examples": [
+        "教授一个技能",
+        "科普一个领域",
+        "分享一套方法论"
+      ],
+      "related_parameters": ["simplification", "structure_type", "rigor"],
+      "typical_hooks": ["benefit_promise", "pain_point"],
+      "weight_range": [0.0, 1.0]
+    },
+
+    "_comment_attitude": "=== 态度改变类 ===",
+
+    "value_guidance": {
+      "name_cn": "价值观引导",
+      "name_en": "Value Guidance",
+      "category": "attitude_change",
+      "description": "有目的性地引导受众的价值判断和道德取向",
+      "rhetoric_basis": "Persuade + Ethos",
+      "key_question": "希望受众认为什么是对的/好的/值得的？",
+      "examples": [
+        "引导对某种生活方式的态度",
+        "建立对某个群体的看法",
+        "传递某种价值取向"
+      ],
+      "related_parameters": ["attitude_strength", "we_perspective", "emotion_peaks"],
+      "typical_hooks": ["emotional_vent", "identity"],
+      "weight_range": [0.0, 1.0]
+    },
+
+    "persuasion": {
+      "name_cn": "观点说服",
+      "name_en": "Persuasion",
+      "category": "attitude_change",
+      "description": "让受众认同作者的具体观点或立场",
+      "rhetoric_basis": "Persuade + Logos + Ethos",
+      "key_question": "希望受众相信什么结论？",
+      "examples": [
+        "让受众相信某个结论",
+        "改变受众对某事的看法",
+        "赢得一场辩论"
+      ],
+      "related_parameters": ["attitude_strength", "fence_sitting_tolerance", "source_quality"],
+      "typical_hooks": ["counter_intuitive", "conflict_suspense"],
+      "weight_range": [0.0, 1.0]
+    },
+
+    "identity_construction": {
+      "name_cn": "身份认同构建",
+      "name_en": "Identity Construction",
+      "category": "attitude_change",
+      "description": "帮助受众构建或强化某种身份认同",
+      "rhetoric_basis": "Ethos + In-group formation",
+      "key_question": "受众是谁？他们想成为谁？",
+      "examples": [
+        "强化'打工人'的身份认同",
+        "构建'独立思考者'的自我形象",
+        "建立圈层归属感"
+      ],
+      "related_parameters": ["we_perspective", "pain_point_depth"],
+      "typical_hooks": ["identity", "emotional_vent"],
+      "weight_range": [0.0, 1.0]
+    },
+
+    "_comment_behavior": "=== 行为改变类 ===",
+
+    "action_call": {
+      "name_cn": "行动号召",
+      "name_en": "Call to Action",
+      "category": "behavior_change",
+      "description": "推动受众采取具体行动",
+      "rhetoric_basis": "Persuade + Motivate",
+      "key_question": "希望受众做什么具体动作？",
+      "examples": [
+        "引导购买决策",
+        "推动关注/点赞/分享",
+        "鼓励尝试某种行为"
+      ],
+      "related_parameters": ["cta_intensity", "urgency_level"],
+      "typical_hooks": ["benefit_promise"],
+      "weight_range": [0.0, 1.0]
+    },
+
+    "decision_guidance": {
+      "name_cn": "决策引导",
+      "name_en": "Decision Guidance",
+      "category": "behavior_change",
+      "description": "帮助受众在选择中做出决策",
+      "rhetoric_basis": "Inform + Persuade",
+      "key_question": "受众面临什么选择？应该选哪个？",
+      "examples": [
+        "产品对比推荐",
+        "职业选择建议",
+        "方案利弊分析"
+      ],
+      "related_parameters": ["rigor", "source_quality", "attitude_strength"],
+      "typical_hooks": ["benefit_promise", "data_shock"],
+      "weight_range": [0.0, 1.0]
+    },
+
+    "_comment_emotional": "=== 情感满足类 ===",
+
+    "emotional_resonance": {
+      "name_cn": "情感共鸣",
+      "name_en": "Emotional Resonance",
+      "category": "emotional_fulfillment",
+      "description": "唤起受众的情感认同，让他们感到被理解",
+      "rhetoric_basis": "Pathos + Entertain",
+      "key_question": "受众有什么未被表达的情感？",
+      "examples": [
+        "说出受众想说但说不出的话",
+        "让受众感到被理解",
+        "引发情绪共鸣"
+      ],
+      "related_parameters": ["we_perspective", "emotion_peaks", "pain_point_depth"],
+      "typical_hooks": ["pain_point", "emotional_vent", "identity"],
+      "weight_range": [0.0, 1.0]
+    },
+
+    "emotional_catharsis": {
+      "name_cn": "情绪宣泄",
+      "name_en": "Emotional Catharsis",
+      "category": "emotional_fulfillment",
+      "description": "替受众宣泄情绪，提供情绪出口",
+      "rhetoric_basis": "Pathos + Catharsis",
+      "key_question": "受众压抑着什么情绪？",
+      "examples": [
+        "替受众骂出心里话",
+        "表达共同的愤怒/无奈",
+        "提供情绪释放的出口"
+      ],
+      "related_parameters": ["emotion_peaks", "attitude_strength", "conflict_intensity"],
+      "typical_hooks": ["emotional_vent"],
+      "weight_range": [0.0, 1.0]
+    },
+
+    "entertainment": {
+      "name_cn": "娱乐消遣",
+      "name_en": "Entertainment",
+      "category": "emotional_fulfillment",
+      "description": "让受众获得轻松愉快的体验",
+      "rhetoric_basis": "Entertain + Pathos",
+      "key_question": "怎么让内容有趣/好玩/轻松？",
+      "examples": [
+        "讲一个有趣的故事",
+        "用幽默的方式说正经事",
+        "制造惊喜和趣味"
+      ],
+      "related_parameters": ["structure_type", "oral_language_weight"],
+      "typical_hooks": ["story_suspense"],
+      "weight_range": [0.0, 1.0]
+    },
+
+    "validation": {
+      "name_cn": "认知验证",
+      "name_en": "Validation",
+      "category": "emotional_fulfillment",
+      "description": "验证受众已有的想法，让他们感到'我早就这么想了'",
+      "rhetoric_basis": "Confirm + Ethos",
+      "key_question": "受众已经相信什么？如何强化？",
+      "examples": [
+        "强化受众已有的观点",
+        "为受众的做法提供理论支持",
+        "让受众感到自己是对的"
+      ],
+      "related_parameters": ["attitude_strength", "we_perspective"],
+      "typical_hooks": ["identity", "pain_point"],
+      "weight_range": [0.0, 1.0]
+    }
+  },
+
+  "combination_patterns": {
+    "_comment": "常见的意图因子组合模式",
+
+    "social_commentary": {
+      "name_cn": "社会评论",
+      "description": "对社会现象发表态度鲜明的评论",
+      "typical_combination": {
+        "value_guidance": 0.85,
+        "persuasion": 0.8,
+        "emotional_resonance": 0.75,
+        "emotional_catharsis": 0.6,
+        "hidden_reveal": 0.5
+      }
+    },
+
+    "deep_explainer": {
+      "name_cn": "深度科普",
+      "description": "深入解释一个复杂概念或现象",
+      "typical_combination": {
+        "concept_clarification": 0.9,
+        "hidden_reveal": 0.7,
+        "cognitive_disruption": 0.6,
+        "knowledge_transfer": 0.5
+      }
+    },
+
+    "opinion_piece": {
+      "name_cn": "观点输出",
+      "description": "表达鲜明立场并说服受众",
+      "typical_combination": {
+        "persuasion": 0.9,
+        "value_guidance": 0.7,
+        "cognitive_disruption": 0.6,
+        "emotional_resonance": 0.5
+      }
+    },
+
+    "tutorial": {
+      "name_cn": "教程干货",
+      "description": "系统教授知识或技能",
+      "typical_combination": {
+        "knowledge_transfer": 0.9,
+        "action_call": 0.6,
+        "concept_clarification": 0.5
+      }
+    },
+
+    "emotional_support": {
+      "name_cn": "情感陪伴",
+      "description": "提供情感共鸣和支持",
+      "typical_combination": {
+        "emotional_resonance": 0.9,
+        "validation": 0.8,
+        "identity_construction": 0.6,
+        "emotional_catharsis": 0.5
+      }
+    },
+
+    "sales_content": {
+      "name_cn": "种草带货",
+      "description": "引导购买决策",
+      "typical_combination": {
+        "decision_guidance": 0.9,
+        "action_call": 0.85,
+        "persuasion": 0.7,
+        "emotional_resonance": 0.5
+      }
+    },
+
+    "expose": {
+      "name_cn": "揭秘爆料",
+      "description": "揭示隐藏信息或潜规则",
+      "typical_combination": {
+        "hidden_reveal": 0.9,
+        "cognitive_disruption": 0.7,
+        "emotional_catharsis": 0.6,
+        "value_guidance": 0.5
+      }
+    }
+  },
+
+  "_extension_notes": {
+    "how_to_add_new_factor": [
+      "1. 确定新因子属于哪个 purpose_category",
+      "2. 定义 key_question (核心问题)",
+      "3. 列出 examples 和 typical_hooks",
+      "4. 关联 related_parameters",
+      "5. 更新 derivation_rules.json 添加对应规则"
+    ],
+    "sources": [
+      "Aristotle - Rhetoric (Logos, Pathos, Ethos)",
+      "Cacioppo & Petty - Elaboration Likelihood Model",
+      "Classical PIE Model (Persuade, Inform, Entertain)",
+      "Content_Creation Module - Hook Techniques, STEPPS"
+    ]
+  }
+}

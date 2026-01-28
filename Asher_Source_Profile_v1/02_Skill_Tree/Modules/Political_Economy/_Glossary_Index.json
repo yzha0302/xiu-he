@@ -1,0 +1,110 @@
+[
+    {
+        "term": "Mercantilism",
+        "term_cn": "重商主义",
+        "definition": "16-18世纪的经济思想，认为金银本身就是财富，国家应累积贵金属。",
+        "source_file": "1.0_Money_Philosophy.md"
+    },
+    {
+        "term": "Labor Theory of Value",
+        "term_cn": "劳动价值论",
+        "definition": "认为商品价值由生产它所需的劳动时间决定。亚当斯密和李嘉图的核心观点。",
+        "source_file": "1.0_Money_Philosophy.md"
+    },
+    {
+        "term": "Relative Value Theory",
+        "term_cn": "相对价值论",
+        "definition": "认为商品价值来自于它与其他商品的关系，而非内在属性。塞缪尔·贝利提出。",
+        "source_file": "1.0_Money_Philosophy.md"
+    },
+    {
+        "term": "Real Abstraction",
+        "term_cn": "真实的抽象",
+        "definition": "马克思术语。指货币这类虽然抽象但却组织了真实世界秩序的介质。它不是任何具体存在，但它组织了一切具体存在。",
+        "source_file": "1.0_Money_Philosophy.md"
+    },
+    {
+        "term": "Commodity Fetishism",
+        "term_cn": "商品拜物教",
+        "definition": "马克思术语。指人们把商品当成具有神秘力量的对象来崇拜，而忽略了商品背后的社会关系。",
+        "source_file": "1.0_Money_Philosophy.md"
+    },
+    {
+        "term": "Surplus Value",
+        "term_cn": "剩余价值",
+        "definition": "马克思术语。劳动者创造的价值超出其工资的部分。产业资本利润的来源。",
+        "source_file": "1.0_Money_Philosophy.md"
+    },
+    {
+        "term": "Dialectic of Enlightenment",
+        "term_cn": "启蒙辩证法",
+        "definition": "霍克海默和阿多诺术语。指启蒙理性在反对神话之后自身变成了新的神话。",
+        "source_file": "1.0_Money_Philosophy.md"
+    },
+    {
+        "term": "Holy Shit",
+        "term_cn": "神圣的屎",
+        "definition": "本模块定义。金钱既是神圣的律令（像上帝一样），又是多余的排泄物（像粪便一样）。这个矛盾定义反映了人们对金钱的纠结态度。",
+        "source_file": "1.0_Money_Philosophy.md"
+    },
+    {
+        "term": "Diamond-Water Paradox",
+        "term_cn": "钻石与水的悖论",
+        "definition": "亚当斯密提出的经济学悖论：水的使用价值极高但交换价值极低，钻石反之。导致了价值二分法的产生。",
+        "source_file": "1.0_Money_Philosophy.md"
+    },
+    {
+        "term": "Brand Premium",
+        "term_cn": "品牌溢价",
+        "definition": "商品价格超出其功能价值的部分。来源于'远不止于此'的省略号——那些无法被完全描述的剩余意义。",
+        "source_file": "1.0_Money_Philosophy.md"
+    },
+    {
+        "term": "Antinomy",
+        "term_cn": "二律背反",
+        "definition": "马克思《资本论》核心概念。资本家作为劳动力买者希望压低工资，但作为产品卖者又需要消费者有购买力——两种权利同时合法但相互矛盾。",
+        "source_file": "2.0_Capitalism_Mutation_History.md"
+    },
+    {
+        "term": "Creative Destruction",
+        "term_cn": "创造性破坏",
+        "definition": "熊彼特的核心概念。资本主义的本质是通过破坏旧结构来创造新的剩余价值。商学院将其偷换为'破坏性创新'来兜售。",
+        "source_file": "2.0_Capitalism_Mutation_History.md"
+    },
+    {
+        "term": "Stagflation",
+        "term_cn": "滞胀",
+        "definition": "高通胀+高失业+低增长的经济怪病。'胀'是屎太多，'滞'是拉不出去。70年代西方经济的典型症状。",
+        "source_file": "2.0_Capitalism_Mutation_History.md"
+    },
+    {
+        "term": "Fordism",
+        "term_cn": "福特主义",
+        "definition": "大萧条后资本主义的自我修正策略——让工人买得起自己生产的产品，以维持消费循环。",
+        "source_file": "2.0_Capitalism_Mutation_History.md"
+    },
+    {
+        "term": "Ponzification",
+        "term_cn": "庞氏化",
+        "definition": "整个世界的运作逻辑和庞氏骗局如出一辙——只要不挤兑，就能继续玩。银行和庞氏骗子的区别在于银行坦诚告诉你他在欺骗。",
+        "source_file": "2.0_Capitalism_Mutation_History.md"
+    },
+    {
+        "term": "Economic Constipation",
+        "term_cn": "经济便秘",
+        "definition": "经济危机的隐喻。当生产者与消费者的虚假分离消失（回归统一），利润/剩余无法排泄，整个世界陷入便秘。",
+        "source_file": "2.0_Capitalism_Mutation_History.md"
+    },
+    {
+        "term": "Jargon as Identity",
+        "term_cn": "黑话即身份",
+        "definition": "活成独一无二的方式——把自己活成一段不可描述、无法被同质化的存在。你的超额薪资来自于'没了他不行'的否定性陈述。",
+        "source_file": "2.0_Capitalism_Mutation_History.md"
+    },
+    {
+        "term": "Destructive Excellence",
+        "term_cn": "破坏性优秀",
+        "definition": "优秀的唯一真正定义——优秀是一种让他人显得平庸的能力。基于否定关系的价值生成逻辑。",
+        "source_file": "2.0_Capitalism_Mutation_History.md"
+    }
+]

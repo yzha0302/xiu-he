@@ -1,0 +1,51 @@
+{
+  "_comment": "Asyre Preset Template v2.0",
+  "_description": "预设配置模板 - 复制此文件创建新预设",
+  "_usage": "cp _PRESET_TEMPLATE.json my_preset.json && 编辑",
+
+  "preset_meta": {
+    "name": "预设名称",
+    "description": "预设描述",
+    "version": "1.0",
+    "created": "YYYY-MM-DD",
+    "author": "",
+    "use_case": "适用场景描述"
+  },
+
+  "intent_factors": {
+    "_comment": "各意图因子的权重 (0.0-1.0)",
+    "value_guidance": 0.0,
+    "persuasion": 0.0,
+    "concept_clarification": 0.0,
+    "hidden_reveal": 0.0,
+    "emotional_resonance": 0.0,
+    "cognitive_disruption": 0.0,
+    "action_call": 0.0,
+    "knowledge_transfer": 0.0
+  },
+
+  "parameter_overrides": {
+    "_comment": "显式覆盖推导结果的参数 (可选)",
+    "example_param": {
+      "importance": "high",
+      "target": 0.8,
+      "reason": "覆盖原因"
+    }
+  },
+
+  "execution_rules_override": {
+    "_comment": "额外的执行规则 (可选)",
+    "add": [],
+    "remove": []
+  },
+
+  "output_format": {
+    "type": "oral_script | article | social_post",
+    "platform": "抖音 | B站 | 公众号 | 通用",
+    "length": {
+      "min": 0,
+      "max": 0,
+      "unit": "字 | 分钟"
+    }
+  }
+}

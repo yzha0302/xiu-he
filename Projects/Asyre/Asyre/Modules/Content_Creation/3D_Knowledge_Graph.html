@@ -1,0 +1,1748 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>3D Knowledge Graph - Content Creation System</title>
+    <!-- 
+        ORAL SCRIPT WRITING STYLE KNOWLEDGE GRAPH
+        - Core writing techniques for self-media oral content
+        - Emphasis on emotion over logic
+    -->
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #000005;
+            overflow: hidden;
+        }
+
+        /* HUD: Top-Left */
+        #hud {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 400px;
+            background: rgba(10, 15, 25, 0.95);
+            border: 1px solid #334466;
+            border-left: 3px solid #00ffff;
+            border-radius: 4px;
+            padding: 25px;
+            color: #eef;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            display: none;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        #hud h2 {
+            margin: 0 0 5px 0;
+            font-size: 24px;
+            padding-right: 30px;
+        }
+
+        #hud .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.2s;
+            font-size: 20px;
+            color: #889;
+            text-align: center;
+            line-height: 24px;
+        }
+
+        #hud .close-btn:hover {
+            opacity: 1;
+            color: #ff5555;
+        }
+
+        #hud .sub-header {
+            font-size: 14px;
+            color: #8899aa;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #334455;
+            padding-bottom: 10px;
+        }
+
+        #hud .section-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #556677;
+            letter-spacing: 2px;
+            margin-top: 15px;
+            margin-bottom: 8px;
+        }
+
+        #hud .content-block {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #ccd;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        #hud .en {
+            color: #fff;
+        }
+
+        #hud .cn {
+            color: #88aacc;
+            font-size: 13px;
+        }
+
+        #hud .insight-block {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #88ff88;
+            background: rgba(0, 80, 0, 0.2);
+            padding: 10px;
+            border-radius: 4px;
+            border-left: 2px solid #00ff00;
+        }
+
+        #hud .warning-block {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #ff8888;
+            background: rgba(80, 0, 0, 0.2);
+            padding: 10px;
+            border-radius: 4px;
+            border-left: 2px solid #ff5555;
+        }
+
+        #hud .related-tag {
+            display: inline-block;
+            background: rgba(0, 255, 255, 0.15);
+            color: #00ffff;
+            padding: 4px 10px;
+            margin: 4px;
+            border-radius: 15px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        #hud .related-tag:hover {
+            background: rgba(0, 255, 255, 0.3);
+        }
+
+        #hud .scene-tag {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 4px 10px;
+            margin: 4px;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #aab;
+        }
+
+        .keyword {
+            color: #00ffff;
+            font-weight: bold;
+        }
+
+        /* Legend: Bottom-Left */
+        #legend {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(10, 15, 25, 0.9);
+            border: 1px solid #334466;
+            border-radius: 4px;
+            padding: 15px;
+            color: #eef;
+            max-width: 280px;
+            backdrop-filter: blur(12px);
+            transition: max-height 0.3s ease;
+        }
+
+        #legend h3 {
+            margin: 0 0 10px 0;
+            font-size: 14px;
+            color: #8899aa;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        #legend h3:hover {
+            color: #00ffff;
+        }
+
+        #legend .legend-items {
+            transition: max-height 0.3s ease, opacity 0.3s ease;
+            overflow: hidden;
+        }
+
+        #legend.collapsed .legend-items {
+            opacity: 0;
+            max-height: 0;
+        }
+
+        #legend .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 6px 0;
+            font-size: 13px;
+        }
+
+        #legend .legend-color {
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+            margin-right: 10px;
+        }
+
+        #legend .legend-label {
+            color: #aab;
+        }
+
+        #legend .legend-count {
+            margin-left: auto;
+            color: #667;
+            font-size: 11px;
+        }
+
+        #legend .legend-total {
+            font-size: 11px;
+            color: #667;
+            margin-left: 10px;
+        }
+
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #00ffff;
+            font-family: monospace;
+            letter-spacing: 2px;
+        }
+    </style>
+    <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/3d-force-graph"></script>
+    <script src="https://unpkg.com/three-spritetext@1.8.1/dist/three-spritetext.min.js"></script>
+    <script src="https://unpkg.com/dat.gui"></script>
+</head>
+
+<body>
+    <div id="loading">INITIALIZING...</div>
+    <div id="3d-graph"></div>
+
+    <!-- HUD with Close Button -->
+    <div id="hud">
+        <span class="close-btn" onclick="hideHUD()">×</span>
+        <h2 id="hud-title">Title</h2>
+        <div id="hud-cn" class="sub-header">Subtitle</div>
+        <div class="section-title">Definition 定义</div>
+        <div id="hud-desc" class="content-block"></div>
+        <div class="section-title">Deep Dive 深度解析</div>
+        <div id="hud-notes" class="content-block" style="border-left: 2px solid #00ffff;"></div>
+        <div class="section-title">Why It Matters 为什么重要</div>
+        <div id="hud-why" class="insight-block"></div>
+        <div class="section-title">Common Mistakes 常见误区</div>
+        <div id="hud-mistakes" class="warning-block"></div>
+        <div class="section-title">Related Terms 关联术语</div>
+        <div id="hud-related"></div>
+        <div class="section-title">Scenarios 应用场景</div>
+        <div id="hud-scenes"></div>
+    </div>
+
+    <!-- Legend (Collapsible) -->
+    <div id="legend">
+        <h3 onclick="toggleLegend()">Domain 领域 <span id="legend-total"></span></h3>
+        <div id="legend-items" class="legend-items"></div>
+    </div>
+
+    <script>
+        // === CATEGORY CONFIGURATION ===
+        const CATEGORY_CONFIG = {
+            "Core": { color: "#00ffff", label_en: "Core", label_cn: "核心技巧" },
+            "Rhythm": { color: "#ff8800", label_en: "Rhythm", label_cn: "节奏控制" },
+            "Language": { color: "#00ff00", label_en: "Language", label_cn: "语言风格" },
+            "Mindset": { color: "#aa00ff", label_en: "Mindset", label_cn: "心态定位" },
+            "AntiPattern": { color: "#ff0055", label_en: "AntiPattern", label_cn: "反模式" },
+            "HookType": { color: "#ffff00", label_en: "HookType", label_cn: "钩子类型" },
+            "HumanLike": { color: "#88ffaa", label_en: "HumanLike", label_cn: "人性化写作" },
+            "IntentFactor": { color: "#00aaff", label_en: "IntentFactor", label_cn: "意图因子" },
+            "PurposeLayer": { color: "#ff66aa", label_en: "PurposeLayer", label_cn: "目的层" },
+            "Theory": { color: "#aa88ff", label_en: "Theory", label_cn: "理论框架" },
+            "Phase": { color: "#66ffcc", label_en: "Phase", label_cn: "执行阶段" },
+            "VideoLanguage": { color: "#ff9944", label_en: "VideoLanguage", label_cn: "视频语言" },
+            "Distribution": { color: "#44aaff", label_en: "Distribution", label_cn: "分发策略" },
+            "Absurdist": { color: "#ff44aa", label_en: "Absurdist", label_cn: "抽象风格" }
+        };
+
+        // Pre-defined color palette for new categories
+        const COLOR_PALETTE = [
+            "#00ffff", "#00ff00", "#ff0055", "#ff8800", "#aa00ff",
+            "#ffff00", "#00ffaa", "#ff00aa", "#88ff00", "#0088ff"
+        ];
+        let colorIndex = 0;
+
+        function getCategory(groupName, labelCn = groupName) {
+            if (!CATEGORY_CONFIG[groupName]) {
+                CATEGORY_CONFIG[groupName] = {
+                    color: COLOR_PALETTE[colorIndex % COLOR_PALETTE.length],
+                    label_en: groupName,
+                    label_cn: labelCn
+                };
+                colorIndex++;
+            }
+            return CATEGORY_CONFIG[groupName];
+        }
+
+        function toggleLegend() {
+            document.getElementById('legend').classList.toggle('collapsed');
+        }
+
+        function buildLegend() {
+            const container = document.getElementById('legend-items');
+            container.innerHTML = '';
+            const counts = {};
+            let total = 0;
+            nodes.forEach(n => { counts[n.group] = (counts[n.group] || 0) + 1; total++; });
+            document.getElementById('legend-total').innerText = `(${Object.keys(counts).length} 域 / ${total} 点)`;
+            for (const [group, count] of Object.entries(counts)) {
+                const cat = getCategory(group);
+                const item = document.createElement('div');
+                item.className = 'legend-item';
+                item.innerHTML = `
+                    <div class="legend-color" style="background:${cat.color}"></div>
+                    <span class="legend-label">${cat.label_en} ${cat.label_cn}</span>
+                    <span class="legend-count">${count}</span>
+                `;
+                container.appendChild(item);
+            }
+        }
+
+        // --- DATA INJECTION POINT ---
+        const nodes = [
+            {
+                id: "Hook",
+                en: "Hook",
+                cn: "钩子",
+                group: "Core",
+                val: 35,
+                desc_en: "The first 3 seconds that determine if viewer swipes away",
+                desc_cn: "决定观众是否划走的开头3秒",
+                notes_en: "Hook is the <span class='keyword'>life-or-death moment</span> of oral content. Modern viewers have 3-second decision windows. The key is not 'introduction' but <span class='keyword'>creating problem sense</span> - anti-intuition, pain point resonance, conflict suspense, or emotional release.",
+                notes_cn: "钩子是口播的<span class='keyword'>生死线</span>。现代观众决策窗口只有3秒。核心不是'介绍'而是<span class='keyword'>制造问题感</span>——反直觉、痛点共鸣、冲突悬念或情绪宣泄。",
+                why_matters: "没有钩子=没有观众。再好的内容，开头留不住人就等于0。",
+                mistakes: "用'大家好今天聊...'开头；用概念定义或背景介绍开头；自我介绍占用前10秒",
+                related: ["Climax_First", "Emotional_Rhythm", "Problem_Sense"],
+                scenes_en: ["Video opening", "Article lead", "Speech hook"],
+                scenes_cn: ["视频开头", "文章导语", "演讲钩子"]
+            },
+            {
+                id: "Climax_First",
+                en: "Climax First",
+                cn: "高潮前置",
+                group: "Core",
+                val: 32,
+                desc_en: "Give conclusion first, then explain",
+                desc_cn: "先给结论/情绪点，再补充解释",
+                notes_en: "Traditional writing: A→B→C→Conclusion D. Oral flips it: <span class='keyword'>D→C→B→A</span>. Viewers have no patience for full logical chains. Grab them with conclusion's impact first, then they'll stay for the explanation.",
+                notes_cn: "传统写作：A→B→C→结论D。口播反过来：<span class='keyword'>D→C→B→A</span>。观众没耐心等完整逻辑链。先用结论冲击力抓住，再解释。",
+                why_matters: "逻辑链太长观众会走神。结论前置保证核心信息被传达。",
+                mistakes: "按时间顺序从头讲到尾；铺垫太长高潮时观众已走",
+                related: ["Hook", "Emotional_Rhythm", "Attitude_Output"],
+                scenes_en: ["Argument presentation", "Storytelling", "Tutorial"],
+                scenes_cn: ["论述观点", "讲故事", "教程讲解"]
+            },
+            {
+                id: "Attitude_Output",
+                en: "Attitude Output",
+                cn: "态度输出",
+                group: "Core",
+                val: 30,
+                desc_en: "Express stance clearly, dare to say 'this is wrong'",
+                desc_cn: "明确表达立场和情绪，敢说'这就是错的'",
+                notes_en: "Oral content is not academic paper. Viewers want <span class='keyword'>your take</span>, not 'objective analysis'. Fence-sitting kills content. Choose a stance and commit to it fully.",
+                notes_cn: "口播不是学术论文。观众要的是<span class='keyword'>你怎么看</span>，不是'客观分析'。骑墙扼杀内容。选定立场，全力表达。",
+                why_matters: "没有态度的内容没有记忆点。观众记住的是立场，不是分析。",
+                mistakes: "强行辩证两边讨好；怕得罪人不敢表态；用'问题很复杂'逃避",
+                related: ["Fence_Sitting", "Emotional_Rhythm"],
+                scenes_en: ["Hot take", "Commentary", "Review"],
+                scenes_cn: ["观点输出", "评论分析", "测评点评"]
+            },
+            {
+                id: "Emotional_Rhythm",
+                en: "Emotional Rhythm",
+                cn: "情绪节奏",
+                group: "Rhythm",
+                val: 28,
+                desc_en: "Emotional ups and downs, like music with climax and rest",
+                desc_cn: "内容的情绪起伏，像音乐有高潮有缓冲",
+                notes_en: "Formula: <span class='keyword'>Build → Burst → Buffer → Build → Burst → Close</span>. Like heartbeat - constantly high = fatigue, constantly flat = boring. Design at least 2 burst points.",
+                notes_cn: "公式：<span class='keyword'>酝酿→爆发→缓冲→酝酿→爆发→收尾</span>。像心电图——一直高能会疲劳，一直平淡会无聊。设计至少2个爆发点。",
+                why_matters: "没有节奏变化的内容像死水，观众无法保持注意力。",
+                mistakes: "从头到尾语气一样像读PPT；情绪一直高能；没有明确高潮点",
+                related: ["Hook", "Climax_First", "Short_Sentence_Burst"],
+                scenes_en: ["Full video", "Article structure", "Speech pacing"],
+                scenes_cn: ["完整视频", "文章结构", "演讲节奏"]
+            },
+            {
+                id: "Short_Sentence_Burst",
+                en: "Short Sentence Burst",
+                cn: "短句爆发",
+                group: "Rhythm",
+                val: 22,
+                desc_en: "Use consecutive short sentences to create emotional climax",
+                desc_cn: "用连续短句制造情绪高潮点",
+                notes_en: "When burst is needed: <span class='keyword'>'That simple. Just one rule. Remember it.'</span> vs 'To summarize, the core point is this one thing, please remember.' Short sentences create <span class='keyword'>rhythm and impact</span>.",
+                notes_cn: "需要爆发时：<span class='keyword'>'就这么简单。就这一条。记住了。'</span> 比 '总结一下，核心要点就是这一条，请务必记住' 有力得多。短句制造<span class='keyword'>节奏和冲击</span>。",
+                why_matters: "短句爆发让观众感受到情绪力量，增强记忆点。",
+                mistakes: "需要爆发时还用长句；全程短句失去对比",
+                related: ["Emotional_Rhythm", "Attitude_Output"],
+                scenes_en: ["Key point emphasis", "Summary", "Call to action"],
+                scenes_cn: ["重点强调", "总结收尾", "号召行动"]
+            },
+            {
+                id: "Oral_Language",
+                en: "Oral Language",
+                cn: "口播语",
+                group: "Language",
+                val: 26,
+                desc_en: "Language suited for speaking, distinct from written language",
+                desc_cn: "适合说出来的语言，区别于书面语",
+                notes_en: "Oral is not 'reading written text aloud' - it's a <span class='keyword'>different grammar system</span>. Features: short sentences, heavy use of 'you/I/we', colloquial connectors ('so', 'but', 'look'). Test: would you say this to a friend?",
+                notes_cn: "口播不是'把书面语读出来'——是<span class='keyword'>完全不同的语法系统</span>。特征：短句为主，大量用'你我咱们'，口语连接词。判断：这话你会跟朋友说吗？",
+                why_matters: "书面语在口播中听起来生硬疏离，观众觉得你在'念稿子'。",
+                mistakes: "使用'众所周知''综上所述'等书面套话；句子太长；第三人称过多",
+                related: ["Pronoun_Shift", "Eye_Level"],
+                scenes_en: ["Script writing", "Live streaming", "Voice-over"],
+                scenes_cn: ["脚本写作", "直播口播", "配音旁白"]
+            },
+            {
+                id: "Pronoun_Shift",
+                en: "Pronoun Shift",
+                cn: "人称切换",
+                group: "Language",
+                val: 22,
+                desc_en: "Switch between I/you/we/they for different effects",
+                desc_cn: "在'我/你/我们/他们'间切换制造不同效果",
+                notes_en: "<span class='keyword'>'I'</span> = authenticity. <span class='keyword'>'You'</span> = dialogue, directness. <span class='keyword'>'We'</span> = alliance, empathy. <span class='keyword'>'They'</span> = opposition, enemy. Skilled creators switch pronouns to control viewer's psychological position.",
+                notes_cn: "<span class='keyword'>'我'</span>=真实感。<span class='keyword'>'你'</span>=对话感。<span class='keyword'>'咱们'</span>=同盟感。<span class='keyword'>'他们'</span>=对立感。熟练的创作者切换人称控制观众心理位置。",
+                why_matters: "人称选择决定观众觉得'你在教育我'还是'你跟我一起'。",
+                mistakes: "全程用'人们''大家'等疏离人称；该用'你'时用了'我们'",
+                related: ["Eye_Level", "Oral_Language"],
+                scenes_en: ["Engaging audience", "Creating opposition", "Building alliance"],
+                scenes_cn: ["拉近观众", "制造对立", "建立同盟"]
+            },
+            {
+                id: "Eye_Level",
+                en: "Eye-Level",
+                cn: "平视受众",
+                group: "Mindset",
+                val: 25,
+                desc_en: "Stand with audience, not above them",
+                desc_cn: "和观众站同一位置，不居高临下教育",
+                notes_en: "Eye-level means 'I've been there too', 'we all experience this'. Not 'you should', 'many don't understand'. Viewers resist being lectured but embrace being <span class='keyword'>understood</span>.",
+                notes_cn: "平视意味着'我也一样''咱们都经历过'。不是'你们应该''很多人不懂'。观众对'被教育'抵触，对<span class='keyword'>被理解</span>亲近。",
+                why_matters: "居高临下的口吻激发逆反心理，降低说服力。",
+                mistakes: "用'我来告诉你们道理'开头；过度强调专业背景；把观众当学生",
+                related: ["Pronoun_Shift", "Attitude_Output"],
+                scenes_en: ["Sharing experience", "Giving advice", "Discussing issues"],
+                scenes_cn: ["分享经历", "给建议", "讨论问题"]
+            },
+            {
+                id: "Problem_Sense",
+                en: "Problem Sense",
+                cn: "问题感",
+                group: "Core",
+                val: 24,
+                desc_en: "Make viewer realize 'there's a problem to solve'",
+                desc_cn: "让观众意识到'有问题需要解决'的紧迫感",
+                notes_en: "Problem sense is the <span class='keyword'>engine of hook</span>. Not 'let's discuss topic X' but making viewer realize 'I might have this problem' or 'there's something I don't know'. Activates curiosity and urgency.",
+                notes_cn: "问题感是<span class='keyword'>钩子的引擎</span>。不是'今天聊话题X'而是让观众意识到'我好像有这问题'或'有我不知道的内幕'。激活好奇和紧迫感。",
+                why_matters: "问题感是观众留下来的根本动力。",
+                mistakes: "开头只说话题不制造问题；问题太抽象和观众没关系",
+                related: ["Hook", "Climax_First"],
+                scenes_en: ["Opening question", "Pain point trigger", "Mystery setup"],
+                scenes_cn: ["开篇提问", "痛点触发", "悬念设置"]
+            },
+            {
+                id: "Fence_Sitting",
+                en: "Fence-Sitting",
+                cn: "骑墙",
+                group: "AntiPattern",
+                val: 20,
+                desc_en: "Pleasing both sides, not taking stance",
+                desc_cn: "两边讨好，不敢表态",
+                notes_en: "The <span class='keyword'>fatal sin</span> of oral content. Pattern: analyze A's merits, then 'but also has issues'; criticize B, then 'but also has value'. This = no attitude = <span class='keyword'>zero attraction</span>. Viewers want a guide, not a map.",
+                notes_cn: "口播的<span class='keyword'>大忌</span>。模式：分析A的好处，又说'但也有问题'；批评B，又说'也有可取'。结果=没态度=<span class='keyword'>零吸引力</span>。观众要导游不要地图。",
+                why_matters: "骑墙内容无法激发情绪共鸣，看完记不住任何东西。",
+                mistakes: "每个观点都加'但是'；用'因人而异'逃避；用'辩证地看'掩盖没立场",
+                related: ["Attitude_Output"],
+                scenes_en: ["Analysis paralysis", "Fear of offending", "Over-objectivity"],
+                scenes_cn: ["分析瘫痪", "怕得罪人", "过度客观"]
+            },
+            {
+                id: "Written_套话",
+                en: "Written Clichés",
+                cn: "书面套话",
+                group: "AntiPattern",
+                val: 18,
+                desc_en: "Formal written phrases that sound stiff in oral content",
+                desc_cn: "在口播中听起来生硬的书面语套话",
+                notes_en: "Red flags: <span class='keyword'>'众所周知'</span>, '综上所述', '换言之', '由此可见'. These scream 'I'm reading a script'. Convert to oral: '很多人以为', '说白了就是', '意思就是', '你看'.",
+                notes_cn: "危险词：<span class='keyword'>'众所周知'</span>'综上所述''换言之''由此可见'。这些词在尖叫'我在念稿子'。转换：'很多人以为''说白了''意思就是''你看'。",
+                why_matters: "书面套话让内容失去对话感和真实感。",
+                mistakes: "直接把文章读出来；不检查口语化程度",
+                related: ["Oral_Language"],
+                scenes_en: ["Script first draft", "Article-to-video", "Report conversion"],
+                scenes_cn: ["初稿检查", "文章转视频", "报告转口播"]
+            },
+            {
+                id: "Logic_Overload",
+                en: "Logic Overload",
+                cn: "逻辑过载",
+                group: "AntiPattern",
+                val: 18,
+                desc_en: "Too-long logical chain before conclusion",
+                desc_cn: "逻辑链过长才给结论",
+                notes_en: "Pattern: 'because A so B therefore C finally D'. By the time you reach D, viewer forgot what A was. <span class='keyword'>Flip it</span>: Start with D, then explain why backwards. Viewer patience = 10 seconds max.",
+                notes_cn: "模式：'因为A所以B因此C最终D'。讲到D时观众早忘了A。<span class='keyword'>反过来</span>：先给D，再倒序解释。观众耐心最多10秒。",
+                why_matters: "完整推导过程让观众走神，核心观点反而没被听到。",
+                mistakes: "追求论证完整性；按时间顺序从头讲",
+                related: ["Climax_First", "Hook"],
+                scenes_en: ["Explanation video", "Argument presentation", "How-to content"],
+                scenes_cn: ["解释类视频", "论述观点", "教程内容"]
+            },
+            {
+                id: "Flat_Emotion",
+                en: "Flat Emotion",
+                cn: "情绪平铺",
+                group: "AntiPattern",
+                val: 18,
+                desc_en: "Same tone throughout, no emotional peaks",
+                desc_cn: "从头到尾语气一样，没有情绪爆发点",
+                notes_en: "Sounds like reading PPT slides. No burst points = no <span class='keyword'>memorable moments</span>. Even 'objective' content needs designed peaks - use short sentences, rhetorical questions, attitude words to create burst.",
+                notes_cn: "听起来像读PPT。没有爆发点=没有<span class='keyword'>记忆点</span>。再'客观'的内容也需要设计高潮——用短句、反问、态度词制造爆发。",
+                why_matters: "情绪平铺让观众昏昏欲睡，无法维持注意力。",
+                mistakes: "把'客观'当美德；没刻意设计高潮点",
+                related: ["Emotional_Rhythm", "Short_Sentence_Burst"],
+                scenes_en: ["Information dump", "Tutorial reading", "News report style"],
+                scenes_cn: ["信息堆砌", "念教程", "新闻播报风格"]
+            },
+            // === HOOK TYPES (8 types) ===
+            {
+                id: "Counter_Intuitive_Hook",
+                en: "Counter-Intuitive",
+                cn: "反直觉钩子",
+                group: "HookType",
+                val: 24,
+                desc_en: "Subvert common sense to create cognitive conflict",
+                desc_cn: "颠覆常识激活认知冲突",
+                notes_en: "Formula: <span class='keyword'>'Most people think X, but actually Y'</span>. When viewers find their beliefs challenged, they must keep watching to resolve the conflict. Impact = distance between X and Y.",
+                notes_cn: "公式：<span class='keyword'>'很多人以为X，其实Y'</span>。当观众发现自己的常识被挑战，会产生必须看下去解决冲突的冲动。冲击力=X和Y之间的距离。",
+                why_matters: "认知冲突是人类最难忽视的心理状态，必须解决才能安心。",
+                mistakes: "变成瞎说八道缺乏论据；Y不够震撼；距离太小没冲击",
+                related: ["Hook", "Data_Shock_Hook", "Problem_Sense"],
+                scenes_en: ["Myth busting", "Knowledge sharing", "Opinion piece"],
+                scenes_cn: ["破除迷思", "知识分享", "观点输出"]
+            },
+            {
+                id: "Pain_Point_Hook",
+                en: "Pain Point",
+                cn: "痛点共鸣钩子",
+                group: "HookType",
+                val: 24,
+                desc_en: "Touch viewer's current struggles to build connection",
+                desc_cn: "触碰观众正在经历的困扰建立情感连接",
+                notes_en: "Formula: <span class='keyword'>'Have you ever felt...'</span>. Describe specific pain scenarios so viewers think 'That's exactly me!'. More specific = more resonance. Pain types: emotional, behavioral, social, growth.",
+                notes_cn: "公式：<span class='keyword'>'你是不是也有过这种感觉...'</span>。描述具体痛苦场景让观众觉得'这说的不就是我'。越具体越共鸣。痛点类型：情绪/行为/社交/成长。",
+                why_matters: "被理解的感觉会让观众产生信任，愿意听你继续说。",
+                mistakes: "痛点太抽象不具体；没有场景感；自以为的痛点不普遍",
+                related: ["Hook", "Identity_Hook", "Eye_Level"],
+                scenes_en: ["Empathy content", "Self-help", "Story sharing"],
+                scenes_cn: ["共情内容", "自我提升", "经历分享"]
+            },
+            {
+                id: "Conflict_Hook",
+                en: "Conflict Suspense",
+                cn: "冲突悬念钩子",
+                group: "HookType",
+                val: 22,
+                desc_en: "Create information gap, hint at insider knowledge",
+                desc_cn: "制造信息不对称暗示有内幕",
+                notes_en: "Formula: <span class='keyword'>'Today I'll tell you something X doesn't want you to know'</span>. Key elements: Hidden party (boss/company/expert) + Secret (insider/truth) + You (I'm on your side).",
+                notes_cn: "公式：<span class='keyword'>'今天我要告诉你一件X不希望你知道的事'</span>。关键元素：隐藏者(老板/公司/专家)+秘密(内幕/真相)+你(我站你这边)。",
+                why_matters: "人对被隐瞒的信息有本能好奇，加上同盟感更想听。",
+                mistakes: "悬念太弱；没有明确对立方；承诺的内幕其实不值钱",
+                related: ["Hook", "Story_Hook", "Emotional_Vent_Hook"],
+                scenes_en: ["Exposé", "Industry secrets", "Behind the scenes"],
+                scenes_cn: ["揭秘", "行业内幕", "幕后故事"]
+            },
+            {
+                id: "Data_Shock_Hook",
+                en: "Data Shock",
+                cn: "数据震撼钩子",
+                group: "HookType",
+                val: 22,
+                desc_en: "Use specific numbers for impact and authority",
+                desc_cn: "用具体数字制造冲击感建立权威性",
+                notes_en: "Formula: <span class='keyword'>'X% of people get Y wrong'</span>. Specific numbers create authenticity. Best types: extreme ratios (99%), comparison data (10x difference). Numbers must be specific, credible, relevant.",
+                notes_cn: "公式：<span class='keyword'>'X%的人在Y这件事上都搞错了'</span>。具体数字产生真实感。最强类型：极端占比(99%)、对比数据(差10倍)。数字要具体可信相关。",
+                why_matters: "数字让抽象变具体，让观点变可信，让观众自我对照。",
+                mistakes: "数字来源不可信；数字太普通没冲击；和观众无关",
+                related: ["Hook", "Counter_Intuitive_Hook", "Benefit_Hook"],
+                scenes_en: ["Research sharing", "Case study", "Statistics"],
+                scenes_cn: ["研究分享", "案例分析", "数据报告"]
+            },
+            {
+                id: "Emotional_Vent_Hook",
+                en: "Emotional Vent",
+                cn: "情绪宣泄钩子",
+                group: "HookType",
+                val: 22,
+                desc_en: "Say what viewers want to say but dare not",
+                desc_cn: "替观众说出他们想说但不敢说的话",
+                notes_en: "Formula: <span class='keyword'>'I'm so sick of X...'</span>. Express strong emotions to trigger resonance. Viewer thinks 'That's exactly what I wanted to say!'. Types: anger, disgust, frustration, heartache.",
+                notes_cn: "公式：<span class='keyword'>'我真的受够了X...'</span>。强烈情绪表达触发共鸣。观众觉得'你说出了我心里话'。类型：愤怒/厌恶/无奈/心疼。",
+                why_matters: "替人说出心里话会赢得强烈的认同感和同盟感。",
+                mistakes: "情绪太假不真诚；宣泄的点不普遍；变成纯发泄没价值",
+                related: ["Hook", "Attitude_Output", "Pain_Point_Hook"],
+                scenes_en: ["Rant", "Hot take", "Commentary"],
+                scenes_cn: ["吐槽", "观点输出", "评论分析"]
+            },
+            {
+                id: "Identity_Hook",
+                en: "Identity",
+                cn: "身份认同钩子",
+                group: "HookType",
+                val: 20,
+                desc_en: "Make specific group feel 'this is for me'",
+                desc_cn: "让特定人群觉得'这是给我看的'",
+                notes_en: "Formula: <span class='keyword'>'If you're X type of person, watch this'</span>. Viewer self-checks 'Am I this type?' If yes, they feel 'This is specifically for me'. Tags: age, profession, personality, status, situation.",
+                notes_cn: "公式：<span class='keyword'>'如果你是X类型的人，一定要看这个'</span>。观众自检'我是不是这类人'。如果是就觉得'这是专门给我看的'。标签：年龄/职业/性格/状态/困境。",
+                why_matters: "针对性内容比泛内容更有吸引力，观众觉得被理解。",
+                mistakes: "标签太宽泛不精准；标签和内容不匹配；排斥了潜在观众",
+                related: ["Hook", "Pain_Point_Hook", "Eye_Level"],
+                scenes_en: ["Targeted content", "Niche audience", "Community building"],
+                scenes_cn: ["定向内容", "垂直受众", "社群建设"]
+            },
+            {
+                id: "Benefit_Hook",
+                en: "Benefit Promise",
+                cn: "利益承诺钩子",
+                group: "HookType",
+                val: 20,
+                desc_en: "Tell viewers exactly what they'll get",
+                desc_cn: "直接告诉观众看完能得到什么",
+                notes_en: "Formula: <span class='keyword'>'After watching this, you'll know how to X'</span>. Promise must be: specific (not abstract), quantifiable (numbers help), urgent (imply loss if missed). Too exaggerated = zero credibility.",
+                notes_cn: "公式：<span class='keyword'>'看完这个，你就知道如何X'</span>。承诺必须：具体(不抽象)、可量化(有数字更好)、有紧迫性(暗示错过损失)。太夸张=可信度归零。",
+                why_matters: "明确收益让观众有动力投入时间，知道看完能得到什么。",
+                mistakes: "承诺太夸张不可信；收益太模糊；和目标观众无关",
+                related: ["Hook", "Data_Shock_Hook", "Climax_First"],
+                scenes_en: ["Tutorial", "How-to", "Tips and tricks"],
+                scenes_cn: ["教程", "方法分享", "技巧指南"]
+            },
+            {
+                id: "Story_Hook",
+                en: "Story Suspense",
+                cn: "故事悬念钩子",
+                group: "HookType",
+                val: 20,
+                desc_en: "Start with story, stop at critical moment",
+                desc_cn: "用故事开头，在关键处停住",
+                notes_en: "Formula: <span class='keyword'>'That night something happened that changed everything...'</span>. Structure: Scene (time/place/person) → Twist (unexpected) → Suspense (stop before climax). Humans can't resist unfinished stories.",
+                notes_cn: "公式：<span class='keyword'>'那天晚上发生了一件事，彻底改变了我...'</span>。结构：场景(时间地点人物)→转折(意外发生)→悬念(高潮前停住)。人类无法抗拒未完成的故事。",
+                why_matters: "故事有代入感，悬念有必须听完的冲动。",
+                mistakes: "故事开头太长；悬念设置太弱；故事和内容主题脱节",
+                related: ["Hook", "Conflict_Hook", "Emotional_Rhythm"],
+                scenes_en: ["Storytelling", "Case study", "Personal experience"],
+                scenes_cn: ["讲故事", "案例分析", "个人经历"]
+            },
+            {
+                id: "Combo_Hook",
+                en: "Combo Hook",
+                cn: "组合钩子",
+                group: "HookType",
+                val: 26,
+                desc_en: "Combine multiple hook types for stronger effect",
+                desc_cn: "多种钩子类型叠加使用增强效果",
+                notes_en: "Single hooks work, <span class='keyword'>combos work better</span>. Best combos: Counter-intuitive+Data (knowledge), Pain+Benefit (tutorial), Identity+Emotion (empathy), Suspense+Counter-intuitive (story), Conflict+Emotion (opinion).",
+                notes_cn: "单一钩子有效，<span class='keyword'>组合钩子更强</span>。高效组合：反直觉+数据(科普)、痛点+承诺(教程)、身份+情绪(情感)、悬念+反直觉(故事)、冲突+情绪(观点)。",
+                why_matters: "单一钩子有效，组合钩子更强，多个触发点叠加。",
+                mistakes: "组合太多变得杂乱；组合类型不匹配；主次不分",
+                related: ["Hook", "Counter_Intuitive_Hook", "Pain_Point_Hook", "Data_Shock_Hook"],
+                scenes_en: ["High-stakes content", "Viral potential", "Complex topics"],
+                scenes_cn: ["重要内容", "爆款潜力", "复杂话题"]
+            },
+            // === HUMAN-LIKE WRITING (from Human_Like_Expression.md) ===
+            {
+                id: "We_Perspective",
+                en: "We-Perspective",
+                cn: "共情视角",
+                group: "HumanLike",
+                val: 28,
+                desc_en: "Use 'we' instead of 'you' to stand alongside the audience",
+                desc_cn: "用'我们'替代'你'，与观众并肩站立而非说教",
+                notes_en: "'You need to understand' = <span class='keyword'>preaching from above</span>. 'Let's figure this out together' = <span class='keyword'>allies fighting together</span>. The viewer is not a student, but a companion on the journey.",
+                notes_cn: "'你需要理解'=<span class='keyword'>居高临下说教</span>。'咱们一起搞清楚'=<span class='keyword'>并肩作战的伙伴</span>。观众不是学生，是旅途中的同伴。",
+                why_matters: "视角决定情感距离。'你'产生抵触，'我们'产生亲近。",
+                mistakes: "习惯性用'你应该'开头；把自己放在'老师'位置",
+                related: ["Eye_Level", "Preacher_Syndrome", "Cold_Analyst"],
+                scenes_en: ["Commentary", "Knowledge sharing", "Empathy content"],
+                scenes_cn: ["评论", "知识分享", "共情内容"]
+            },
+            {
+                id: "Question_Hook_Start",
+                en: "Question Hook Start",
+                cn: "问题开头",
+                group: "HumanLike",
+                val: 26,
+                desc_en: "Start with a question, not a statement",
+                desc_cn: "用问句开头，而不是陈述句",
+                notes_en: "'Why do we always feel born in the wrong era?' is infinitely better than 'In modern society, people generally have a feeling...'. Questions trigger <span class='keyword'>Zeigarnik Effect</span> - the need to complete unfinished thoughts.",
+                notes_cn: "'为什么我们总觉得生不逢时？'远比'在现代社会，人们普遍有一种感受...'要好。问题触发<span class='keyword'>蔡格尼克效应</span>——未完成事项必须解决的心理。",
+                why_matters: "问题激活大脑的未完成感，观众会产生'为什么呢？'的好奇。",
+                mistakes: "开头用陈述句铺垫太长；问题太抽象不够具体",
+                related: ["Hook", "Counter_Intuitive_Hook", "Pain_Point_Hook"],
+                scenes_en: ["Video opening", "Article intro", "Social content"],
+                scenes_cn: ["视频开头", "文章引入", "社交内容"]
+            },
+            {
+                id: "Conversational_Warmth",
+                en: "Conversational Warmth",
+                cn: "口语温度",
+                group: "HumanLike",
+                val: 26,
+                desc_en: "Write like talking to a friend, not an academic paper",
+                desc_cn: "像跟朋友聊天一样写作，而不是写学术论文",
+                notes_en: "Replace: 'Given the above analysis' → <span class='keyword'>'So you see'</span>. 'It is worth noting' → <span class='keyword'>'But be careful here'</span>. 'In conclusion' → <span class='keyword'>'Bottom line'</span>. Test: Can you read it aloud naturally?",
+                notes_cn: "替换：'鉴于上述分析可以得出'→<span class='keyword'>'所以你看'</span>。'值得注意的是'→<span class='keyword'>'但有一点要小心'</span>。'综上所述'→<span class='keyword'>'说到底'</span>。测试：能自然念出来吗？",
+                why_matters: "书面语产生距离感，口语产生亲近感和信任感。",
+                mistakes: "每句话都很书面；没有语气词；像在念用户手册",
+                related: ["Oral_Language", "Written_套话", "Preacher_Syndrome"],
+                scenes_en: ["Oral script", "Casual content", "Social media"],
+                scenes_cn: ["口播脚本", "轻松内容", "社交媒体"]
+            },
+            {
+                id: "Clear_Stance",
+                en: "Clear Stance",
+                cn: "态度鲜明",
+                group: "HumanLike",
+                val: 28,
+                desc_en: "Have a clear opinion, don't fence-sit",
+                desc_cn: "有明确的观点，不要骑墙两边讨好",
+                notes_en: "'This issue is complex and needs dialectical analysis' = <span class='keyword'>AI speak</span>. 'This is just wrong, period' = <span class='keyword'>human speak</span>. Viewers remember stances, not analyses. No stance = no memory.",
+                notes_cn: "'这个问题很复杂，要辩证看待'=<span class='keyword'>AI说法</span>。'这就是错的，没什么好辩的'=<span class='keyword'>人话</span>。观众记住的是立场，不是分析。没立场=没记忆。",
+                why_matters: "人记住的是观点，不是分析。没有态度的内容没有记忆点。",
+                mistakes: "害怕得罪人不敢表态；强行辩证；用'问题很复杂'逃避",
+                related: ["Attitude_Output", "Fence_Sitting", "Cold_Analyst"],
+                scenes_en: ["Commentary", "Review", "Opinion content"],
+                scenes_cn: ["评论", "测评", "观点内容"]
+            },
+            {
+                id: "Rhythm_Variation",
+                en: "Rhythm Variation",
+                cn: "节奏变化",
+                group: "HumanLike",
+                val: 24,
+                desc_en: "Vary sentence length deliberately",
+                desc_cn: "刻意变化句子长短",
+                notes_en: "All medium sentences = <span class='keyword'>AI pattern</span>. Humans write with rhythm: long explanation → short burst → medium transition. When making a point: <span class='keyword'>'Remember this. Short is powerful. Simple.'</span>",
+                notes_cn: "全是中等长度句子=<span class='keyword'>AI模式</span>。人类写作有节奏：长句解释→短句爆发→中句过渡。强调时：<span class='keyword'>'记住一个道理。短句有力。就这么简单。'</span>",
+                why_matters: "句式单一是AI最明显的特征之一。节奏变化让文字有生命力。",
+                mistakes: "全是长句→累；全是短句→像念经；全是中句→AI味",
+                related: ["Short_Sentence_Burst", "Emotional_Rhythm", "Flat_Emotion"],
+                scenes_en: ["All content", "Emphasis points", "Climax moments"],
+                scenes_cn: ["所有内容", "强调点", "高潮时刻"]
+            },
+            {
+                id: "Emotion_Peak_Design",
+                en: "Emotion Peak Design",
+                cn: "情绪高潮设计",
+                group: "HumanLike",
+                val: 26,
+                desc_en: "Design emotional curve with peaks and valleys",
+                desc_cn: "设计有高峰有低谷的情绪曲线",
+                notes_en: "Formula: <span class='keyword'>Build → Burst → Buffer → Build → Burst → Close</span>. Like heartbeat - constantly high = fatigue, constantly flat = boring. Design at least <span class='keyword'>2 burst points</span> per piece.",
+                notes_cn: "公式：<span class='keyword'>酝酿→爆发→缓冲→酝酿→爆发→收尾</span>。像心电图——一直高能会疲劳，一直平淡会无聊。每篇内容至少设计<span class='keyword'>2个爆发点</span>。",
+                why_matters: "情绪平铺让观众走神，High-Low交替才能保持注意力。",
+                mistakes: "从头到尾情绪一样；没有明确的高潮点；情绪没有起伏",
+                related: ["Emotional_Rhythm", "Climax_First", "Flat_Emotion"],
+                scenes_en: ["Full video", "Article structure", "Presentation"],
+                scenes_cn: ["完整视频", "文章结构", "演讲"]
+            },
+            // === AI ANTI-PATTERNS (from Human_Like_Expression.md) ===
+            {
+                id: "Preacher_Syndrome",
+                en: "Preacher Syndrome",
+                cn: "说教者综合症",
+                group: "AntiPattern",
+                val: 20,
+                desc_en: "Starting with 'you should' and lecturing from above",
+                desc_cn: "用'你应该'开头，居高临下教训读者",
+                notes_en: "Default AI pattern: second-person prescriptive. 'You need to realize...' creates <span class='keyword'>resistance</span>. Fix: Replace 'you' with 'we', replace statements with questions. The viewer is not your student.",
+                notes_cn: "AI默认模式：第二人称祈使句。'你需要意识到...'产生<span class='keyword'>抵触</span>。修复：用'我们'替代'你'，用问句替代陈述句。观众不是你的学生。",
+                why_matters: "说教感是观众最容易识别的AI特征，也最容易引起反感。",
+                mistakes: "习惯性用'你需要'开头；把自己当老师；居高临下",
+                related: ["We_Perspective", "Eye_Level", "Cold_Analyst"],
+                scenes_en: ["Tutorial content", "Advice content", "Educational"],
+                scenes_cn: ["教程内容", "建议类", "教育类"]
+            },
+            {
+                id: "Cold_Analyst",
+                en: "Cold Analyst",
+                cn: "冰冷分析师",
+                group: "AntiPattern",
+                val: 20,
+                desc_en: "Only analyzing without taking a stance, like a research report",
+                desc_cn: "只分析不表态，像在写研究报告",
+                notes_en: "'There are various viewpoints on this issue, each with its merits...' = <span class='keyword'>AI default neutral</span>. Fix: Use 'I believe', dare to say 'This is wrong'. Viewers want <span class='keyword'>your take</span>, not Wikipedia.",
+                notes_cn: "'关于这个问题有多种观点，各有道理...'=<span class='keyword'>AI默认中立</span>。修复：用'我认为'，敢说'这就是错的'。观众要的是<span class='keyword'>你怎么看</span>，不是百度百科。",
+                why_matters: "冰冷分析没有情感连接，观众无法与内容产生共鸣。",
+                mistakes: "害怕得罪人；追求'客观中立'；不敢有个人色彩",
+                related: ["Clear_Stance", "Attitude_Output", "Fence_Sitting"],
+                scenes_en: ["Commentary", "Opinion piece", "Review"],
+                scenes_cn: ["评论", "观点文章", "测评"]
+            },
+            {
+                id: "Rule_Of_Three",
+                en: "Rule of Three Addiction",
+                cn: "三段论依赖症",
+                group: "AntiPattern",
+                val: 18,
+                desc_en: "Always listing exactly three examples or points",
+                desc_cn: "所有例子都是三个，所有列表都是三点",
+                notes_en: "AI training data has extremely high frequency of 'three points'. 'There are three reasons. First... Second... Third...' = <span class='keyword'>instant AI detection</span>. Fix: Sometimes use 2, sometimes 4-5. Break the pattern.",
+                notes_cn: "AI训练数据中'三段论'频率极高。'这有三个原因。第一...第二...第三...'=<span class='keyword'>立刻被识破</span>。修复：有时用2个，有时用4-5个。打破模式。",
+                why_matters: "三段论是最明显的AI特征之一，一眼就能看出来。",
+                mistakes: "所有列表都是三项；所有例子都是三个；形成固定模式",
+                related: ["Rhythm_Variation", "Flat_Emotion"],
+                scenes_en: ["List content", "Explanation", "Summary"],
+                scenes_cn: ["列表内容", "解释说明", "总结"]
+            },
+            {
+                id: "Transition_Overflow",
+                en: "Transition Overflow",
+                cn: "过渡词滥用",
+                group: "AntiPattern",
+                val: 18,
+                desc_en: "Overusing 'moreover', 'however', 'therefore'",
+                desc_cn: "过度使用'此外'、'然而'、'因此'",
+                notes_en: "'First... Moreover... However... Therefore... In conclusion...' = <span class='keyword'>artificial coherence</span>. Human thinking is more jumpy. Fix: Delete 80% of transitions, use paragraph breaks instead.",
+                notes_cn: "'首先...此外...然而...因此...综上所述...'=<span class='keyword'>人工的连贯感</span>。人类思维更跳跃。修复：删掉80%过渡词，用段落分隔代替。",
+                why_matters: "过渡词滥用让文章听起来像老师批改的作文，而不是自然表达。",
+                mistakes: "每段开头都有过渡词；连续用多个'此外'；刻意追求连贯",
+                related: ["Written_套话", "Conversational_Warmth", "Oral_Language"],
+                scenes_en: ["Long-form content", "Articles", "Essays"],
+                scenes_cn: ["长内容", "文章", "论述"]
+            },
+            {
+                id: "Warmth_Deficiency",
+                en: "Warmth Deficiency",
+                cn: "温度缺失症",
+                group: "AntiPattern",
+                val: 18,
+                desc_en: "Cold, robotic language like a user manual",
+                desc_cn: "语言冰冷，像在读用户手册",
+                notes_en: "'In modern society, people generally face the problem of too many choices' = <span class='keyword'>robot speak</span>. 'Too many choices, can't pick anything - who hasn't been there?' = <span class='keyword'>human speak</span>. Add 嘛/啊/吧, add exclamations, add metaphors.",
+                notes_cn: "'现代社会中，人们普遍面临着选择过多的困扰'=<span class='keyword'>机器人说法</span>。'选择太多，反而选不出来——这事儿谁没遇到过啊？'=<span class='keyword'>人话</span>。加语气词嘛/啊/吧，加感叹，加比喻。",
+                why_matters: "冰冷的语言产生距离感，读者无法产生情感连接。",
+                mistakes: "每句话都很正式；没有语气词；没有自己的比喻和表达方式",
+                related: ["Conversational_Warmth", "Oral_Language", "Written_套话"],
+                scenes_en: ["All content", "Oral script", "Casual content"],
+                scenes_cn: ["所有内容", "口播脚本", "轻松内容"]
+            },
+            // === INTENT FACTOR SYSTEM (from 2.0_Intent_Factor_System.md) ===
+            {
+                id: "Intent_Factor",
+                en: "Intent Factor",
+                cn: "意图因子",
+                group: "IntentFactor",
+                val: 35,
+                desc_en: "The atomic unit of creative intent, quantifiable and derivable",
+                desc_cn: "创作目的的最小单位，可量化可推导",
+                notes_en: "Intent Factor is the <span class='keyword'>core concept</span> of the Asyre system. It breaks down 'what do I want the audience to do' into quantifiable atomic units. Each content is a weighted combination of intent factors.",
+                notes_cn: "意图因子是Asyre系统的<span class='keyword'>核心概念</span>。它把'我想让观众怎样'拆解成可量化的原子单位。每篇内容是多个意图因子的加权组合。",
+                why_matters: "意图因子解决了'用AI写内容时不知道该怎么写'的根本问题——从意图推导参数。",
+                mistakes: "意图模糊不量化；意图因子冲突互相打架；过度堆砌太多高权重因子",
+                related: ["Purpose_Layer", "Derivation_Rule", "Persuasion"],
+                scenes_en: ["Content planning", "AI prompting", "Creative direction"],
+                scenes_cn: ["内容规划", "AI提示", "创作方向"]
+            },
+            {
+                id: "Purpose_Layer",
+                en: "Purpose Layer",
+                cn: "目的层",
+                group: "PurposeLayer",
+                val: 30,
+                desc_en: "Top-level classification: Cognitive/Attitude/Behavior/Emotional",
+                desc_cn: "意图因子的上层分类：认知/态度/行为/情感",
+                notes_en: "Purpose Layer categorizes intent factors into <span class='keyword'>four types</span>: Cognitive Change, Attitude Change, Behavior Change, Emotional Fulfillment.",
+                notes_cn: "目的层将意图因子分为<span class='keyword'>四大类</span>：认知改变、态度改变、行为改变、情感满足。",
+                why_matters: "目的层帮你快速定位内容的核心目标属于哪一类。",
+                mistakes: "把不同目的层的因子混在一起；不清楚自己的核心目的",
+                related: ["Intent_Factor", "Cognitive_Change", "Attitude_Change", "Emotional_Fulfillment"],
+                scenes_en: ["Content strategy", "Intent classification"],
+                scenes_cn: ["内容策略", "意图分类"]
+            },
+            {
+                id: "Derivation_Rule",
+                en: "Derivation Rule",
+                cn: "推导规则",
+                group: "IntentFactor",
+                val: 28,
+                desc_en: "Logic that derives execution parameters from intent factors",
+                desc_cn: "从意图因子自动推导执行参数的逻辑",
+                notes_en: "Derivation Rules are the <span class='keyword'>core engine</span>. When persuasion >= 0.7, rules auto-derive that attitude_strength must >= 0.8.",
+                notes_cn: "推导规则是意图因子系统的<span class='keyword'>核心引擎</span>。当配置了persuasion >= 0.7，系统自动推导attitude_strength必须>= 0.8。",
+                why_matters: "推导规则让AI不再瞎猜，知道每种意图对应什么执行要求。",
+                mistakes: "忽略规则直接写内容；规则冲突时不知道如何处理",
+                related: ["Intent_Factor", "Attitude_Output", "Fence_Sitting"],
+                scenes_en: ["Parameter derivation", "Rule triggering"],
+                scenes_cn: ["参数推导", "规则触发"]
+            },
+            {
+                id: "Cognitive_Change",
+                en: "Cognitive Change",
+                cn: "认知改变",
+                group: "PurposeLayer",
+                val: 26,
+                desc_en: "Make audience learn something new or replace old knowledge",
+                desc_cn: "让受众脑子里装进新东西或换掉旧东西",
+                notes_en: "Cognitive Change modifies <span class='keyword'>knowledge structure</span>—adding new knowledge, eliminating misconceptions, or disrupting fixed cognition. Based on Logos.",
+                notes_cn: "认知改变的目标是改变受众的<span class='keyword'>知识结构</span>——增加新知识、消除误解、或打破固有认知。修辞基础是Logos。",
+                why_matters: "认知一旦改变，态度和行为改变会跟着来。",
+                mistakes: "只给结论不给逻辑；太抽象没有案例",
+                related: ["Purpose_Layer", "Logos", "Counter_Intuitive_Hook"],
+                scenes_en: ["Knowledge content", "Tutorial", "Myth busting"],
+                scenes_cn: ["知识内容", "教程", "破除迷思"]
+            },
+            {
+                id: "Attitude_Change",
+                en: "Attitude Change",
+                cn: "态度改变",
+                group: "PurposeLayer",
+                val: 26,
+                desc_en: "Change audience's attitude toward something",
+                desc_cn: "让受众对某件事的态度发生转变",
+                notes_en: "Attitude Change modifies <span class='keyword'>value judgments</span>—through value guidance, persuasion, or identity construction. Based on Ethos.",
+                notes_cn: "态度改变的目标是改变受众的<span class='keyword'>价值判断和立场</span>。修辞基础是Ethos。",
+                why_matters: "态度决定选择。改变态度是改变行为的前提。",
+                mistakes: "骑墙不敢表态；只讲道理不触动情绪",
+                related: ["Purpose_Layer", "Ethos", "Attitude_Output", "Persuasion"],
+                scenes_en: ["Opinion content", "Commentary"],
+                scenes_cn: ["观点内容", "评论"]
+            },
+            {
+                id: "Emotional_Fulfillment_Intent",
+                en: "Emotional Fulfillment",
+                cn: "情感满足",
+                group: "PurposeLayer",
+                val: 26,
+                desc_en: "Provide emotional satisfaction or resonance",
+                desc_cn: "让受众获得情感层面的满足或共鸣",
+                notes_en: "Emotional Fulfillment makes audience <span class='keyword'>feel something</span>—understood, released, entertained, or validated. Based on Pathos.",
+                notes_cn: "情感满足让受众<span class='keyword'>感受到什么</span>——被理解、宣泄情绪、获得娱乐、或被认可。修辞基础是Pathos。",
+                why_matters: "观众记住的是你让他感受到了什么，不是你说了什么。",
+                mistakes: "情绪太假；全程煽情没有节奏",
+                related: ["Purpose_Layer", "Pathos", "Emotional_Rhythm"],
+                scenes_en: ["Empathy content", "Entertainment"],
+                scenes_cn: ["共情内容", "娱乐"]
+            },
+            {
+                id: "Persuasion",
+                en: "Persuasion",
+                cn: "观点说服",
+                group: "IntentFactor",
+                val: 24,
+                desc_en: "Make audience agree with your viewpoint",
+                desc_cn: "让受众认同作者的具体观点或立场",
+                notes_en: "Persuasion requires <span class='keyword'>clear stance</span>—no fence-sitting. When persuasion >= 0.7, attitude_strength must >= 0.8.",
+                notes_cn: "说服的核心是<span class='keyword'>立场鲜明</span>——禁止骑墙。当persuasion >= 0.7时，attitude_strength必须>= 0.8。",
+                why_matters: "有立场的内容才有记忆点。",
+                mistakes: "骑墙两边讨好；用'问题很复杂'逃避",
+                related: ["Attitude_Change", "Attitude_Output", "Fence_Sitting"],
+                scenes_en: ["Opinion content", "Commentary"],
+                scenes_cn: ["观点内容", "评论"]
+            },
+            {
+                id: "Emotional_Resonance_Intent",
+                en: "Emotional Resonance",
+                cn: "情感共鸣",
+                group: "IntentFactor",
+                val: 24,
+                desc_en: "Evoke emotional recognition, make audience feel understood",
+                desc_cn: "唤起受众的情感认同，让他们感到被理解",
+                notes_en: "Resonance = pain_point_depth × we_perspective × emotion_peaks. Design at least <span class='keyword'>2 emotional peaks</span>.",
+                notes_cn: "共鸣 = 痛点深度 × 我们视角 × 情绪高潮点。必须设计至少<span class='keyword'>2个情绪高潮点</span>。",
+                why_matters: "被理解的感觉会建立强烈的情感连接和信任。",
+                mistakes: "情感太假；痛点不够普遍",
+                related: ["Emotional_Fulfillment_Intent", "We_Perspective", "Pain_Point_Hook"],
+                scenes_en: ["Empathy content", "Story sharing"],
+                scenes_cn: ["共情内容", "故事分享"]
+            },
+            // === THEORY (Aristotle's Rhetoric) ===
+            {
+                id: "Logos",
+                en: "Logos",
+                cn: "逻辑诉求",
+                group: "Theory",
+                val: 22,
+                desc_en: "Persuasion through evidence and reasoning",
+                desc_cn: "用证据和推理说服的方式",
+                notes_en: "Logos is one of Aristotle's <span class='keyword'>three appeals</span>. Persuades through logical reasoning and data evidence.",
+                notes_cn: "Logos是亚里士多德<span class='keyword'>三大诉求</span>之一。通过逻辑推理、数据证据来说服。",
+                why_matters: "Logos是建立可信度的基础。",
+                mistakes: "只有Logos没有Pathos（太干缺乏感染力）",
+                related: ["Pathos", "Ethos", "Cognitive_Change"],
+                scenes_en: ["Explanation", "Analysis"],
+                scenes_cn: ["解释", "分析"]
+            },
+            {
+                id: "Pathos",
+                en: "Pathos",
+                cn: "情感诉求",
+                group: "Theory",
+                val: 22,
+                desc_en: "Persuasion through emotions and empathy",
+                desc_cn: "用情绪和共鸣打动的方式",
+                notes_en: "Pathos is one of Aristotle's <span class='keyword'>three appeals</span>. Moves audience by evoking emotions.",
+                notes_cn: "Pathos是亚里士多德<span class='keyword'>三大诉求</span>之一。通过激发情绪来打动受众。",
+                why_matters: "人记住的是你让他感受到了什么。",
+                mistakes: "只有Pathos没有Logos（煽情但空洞）",
+                related: ["Logos", "Ethos", "Emotional_Fulfillment_Intent"],
+                scenes_en: ["Emotional content", "Storytelling"],
+                scenes_cn: ["情感内容", "讲故事"]
+            },
+            {
+                id: "Ethos",
+                en: "Ethos",
+                cn: "人格诉求",
+                group: "Theory",
+                val: 22,
+                desc_en: "Persuasion through credibility and trust",
+                desc_cn: "用身份和信任背书的方式",
+                notes_en: "Ethos is one of Aristotle's <span class='keyword'>three appeals</span>. Wins trust by establishing credibility.",
+                notes_cn: "Ethos是亚里士多德<span class='keyword'>三大诉求</span>之一。通过建立可信度来赢得信任。",
+                why_matters: "没有Ethos，Logos和Pathos都无效。",
+                mistakes: "过度卖弄专业引发反感",
+                related: ["Logos", "Pathos", "Attitude_Change"],
+                scenes_en: ["Expert content", "Trust building"],
+                scenes_cn: ["专家内容", "信任建立"]
+            },
+            {
+                id: "PIE_Model",
+                en: "PIE Model",
+                cn: "PIE模型",
+                group: "Theory",
+                val: 22,
+                desc_en: "Aristotle's three purposes: Persuade/Inform/Entertain",
+                desc_cn: "亚里士多德的三大传播目的",
+                notes_en: "P=Persuade, I=Inform, E=Entertain. Intent Factor System is the <span class='keyword'>modern extension</span> of PIE.",
+                notes_cn: "P代表说服、I代表告知、E代表娱乐。意图因子系统是PIE模型的<span class='keyword'>现代扩展</span>。",
+                why_matters: "2000年前的框架至今有效。",
+                mistakes: "以为只能选一个（其实是组合）",
+                related: ["Logos", "Pathos", "Ethos", "Purpose_Layer"],
+                scenes_en: ["Content strategy", "Rhetoric"],
+                scenes_cn: ["内容策略", "修辞学"]
+            },
+            // === PHASES (Execution Stages) ===
+            {
+                id: "Phase_Hook",
+                en: "Phase 1: Hook",
+                cn: "阶段1：开头钩子",
+                group: "Phase",
+                val: 20,
+                desc_en: "The first 3 seconds that determine if viewer stays",
+                desc_cn: "开头3秒定生死",
+                notes_en: "In the first 3 seconds, create <span class='keyword'>problem sense</span>, trigger curiosity, or hit pain points. No introduction—straight to the hook.",
+                notes_cn: "开头3秒内，必须制造<span class='keyword'>问题感</span>、激活好奇心或击中痛点。不要介绍——直接给钩子。",
+                why_matters: "没有钩子=没有观众。",
+                mistakes: "用'大家好'开头；铺垫太长",
+                related: ["Hook", "Problem_Sense", "Phase_Climax"],
+                scenes_en: ["Video opening", "Article lead"],
+                scenes_cn: ["视频开头", "文章导语"]
+            },
+            {
+                id: "Phase_Climax",
+                en: "Phase 2: Climax First",
+                cn: "阶段2：高潮前置",
+                group: "Phase",
+                val: 20,
+                desc_en: "Give conclusion first, then explain",
+                desc_cn: "先给结论再解释",
+                notes_en: "Flip traditional writing: <span class='keyword'>D→C→B→A</span>. Grab with conclusion's impact first.",
+                notes_cn: "颠倒顺序：<span class='keyword'>D→C→B→A</span>。先用结论冲击力抓住。",
+                why_matters: "结论前置保证核心信息被传达。",
+                mistakes: "按时间顺序从头讲到尾",
+                related: ["Climax_First", "Phase_Hook", "Phase_Attitude"],
+                scenes_en: ["Main body", "Argument structure"],
+                scenes_cn: ["正文", "论述结构"]
+            },
+            {
+                id: "Phase_Attitude",
+                en: "Phase 3: Clear Attitude",
+                cn: "阶段3：态度鲜明",
+                group: "Phase",
+                val: 20,
+                desc_en: "Express stance clearly, no fence-sitting",
+                desc_cn: "禁止骑墙",
+                notes_en: "Viewers want <span class='keyword'>your take</span>. Choose a side and commit fully.",
+                notes_cn: "观众要的是<span class='keyword'>你怎么看</span>。选定立场，全力表达。",
+                why_matters: "没有态度=没有记忆点。",
+                mistakes: "强行辩证两边讨好",
+                related: ["Attitude_Output", "Fence_Sitting", "Phase_Rhythm"],
+                scenes_en: ["Opinion expression", "Stance taking"],
+                scenes_cn: ["观点表达", "立场表态"]
+            },
+            {
+                id: "Phase_Rhythm",
+                en: "Phase 4: Emotional Rhythm",
+                cn: "阶段4：情绪节奏",
+                group: "Phase",
+                val: 20,
+                desc_en: "Design emotional ups and downs",
+                desc_cn: "有张有弛",
+                notes_en: "<span class='keyword'>Build→Burst→Buffer→Build→Burst→Close</span>. Design at least 2 burst points.",
+                notes_cn: "<span class='keyword'>酝酿→爆发→缓冲→酝酿→爆发→收尾</span>。至少设计2个爆发点。",
+                why_matters: "没有节奏变化=死水。",
+                mistakes: "从头到尾语气一样",
+                related: ["Emotional_Rhythm", "Short_Sentence_Burst", "Phase_Audience"],
+                scenes_en: ["Full content", "Pacing design"],
+                scenes_cn: ["完整内容", "节奏设计"]
+            },
+            {
+                id: "Phase_Audience",
+                en: "Phase 5: Eye-Level",
+                cn: "阶段5：和受众站在一起",
+                group: "Phase",
+                val: 20,
+                desc_en: "Stand with audience, not above them",
+                desc_cn: "不居高临下",
+                notes_en: "'I've been there too' not 'you should'. Viewers <span class='keyword'>resist being lectured</span>.",
+                notes_cn: "'我也一样'而不是'你们应该'。观众对<span class='keyword'>被教育抵触</span>。",
+                why_matters: "居高临下激发逆反心理。",
+                mistakes: "用'我来告诉你们'开头",
+                related: ["Eye_Level", "We_Perspective", "Pronoun_Shift"],
+                scenes_en: ["Tone setting", "Relationship building"],
+                scenes_cn: ["语气设定", "关系建立"]
+            },
+            // === VIDEO LANGUAGE (Visual Types & Camera Psychology) ===
+            {
+                id: "Talking_Head",
+                en: "Talking Head",
+                cn: "说话人出镜",
+                group: "VideoLanguage",
+                val: 26,
+                desc_en: "Speaker directly facing camera, building trust and delivering attitude",
+                desc_cn: "说话人直接面对镜头，建立信任、传递态度",
+                notes_en: "Talking Head is the <span class='keyword'>anchor of trust</span>. Use for opinions, emotional peaks, CTAs, and openings. Max 15s continuous, min 20s per minute.",
+                notes_cn: "说话人出镜是<span class='keyword'>信任的锚点</span>。用于观点表达、情绪高潮、CTA、开头。连续不超过15秒，每分钟至少出镜20秒。",
+                why_matters: "没有人脸=没有信任。观众需要知道是谁在说。",
+                mistakes: "全程只有说话人（视觉疲劳）；关键观点时却切到B-Roll",
+                related: ["B_Roll", "Graphics_Overlay", "Hook"],
+                scenes_en: ["Opinions", "Emotional peaks", "Opening hook", "CTA"],
+                scenes_cn: ["观点表达", "情绪高潮", "开头钩子", "行动号召"]
+            },
+            {
+                id: "B_Roll",
+                en: "B-Roll",
+                cn: "视觉素材",
+                group: "VideoLanguage",
+                val: 24,
+                desc_en: "Supporting footage that illustrates what is being said",
+                desc_cn: "辅助主画面的素材，图解所说内容",
+                notes_en: "B-Roll <span class='keyword'>breaks monotony</span> and provides visual evidence. 3-5s per clip, must match content precisely. Avoids talking head fatigue.",
+                notes_cn: "B-Roll<span class='keyword'>打破单调</span>，提供视觉证据。每个片段3-5秒，必须精确匹配内容。",
+                why_matters: "眼见为实。口说无凭的内容可信度减半。",
+                mistakes: "素材与内容无关；低质量/模糊素材；过度使用网红素材",
+                related: ["Talking_Head", "Graphics_Overlay", "Editing_Rhythm"],
+                scenes_en: ["Describing things", "Scene transition", "Data support"],
+                scenes_cn: ["描述事物", "场景过渡", "数据支撑"]
+            },
+            {
+                id: "Graphics_Overlay",
+                en: "Graphics Overlay",
+                cn: "图示叠加",
+                group: "VideoLanguage",
+                val: 24,
+                desc_en: "Text, charts, animations overlaid on video",
+                desc_cn: "叠加在视频上的文字、图表、动画",
+                notes_en: "Graphics <span class='keyword'>externalize information</span>. Essential for data, lists, processes, comparisons. Max 7 words on screen, lower third position.",
+                notes_cn: "图示将信息<span class='keyword'>外化</span>。数据、列表、流程、对比必用。屏幕最多7个词，下三分之一位置。",
+                why_matters: "数据不可视化=没说。复杂概念需要视觉锚点。",
+                mistakes: "文字太多太小；设计不统一；数字没有图表化",
+                related: ["B_Roll", "Talking_Head"],
+                scenes_en: ["Data", "Processes", "Key terms", "Comparisons"],
+                scenes_cn: ["数据", "流程", "关键词", "对比"]
+            },
+            {
+                id: "Shot_Size",
+                en: "Shot Size",
+                cn: "景别",
+                group: "VideoLanguage",
+                val: 22,
+                desc_en: "Distance from camera to subject, controls emotional intensity",
+                desc_cn: "镜头与主体的距离，控制情绪强度",
+                notes_en: "<span class='keyword'>Closer = stronger emotion</span>. Wide shots for context/awe, medium for dialogue, close-up for emotion/peaks, extreme close-up for reveals.",
+                notes_cn: "<span class='keyword'>越近=情绪越强</span>。远景用于语境/敬畏，中景用于对话，特写用于情绪/高潮，极特写用于揭示。",
+                why_matters: "景别是情绪的放大器。用错景别=情绪失效。",
+                mistakes: "全程同一景别（无节奏）；观点高潮却用远景",
+                related: ["Camera_Angle", "Emotional_Rhythm"],
+                scenes_en: ["All video", "Emotion control"],
+                scenes_cn: ["所有视频", "情绪控制"]
+            },
+            {
+                id: "Camera_Angle",
+                en: "Camera Angle",
+                cn: "机位角度",
+                group: "VideoLanguage",
+                val: 20,
+                desc_en: "Vertical position of camera relative to subject",
+                desc_cn: "镜头相对主体的垂直位置",
+                notes_en: "<span class='keyword'>Eye-level = equality</span>. Low angle = authority/power. High angle = vulnerability. Default to eye-level for trust.",
+                notes_cn: "<span class='keyword'>平视=平等</span>。仰视=权威/力量。俯视=脆弱。默认用平视建立信任。",
+                why_matters: "角度暗示权力关系。过度仰视显得傲慢。",
+                mistakes: "随意拍摄不考虑角度；用俯视让观众感到被轻视",
+                related: ["Shot_Size", "Eye_Level"],
+                scenes_en: ["Trust building", "Authority positioning"],
+                scenes_cn: ["信任建立", "权威定位"]
+            },
+            {
+                id: "Editing_Rhythm",
+                en: "Editing Rhythm",
+                cn: "剪辑节奏",
+                group: "VideoLanguage",
+                val: 22,
+                desc_en: "Frequency and pacing of cuts between shots",
+                desc_cn: "镜头切换的频率和节奏",
+                notes_en: "Fast cuts (15-20/min) for excitement. Medium (8-12) for normal content. Slow (4-6) for emotion/reflection. <span class='keyword'>Match cuts to content energy</span>.",
+                notes_cn: "快节奏(15-20/分钟)用于兴奋。中等(8-12)用于常规内容。慢(4-6)用于情感/沉思。<span class='keyword'>切换频率匹配内容能量</span>。",
+                why_matters: "节奏是观众注意力的心跳。太快焦虑，太慢无聊。",
+                mistakes: "全程一个节奏；开头太慢流失观众",
+                related: ["Emotional_Rhythm", "Short_Sentence_Burst"],
+                scenes_en: ["All editing", "Pacing control"],
+                scenes_cn: ["所有剪辑", "节奏控制"]
+            },
+            {
+                id: "Visual_Decision_Tree",
+                en: "Visual Decision Tree",
+                cn: "画面选择决策树",
+                group: "VideoLanguage",
+                val: 20,
+                desc_en: "Framework for choosing visual type based on content function",
+                desc_cn: "基于内容功能选择画面类型的框架",
+                notes_en: "Attitude/opinion → <span class='keyword'>Talking Head</span>. Describing things → <span class='keyword'>B-Roll</span>. Data/process → <span class='keyword'>Graphics</span>. Commentary → <span class='keyword'>Composite</span>.",
+                notes_cn: "态度/观点 → <span class='keyword'>说话人</span>。描述事物 → <span class='keyword'>B-Roll</span>。数据/流程 → <span class='keyword'>图示</span>。解读/评论 → <span class='keyword'>混合模式</span>。",
+                why_matters: "系统化决策，避免随意选择画面。",
+                mistakes: "凭感觉随意选画面；不匹配内容功能",
+                related: ["Talking_Head", "B_Roll", "Graphics_Overlay"],
+                scenes_en: ["Pre-production", "Storyboarding"],
+                scenes_cn: ["前期规划", "分镜脚本"]
+            },
+            // === PLATFORM DISTRIBUTION STRATEGY ===
+            {
+                id: "Traffic_Pool",
+                en: "Traffic Pool",
+                cn: "流量池",
+                group: "Distribution",
+                val: 28,
+                desc_en: "Tiered exposure mechanism in Douyin/Kuaishou",
+                desc_cn: "抖音/快手的分层曝光测试机制",
+                notes_en: "New videos start in <span class='keyword'>cold start pool</span> (300-500 views). Pass threshold → next pool (1000-5000) → eventually millions. <span class='keyword'>Completion rate >40% + Engagement >3%</span> to advance.",
+                notes_cn: "新视频进入<span class='keyword'>冷启动池</span>（300-500曝光）。达标→下一级池（1000-5000）→直至百万级。<span class='keyword'>完播率>40% + 互动率>3%</span>才能晋级。",
+                why_matters: "理解流量池=理解抖音游戏规则。不达标=永远被困初始池。",
+                mistakes: "视频过长导致完播率崩塌；发布后不管冷启动数据",
+                related: ["Completion_Rate", "Engagement_Rate", "Cold_Start"],
+                scenes_en: ["Douyin", "Kuaishou", "Short video"],
+                scenes_cn: ["抖音", "快手", "短视频"]
+            },
+            {
+                id: "Watch_Time",
+                en: "Watch Time",
+                cn: "观看时长",
+                group: "Distribution",
+                val: 26,
+                desc_en: "Total minutes watched - YouTube's core metric",
+                desc_cn: "用户观看的累计时长——YouTube核心指标",
+                notes_en: "YouTube aims to keep users on platform. <span class='keyword'>Longer videos (>10min)</span> with high retention beat short videos. Watch Time = Duration × Retention × Views.",
+                notes_cn: "YouTube目标是留住用户。<span class='keyword'>长视频(>10分钟)</span>+高留存比短视频更易推荐。观看时长 = 时长×留存率×播放量。",
+                why_matters: "YouTube判断内容价值的核心标准。时长越长，算法越认可。",
+                mistakes: "为追求长度而注水；前期流失拉低平均时长",
+                related: ["CTR", "Retention_Rate", "Hook"],
+                scenes_en: ["YouTube", "Long-form video"],
+                scenes_cn: ["YouTube", "长视频"]
+            },
+            {
+                id: "CTR_Metric",
+                en: "CTR",
+                cn: "点击率",
+                group: "Distribution",
+                val: 24,
+                desc_en: "Click-through rate - thumbnail effectiveness",
+                desc_cn: "缩略图被点击的概率",
+                notes_en: "CTR = Clicks/Impressions. <span class='keyword'>2-10% is healthy, >10% excellent</span>. Optimize: high contrast thumbnail, big face + emotion, curiosity-driven title.",
+                notes_cn: "CTR = 点击数/展示数。<span class='keyword'>2-10%健康，>10%优秀</span>。优化：高对比缩略图、大脸+情绪、引发好奇的标题。",
+                why_matters: "没有点击，内容再好也无人问津。CTR决定初始流量。",
+                mistakes: "缩略图与标题重复；标题党但不兑现",
+                related: ["Watch_Time", "Hook"],
+                scenes_en: ["YouTube", "All platforms"],
+                scenes_cn: ["YouTube", "所有平台"]
+            },
+            {
+                id: "EEAT",
+                en: "E-E-A-T",
+                cn: "经验/专业/权威/可信",
+                group: "Distribution",
+                val: 24,
+                desc_en: "Google's content quality framework",
+                desc_cn: "Google评估内容质量的四维框架",
+                notes_en: "<span class='keyword'>Experience + Expertise + Authoritativeness + Trustworthiness</span>. Critical for YMYL (Your Money/Life) content. Show author credentials, cite sources, maintain accuracy.",
+                notes_cn: "<span class='keyword'>经验+专业+权威+可信</span>。对YMYL（涉及金钱/健康）内容尤为重要。展示作者身份、引用权威来源、保持准确性。",
+                why_matters: "E-E-A-T是Google判断内容质量的核心。低E-E-A-T难获排名。",
+                mistakes: "匿名发布；无来源引用；内容过时",
+                related: ["Core_Web_Vitals", "SEO"],
+                scenes_en: ["Blog", "Website", "Google SEO"],
+                scenes_cn: ["博客", "网站", "谷歌SEO"]
+            },
+            {
+                id: "Platform_Native",
+                en: "Platform Native",
+                cn: "平台原生化",
+                group: "Distribution",
+                val: 22,
+                desc_en: "Adapting content to each platform's format and culture",
+                desc_cn: "内容必须适配平台调性而非跨平台复制",
+                notes_en: "Each platform has unique expectations. <span class='keyword'>Same content, different forms</span>: Douyin=vertical+fast, YouTube=horizontal+long, XHS=images+keywords.",
+                notes_cn: "每个平台有独特期望。<span class='keyword'>同一内容，不同形式</span>：抖音=竖屏+快节奏，YouTube=横屏+长内容，小红书=图片+关键词。",
+                why_matters: "非原生内容难以获得推荐。用户能感知'不属于这里'的违和感。",
+                mistakes: "一条内容发所有平台；横屏视频不裁剪发抖音",
+                related: ["Traffic_Pool", "Watch_Time"],
+                scenes_en: ["Cross-platform", "Content strategy"],
+                scenes_cn: ["跨平台", "内容策略"]
+            },
+            {
+                id: "Cold_Start",
+                en: "Cold Start",
+                cn: "冷启动",
+                group: "Distribution",
+                val: 22,
+                desc_en: "Initial exposure testing phase for new content",
+                desc_cn: "新内容获取初始曝光的测试阶段",
+                notes_en: "New content gets <span class='keyword'>300-500 test impressions</span>. Algorithm decides based on early feedback. <span class='keyword'>Golden window: first 30 minutes</span>.",
+                notes_cn: "新内容获得<span class='keyword'>300-500次测试曝光</span>。算法根据早期反馈决定。<span class='keyword'>黄金窗口：前30分钟</span>。",
+                why_matters: "冷启动是内容命运的分水岭。初始数据差就被淘汰。",
+                mistakes: "发布后不管不顾；在非活跃时段发布",
+                related: ["Traffic_Pool", "Engagement_Rate"],
+                scenes_en: ["All platforms", "Launch strategy"],
+                scenes_cn: ["所有平台", "发布策略"]
+            },
+            // === ABSURDIST CONTENT STYLE NODES ===
+            {
+                id: "Benign_Violation",
+                en: "Benign Violation",
+                cn: "良性违规",
+                group: "Absurdist",
+                val: 28,
+                desc_en: "Humor occurs when something violates norms but seems benign",
+                desc_cn: "幽默发生的条件——违反规范但无害",
+                notes_en: "<span class='keyword'>Violation + Benign = Laughter</span>. If only violation = offense. If only benign = boring. Both together = humor. Self-deprecation is always safe.",
+                notes_cn: "<span class='keyword'>违规+无害=笑</span>。只有违规=冒犯。只有无害=无聊。两者同在=幽默。自嘲永远安全。",
+                why_matters: "理解良性违规能帮你设计出既能打破期望又不会翻车的幽默内容。",
+                mistakes: "违规太过变成冒犯；或者太安全变得无聊",
+                related: ["Incongruity", "Hook", "Emotional_Vent_Hook"],
+                scenes_en: ["Comedy content", "Meme creation"],
+                scenes_cn: ["喜剧内容", "梗图创作"]
+            },
+            {
+                id: "Incongruity",
+                en: "Incongruity",
+                cn: "不协调",
+                group: "Absurdist",
+                val: 26,
+                desc_en: "Humor from expectation-reality mismatch",
+                desc_cn: "期望与现实不符产生的惊讶效果",
+                notes_en: "<span class='keyword'>Expect A, get B = surprise = dopamine</span>. Stronger expectation + bigger twist = more attention. Design 'twists' and 'reversals' deliberately.",
+                notes_cn: "<span class='keyword'>期望A，得到B=惊讶=多巴胺</span>。期望越强+反转越大=注意力越高。刻意设计'反转'和'出人意料'。",
+                why_matters: "设计'反转'和'出人意料'是抓住注意力的核心技巧。",
+                mistakes: "反转太刻意/太突兀导致观众困惑而非惊喜",
+                related: ["Benign_Violation", "Hook", "Counter_Intuitive_Hook"],
+                scenes_en: ["Plot twists", "Punchlines"],
+                scenes_cn: ["情节反转", "笑点设计"]
+            },
+            {
+                id: "Meme_Literacy",
+                en: "Meme Literacy",
+                cn: "梗素养",
+                group: "Absurdist",
+                val: 24,
+                desc_en: "Ability to understand and use internet memes",
+                desc_cn: "理解和使用互联网梗的能力",
+                notes_en: "Know current memes, judge freshness (expired memes = cringe), use in context, don't overload. <span class='keyword'>Right meme = resonance; wrong meme = embarrassment</span>.",
+                notes_cn: "了解当前流行梗，判断时效性（过时梗=尴尬），在语境中使用，不堆砌。<span class='keyword'>梗用对=共鸣；用错=尴尬</span>。",
+                why_matters: "梗用对了是共鸣，用错了是尴尬。梗素养决定圈层沟通能力。",
+                mistakes: "用过时的梗；用自己不懂的梗；堆砌太多梗",
+                related: ["Abstract_Culture", "Brainrot"],
+                scenes_en: ["Gen Z content", "Social media"],
+                scenes_cn: ["Z世代内容", "社交媒体"]
+            },
+            {
+                id: "Brainrot",
+                en: "Brainrot",
+                cn: "脑腐内容",
+                group: "Absurdist",
+                val: 22,
+                desc_en: "Meaningless but addictive internet content",
+                desc_cn: "无意义但令人上瘾的互联网内容",
+                notes_en: "Gen Z self-deprecating term for <span class='keyword'>low-effort, high-engagement content</span>. Features: fragmented, absurd, meme-heavy. Reflects attention economy optimization.",
+                notes_cn: "Z世代自嘲式说法，指<span class='keyword'>低投入高互动内容</span>。特点：碎片化、荒诞、大量meme。反映注意力经济优化。",
+                why_matters: "理解Brainrot能帮你理解Z世代的内容消费心理。",
+                mistakes: "把Brainrot理解为贬义；忽视其作为圈层文化符号的功能",
+                related: ["Meme_Literacy", "Post_Irony"],
+                scenes_en: ["TikTok", "Short video"],
+                scenes_cn: ["抖音", "短视频"]
+            },
+            {
+                id: "Post_Irony",
+                en: "Post-Irony",
+                cn: "后反讽",
+                group: "Absurdist",
+                val: 22,
+                desc_en: "Deliberate low-quality as humor form",
+                desc_cn: "故意的低质量本身成为幽默",
+                notes_en: "Beyond sarcasm: <span class='keyword'>saying A, audience knows it's ironic, but it's also sincere</span>. Sincerity/irony boundary blurred. 'Bad' memes outperform polished ones.",
+                notes_cn: "超越讽刺：<span class='keyword'>说A，观众知道是讽刺，但又不完全是</span>。真诚/讽刺边界模糊。'烂图'比精致图更受欢迎。",
+                why_matters: "后反讽是当代网络幽默的主流形式，理解它才能与年轻受众对话。",
+                mistakes: "用传统讽刺的逻辑理解后反讽；或者模仿形式但丢失态度",
+                related: ["Brainrot", "Abstract_Culture"],
+                scenes_en: ["Meme culture", "Gen Z humor"],
+                scenes_cn: ["梗文化", "Z世代幽默"]
+            },
+            {
+                id: "Abstract_Culture",
+                en: "Abstract Culture",
+                cn: "抽象文化",
+                group: "Absurdist",
+                val: 24,
+                desc_en: "Chinese internet absurdist subculture from 6324",
+                desc_cn: "中文互联网特有的荒诞亚文化，源于6324直播间",
+                notes_en: "Origin: 6324 livestream room. Features: <span class='keyword'>abstract speech</span> (emoji/abbreviation to bypass censorship), deconstruction, in-group codes, emotional outlet.",
+                notes_cn: "起源：6324直播间。特点：<span class='keyword'>抽象话</span>（用emoji/缩写绕过审查）、解构权威、圈层暗语、情绪宣泄。",
+                why_matters: "抽象文化是理解当代中国年轻人表达方式的重要入口。",
+                mistakes: "认为抽象=纯粹的恶意；忽视其作为亚文化的系统性",
+                related: ["Meme_Literacy", "Post_Irony"],
+                scenes_en: ["Bilibili", "Chinese social media"],
+                scenes_cn: ["B站", "中文社交媒体"]
+            }
+        ];
+
+        const links = [
+            // Core techniques relationships
+            { source: "Hook", target: "Climax_First", label: "Enables" },
+            { source: "Hook", target: "Problem_Sense", label: "Requires" },
+            { source: "Climax_First", target: "Attitude_Output", label: "Amplifies" },
+            { source: "Attitude_Output", target: "Emotional_Rhythm", label: "Drives" },
+
+            // Rhythm relationships
+            { source: "Emotional_Rhythm", target: "Short_Sentence_Burst", label: "Uses" },
+            { source: "Short_Sentence_Burst", target: "Climax_First", label: "Supports" },
+
+            // Language relationships
+            { source: "Oral_Language", target: "Pronoun_Shift", label: "Includes" },
+            { source: "Pronoun_Shift", target: "Eye_Level", label: "Enables" },
+            { source: "Eye_Level", target: "Attitude_Output", label: "Grounds" },
+
+            // Anti-pattern relationships
+            { source: "Fence_Sitting", target: "Attitude_Output", label: "Opposite of" },
+            { source: "Written_套话", target: "Oral_Language", label: "Opposite of" },
+            { source: "Logic_Overload", target: "Climax_First", label: "Opposite of" },
+            { source: "Flat_Emotion", target: "Emotional_Rhythm", label: "Opposite of" },
+
+            // Cross-domain links
+            { source: "Oral_Language", target: "Hook", label: "Powers" },
+            { source: "Problem_Sense", target: "Emotional_Rhythm", label: "Initiates" },
+
+            // Hook type relationships
+            { source: "Hook", target: "Counter_Intuitive_Hook", label: "Type" },
+            { source: "Hook", target: "Pain_Point_Hook", label: "Type" },
+            { source: "Hook", target: "Conflict_Hook", label: "Type" },
+            { source: "Hook", target: "Data_Shock_Hook", label: "Type" },
+            { source: "Hook", target: "Emotional_Vent_Hook", label: "Type" },
+            { source: "Hook", target: "Identity_Hook", label: "Type" },
+            { source: "Hook", target: "Benefit_Hook", label: "Type" },
+            { source: "Hook", target: "Story_Hook", label: "Type" },
+            { source: "Hook", target: "Combo_Hook", label: "Type" },
+
+            // Hook type interconnections
+            { source: "Counter_Intuitive_Hook", target: "Data_Shock_Hook", label: "Combines with" },
+            { source: "Pain_Point_Hook", target: "Benefit_Hook", label: "Combines with" },
+            { source: "Identity_Hook", target: "Emotional_Vent_Hook", label: "Combines with" },
+            { source: "Story_Hook", target: "Conflict_Hook", label: "Combines with" },
+            { source: "Combo_Hook", target: "Counter_Intuitive_Hook", label: "Uses" },
+            { source: "Combo_Hook", target: "Pain_Point_Hook", label: "Uses" },
+
+            // === HUMAN-LIKE WRITING RELATIONSHIPS ===
+            // HumanLike core connections
+            { source: "We_Perspective", target: "Eye_Level", label: "Enables" },
+            { source: "We_Perspective", target: "Conversational_Warmth", label: "Supports" },
+            { source: "Question_Hook_Start", target: "Hook", label: "Type of" },
+            { source: "Conversational_Warmth", target: "Oral_Language", label: "Related to" },
+            { source: "Clear_Stance", target: "Attitude_Output", label: "Same as" },
+            { source: "Rhythm_Variation", target: "Short_Sentence_Burst", label: "Uses" },
+            { source: "Rhythm_Variation", target: "Emotional_Rhythm", label: "Enables" },
+            { source: "Emotion_Peak_Design", target: "Emotional_Rhythm", label: "Same as" },
+            { source: "Emotion_Peak_Design", target: "Climax_First", label: "Uses" },
+
+            // HumanLike ↔ AntiPattern opposites
+            { source: "Preacher_Syndrome", target: "We_Perspective", label: "Opposite of" },
+            { source: "Cold_Analyst", target: "Clear_Stance", label: "Opposite of" },
+            { source: "Rule_Of_Three", target: "Rhythm_Variation", label: "Opposite of" },
+            { source: "Transition_Overflow", target: "Conversational_Warmth", label: "Opposite of" },
+            { source: "Warmth_Deficiency", target: "Conversational_Warmth", label: "Opposite of" },
+
+            // Cross-connections to existing nodes
+            { source: "Preacher_Syndrome", target: "Eye_Level", label: "Opposite of" },
+            { source: "Cold_Analyst", target: "Fence_Sitting", label: "Related to" },
+            { source: "Warmth_Deficiency", target: "Written_套话", label: "Related to" },
+
+            // === INTENT FACTOR SYSTEM RELATIONSHIPS ===
+            // Intent Factor core
+            { source: "Intent_Factor", target: "Purpose_Layer", label: "Categorized by" },
+            { source: "Intent_Factor", target: "Derivation_Rule", label: "Triggers" },
+            { source: "Derivation_Rule", target: "Attitude_Output", label: "Derives" },
+            { source: "Derivation_Rule", target: "Fence_Sitting", label: "Blocks" },
+
+            // Purpose Layer connections
+            { source: "Purpose_Layer", target: "Cognitive_Change", label: "Type" },
+            { source: "Purpose_Layer", target: "Attitude_Change", label: "Type" },
+            { source: "Purpose_Layer", target: "Emotional_Fulfillment_Intent", label: "Type" },
+
+            // Intent factors
+            { source: "Persuasion", target: "Attitude_Change", label: "Is Part Of" },
+            { source: "Persuasion", target: "Attitude_Output", label: "Requires" },
+            { source: "Persuasion", target: "Fence_Sitting", label: "Opposite of" },
+            { source: "Emotional_Resonance_Intent", target: "Emotional_Fulfillment_Intent", label: "Is Part Of" },
+            { source: "Emotional_Resonance_Intent", target: "Pain_Point_Hook", label: "Uses" },
+            { source: "Emotional_Resonance_Intent", target: "We_Perspective", label: "Uses" },
+
+            // === THEORY (Aristotle) RELATIONSHIPS ===
+            { source: "Logos", target: "Cognitive_Change", label: "Powers" },
+            { source: "Pathos", target: "Emotional_Fulfillment_Intent", label: "Powers" },
+            { source: "Ethos", target: "Attitude_Change", label: "Powers" },
+            { source: "PIE_Model", target: "Purpose_Layer", label: "Foundation of" },
+            { source: "Logos", target: "Pathos", label: "Complements" },
+            { source: "Pathos", target: "Ethos", label: "Complements" },
+            { source: "Ethos", target: "Logos", label: "Complements" },
+
+            // === PHASE RELATIONSHIPS ===
+            { source: "Phase_Hook", target: "Hook", label: "Uses" },
+            { source: "Phase_Hook", target: "Phase_Climax", label: "Followed by" },
+            { source: "Phase_Climax", target: "Climax_First", label: "Uses" },
+            { source: "Phase_Climax", target: "Phase_Attitude", label: "Followed by" },
+            { source: "Phase_Attitude", target: "Attitude_Output", label: "Uses" },
+            { source: "Phase_Attitude", target: "Phase_Rhythm", label: "Followed by" },
+            { source: "Phase_Rhythm", target: "Emotional_Rhythm", label: "Uses" },
+            { source: "Phase_Rhythm", target: "Phase_Audience", label: "Followed by" },
+            { source: "Phase_Audience", target: "Eye_Level", label: "Uses" },
+            { source: "Phase_Audience", target: "We_Perspective", label: "Uses" },
+
+            // === VIDEO LANGUAGE RELATIONSHIPS ===
+            // Visual types
+            { source: "Talking_Head", target: "B_Roll", label: "Alternates with" },
+            { source: "Talking_Head", target: "Graphics_Overlay", label: "Combines with" },
+            { source: "B_Roll", target: "Graphics_Overlay", label: "Complements" },
+            { source: "Talking_Head", target: "Hook", label: "Used for" },
+            { source: "Talking_Head", target: "Attitude_Output", label: "Delivers" },
+            // Camera psychology
+            { source: "Shot_Size", target: "Emotional_Rhythm", label: "Amplifies" },
+            { source: "Camera_Angle", target: "Eye_Level", label: "Implements" },
+            { source: "Shot_Size", target: "Camera_Angle", label: "Combines with" },
+            // Editing
+            { source: "Editing_Rhythm", target: "Emotional_Rhythm", label: "Mirrors" },
+            { source: "Editing_Rhythm", target: "Short_Sentence_Burst", label: "Video equivalent" },
+            { source: "B_Roll", target: "Editing_Rhythm", label: "Enables" },
+            // Decision framework
+            { source: "Visual_Decision_Tree", target: "Talking_Head", label: "Routes to" },
+            { source: "Visual_Decision_Tree", target: "B_Roll", label: "Routes to" },
+            { source: "Visual_Decision_Tree", target: "Graphics_Overlay", label: "Routes to" },
+
+            // === DISTRIBUTION STRATEGY RELATIONSHIPS ===
+            // Platform metrics
+            { source: "Traffic_Pool", target: "Cold_Start", label: "Starts with" },
+            { source: "Cold_Start", target: "Hook", label: "Requires" },
+            { source: "Watch_Time", target: "Emotional_Rhythm", label: "Needs" },
+            { source: "CTR_Metric", target: "Hook", label: "Depends on" },
+            // Cross-platform
+            { source: "Platform_Native", target: "Traffic_Pool", label: "Enables" },
+            { source: "Platform_Native", target: "Watch_Time", label: "Enables" },
+            // SEO connections
+            { source: "EEAT", target: "Ethos", label: "Similar to" },
+            { source: "Watch_Time", target: "CTR_Metric", label: "Combined with" },
+
+            // === ABSURDIST CONTENT STYLE RELATIONSHIPS ===
+            // Core theory connections
+            { source: "Benign_Violation", target: "Incongruity", label: "Works with" },
+            { source: "Benign_Violation", target: "Hook", label: "Enables" },
+            { source: "Incongruity", target: "Counter_Intuitive_Hook", label: "Powers" },
+            { source: "Incongruity", target: "Climax_First", label: "Related to" },
+            // Meme culture connections
+            { source: "Meme_Literacy", target: "Abstract_Culture", label: "Needed for" },
+            { source: "Meme_Literacy", target: "Brainrot", label: "Enables" },
+            { source: "Brainrot", target: "Post_Irony", label: "Uses" },
+            { source: "Post_Irony", target: "Abstract_Culture", label: "Related to" },
+            // Cross-domain connections
+            { source: "Abstract_Culture", target: "Oral_Language", label: "Disrupts" },
+            { source: "Benign_Violation", target: "Emotional_Vent_Hook", label: "Enables" },
+            { source: "Incongruity", target: "Emotional_Rhythm", label: "Creates" }
+        ];
+
+        // --- CONFIGURATION ---
+        const settings = { linkDistance: 80, chargeStrength: -200, labelSize: 1.0, opacity: 0.8, autoRotate: true };
+
+        // --- ENGINE ---
+        const elem = document.getElementById('3d-graph');
+        const Graph = ForceGraph3D()(elem)
+            .graphData({ nodes, links })
+            .backgroundColor('#000005')
+            .showNavInfo(false)
+            .nodeThreeObject(node => {
+                const cat = getCategory(node.group);
+                const text = `${node.en}\n${node.cn}`;
+                const sprite = new SpriteText(text);
+                sprite.color = cat.color;
+                sprite.textHeight = (node.val / 2) * settings.labelSize;
+                sprite.fontFace = 'Arial'; sprite.fontWeight = 'bold';
+                sprite.backgroundColor = `rgba(0,0,0,${settings.opacity / 2})`;
+                sprite.padding = 4;
+                sprite.userData = { baseSize: node.val / 2 };
+                return sprite;
+            })
+            .linkWidth(link => 2.5)
+            .linkColor(link => {
+                const sourceNode = nodes.find(n => n.id === link.source || n.id === link.source.id);
+                if (sourceNode) return getCategory(sourceNode.group).color + '88';
+                return '#445566';
+            })
+            .linkOpacity(0.7)
+            .linkCurvature(0.12)
+            .linkCurveRotation(link => {
+                const hash = (link.source?.id || link.source) + (link.target?.id || link.target);
+                let sum = 0;
+                for (let i = 0; i < hash.length; i++) sum += hash.charCodeAt(i);
+                return (sum % 360) * (Math.PI / 180);
+            })
+            .linkDirectionalArrowLength(5)
+            .linkDirectionalArrowRelPos(0.9)
+            .linkDirectionalArrowColor(link => {
+                const sourceNode = nodes.find(n => n.id === link.source || n.id === link.source.id);
+                if (sourceNode) return getCategory(sourceNode.group).color;
+                return '#ffffff';
+            })
+            .linkDirectionalParticles(3)
+            .linkDirectionalParticleSpeed(0.005)
+            .linkDirectionalParticleWidth(2)
+            .linkDirectionalParticleColor(link => {
+                const sourceNode = nodes.find(n => n.id === link.source || n.id === link.source.id);
+                if (sourceNode) return getCategory(sourceNode.group).color;
+                return '#ffffff';
+            })
+            .onNodeClick(node => { Graph.cameraPosition({ x: node.x + 50, y: node.y + 50, z: node.z + 50 }, node, 1500); showHUD(node); });
+
+        Graph.d3Force('link').distance(settings.linkDistance);
+        Graph.d3Force('charge').strength(settings.chargeStrength);
+
+        // --- CONTROLS ---
+        const gui = new dat.GUI();
+        const folder = gui.addFolder('Graph Settings');
+        folder.add(settings, 'linkDistance', 10, 300).onChange(val => { Graph.d3Force('link').distance(val); Graph.d3ReheatSimulation(); });
+        folder.add(settings, 'chargeStrength', -500, -10).onChange(val => { Graph.d3Force('charge').strength(val); Graph.d3ReheatSimulation(); });
+        folder.add(settings, 'labelSize', 0.1, 3.0).onChange(val => { Graph.scene().traverse(obj => { if (obj.userData?.baseSize) obj.textHeight = obj.userData.baseSize * val; }); });
+        folder.add(settings, 'opacity', 0.1, 1.0).onChange(val => { Graph.scene().traverse(obj => { if (obj.userData?.baseSize) obj.backgroundColor = `rgba(0,0,0,${val / 2})`; }); });
+        folder.add(settings, 'autoRotate').onChange(val => { Graph.controls().autoRotate = val; });
+        folder.open();
+
+        // --- HUD LOGIC ---
+        function showHUD(node) {
+            const el = (id) => document.getElementById(id);
+            const cat = getCategory(node.group);
+            el('hud').style.display = 'block';
+            el('hud-title').innerText = node.en;
+            el('hud-title').style.color = cat.color;
+            el('hud-cn').innerText = `${node.cn} [${node.group}]`;
+            el('hud-desc').innerHTML = `<div class="en">${node.desc_en || ''}</div><div class="cn">${node.desc_cn || ''}</div>`;
+            el('hud-notes').innerHTML = `<div class="en">${node.notes_en || ''}</div><div class="cn">${node.notes_cn || ''}</div>`;
+
+            // Why It Matters
+            const whyEl = el('hud-why');
+            if (node.why_matters) {
+                whyEl.innerHTML = node.why_matters;
+                whyEl.parentElement.style.display = 'block';
+            } else {
+                whyEl.innerHTML = '';
+                whyEl.parentElement.style.display = 'none';
+            }
+
+            // Common Mistakes
+            const mistakesEl = el('hud-mistakes');
+            if (node.mistakes) {
+                mistakesEl.innerHTML = node.mistakes;
+                mistakesEl.parentElement.style.display = 'block';
+            } else {
+                mistakesEl.innerHTML = '';
+                mistakesEl.parentElement.style.display = 'none';
+            }
+
+            // Related Terms
+            const relatedContainer = el('hud-related');
+            relatedContainer.innerHTML = '';
+            if (node.related && node.related.length > 0) {
+                node.related.forEach(term => {
+                    const tag = document.createElement('span');
+                    tag.className = 'related-tag';
+                    tag.innerText = term;
+                    tag.onclick = () => {
+                        const targetNode = nodes.find(n => n.id === term || n.en === term);
+                        if (targetNode) {
+                            Graph.cameraPosition({ x: targetNode.x + 50, y: targetNode.y + 50, z: targetNode.z + 50 }, targetNode, 1500);
+                            setTimeout(() => showHUD(targetNode), 1600);
+                        }
+                    };
+                    relatedContainer.appendChild(tag);
+                });
+                relatedContainer.parentElement.style.display = 'block';
+            } else {
+                relatedContainer.parentElement.style.display = 'none';
+            }
+
+            // Scenarios
+            const sceneContainer = el('hud-scenes');
+            sceneContainer.innerHTML = '';
+            if (node.scenes_en && node.scenes_en.length > 0) {
+                for (let i = 0; i < node.scenes_en.length; i++) {
+                    const tag = document.createElement('span');
+                    tag.className = 'scene-tag';
+                    tag.innerHTML = `${node.scenes_en[i]} <span style="color:#88aacc">${node.scenes_cn[i]}</span>`;
+                    sceneContainer.appendChild(tag);
+                }
+                sceneContainer.parentElement.style.display = 'block';
+            } else {
+                sceneContainer.parentElement.style.display = 'none';
+            }
+        }
+
+        function hideHUD() {
+            document.getElementById('hud').style.display = 'none';
+        }
+
+        // Initialize
+        buildLegend();
+        setTimeout(() => { document.getElementById('loading').style.display = 'none'; }, 1000);
+        Graph.controls().autoRotate = true;
+    </script>
+</body>
+
+</html>

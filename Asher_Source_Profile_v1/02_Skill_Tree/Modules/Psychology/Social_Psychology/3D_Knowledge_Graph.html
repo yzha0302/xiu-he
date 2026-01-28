@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>China Underground Economy - 3D Knowledge Graph</title>
+    <!--
+        ASHER KNOWLEDGE GRAPH - China Underground Economy Module
+        Covers: 精神小妹, 崩老头, 瑜伽崩, 情绪价值经济学
+    -->
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #000005;
+            overflow: hidden;
+        }
+
+        /* HUD: Top-Left */
+        #hud {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 400px;
+            background: rgba(10, 15, 25, 0.95);
+            border: 1px solid #334466;
+            border-left: 3px solid #00ffff;
+            border-radius: 4px;
+            padding: 25px;
+            color: #eef;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            display: none;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        #hud h2 {
+            margin: 0 0 5px 0;
+            font-size: 24px;
+            padding-right: 30px;
+        }
+
+        #hud .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.2s;
+            font-size: 20px;
+            color: #889;
+            text-align: center;
+            line-height: 24px;
+        }
+
+        #hud .close-btn:hover {
+            opacity: 1;
+            color: #ff5555;
+        }
+
+        #hud .sub-header {
+            font-size: 14px;
+            color: #8899aa;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #334455;
+            padding-bottom: 10px;
+        }
+
+        #hud .section-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #556677;
+            letter-spacing: 2px;
+            margin-top: 15px;
+            margin-bottom: 8px;
+        }
+
+        #hud .content-block {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #ccd;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        #hud .en {
+            color: #fff;
+        }
+
+        #hud .cn {
+            color: #88aacc;
+            font-size: 13px;
+        }
+
+        #hud .keyword {
+            color: #00ffff;
+            font-weight: bold;
+        }
+
+        #hud .scene-tag {
+            display: inline-block;
+            font-size: 12px;
+            background: #223344;
+            color: #aab;
+            padding: 4px 8px;
+            border-radius: 12px;
+            margin: 3px 5px 3px 0;
+            border: 1px solid #334455;
+        }
+
+        /* Legend: Bottom-Left (Collapsible) */
+        #legend {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(10, 15, 25, 0.9);
+            border: 1px solid #334466;
+            border-radius: 4px;
+            padding: 15px 20px;
+            color: #ccd;
+            backdrop-filter: blur(10px);
+            min-width: 180px;
+        }
+
+        #legend h3 {
+            margin: 0;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #778;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        #legend h3::after {
+            content: '▼';
+            font-size: 10px;
+            transition: transform 0.3s;
+        }
+
+        #legend.collapsed h3::after {
+            transform: rotate(-90deg);
+        }
+
+        #legend .legend-items {
+            max-height: 200px;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        #legend.collapsed .legend-items {
+            max-height: 0;
+        }
+
+        #legend .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 6px 0;
+            font-size: 13px;
+        }
+
+        #legend .legend-color {
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+            margin-right: 10px;
+        }
+
+        #legend .legend-label {
+            color: #aab;
+        }
+
+        #legend .legend-count {
+            margin-left: auto;
+            color: #667;
+            font-size: 11px;
+        }
+
+        #legend .legend-total {
+            font-size: 11px;
+            color: #667;
+            margin-left: 10px;
+        }
+
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #00ffff;
+            font-family: monospace;
+            letter-spacing: 2px;
+        }
+    </style>
+    <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/3d-force-graph"></script>
+    <script src="https://unpkg.com/three-spritetext@1.8.1/dist/three-spritetext.min.js"></script>
+    <script src="https://unpkg.com/dat.gui"></script>
+</head>
+
+<body>
+    <div id="loading">INITIALIZING...</div>
+    <div id="3d-graph"></div>
+
+    <!-- HUD with Close Button -->
+    <div id="hud">
+        <span class="close-btn" onclick="hideHUD()">×</span>
+        <h2 id="hud-title">Title</h2>
+        <div id="hud-cn" class="sub-header">Subtitle</div>
+        <div class="section-title">Definition 定义</div>
+        <div id="hud-desc" class="content-block"></div>
+        <div class="section-title">Deep Dive 深度解析</div>
+        <div id="hud-notes" class="content-block" style="border-left: 2px solid #00ffff;"></div>
+        <div class="section-title">Scenarios 应用场景</div>
+        <div id="hud-scenes"></div>
+    </div>
+
+    <!-- Legend (Collapsible) -->
+    <div id="legend">
+        <h3 onclick="toggleLegend()">Domain 领域 <span id="legend-total"></span></h3>
+        <div id="legend-items" class="legend-items"></div>
+    </div>
+
+    <script>
+        // === CATEGORY CONFIGURATION ===
+        const CATEGORY_CONFIG = {
+            "Sociology": { color: "#00ffff", label_en: "Sociology", label_cn: "社会学" },
+            "Psychology": { color: "#ff0055", label_en: "Psychology", label_cn: "心理学" },
+            "Economy": { color: "#00ff00", label_en: "Economy", label_cn: "灰色经济" },
+            "Behavior": { color: "#ff8800", label_en: "Behavior", label_cn: "行为模式" },
+            "Ecosystem": { color: "#aa00ff", label_en: "Ecosystem", label_cn: "生态系统" },
+            "Logic": { color: "#ffffff", label_en: "Logic", label_cn: "逻辑公式" }
+        };
+
+        const COLOR_PALETTE = [
+            "#00ffff", "#00ff00", "#ff0055", "#ff8800", "#aa00ff",
+            "#ffff00", "#00ffaa", "#ff00aa", "#88ff00", "#0088ff"
+        ];
+        let colorIndex = 0;
+
+        function getCategory(groupName, labelCn = groupName) {
+            if (!CATEGORY_CONFIG[groupName]) {
+                CATEGORY_CONFIG[groupName] = {
+                    color: COLOR_PALETTE[colorIndex % COLOR_PALETTE.length],
+                    label_en: groupName,
+                    label_cn: labelCn
+                };
+                colorIndex++;
+            }
+            return CATEGORY_CONFIG[groupName];
+        }
+
+        function toggleLegend() {
+            document.getElementById('legend').classList.toggle('collapsed');
+        }
+
+        function buildLegend() {
+            const container = document.getElementById('legend-items');
+            container.innerHTML = '';
+            const counts = {};
+            let total = 0;
+            nodes.forEach(n => { counts[n.group] = (counts[n.group] || 0) + 1; total++; });
+            document.getElementById('legend-total').innerText = `(${Object.keys(counts).length} 域 / ${total} 点)`;
+            for (const [group, count] of Object.entries(counts)) {
+                const cat = getCategory(group);
+                const item = document.createElement('div');
+                item.className = 'legend-item';
+                item.innerHTML = `
+                    <div class="legend-color" style="background:${cat.color}"></div>
+                    <span class="legend-label">${cat.label_en} ${cat.label_cn}</span>
+                    <span class="legend-count">${count}</span>
+                `;
+                container.appendChild(item);
+            }
+        }
+
+        // --- DATA: NODES ---
+        const nodes = [
+            // === CORE CONCEPTS ===
+            {
+                id: "Jingshen Xiaomei", en: "Jingshen Xiaomei", cn: "精神小妹", group: "Sociology", val: 24,
+                desc_en: "Marginalized young women in China's urban underground.",
+                desc_cn: "中国社会底层年轻女性群体，以偷窃和情感诈骗为生。",
+                notes_en: "Featured by <span class='keyword'>heavy makeup, tattoos, extreme thinness</span>. Often from left-behind or single-parent families.",
+                notes_cn: "特征：<span class='keyword'>夸张妆容、全身刺青、病态消瘦</span>。多来自留守儿童或单亲家庭。",
+                scenes_en: ["Street Culture", "Underground Economy"],
+                scenes_cn: ["街头文化", "地下经济"]
+            },
+            {
+                id: "Jingshen Xiaohuo", en: "Jingshen Xiaohuo", cn: "精神小伙", group: "Sociology", val: 18,
+                desc_en: "Male counterpart of Jingshen Xiaomei.",
+                desc_cn: "精神小妹的男性对应物，同样来自底层。",
+                notes_en: "Usually unemployed. <span class='keyword'>Wallet cleaner than face</span>. Not the target, but the 'family'.",
+                notes_cn: "通常无业。<span class='keyword'>包比脸还干净</span>。不是崩的目标，而是'家人'。",
+                scenes_en: ["Street Life", "Dormitory Ecosystem"],
+                scenes_cn: ["街头生活", "公寓生态"]
+            },
+            {
+                id: "Beng Laotou", en: "Beng Laotou", cn: "崩老头", group: "Economy", val: 24,
+                desc_en: "Emotional scam targeting middle-aged men.",
+                desc_cn: "通过情绪价值向中老年男性骗取小额金钱的行为。",
+                notes_en: "'Beng' = Northeastern slang for 'scam'. Like <span class='keyword'>flicking someone's forehead</span> - small loss, but addictive.",
+                notes_cn: "'崩'是东北话'骗'。像<span class='keyword'>弹脑瓜崩</span>——轻轻一下，虽然吃亏但心里痒痒。",
+                scenes_en: ["Social App Chat", "Nightclub"],
+                scenes_cn: ["社交软件聊天", "夜店"]
+            },
+            {
+                id: "Fei", en: "Fei (Flying)", cn: "飞", group: "Behavior", val: 18,
+                desc_en: "Slang for stealing/running away without paying.",
+                desc_cn: "偷窃的隐语。飞超市=偷东西，飞出租车=逃票。",
+                notes_en: "Expresses the <span class='keyword'>lightness and nonchalance</span> of the act. 'Fly' the supermarket 2-3 times daily.",
+                notes_cn: "表达动作的<span class='keyword'>'轻盈'和'潇洒'</span>。一天飞超市2-3趟。",
+                scenes_en: ["Survival", "Daily Routine"],
+                scenes_cn: ["生存技能", "日常操作"]
+            },
+            {
+                id: "Lao Deng", en: "Lao Deng", cn: "老灯", group: "Economy", val: 16,
+                desc_en: "Target classification for scam victims.",
+                desc_cn: "东北话，指年纪较大且有钱可骗的男性目标。",
+                notes_en: "Tiers: <span class='keyword'>Pre-Lamp (00s)</span> broke, <span class='keyword'>Mid-Lamp (90s)</span> smart, <span class='keyword'>Old-Lamp (pre-80s)</span> easiest.",
+                notes_cn: "分级：<span class='keyword'>预备灯(00后)</span>没钱，<span class='keyword'>中灯(90后)</span>聪明，<span class='keyword'>老灯(80前)</span>最好崩。",
+                scenes_en: ["Target Selection", "Risk Assessment"],
+                scenes_cn: ["目标筛选", "风险评估"]
+            },
+            {
+                id: "Yujia Beng", en: "Yujia Beng", cn: "瑜伽崩", group: "Economy", val: 22,
+                desc_en: "Evolved form: high-end version of Beng Laotou.",
+                desc_cn: "精神小妹的进化形态，穿瑜伽服出入高端场所。",
+                notes_en: "Target: <span class='keyword'>tech bros in forums</span>. Method: AA first, luxury lifestyle, long-term play.",
+                notes_cn: "目标：<span class='keyword'>技术论坛的技术宅</span>。方法：先AA，精致人设，长期培养。",
+                scenes_en: ["Coffee Shop", "Gym"],
+                scenes_cn: ["咖啡厅", "健身房"]
+            },
+            {
+                id: "Lianjia Gongyu", en: "Cheap Dormitory", cn: "廉价公寓", group: "Ecosystem", val: 18,
+                desc_en: "Crowdfunded cheap housing for street people.",
+                desc_cn: "精神小妹群居的住所，100元/晚众筹。",
+                notes_en: "10+ people per room. <span class='keyword'>Mixed gender</span>. Whoever 'beng' today pays rent.",
+                notes_cn: "10人以上挤一间。<span class='keyword'>男女混住</span>。谁今天崩到钱谁付房租。",
+                scenes_en: ["Housing", "Community"],
+                scenes_cn: ["住房", "社群"]
+            },
+            {
+                id: "Qunfa Jieqian", en: "Mass Loan Request", cn: "群发借钱", group: "Behavior", val: 14,
+                desc_en: "Survival skill: mass-message for small loans.",
+                desc_cn: "向微信列表几百个好友群发借几块十块的信息。",
+                notes_en: "Strategy: <span class='keyword'>Wide net, small asks</span>. 100 people, 10 respond = daily meal.",
+                notes_cn: "策略：<span class='keyword'>广撒网，小金额</span>。100人里10个借就行。",
+                scenes_en: ["Survival", "Cash Flow"],
+                scenes_cn: ["生存技能", "现金流"]
+            },
+            {
+                id: "Sunk Cost Fallacy", en: "Sunk Cost Fallacy", cn: "沉没成本陷阱", group: "Psychology", val: 20,
+                desc_en: "Why victims keep paying despite knowing the scam.",
+                desc_cn: "因为已经投入而继续投入更多的非理性行为。",
+                notes_en: "From milk tea to meals to bags. <span class='keyword'>'What if it's real?'</span> = 17 months of transfers.",
+                notes_cn: "从奶茶到饭到包。<span class='keyword'>'万一是真的呢？'</span>= 17个月持续转账。",
+                scenes_en: ["Scam Victim Psychology", "Decision Making"],
+                scenes_cn: ["被骗心理", "决策机制"]
+            },
+            {
+                id: "Emotional Value", en: "Emotional Value", cn: "情绪价值", group: "Economy", val: 22,
+                desc_en: "The core 'product' being traded.",
+                desc_cn: "通过撒娇、陪聊等满足情感需求的能力。",
+                notes_en: "Cheap supply meets desperate demand. <span class='keyword'>Anything but reality check</span> is acceptable.",
+                notes_cn: "廉价供给对接绝望需求。<span class='keyword'>'睁眼说瞎话'</span>是职业素养。",
+                scenes_en: ["Transaction Core", "Value Exchange"],
+                scenes_cn: ["交易核心", "价值交换"]
+            },
+            {
+                id: "Fundamental Attribution Error", en: "Attribution Error", cn: "基本归因谬误", group: "Psychology", val: 16,
+                desc_en: "Blaming individuals, ignoring systemic factors.",
+                desc_cn: "过度归因于个人因素，忽略情境因素。",
+                notes_en: "Calling them 'self-destructive' ignores: <span class='keyword'>left-behind children, education gap, family absence</span>.",
+                notes_cn: "说她们'自甘堕落'忽略了：<span class='keyword'>留守儿童、教育断层、家庭缺失</span>。",
+                scenes_en: ["Social Analysis", "Bias Awareness"],
+                scenes_cn: ["社会分析", "认知偏误"]
+            },
+            {
+                id: "Cognitive Dissonance", en: "Cognitive Dissonance", cn: "认知失调", group: "Psychology", val: 16,
+                desc_en: "How victims rationalize being scammed.",
+                desc_cn: "行为与认知不一致时的心理不适和合理化。",
+                notes_en: "Victim thinks: <span class='keyword'>'I'm doing charity'</span> rather than admitting being fooled.",
+                notes_cn: "被骗者想：<span class='keyword'>'我是在做善事'</span>而不是承认被骗。",
+                scenes_en: ["Self-Justification", "Defense Mechanism"],
+                scenes_cn: ["自我合理化", "防御机制"]
+            },
+            {
+                id: "Precision Targeting", en: "Precision Targeting", cn: "精准狙击", group: "Behavior", val: 18,
+                desc_en: "Yujia strategy: target specific victim profiles.",
+                desc_cn: "瑜伽崩专门针对特定画像的男性进行诈骗。",
+                notes_en: "Best targets: <span class='keyword'>stay-at-home, no social experience, never seen 'beauties'</span>.",
+                notes_cn: "最佳目标：<span class='keyword'>宅家、没混过社会、没见过'美女'</span>。",
+                scenes_en: ["Target Selection", "Risk Optimization"],
+                scenes_cn: ["目标筛选", "风险优化"]
+            },
+
+            // === ANTI-PATTERNS AS NODES ===
+            {
+                id: "Win-Win Illusion", en: "Win-Win Illusion Trap", cn: "双赢幻觉陷阱", group: "Psychology", val: 14,
+                desc_en: "Trap: Believing it's fair exchange, not fraud.",
+                desc_cn: "认为各取所需是公平交易，忽略信息差欺诈本质。",
+                notes_en: "Fix: Recognize the <span class='keyword'>power asymmetry</span> and information gap.",
+                notes_cn: "修正：认清<span class='keyword'>权力不对等</span>和信息差。",
+                scenes_en: ["Analysis Trap", "Moral Relativism"],
+                scenes_cn: ["分析陷阱", "道德相对主义"]
+            },
+            {
+                id: "Victim Blaming", en: "Victim Blaming Trap", cn: "受害者有罪论陷阱", group: "Psychology", val: 14,
+                desc_en: "Trap: Mocking victims as deserving it.",
+                desc_cn: "嘲笑被骗的老头'活该'，忽视其精神困境。",
+                notes_en: "68yo waiting for 'government-issued wife' is <span class='keyword'>loneliness, not stupidity</span>.",
+                notes_cn: "68岁老人等'国家发的老婆'是<span class='keyword'>孤独，不是愚蠢</span>。",
+                scenes_en: ["Empathy Gap", "Social Isolation"],
+                scenes_cn: ["共情缺失", "社会孤立"]
+            },
+            {
+                id: "Self-Destruction Myth", en: "Self-Destruction Myth", cn: "自甘堕落神话", group: "Psychology", val: 14,
+                desc_en: "Trap: Blaming only personal choice.",
+                desc_cn: "全部归因于个人选择，忽略结构性因素。",
+                notes_en: "When no one tells them it's wrong & media monetizes it, they have <span class='keyword'>no concept of normal life</span>.",
+                notes_cn: "当没人告诉她们这是错的，媒体还拿她们当流量时，她们<span class='keyword'>根本没有正常生活的概念</span>。",
+                scenes_en: ["Systemic Analysis", "Social Responsibility"],
+                scenes_cn: ["系统分析", "社会责任"]
+            },
+
+            // === LIFECYCLE PHASES ===
+            {
+                id: "Phase 1 Entry", en: "Phase 1: Entry", cn: "阶段1: 入行", group: "Ecosystem", val: 16,
+                desc_en: "15-18 years old: Drop out, enter street life.",
+                desc_cn: "15-18岁：辍学入行，开始街头生活。",
+                notes_en: "Trigger: <span class='keyword'>Left-behind / single-parent / dropout</span>.",
+                notes_cn: "触发条件：<span class='keyword'>留守/单亲/辍学</span>。",
+                scenes_en: ["Life Transition", "Entry Point"],
+                scenes_cn: ["人生转折", "入口"]
+            },
+            {
+                id: "Phase 2 Prime", en: "Phase 2: Prime", cn: "阶段2: 青春变现期", group: "Ecosystem", val: 18,
+                desc_en: "18-22 years old: Peak earning with youth.",
+                desc_cn: "18-22岁：夜场/崩老头的青春变现期。",
+                notes_en: "Core asset: <span class='keyword'>Youth + looks</span>. Short window.",
+                notes_cn: "核心资产：<span class='keyword'>青春+颜值</span>。窗口期短。",
+                scenes_en: ["Peak Earning", "Youth Monetization"],
+                scenes_cn: ["收入巅峰", "青春变现"]
+            },
+            {
+                id: "Phase 3 Decline", en: "Phase 3: Decline", cn: "阶段3: 衰退", group: "Ecosystem", val: 16,
+                desc_en: "22-25 years old: Looks deteriorate rapidly.",
+                desc_cn: "22-25岁：颜值因熬夜+劣质化妆品快速下降。",
+                notes_en: "Accelerated by: <span class='keyword'>sleep deprivation, cheap cosmetics, malnutrition</span>.",
+                notes_cn: "加速因素：<span class='keyword'>熬夜、劣质化妆品、营养不良</span>。",
+                scenes_en: ["Physical Decline", "Transition"],
+                scenes_cn: ["身体衰退", "转型期"]
+            },
+            {
+                id: "Phase 4 Factory", en: "Phase 4: Factory", cn: "阶段4: 电子厂终局", group: "Ecosystem", val: 14,
+                desc_en: "25+ years old: End up on factory assembly lines.",
+                desc_cn: "25岁+：进入深圳东莞电子厂流水线。",
+                notes_en: "Manufacturing as <span class='keyword'>last safety net</span>. Zero skills = zero options.",
+                notes_cn: "制造业是<span class='keyword'>最后的兜底</span>。零技能=零选择。",
+                scenes_en: ["Final Destination", "Industry Absorption"],
+                scenes_cn: ["最终归宿", "产业吸纳"]
+            },
+
+            // === LOGIC FORMULAS ===
+            {
+                id: "Beng Value Formula", en: "Beng Value Formula", cn: "崩老头价值公式", group: "Logic", val: 20,
+                desc_en: "Revenue = Targets × Amount × Success Rate",
+                desc_cn: "收入 = 目标数量 × 单笔金额 × 成功率",
+                notes_en: "Income depends on <span class='keyword'>volume (chatting with 100s)</span>, not depth.",
+                notes_cn: "收入取决于<span class='keyword'>数量(同时聊几百个)</span>，而非深度。",
+                scenes_en: ["Business Logic", "Revenue Model"],
+                scenes_cn: ["商业逻辑", "收入模型"]
+            },
+            {
+                id: "Lao Deng Filter", en: "Target Filter Formula", cn: "老灯筛选公式", group: "Logic", val: 20,
+                desc_en: "Score = (Money × Emptiness) ÷ Experience",
+                desc_cn: "好崩程度 = (经济实力 × 精神空虚度) ÷ 社交经验",
+                notes_en: "High score targets: <span class='keyword'>Rich, Lonely, Naive</span>.",
+                notes_cn: "高分目标：<span class='keyword'>有钱、孤独、没见过世面</span>。",
+                scenes_en: ["Targeting Strategy", "Algorithm"],
+                scenes_cn: ["筛选策略", "算法"]
+            },
+            {
+                id: "Yujia ROI", en: "Yujia ROI Formula", cn: "瑜伽崩ROI公式", group: "Logic", val: 20,
+                desc_en: "ROI = Big Scam ÷ (Image Cost + Time)",
+                desc_cn: "ROI = 大额变现 ÷ (形象投资 + 时间成本)",
+                notes_en: "High upfront cost (gym, cafe) requires <span class='keyword'>big payout</span> to justify.",
+                notes_cn: "高前期投入(健身房、咖啡)需要<span class='keyword'>大额回报</span>来平衡。",
+                scenes_en: ["Investment", "Return on Investment"],
+                scenes_cn: ["投资回报", "ROI"]
+            },
+            {
+                id: "LTV Formula", en: "Lifecycle Formula", cn: "生命周期价值公式", group: "Logic", val: 20,
+                desc_en: "LTV = Youth Years × Annual Income",
+                desc_cn: "LTV = 青春年限 × 年均收入",
+                notes_en: "Youth is a <span class='keyword'>depreciating asset</span> (15-25yo).",
+                notes_cn: "青春是<span class='keyword'>折旧资产</span>(15-25岁)。",
+                scenes_en: ["Asset Management", "Time Limit"],
+                scenes_cn: ["资产管理", "时间限制"]
+            }
+        ];
+
+        // --- DATA: LINKS ---
+        const links = [
+            // Core Flow
+            { source: "Jingshen Xiaomei", target: "Beng Laotou", label: "Primary Income" },
+            { source: "Jingshen Xiaomei", target: "Fei", label: "Survival Skill" },
+            { source: "Jingshen Xiaomei", target: "Lianjia Gongyu", label: "Lives In" },
+            { source: "Jingshen Xiaomei", target: "Jingshen Xiaohuo", label: "Partners With" },
+            { source: "Jingshen Xiaomei", target: "Qunfa Jieqian", label: "Uses" },
+
+            // Evolution
+            { source: "Beng Laotou", target: "Yujia Beng", label: "Evolves Into" },
+            { source: "Yujia Beng", target: "Precision Targeting", label: "Uses" },
+            { source: "Beng Laotou", target: "Lao Deng", label: "Targets" },
+
+            // Psychology
+            { source: "Beng Laotou", target: "Emotional Value", label: "Trades" },
+            { source: "Emotional Value", target: "Sunk Cost Fallacy", label: "Triggers" },
+            { source: "Sunk Cost Fallacy", target: "Cognitive Dissonance", label: "Leads To" },
+
+            // Traps
+            { source: "Win-Win Illusion", target: "Beng Laotou", label: "Misinterprets" },
+            { source: "Victim Blaming", target: "Lao Deng", label: "Dismisses" },
+            { source: "Self-Destruction Myth", target: "Jingshen Xiaomei", label: "Mislabels" },
+            { source: "Fundamental Attribution Error", target: "Self-Destruction Myth", label: "Causes" },
+
+            // Lifecycle
+            { source: "Phase 1 Entry", target: "Jingshen Xiaomei", label: "Creates" },
+            { source: "Phase 1 Entry", target: "Phase 2 Prime", label: "Leads To" },
+            { source: "Phase 2 Prime", target: "Phase 3 Decline", label: "Leads To" },
+            { source: "Phase 3 Decline", target: "Phase 4 Factory", label: "Leads To" },
+            { source: "Phase 2 Prime", target: "Beng Laotou", label: "Peak Activity" },
+
+            // Logic Links
+            { source: "Beng Value Formula", target: "Beng Laotou", label: "Calculates" },
+            { source: "Lao Deng Filter", target: "Lao Deng", label: "Selects" },
+            { source: "Yujia ROI", target: "Yujia Beng", label: "Optimizes" },
+            { source: "LTV Formula", target: "Phase 2 Prime", label: "Measures" },
+            { source: "Beng Value Formula", target: "Qunfa Jieqian", label: "Applies To" },
+
+            // Ecosystem
+            { source: "Lianjia Gongyu", target: "Qunfa Jieqian", label: "Funded By" }
+        ];
+
+        // --- CONFIGURATION ---
+        const settings = { linkDistance: 80, chargeStrength: -200, labelSize: 1.0, opacity: 0.8, autoRotate: true };
+
+        // --- ENGINE ---
+        const elem = document.getElementById('3d-graph');
+        const Graph = ForceGraph3D()(elem)
+            .graphData({ nodes, links })
+            .backgroundColor('#000005')
+            .showNavInfo(false)
+            .nodeThreeObject(node => {
+                const cat = getCategory(node.group);
+                const text = `${node.en}\n${node.cn}`;
+                const sprite = new SpriteText(text);
+                sprite.color = cat.color;
+                sprite.textHeight = (node.val / 2) * settings.labelSize;
+                sprite.fontFace = 'Arial'; sprite.fontWeight = 'bold';
+                sprite.backgroundColor = `rgba(0,0,0,${settings.opacity / 2})`;
+                sprite.padding = 4;
+                sprite.userData = { baseSize: node.val / 2 };
+                return sprite;
+            })
+            .linkWidth(link => 2.5)
+            .linkColor(link => {
+                const sourceNode = nodes.find(n => n.id === link.source || n.id === link.source.id);
+                if (sourceNode) return getCategory(sourceNode.group).color + '88';
+                return '#445566';
+            })
+            .linkOpacity(0.7)
+            .linkCurvature(0.12)
+            .linkCurveRotation(link => {
+                const hash = (link.source?.id || link.source) + (link.target?.id || link.target);
+                let sum = 0;
+                for (let i = 0; i < hash.length; i++) sum += hash.charCodeAt(i);
+                return (sum % 360) * (Math.PI / 180);
+            })
+            .linkDirectionalArrowLength(5)
+            .linkDirectionalArrowRelPos(0.9)
+            .linkDirectionalArrowColor(link => {
+                const sourceNode = nodes.find(n => n.id === link.source || n.id === link.source.id);
+                if (sourceNode) return getCategory(sourceNode.group).color;
+                return '#ffffff';
+            })
+            .linkDirectionalParticles(3)
+            .linkDirectionalParticleSpeed(0.005)
+            .linkDirectionalParticleWidth(2)
+            .linkDirectionalParticleColor(link => {
+                const sourceNode = nodes.find(n => n.id === link.source || n.id === link.source.id);
+                if (sourceNode) return getCategory(sourceNode.group).color;
+                return '#ffffff';
+            })
+            .onNodeClick(node => {
+                const currentPos = Graph.cameraPosition();
+                const currentDistance = Math.hypot(currentPos.x, currentPos.y, currentPos.z);
+                const nodeDistance = Math.hypot(node.x, node.y, node.z) || 1;
+
+                const newX = (node.x / nodeDistance) * currentDistance;
+                const newY = (node.y / nodeDistance) * currentDistance;
+                const newZ = (node.z / nodeDistance) * currentDistance;
+
+                Graph.cameraPosition({ x: newX, y: newY, z: newZ }, node, 1500);
+                showHUD(node);
+            });
+
+        Graph.d3Force('link').distance(settings.linkDistance);
+        Graph.d3Force('charge').strength(settings.chargeStrength);
+
+        // --- CONTROLS ---
+        const gui = new dat.GUI();
+        const folder = gui.addFolder('Graph Settings');
+        folder.add(settings, 'linkDistance', 10, 300).onChange(val => { Graph.d3Force('link').distance(val); Graph.d3ReheatSimulation(); });
+        folder.add(settings, 'chargeStrength', -500, -10).onChange(val => { Graph.d3Force('charge').strength(val); Graph.d3ReheatSimulation(); });
+        folder.add(settings, 'labelSize', 0.1, 3.0).onChange(val => { Graph.scene().traverse(obj => { if (obj.userData?.baseSize) obj.textHeight = obj.userData.baseSize * val; }); });
+        folder.add(settings, 'opacity', 0.1, 1.0).onChange(val => { Graph.scene().traverse(obj => { if (obj.userData?.baseSize) obj.backgroundColor = `rgba(0,0,0,${val / 2})`; }); });
+        folder.add(settings, 'autoRotate').onChange(val => { Graph.controls().autoRotate = val; });
+        folder.open();
+
+        // --- HUD LOGIC ---
+        function showHUD(node) {
+            const el = (id) => document.getElementById(id);
+            const cat = getCategory(node.group);
+            el('hud').style.display = 'block';
+            el('hud-title').innerText = node.en;
+            el('hud-title').style.color = cat.color;
+            el('hud-cn').innerText = `${node.cn} [${node.group}]`;
+            el('hud-desc').innerHTML = `<div class="en">${node.desc_en}</div><div class="cn">${node.desc_cn}</div>`;
+            el('hud-notes').innerHTML = `<div class="en">${node.notes_en}</div><div class="cn">${node.notes_cn}</div>`;
+            const sceneContainer = el('hud-scenes');
+            sceneContainer.innerHTML = '';
+            if (node.scenes_en) {
+                for (let i = 0; i < node.scenes_en.length; i++) {
+                    const tag = document.createElement('span');
+                    tag.className = 'scene-tag';
+                    tag.innerHTML = `${node.scenes_en[i]} <span style="color:#88aacc">${node.scenes_cn[i]}</span>`;
+                    sceneContainer.appendChild(tag);
+                }
+            }
+        }
+
+        function hideHUD() {
+            document.getElementById('hud').style.display = 'none';
+        }
+
+        // Initialize
+        buildLegend();
+        setTimeout(() => { document.getElementById('loading').style.display = 'none'; }, 1000);
+        Graph.controls().autoRotate = true;
+    </script>
+</body>
+
+</html>

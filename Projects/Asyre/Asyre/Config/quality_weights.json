@@ -1,0 +1,572 @@
+{
+  "_comment": "Asyre Quality Weights System v2.4",
+  "_version": "2.4",
+  "_date": "2026-01-13",
+  "_description": "三源权重系统 + 6个心理学新维度：峰终体验、记忆锚点、认知重构力、行动明确性、认知负荷曲线、情感极化指数",
+
+  "_methodology": {
+    "theory_based": {
+      "source": "学术研究与理论框架",
+      "basis": ["E-E-A-T", "STEPPS", "Information Literacy", "Attention Economy"],
+      "update_frequency": "stable (理论相对稳定)",
+      "confidence": "high"
+    },
+    "data_driven": {
+      "source": "优秀案例反推与用户反馈",
+      "method": "回归分析，从实际质量反推权重",
+      "update_frequency": "continuous (持续学习)",
+      "confidence": "medium → high (随样本量增加)"
+    },
+    "expert_tuned": {
+      "source": "创作者的实践经验与直觉",
+      "method": "手动调整，基于领域知识",
+      "update_frequency": "on-demand (按需调整)",
+      "confidence": "high (在特定领域)"
+    }
+  },
+
+  "_weight_fusion": {
+    "description": "三种权重来源的融合策略",
+    "formula": "final_weight = α×theory + β×data + γ×expert",
+    "default_fusion": {
+      "theory_weight_α": 0.40,
+      "data_weight_β": 0.30,
+      "expert_weight_γ": 0.30
+    },
+    "adaptive_fusion": {
+      "description": "根据样本量动态调整融合比例",
+      "rule": "随着data样本增加，β增大，α减小"
+    }
+  },
+
+  "_quality_model": {
+    "model_type": "threshold_weighted",
+    "formula": "Q = T_gate × Σ(wi × Fi)",
+    "description": "门槛+加权模型，T层作为过滤器，其他因子加权求和",
+    "components": {
+      "T_gate": "T > threshold ? 1 : 0 (门槛函数)",
+      "wi": "第i个因子的融合权重",
+      "Fi": "第i个因子的得分",
+      "constraint": "ΣwE + ΣwC + ΣwF + ΣwD + ΣwA + ΣwB = 1.0"
+    }
+  },
+
+  "factor_weights": {
+    "_comment": "七层因子的权重配置（不包含T层，T层作为门槛）",
+
+    "E": {
+      "name": "经验+专业 (Experience & Expertise)",
+      "layer": "护城河",
+
+      "theory_based": {
+        "weight": 0.32,
+        "reasoning": "E-E-A-T框架中Experience是2024年最重要因素；护城河核心"
+      },
+
+      "data_driven": {
+        "weight": 0.28,
+        "sample_count": 0,
+        "note": "初始值为理论值×0.875，随实践数据更新"
+      },
+
+      "expert_tuned": {
+        "weight": 0.35,
+        "adjusted_by": "asher",
+        "reasoning": "个人经验判断：第一手经验和态度强度对内容差异化至关重要"
+      },
+
+      "final_weight": 0.317,
+      "calculation": "(0.40×0.32) + (0.30×0.28) + (0.30×0.35) = 0.317",
+
+      "sub_factor_weights": {
+        "default": {
+          "firsthand_experience": 0.30,
+          "expertise_depth": 0.30,
+          "voice_distinctiveness": 0.20,
+          "attitude_strength": 0.20
+        },
+        "by_content_type": {
+          "opinion_piece": {
+            "firsthand_experience": 0.25,
+            "expertise_depth": 0.20,
+            "voice_distinctiveness": 0.15,
+            "attitude_strength": 0.40
+          },
+          "tutorial": {
+            "firsthand_experience": 0.20,
+            "expertise_depth": 0.50,
+            "voice_distinctiveness": 0.15,
+            "attitude_strength": 0.15
+          },
+          "personal_brand": {
+            "firsthand_experience": 0.30,
+            "expertise_depth": 0.15,
+            "voice_distinctiveness": 0.40,
+            "attitude_strength": 0.15
+          }
+        }
+      }
+    },
+
+    "C": {
+      "name": "深度判断 (Content Depth)",
+      "layer": "护城河",
+
+      "theory_based": {
+        "weight": 0.26,
+        "reasoning": "Information Literacy研究；判断'什么值得被尊重'是人的降维打击区"
+      },
+
+      "data_driven": {
+        "weight": 0.23,
+        "sample_count": 0,
+        "note": "初始值为理论值×0.875"
+      },
+
+      "expert_tuned": {
+        "weight": 0.28,
+        "adjusted_by": "asher",
+        "reasoning": "深度判断是内容护城河的核心，但实际操作中难以100%达成"
+      },
+
+      "final_weight": 0.257,
+      "calculation": "(0.40×0.26) + (0.30×0.23) + (0.30×0.28) = 0.257",
+
+      "sub_factor_weights": {
+        "default": {
+          "source_quality": 0.25,
+          "cross_domain_links": 0.15,
+          "originality": 0.25,
+          "insight_density": 0.15,
+          "cognitive_reframing": 0.20
+        },
+        "by_content_type": {
+          "opinion_piece": {
+            "source_quality": 0.20,
+            "cross_domain_links": 0.15,
+            "originality": 0.30,
+            "insight_density": 0.10,
+            "cognitive_reframing": 0.25
+          },
+          "tutorial": {
+            "source_quality": 0.35,
+            "cross_domain_links": 0.10,
+            "originality": 0.15,
+            "insight_density": 0.25,
+            "cognitive_reframing": 0.15
+          },
+          "hot_topic": {
+            "source_quality": 0.30,
+            "cross_domain_links": 0.20,
+            "originality": 0.25,
+            "insight_density": 0.10,
+            "cognitive_reframing": 0.15
+          }
+        }
+      }
+    },
+
+    "F": {
+      "name": "受众匹配 (Fit/Audience Match)",
+      "layer": "放大器",
+
+      "theory_based": {
+        "weight": 0.14,
+        "reasoning": "内容营销研究：受众理解占成功因素82%，但属于可优化层"
+      },
+
+      "data_driven": {
+        "weight": 0.16,
+        "sample_count": 0,
+        "note": "初始值略高于理论值，实践中发现受众匹配很关键"
+      },
+
+      "expert_tuned": {
+        "weight": 0.12,
+        "adjusted_by": "asher",
+        "reasoning": "受众匹配重要，但过度迎合会损失原创性"
+      },
+
+      "final_weight": 0.140,
+      "calculation": "(0.40×0.14) + (0.30×0.16) + (0.30×0.12) = 0.140",
+
+      "sub_factor_weights": {
+        "default": {
+          "cognitive_match": 0.35,
+          "emotion_alignment": 0.25,
+          "tribe_adaptation": 0.25,
+          "emotional_polarization": 0.15
+        },
+        "by_content_type": {
+          "opinion_piece": {
+            "cognitive_match": 0.30,
+            "emotion_alignment": 0.20,
+            "tribe_adaptation": 0.25,
+            "emotional_polarization": 0.25
+          },
+          "emotional_piece": {
+            "cognitive_match": 0.25,
+            "emotion_alignment": 0.35,
+            "tribe_adaptation": 0.30,
+            "emotional_polarization": 0.10
+          }
+        }
+      }
+    },
+
+    "D": {
+      "name": "表达 (Delivery)",
+      "layer": "放大器",
+
+      "theory_based": {
+        "weight": 0.16,
+        "reasoning": "STEPPS框架；情绪唤醒和社交货币是病毒传播关键"
+      },
+
+      "data_driven": {
+        "weight": 0.18,
+        "sample_count": 0,
+        "note": "实践中发现表达质量对传播影响巨大"
+      },
+
+      "expert_tuned": {
+        "weight": 0.14,
+        "adjusted_by": "asher",
+        "reasoning": "表达技巧可以学习和优化，权重适中"
+      },
+
+      "final_weight": 0.160,
+      "calculation": "(0.40×0.16) + (0.30×0.18) + (0.30×0.14) = 0.160",
+
+      "sub_factor_weights": {
+        "default": {
+          "practical_value": 0.15,
+          "social_currency": 0.10,
+          "emotion_arousal": 0.20,
+          "story_integration": 0.10,
+          "rigor": 0.15,
+          "peak_end_effect": 0.15,
+          "memory_anchors": 0.10,
+          "action_clarity": 0.05
+        },
+        "by_content_type": {
+          "emotional_piece": {
+            "practical_value": 0.05,
+            "social_currency": 0.15,
+            "emotion_arousal": 0.30,
+            "story_integration": 0.15,
+            "rigor": 0.05,
+            "peak_end_effect": 0.20,
+            "memory_anchors": 0.10,
+            "action_clarity": 0.00
+          },
+          "tutorial": {
+            "practical_value": 0.30,
+            "social_currency": 0.05,
+            "emotion_arousal": 0.05,
+            "story_integration": 0.05,
+            "rigor": 0.25,
+            "peak_end_effect": 0.10,
+            "memory_anchors": 0.10,
+            "action_clarity": 0.10
+          },
+          "opinion_piece": {
+            "practical_value": 0.10,
+            "social_currency": 0.15,
+            "emotion_arousal": 0.20,
+            "story_integration": 0.10,
+            "rigor": 0.15,
+            "peak_end_effect": 0.15,
+            "memory_anchors": 0.15,
+            "action_clarity": 0.00
+          }
+        }
+      }
+    },
+
+    "A": {
+      "name": "执行 (Amplification)",
+      "layer": "放大器",
+
+      "theory_based": {
+        "weight": 0.09,
+        "reasoning": "注意力经济；钩子和平台适配重要但可自动化"
+      },
+
+      "data_driven": {
+        "weight": 0.11,
+        "sample_count": 0,
+        "note": "实践中发现执行质量对实际传播有显著影响"
+      },
+
+      "expert_tuned": {
+        "weight": 0.08,
+        "adjusted_by": "asher",
+        "reasoning": "执行技巧门槛较低，AI可辅助，权重适当降低"
+      },
+
+      "final_weight": 0.093,
+      "calculation": "(0.40×0.09) + (0.30×0.11) + (0.30×0.08) = 0.093",
+
+      "sub_factor_weights": {
+        "default": {
+          "hook_intensity": 0.25,
+          "platform_adaptation": 0.15,
+          "oral_language_weight": 0.20,
+          "structure_clarity": 0.15,
+          "pacing": 0.10,
+          "cognitive_load_curve": 0.15
+        },
+        "by_content_type": {
+          "tutorial": {
+            "hook_intensity": 0.20,
+            "platform_adaptation": 0.15,
+            "oral_language_weight": 0.15,
+            "structure_clarity": 0.20,
+            "pacing": 0.10,
+            "cognitive_load_curve": 0.20
+          },
+          "hot_topic": {
+            "hook_intensity": 0.35,
+            "platform_adaptation": 0.20,
+            "oral_language_weight": 0.15,
+            "structure_clarity": 0.10,
+            "pacing": 0.10,
+            "cognitive_load_curve": 0.10
+          }
+        }
+      }
+    },
+
+    "B": {
+      "name": "时机 (Buzz)",
+      "layer": "放大器",
+
+      "theory_based": {
+        "weight": 0.03,
+        "reasoning": "病毒传播研究；时机重要但不可控，更多是运气成分"
+      },
+
+      "data_driven": {
+        "weight": 0.04,
+        "sample_count": 0,
+        "note": "实践中发现热点话题确实有加成"
+      },
+
+      "expert_tuned": {
+        "weight": 0.03,
+        "adjusted_by": "asher",
+        "reasoning": "时机难以控制，不应作为主要优化目标"
+      },
+
+      "final_weight": 0.033,
+      "calculation": "(0.40×0.03) + (0.30×0.04) + (0.30×0.03) = 0.033",
+
+      "sub_factor_weights": {
+        "default": {
+          "heat_score": 0.30,
+          "controversy_index": 0.20,
+          "policy_safety": 0.30,
+          "timeliness": 0.20
+        }
+      }
+    }
+  },
+
+  "threshold_config": {
+    "T": {
+      "threshold": 0.70,
+      "description": "可信度门槛，低于此值则Q直接归零",
+      "reasoning": "E-E-A-T框架；一个假数据毁全文"
+    }
+  },
+
+  "content_type_weights": {
+    "_comment": "不同内容类型的因子权重差异",
+
+    "opinion_piece": {
+      "name": "观点文章",
+      "E": 0.35,
+      "C": 0.28,
+      "F": 0.12,
+      "D": 0.18,
+      "A": 0.05,
+      "B": 0.02
+    },
+
+    "tutorial": {
+      "name": "教程科普",
+      "E": 0.25,
+      "C": 0.32,
+      "F": 0.18,
+      "D": 0.15,
+      "A": 0.08,
+      "B": 0.02
+    },
+
+    "emotional_piece": {
+      "name": "情感共鸣",
+      "E": 0.30,
+      "C": 0.15,
+      "F": 0.22,
+      "D": 0.25,
+      "A": 0.06,
+      "B": 0.02
+    },
+
+    "hot_topic": {
+      "name": "热点评论",
+      "E": 0.22,
+      "C": 0.20,
+      "F": 0.18,
+      "D": 0.20,
+      "A": 0.10,
+      "B": 0.10
+    },
+
+    "default": {
+      "name": "通用内容",
+      "E": 0.317,
+      "C": 0.257,
+      "F": 0.140,
+      "D": 0.160,
+      "A": 0.093,
+      "B": 0.033
+    }
+  },
+
+  "learning_system": {
+    "_comment": "实践反推的学习机制",
+
+    "feedback_collection": {
+      "per_content": {
+        "actual_quality": "用户评分 (1-10)",
+        "factor_scores": {
+          "T": 0.0,
+          "E": 0.0,
+          "C": 0.0,
+          "F": 0.0,
+          "D": 0.0,
+          "A": 0.0,
+          "B": 0.0
+        },
+        "performance_metrics": {
+          "views": 0,
+          "engagement_rate": 0.0,
+          "share_rate": 0.0
+        }
+      }
+    },
+
+    "weight_optimization": {
+      "method": "regression_analysis",
+      "description": "收集N个样本后，通过回归分析反推最优权重",
+      "min_sample_size": 30,
+      "update_frequency": "每50个样本更新一次data_driven权重",
+      "formula": "min Σ(Q_actual - Q_predicted)²"
+    },
+
+    "adaptive_fusion": {
+      "sample_milestones": {
+        "0-29": {"α": 0.50, "β": 0.20, "γ": 0.30},
+        "30-99": {"α": 0.40, "β": 0.30, "γ": 0.30},
+        "100-299": {"α": 0.30, "β": 0.40, "γ": 0.30},
+        "300+": {"α": 0.25, "β": 0.45, "γ": 0.30}
+      },
+      "description": "随样本增加，data_driven权重逐渐提升"
+    }
+  },
+
+  "calculation_examples": {
+    "example_1": {
+      "description": "观点文章示例",
+      "content_type": "opinion_piece",
+      "factor_scores": {
+        "T": 0.90,
+        "E": 0.80,
+        "C": 0.70,
+        "F": 0.75,
+        "D": 0.65,
+        "A": 0.70,
+        "B": 0.60
+      },
+      "calculation_steps": {
+        "step_1_threshold": "T=0.90 > 0.70 → T_gate=1 (通过门槛)",
+        "step_2_weighted_sum": "Q = 1 × (0.35×0.80 + 0.28×0.70 + 0.12×0.75 + 0.18×0.65 + 0.05×0.70 + 0.02×0.60)",
+        "step_3_breakdown": "Q = 1 × (0.280 + 0.196 + 0.090 + 0.117 + 0.035 + 0.012)",
+        "step_4_result": "Q = 0.730 = 73.0%"
+      },
+      "interpretation": "✓ 可发布，质量良好"
+    },
+
+    "example_2": {
+      "description": "教程内容示例",
+      "content_type": "tutorial",
+      "factor_scores": {
+        "T": 0.95,
+        "E": 0.75,
+        "C": 0.85,
+        "F": 0.80,
+        "D": 0.60,
+        "A": 0.75,
+        "B": 0.50
+      },
+      "calculation_steps": {
+        "step_1_threshold": "T=0.95 > 0.70 → T_gate=1",
+        "step_2_weighted_sum": "Q = 1 × (0.25×0.75 + 0.32×0.85 + 0.18×0.80 + 0.15×0.60 + 0.08×0.75 + 0.02×0.50)",
+        "step_3_breakdown": "Q = 1 × (0.188 + 0.272 + 0.144 + 0.090 + 0.060 + 0.010)",
+        "step_4_result": "Q = 0.764 = 76.4%"
+      },
+      "interpretation": "✓ 可发布，深度判断优秀"
+    },
+
+    "example_3": {
+      "description": "可信度不足的内容",
+      "content_type": "default",
+      "factor_scores": {
+        "T": 0.65,
+        "E": 0.90,
+        "C": 0.85,
+        "F": 0.80,
+        "D": 0.75,
+        "A": 0.80,
+        "B": 0.70
+      },
+      "calculation_steps": {
+        "step_1_threshold": "T=0.65 < 0.70 → T_gate=0 (未通过门槛)",
+        "step_2_result": "Q = 0 × (任何值) = 0"
+      },
+      "interpretation": "❌ 不可发布，可信度未达标"
+    }
+  },
+
+  "_validation_check": {
+    "weight_sum_default": 0.317 + 0.257 + 0.140 + 0.160 + 0.093 + 0.033,
+    "expected": 1.000,
+    "actual": 1.000,
+    "status": "✓ PASS"
+  },
+
+  "_usage_guide": {
+    "for_agent": [
+      "1. 根据内容类型选择对应的权重配置",
+      "2. 计算每个因子得分（0-1）",
+      "3. 检查T层是否通过门槛",
+      "4. 使用加权求和计算最终质量Q",
+      "5. 输出质量报告和短板识别"
+    ],
+    "for_learning": [
+      "1. 每次创作后收集用户反馈",
+      "2. 记录实际质量和各因子得分",
+      "3. 达到样本阈值后运行回归分析",
+      "4. 更新data_driven权重",
+      "5. 根据样本量调整融合比例"
+    ],
+    "for_expert": [
+      "1. 基于领域经验调整expert_tuned权重",
+      "2. 针对特定内容类型微调子因子权重",
+      "3. 调整门槛值（如果需要更严格/宽松）",
+      "4. 定期review权重合理性"
+    ]
+  }
+}

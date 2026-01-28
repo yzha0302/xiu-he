@@ -1,0 +1,113 @@
+[
+    {
+        "formula_en": "Knowledge Compression Formula",
+        "formula_cn": "知识压缩公式",
+        "equation": "Effective_Knowledge = Infinite_Possibilities → Finite_Variables → Functional_Relations → Prediction",
+        "variables": {
+            "Infinite_Possibilities": "所有逻辑可能性的总类",
+            "Finite_Variables": "经验可能性较有限的子类",
+            "Functional_Relations": "变量之间的功能联系",
+            "Prediction": "从当前状况推出的未来可能性"
+        },
+        "mechanism": "赫伯特·西蒙的有限理性核心：人无法处理无限变量，知识的使命是把无限压缩成有限。整个归纳过程就是从无限的逻辑可能性中筛选出有限的经验可能性，建立功能联系，最终实现预测。这解释了为什么知识永远只能'无限逼近'而非'达到'真理。",
+        "application": "当信息过载无法决策时，问自己：有哪些关键变量？它们之间有什么功能联系？",
+        "anti_pattern": "试图考虑所有变量导致决策瘫痪。有限理性不是缺陷，是高效思考的前提。",
+        "source_file": "Logic_and_Reasoning.md"
+    },
+    {
+        "formula_en": "Induction Strength Formula",
+        "formula_cn": "归纳强度公式",
+        "equation": "Induction_Strength = Sample_Size × Randomness × Variable_Control",
+        "variables": {
+            "Sample_Size": "样本量(越大越好)",
+            "Randomness": "随机性(消除选择偏差)",
+            "Variable_Control": "变量控制程度(混杂因子的隔离)"
+        },
+        "mechanism": "归纳强度不是有效/无效的二元判断，而是一个连续的光谱。费舍尔的随机对照试验通过最大化这三个因素来提高归纳强度。但无论归纳强度多高，终究只能无限逼近而非达到确定性——这是休谟之叉的深刻含义。",
+        "application": "评估一项研究结论时，检查这三个因素：样本够大吗？足够随机吗？混杂因子控制得好吗？",
+        "anti_pattern": "把高强度归纳当成确定性因果。即便是99.999%的置信度也不是100%。",
+        "source_file": "Logic_and_Reasoning.md"
+    },
+    {
+        "formula_en": "Analogy Validity Formula",
+        "formula_cn": "类比有效性公式",
+        "equation": "Analogy_Validity = Structural_Mapping × Domain_Relevance",
+        "variables": {
+            "Structural_Mapping": "结构映射完整度(共有特征的匹配程度)",
+            "Domain_Relevance": "领域相关性(两个领域的内在关联)"
+        },
+        "mechanism": "概念整合理论的应用：类比通过结构映射将一个领域的理解迁移到另一个领域。映射越完整、领域越相关，类比越有效。但每个类比都有盲区——被映射遮蔽的部分。'爱情是战争'的高映射度也带来了'必须有赢家'的遮蔽效应。",
+        "application": "评估一个类比时问：共有结构是什么？映射了什么？遮蔽了什么？",
+        "anti_pattern": "过度依赖单一类比。任何类比都只是部分映射，需要用多个类比互补。",
+        "source_file": "Logic_and_Reasoning.md"
+    },
+    {
+        "formula_en": "Prototype Control Formula",
+        "formula_cn": "原型控制力公式",
+        "equation": "Control_Power = Time_of_Appearance × Usage_Frequency × Node_Connections",
+        "variables": {
+            "Time_of_Appearance": "出现时间(越早控制力越大)",
+            "Usage_Frequency": "使用频率(越频繁越固化)",
+            "Node_Connections": "关联节点数(网络中心性)"
+        },
+        "mechanism": "原型范畴论的应用：越早在生命中出现的原型，位置越靠中间，关联越多，控制力越强。'家庭即社会'的隐喻如此根深蒂固，是因为家庭是最早、最频繁使用、关联最广的原型之一。这解释了为什么原生家庭的影响如此深远，也解释了为什么改变根深蒂固的观念如此困难。",
+        "application": "当发现某个信念特别顽固时，追溯它的原型：是什么早期经验塑造了它？",
+        "anti_pattern": "试图通过理性说服改变深层信念。需要从原型层面工作，提供替代隐喻。",
+        "source_file": "Logic_and_Reasoning.md"
+    },
+    {
+        "formula_en": "Metaphor Detection Formula",
+        "formula_cn": "隐喻识别公式",
+        "equation": "Metaphor_Exposure = Ask('共有结构是什么') + Ask('遮蔽了什么') + Try('替代隐喻')",
+        "variables": {
+            "共有结构": "两个概念共享的结构特征",
+            "遮蔽部分": "隐喻未能映射的方面",
+            "替代隐喻": "可以提供不同视角的其他类比"
+        },
+        "mechanism": "隐喻是无意识运作的，我们对它毫无察觉。要跳出隐喻的锁定，必须主动识别它。三步法：(1)问这个表达背后的隐喻是什么，共有结构是什么；(2)问这个隐喻遮蔽了什么可能性；(3)尝试替代隐喻看看能打开什么新视角。比如从'学习是百米冲刺'切换到'学习是马拉松'。",
+        "application": "当感觉被某种思维方式困住时，用这三问检验当前隐喻。",
+        "anti_pattern": "认为自己的表达是'客观描述'而非隐喻。几乎所有抽象概念都通过隐喻理解。",
+        "source_file": "Logic_and_Reasoning.md"
+    },
+    {
+        "formula_en": "Cognitive Efficiency Formula",
+        "formula_cn": "认知效率公式",
+        "equation": "Efficiency = Analogy_Transfer_Rate × (1 / Complete_Disjunctive_Demand)",
+        "variables": {
+            "Analogy_Transfer_Rate": "类比迁移有效率(基于原型的经验传递成功率)",
+            "Complete_Disjunctive_Demand": "完全析取分析需求(需要分析所有逻辑可能性的程度)"
+        },
+        "mechanism": "这个公式解释了为什么人类在模糊情境中比AI更智能。人类围绕原型建立了半封闭的概念空间，让经验迁移高效运行（分子大）；同时避免对每个决策进行完全析取分析（分母小）。我们是'归纳鬼才、类比高手、演绎残废'——这不是bug，是feature。",
+        "application": "在模糊情境中信任直觉，在明确情境中切换到分析模式。",
+        "anti_pattern": "试图在所有情境中都进行完全析取分析。会导致决策瘫痪和效率崩溃。",
+        "source_file": "Logic_and_Reasoning.md"
+    },
+    {
+        "formula_en": "Causation Inference Formula",
+        "formula_cn": "因果推断公式",
+        "equation": "Causation_Confidence = Statistical_Evidence × Experimental_Evidence × Mechanism_Evidence",
+        "variables": {
+            "Statistical_Evidence": "统计证据(大样本相关性数据)",
+            "Experimental_Evidence": "实验证据(对照实验、动物实验)",
+            "Mechanism_Evidence": "机制证据(化学/物理/生物机理)"
+        },
+        "mechanism": "吸烟与肺癌案例的教训：仅有统计证据不足以确立因果。费舍尔作为统计学泰斗也能用混杂因子理论反驳。需要形成完整证据链：(1)统计数据显示强相关；(2)对照实验证明因变量变化；(3)机制分析解释如何导致。三者缺一则因果推断脆弱。",
+        "application": "评估因果论断时，检查这三类证据是否齐全。",
+        "anti_pattern": "只有统计相关就下因果结论。'相关不等于因果'不只是提醒语。",
+        "source_file": "Logic_and_Reasoning.md"
+    },
+    {
+        "formula_en": "Form Independence Formula",
+        "formula_cn": "形式独立公式",
+        "equation": "Technological_Power = Form_Abstraction × Physical_Implementation × Iteration_Speed",
+        "variables": {
+            "Form_Abstraction": "形式抽象程度(从内容中独立出来的程度)",
+            "Physical_Implementation": "物理实现(能否用物理手段复现形式)",
+            "Iteration_Speed": "迭代速度(物理实现的运算速度)"
+        },
+        "mechanism": "从布尔代数到计算机的发展路径：(1)布尔把逻辑抽象成与/或/非的符号运算，形式完全脱离内容；(2)香农发现可以用电路开关实现布尔运算；(3)从继电器(50次/秒)到晶体管(数百亿次/秒)。三者相乘产生了AlphaGo这样的'魔法'——在最微观层面只是连通断开，宏观上却改天换地。",
+        "application": "评估技术潜力时，看它在这三个维度的得分。",
+        "anti_pattern": "只关注应用层而忽视形式层的抽象能力。形式的独立是威力的来源。",
+        "source_file": "Logic_and_Reasoning.md"
+    }
+]

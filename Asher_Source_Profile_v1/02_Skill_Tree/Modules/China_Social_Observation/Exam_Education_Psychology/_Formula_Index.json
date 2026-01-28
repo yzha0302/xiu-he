@@ -1,0 +1,86 @@
+[
+    {
+        "formula_en": "Fear Amplification Formula",
+        "formula_cn": "恐惧投射公式",
+        "equation": "Perceived_Authority = Actual_Power × Fear_Amplification_Coefficient",
+        "variables": {
+            "Perceived_Authority": "感知到的权威力量",
+            "Actual_Power": "权威的实际力量",
+            "Fear_Amplification_Coefficient": "恐惧放大系数（由杏仁核过度激活决定）"
+        },
+        "mechanism": "被驯化者（尤其是经历过长期应试压力的人）的杏仁核会放大外界威胁信号。即使权威的实际力量很小（比如已经毕业了老师管不了你），Fear_Amplification_Coefficient仍然很高，导致Perceived_Authority远大于Actual_Power。这就是为什么很多人'明明没人管了还是不敢'。",
+        "application": "当你感到对某件事恐惧时，问自己：这个恐惧有多少是真实的威胁，有多少是放大系数在作怪？",
+        "anti_pattern": "继续用恐惧驱动自己，以为这是'自律'或'上进'。实际上你在强化自己的放大系数。",
+        "source_file": "Exam_Education_Psychology.md"
+    },
+    {
+        "formula_en": "Decision Suppression Formula",
+        "formula_cn": "决策抑制公式",
+        "equation": "Decision_Ability = Logic_Ability - Error_Anxiety",
+        "variables": {
+            "Decision_Ability": "实际决策能力",
+            "Logic_Ability": "逻辑分析能力（刷题训练出的模式匹配）",
+            "Error_Anxiety": "出错焦虑（避错神经通路的强度）"
+        },
+        "mechanism": "应试教育训练出的不是逻辑能力，而是'规避风险的神经通路'。当Error_Anxiety很高时，即使Logic_Ability再强，Decision_Ability也会被压到很低。面对不确定决策时，焦虑会干扰思维，导致无法正常决策——这就是'高IQ低决策力'悖论的成因。",
+        "application": "下次做大决定时，先问自己：我是在理性分析，还是在被出错焦虑支配？",
+        "anti_pattern": "用更多分析来缓解决策焦虑。实际需要的是提高对不确定性的接受力。",
+        "source_file": "Exam_Education_Psychology.md"
+    },
+    {
+        "formula_en": "Exploration Motivation Formula",
+        "formula_cn": "探索动机公式",
+        "equation": "Exploration_Motivation ∝ Process_Reward / Result_Reward",
+        "variables": {
+            "Exploration_Motivation": "探索新事物的动机强度",
+            "Process_Reward": "过程中获得的多巴胺奖励",
+            "Result_Reward": "结果揭晓时获得的多巴胺奖励"
+        },
+        "mechanism": "正常学习中，多巴胺在每个阶段（好奇→探索→理解→结论）分段释放。但应试教育将所有奖励集中在'对答案'那一刻。当Process_Reward趋近于0时，大脑会自动节能跳过探索阶段。结果是：没有好奇心，只关心答案，形成'别废话上结论'的思维模式。",
+        "application": "有意识地在过程中给自己设置小奖励，重新训练多巴胺释放模式。",
+        "anti_pattern": "只关注最终结果（考多少分、赚多少钱），忽视过程体验。这会加剧探索动机萎縮。",
+        "source_file": "Exam_Education_Psychology.md"
+    },
+    {
+        "formula_en": "Meaning Generation Formula",
+        "formula_cn": "意义生成公式",
+        "equation": "Meaning_Sense = Subjectivity × Imagination",
+        "variables": {
+            "Meaning_Sense": "对人生的意义感",
+            "Subjectivity": "个人主体性（我主动参与的程度）",
+            "Imagination": "对未来的想象力"
+        },
+        "mechanism": "意义不是被给予的，而是被创造的。创造需要两个条件：1) 主体性——'我'主动把自己放进一个美好的预期中；2) 想象力——能够构想一个美好的未来。当未来被定义为固定流程时，Imagination趋近于0，无论Subjectivity多高，Meaning_Sense都会坍縮。这就是'流程式人生'感到空虚的原因。",
+        "application": "花时间想象一个不受任何约束的理想未来，哪怕只是白日梦。",
+        "anti_pattern": "把所有时间用于完成任务/流程，不给想象留下任何空间。",
+        "source_file": "Exam_Education_Psychology.md"
+    },
+    {
+        "formula_en": "Relationship Quality Formula",
+        "formula_cn": "关系质量公式",
+        "equation": "Relationship_Quality ∝ 1 / (Competition_Intensity × Comparison_Drive)",
+        "variables": {
+            "Relationship_Quality": "关系的真挚程度",
+            "Competition_Intensity": "环境的竞争强度",
+            "Comparison_Drive": "个人的比较驱力（被训练出的）"
+        },
+        "mechanism": "当成绩成为唯一KPI时，人与人之间不存在平等，只能在比较中找平衡。Competition_Intensity × Comparison_Drive的乘积越大，Relationship_Quality就越低。这解释了为什么在中国'激烈竞争同时保持真挚友谊'几乎不可能——文化结构本身切断了某些关系的可能性。",
+        "application": "刻意在无竞争场合建立关系，练习'不比较地欣赏'。",
+        "anti_pattern": "用实力/财富/地位筛选'朋友'。你得到的不是友谊，是利益联盟。",
+        "source_file": "Exam_Education_Psychology.md"
+    },
+    {
+        "formula_en": "Tightening Spell Formula",
+        "formula_cn": "紧箍咒公式",
+        "equation": "Self_Censorship = External_Control × Internalization_Duration",
+        "variables": {
+            "Self_Censorship": "自我审查强度",
+            "External_Control": "曾经经历的外部控制强度",
+            "Internalization_Duration": "内化持续时间（年）"
+        },
+        "mechanism": "紧箍咒的力量不在于唐僧念不念咒，而在于孙悟空自己害怕被念咒。当外部控制持续足够长时间（应试教育10-15年），它就会被完全内化。毕业后没有老师了，但Self_Censorship会自动运行——你用内化的标准不断评判自己。10年的内化产生的自我审查，可能需要另一个10年来松动。",
+        "application": "问自己：我现在的'自律'是来自真正的自己，还是来自内化的权威？",
+        "anti_pattern": "把所有自我批判都当作'正常'或'必要'。区分健康的自我反思和病态的自我审问。",
+        "source_file": "Exam_Education_Psychology.md"
+    }
+]

@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Default Mode Network - 3D Knowledge Graph</title>
+    <!-- 
+        ASHER KNOWLEDGE GRAPH - Default Mode Network Module
+        Topic: DMN and Creativity, Meditation, Productivity
+        Version: 2.0 - Enhanced with Deep Content
+    -->
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #000005;
+            overflow: hidden;
+        }
+
+        #hud {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 420px;
+            background: rgba(10, 15, 25, 0.95);
+            border: 1px solid #334466;
+            border-left: 3px solid #00ffff;
+            border-radius: 4px;
+            padding: 25px;
+            color: #eef;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            display: none;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        #hud h2 {
+            margin: 0 0 5px 0;
+            font-size: 22px;
+            padding-right: 30px;
+        }
+
+        #hud .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.2s;
+            font-size: 20px;
+            color: #889;
+            text-align: center;
+            line-height: 24px;
+        }
+
+        #hud .close-btn:hover {
+            opacity: 1;
+            color: #ff5555;
+        }
+
+        #hud .sub-header {
+            font-size: 14px;
+            color: #8899aa;
+            margin-bottom: 12px;
+            border-bottom: 1px solid #334455;
+            padding-bottom: 8px;
+        }
+
+        #hud .section-title {
+            font-size: 10px;
+            text-transform: uppercase;
+            color: #556677;
+            letter-spacing: 2px;
+            margin-top: 12px;
+            margin-bottom: 6px;
+        }
+
+        #hud .content-block {
+            font-size: 13px;
+            line-height: 1.6;
+            color: #ccd;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 8px;
+            border-radius: 4px;
+        }
+
+        #hud .en {
+            color: #fff;
+        }
+
+        #hud .cn {
+            color: #88aacc;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        #hud .keyword {
+            color: #00ffff;
+            font-weight: bold;
+        }
+
+        #hud .scene-tag {
+            display: inline-block;
+            font-size: 11px;
+            background: #223344;
+            color: #aab;
+            padding: 3px 7px;
+            border-radius: 10px;
+            margin: 2px 4px 2px 0;
+            border: 1px solid #334455;
+        }
+
+        #hud .related-tag {
+            display: inline-block;
+            font-size: 11px;
+            background: #224433;
+            color: #8ca;
+            padding: 3px 7px;
+            border-radius: 8px;
+            margin: 2px 4px 2px 0;
+            border: 1px solid #335544;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        #hud .related-tag:hover {
+            background: #337755;
+            color: #afa;
+        }
+
+        #hud .warning-block {
+            font-size: 12px;
+            line-height: 1.5;
+            color: #faa;
+            background: rgba(80, 20, 20, 0.3);
+            padding: 8px;
+            border-radius: 4px;
+            border-left: 2px solid #f55;
+        }
+
+        #hud .insight-block {
+            font-size: 12px;
+            line-height: 1.5;
+            color: #afc;
+            background: rgba(20, 60, 30, 0.3);
+            padding: 8px;
+            border-radius: 4px;
+            border-left: 2px solid #5a5;
+        }
+
+        #legend {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(10, 15, 25, 0.9);
+            border: 1px solid #334466;
+            border-radius: 4px;
+            padding: 12px 16px;
+            color: #ccd;
+            backdrop-filter: blur(10px);
+            min-width: 160px;
+        }
+
+        #legend h3 {
+            margin: 0;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #778;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        #legend h3::after {
+            content: '▼';
+            font-size: 9px;
+            transition: transform 0.3s;
+        }
+
+        #legend.collapsed h3::after {
+            transform: rotate(-90deg);
+        }
+
+        #legend .legend-items {
+            max-height: 180px;
+            overflow-y: auto;
+            transition: max-height 0.3s ease;
+        }
+
+        #legend.collapsed .legend-items {
+            max-height: 0;
+        }
+
+        #legend .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+            font-size: 12px;
+        }
+
+        #legend .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+            margin-right: 8px;
+        }
+
+        #legend .legend-label {
+            color: #aab;
+        }
+
+        #legend .legend-count {
+            margin-left: auto;
+            color: #667;
+            font-size: 10px;
+        }
+
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #00ffff;
+            font-family: monospace;
+            letter-spacing: 2px;
+        }
+    </style>
+    <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/3d-force-graph"></script>
+    <script src="https://unpkg.com/three-spritetext@1.8.1/dist/three-spritetext.min.js"></script>
+    <script src="https://unpkg.com/dat.gui"></script>
+</head>
+
+<body>
+    <div id="loading">INITIALIZING...</div>
+    <div id="3d-graph"></div>
+
+    <div id="hud">
+        <span class="close-btn" onclick="hideHUD()">×</span>
+        <h2 id="hud-title">Title</h2>
+        <div id="hud-cn" class="sub-header">Subtitle</div>
+        <div class="section-title">Definition 定义</div>
+        <div id="hud-desc" class="content-block"></div>
+        <div class="section-title">Deep Dive 深度解析</div>
+        <div id="hud-notes" class="content-block" style="border-left: 2px solid #00ffff;"></div>
+        <div class="section-title">Why It Matters 为什么重要</div>
+        <div id="hud-why" class="insight-block"></div>
+        <div class="section-title">Common Mistakes 常见误区</div>
+        <div id="hud-mistakes" class="warning-block"></div>
+        <div class="section-title">Related Terms 关联术语</div>
+        <div id="hud-related"></div>
+        <div class="section-title">Scenarios 应用场景</div>
+        <div id="hud-scenes"></div>
+    </div>
+
+    <div id="legend">
+        <h3 onclick="toggleLegend()">Domain 领域 <span id="legend-total"></span></h3>
+        <div id="legend-items" class="legend-items"></div>
+    </div>
+
+    <script>
+        const CATEGORY_CONFIG = {
+            "Brain": { color: "#00ffff", label_en: "Brain Network", label_cn: "脑网络" },
+            "Creativity": { color: "#ff8800", label_en: "Creativity", label_cn: "创造力" },
+            "Practice": { color: "#00ff00", label_en: "Practice", label_cn: "实践方法" },
+            "Pathology": { color: "#ff0055", label_en: "Pathology", label_cn: "病理" },
+            "Core": { color: "#aa00ff", label_en: "Core Concept", label_cn: "核心概念" },
+            "Memory": { color: "#ffff00", label_en: "Memory", label_cn: "记忆系统" },
+            "Productivity": { color: "#00aaff", label_en: "Productivity", label_cn: "生产力" }
+        };
+
+        const COLOR_PALETTE = ["#00ffff", "#00ff00", "#ff0055", "#ff8800", "#aa00ff", "#ffff00", "#00ffaa", "#ff00aa", "#88ff00", "#0088ff"];
+        let colorIndex = 0;
+
+        function getCategory(groupName, labelCn = groupName) {
+            if (!CATEGORY_CONFIG[groupName]) {
+                CATEGORY_CONFIG[groupName] = { color: COLOR_PALETTE[colorIndex % COLOR_PALETTE.length], label_en: groupName, label_cn: labelCn };
+                colorIndex++;
+            }
+            return CATEGORY_CONFIG[groupName];
+        }
+
+        function toggleLegend() { document.getElementById('legend').classList.toggle('collapsed'); }
+
+        function buildLegend() {
+            const container = document.getElementById('legend-items');
+            container.innerHTML = '';
+            const counts = {};
+            let total = 0;
+            nodes.forEach(n => { counts[n.group] = (counts[n.group] || 0) + 1; total++; });
+            document.getElementById('legend-total').innerText = `(${Object.keys(counts).length}域/${total}节点)`;
+            for (const [group, count] of Object.entries(counts)) {
+                const cat = getCategory(group);
+                const item = document.createElement('div');
+                item.className = 'legend-item';
+                item.innerHTML = `<div class="legend-color" style="background:${cat.color}"></div><span class="legend-label">${cat.label_cn}</span><span class="legend-count">${count}</span>`;
+                container.appendChild(item);
+            }
+        }
+
+        // === ENHANCED NODE DATA WITH DEEP CONTENT ===
+        const nodes = [
+            {
+                id: "DMN", en: "Default Mode Network", cn: "默认模式网络", group: "Brain", val: 45,
+                desc_en: "A large-scale brain network active when not focused on external tasks.",
+                desc_cn: "大脑的'待机程序'，在你不干活时最活跃，负责走神、做梦、自我反思。",
+                notes_en: "Consumes <span class='keyword'>60-80%</span> of brain energy - called the 'dark energy' of the brain. Includes mPFC, PCC, precuneus, angular gyrus.",
+                notes_cn: "消耗大脑<span class='keyword'>60%-80%</span>的能量，被称为'大脑的暗能量'。包括内侧前额叶、后扣带皮层、楔前叶、角回。",
+                why_matters: "理解 DMN 能让你重新认识'走神'的价值——它不是效率的敌人，而是创造力的温床。你可以主动利用 DMN 来激发灵感。",
+                mistakes: "以为刷手机、看视频是在'休息'和激活 DMN。错！手机提供持续的外部刺激，会阻止 DMN 激活。",
+                related: ["TPN", "mPFC", "PCC", "Incubation", "MindWandering"],
+                scenes_en: ["Daydreaming", "Self-reflection", "Future planning"],
+                scenes_cn: ["走神", "自我反思", "规划未来"]
+            },
+            {
+                id: "TPN", en: "Task-Positive Network", cn: "任务正网络", group: "Brain", val: 35,
+                desc_en: "Network active during goal-directed, externally focused tasks.",
+                desc_cn: "DMN的反面，在你专注干活时激活。",
+                notes_en: "Shows <span class='keyword'>seesaw relationship</span> with DMN. When one is up, the other is down.",
+                notes_cn: "与DMN呈<span class='keyword'>跷跷板关系</span>。一个活跃时另一个就被抑制。",
+                why_matters: "你需要在 TPN 和 DMN 之间灵活切换。纯粹追求'深度工作'而消灭一切走神是错误的。",
+                mistakes: "认为 TPN 越活跃越好，追求整天专注。这会导致创意枯竭和认知疲劳。",
+                related: ["DMN", "SalienceNetwork", "SeesawRelationship"],
+                scenes_en: ["Focused work", "Problem solving", "Reading"],
+                scenes_cn: ["专注工作", "解决问题", "阅读"]
+            },
+            {
+                id: "mPFC", en: "Medial Prefrontal Cortex", cn: "内侧前额叶皮质", group: "Brain", val: 28,
+                desc_en: "Key DMN region for self-referential thinking and social cognition.",
+                desc_cn: "DMN核心脑区，负责想自己、想别人、想未来。",
+                notes_en: "The 'self' center of the brain. Active when thinking about <span class='keyword'>who you are</span>.",
+                notes_cn: "大脑的'自我'中心。思考<span class='keyword'>我是谁</span>时活跃。",
+                why_matters: "mPFC 是'自我'的神经学基础。理解它能帮你认识：为什么走神时总是在想自己的事？",
+                mistakes: "认为'想自己'是自私或无意义的。实际上，自我反思对心理健康至关重要。",
+                related: ["DMN", "PCC", "SelfReflection"],
+                scenes_en: ["Self-reflection", "Thinking about others"],
+                scenes_cn: ["自我反思", "揣测他人"]
+            },
+            {
+                id: "PCC", en: "Posterior Cingulate Cortex", cn: "后扣带皮层", group: "Brain", val: 28,
+                desc_en: "Key DMN region for integrating self-related information and memory.",
+                desc_cn: "DMN核心脑区，整合自我相关信息和记忆。",
+                notes_en: "Crucial for <span class='keyword'>autobiographical memory</span> and sense of self continuity.",
+                notes_cn: "对<span class='keyword'>自传体记忆</span>和自我连续感至关重要。",
+                why_matters: "PCC 是'记忆与自我'的交汇点。它让你感觉'我还是昨天的我'。",
+                mistakes: "忽视记忆在自我认同中的作用。很多人以为自我只是'此刻的我'。",
+                related: ["DMN", "mPFC", "AutobiographicalMemory"],
+                scenes_en: ["Memory recall", "Self-continuity"],
+                scenes_cn: ["记忆提取", "自我连续性"]
+            },
+            {
+                id: "Incubation", en: "Incubation Effect", cn: "孵化效应", group: "Creativity", val: 38,
+                desc_en: "Putting a problem aside leads to sudden insights - DMN processing in background.",
+                desc_cn: "放下问题去做别的事，答案反而自己跳出来。",
+                notes_en: "Why <span class='keyword'>'sleep on it'</span> works. Archimedes, Kekule - all incubation.",
+                notes_cn: "<span class='keyword'>'睡一觉再想'</span>有效的原因。阿基米德、凯库勒的顿悟都是孵化效应。",
+                why_matters: "孵化效应是对抗'卡住'的秘密武器。正确做法不是更用力，而是暂时放下。",
+                mistakes: "认为孵化 = 偷懒。错！孵化的前提是你已经'浸泡'在问题中。没有输入的孵化是无效的。",
+                related: ["DMN", "RemoteAssociation", "StrategicRest", "InputPhase"],
+                scenes_en: ["Creative problem solving", "Writer's block"],
+                scenes_cn: ["创意问题解决", "写作瓶颈"]
+            },
+            {
+                id: "RemoteAssociation", en: "Remote Association", cn: "远程联想", group: "Creativity", val: 32,
+                desc_en: "Connecting seemingly unrelated concepts - the essence of creativity.",
+                desc_cn: "在看似不相关的概念之间建立连接——创造力的本质。",
+                notes_en: "DMN enables connection between <span class='keyword'>disparate memory traces</span>.",
+                notes_cn: "DMN让<span class='keyword'>分散的记忆痕迹</span>建立连接。顿悟时刻。",
+                why_matters: "如果你想更有创造力，需要两件事：扩大知识面 + 留出放空时间让 DMN 做远程联想。",
+                mistakes: "认为创造力是'灵感突降'，是天赋。错！创造力是可以训练的。",
+                related: ["DMN", "Incubation", "DivergentThinking", "SemanticMemory"],
+                scenes_en: ["Brainstorming", "Innovation"],
+                scenes_cn: ["头脑风暴", "创新"]
+            },
+            {
+                id: "MindWandering", en: "Mind Wandering", cn: "走神", group: "Core", val: 35,
+                desc_en: "Spontaneous thought unrelated to current task - DMN's primary manifestation.",
+                desc_cn: "与当前任务无关的自发思维——DMN的主要表现。",
+                notes_en: "Not always bad! <span class='keyword'>Productive mind wandering</span> generates ideas.",
+                notes_cn: "并非总是坏事！<span class='keyword'>有生产力的走神</span>能产生想法。关键是调节能力。",
+                why_matters: "不要把走神一棍子打死。学会区分'有价值的走神'和'有害的走神'。",
+                mistakes: "把所有走神都视为'分心'，用番茄钟彻底消灭它。这会扼杀创造力。",
+                related: ["DMN", "Rumination", "Daydreaming", "Meditation"],
+                scenes_en: ["Meeting daydreams", "Shower thoughts"],
+                scenes_cn: ["会议走神", "洗澡灵感"]
+            },
+            {
+                id: "Daydreaming", en: "Daydreaming", cn: "白日梦", group: "Core", val: 28,
+                desc_en: "Vivid mental imagery during waking rest - high DMN activity.",
+                desc_cn: "清醒时的自发幻想——DMN高度活跃的状态。",
+                notes_en: "Brain performs <span class='keyword'>mental simulation</span> during daydreaming.",
+                notes_cn: "白日梦时大脑在进行<span class='keyword'>心理模拟</span>——在脑中构建和预演场景。",
+                why_matters: "白日梦不是懒惰的表现，而是大脑在进行高级认知活动。很多伟大发明在白日梦中萌芽。",
+                mistakes: "把白日梦等同于'不务正业'。实际上，适度的白日梦是创造力的重要组成部分。",
+                related: ["MindWandering", "DMN", "FuturePlanning"],
+                scenes_en: ["Relaxed thinking", "Imagination"],
+                scenes_cn: ["放松思考", "想象"]
+            },
+            {
+                id: "Meditation", en: "Meditation", cn: "冥想", group: "Practice", val: 35,
+                desc_en: "Practice that regulates DMN activity - reducing rumination, enhancing creativity.",
+                desc_cn: "调节DMN活动的练习——减少反刍，增强创造力。",
+                notes_en: "<span class='keyword'>Reduces</span> DMN overactivity. <span class='keyword'>Enhances</span> connectivity. Both effects!",
+                notes_cn: "<span class='keyword'>降低</span>DMN过度活跃。<span class='keyword'>增强</span>连接性。双重效果！",
+                why_matters: "如果你既想利用 DMN 的创造力，又不想被反刍折磨，冥想是最有效的训练方法。",
+                mistakes: "认为冥想是'清空大脑'或'什么都不想'。错！冥想是'觉察思维但不卷入'。",
+                related: ["DMN", "Rumination", "SalienceNetwork", "AlphaWave", "ThetaWave"],
+                scenes_en: ["Daily practice", "Pre-creative work"],
+                scenes_cn: ["日常练习", "创作前准备"]
+            },
+            {
+                id: "StrategicRest", en: "Strategic Rest", cn: "策略性放空", group: "Practice", val: 32,
+                desc_en: "Intentionally engaging in low-cognitive activities to activate DMN.",
+                desc_cn: "主动安排低认知负荷活动以激活DMN。",
+                notes_en: "Walking, showering, chores. <span class='keyword'>NOT scrolling phone</span> - that blocks DMN!",
+                notes_cn: "散步、洗澡、做家务。<span class='keyword'>刷手机不算</span>——那会阻止DMN激活！",
+                why_matters: "把策略性放空纳入工作流程。深度工作后不要立刻看手机，而是散步10-15分钟。",
+                mistakes: "把'刷手机'当作'休息'。手机让大脑持续处于接收外部刺激的状态。",
+                related: ["DMN", "Incubation", "PhoneTrap", "Exercise"],
+                scenes_en: ["Between work sessions", "When stuck"],
+                scenes_cn: ["工作间隙", "卡住时"]
+            },
+            {
+                id: "Exercise", en: "Aerobic Exercise", cn: "有氧运动", group: "Practice", val: 25,
+                desc_en: "Physical activity that enhances DMN connectivity.",
+                desc_cn: "可以增强DMN内部连接性的身体活动。",
+                notes_en: "20-30 min running/swimming can <span class='keyword'>boost</span> creative problem-solving.",
+                notes_cn: "20-30分钟跑步/游泳可以<span class='keyword'>提升</span>创意问题解决能力。",
+                why_matters: "在需要创意突破时，先去运动 20-30 分钟，然后回来继续思考。",
+                mistakes: "只看运动的身体益处，忽视其认知益处。运动是低成本的创造力增强剂。",
+                related: ["DMN", "StrategicRest", "Creativity"],
+                scenes_en: ["Before creative work", "Breaking mental blocks"],
+                scenes_cn: ["创作前", "打破思维僵局"]
+            },
+            {
+                id: "Rumination", en: "Rumination", cn: "反刍", group: "Pathology", val: 30,
+                desc_en: "Repetitive negative thinking - pathological DMN overactivity.",
+                desc_cn: "反复想同一件负面的事——DMN过度活跃的病态表现。",
+                notes_en: "Linked to <span class='keyword'>depression and anxiety</span>. The dark side of DMN.",
+                notes_cn: "与<span class='keyword'>抑郁和焦虑</span>相关。DMN的阴暗面。",
+                why_matters: "当你发现自己反复想同一件负面的事，这是 DMN 失控的信号。需要'打断'它。",
+                mistakes: "试图'用想来解决想'——越分析越焦虑。需要的是'打断模式'而非更多思考。",
+                related: ["DMN", "MindWandering", "Meditation", "Anxiety"],
+                scenes_en: ["Worry loops", "Self-criticism"],
+                scenes_cn: ["担忧循环", "自我批评"]
+            },
+            {
+                id: "PhoneTrap", en: "Phone Scrolling Trap", cn: "刷手机陷阱", group: "Pathology", val: 28,
+                desc_en: "Mistaking phone use for rest - it actually blocks DMN activation.",
+                desc_cn: "把刷手机误以为是休息——它实际上阻止了DMN激活。",
+                notes_en: "Phone provides <span class='keyword'>continuous external stimulation</span>. No internal processing.",
+                notes_cn: "手机提供<span class='keyword'>持续的外部刺激</span>。没有时间进行内部整合。",
+                why_matters: "这是现代人创造力下降的主要原因之一。把刷手机替换成无刺激活动，创造力会显著提升。",
+                mistakes: "认为'我只是放松一下''刷手机很被动不费脑子'。被动接收刺激和内部整合是两回事。",
+                related: ["DMN", "StrategicRest", "TPN"],
+                scenes_en: ["Lunch break", "Commuting"],
+                scenes_cn: ["午休", "通勤"]
+            },
+            {
+                id: "SalienceNetwork", en: "Salience Network", cn: "显著性网络", group: "Brain", val: 28,
+                desc_en: "Network that detects important stimuli and switches between DMN and TPN.",
+                desc_cn: "检测重要刺激并在DMN和TPN之间切换的网络。",
+                notes_en: "The <span class='keyword'>dispatcher</span> between internal and external focus.",
+                notes_cn: "内外部注意力之间的<span class='keyword'>调度员</span>。",
+                why_matters: "理解 SN 能帮你优化工作节奏：不是'一直专注'或'一直放松'，而是灵活切换。",
+                mistakes: "忽视'切换'的重要性，只追求某一种状态的极端。大脑需要有节奏的切换。",
+                related: ["DMN", "TPN", "Meditation"],
+                scenes_en: ["Attention switching", "Priority detection"],
+                scenes_cn: ["注意力切换", "优先级检测"]
+            },
+            {
+                id: "InputPhase", en: "Input Phase", cn: "输入阶段", group: "Core", val: 25,
+                desc_en: "The learning/research phase before creative incubation.",
+                desc_cn: "创意孵化前的学习/研究阶段。",
+                notes_en: "DMN can only process <span class='keyword'>what you've already learned</span>. Input first!",
+                notes_cn: "DMN只能处理<span class='keyword'>你已经学过的东西</span>。先输入，再孵化。",
+                why_matters: "创意公式是：输入 × 孵化 = 产出。任何一项为零，结果都是零。",
+                mistakes: "只要孵化不要输入（整天发呆但不学习），或者只要输入不要孵化（拼命学习但不留放空时间）。",
+                related: ["Incubation", "OutputPhase", "RemoteAssociation"],
+                scenes_en: ["Reading", "Research"],
+                scenes_cn: ["阅读", "研究"]
+            },
+            {
+                id: "OutputPhase", en: "Output Phase", cn: "输出阶段", group: "Core", val: 25,
+                desc_en: "The execution phase after insight emerges.",
+                desc_cn: "灵感浮现后立即执行的阶段。",
+                notes_en: "Insights are <span class='keyword'>fleeting</span>. Capture immediately!",
+                notes_cn: "灵感是<span class='keyword'>短暂的</span>——如果不及时捕捉，它很快就会消失。",
+                why_matters: "'趁热打铁'不是口号，而是神经科学的建议——灵感浮现时的神经活动模式是短暂的。",
+                mistakes: "有了灵感后说'等会儿再说''回去再写'。等你'回去'的时候，灵感已经模糊了。",
+                related: ["InputPhase", "Incubation", "TPN"],
+                scenes_en: ["Writing", "Creating"],
+                scenes_cn: ["写作", "创作"]
+            },
+            {
+                id: "SeesawRelationship", en: "Seesaw Relationship", cn: "跷跷板关系", group: "Core", val: 28,
+                desc_en: "DMN and TPN alternate activation pattern - one up, the other down.",
+                desc_cn: "DMN和TPN交替激活、互相抑制的动态平衡。",
+                notes_en: "Normal brain operation. Problem is <span class='keyword'>imbalance</span>: TPN overload + DMN starvation.",
+                notes_cn: "正常的大脑运作模式。问题在于<span class='keyword'>失衡</span>：TPN过载而DMN饥饿。",
+                why_matters: "理解跷跷板能帮你设计更好的工作节奏：专注→放空→专注，而不是专注→刷手机→专注。",
+                mistakes: "认为高效率 = 一直激活 TPN。长期压制 DMN 会导致创造力枯竭和认知疲劳。",
+                related: ["DMN", "TPN", "NetworkBalance"],
+                scenes_en: ["Work rhythm design", "Energy management"],
+                scenes_cn: ["工作节奏设计", "精力管理"]
+            },
+            {
+                id: "DivergentThinking", en: "Divergent Thinking", cn: "发散性思维", group: "Creativity", val: 28,
+                desc_en: "Generating multiple possibilities from one starting point - creativity key.",
+                desc_cn: "从一个起点生成多种可能性的思维方式——创造力的关键。",
+                notes_en: "DMN is crucial for divergent thinking. Stimulating DMN <span class='keyword'>boosts scores</span>.",
+                notes_cn: "DMN在发散思维中起关键作用。刺激DMN可以<span class='keyword'>提升测试得分</span>。",
+                why_matters: "在需要创意的阶段，要激活发散思维；在需要执行的阶段，要激活聚合思维。",
+                mistakes: "在发散阶段就开始评判和筛选。这会过早激活 TPN，抑制 DMN，扼杀创意。",
+                related: ["ConvergentThinking", "DMN", "RemoteAssociation"],
+                scenes_en: ["Brainstorming", "Ideation"],
+                scenes_cn: ["头脑风暴", "构思"]
+            },
+            {
+                id: "ConvergentThinking", en: "Convergent Thinking", cn: "聚合思维", group: "Creativity", val: 25,
+                desc_en: "Narrowing down to one best answer - execution key.",
+                desc_cn: "收敛到单一最佳答案的思维方式——执行的关键。",
+                notes_en: "TPN dominant. Complementary to divergent thinking, not replacing it.",
+                notes_cn: "TPN主导。与发散思维互补，而非替代。",
+                why_matters: "纯粹的发散没有落地，纯粹的聚合没有创新。成功的创意过程是两者的结合。",
+                mistakes: "全程高评判（聚合模式开太早）或全程不决策（发散模式关不掉）。",
+                related: ["DivergentThinking", "TPN", "Execution"],
+                scenes_en: ["Decision making", "Editing"],
+                scenes_cn: ["决策", "编辑"]
+            },
+            {
+                id: "AutobiographicalMemory", en: "Autobiographical Memory", cn: "自传体记忆", group: "Memory", val: 25,
+                desc_en: "Memory of personal experiences - building blocks of 'who I am'.",
+                desc_cn: "关于个人经历的记忆——构成'我是谁'的素材。",
+                notes_en: "DMN's PCC and mPFC are crucial for autobiographical memory retrieval.",
+                notes_cn: "DMN的后扣带皮层和内侧前额叶在自传体记忆提取中起关键作用。",
+                why_matters: "自传体记忆让你感觉'我还是我'。丧失它会导致自我认同危机。",
+                mistakes: "认为'活在当下'就该忘记过去。健康的自我需要过去、现在、未来的整合。",
+                related: ["PCC", "mPFC", "SemanticMemory"],
+                scenes_en: ["Self-reflection", "Memoir"],
+                scenes_cn: ["自我反思", "回忆"]
+            },
+            {
+                id: "SemanticMemory", en: "Semantic Memory", cn: "语义记忆", group: "Memory", val: 25,
+                desc_en: "Memory of facts and concepts - raw material for remote association.",
+                desc_cn: "关于事实和概念的记忆——远程联想的素材库。",
+                notes_en: "High creativity individuals have stronger DMN-semantic network <span class='keyword'>connectivity</span>.",
+                notes_cn: "高创造力个体的DMN与语义记忆网络<span class='keyword'>连接更强</span>。",
+                why_matters: "你的语义记忆库就是 DMN 进行远程联想的'原材料仓库'。持续学习可以丰富这个仓库。",
+                mistakes: "认为'知识已过时，搜索就够了'。远程联想发生在大脑内部，需要知识内化。",
+                related: ["AutobiographicalMemory", "RemoteAssociation", "InputPhase"],
+                scenes_en: ["Learning", "Knowledge building"],
+                scenes_cn: ["学习", "知识积累"]
+            },
+            {
+                id: "AlphaWave", en: "Alpha Wave", cn: "α波", group: "Brain", val: 22,
+                desc_en: "Brainwave (8-12Hz) associated with calm, relaxed alertness.",
+                desc_cn: "与平静、放松相关的脑电波 (8-12Hz)。",
+                notes_en: "Meditation increases alpha waves. Marks shift from <span class='keyword'>tense external focus</span> to <span class='keyword'>relaxed internal processing</span>.",
+                notes_cn: "冥想时大脑产生更多Alpha波。标志着从<span class='keyword'>紧张的外部专注</span>转向<span class='keyword'>放松的内部处理</span>。",
+                why_matters: "Alpha波水平可以作为'放松程度'的客观指标。刷手机时Alpha波不高，说明大脑没有真正放松。",
+                mistakes: "追求'刺激'而忽视'放松'。持续高强度刺激会压制Alpha波。",
+                related: ["ThetaWave", "Meditation", "DMN"],
+                scenes_en: ["Meditation", "Relaxation"],
+                scenes_cn: ["冥想", "放松"]
+            },
+            {
+                id: "ThetaWave", en: "Theta Wave", cn: "θ波", group: "Brain", val: 22,
+                desc_en: "Brainwave (4-8Hz) associated with deep meditation and creativity.",
+                desc_cn: "与深度冥想、内省和创造力相关的脑电波 (4-8Hz)。",
+                notes_en: "Many <span class='keyword'>insights</span> occur during theta-dominant states: falling asleep, showering.",
+                notes_cn: "很多<span class='keyword'>顿悟</span>发生在θ波增强时：入睡前、洗澡时、深度冥想时。",
+                why_matters: "θ波是'创意友好'的脑电状态。入睡前、洗澡时容易有灵感。",
+                mistakes: "忽视睡前/醒后的'门槛时刻'。很多人一醒来就看手机，错过了创意高峰期。",
+                related: ["AlphaWave", "Meditation", "Incubation"],
+                scenes_en: ["Deep meditation", "Falling asleep"],
+                scenes_cn: ["深度冥想", "入睡前"]
+            },
+            // === TPN-SPECIFIC NODES ===
+            {
+                id: "dlPFC", en: "Dorsolateral Prefrontal Cortex", cn: "背外侧前额叶皮质", group: "Brain", val: 30,
+                desc_en: "The 'CEO' of TPN - responsible for working memory and executive control.",
+                desc_cn: "TPN的'首席执行官'，负责工作记忆和决策。",
+                notes_en: "Like <span class='keyword'>RAM + CPU</span> of computer. Stores and processes information. Fatigable.",
+                notes_cn: "像电脑的<span class='keyword'>RAM+CPU</span>，既暂存信息又处理运算。会疲劳，需要休息。",
+                why_matters: "dlPFC 是'专注能力'的神经学基础。疲劳时更容易分心（dlPFC 资源耗尽）。",
+                mistakes: "把 dlPFC 当成无限资源。它需要葡萄糖和氧气，会疲劳，不能无限调用。",
+                related: ["TPN", "WorkingMemory", "ExecutiveFunction", "CognitiveControl"],
+                scenes_en: ["Problem solving", "Decision making"],
+                scenes_cn: ["解决问题", "决策"]
+            },
+            {
+                id: "PPC_TPN", en: "Posterior Parietal Cortex", cn: "后顶叶皮层(TPN)", group: "Brain", val: 25,
+                desc_en: "TPN's 'perception integration center' - controls spatial attention.",
+                desc_cn: "TPN的'感知整合中心'，负责空间注意力。",
+                notes_en: "Decides <span class='keyword'>where to focus</span>. Phone vibration attracts PPC automatically.",
+                notes_cn: "决定<span class='keyword'>关注哪里</span>。手机振动会自动吸引PPC注意力。",
+                why_matters: "PPC 决定你把注意力'投射'到哪里。把手机放另一个房间能减少干扰。",
+                mistakes: "忽视物理环境对注意力的影响。PPC 会自动被显著刺激吸引。",
+                related: ["TPN", "IPS", "FEF", "SpatialAttention"],
+                scenes_en: ["Visual search", "Spatial reasoning"],
+                scenes_cn: ["视觉搜索", "空间推理"]
+            },
+            {
+                id: "DeepWork", en: "Deep Work", cn: "深度工作", group: "Productivity", val: 35,
+                desc_en: "Distraction-free, high-intensity cognitive work that creates value.",
+                desc_cn: "无干扰、高专注的工作状态，产出高质量。",
+                notes_en: "<span class='keyword'>Output = Focus_Time × Intensity</span>. 4h deep > 8h fragmented.",
+                notes_cn: "<span class='keyword'>产出 = 专注时间 × 强度</span>。4小时深度 > 8小时碎片化。",
+                why_matters: "在知识经济时代，深度工作能力是最稀缺的技能。短时间内产出高质量成果。",
+                mistakes: "把'长时间工作'等同于'深度工作'。碎片化的8小时价值 < 完整的4小时。",
+                related: ["TPN", "FlowState", "AttentionResidue", "Pomodoro"],
+                scenes_en: ["Writing", "Coding", "Research"],
+                scenes_cn: ["写作", "编程", "研究"]
+            },
+            {
+                id: "FlowState", en: "Flow State", cn: "心流状态", group: "Productivity", val: 35,
+                desc_en: "Optimal experience state - complete absorption, loss of self-awareness, time distortion.",
+                desc_cn: "全神贯注的最优体验状态，忘我、愉悦。",
+                notes_en: "Trigger: <span class='keyword'>Clear goal + Immediate feedback + Skill ≈ Challenge</span>.",
+                notes_cn: "触发条件：<span class='keyword'>清晰目标 + 即时反馈 + 技能≈挑战</span>。",
+                why_matters: "心流是工作满足感和高效产出的来源。触发条件是可以主动设计的。",
+                mistakes: "期望心流随时可得。它需要特定条件，不满足就无法触发。",
+                related: ["DeepWork", "TPN", "dlPFC", "Dopamine"],
+                scenes_en: ["Gaming", "Sports", "Creative work"],
+                scenes_cn: ["游戏", "运动", "创意工作"]
+            },
+            {
+                id: "AttentionResidue", en: "Attention Residue", cn: "注意力残留", group: "Pathology", val: 28,
+                desc_en: "After task switch, attention still 'stuck' on old task - efficiency killer.",
+                desc_cn: "任务切换后，注意力还'卡在'旧任务。",
+                notes_en: "Each switch costs <span class='keyword'>~23 min</span> to fully recover. 10 interruptions = 4h lost.",
+                notes_cn: "每次切换后需要<span class='keyword'>约23分钟</span>才能恢复。10次打断 = 损失4小时。",
+                why_matters: "注意力残留是多任务工作效率低下的神经学解释。避免频繁切换。",
+                mistakes: "低估切换成本。'看一眼手机'可能损失20+分钟深度专注。",
+                related: ["Multitasking", "TPN", "DeepWork", "PhoneTrap"],
+                scenes_en: ["Multitasking", "Phone checking"],
+                scenes_cn: ["多任务", "看手机"]
+            },
+            {
+                id: "WorkingMemory", en: "Working Memory", cn: "工作记忆", group: "Brain", val: 25,
+                desc_en: "Brain's 'sticky note' - temporarily holds and manipulates information.",
+                desc_cn: "脑中的'便签纸'，暂存和处理信息。",
+                notes_en: "Capacity: <span class='keyword'>7±2 items</span>. Like computer RAM. Needs refresh.",
+                notes_cn: "容量：<span class='keyword'>7±2个单元</span>。像电脑RAM。需要持续刷新。",
+                why_matters: "工作记忆是'思考'的神经学基础。有限性决定了要用笔记、分解任务。",
+                mistakes: "高估自己的工作记忆容量。'我能记住'往往是错觉。",
+                related: ["dlPFC", "TPN", "CognitiveControl"],
+                scenes_en: ["Mental math", "Following instructions"],
+                scenes_cn: ["心算", "执行指令"]
+            },
+            {
+                id: "CognitiveControl", en: "Cognitive Control", cn: "认知控制", group: "Core", val: 25,
+                desc_en: "Ability to inhibit distractions and maintain goals - 'willpower' basis.",
+                desc_cn: "抑制干扰、维持目标的能力。",
+                notes_en: "<span class='keyword'>Trainable</span> through meditation, exercise, sleep.",
+                notes_cn: "通过冥想、运动、睡眠可以<span class='keyword'>训练增强</span>。",
+                why_matters: "认知控制是'意志力'的神经学基础。好消息是它可以训练。",
+                mistakes: "把认知控制当成固定特质。它会因疲劳、压力、睡眠不足而波动。",
+                related: ["dlPFC", "ExecutiveFunction", "Meditation", "TPN"],
+                scenes_en: ["Resisting temptation", "Staying focused"],
+                scenes_cn: ["抵制诱惑", "保持专注"]
+            },
+            {
+                id: "ExecutiveFunction", en: "Executive Function", cn: "执行功能", group: "Core", val: 28,
+                desc_en: "Umbrella term for high-level cognitive abilities: planning, decision, inhibition.",
+                desc_cn: "高级认知能力的统称：计划、决策、抑制。",
+                notes_en: "Supported by <span class='keyword'>prefrontal cortex</span>. Matures in late 20s.",
+                notes_cn: "由<span class='keyword'>前额叶皮层</span>支持。约25岁才成熟。",
+                why_matters: "执行功能影响生活的方方面面。可以训练增强，也可能因损伤而受损。",
+                mistakes: "忽视对执行功能的保护。长期压力、睡眠不足都会损害它。",
+                related: ["dlPFC", "WorkingMemory", "CognitiveControl", "TPN"],
+                scenes_en: ["Planning", "Decision making"],
+                scenes_cn: ["规划", "决策"]
+            },
+            {
+                id: "Pomodoro", en: "Pomodoro Technique", cn: "番茄工作法", group: "Productivity", val: 22,
+                desc_en: "25 min focus + 5 min break time management method.",
+                desc_cn: "25分钟专注 + 5分钟休息的时间管理法。",
+                notes_en: "Good <span class='keyword'>scaffold</span> for beginners. 25 min may be too short for flow.",
+                notes_cn: "对初学者是很好的<span class='keyword'>脚手架</span>。能进入心流时25分钟可能太短。",
+                why_matters: "番茄工作法是进入专注状态的入门工具，提供明确的结构。",
+                mistakes: "在5分钟休息时刷手机。这让TPN继续工作，失去了休息的意义。",
+                related: ["DeepWork", "TPN", "UltradianRhythm", "StrategicRest"],
+                scenes_en: ["Study", "Work sessions"],
+                scenes_cn: ["学习", "工作时段"]
+            },
+            {
+                id: "UltradianRhythm", en: "Ultradian Rhythm", cn: "超日节律", group: "Practice", val: 22,
+                desc_en: "Body's natural 90-min energy cycle - optimal work rhythm.",
+                desc_cn: "人体自然的精力波动周期，约90分钟一个循环。",
+                notes_en: "Same as sleep REM cycle. Top performers work in <span class='keyword'>90-min blocks</span>.",
+                notes_cn: "与睡眠REM周期相同。顶尖表演者按<span class='keyword'>90分钟周期</span>工作。",
+                why_matters: "理解超日节律能帮你设计更符合生理的工作节奏。",
+                mistakes: "对抗自然节律。在疲劳期硬撑会降低效率和增加错误率。",
+                related: ["DeepWork", "Pomodoro", "StrategicRest", "FlowState"],
+                scenes_en: ["Work scheduling", "Energy management"],
+                scenes_cn: ["工作安排", "精力管理"]
+            },
+            {
+                id: "IPS", en: "Intraparietal Sulcus", cn: "顶内沟", group: "Brain", val: 20,
+                desc_en: "Attention 'allocator' - decides where cognitive resources go.",
+                desc_cn: "注意力的'分配器'，决定认知资源往哪里投放。",
+                notes_en: "Connected to visual and motor cortex. Key for <span class='keyword'>visual search</span>.",
+                notes_cn: "与视觉皮层、运动皮层连接。对<span class='keyword'>视觉搜索</span>很关键。",
+                why_matters: "IPS 决定你把有限的注意力资源投向哪里。环境设计很重要。",
+                mistakes: "忽视物理环境的影响。把手机放在视野内就是主动制造干扰。",
+                related: ["PPC_TPN", "TPN", "FEF"],
+                scenes_en: ["Visual search", "Numerical cognition"],
+                scenes_cn: ["视觉搜索", "数字认知"]
+            },
+            {
+                id: "FEF", en: "Frontal Eye Fields", cn: "额叶眼动区", group: "Brain", val: 20,
+                desc_en: "Controls eye movement and visual attention - 'where to look' center.",
+                desc_cn: "控制眼球运动和视觉注意力的脑区。",
+                notes_en: "Even without eye movement, FEF can <span class='keyword'>project attention</span> to locations.",
+                notes_cn: "即使眼睛不动，FEF也能把注意力<span class='keyword'>'投射'</span>到特定位置。",
+                why_matters: "FEF 是'看哪里'的控制中心。冥想可以增强 FEF 对眼动的控制。",
+                mistakes: "忽视眼动在专注中的作用。眼睛跳动时TPN无法稳定激活。",
+                related: ["TPN", "IPS", "PPC_TPN"],
+                scenes_en: ["Reading", "Visual search"],
+                scenes_cn: ["阅读", "视觉搜索"]
+            }
+        ];
+
+        const links = [
+            { source: "DMN", target: "mPFC", label: "includes" },
+            { source: "DMN", target: "PCC", label: "includes" },
+            { source: "DMN", target: "TPN", label: "seesaw" },
+            { source: "DMN", target: "MindWandering", label: "manifests" },
+            { source: "MindWandering", target: "Daydreaming", label: "variant" },
+            { source: "MindWandering", target: "Incubation", label: "enables" },
+            { source: "MindWandering", target: "Rumination", label: "dark side" },
+            { source: "DMN", target: "RemoteAssociation", label: "enables" },
+            { source: "RemoteAssociation", target: "Incubation", label: "drives" },
+            { source: "RemoteAssociation", target: "DivergentThinking", label: "supports" },
+            { source: "DivergentThinking", target: "ConvergentThinking", label: "precedes" },
+            { source: "Meditation", target: "DMN", label: "regulates" },
+            { source: "Meditation", target: "Rumination", label: "reduces" },
+            { source: "Meditation", target: "AlphaWave", label: "increases" },
+            { source: "Meditation", target: "ThetaWave", label: "increases" },
+            { source: "StrategicRest", target: "DMN", label: "activates" },
+            { source: "Exercise", target: "DMN", label: "enhances" },
+            { source: "InputPhase", target: "Incubation", label: "precedes" },
+            { source: "Incubation", target: "OutputPhase", label: "precedes" },
+            { source: "PhoneTrap", target: "DMN", label: "blocks" },
+            { source: "SalienceNetwork", target: "DMN", label: "switches to" },
+            { source: "SalienceNetwork", target: "TPN", label: "switches to" },
+            { source: "SeesawRelationship", target: "DMN", label: "describes" },
+            { source: "SeesawRelationship", target: "TPN", label: "describes" },
+            { source: "PCC", target: "AutobiographicalMemory", label: "retrieves" },
+            { source: "SemanticMemory", target: "RemoteAssociation", label: "supplies" },
+            { source: "InputPhase", target: "SemanticMemory", label: "builds" },
+            // === TPN-SPECIFIC LINKS ===
+            { source: "TPN", target: "dlPFC", label: "core region" },
+            { source: "TPN", target: "PPC_TPN", label: "core region" },
+            { source: "TPN", target: "FEF", label: "includes" },
+            { source: "TPN", target: "IPS", label: "includes" },
+            { source: "dlPFC", target: "WorkingMemory", label: "supports" },
+            { source: "dlPFC", target: "ExecutiveFunction", label: "supports" },
+            { source: "dlPFC", target: "CognitiveControl", label: "enables" },
+            { source: "TPN", target: "DeepWork", label: "enables" },
+            { source: "TPN", target: "FlowState", label: "enables" },
+            { source: "DeepWork", target: "FlowState", label: "leads to" },
+            { source: "AttentionResidue", target: "DeepWork", label: "blocks" },
+            { source: "PhoneTrap", target: "AttentionResidue", label: "causes" },
+            { source: "Pomodoro", target: "DeepWork", label: "supports" },
+            { source: "UltradianRhythm", target: "DeepWork", label: "optimizes" },
+            { source: "Meditation", target: "CognitiveControl", label: "trains" }
+        ];
+
+        const settings = { linkDistance: 90, chargeStrength: -180, labelSize: 1.0, opacity: 0.8, autoRotate: true };
+
+        const elem = document.getElementById('3d-graph');
+        const Graph = ForceGraph3D()(elem)
+            .graphData({ nodes, links })
+            .backgroundColor('#000005')
+            .showNavInfo(false)
+            .nodeThreeObject(node => {
+                const cat = getCategory(node.group);
+                const text = `${node.en}\n${node.cn}`;
+                const sprite = new SpriteText(text);
+                sprite.color = cat.color;
+                sprite.textHeight = (node.val / 2.5) * settings.labelSize;
+                sprite.fontFace = 'Arial'; sprite.fontWeight = 'bold';
+                sprite.backgroundColor = `rgba(0,0,0,${settings.opacity / 2})`;
+                sprite.padding = 3;
+                sprite.userData = { baseSize: node.val / 2.5 };
+                return sprite;
+            })
+            .linkWidth(2)
+            .linkColor(link => {
+                const sourceNode = nodes.find(n => n.id === link.source || n.id === link.source.id);
+                if (sourceNode) return getCategory(sourceNode.group).color + '66';
+                return '#445566';
+            })
+            .linkOpacity(0.6)
+            .linkCurvature(0.1)
+            .linkDirectionalArrowLength(4)
+            .linkDirectionalArrowRelPos(0.9)
+            .linkDirectionalParticles(2)
+            .linkDirectionalParticleSpeed(0.004)
+            .linkDirectionalParticleWidth(1.5)
+            .onNodeClick(node => {
+                const currentPos = Graph.cameraPosition();
+                const currentDistance = Math.hypot(currentPos.x, currentPos.y, currentPos.z);
+                const nodeDistance = Math.hypot(node.x, node.y, node.z) || 1;
+                const newX = (node.x / nodeDistance) * currentDistance;
+                const newY = (node.y / nodeDistance) * currentDistance;
+                const newZ = (node.z / nodeDistance) * currentDistance;
+                Graph.cameraPosition({ x: newX, y: newY, z: newZ }, node, 1500);
+                showHUD(node);
+            });
+
+        Graph.d3Force('link').distance(settings.linkDistance);
+        Graph.d3Force('charge').strength(settings.chargeStrength);
+
+        const gui = new dat.GUI();
+        const folder = gui.addFolder('Graph Settings');
+        folder.add(settings, 'linkDistance', 10, 300).onChange(val => { Graph.d3Force('link').distance(val); Graph.d3ReheatSimulation(); });
+        folder.add(settings, 'chargeStrength', -500, -10).onChange(val => { Graph.d3Force('charge').strength(val); Graph.d3ReheatSimulation(); });
+        folder.add(settings, 'labelSize', 0.1, 3.0).onChange(val => { Graph.scene().traverse(obj => { if (obj.userData?.baseSize) obj.textHeight = obj.userData.baseSize * val; }); });
+        folder.add(settings, 'autoRotate').onChange(val => { Graph.controls().autoRotate = val; });
+        folder.open();
+
+        function showHUD(node) {
+            const el = (id) => document.getElementById(id);
+            const cat = getCategory(node.group);
+            el('hud').style.display = 'block';
+            el('hud-title').innerText = node.en;
+            el('hud-title').style.color = cat.color;
+            el('hud-cn').innerText = `${node.cn} [${cat.label_cn}]`;
+            el('hud-desc').innerHTML = `<div class="en">${node.desc_en || ''}</div><div class="cn">${node.desc_cn || ''}</div>`;
+            el('hud-notes').innerHTML = `<div>${node.notes_en || ''}</div><div class="cn">${node.notes_cn || ''}</div>`;
+
+            // Why It Matters
+            const whyEl = el('hud-why');
+            whyEl.innerHTML = node.why_matters || '';
+            whyEl.parentElement.previousElementSibling.style.display = node.why_matters ? 'block' : 'none';
+            whyEl.style.display = node.why_matters ? 'block' : 'none';
+
+            // Common Mistakes
+            const mistakesEl = el('hud-mistakes');
+            mistakesEl.innerHTML = node.mistakes || '';
+            mistakesEl.parentElement.previousElementSibling.style.display = node.mistakes ? 'block' : 'none';
+            mistakesEl.style.display = node.mistakes ? 'block' : 'none';
+
+            // Related Terms
+            const relatedContainer = el('hud-related');
+            relatedContainer.innerHTML = '';
+            if (node.related && node.related.length > 0) {
+                node.related.forEach(term => {
+                    const tag = document.createElement('span');
+                    tag.className = 'related-tag';
+                    tag.innerText = term;
+                    tag.onclick = () => {
+                        const targetNode = nodes.find(n => n.id === term);
+                        if (targetNode) {
+                            Graph.cameraPosition({ x: targetNode.x + 50, y: targetNode.y + 50, z: targetNode.z + 50 }, targetNode, 1500);
+                            setTimeout(() => showHUD(targetNode), 1600);
+                        }
+                    };
+                    relatedContainer.appendChild(tag);
+                });
+            }
+
+            // Scenarios
+            const sceneContainer = el('hud-scenes');
+            sceneContainer.innerHTML = '';
+            if (node.scenes_en) {
+                for (let i = 0; i < node.scenes_en.length; i++) {
+                    const tag = document.createElement('span');
+                    tag.className = 'scene-tag';
+                    tag.innerHTML = `${node.scenes_en[i]} <span style="color:#88aacc">${node.scenes_cn[i]}</span>`;
+                    sceneContainer.appendChild(tag);
+                }
+            }
+        }
+
+        function hideHUD() { document.getElementById('hud').style.display = 'none'; }
+
+        buildLegend();
+        setTimeout(() => { document.getElementById('loading').style.display = 'none'; }, 1000);
+        Graph.controls().autoRotate = true;
+    </script>
+</body>
+
+</html>

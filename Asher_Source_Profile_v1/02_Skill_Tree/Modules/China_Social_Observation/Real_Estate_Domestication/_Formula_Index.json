@@ -1,0 +1,86 @@
+[
+    {
+        "formula_en": "Rationality Collapse Formula",
+        "formula_cn": "理性崩塌公式",
+        "equation": "Rationality_Collapse = Σ(Reality_Defies_Logic) × Duration",
+        "variables": {
+            "Rationality_Collapse": "理性崩塌程度",
+            "Reality_Defies_Logic": "现实违背常识的次数/程度",
+            "Duration": "持续时间(年)"
+        },
+        "mechanism": "当现实长期、持续地违背常识——收入不涨但房价涨，租售比不合理但继续涨，人口不增加但还涨——理性判断系统就会被来回'羞辱'。每一次'讲逻辑的人都错了'都在累积崩塌效应。持续时间越长，崩塌越彻底。这解释了为什么在中国房地产市场，理性分析反而是最不靠谱的。",
+        "application": "当发现自己无法理解市场时，检查是否系统本身不讲逻辑。",
+        "anti_pattern": "用更多分析来理解一个不讲逻辑的系统。需要的是策略适应，不是理性解释。",
+        "source_file": "Real_Estate_Domestication.md"
+    },
+    {
+        "formula_en": "Cognitive Regression Formula",
+        "formula_cn": "认知退行公式",
+        "equation": "Cognitive_Regression = Rationality_Collapse / Personal_Subjectivity",
+        "variables": {
+            "Cognitive_Regression": "认知退行程度",
+            "Rationality_Collapse": "理性崩塌程度",
+            "Personal_Subjectivity": "个人主体性强度"
+        },
+        "mechanism": "认知退行程度取决于理性崩塌程度和个人主体性的比值。理性崩塌越严重（分子越大），主体性越弱（分母越小），退行越严重。当理性完全崩塌且缺乏主体性时，人会退化到无法自我掌控的幼儿状态，充满对权威的渴望和依附。",
+        "application": "增强主体性（分母）可以减少认知退行程度。",
+        "anti_pattern": "把权威依附当作'理性选择'。它是理性崩塌后的心理防御机制。",
+        "source_file": "Real_Estate_Domestication.md"
+    },
+    {
+        "formula_en": "Dignity Assetization Formula",
+        "formula_cn": "尊严资产化公式",
+        "equation": "Dignity_Volatility = Price_Change × Asset_Dependence",
+        "variables": {
+            "Dignity_Volatility": "尊严波动程度",
+            "Price_Change": "房价涨跌幅度",
+            "Asset_Dependence": "资产依附程度(0-1)"
+        },
+        "mechanism": "当尊严评价机制从'你是谁'转移到'你有什么'，尊严就会随资产价格起伏。资产依附程度越高（越把房子等同于自我价值），房价涨跌对心理的影响越大。这解释了为什么房价涨跌会如此深刻地影响中国人的心理状态——他们的尊严长在了房产证上。",
+        "application": "降低资产依附度（区分财务结果和人格价值）可以稳定尊严。",
+        "anti_pattern": "把房价涨≈个人成功。财务波动≠人格价值波动。",
+        "source_file": "Real_Estate_Domestication.md"
+    },
+    {
+        "formula_en": "Relationship Utilitarianization Formula",
+        "formula_cn": "关系功利化公式",
+        "equation": "Relationship_Utility = Housing_Pressure / Emotional_Need",
+        "variables": {
+            "Relationship_Utility": "关系功利化程度",
+            "Housing_Pressure": "房产压力(房价/收入)",
+            "Emotional_Need": "情感需求强度"
+        },
+        "mechanism": "当房产压力远大于个人能力时，择偶就会从'情感匹配'转向'资源匹配'。房产压力越大，情感需求就越被压缩——有感情没房子分手，有房子没感情结婚。这不是道德选择，而是巨大压力下的必然结果。情感被系统性降级。",
+        "application": "降低房产压力（或提高收入）可以给情感更多空间。",
+        "anti_pattern": "用道德批判功利择偶。真正需要改变的是压力结构。",
+        "source_file": "Real_Estate_Domestication.md"
+    },
+    {
+        "formula_en": "Future Imagination Formula",
+        "formula_cn": "未来想象力公式",
+        "equation": "Future_Imagination = Disposable_Resources - Debt_Pressure",
+        "variables": {
+            "Future_Imagination": "未来想象力",
+            "Disposable_Resources": "可支配资源(时间/金钱/精力)",
+            "Debt_Pressure": "债务压力(房贷/心理债务)"
+        },
+        "mechanism": "未来想象力是可支配资源减去债务压力的差值。房贷把未来的选择权转移给了过去——每月工资填补过去的窟窿。当债务压力接近或超过可支配资源，未来想象力趋近于零甚至为负。人从'人生探索者'变成'现金流维护者'，所有关于未来的狂想在产生之前就被消灭。",
+        "application": "减少债务压力或增加可支配资源可以恢复未来想象力。",
+        "anti_pattern": "认为'有房就有未来'。房贷反而可能偷走未来。",
+        "source_file": "Real_Estate_Domestication.md"
+    },
+    {
+        "formula_en": "Social Innovation Capacity Formula",
+        "formula_cn": "社会创新能力公式",
+        "equation": "Social_Innovation = Σ(Individual_Risk_Tolerance) × Resource_Allocation_Efficiency",
+        "variables": {
+            "Social_Innovation": "社会创新能力",
+            "Individual_Risk_Tolerance": "个体风险承受能力",
+            "Resource_Allocation_Efficiency": "资源配置效率"
+        },
+        "mechanism": "社会创新能力是所有个体风险承受能力的总和乘以资源配置效率。当房地产驯化出风险厌恶型人格（只敢承受房贷风险），个体风险承受能力集体萎缩。同时资源大量流入房地产而非创新（开厂十年不如炒房一年），配置效率极低。两者相乘，社会创新能力被严重抑制。",
+        "application": "恢复个体风险承受能力+优化资源配置是提升创新能力的双重路径。",
+        "anti_pattern": "认为'投入更多资源'能解决创新问题。问题在于资源去向和人格结构。",
+        "source_file": "Real_Estate_Domestication.md"
+    }
+]

@@ -1,0 +1,80 @@
+[
+    {
+        "term": "Jingshen Xiaomei",
+        "term_cn": "精神小妹",
+        "definition": "中国社会底层年轻女性群体。特征包括夸张妆容、全身刺青、病态消瘦、群居廉价公寓、以偷窃和情感诈骗为生。",
+        "source_file": "1.0_Emotional_Scam_Economy.md"
+    },
+    {
+        "term": "Jingshen Xiaohuo",
+        "term_cn": "精神小伙",
+        "definition": "精神小妹的男性对应物。同样来自底层，通常无业或从事灰色行业。",
+        "source_file": "1.0_Jingshen_Xiaomei_Economy.md"
+    },
+    {
+        "term": "Beng Laotou",
+        "term_cn": "崩老头",
+        "definition": "通过提供情绪价值、暧昧聊天等方式，向中老年男性骗取小额金钱的行为。'崩'是东北话'骗'的意思。",
+        "source_file": "1.0_Jingshen_Xiaomei_Economy.md"
+    },
+    {
+        "term": "Fei",
+        "term_cn": "飞",
+        "definition": "偷窃的隐语。'飞超市'=超市偷东西，'飞出租车'=打车不付钱跑掉。",
+        "source_file": "1.0_Jingshen_Xiaomei_Economy.md"
+    },
+    {
+        "term": "Lao Deng",
+        "term_cn": "老灯",
+        "definition": "东北话，指年纪较大且有钱可骗的男性目标。按年龄分为预备灯(00后)、中灯(90后)、老灯(80年代以前)。",
+        "source_file": "1.0_Jingshen_Xiaomei_Economy.md"
+    },
+    {
+        "term": "Yujia Beng",
+        "term_cn": "瑜伽崩",
+        "definition": "精神小妹的进化形态。穿瑜伽服出入高端场所，通过精致人设和长期情感培养，对高净值男性进行大额诈骗。",
+        "source_file": "1.0_Jingshen_Xiaomei_Economy.md"
+    },
+    {
+        "term": "Lianjia Gongyu",
+        "term_cn": "廉价公寓",
+        "definition": "精神小妹群居的住所。多人挤一间、男女混住、环境脏乱、房租众筹、随时跑路。",
+        "source_file": "1.0_Jingshen_Xiaomei_Economy.md"
+    },
+    {
+        "term": "Qunfa Jieqian",
+        "term_cn": "群发借钱",
+        "definition": "向微信列表几百个好友群发'借几块十块'的信息，积少成多的生存技能。",
+        "source_file": "1.0_Jingshen_Xiaomei_Economy.md"
+    },
+    {
+        "term": "Sunk Cost Fallacy",
+        "term_cn": "沉没成本陷阱",
+        "definition": "因为已经投入资源而继续投入更多的非理性行为。老头被崩的核心心理机制。",
+        "source_file": "1.0_Jingshen_Xiaomei_Economy.md"
+    },
+    {
+        "term": "Emotional Value",
+        "term_cn": "情绪价值",
+        "definition": "通过撒娇、陪聊、假装关心等方式，满足他人情感需求的能力。精神小妹的核心'商品'。",
+        "source_file": "1.0_Jingshen_Xiaomei_Economy.md"
+    },
+    {
+        "term": "Fundamental Attribution Error",
+        "term_cn": "基本归因谬误",
+        "definition": "过度归因于个人因素，忽略情境因素的认知偏误。",
+        "source_file": "1.0_Jingshen_Xiaomei_Economy.md"
+    },
+    {
+        "term": "Cognitive Dissonance",
+        "term_cn": "认知失调",
+        "definition": "行为与认知不一致时的心理不适。老头明知被骗却通过'我是在做善事'来合理化。",
+        "source_file": "1.0_Jingshen_Xiaomei_Economy.md"
+    },
+    {
+        "term": "Precision Targeting",
+        "term_cn": "精准狙击",
+        "definition": "瑜伽崩专门针对特定画像(有钱、孤独、少社交经验)的男性进行诈骗的策略。",
+        "source_file": "1.0_Jingshen_Xiaomei_Economy.md"
+    }
+]

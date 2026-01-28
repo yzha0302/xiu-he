@@ -1,0 +1,330 @@
+{
+  "_meta": {
+    "version": "1.0",
+    "description": "画像构建协议 - 渐进式了解创作者的问题库",
+    "philosophy": "通过哲学性/创作性问题自然对话，而非填表",
+    "usage": "Agent 根据当前画像完整度选择问题，每次对话问1-3个"
+  },
+
+  "question_bank": {
+    "1_character_discovery": {
+      "_phase": "initial",
+      "_purpose": "了解人格底色",
+      "_priority": "high",
+
+      "questions": [
+        {
+          "id": "char_001",
+          "question": "如果你必须在「说真话可能伤人」和「说善意的谎言」之间选择，你会怎么选？为什么？",
+          "maps_to": "moral_alignment",
+          "depth": "philosophical",
+          "follow_up": "有没有例外情况？"
+        },
+        {
+          "id": "char_002",
+          "question": "社交活动结束后，你是感觉充电了还是需要独处恢复？",
+          "maps_to": "energy_metabolism",
+          "depth": "behavioral",
+          "follow_up": "你理想的独处方式是什么？"
+        },
+        {
+          "id": "char_003",
+          "question": "面对一个50%成功率但回报巨大的机会，你会选择尝试还是等待更稳妥的选项？",
+          "maps_to": "risk_appetite",
+          "depth": "decision",
+          "follow_up": "你做过最冒险的决定是什么？"
+        },
+        {
+          "id": "char_004",
+          "question": "你觉得自己最被低估的能力是什么？最被高估的呢？",
+          "maps_to": "core_capabilities",
+          "depth": "self_reflection",
+          "follow_up": null
+        },
+        {
+          "id": "char_005",
+          "question": "如果用一个词形容你的「人格底色」，你会选什么？",
+          "maps_to": "moral_alignment",
+          "depth": "metaphorical",
+          "follow_up": "为什么是这个词？"
+        }
+      ]
+    },
+
+    "2_cognitive_discovery": {
+      "_phase": "early",
+      "_purpose": "了解思维方式",
+      "_priority": "high",
+
+      "questions": [
+        {
+          "id": "cog_001",
+          "question": "当你遇到一个复杂问题时，你习惯先拆解细节，还是先建立全局图景？",
+          "maps_to": "processing_style",
+          "depth": "behavioral",
+          "follow_up": "能举个例子吗？"
+        },
+        {
+          "id": "cog_002",
+          "question": "你最信任的信息来源是什么？最不信任的呢？",
+          "maps_to": "information_intake",
+          "depth": "behavioral",
+          "follow_up": "你是怎么验证信息真假的？"
+        },
+        {
+          "id": "cog_003",
+          "question": "有没有一个思维框架或理论，深刻影响了你看世界的方式？",
+          "maps_to": "mental_models",
+          "depth": "philosophical",
+          "follow_up": "它是怎么改变你的？"
+        },
+        {
+          "id": "cog_004",
+          "question": "你觉得自己最大的认知盲区是什么？或者说，你最不擅长理解什么类型的事物？",
+          "maps_to": "cognitive_blind_spots",
+          "depth": "self_reflection",
+          "follow_up": null
+        },
+        {
+          "id": "cog_005",
+          "question": "你更相信直觉还是数据？当两者冲突时呢？",
+          "maps_to": "processing_style",
+          "depth": "decision",
+          "follow_up": "有没有直觉对了、数据错了的经历？"
+        }
+      ]
+    },
+
+    "3_aesthetic_discovery": {
+      "_phase": "early",
+      "_purpose": "了解审美偏好",
+      "_priority": "medium",
+
+      "questions": [
+        {
+          "id": "aes_001",
+          "question": "你的桌面（物理或电脑）是整洁派还是创意混乱派？",
+          "maps_to": "order_preference",
+          "depth": "behavioral",
+          "follow_up": "你觉得这反映了你什么特点？"
+        },
+        {
+          "id": "aes_002",
+          "question": "如果用一种颜色、一种材质、一种声音来代表你的风格，你会选什么？",
+          "maps_to": "sensory_preferences",
+          "depth": "metaphorical",
+          "follow_up": null
+        },
+        {
+          "id": "aes_003",
+          "question": "你喜欢的文章/视频风格是什么？冷峻理性、温暖治愈、幽默调侃、还是其他？",
+          "maps_to": "expression_standards",
+          "depth": "preference",
+          "follow_up": "能举几个你喜欢的创作者吗？"
+        },
+        {
+          "id": "aes_004",
+          "question": "你最不能忍受的「丑」是什么？（可以是视觉的、语言的、行为的）",
+          "maps_to": "order_preference",
+          "depth": "philosophical",
+          "follow_up": null
+        }
+      ]
+    },
+
+    "4_content_identity_discovery": {
+      "_phase": "mid",
+      "_purpose": "了解内容定位",
+      "_priority": "highest",
+
+      "questions": [
+        {
+          "id": "cont_001",
+          "question": "你做内容的核心目的是什么？传递知识、改变观点、引发情感、还是推动行动？",
+          "maps_to": "intent_tendencies",
+          "depth": "strategic",
+          "follow_up": "如果只能选一个呢？"
+        },
+        {
+          "id": "cont_002",
+          "question": "你理想的读者/观众是什么样的人？他们有什么痛点？",
+          "maps_to": "target_audience",
+          "depth": "strategic",
+          "follow_up": "你最不想吸引什么样的人？"
+        },
+        {
+          "id": "cont_003",
+          "question": "你在哪个领域有真正的一手经验？不是学来的，是亲身经历的。",
+          "maps_to": "unique_angles.personal_experiences",
+          "depth": "experiential",
+          "follow_up": "这些经历教会了你什么别人不知道的东西？"
+        },
+        {
+          "id": "cont_004",
+          "question": "你有没有一个「反直觉」的观点，是你坚信但大多数人不同意的？",
+          "maps_to": "unique_angles.unique_perspectives",
+          "depth": "philosophical",
+          "follow_up": "你为什么这么想？"
+        },
+        {
+          "id": "cont_005",
+          "question": "如果你的内容风格是一个人，这个人会怎么说话？",
+          "maps_to": "expression_standards",
+          "depth": "metaphorical",
+          "follow_up": null
+        },
+        {
+          "id": "cont_006",
+          "question": "你最想让读者看完你的内容后产生什么变化？",
+          "maps_to": "intent_tendencies",
+          "depth": "strategic",
+          "follow_up": null
+        }
+      ]
+    },
+
+    "5_expression_rules_discovery": {
+      "_phase": "mid",
+      "_purpose": "了解表达红线",
+      "_priority": "high",
+
+      "questions": [
+        {
+          "id": "expr_001",
+          "question": "有没有一些表达方式或词汇，你在别人的内容里看到会特别反感？",
+          "maps_to": "forbidden_words",
+          "depth": "preference",
+          "follow_up": "为什么反感？"
+        },
+        {
+          "id": "expr_002",
+          "question": "你喜欢的开场方式是什么？直接抛观点、讲故事、提问、还是其他？",
+          "maps_to": "preferred_expressions.opening_styles",
+          "depth": "behavioral",
+          "follow_up": null
+        },
+        {
+          "id": "expr_003",
+          "question": "你觉得好内容应该多长？你自己阅读时更喜欢长篇深度还是短小精悍？",
+          "maps_to": "structural_preferences",
+          "depth": "preference",
+          "follow_up": null
+        },
+        {
+          "id": "expr_004",
+          "question": "你有没有经常使用的「口头禅」或标志性表达？",
+          "maps_to": "unique_angles.signature_phrases",
+          "depth": "behavioral",
+          "follow_up": null
+        }
+      ]
+    },
+
+    "6_deep_philosophical": {
+      "_phase": "advanced",
+      "_purpose": "深层价值观挖掘",
+      "_priority": "low",
+
+      "questions": [
+        {
+          "id": "deep_001",
+          "question": "你觉得「真实」和「有用」哪个更重要？如果真相没有用呢？",
+          "maps_to": "moral_alignment",
+          "depth": "philosophical",
+          "follow_up": null
+        },
+        {
+          "id": "deep_002",
+          "question": "你认为人性本善还是本恶？这如何影响你的内容？",
+          "maps_to": "moral_alignment",
+          "depth": "philosophical",
+          "follow_up": null
+        },
+        {
+          "id": "deep_003",
+          "question": "如果你的内容只能改变一件事，你希望是什么？",
+          "maps_to": "intent_tendencies",
+          "depth": "philosophical",
+          "follow_up": null
+        },
+        {
+          "id": "deep_004",
+          "question": "你害怕被误解吗？你愿意为了清晰而牺牲深度，还是为了深度而接受被误解？",
+          "maps_to": "expression_standards",
+          "depth": "philosophical",
+          "follow_up": null
+        }
+      ]
+    }
+  },
+
+  "selection_algorithm": {
+    "description": "根据画像完整度选择问题",
+    "rules": [
+      {
+        "condition": "completeness < 0.2",
+        "action": "优先问 character_discovery 和 content_identity_discovery",
+        "questions_per_session": 2
+      },
+      {
+        "condition": "completeness >= 0.2 && completeness < 0.5",
+        "action": "问 cognitive_discovery 和 aesthetic_discovery",
+        "questions_per_session": 2
+      },
+      {
+        "condition": "completeness >= 0.5 && completeness < 0.8",
+        "action": "问 expression_rules_discovery",
+        "questions_per_session": 1
+      },
+      {
+        "condition": "completeness >= 0.8",
+        "action": "问 deep_philosophical 或根据反馈补充特定维度",
+        "questions_per_session": 1
+      }
+    ]
+  },
+
+  "conversation_protocol": {
+    "trigger_conditions": [
+      "用户主动要求: /asyre profile",
+      "用户主动分享个人信息时，自然追问",
+      "创作过程中发现画像信息不足"
+    ],
+
+    "natural_integration": {
+      "description": "不要像审讯一样连续问问题，要自然融入对话",
+      "techniques": [
+        "在评价用户内容时，自然地问: '我注意到你喜欢用XX方式开头，这是你的风格偏好吗？'",
+        "在创作过程中问: '这个观点的立场够强吗？还是你更喜欢温和一点？'",
+        "在收到反馈时问: '你觉得这个表达符合你的风格吗？'"
+      ]
+    },
+
+    "response_parsing": {
+      "description": "如何将用户回答转化为画像数据",
+      "example": {
+        "user_response": "我特别讨厌那种'大家好我是XXX'的开头，太无聊了",
+        "parsed_data": {
+          "forbidden_words.phrases": ["大家好我是"],
+          "preferred_expressions.opening_styles": ["避免自我介绍式开头"],
+          "expression_standards.formality_level": "informal"
+        }
+      }
+    }
+  },
+
+  "output_format": {
+    "profile_summary": {
+      "when": "画像更新后或用户请求时",
+      "format": "创作者画像概览卡片",
+      "sections": [
+        "人格底色 (一句话)",
+        "思维特点 (2-3个关键词)",
+        "审美倾向 (风格描述)",
+        "内容定位 (目标+意图)",
+        "表达红线 (禁止词列表)",
+        "画像完整度 (%)"
+      ]
+    }
+  }
+}

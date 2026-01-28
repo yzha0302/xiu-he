@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Exam Education Psychology - 3D Knowledge Graph</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #000005;
+            overflow: hidden;
+        }
+
+        #hud {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 400px;
+            background: rgba(10, 15, 25, 0.95);
+            border: 1px solid #334466;
+            border-left: 3px solid #ff8800;
+            border-radius: 4px;
+            padding: 25px;
+            color: #eef;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            display: none;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        #hud h2 {
+            margin: 0 0 5px 0;
+            font-size: 24px;
+            padding-right: 30px;
+        }
+
+        #hud .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.2s;
+            font-size: 20px;
+            color: #889;
+            text-align: center;
+            line-height: 24px;
+        }
+
+        #hud .close-btn:hover {
+            opacity: 1;
+            color: #ff5555;
+        }
+
+        #hud .sub-header {
+            font-size: 14px;
+            color: #8899aa;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #334455;
+            padding-bottom: 10px;
+        }
+
+        #hud .section-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #556677;
+            letter-spacing: 2px;
+            margin-top: 15px;
+            margin-bottom: 8px;
+        }
+
+        #hud .content-block {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #ccd;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        #hud .en {
+            color: #fff;
+        }
+
+        #hud .cn {
+            color: #88aacc;
+            font-size: 13px;
+        }
+
+        #hud .keyword {
+            color: #ff8800;
+            font-weight: bold;
+        }
+
+        #hud .scene-tag {
+            display: inline-block;
+            font-size: 12px;
+            background: #223344;
+            color: #aab;
+            padding: 4px 8px;
+            border-radius: 12px;
+            margin: 3px 5px 3px 0;
+            border: 1px solid #334455;
+        }
+
+        #hud .related-tag {
+            display: inline-block;
+            font-size: 11px;
+            background: #224433;
+            color: #8ca;
+            padding: 3px 8px;
+            border-radius: 8px;
+            margin: 2px 4px 2px 0;
+            border: 1px solid #335544;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        #hud .related-tag:hover {
+            background: #337755;
+            color: #afa;
+        }
+
+        #hud .warning-block {
+            font-size: 13px;
+            line-height: 1.6;
+            color: #faa;
+            background: rgba(80, 20, 20, 0.3);
+            padding: 10px;
+            border-radius: 4px;
+            border-left: 2px solid #f55;
+        }
+
+        #hud .insight-block {
+            font-size: 13px;
+            line-height: 1.6;
+            color: #afc;
+            background: rgba(20, 60, 30, 0.3);
+            padding: 10px;
+            border-radius: 4px;
+            border-left: 2px solid #5a5;
+        }
+
+        #legend {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(10, 15, 25, 0.9);
+            border: 1px solid #334466;
+            border-radius: 4px;
+            padding: 15px 20px;
+            color: #ccd;
+            backdrop-filter: blur(10px);
+            min-width: 180px;
+        }
+
+        #legend h3 {
+            margin: 0;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #778;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        #legend h3::after {
+            content: '▼';
+            font-size: 10px;
+            transition: transform 0.3s;
+        }
+
+        #legend.collapsed h3::after {
+            transform: rotate(-90deg);
+        }
+
+        #legend .legend-items {
+            max-height: 200px;
+            overflow-y: auto;
+            transition: max-height 0.3s ease;
+        }
+
+        #legend.collapsed .legend-items {
+            max-height: 0;
+        }
+
+        #legend .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 6px 0;
+            font-size: 13px;
+        }
+
+        #legend .legend-color {
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+            margin-right: 10px;
+        }
+
+        #legend .legend-label {
+            color: #aab;
+        }
+
+        #legend .legend-count {
+            margin-left: auto;
+            color: #667;
+            font-size: 11px;
+        }
+
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #ff8800;
+            font-family: monospace;
+            letter-spacing: 2px;
+        }
+    </style>
+    <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/3d-force-graph"></script>
+    <script src="https://unpkg.com/three-spritetext@1.8.1/dist/three-spritetext.min.js"></script>
+    <script src="https://unpkg.com/dat.gui"></script>
+</head>
+
+<body>
+    <div id="loading">INITIALIZING...</div>
+    <div id="3d-graph"></div>
+    <div id="hud">
+        <span class="close-btn" id="hud-close">×</span>
+        <h2 id="hud-title">Title</h2>
+        <div id="hud-cn" class="sub-header">Subtitle</div>
+        <div class="section-title">Definition 定义</div>
+        <div id="hud-desc" class="content-block"></div>
+        <div class="section-title">Deep Dive 深度解析</div>
+        <div id="hud-notes" class="content-block" style="border-left: 2px solid #ff8800;"></div>
+        <div class="section-title">Why It Matters 为什么重要</div>
+        <div id="hud-why" class="insight-block"></div>
+        <div class="section-title">Common Mistakes 常见误区</div>
+        <div id="hud-mistakes" class="warning-block"></div>
+        <div class="section-title">Related Terms 关联术语</div>
+        <div id="hud-related"></div>
+        <div class="section-title">Scenarios 应用场景</div>
+        <div id="hud-scenes"></div>
+    </div>
+    <div id="legend">
+        <h3 onclick="toggleLegend()">Domain 领域 <span id="legend-total"></span></h3>
+        <div id="legend-items" class="legend-items"></div>
+    </div>
+    <script>
+        const CATEGORY_CONFIG = {
+            "Core": { color: "#ffffff", label_en: "Core Topic", label_cn: "核心主题" },
+            "SevenSins": { color: "#ff0055", label_en: "Seven Sins", label_cn: "七宗罪" },
+            "Neuroscience": { color: "#ff8800", label_en: "Neuroscience", label_cn: "神经科学" },
+            "Psychology": { color: "#aa00ff", label_en: "Psychology", label_cn: "心理学" },
+            "Social": { color: "#00ffff", label_en: "Social", label_cn: "社会层面" },
+            "Metaphor": { color: "#00ff00", label_en: "Metaphor", label_cn: "隐喻" },
+            "Culture": { color: "#ffff00", label_en: "Culture", label_cn: "文化特征" },
+            "Rights": { color: "#ff6600", label_en: "Rights", label_cn: "权利概念" },
+            "Trauma": { color: "#ff3366", label_en: "Trauma", label_cn: "人格创伤" },
+            "RealEstate": { color: "#00aaff", label_en: "Real Estate", label_cn: "房地产驯化" },
+            "Bitterness": { color: "#88ff00", label_en: "Bitterness", label_cn: "吃苦文化" },
+            "Face": { color: "#ff88ff", label_en: "Face Culture", label_cn: "面子文化" },
+            "Beauty": { color: "#ff55aa", label_en: "Beauty Filter", label_cn: "美颜滞镜" },
+            "Narrative": { color: "#cc44ff", label_en: "Narrative Crisis", label_cn: "叙事危机" }
+        };
+        const COLOR_PALETTE = ["#ff0055", "#ff8800", "#aa00ff", "#00ffff", "#00ff00", "#ffff00", "#00ffaa", "#ff00aa"];
+        let colorIndex = 0;
+        function getCategory(groupName, labelCn = groupName) {
+            if (!CATEGORY_CONFIG[groupName]) { CATEGORY_CONFIG[groupName] = { color: COLOR_PALETTE[colorIndex % COLOR_PALETTE.length], label_en: groupName, label_cn: labelCn }; colorIndex++; }
+            return CATEGORY_CONFIG[groupName];
+        }
+        function toggleLegend() { document.getElementById('legend').classList.toggle('collapsed'); }
+        function buildLegend() {
+            const container = document.getElementById('legend-items'); container.innerHTML = '';
+            const counts = {}; let total = 0; nodes.forEach(n => { counts[n.group] = (counts[n.group] || 0) + 1; total++; });
+            document.getElementById('legend-total').innerText = `(${Object.keys(counts).length} 域 / ${total} 点)`;
+            for (const [group, count] of Object.entries(counts)) {
+                const cat = getCategory(group);
+                const item = document.createElement('div'); item.className = 'legend-item';
+                item.innerHTML = `<div class="legend-color" style="background:${cat.color}"></div><span class="legend-label">${cat.label_en} ${cat.label_cn}</span><span class="legend-count">${count}</span>`;
+                container.appendChild(item);
+            }
+        }
+
+        const nodes = [
+            // === CORE TOPIC (中心节点，后续可扩展更多主题) ===
+            { id: "Exam_Education", en: "Exam-Oriented Education", cn: "应试教育七宗罪", group: "Core", val: 50, desc_en: "10+ years of institutional pressure reshapes personality", desc_cn: "十年制度化压抑如何重塑人格", notes_en: "Five overlapping damages: <span class='keyword'>mental pressure + insecurity + constant criticism + emotional suppression + sleep deprivation</span>. Trauma during brain development period = trauma AS personality, not trauma ON personality.", notes_cn: "五重叠加伤害：<span class='keyword'>精神高压+缺乏安全感+持续批判+情绪压抑+睡眠剥夺</span>。发育期创伤=创伤即人格，不是人格上的创伤。", why_matters: "这是理解中国社会心理的核心框架。", mistakes: "认为'都过去了'就没事。神经回路已被塑造。", related: ["Sin1_Servility", "Sin2_Decision", "Sin3_Emotion", "Sin4_Relationship", "Sin5_Thinking", "Sin6_Sexual", "Sin7_Imagination"], scenes_en: ["Exam nightmare decades later", "Fear of authority", "Can't relax"], scenes_cn: ["毕业几十年还梦到考试", "见权威就紧张", "无法放松"] },
+
+            // === SEVEN SINS ===
+            { id: "Sin1_Servility", en: "Sin 1: Servility Training", cn: "第一宗罪: 服从性训练", group: "SevenSins", val: 35, desc_en: "Underestimate self, overestimate authority", desc_cn: "低估自己、高估权威", notes_en: "Long-term <span class='keyword'>authority = truth</span> system. Teacher's evaluation = child's worth. School rules = unconditional obedience. Test scores = future destiny.", notes_cn: "长期处于<span class='keyword'>权威即真理</span>系统。老师评价决定好坏，学校制度必须无条件服从，考试分数决定命运。", why_matters: "识别服从性是打破它的第一步。", mistakes: "误以为服从只是'听话'。它是神经层面的改变。", related: ["Exam_Education", "Amygdala Hypertrophy", "Learned Helplessness", "Chronic Fear"], scenes_en: ["Fear of boss", "Can't say no", "Self-censorship"], scenes_cn: ["怕领导", "不会拒绝", "自我审查"] },
+            { id: "Sin2_Decision", en: "Sin 2: Decision Paralysis", cn: "第二宗罪: 判断力受损", group: "SevenSins", val: 32, desc_en: "High logic, low decision-making ability", desc_cn: "高逻辑能力，低决策能力", notes_en: "Test-prep trains <span class='keyword'>risk-avoidance neural pathway</span>, not logic. This pathway strongly inhibits exploration, creativity and decisions.", notes_cn: "刷题训练的不是逻辑，而是<span class='keyword'>规避风险的神经通路</span>。这条通路强烈抑制探索、创造和决策能力。", why_matters: "错误带来的痛苦>>探索带来的快乐。", mistakes: "认为更多分析能解决决策问题。需要提高对不确定性的接受力。", related: ["Error Phobia", "Overthinking"], scenes_en: ["Collapse facing uncertainty", "Analysis paralysis"], scenes_cn: ["面对不确定就崩溃", "分析瘫痪"] },
+            { id: "Sin3_Emotion", en: "Sin 3: Emotional Disorder", cn: "第三宗罪: 情绪障碍", group: "SevenSins", val: 32, desc_en: "Can't perceive joy, can't enjoy joy", desc_cn: "不能感知快乐，不能享受快乐", notes_en: "Most important relationship = with grades (cold symbol). <span class='keyword'>Leisure = degradation</span> installed as core program.", notes_cn: "最重要的关系是和成绩的关系（冷冰冰的符号）。<span class='keyword'>放松=堕落</span>被植入为核心程序。", why_matters: "DMN被训练成自我审问系统。", mistakes: "认为'高效利用时间'是美德。无结构空白时间至关重要。", related: ["DMN Hijacking", "Leisure Guilt", "PFC Overload"], scenes_en: ["Feel empty after fun", "Can't relax on vacation"], scenes_cn: ["玩完感觉空虚", "放假反而焦虑"] },
+            { id: "Sin4_Relationship", en: "Sin 4: Relationship Disorder", cn: "第四宗罪: 关系障碍", group: "SevenSins", val: 30, desc_en: "Forever anxious, forever comparing", desc_cn: "永远焦虑，永远在比", notes_en: "From grade 1, <span class='keyword'>grades = only KPI</span>. No equality, only comparison for balance. Relationships become utilitarian.", notes_cn: "从一年级开始，<span class='keyword'>成绩=唯一KPI</span>。人和人不存在平等，只能在比较中找平衡。关系变得功利。", why_matters: "文化切断了构成某些关系的可能性。", mistakes: "用实力/财富/地位筛选'朋友'。得到的是利益联盟。", related: ["Comparative Relationship", "Anxious Attachment", "Avoidant Attachment"], scenes_en: ["Always comparing at reunions", "Friends disappear when broke"], scenes_cn: ["同学聚会总在比", "没钱朋友就少"] },
+            { id: "Sin5_Thinking", en: "Sin 5: Exploration Deficit", cn: "第五宗罪: 思维探索障碍", group: "SevenSins", val: 30, desc_en: "Skip to conclusion, no curiosity", desc_cn: "别废话上结论", notes_en: "Dopamine only at 'correct answer' moment. Brain skips exploration (no reward). '<span class='keyword'>Western books are verbose</span>' = dopamine pattern distortion.", notes_cn: "多巴胺只在'对答案'那一刻释放。大脑自动跳过探索阶段(无快感)。'<span class='keyword'>西方人写书太啰嗦</span>'=多巴胺模式扭曲。", why_matters: "背离了科学精神。", mistakes: "认为追求效率就是好。跳过过程扼杀探索快乐。", related: ["Dopamine Pattern Distortion", "Certainty Seeking"], scenes_en: ["Skip book chapters", "Impatient for answers"], scenes_cn: ["跳着看书", "急于要答案"] },
+            { id: "Sin6_Sexual", en: "Sin 6: Sexual Disorder", cn: "第六宗罪: 性心理障碍", group: "SevenSins", val: 28, desc_en: "Sexual repression ↔ Sexual addiction", desc_cn: "性压抑 ↔ 性成瘾", notes_en: "Stigmatize romance/sex before natural exploration. <span class='keyword'>Negative concept before experience</span> = can't accept sexual impulses.", notes_cn: "在自然体验之前汙名化恋爱和性。<span class='keyword'>负面概念先于体验</span>=无法从容接纳性冲动。", why_matters: "构成社会性压抑的基本盘。", mistakes: "认为'不谈性'是保护。汙名化造成的伤害更大。", related: ["Sexual Stigmatization", "Compensatory Behavior"], scenes_en: ["Gossip carnage", "Addiction patterns"], scenes_cn: ["桃色新闻狂欢", "成瘾模式"] },
+            { id: "Sin7_Imagination", en: "Sin 7: Imagination Atrophy", cn: "第七宗罪: 想象力萎縮", group: "SevenSins", val: 32, desc_en: "Future can only be planned, not imagined", desc_cn: "未来只可以被计划，不可以被想象", notes_en: "From grade 1: <span class='keyword'>future = good university</span>. One path, one standard, one correct. Future is command, not possibility.", notes_cn: "从一年级起：<span class='keyword'>未来=考好大学</span>。一个路径，一个标准，一种正确。未来是命令，不是可能性。", why_matters: "意义系统坍縮。", mistakes: "认为'目标明确'就是好。过早窄化扼杀想象力。", related: ["Future as Command", "Meaning Collapse"], scenes_en: ["Future anxiety", "Midlife crisis"], scenes_cn: ["未来恐惧症", "中年危机"] },
+
+            // === NEUROSCIENCE ===
+            { id: "Amygdala Hypertrophy", en: "Amygdala Hypertrophy", cn: "杏仁核放大", group: "Neuroscience", val: 30, desc_en: "Fear center enlarged and hypersensitive", desc_cn: "恐惧中枢增大、过度敏感", notes_en: "Long-term criticism/punishment activates amygdala repeatedly. It grows, becomes hypersensitive. Result: <span class='keyword'>chronic fear without real threat</span>.", notes_cn: "长期批评/惩罚反复激活杏仁核。它增大、敏感。结果：<span class='keyword'>无真实威胁也慢性恐惧</span>。", why_matters: "那些'莫名的紧张'是真实的神经改变。", mistakes: "认为克服恐惧只需意志力。需要安全体验重新训练。", related: ["Chronic Fear", "Sin1_Servility"], scenes_en: ["Unexplained anxiety", "Hypervigilance"], scenes_cn: ["莫名紧张", "过度警觉"] },
+            { id: "PFC Overload", en: "Prefrontal Cortex Overload", cn: "前额叶超载", group: "Neuroscience", val: 28, desc_en: "Rational control center damaged by emotional suppression", desc_cn: "理性中枢因长期压抑情绪而受损", notes_en: "PFC = brain's CEO. Long-term emotion suppression = chronic overload. Result: <span class='keyword'>numb to joy/excitement/love</span>.", notes_cn: "PFC是大脑CEO。长期压抑情绪=慢性超载。结果：<span class='keyword'>对快乐/兴奋/爱麻木</span>。", why_matters: "解释了为什么高材生情绪管理反而弱。", mistakes: "认为'控制情绪'是好事。过度控制是损伤。", related: ["Sin3_Emotion", "DMN Hijacking"], scenes_en: ["Emotional numbness", "Burnout"], scenes_cn: ["情绪麻木", "耗竭"] },
+            { id: "DMN Hijacking", en: "Default Mode Network Hijacking", cn: "自我网络劫持", group: "Neuroscience", val: 30, desc_en: "Self-imagination system → Self-criticism system", desc_cn: "自我想象系统→自我批判系统", notes_en: "Normal DMN: self-reflection, daydreaming, inspiration. After training: <span class='keyword'>self-interrogation, self-shaming</span>.", notes_cn: "正常DMN：自我反思、做白日梦、产生灵感。被训练后：<span class='keyword'>自我审问、自我羞耻</span>。", why_matters: "解释了为什么很多人'不会放松'。", mistakes: "认为高效利用时间是美德。无结构时间对创造力至关重要。", related: ["Leisure Guilt", "Sin3_Emotion"], scenes_en: ["Can't stop self-criticism", "Daydreaming = guilt"], scenes_cn: ["停不下自我批判", "发呆=罪恶感"] },
+            { id: "Dopamine Pattern Distortion", en: "Dopamine Pattern Distortion", cn: "多巴胺模式扭曲", group: "Neuroscience", val: 28, desc_en: "Process reward → Result-only burst", desc_cn: "过程奖励→结果集中释放", notes_en: "Normal: dopamine at each learning stage. Test-prep: only at 'correct answer'. Brain <span class='keyword'>skips exploration</span> (no reward).", notes_cn: "正常：多巴胺在每个学习阶段释放。应试：只在'对答案'时。大脑<span class='keyword'>跳过探索</span>(无快感)。", why_matters: "解释了为什么很多人没有好奇心。", mistakes: "认为追求效率就是好。跳过过程扼杀探索快乐。", related: ["Sin5_Thinking", "Certainty Seeking"], scenes_en: ["Only care about results", "No curiosity"], scenes_cn: ["只关心结果", "没好奇心"] },
+
+            // === PSYCHOLOGY ===
+            { id: "Learned Helplessness", en: "Learned Helplessness", cn: "习得性无助", group: "Psychology", val: 30, desc_en: "Belief that effort is futile, no matter what", desc_cn: "无论努力都没用的信念", notes_en: "Baby elephant tied by rope, can't escape. Grows strong but <span class='keyword'>won't try</span> because of internalized belief. Underestimates self, overestimates rope.", notes_cn: "小象被绳子绑，挣脱不了。长大后虽强壮但<span class='keyword'>不敢挣脱</span>。低估自己，高估绳子。", why_matters: "识别习得性无助是打破它的第一步。", mistakes: "认为'我就是这样的人'。这是后天塑造的神经回路。", related: ["Sin1_Servility", "Amygdala Hypertrophy"], scenes_en: ["Give up before trying", "Believe I'm unable"], scenes_cn: ["没试就放弃", "相信自己不行"] },
+            { id: "Chronic Fear", en: "Chronic Fear State", cn: "慢性恐惧状态", group: "Psychology", val: 26, desc_en: "Feeling unsafe without real threat", desc_cn: "无真实威胁时仍持续感到不安", notes_en: "Even after graduation/no teacher, vigilance persists. <span class='keyword'>Worry about criticism/evaluation</span> becomes personality trait.", notes_cn: "即使毕业了/老师不在了，警觉状态仍持续。<span class='keyword'>担心被批评/评价</span>成为人格特质。", why_matters: "理解这是神经改变，不是'想太多'。", mistakes: "试图用'理性'压制恐惧。需要安全体验重新校准。", related: ["Amygdala Hypertrophy", "Sin1_Servility"], scenes_en: ["Always on edge", "Fear of judgment"], scenes_cn: ["总是紧绷", "怕被评判"] },
+            { id: "Leisure Guilt", en: "Leisure Guilt", cn: "休闲罪恶感", group: "Psychology", val: 26, desc_en: "Rest triggers self-punishment", desc_cn: "休息触发自我惩罚", notes_en: "If nothing makes me anxious, <span class='keyword'>I become MORE anxious</span>. Anxiety = safety zone. Leisure = intolerable.", notes_cn: "如果没事让我焦虑，<span class='keyword'>我反而更焦虑</span>。焦虑=安全区。闲暇=难以忍受。", why_matters: "无法享受休闲是心理障碍。", mistakes: "认为'忙碌'证明价值。休息和创造力正相关。", related: ["DMN Hijacking", "Sin3_Emotion"], scenes_en: ["Anxious on vacation", "Can't do nothing"], scenes_cn: ["放假反而焦虑", "无法无所事事"] },
+            { id: "Comparative Relationship", en: "Comparative Relationship", cn: "比较型关系", group: "Psychology", val: 25, desc_en: "Relationships based on status comparison", desc_cn: "以地位比较为基础的关系", notes_en: "No equality from grade 1. Relationships = <span class='keyword'>utilitarian, transactional, fluctuating</span>. Can't see people, only see numbers.", notes_cn: "从一年级就没有平等。关系=<span class='keyword'>功利性、波动性、阶段性</span>。看不到人，只看到指标。", why_matters: "识别比较型关系是建立真挚友谊的前提。", mistakes: "把'还不错的人脉'当友谊。", related: ["Sin4_Relationship"], scenes_en: ["Measuring friends by GDP", "Status-based respect"], scenes_cn: ["用GDP衡量朋友", "按地位给尊重"] },
+            { id: "Meaning Collapse", en: "Meaning Collapse", cn: "意义系统坍縮", group: "Psychology", val: 28, desc_en: "From imagination-life to process-life", desc_cn: "从想象式人生退化为流程式人生", notes_en: "Life process: study→grades→university→job→marry→kids. <span class='keyword'>No excitement</span> because process-thinking can't generate meaning.", notes_cn: "人生流程：学习→成绩→大学→工作→结婚→生孩。<span class='keyword'>没有兴奋感</span>因为流程思维无法产生意义。", why_matters: "流程式思维带不来意义感。恢复想象力是关键。", mistakes: "认为'完成人生任务'就会满足。", related: ["Sin7_Imagination", "Future as Command"], scenes_en: ["Midlife emptiness", "What's the point"], scenes_cn: ["中年空虚", "有什么意义"] },
+            { id: "Future as Command", en: "Future as Command", cn: "未来即命令", group: "Psychology", val: 26, desc_en: "Future = specific order, not possibility", desc_cn: "未来是具体命令，不是可能性", notes_en: "When facing 'future', brain activates <span class='keyword'>task system</span>, not imagination system. Future = threat, not hope.", notes_cn: "面对'未来'这个词，大脑启动<span class='keyword'>任务系统</span>而非想象系统。未来=威胁，不是希望。", why_matters: "当未来只能被计划不能被想象，意义就坍縮。", mistakes: "认为'目标明确'就是好。", related: ["Sin7_Imagination", "Meaning Collapse"], scenes_en: ["Future = anxiety", "No excitement about growing up"], scenes_cn: ["未来=焦虑", "长大没期待感"] },
+
+            // === SOCIAL ===
+            { id: "Poverty Trifecta", en: "Three Types of Poverty", cn: "三类贫困户", group: "Social", val: 28, desc_en: "Time/Meaning/Emotion Poverty", desc_cn: "时间/意义/情感贫困户", notes_en: "Time: all time for KPIs. Meaning: behavior instrumentalized. Emotion: <span class='keyword'>can't feel warmth, only analyze metrics</span>.", notes_cn: "时间：所有时间满足指标。意义：行为工具化。情感：<span class='keyword'>感受不到温度，只能分析指标</span>。", why_matters: "识别属于哪类贫困户是对症下药的前提。", mistakes: "认为'成功'能解决这些问题。这是人格层面受损。", related: ["Meaning Collapse", "Sin3_Emotion"], scenes_en: ["No time for self", "Life = tasks"], scenes_cn: ["没时间给自己", "人生=任务"] },
+            { id: "Innovation Deficit", en: "Innovation Deficit", cn: "创新匮乏", group: "Social", val: 26, desc_en: "Collective lack of future imagination", desc_cn: "集体性缺乏对未来的畅想", notes_en: "When everyone has <span class='keyword'>future anxiety instead of imagination</span>, creativity dies at social level.", notes_cn: "当所有人都用<span class='keyword'>未来焦虑替代未来想象</span>，社会层面的创造力就死亡。", why_matters: "个人障碍在社会层面表现为创新匮乏。", mistakes: "认为'投入更多资源'能解决。问题在人格层面。", related: ["Sin7_Imagination", "Poverty Trifecta"], scenes_en: ["Copy not create", "Fear of change"], scenes_cn: ["只会模仿", "害怕变化"] },
+
+            // === METAPHOR ===
+            { id: "Tightening Spell", en: "Tightening Spell (紧箍咒)", cn: "紧箍咒", group: "Metaphor", val: 35, desc_en: "External control internalized as self-censorship", desc_cn: "外在控制内化为自我审查", notes_en: "Sun Wukong self-limits even without Tang Monk chanting. <span class='keyword'>External authority → internalized self-judgment</span>. Wu Cheng'en wrote 500 years ago what Chinese wear for millennia.", notes_cn: "即使唐僧不念咒，孙悟空也自我约束。<span class='keyword'>外在权威→内化的自我审判</span>。吴承恩500年前写出中国人戴了几千年的东西。", why_matters: "识别紧箍咒是取下它的第一步。", mistakes: "把所有自我批判当作'自律'。区分健康反思和病态审问。", related: ["Sin1_Servility", "Internalized Authority"], scenes_en: ["Self-limit without boss", "Can't break invisible rules"], scenes_cn: ["没领导也自我限制", "打破不了隐形规则"] },
+            { id: "Elephant Rope", en: "Elephant and Rope", cn: "驯象隐喻", group: "Metaphor", val: 28, desc_en: "Trained weakness persists despite strength", desc_cn: "被训练的无力感即使强壮后仍持续", notes_en: "Baby elephant tied, can't break free. Adult elephant <span class='keyword'>won't try</span> despite strength. Underestimates self, overestimates rope.", notes_cn: "小象被绑，挣脱不了。成年象虽强壮<span class='keyword'>也不敢尝试</span>。低估自己，高估绳子。", why_matters: "我们很多'我做不到'其实是习得性无助。", mistakes: "认为'我就是这样的人'。信念可以被重新训练。", related: ["Learned Helplessness", "Sin1_Servility"], scenes_en: ["Won't try new things", "Believe limits are real"], scenes_cn: ["不敢尝试新事物", "相信限制是真的"] },
+            { id: "War Zone Comparison", en: "War Zone Comparison", cn: "战区类比", group: "Metaphor", val: 30, desc_en: "10+ years of developmental trauma = war survivor", desc_cn: "10+年发育期创伤≈战区幸存者", notes_en: "Stress+insecurity+criticism+suppression+sleep deprivation for 10+ years during brain development. <span class='keyword'>Not trauma ON personality, but trauma AS personality</span>.", notes_cn: "精神高压+缺乏安全感+持续批判+情绪压抑+睡眠剥夺持续10+年，覆盖大脑发育期。<span class='keyword'>不是人格上的创伤，而是创伤即人格</span>。", why_matters: "战区创伤可治疗，应试创伤需要'反学习'。", mistakes: "认为'都过去了'就没事。神经回路已被塑造。", related: ["Amygdala Hypertrophy", "PFC Overload"], scenes_en: ["Exam nightmare decades later", "Triggered by authority"], scenes_cn: ["毕业几十年还梦到考试", "见权威就紧张"] },
+
+            // === CORE TOPIC 2: 中国文化深层结构 ===
+            { id: "Culture_Deep_Structure", en: "Chinese Culture Deep Structure", cn: "中国文化深层结构", group: "Core", val: 50, desc_en: "The invisible cultural logic that shapes Chinese minds", desc_cn: "塑造中国人思维的隐形文化逻辑", notes_en: "Sun Longji's thesis: We are <span class='keyword'>shaped by a historical, structural cultural logic</span> - invisible, imperceptible, omnipresent like air. Four features: Formalization, Symbolization, Holistic Thinking, Relational Orientation.", notes_cn: "孙隆基的核心观点：我们被一种<span class='keyword'>历史深成的、结构化的文化逻辑</span>塑造——不可见、难察觉、无所不在如空气。四大特征：程式化、象徵化、整体性、关系取向。", why_matters: "这是理解为什么中国人是这样的文化根源。", mistakes: "认为文化只是'风俗习惯'。深层结构塑造思维方式本身。", related: ["Formalization", "Symbolization", "Holistic_Thinking", "Relational_Orientation"], scenes_en: ["Olympics opening ceremony", "Dinner table hierarchy", "Standard answer authority"], scenes_cn: ["奥运开幕式整齐划一", "饭局座位等级", "标准答案权威"] },
+
+            // === CULTURE FEATURES (文化特征) ===
+            { id: "Formalization", en: "Formalization", cn: "程式化", group: "Culture", val: 32, desc_en: "Form over substance, pattern over innovation", desc_cn: "形式重于实质，模式重于创新", notes_en: "Emphasize <span class='keyword'>form, pattern, structure</span> over essential innovation. Change is superficial. Whether inner reality changed = not important. Whether outer form is proper = very important.", notes_cn: "强调<span class='keyword'>形式、模式、结构</span>而非本质创新。改变是表面的。内在是否变化=不重视。外在是否符合礼仪=极为介意。", why_matters: "识别程式化是突破形式主义的第一步。", mistakes: "认为注重形式只是审美偏好。它是权力控制的工具。", related: ["Culture_Deep_Structure", "Symbolization", "Sin1_Servility"], scenes_en: ["Eight-legged essay", "Gaokao high-score essays", "Marching in squares"], scenes_cn: ["八股文", "高考满分作文", "豆腐块跑操"] },
+            { id: "Symbolization", en: "Symbolization", cn: "象徵化", group: "Culture", val: 32, desc_en: "Form carries power symbolism, ritual = order", desc_cn: "形式承载权力象徵，仪式=秩序", notes_en: "Form is not just aesthetics but <span class='keyword'>symbol of power, hierarchy, order</span>. Dinner seating, toast order, serving sequence - all rules. Even simple tea service becomes ritual.", notes_cn: "形式不只是美学，更是<span class='keyword'>权力、等级、秩序的象徵</span>。饭局座位、敬酒顺序、夹菜顺序——全是规矩。简单喝茶也变满满仪式感。", why_matters: "仪式感不只是文化，它是权力控制的感性层面。", mistakes: "把仪式感等同于文化传承。很多仪式是权力控制工具。", related: ["Culture_Deep_Structure", "Formalization", "Power Hierarchy"], scenes_en: ["Northern dinner hierarchy", "Leadership service ritual", "Uniform school activities"], scenes_cn: ["北方饭局等级", "给领导端茶仪式", "学校整齐划一活动"] },
+            { id: "Holistic_Thinking", en: "Holistic Thinking", cn: "整体性思维", group: "Culture", val: 30, desc_en: "Refuse to decompose, only sensible not transmittable", desc_cn: "拒绝分析拆解，只可意会不可言传", notes_en: "World = integral whole, shouldn't be decomposed. '道可道非常道' - <span class='keyword'>if you understand you understand, if not it's your problem</span>. This blocks scientific method and knowledge accumulation.", notes_cn: "世界=整体，不应被拆解。'道可道非常道'——<span class='keyword'>你懂就是你懂，你不懂是你的问题</span>。这阻断了科学方法和知识积累。", why_matters: "解释了为什么中国没有产生现代科学。", mistakes: "认为整体性思维'更高级'。它阻断知识积累。", related: ["Culture_Deep_Structure", "Sin5_Thinking", "Innovation Deficit"], scenes_en: ["TCM holistic diagnosis", "Only feel not analyze", "Wisdom can't be taught"], scenes_cn: ["中医整体辨证", "只能感悟不能分析", "智慧教不了"] },
+            { id: "Relational_Orientation", en: "Relational Orientation", cn: "关系取向", group: "Culture", val: 32, desc_en: "Individual defined by relationships, not independently", desc_cn: "个体由关系定义，不是独立存在", notes_en: "Core is not individual-world relation but <span class='keyword'>person-person network</span>. Family center, power hierarchy, guanxi network. Nobody cares who you are - only who you belong to.", notes_cn: "核心不是个体与世界的理性关系，而是<span class='keyword'>人与人的关系网络</span>。家族中心、权力等级、关系网络。没人关心你是谁——只关心你是谁的谁。", why_matters: "关系取向消解个体主体性，规则让位于关系。", mistakes: "认为关系取向只是'人情味'。代价是规则被架空。", related: ["Culture_Deep_Structure", "Sin4_Relationship", "Comparative Relationship"], scenes_en: ["Find connections first", "Guanxi over rules", "Father's status = your status"], scenes_cn: ["办事先找人", "关系大于规则", "你爹地位=你地位"] },
+            { id: "Subjectivity_Loss", en: "Subjectivity Loss", cn: "主体性消解", group: "Culture", val: 28, desc_en: "Can't identify pure self outside of relationships", desc_cn: "无法在关系之外识别纯粹的自己", notes_en: "West: <span class='keyword'>I am I first, then who others see</span>. China: <span class='keyword'>Who I am = who I'm with</span>. Leaders retire, lose network = depression, identity crisis.", notes_cn: "西方：<span class='keyword'>我先是我，然后才是别人眼中的谁</span>。中国：<span class='keyword'>我是谁=我与谁在一起</span>。领导退休失去关系网=抑郁、认同危机。", why_matters: "没有主体性的人，社会角色消失后会产生自我认知障碍。", mistakes: "认为主体性是'自私'。主体性是独立思考和行动的能力。", related: ["Relational_Orientation", "Meaning Collapse"], scenes_en: ["Retired leader depression", "Lost without title", "Who am I without connections"], scenes_cn: ["领导退休抑郁症", "没头衔就迷失", "没关系网我是谁"] },
+
+            // === CORE TOPIC 3: 权利意识缺失 ===
+            { id: "Rights_Deficit", en: "Rights Consciousness Deficit", cn: "权利意识缺失", group: "Core", val: 48, desc_en: "Lack of understanding what rights one has", desc_cn: "不知道自己有什么不可剥夺的权利", notes_en: "Chinese people struggle to distinguish <span class='keyword'>rights (天赋人权) vs power (权力)</span>. Rights = privilege granted by above, can be revoked anytime. Result: no boundary, no confidence, no subjectivity.", notes_cn: "中国人分不清<span class='keyword'>权利(rights)和权力(power)</span>。权利=上面赏赐的特权，可随时剥夺。结果：无边界、无自信、无主体性。", why_matters: "权利意识缺失是理解中国人心理创伤的核心钥匙。", mistakes: "认为权利只是'法律概念'。它塑造整个人格结构。", related: ["Conditional_Society", "Qualification_Anxiety", "Low_Self_Worth", "Boundary_Blurring"], scenes_en: ["Can't say I have right to...", "Emotional blackmail works", "Morality beats rights"], scenes_cn: ["不会说'我有权...'", "感情绑架有效", "道德压制权利"] },
+
+            // === RIGHTS CONCEPTS ===
+            { id: "Conditional_Society", en: "Conditional Society", cn: "条件社会", group: "Rights", val: 35, desc_en: "Everything requires qualification", desc_cn: "享受任何美好都有条件", notes_en: "Being loved = be a good child. Being respected = have status. Being confident = have 'qualification'. <span class='keyword'>Confidence is a conditional privilege, not a right</span>.", notes_cn: "被爱=做乖孩子。被尊重=有地位。自信=有'资格'。<span class='keyword'>自信是有条件的特权，不是权利</span>。", why_matters: "识别条件社会是理解中国人缺乏自信的第一步。", mistakes: "认为'有条件的爱'是正常教育。它系统性摧毁自我价值。", related: ["Rights_Deficit", "Qualification_Anxiety", "Qualification_Attack"], scenes_en: ["Fengji mocked for confidence", "Service workers avoid eye contact"], scenes_cn: ["凤姐因自信被嘲", "服务员不敢对视"] },
+            { id: "Qualification_Anxiety", en: "Qualification Anxiety", cn: "资格焦虑", group: "Rights", val: 32, desc_en: "Fear of not being 'qualified'", desc_cn: "担心自己不够格、不配得", notes_en: "Before pursuing anything, first ask '<span class='keyword'>Am I qualified?</span>' Internal qualification audit before external pursuit. We audit others because we first audit ourselves.", notes_cn: "追求任何东西之前，先问'<span class='keyword'>我配吗？</span>'内在资格审查先于外在追求。我们审查别人是因为先审查了自己。", why_matters: "资格焦虑是低自尊和讨好型人格的核心驱动力。", mistakes: "认为资格焦虑是'谦虚'。它是权利意识缺失的症状。", related: ["Conditional_Society", "Unworthiness", "Qualification_Attack"], scenes_en: ["Ask 'do I deserve' first", "Self-audit before action"], scenes_cn: ["先问'我配吗'", "行动前自我审查"] },
+            { id: "Qualification_Attack", en: "Qualification Attack", cn: "资格攻击", group: "Rights", val: 30, desc_en: "Attack others by denying their qualification", desc_cn: "通过质疑对方资格来贬低对方", notes_en: "'你配吗?' '你算老几?' '癞蛤蟆想吃天鹅肉' - <span class='keyword'>attack social status, not ability</span>. Deny qualification to speak = instant power dominance.", notes_cn: "'你配吗？''你算老几？''癞蛤蟆想吃天鹅肉'——<span class='keyword'>攻击社会地位而非能力</span>。否定对话资格=瞬间占据权力高位。", why_matters: "分析骂人方式揭示文化最深的焦虑。", mistakes: "以为只是'说话难听'。它是身份压迫的语言形式。", related: ["Conditional_Society", "Qualification_Anxiety", "Identity_Oppression"], scenes_en: ["你是哪根葱", "你连给我提鞋都不配"], scenes_cn: ["资格攻击", "身份压迫语言"] },
+            { id: "Unworthiness", en: "Unworthiness", cn: "不配得感", group: "Rights", val: 30, desc_en: "Internalized 'I don't deserve' belief", desc_cn: "内化的'我不配'信念", notes_en: "Feel <span class='keyword'>undeserving of love/money/happiness/success</span>. Even when having them, fear losing. Root cause: never told 'you have the right', only told 'you must deserve'.", notes_cn: "觉得自己<span class='keyword'>不配得到爱/钱/幸福/成功</span>。拥有了也担心失去。根源：没人说'你有权'，只被告知'你要配得'。", why_matters: "不配得感是很多心理问题的根源。", mistakes: "试图通过'变得更配'来解决。问题在于权利意识。", related: ["Qualification_Anxiety", "Low_Self_Worth", "Rights_Deficit"], scenes_en: ["Don't deserve success", "Fear losing what I have"], scenes_cn: ["不配成功", "拥有后怕失去"] },
+            { id: "Emotional_Exploitation", en: "Emotional Exploitation", cn: "感情剥削", group: "Rights", val: 30, desc_en: "'For your good' to suppress rights", desc_cn: "用'为你好'压制权利诉求", notes_en: "'I'm for your good' = classic Chinese <span class='keyword'>spiritual control</span>. You: rights. They: filial piety. You: rights. They: loyalty. You: rights. They: hierarchy. You: rights. They: how to be a person.", notes_cn: "'我是为你好'=典型中国式<span class='keyword'>精神控制</span>。你讲权利，他讲孝顺。你讲权利，他讲忠诚。你讲权利，他讲等级。你讲权利，他讲做人。", why_matters: "识别感情剥削是捍卫权利的关键技能。", mistakes: "用内疚让自己感觉高尚。捍卫权利才是高尚。", related: ["Rights_Deficit", "Boundary_Blurring", "Moral_Institutional_Conflation"], scenes_en: ["Teacher hit you = for your good", "Parents control = for your good"], scenes_cn: ["老师打你是为你好", "父母控制是为你好"] },
+            { id: "Moral_Institutional_Conflation", en: "Moral-Institutional Conflation", cn: "道德制度混同", group: "Rights", val: 28, desc_en: "Use morality to compensate institutional gaps", desc_cn: "用道德弥补制度落后", notes_en: "修身齐家治国平天下, 以德服人 - <span class='keyword'>moral perfection compensates institutional weakness</span>. Expect sages, not systems. Profession moralization = low pay + high pressure + moral shaming.", notes_cn: "修身齐家治国平天下、以德服人——<span class='keyword'>道德高尚弥补制度不足</span>。期待圣人不期待制度。职业道德化=低薪+高压+道德绑架。", why_matters: "只有分清道德和制度，才能正确捍卫权利。", mistakes: "期待清官圣人解决问题。需要制度保障。", related: ["Rights_Deficit", "Emotional_Exploitation"], scenes_en: ["Doctor = angel (low pay)", "Teacher = candle"], scenes_cn: ["医生=天使(低薪)", "老师=蜡烛"] },
+
+            // === RIGHTS TRAUMA (四大人格创伤) ===
+            { id: "Low_Self_Worth", en: "Low Self-Worth", cn: "低价值感", group: "Trauma", val: 30, desc_en: "No confidence, don't deserve", desc_cn: "不自信、不配得", notes_en: "No 'I have right' thinking. <span class='keyword'>Others' approval = self-worth</span>. Others' disapproval = no worth. Fengji mocked = collective confidence audit.", notes_cn: "没有'我有权'思维。<span class='keyword'>他人认同=自己有价值</span>。他人不认同=自己没价值。凤姐被嘲=集体自信资格审查。", why_matters: "低价值感是很多心理问题的根源。", mistakes: "试图通过'变得更优秀'获得价值感。问题在于权利意识。", related: ["Rights_Deficit", "Qualification_Anxiety", "Unworthiness"], scenes_en: ["Need external validation", "Self-worth = others' opinion"], scenes_cn: ["需要外在认可", "自我价值=别人评价"] },
+            { id: "Boundary_Blurring", en: "Boundary Blurring", cn: "边界感模糊", group: "Trauma", val: 28, desc_en: "Can't distinguish self from others' control", desc_cn: "无法区分自己和他人控制", notes_en: "Spiritual world has <span class='keyword'>no independent rights boundary</span>. Blood/authority relations blur self-other line. High schooler studies 16h afraid to toilet = doesn't know rest is a RIGHT.", notes_cn: "精神世界<span class='keyword'>没有独立权利边界</span>。血缘/权威关系模糊自他界限。高中生16小时不敢上厕所=不知道休息是权利。", why_matters: "边界模糊是被精神控制的根源。", mistakes: "用'孝顺''服从'合理化。边界是权利问题不是道德问题。", related: ["Rights_Deficit", "Emotional_Exploitation", "Rights_Learned_Helplessness"], scenes_en: ["16h no toilet break", "催婚不敢拒绝"], scenes_cn: ["16小时不敢上厕所", "催婚不敢拒绝"] },
+            { id: "Rights_Learned_Helplessness", en: "Rights Learned Helplessness", cn: "权利习得性无助", group: "Trauma", val: 28, desc_en: "Give up claiming rights before trying", desc_cn: "还没争取就放弃权利主张", notes_en: "Rights claims not understood, labeled 'selfish'. Long-term moral torture → <span class='keyword'>give up before trying</span>. Want something? Already given up.", notes_cn: "权利主张不被理解，被说'自私'。长期道德折磨→<span class='keyword'>没争取就放弃</span>。想要的东西？已经开始放弃。", why_matters: "权利习得性无助导致放弃争取合法利益。", mistakes: "认为'我就是不敢争取的人'。这是被训练出来的。", related: ["Rights_Deficit", "Learned Helplessness", "Moral_Institutional_Conflation"], scenes_en: ["Give up before fight", "Rights = selfish"], scenes_cn: ["没争取就放弃", "讲权利=自私"] },
+            { id: "Distorted_Power_ID", en: "Distorted Power Identification", cn: "扭曲的权力认同", group: "Trauma", val: 28, desc_en: "Compensate rights deficit with power fantasy", desc_cn: "用权力幻想补偿权利缺失", notes_en: "Watch 清宫剧 from emperor perspective. Watch rich humiliate poor on Douyin. Pay for 大佬 courses. <span class='keyword'>Consumer is only free realm</span> = consumption as rights compensation.", notes_cn: "看清宫剧喜欢皇帝视角。刷富人玩弄小人物。付费找大佬。<span class='keyword'>消费=唯一自由战场</span>=用消费补偿权利缺失。", why_matters: "识别扭曲的权力认同有助于理解消费主义心理根源。", mistakes: "用消费填补权利空缺。需要建立权利意识。", related: ["Rights_Deficit", "Low_Self_Worth"], scenes_en: ["Emperor POV in dramas", "Pay for guru courses", "Shopping = freedom"], scenes_cn: ["清宫剧皇帝视角", "知识付费找大佬", "购物=自由"] },
+            { id: "Confidence_As_Right", en: "Confidence as Human Right", cn: "自信即人权", group: "Rights", val: 35, desc_en: "Confidence is a RIGHT, not a privilege", desc_cn: "自信是权利，不是特权", notes_en: "'Why so ordinary yet so confident?' should be wake-up call for ALL. Goal: <span class='keyword'>I am this ordinary, and this confident</span>. Every person can appreciate ordinary confident people.", notes_cn: "'为什么那么普通又那么自信?'应该对所有人振聋发聩。目标：<span class='keyword'>我就是这么普通，就是这么自信</span>。每个人都能欣赏普通又自信的人。", why_matters: "自信是人权不是特权，是本模块的核心主张。", mistakes: "认为'有资本才能自信'。自信不需要资本，它是权利。", related: ["Rights_Deficit", "Qualification_Anxiety", "Conditional_Society"], scenes_en: ["Ordinary and confident", "No qualification needed"], scenes_cn: ["普通又自信", "不需要资格证明"] },
+
+            // === CORE TOPIC 4: 房地产驯化 ===
+            { id: "Real_Estate_Domestication", en: "Real Estate Domestication", cn: "房地产驯化", group: "Core", val: 48, desc_en: "How real estate reshaped Chinese personality", desc_cn: "房地产如何改变中国人的人格结构", notes_en: "Real estate became a <span class='keyword'>religion-level belief</span> through decades of domestication. When prices consistently defy logic, rationality collapses. Forms 5 core traits: security outsourcing, subjectivity regression, dignity assetization, risk aversion, emotional compression.", notes_cn: "房地产经过几十年的驯化，获得了<span class='keyword'>宗教般的信仰地位</span>。当价格长期违背常识，理性崩塌。形成5大人格特征：安全感外包、主体性退化、尊严资产化、风险厌恶、情绪压缩。", why_matters: "这是理解中国人为什么活得那么累的核心框架。", mistakes: "认为'买房就有安全感'。房贷反而剥夺了安全感。", related: ["Rationality_Collapse", "Dignity_Assetization", "Real_Estate_Religion"], scenes_en: ["House = religion", "Price defies logic", "Personality change"], scenes_cn: ["房子=宗教", "价格违背常识", "人格改变"] },
+
+            // === REAL ESTATE MECHANISMS (驯化机制) ===
+            { id: "Rationality_Collapse", en: "Rationality Collapse", cn: "理性崩塌", group: "RealEstate", val: 32, desc_en: "Logic-defying prices destroy rational thinking", desc_cn: "价格违背常识摧毁理性思维", notes_en: "Income stagnant + price up. Rent-price ratio absurd + price up. Population declining + price up. <span class='keyword'>Logical people were always wrong</span>. Rationality repeatedly humiliated until collapsed.", notes_cn: "收入不涨房价涨，租售比不合理房价涨，人口不增加房价涨。<span class='keyword'>讲逻辑的人都错了</span>。理性被反复羞辱直到崩塌。", why_matters: "理性崩塌是认知退行的第一步。", mistakes: "用更多分析理解不讲逻辑的系统。需要策略适应，不是理性解释。", related: ["Real_Estate_Domestication", "Cognitive_Regression"], scenes_en: ["Logic fails", "分析越多越错"], scenes_cn: ["逻辑失效", "分析越多越错"] },
+            { id: "Cognitive_Regression", en: "Cognitive Regression", cn: "认知退行", group: "RealEstate", val: 30, desc_en: "Regress to childlike dependency after rationality collapses", desc_cn: "理性崩塌后退化到幼儿依附状态", notes_en: "When rationality fails, people <span class='keyword'>regress to infant state</span>: full of abandonment fear, craving authority attachment. Can't control self, need external authority.", notes_cn: "理性失效后，人<span class='keyword'>退化到幼儿状态</span>：充满被抛弃的恐惧，渴望权威依附。无法自我掌控，需要外部权威。", why_matters: "认知退行解释了为什么房价越涨人们越不敢质疑。", mistakes: "认为权威依附是'理性选择'。它是理性崩塌后的心理防御。", related: ["Rationality_Collapse", "Authority_Dependence"], scenes_en: ["Can't think independently", "Need authority signals"], scenes_cn: ["无法独立思考", "需要权威信号"] },
+            { id: "Authority_Dependence", en: "Authority Dependence", cn: "权威依附", group: "RealEstate", val: 28, desc_en: "Abandon independent thinking, crave greater power", desc_cn: "放弃独立思考，渴望依附更大力量", notes_en: "After cognitive regression, people <span class='keyword'>wait for bigger signals</span>, bigger trends, 'someone above will manage'. Human judgment fully outsourced to external system.", notes_cn: "认知退行后，人们<span class='keyword'>等待更大的信号</span>、更大的风向、'上面的人一定会管'。把人生判断彻底交付给外部系统。", why_matters: "权威依附是理解中国社会'等靠要'心态的心理根源。", mistakes: "把权威依附当作'成熟稳重'。它是理性崩塌的结果。", related: ["Cognitive_Regression", "Real_Estate_Religion"], scenes_en: ["Wait for policy", "Can't decide alone"], scenes_cn: ["等政策", "不敢自己决定"] },
+            { id: "Real_Estate_Religion", en: "Real Estate Religion", cn: "房地产教", group: "RealEstate", val: 35, desc_en: "Houses gained religion-like worship status", desc_cn: "房子获得宗教般的信仰地位", notes_en: "Unpredictable, powerful, 'always growing'. Determines status, dignity, education, citizenship. <span class='keyword'>New era omnipotent God</span>. Price tiers form chain of contempt. All worship.", notes_cn: "不可预测、力量强大、'永远增长'。决定地位、尊嚴、教育、市民权利。<span class='keyword'>新时代全知全能的上帝</span>。价格分层形成鄙视链。所有人虔诚跪拜。", why_matters: "识别房地产的宗教化特征是脱离其控制的第一步。", mistakes: "认为'房子只是资产'。它承载了尊嚴/权利/教育等多重功能。", related: ["Authority_Dependence", "Dignity_Assetization"], scenes_en: ["House = God", "Price = faith"], scenes_cn: ["房子=上帝", "价格=信仰"] },
+            { id: "Subjectivity_Transfer", en: "Subjectivity Transfer", cn: "主体性转移", group: "RealEstate", val: 30, desc_en: "Personal identity shifts from 'who I am' to 'what I have'", desc_cn: "个人主体感从'我是谁'转移到'我有什么'", notes_en: "Normal adult: 'I solve my life and dignity by myself'. Reality: <span class='keyword'>only parents can provide entry ticket</span>. Subjectivity no longer complete, bound to parents' support and house value.", notes_cn: "正常成年：'我靠自己解决生活和尊嚴'。现实：<span class='keyword'>只有靠父母才有入场券</span>。主体性不再完整，深深绑定在父母支持和房产价值中。", why_matters: "主体性转移是尊严资产化的前提。", mistakes: "认为'买房后就有安全感'。安全感外包后反而更焦虑。", related: ["Real_Estate_Domestication", "Dignity_Assetization", "Shareholder_Parents"], scenes_en: ["Parents buy house", "Identity = asset"], scenes_cn: ["靠父母买房", "身份=资产"] },
+            { id: "Relationship_Utilitarianization", en: "Relationship Utilitarianization", cn: "关系功利化", group: "RealEstate", val: 30, desc_en: "Relationships become transactional around housing", desc_cn: "亲密关系围绕房产变得功利化", notes_en: "Parents = shareholders. Partners = functional. <span class='keyword'>Love without house = breakup, house without love = marriage</span>. Emotion systematically downgraded.", notes_cn: "父母=股东，伴侣=功能性。<span class='keyword'>有感情没房子=分手，有房子没感情=结婚</span>。感情被系统性降级。", why_matters: "关系功利化解释了为什么中国婚姻中感情被降级。", mistakes: "用道德批判功利择偶。真正需要改变的是压力结构。", related: ["Shareholder_Parents", "Functional_Partner"], scenes_en: ["Marriage = deal", "Love downgraded"], scenes_cn: ["婚姻=交易", "感情降级"] },
+            { id: "Shareholder_Parents", en: "Shareholder Parents", cn: "股东型父母", group: "RealEstate", val: 26, desc_en: "Parents as investors gain lifelong control", desc_cn: "父母作为出资人获得终身话语权", notes_en: "Parents contribute to house purchase → <span class='keyword'>lifelong speaking rights</span>. Marriage, work, children all need their approval. No contract but permanent psychological debt.", notes_cn: "父母参与买房→<span class='keyword'>终身话语权</span>。结婚、工作、生孩子都需考虑感受。没有合同但终身有效的心理债务。", why_matters: "股东型父母是理解中国式'控制'的新视角。", mistakes: "认为父母出钱是'无条件的爱'。往往附带隐性控制权。", related: ["Relationship_Utilitarianization", "Subjectivity_Transfer"], scenes_en: ["Parents invest", "Lifelong debt"], scenes_cn: ["父母出资", "终身债务"] },
+            { id: "Functional_Partner", en: "Functional Partner", cn: "功能性伴侣", group: "RealEstate", val: 26, desc_en: "Partner chosen for housing problem, not love", desc_cn: "为解决房子问题选择的伴侣", notes_en: "Distorted taste due to housing pressure. Dating becomes <span class='keyword'>resource matching</span>. Surface intimacy, deep caution. Emotion/passion sought outside marriage.", notes_cn: "因房产压力扭曲对异性的真实感受。择偶变成<span class='keyword'>资源匹配</span>。表面亲密、深层谨慎。情感和欲望在婚外寻求。", why_matters: "功能性伴侣解释了结构性婚姻的形成。", mistakes: "认为这是道德问题。它是巨大压力下的必然选择。", related: ["Relationship_Utilitarianization"], scenes_en: ["Marriage = function", "Love outside"], scenes_cn: ["婚姻=功能", "感情在外"] },
+            { id: "Rights_Commodification", en: "Rights Commodification", cn: "权利商品化", group: "RealEstate", val: 30, desc_en: "Citizen rights must be purchased, not naturally owned", desc_cn: "公民权利需要购买而非天然拥有", notes_en: "Education, healthcare, citizenship = personal rights as taxpayer. But <span class='keyword'>all commodified</span>. Child education = buy school district. Rights distributed by asset, not person.", notes_cn: "教育、医疗、市民权利=纳税人应有权利。但<span class='keyword'>全被商品化</span>。孩子教育=买学区房。权利按资产分配，不按人分配。", why_matters: "权利商品化是权利意识缺失在房地产领域的延伸。", mistakes: "认为'买得起就是有权利'。应该思考为什么需要购买本应有的权利。", related: ["Rights_Deficit", "Rights_Shaming"], scenes_en: ["Education = buy house", "Rights = money"], scenes_cn: ["教育=买房", "权利=金钱"] },
+            { id: "Rights_Shaming", en: "Rights Shaming", cn: "权利羞辱", group: "RealEstate", val: 28, desc_en: "Shame from lacking ability to purchase rights", desc_cn: "因缺乏购买权利能力而产生的羞耻", notes_en: "No house = lose personality and citizen role. Can't marry = my fault. Child can't go to good school = <span class='keyword'>my fault</span>. Long-term self-blame internalized.", notes_cn: "没有房子=丧失人格和市民角色。没法结婚=我没本事。孩子上不了好学校=<span class='keyword'>我没本事</span>。长期自我责备被内化。", why_matters: "权利羞辱解释了中国人普遍的自我责备和低价值感。", mistakes: "认为这是'个人失败'。它是系统性权利分配不公的结果。", related: ["Rights_Commodification", "Low_Self_Worth"], scenes_en: ["My fault", "Self-blame"], scenes_cn: ["我没本事", "自我责备"] },
+            { id: "Future_Atrophy", en: "Future Imagination Atrophy", cn: "未来想象萎缩", group: "RealEstate", val: 30, desc_en: "Mortgage steals future choices and imagination", desc_cn: "房贷偷走未来的选择权和想象力", notes_en: "Monthly payment: last month's labor → this month's salary → <span class='keyword'>fill past hole</span>. Past takes future's choices. Can't risk. Dreams → debt fear. Explorer → cash flow maintainer.", notes_cn: "每月还贷：上月劳动→本月工资→<span class='keyword'>填补过去的窟窿</span>。过去拿走未来的选择。不敢冒险。理想→债务恐惧。探索者→现金流维护者。", why_matters: "未来萎缩解释了为什么社会创新能力被抑制。", mistakes: "认为'有房就有未来'。房贷反而可能偷走未来。", related: ["Real_Estate_Domestication", "Risk_Aversion_Personality"], scenes_en: ["Fill past holes", "No future dreams"], scenes_cn: ["填补过去", "没有未来梦想"] },
+
+            // === REAL ESTATE PERSONALITY (房地产人格特征) ===
+            { id: "Security_Outsourcing", en: "Security Outsourcing", cn: "安全感外包", group: "RealEstate", val: 28, desc_en: "Security comes from assets, not self", desc_cn: "安全感来自资产而非自身", notes_en: "Security no longer from ability, relationships, friends. From <span class='keyword'>house, hukou, city tier</span>. Natural internal security system severely damaged.", notes_cn: "安全感不再来自能力、亲人、朋友。来自<span class='keyword'>房产、户籍、城市等级</span>。天然的内在安全系统被严重破坏。", why_matters: "安全感外包解释了为什么有房也不安心。", mistakes: "认为'更多资产=更多安全感'。外包的安全感永远不稳定。", related: ["Real_Estate_Domestication", "Authority_Dependence"], scenes_en: ["House = security", "Always anxious"], scenes_cn: ["房子=安全感", "永远焦虑"] },
+            { id: "RE_Subjectivity_Regression", en: "Subjectivity Regression", cn: "主体性退化", group: "RealEstate", val: 28, desc_en: "Don't dare trust own thinking", desc_cn: "不敢相信自己的思考", notes_en: "No longer dare believe own thinking, <span class='keyword'>wait for bigger signals</span>, bigger trends. Personality resilience crushed. Life judgment fully handed to external.", notes_cn: "不敢相信自己的思考和理性，<span class='keyword'>等待更大的信号</span>、更大的风向。人格韧性被摧毁。人生判断彻底交付给外部系统。", why_matters: "主体性退化是房地产人格的核心特征。", mistakes: "认为'听专家的'是明智。需要恢复独立判断能力。", related: ["Cognitive_Regression", "Authority_Dependence"], scenes_en: ["Wait for experts", "Can't judge"], scenes_cn: ["等待专家", "无法判断"] },
+            { id: "Dignity_Assetization", en: "Dignity Assetization", cn: "尊严资产化", group: "RealEstate", val: 30, desc_en: "Dignity rises and falls with house prices", desc_cn: "尊严随房价起伏跌宕", notes_en: "Self-esteem and shame fluctuate with house price. Dignity not on body but <span class='keyword'>on property certificate</span>. Psychology controlled by asset price.", notes_cn: "自尊和羞耻随房价起伏。尊严没有长在身上，而是<span class='keyword'>长在房产证上</span>。心理状态被资产价格操控。", why_matters: "尊严资产化解释了为什么房价涨跌如此影响心理。", mistakes: "把财务成败等同于人生成败。投资结果≠人格价值。", related: ["Subjectivity_Transfer", "Real_Estate_Religion"], scenes_en: ["Price up = happy", "Price down = shame"], scenes_cn: ["涨=开心", "跌=羞耻"] },
+            { id: "Risk_Aversion_Personality", en: "Risk Aversion Personality", cn: "风险厌恶型人格", group: "RealEstate", val: 28, desc_en: "Only dare take mortgage risk, not innovation risk", desc_cn: "只敢承受房贷风险，不敢创新创业", notes_en: "Any failure may affect next month's mortgage. <span class='keyword'>Only dare take mortgage risk</span>, not venture risk. Social innovation capacity severely suppressed.", notes_cn: "任何失败都可能影响下月房贷。<span class='keyword'>只敢承受房贷风险</span>，不敢承受创新创业风险。社会创新能力被严重抑制。", why_matters: "风险厌恶解释了为什么社会创新动力不足。", mistakes: "认为风险厌恶是'成熟稳重'。过度风险厌恶是被驯化的结果。", related: ["Future_Atrophy", "Real_Estate_Domestication"], scenes_en: ["Can't risk", "Factory < flipping"], scenes_cn: ["不敢冒险", "开厂不如炒房"] },
+            { id: "Emotional_Compression", en: "Emotional Compression", cn: "情绪压缩", group: "RealEstate", val: 28, desc_en: "Chronic anxiety compressed into aggression", desc_cn: "长期焦虑被压缩为攻击性", notes_en: "Society full of anger and hostility. Everyone chronically anxious without knowing why. In front of house owners = inferior. <span class='keyword'>Unnamed humiliation → aggression</span>.", notes_cn: "社会充满愤怒和戾气。每个人都长期焦虑但说不出原因。面对有房者自卑。<span class='keyword'>说不清的屈辱感→攻击性</span>。", why_matters: "情绪压缩解释了中国社会普遍的戾气和攻击性。", mistakes: "认为'控制情绪'就能解决。根源在于结构性的焦虑来源。", related: ["Real_Estate_Domestication", "Rights_Shaming"], scenes_en: ["Can't smile", "Aggression everywhere"], scenes_cn: ["不会笑", "到处是攻击性"] },
+
+            // === CORE TOPIC 5: 吃苦文化 ===
+            { id: "Eating_Bitterness_Culture", en: "Eating Bitterness Culture", cn: "吃苦文化", group: "Core", val: 45, desc_en: "Treating pain endurance as virtue itself", desc_cn: "把忍耐痛苦当做美德本身", notes_en: "Unique Chinese phenomenon: <span class='keyword'>suffering = virtue, not means but end itself</span>. Result of autocracy + material scarcity. Uses moral high ground to make people endure what they shouldn't.", notes_cn: "中国特有现象：<span class='keyword'>吃苦=美德，不是手段而是目的本身</span>。父权集权+物质匮乏的产物。用道德高帽子让人忍受本不该忍受的痛苦。", why_matters: "吃苦文化是中国人丧失主体性的重要根源。", mistakes: "认为吃苦是普世价值。它是被强加的价值观，不是人的本性。", related: ["Mule_Spirit", "Rights_Deficit"], scenes_en: ["Eating bitterness = glory", "吃得苦中苦"], scenes_cn: ["吃苦=光荣", "吃得苦中苦"] },
+
+            // === EATING BITTERNESS TRAITS (吃苦人格特征) ===
+            { id: "Mule_Spirit", en: "Mule Spirit", cn: "骡马精神", group: "Bitterness", val: 30, desc_en: "Eat less, work more, good temper - ideal domesticated state", desc_cn: "吃得少干得多脾气好——被驯化的理想状态", notes_en: "Why use mules not horses or donkeys? Horse eats too much, donkey bad temper. Mule: <span class='keyword'>eat less, work more, good temper, long life, no offspring</span>. Perfect ruled subject.", notes_cn: "为什么用骡子不用马驴？马吃太多，驴脾气差。骡子：<span class='keyword'>吃得少干得多脾气好寿命长没有后代</span>。完美的被统治者形象。", why_matters: "骡马精神揭示了吃苦文化的统治功能。", mistakes: "认为骡马精神是'勤劳朴实'。它是精神奴役的产物。", related: ["Eating_Bitterness_Culture", "Pain_As_Value"], scenes_en: ["铁人王进喜", "螺丝钉精神"], scenes_cn: ["铁人王进喜", "螺丝钉精神"] },
+            { id: "Pain_As_Value", en: "Pain As Value", cn: "痛苦=价值", group: "Bitterness", val: 28, desc_en: "Treating endurance and pain as source of self-worth", desc_cn: "把忍耐痛苦当做自我价值来源", notes_en: "When eating bitterness taught as virtue, people <span class='keyword'>unconsciously equate enduring pain with self-worth</span>. Naturally despise those who resist. Suffering = moral superiority.", notes_cn: "当吃苦被灌输为美德，人会<span class='keyword'>不自觉地把忍耐痛苦当做自我价值来源</span>。会不由自主地鄙视反抗吃苦的人。吃苦=道德优越。", why_matters: "痛苦=价值是吃苦人格的核心症状。", mistakes: "用'我在吃苦所以我高尚'安慰自己。吃苦不等于价值。", related: ["Eating_Bitterness_Culture", "Fear_Of_Enjoyment"], scenes_en: ["Despise comfort-seekers", "More pain = more noble"], scenes_cn: ["鄙视不能吃苦的人", "越苦越高尚"] },
+            { id: "Fear_Of_Enjoyment", en: "Fear Of Enjoyment", cn: "害怕享受", group: "Bitterness", val: 28, desc_en: "Feeling guilty about happiness and comfort", desc_cn: "对幸福舒适有负罪感", notes_en: "Long-term scarcity and overwork creates <span class='keyword'>defense mechanism against joy</span>. Subconscious: relaxation = punishment. Even with comfortable conditions, can't fully enjoy. Unworthiness feeling.", notes_cn: "长期匮乏和过度劳动形成<span class='keyword'>对快乐的防御机制</span>。潜意识：轻松=惩罚。即便有轻松条件也没法徹底享受。不配得感。", why_matters: "害怕享受解释了为什么中国人不会'享福'。", mistakes: "认为不肯花钱、不肯休息是'节俭美德'。它是创伤后遗症。", related: ["Pain_As_Value", "Spiritual_Poverty"], scenes_en: ["衡水中学同学去KTV愧疚", "有钱也不肯花"], scenes_cn: ["去KTV愧疚", "有钱也不肯花"] },
+            { id: "EB_Subjectivity_Destruction", en: "Subjectivity Destruction", cn: "销毁主体性", group: "Bitterness", val: 28, desc_en: "Tolerating unfairness instead of changing/leaving", desc_cn: "忍受不公环境而不改变离开", notes_en: "When accepting 'suffering = virtue', facing unfair/inefficient environment, you <span class='keyword'>tell yourself just endure</span> instead of changing/leaving. Enduring = virtue. But grinding yourself in wrong place damages spirit irreversibly.", notes_cn: "当接受'吃苦=美德'，面对不公环境时，会<span class='keyword'>说服自己忍一下就好</span>而不是改变/离开。忍耐=美德。但在不适合的地方强行磨损会给精神带来不可逆损伤。", why_matters: "销毁主体性是吃苦文化对个体最大的伤害。", mistakes: "把对不公的忍耐等同于美德。不公需要反抗，不是忍耐。", related: ["Eating_Bitterness_Culture", "Subjectivity_Loss"], scenes_en: ["Just endure it", "忍一忍就好了"], scenes_cn: ["忍一忍就好了", "别那么娇气"] },
+            { id: "Spiritual_Poverty", en: "Spiritual Poverty", cn: "精神贫困化", group: "Bitterness", val: 28, desc_en: "Brain has no space to go deep", desc_cn: "大脑没有空间向深处走", notes_en: "When time consumed by labor and survival anxiety, brain can't stop and go <span class='keyword'>deep to contemplate valuable thoughts</span>. Some elders can't stop being busy - because stopping and gazing inward is the real abyss: empty world with no beauty.", notes_cn: "时间消耗在劳动和生存焦虑上，大脑没法停下<span class='keyword'>向深处走思索有价值的思想</span>。有些老人停不下来——因为凝视自己才是深渊：世界黑蕩蕩空洞洞没有美。", why_matters: "精神贫困化解释了为什么精神生活趋于单调。", mistakes: "用忙碌逃避内心空虚。真正的解决是面对自己。", related: ["Eating_Bitterness_Culture", "Emotional_Numbing"], scenes_en: ["Can't stop being busy", "Empty inside"], scenes_cn: ["忙碌停不下来", "内心空虚"] },
+            { id: "Emotional_Numbing", en: "Emotional Numbing", cn: "情感麻木", group: "Bitterness", val: 26, desc_en: "Shutting down feelings to avoid pain", desc_cn: "为回避痛苦而封闭感受能力", notes_en: "Choosing bitterness long-term, you must become <span class='keyword'>numb to avoid torture</span>. Becoming purely survival/pragmatism. Beauty and spiritual exploration judged 'meaningless'. Collective entertainment/spiritual life becomes monotonous.", notes_cn: "长期选择吃苦，必须<span class='keyword'>变得麻木来回避折磨</span>。变成纯粹生存主义实用主义。美和精神探索被判定为'没意义'。群体娱乐和精神生活趋于单调。", why_matters: "情感麻木解释了为什么中国人'靈性干涸'。", mistakes: "认为麻木是'成熟稳重'。它是精神创伤的自我保护。", related: ["Spiritual_Poverty", "Eating_Bitterness_Culture"], scenes_en: ["Can't feel beauty", "Pragmatism only"], scenes_cn: ["感受不到美", "只有实用主义"] },
+
+            // === FACE VS DIGNITY ===
+            { id: "Face_Dignity_Split", en: "Face vs Dignity Split", cn: "面子尊严分裂", group: "Core", val: 42, desc_en: "The fundamental split between external and internal value", desc_cn: "外在评价与内在价值的根本分裂", notes_en: "Chinese culture: <span class='keyword'>Face (external) strong, Dignity (internal) weak</span>. Face = how others see me. Dignity = how I see myself. China had no word for 'dignity' until 20th century import from Japan.", notes_cn: "中国文化：<span class='keyword'>面子(外在)强，尊严(内在)弱</span>。面子=他人如何看我。尊严=我如何看我自己。'尊严'这个词20世纪初才从日本传入中国。", why_matters: "面子尊严分裂是理解中国人心理的关键钥匙。", mistakes: "把面子等同于尊严。它们是完全不同的心理结构。", related: ["Face_Culture", "Dignity_Concept"], scenes_en: ["Caring about loss of face", "Not sensing dignity violation"], scenes_cn: ["怕丢面子", "感受不到尊严被侵犯"] },
+            { id: "Face_Culture", en: "Face Culture", cn: "面子文化", group: "Face", val: 35, desc_en: "How others see me - looking outward, tied to shame", desc_cn: "他人如何看我——向外看，捆绑羞耻感", notes_en: "<span class='keyword'>Face = external evaluation, needs conditions to obtain</span>. Tied to shame - others looking down makes me ashamed. Product of hierarchy, social control mechanism, pathological compensation for lost dignity.", notes_cn: "<span class='keyword'>面子=外部评价，需要条件交换</span>。捆绑羞耻感——别人看不起会羞耻。等级社会衍生物、社会控制机制、尊严被剝夺后的病态补偿。", why_matters: "理解面子是理解中国社会运作的钥匙。", mistakes: "把面子等同于尊严。面子是外部的有条件的。", related: ["Face_Dignity_Split", "Shame_Education", "Dignity_Deprivation"], scenes_en: ["'face given by others'", "吃饭没人敢转桌"], scenes_cn: ["'面子是别人给的'", "吃饭没人敢转桌"] },
+            { id: "Dignity_Concept", en: "Dignity (Western)", cn: "尊严(西方概念)", group: "Face", val: 32, desc_en: "How I see myself - looking inward, inherent by nature", desc_cn: "我如何看我自己——向内看，天赋人权", notes_en: "Western concept imported via Japan in 20th century. <span class='keyword'>Dignity = inherent, tied to guilt not shame</span>. 'God created man in his image' - every person has inalienable sacred value regardless of status.", notes_cn: "20世纪经日本传入的西方概念。<span class='keyword'>尊严=天赋的，捆绑愧疚感而非羞耻感</span>。'上帝按自己形象造人'——每个人不论身份都有不可剝夺的神圣价值。", why_matters: "尊严概念在中国'没有根'——理解心理困境的关键。", mistakes: "认为尊严需要努力获得。尊严是基础配置，不是奖励。", related: ["Face_Dignity_Split", "Integrated_Self"], scenes_en: ["I respect myself", "Inherent value"], scenes_cn: ["我尊重我自己", "天赋价值"] },
+            { id: "Shame_Education", en: "Shame-based Education", cn: "羞耻教育", group: "Face", val: 32, desc_en: "Controlling behavior through shame, not inner value", desc_cn: "通过羞耻控制行为，而非培养内在价值", notes_en: "Core logic: <span class='keyword'>deny yourself first to deserve recognition</span>. Obedient = good child. Good grades = good child. Total self-abandonment + authority conformity → get approval. Long-term: never get what you want → emotion/thought freezing.", notes_cn: "核心逻辑：<span class='keyword'>先否定自己才配被认可</span>。听话=好孩子。成绩好=好孩子。彻底自我放弃+权威迎合→获得肯定。长期：永远得不到想要的→情绪/思维冻结。", why_matters: "羞耻教育是把人压制在依附性自我的核心机制。", mistakes: "认为这是'严格教育'。它系统性摧毁内在价值感。", related: ["Face_Culture", "Dependent_Self", "Low_Self_Worth"], scenes_en: ["别人笑话你", "让爸妈没面子"], scenes_cn: ["别人会笑话你", "让爸妈没面子"] },
+            { id: "Dignity_Deprivation", en: "Dignity Deprivation", cn: "尊严剝夺", group: "Face", val: 30, desc_en: "Systematically stripping individual's inner value sense", desc_cn: "系统性地剝夺个体的内在价值感", notes_en: "Three steps: 1) No one tells you have dignity; 2) Deprive dignity from childhood (red scarf tiers, ranking); 3) Tell you dignity requires conditions. <span class='keyword'>Never knew what dignity is, but experienced its lack early</span>.", notes_cn: "三步：1)没人告诉你有尊严；2)从幼年开始剝夺(红领巾分批、排名)；3)告诉你尊严要条件交换。<span class='keyword'>从来不知尊严为何物，却早早经历了匮乏尊严的痛苦</span>。", why_matters: "尊严剝夺是面子文化和官癮的根源。", mistakes: "认为这些是'正常教育方式'。它们是系统性精神虐待。", related: ["Face_Culture", "Power_Addiction", "Shame_Education"], scenes_en: ["红领巾分批", "成绩排名"], scenes_cn: ["红领巾分批", "成绩排名"] },
+            { id: "Dependent_Self", en: "Dependent Self", cn: "依附性自我", group: "Face", val: 28, desc_en: "Confirming self through others' eyes - childlike stage", desc_cn: "通过他人目光确认自己——幼态阶段", notes_en: "First stage of self-development (normally <10 years old). <span class='keyword'>If others don't like me, I feel shame/fear</span>. Chinese education mass-suppresses children in this infant stage. Even PhD with 1.8m height, inner self still at 5-6 years old.", notes_cn: "自我发展第一阶段(通常10岁以下)。<span class='keyword'>如果别人不喜欢我，我会羞耻恐惧</span>。中国教育批量把孩子压抑在这个幼态阶段。即便博士1米8，自我内核依然在5-6岁。", why_matters: "依附性自我是过度在意他人评价的心理根源。", mistakes: "认为在意他人评价是'成熟懂事'。过度在意是心理发育停滞。", related: ["Shame_Education", "Differentiated_Self"], scenes_en: ["Need others' approval", "Fear of rejection"], scenes_cn: ["需要别人认可", "怕被拒绝"] },
+            { id: "Differentiated_Self", en: "Differentiated Self", cn: "分化性自我", group: "Face", val: 28, desc_en: "Confirming self through own eyes - mature stage", desc_cn: "通过自己眼光确认自己——成熟阶段", notes_en: "Second stage. Can distinguish external evaluation from inner value. <span class='keyword'>'Others don't like me, but I like myself'</span>. Inner core becomes stable, emotions self-regulate, courage to set boundaries. Society needs more of these for innovation.", notes_cn: "第二阶段。能区分外界评价和内在价值。<span class='keyword'>'别人不喜欢我，但我喜欢我自己'</span>。内核稳定，情绪自我调节，有勇气建立边界。社会创新需要这样的人占主流。", why_matters: "分化性自我是健康心理的标志。", mistakes: "认为'不在意别人'是冷漠自大。它是心理成熟表现。", related: ["Dependent_Self", "Integrated_Self"], scenes_en: ["Self-validation", "Stable inner core"], scenes_cn: ["自我认可", "内核稳定"] },
+            { id: "Integrated_Self", en: "Integrated Self", cn: "整合性自我", group: "Face", val: 30, desc_en: "I am me - inner-outer balance, mature stage", desc_cn: "我就是我——内外平衡的成熟阶段", notes_en: "Third stage. Understand own value AND see others' value. Create healthy family/interpersonal relationships. <span class='keyword'>Enjoy mutual respect in equality, not through comparison/crushing</span>. Society needs these as educators/managers/policymakers.", notes_cn: "第三阶段。理解自己价值也能看见别人价值。创造健康的家庭/人际关系。<span class='keyword'>在平等中享受彼此尊重，而非通过比较傾軋</span>。社会需要这样的人成为教育者/管理者。", why_matters: "整合性自我是心理成熟的最高阶段。", mistakes: "认为这是'圣人境界'。它是正常人应达到的成熟状态。", related: ["Differentiated_Self", "Dignity_Concept"], scenes_en: ["See self and others", "Inner-outer harmony"], scenes_cn: ["看见自己也看见别人", "内外和谐"] },
+            { id: "Power_Addiction", en: "Power Addiction", cn: "官癮", group: "Face", val: 30, desc_en: "Pathological craving for power - compensatory psychology", desc_cn: "对权力地位的病态渴望——补偿性心理", notes_en: "More Confucian influence = stronger power addiction. Living in hierarchy without equal treatment → <span class='keyword'>extreme craving for respect (pathological)</span>. Official respect is addictive - finally feeling respected for first time. But it's from others' fear, not equality.", notes_cn: "儒家影响越深官癮越重。生活在等级中没被平等对待→<span class='keyword'>极度渴望被尊重(病态)</span>。当官带来的虚幻尊重非常上癮——终于体会从未体会的被尊重感觉。但这是来自恐惧不是平等。", why_matters: "官癮解释了为什么权力崇拜如此普遍。", mistakes: "认为官癮是'上进心'。它是尊严剝夺后的病态补偿。", related: ["Dignity_Deprivation", "Slaying_Dragon"], scenes_en: ["Power worship", "Addicted to authority"], scenes_cn: ["权力崇拜", "对权威上癮"] },
+            { id: "Slaying_Dragon", en: "Slaying the Dragon Youth", cn: "屠龙少年终成恶龙", group: "Face", val: 28, desc_en: "The oppressed becomes the oppressor", desc_cn: "曾被压迫者成为新的压迫者", notes_en: "Power addiction cycle: Humiliated by superiors → humiliate subordinates. Crushed by power → obsessed with power. Craved dignity in humiliation → <span class='keyword'>becomes creator of humiliation</span>. Started with pure ideals, ended by culture's gravity.", notes_cn: "官癎循环：被上级羞辱→也羞辱下级。被权力碾压→更执着于权力。在屈辱中渴求尊严→<span class='keyword'>成为制造屈辱的人</span>。最初可能单纯理想上路，最终因文化重力万劫不复。", why_matters: "屠龙少年理论解释了压迫模式的代际传递。", mistakes: "认为'我曾被害所以我理解弱者'。没治愈的创伤倾向于复制。", related: ["Power_Addiction", "Dignity_Deprivation"], scenes_en: ["Become what you hated", "Trauma replication"], scenes_cn: ["成为曾经憎恨的人", "创伤复制"] },
+
+            // === CORE TOPIC 6: 美颜滞镜与拍照心理 ===
+            { id: "Beauty_Filter_Module", en: "Beauty Filter & Photo Obsession", cn: "美颜滞镜与拍照心理", group: "Core", val: 45, desc_en: "Collective escape from reality through beauty filters and photo obsession", desc_cn: "通过美颜和拍照集体性地逃避真实", notes_en: "<span class='keyword'>True self makes self unhappy</span>. Not just personal photos - history, morality, art all beautified. When society collectively avoids 'tasting and thinking about reality', it reflects society's current problems.", notes_cn: "<span class='keyword'>真实的自己让自己不快乐</span>。不仅是照片，历史/道德/文艺作品都被美化。当社会集体性逃避'品味和思考真实'，反映的是社会当前的问题。", why_matters: "理解为什么中国人感受不到真实的幸福。", mistakes: "认为美颜是'无伤大雅'。它是感受力坍塔的症状。", related: ["Trauma_Aesthetics", "Sensory_Capacity", "Photo_Obsession"], scenes_en: ["橡皮娃娃脸", "出片比体验重要"], scenes_cn: ["橡皮娃娃脸", "出片>体验"] },
+
+            // === BEAUTY FILTER CONCEPTS (美颜滞镜概念) ===
+            { id: "Trauma_Aesthetics", en: "Trauma Aesthetics", cn: "创伤美学", group: "Beauty", val: 32, desc_en: "Gorgeous unrealistic aesthetics as collective painkiller in economic downturn", desc_cn: "经济下行期用华丽不真实的审美作为集体安慰剂", notes_en: "Visual perfection and stimulation = <span class='keyword'>tired soul's necessity</span>. Powerful beauty filters, rubber-doll actors, glittering Tang/Song cities - more gorgeous = more unrealistic = trauma aesthetics in economic downturn.", notes_cn: "视觉完美和刺激=<span class='keyword'>疲惫灵魂的刚需</span>。功能强大的美颜外挂、橡皮娃娃影视、灯火辉煌的唐宋古城——越华丽越不真实=经济下行期创伤美学。", why_matters: "解释为什么审美在经济下行期反而更浮夸。", mistakes: "认为华丽审美是进步标志。它是集体创伤的症状。", related: ["Beauty_Filter_Module", "Social_Filter", "Reality_Avoidance"], scenes_en: ["灯火辉煌的唐宋", "三观正电视剧"], scenes_cn: ["灯火辉煌长安", "三观正剂"] },
+            { id: "Sensory_Capacity", en: "Sensory Capacity", cn: "感受力", group: "Beauty", val: 35, desc_en: "Private self-trusting ability to experience beauty and happiness", desc_cn: "对美和幸福的私密的自我信任的体验能力", notes_en: "Ability to fully immerse in experience <span class='keyword'>not governed by language/evaluation</span>. My feeling can't be ruled by anything else. Exists through purity, dies through utilitarianism. First thing cut from Chinese children.", notes_cn: "充分沉浸于体验的能力，<span class='keyword'>不可被语言和评价统治</span>。我的感受不可被任何其他东西统治。因单纯而存在，因功利而消失。中国孩子从小被切断的第一个东西。", why_matters: "感受力是不被外部标签绑架、体验真实幸福的根基。", mistakes: "认为感受力是天生的。它会被功利教育系统性摧毁。", related: ["Private_Happiness", "Binary_Opposition", "Hollow_Person"], scenes_en: ["无法沉浸体验美", "感受不到幸福"], scenes_cn: ["感受不到美", "感受不到幸福"] },
+            { id: "Hollow_Person", en: "Hollow Person", cn: "空心人", group: "Beauty", val: 30, desc_en: "No inner sensory capacity, only chasing external labels", desc_cn: "没有内在感受力，只追逐外部标签", notes_en: "After cruelly closing feelings, quickly submit to binary opposition system. <span class='keyword'>Chase external labels, believe they're proof of happiness</span>. Hollowness = Labels - Sensory Capacity. Mass-produced by Chinese education.", notes_cn: "残忍关闭感受后，迅速臣服二元对立体系。<span class='keyword'>不断追逐外部标签，认为它们是幸福的证据</span>。空心程度=标签-感受力。中国教育批量生产。", why_matters: "空心人是中国教育批量生产的人格类型。", mistakes: "认为空心人是'务实'。实际是感受力被摧毁后的残缺状态。", related: ["Sensory_Capacity", "Binary_Opposition", "External_Validation"], scenes_en: ["追逐学历/收入/婚姻"], scenes_cn: ["追追追外在标签"] },
+            { id: "Binary_Opposition", en: "Binary Opposition", cn: "二元对立", group: "Beauty", val: 28, desc_en: "Either-or thinking that destroys sensory capacity", desc_cn: "非此即彼的思维模式，摧毁感受力的根源", notes_en: "Bad thinking mode: produces binary people, extreme certainty. Makes you <span class='keyword'>distrust your feelings</span>. 'What's glorious/shameful, what job has face' - fundamental question of 'why am I good' controlled by others.", notes_cn: "坏思维模式：生产二极体，极度追求确定性。让人<span class='keyword'>不相信自己的感受</span>。'什么光荣/羞耻/什么工作有面子'——'我为什么好'这个底层问题话语权在别人手里。", why_matters: "理解二元对立是理解感受力丧失的钥匙。", mistakes: "认为二元对立是'有主见'。它是精神殖民。", related: ["Sensory_Capacity", "Hollow_Person", "Strong_Weak_Beauty"], scenes_en: ["Good/bad, right/wrong", "Binary thinking"], scenes_cn: ["好/坏对错二元", "非此即彼"] },
+            { id: "Private_Happiness", en: "Private Happiness", cn: "私密幸福", group: "Beauty", val: 30, desc_en: "Inner satisfaction not needing sharing or recognition", desc_cn: "不需分享、不需认可的内在满足感", notes_en: "Climbing mountain alone, no photos, no telling anyone - but knowing I felt great happiness. <span class='keyword'>'I live happily' always loud in my head</span>. Common in environments respecting individual rights, but not recognized in China.", notes_cn: "一个人爬山，没拍照没告诉任何人，但知道我感受到了极大幸福。<span class='keyword'>'我活得很幸福'永远在脑子里很大声</span>。在尊重个人权益的环境普遍存在，但在中国不被承认。", why_matters: "私密幸福是不依赖外部认可的真正幸福。", mistakes: "认为私密幸福是'孤僻'。它是心理成熟的标志。", related: ["Sensory_Capacity", "Like_Dependency", "External_Validation"], scenes_en: ["一个人读书深深满足"], scenes_cn: ["不需分享的幸福"] },
+            { id: "Social_Filter", en: "Social Filter", cn: "社会滞镜", group: "Beauty", val: 30, desc_en: "Society-wide systematic beautification of reality", desc_cn: "笼罩整个社会的对真实的系统性美化", notes_en: "Not just personal photos - learned, read, seen, heard, believed, discussed all <span class='keyword'>comprehensively beautified</span>. Appearance (white-young-thin), history (glittering Tang), morality (good rewarded), art (flawless actors). If this giant filter disappears, we'd feel fear and disgust.", notes_cn: "不仅个人照片，学到/读到/看到/听到/相信/讨论的都<span class='keyword'>被全面美化</span>。容貌(白幼瘦)/历史(灯火唐朝)/道德(善有善报)/文艺(无瑕疵主角)。如果这个巨大滞镜消失，我们会感到恐惧和厌恶。", why_matters: "社会滞镜是理解为什么中国人集体逃避真实的宏观视角。", mistakes: "认为社会滞镜是'正能量'。它是对真实的系统性否认。", related: ["Trauma_Aesthetics", "History_Beautification", "Moral_Beautification"], scenes_en: ["历史/容貌/道德都美颜"], scenes_cn: ["全社会美颜"] },
+            { id: "Photo_Obsession", en: "Photo Obsession", cn: "拍照沉迷", group: "Beauty", val: 30, desc_en: "Chinese photo-taking passion far exceeds other countries", desc_cn: "中国人出片热情远超世界其他地区", notes_en: "Eating needs photos, coffee needs photos, swimming needs photos. Photo-taking becomes <span class='keyword'>independent big event, more important than activity itself</span>. Three reasons: external validation, expression poverty, meaning poverty.", notes_cn: "吃饭要出片、咖啡要出片、游泳要出片。出片成为<span class='keyword'>独立大事，重要性>活动本身</span>。三个原因：外部评价权重、自我表达贫乏、意义感匹乏。", why_matters: "拍照沉迷表面是爱好，实际反映感受力坍塔。", mistakes: "认为拍照沉迷是'热爱生活'。可能恰恰说明无法沉浸体验。", related: ["Like_Dependency", "Meaning_Poverty", "External_Validation"], scenes_en: ["3小时泳池拍照", "带N个设备出片"], scenes_cn: ["泳池拍照三小时", "带多个设备出片"] },
+            { id: "Like_Dependency", en: "Like Dependency", cn: "点赞依赖", group: "Beauty", val: 28, desc_en: "Outsourcing self-worth to social media interactions", desc_cn: "把自我价值外包给社交媒体互动", notes_en: "Like culture hooks everyone, but <span class='keyword'>hooks Chinese more</span>. Like = recognition = value. Repeatedly refreshing for likes, anxiety when few - value completely outsourced, inner void deepens.", notes_cn: "点赞文化让所有人上头，但<span class='keyword'>对中国人更上头</span>。点赞=认可=有价值。反复刷新看点赞，点赞少就焦虑——价值感完全外包，内在空虚加剧。", why_matters: "点赞依赖是面子文化在社交媒体时代的延伸。", mistakes: "认为点赞多=成功。点赞数与内在价值无关。", related: ["Face_Culture", "Photo_Obsession", "External_Validation"], scenes_en: ["反复刷新看点赞", "点赞少就焦虑"], scenes_cn: ["刷新看点赞", "点赞少焦虑"] },
+            { id: "Meaning_Poverty", en: "Meaning Poverty", cn: "意义感匹乏", group: "Beauty", val: 28, desc_en: "Traditional life narratives (education/marriage/career) collectively failing", desc_cn: "传统人生叙事(学业/婚姻/事业)集体失效", notes_en: "Pragmatic nation, meaning from <span class='keyword'>visible worldly things</span>. Now: school ≠ good job, marriage ≠ love, career = 35 layoff. Three life narratives collectively hopeless = can't find direction. Plus 48+ hour work weeks = no leisure for meaning.", notes_cn: "实用主义民族，意义很大程度来源于<span class='keyword'>可见的世俗东西</span>。现在：上学≠好工作、婚姻≠爱情、事业=35岁淘汰。三种人生叙事集体无望=找不到奔头。加上周坘48+小时工作=没有闲暇创造意义。", why_matters: "意义感匹乏解释了为什么用拍照来装扣人生。", mistakes: "认为'努力就有意义'。努力普遍没回报时意义来源需要重建。", related: ["Photo_Obsession", "Private_Happiness", "Hollow_Person"], scenes_en: ["35岁失业", "三种叙事失效"], scenes_cn: ["找不到奔头", "不知道在忙什么"] },
+            { id: "External_Validation", en: "External Validation Dependency", cn: "外部认可依赖", group: "Beauty", val: 32, desc_en: "Being recognized by others as Chinese people's only self-worth source", desc_cn: "被他人认可成为中国人唯一的自我价值来源", notes_en: "Chinese fundamentally don't believe one can live well <span class='keyword'>without others' recognition</span>. Single = incomplete. No kids = incomplete. Living alone = pitiful. Rooted belief: meaning only from relationships, not personal experience.", notes_cn: "中国人根本不相信一个人<span class='keyword'>不靠他人认可</span>就可以过得好。单身=不完整。没孩子=不完整。一个人=可怕。根深蒂固认为：意义只能来自关系，不能来自个人体验。", why_matters: "外部认可依赖是中国人心理困境的集大成者。", mistakes: "认为这是'重视关系'。它是对个体价值的系统性否认。", related: ["Face_Culture", "Like_Dependency", "Private_Happiness"], scenes_en: ["单身=不完整", "形单影只=可怕"], scenes_cn: ["单身不完整", "一个人=可怕"] },
+            { id: "Disillusionment", en: "Disillusionment", cn: "幻灭感", group: "Beauty", val: 28, desc_en: "Psychological crisis from gap between beauty narrative and real world", desc_cn: "美颜叙事与真实现实落差导致的心理危机", notes_en: "Youth fed beauty narrative enter society, find <span class='keyword'>Legalism/Social Darwinism/no reward for effort</span> - illusion shattered. Disillusionment = Beauty Narrative / Real World. Like waking from a dream, depression, feeling cheated.", notes_cn: "受美颜叙事教育的年轻人进入社会，发现<span class='keyword'>法家/社达/努力无回报</span>——幻觉被撕碎。幻灭程度=美颜叙事/真实现实。大梦一场、抑郁、被欺骗感。", why_matters: "幻灭感是社会滞镜最终破裂的必然结果。", mistakes: "认为幻灭感是'年轻人脆弱'。根源在被喂养的虚假叙事。", related: ["Social_Filter", "Moral_Beautification", "Binary_Opposition"], scenes_en: ["我前半生算什么", "被欺骗的感觉"], scenes_cn: ["大梦一场", "被欺骗感"] },
+
+            // === CORE TOPIC 7: 叙事危机 (Narrative Crisis) ===
+            { id: "Narrative_Crisis", en: "Narrative Crisis", cn: "中国人的叙事危机", group: "Core", val: 50, desc_en: "Collective meaning collapse due to lack of public narrative tradition", desc_cn: "因公共叙事缺失导致的集体性意义感塌陷", notes_en: "China lacks a Bible-like <span class='keyword'>80-thousand-word public narrative</span> that gives every citizen a sense of belonging. Result: meaning is only sought in blood relations and material success. When life hits a dead end, there's no larger story to fall back on.", notes_cn: "中国缺乏类似圣经的<span class='keyword'>80万字公共叙事传统</span>，每个人无法在血缘之外找到精神归属。意义只能在现实利益和家族传承中寻找，当人生遇到困境，没有更大的故事可以依托。", why_matters: "这是诊断当代中国社会众多心理问题（内卷、躺平、中年危机）的根因钥匙。", mistakes: "认为精神空虚是个人问题。它是结构性的历史文化缺失。", related: ["Meaning_Vector", "Public_Narrative_Structure", "Atomization", "Hollow_Person"], scenes_en: ["Labubu vs Molly trend", "Midlife meaning crisis"], scenes_cn: ["Labubu vs Molly流行趋势", "中年意义危机"] },
+
+            { id: "Meaning_Vector", en: "Meaning Vector", cn: "意义向量", group: "Narrative", val: 35, desc_en: "Meaning = Direction × Time × Positive Change", desc_cn: "意义是一个与时间合并的方向性变化", notes_en: "Meaning is not static but <span class='keyword'>directional movement on a time axis</span>. Only when placed on a timeline producing positive change does something feel 'meaningful'. Labubu represents lack of meaning - breakdown has no temporal direction.", notes_cn: "意义不是静态状态，而是一个<span class='keyword'>在时间轴上有方向的向量</span>。只有在时间坐标轴上持续向前产生积极变化，才会被认为'有意义'。Labubu代表意义缺失——崩溃没有时间指向。", why_matters: "理解意义的本质是'方向感'，你就知道为什么短视频让人空虚——它没有时间维度的积累。", mistakes: "把'快乐'等同于'有意义'。快乐可以是瞬间的，意义必须有方向。", related: ["Narrative_Crisis", "Temporal_Directionality", "Short_Video_Emptiness"], scenes_en: ["Molly = future expectation", "Labubu = present breakdown"], scenes_cn: ["Molly=未来期待", "Labubu=当下崩溃"] },
+
+            { id: "Temporal_Directionality", en: "Temporal Directionality", cn: "时间指向性", group: "Narrative", val: 28, desc_en: "Whether an emotion or expectation points toward the future", desc_cn: "一种情绪或期待是否指向未来的特性", notes_en: "Key dimension distinguishing emotions. Molly (pursuing ideal self) <span class='keyword'>has temporal direction - pointing to future</span>. Labubu's breakdown has none - 'I want to collapse NOW', nobody says 'I hope to collapse next year'.", notes_cn: "区分不同情绪的关键维度。Molly（追求美好自我）<span class='keyword'>有时间指向性——指向未来</span>。Labubu的崩溃没有——'我现在就要崩溃'，没人说'我希望明年崩溃'。", why_matters: "检查你的人生是否有'时间指向性'，是诊断意义感的关键。", mistakes: "沉溺于当下的情绪宣泄，而忽视建立有方向性的期待。", related: ["Meaning_Vector", "Narrative_Crisis"], scenes_en: ["Future anxiety vs future hope"], scenes_cn: ["未来焦虑 vs 未来期待"] },
+
+            { id: "Labubu_Molly", en: "Labubu vs Molly", cn: "Labubu vs Molly现象", group: "Narrative", val: 32, desc_en: "Two dolls mapping collective emotion migration", desc_cn: "两款玩偶精准映射社会集体情绪迁移", notes_en: "Molly (2016-2021): <span class='keyword'>beautiful, delicate, pointing to idealself</span>. Labubu (2022+): wild, manic, embracing current breakdown. Both are 'hollow persons' - no story background - perfect canvas for projecting era's psychology.", notes_cn: "Molly（2016-2021）：<span class='keyword'>漂亮、精致、指向理想化自我</span>。Labubu（2022+）：邪气、癫狂、拥抱当下崩溃。两者都是'空心人'——没有故事背景——是时代心理的完美投影幕布。", why_matters: "观察空心人IP的流行趋势变化，可以诊断社会集体情绪的迁移方向。", mistakes: "认为这只是商业现象。它是集体潜意识的精准映射。", related: ["Narrative_Crisis", "Hollow_Person", "Collective_Unconscious_NC"], scenes_en: ["Economic upswing = Molly", "Meaning fracture = Labubu"], scenes_cn: ["经济上行期=Molly", "意义断裂期=Labubu"] },
+
+            { id: "Collective_Unconscious_NC", en: "Collective Unconscious", cn: "集体潜意识", group: "Narrative", val: 30, desc_en: "Deep psychological patterns shared by a cultural group", desc_cn: "一个社会群体共享的深层心理模式", notes_en: "Jung's concept: <span class='keyword'>psychological structures passed through generations</span>. Chinese pragmatism, authority dependence, melancholic aesthetics are all manifestations. The popularity of dolls/songs/memes often precisely captures collective unconscious.", notes_cn: "荣格概念：<span class='keyword'>代际传递的精神基因</span>。中国人骨子里的实用主义、对权威的依附、悲情美学倾向，都是表现。玩偶/歌曲/梗的流行往往精准捕捉集体潜意识。", why_matters: "很多你以为是'自己选择'的思维模式，其实是集体潜意识在运作。", mistakes: "以为自己的价值观完全是自己形成的。忽视文化结构的深层影响。", related: ["Narrative_Crisis", "Melancholic_Aesthetics", "Pragmatism_NC"], scenes_en: ["李白歌曲爆火", "悲情歌流行"], scenes_cn: ["'试试又能怎'", "悲情歌流行"] },
+
+            { id: "Public_Narrative_Structure", en: "Public Narrative Structure", cn: "公共叙事结构", group: "Narrative", val: 38, desc_en: "Society-wide, everyone-participates meaning framework", desc_cn: "贯穿社会的、人人可参与的意义框架", notes_en: "Society's 'spiritual infrastructure'. The Bible provides <span class='keyword'>80-thousand-word narrative answering four ultimate questions</span>: Where from? Why live? How to live? Where going? This enables trust and contracts beyond blood ties. Missing in Chinese folk tradition.", notes_cn: "社会的'精神基础设施'。圣经提供了<span class='keyword'>80万字叙事回答四大终极问题</span>：你从哪来？为何而生？如何活着？将往何处？这使陌生人可建立超越血缘的契约信任。中国民间长期缺乏。", why_matters: "这是深层理解中国社会问题的钥匙——很多问题不是个人的，而是结构性缺失导致的。", mistakes: "以为皇权叙事可以替代。皇权叙事只服务权力，不服务平民的意义需求。", related: ["Narrative_Crisis", "Folk_Narrative", "Community_of_Destiny"], scenes_en: ["Bible as folk narrative", "Chinese mythology: fragmented"], scenes_cn: ["圣经作为平民叙事", "中国神话：碎片化"] },
+
+            { id: "Folk_Narrative", en: "Folk Narrative", cn: "平民叙事", group: "Narrative", val: 30, desc_en: "Public story tradition from common people, everyone can participate", desc_cn: "来自民间、人人可参与的公共故事传统", notes_en: "Different from imperial history. Folk narrative means <span class='keyword'>ordinary people feel 'I'm part of this story'</span>. Western Bible is typical - king or farmer, all can anchor life meaning in it. China historically lacks this tradition.", notes_cn: "区别于帝王将相官方叙事。平民叙事是普通人也能感受到<span class='keyword'>'我是这个故事一部分'</span>。圣经是典型——无论国王还是农夫，都可把人生纳入这套故事找到意义路径。中国历史上长期缺失。", why_matters: "没有平民叙事，普通人就无法在宏大历史中找到自己的位置。", mistakes: "以为读历史就是参与叙事。如果只能用'帝王视角'看历史，你仍然是旁观者。", related: ["Public_Narrative_Structure", "Community_of_Destiny", "Narrative_Crisis"], scenes_en: ["Emperor perspective reading history", "Weak-person dependency thinking"], scenes_cn: ["帝王视角看历史", "弱者型依附思维"] },
+
+            { id: "Community_of_Destiny", en: "Community of Destiny", cn: "命运共同体", group: "Narrative", val: 32, desc_en: "Cross-time group identity through shared narrative", desc_cn: "因共享叙事而形成的跨时空群体认同", notes_en: "When people anchor their lives in the same public narrative, <span class='keyword'>present, absent, living, dead all become trans-temporal community</span>. This is the deep foundation of contractual trust and social cooperation. No shared narrative = no real community.", notes_cn: "当人们把人生纳入同一套公共叙事时，<span class='keyword'>在场的人、不在场的人、活着的人、死去的人，都成为'超时空的命运共同体'</span>。这是契约信任和社会合作的深层基础。没有共享叙事，就无法形成真正的命运共同体。", why_matters: "这解释了为什么中国人难以形成真正的公民社会。", mistakes: "以为同属一个国家就是命运共同体。需要共享的深层叙事。", related: ["Public_Narrative_Structure", "Folk_Narrative", "Atomization"], scenes_en: ["Church as community building", "Sunday collective story-listening"], scenes_cn: ["教堂作为共同体建构", "周日集体聆听故事"] },
+
+            { id: "Differential_Mode_NC", en: "Differential Mode of Association", cn: "差序格局", group: "Narrative", val: 32, desc_en: "Trust circle diminishing from self outward", desc_cn: "以自己为中心、由近及远递减的信任圈", notes_en: "Fei Xiaotong's classic concept. Chinese relationships like <span class='keyword'>ripples - closer people more trusted</span>. Different from Western 'group pattern' (equal contractual relations). Differential mode means no ready-made trust mechanism outside family.", notes_cn: "费孝通经典概念。中国人社会关系像<span class='keyword'>水波纹——越近的人越信任</span>。与西方'团体格局'（人人平等的契约关系）不同。差序格局导致家族之外没有现成的信任机制。", why_matters: "这解释了为什么中国人难以形成超越血缘的命运共同体。", mistakes: "认为差序格局是落后的。它是叙事缺失的自然结果。", related: ["Community_of_Destiny", "Public_Narrative_Structure", "Atomization"], scenes_en: ["Trust only family", "No trust outside bloodline"], scenes_cn: ["只信任家人", "血缘之外无信任"] },
+
+            { id: "Atomization", en: "Atomization", cn: "原子化", group: "Narrative", val: 30, desc_en: "Individual disconnected from society, isolated like atoms", desc_cn: "个体与社会联结断裂，各自孤立的状态", notes_en: "When public narrative is missing and social trust collapses, individuals become <span class='keyword'>isolated 'atoms'</span>. You don't know who you belong to. Even your once-proud kindness and morality become doubtful. Nothing to eternally belong to beyond family.", notes_cn: "当公共叙事缺失、社会信任崩解时，个体会变成彼此孤立的<span class='keyword'>'原子'</span>。你不知道自己属于谁，连曾经引以为傲的善良和道德都会怀疑。除了家庭家族，不知道自己可以永恒地属于什么更大的群体。", why_matters: "很多人的孤独感不是因为没有朋友，而是原子化——没有更大的归属感。", mistakes: "以为多社交就能解决。需要的是找到超越个人的意义归属。", related: ["Narrative_Crisis", "Community_of_Destiny", "Differential_Mode_NC"], scenes_en: ["Don't know who I belong to", "Lonely despite friends"], scenes_cn: ["不知道自己属于谁", "有朋友还是孤独"] },
+
+            { id: "Melancholic_Aesthetics", en: "Melancholic Aesthetics", cn: "悲情美学", group: "Narrative", val: 28, desc_en: "Cultural tendency to find beauty in sadness and failure", desc_cn: "以哀伤、不得志、愁苦为美的文化倾向", notes_en: "'Rolling Yangtze flows east, washing away heroes. Success or failure, all empty.' - Not <span class='keyword'>'glorious in defeat' tragic</span>, but 'win or lose, all meaningless' nihilistic. Culture doesn't admire losers, doesn't give losers aesthetic dignity.", notes_cn: "'滚滚长江东逝水，是非成败转头空'——不是<span class='keyword'>'虽败犹荣'的悲壮</span>，而是'不管成功失败都毫无意义'的虚无。文化不欣赏失败者，不给失败者安美学色彩。", why_matters: "理解悲情美学，可以识别自己思维中的虚无主义底色。", mistakes: "把悲情美学当成'深刻'。它可能是无力感的美化包装。", related: ["Collective_Unconscious_NC", "Narrative_Crisis"], scenes_en: ["Su Shi's eternal melancholy", "Sadness-beauty poems"], scenes_cn: ["苏轼一生郁郁不得志", "悲伤为美的诗词"] },
+
+            { id: "Pragmatism_NC", en: "Pragmatism", cn: "实用主义", group: "Narrative", val: 28, desc_en: "Thinking oriented toward immediate practical gains", desc_cn: "以眼前现实利益为导向的思维方式", notes_en: "When society lacks long-term trustworthy public narrative, people <span class='keyword'>can only find meaning in blood and reality</span>. This inevitably leads to pragmatism - valuing posterity, family glory. Hard to focus on inherently self-transcendent creative acts.", notes_cn: "当社会缺乏长期可信赖的公共叙事，人们就<span class='keyword'>只能在血缘和现实中找意义</span>。这必然导致骨子里的实用主义——重视传宗接代、光宗耀祖，很难把视角放在天然具有自我超越性的创造行为中。", why_matters: "理解实用主义的文化根源，可以跳出'只能这样活'的思维陷阱。", mistakes: "认为追求超越性是不现实的。那是被实用主义框住的表现。", related: ["Narrative_Crisis", "Differential_Mode_NC"], scenes_en: ["Offspring over creation", "Practical over spiritual"], scenes_cn: ["传宗接代\u003e创造", "实用\u003e精神"] },
+
+            { id: "Fear_vs_Love_Driven", en: "Fear vs Love Driven", cn: "恐惧驱动 vs 热爱驱动", group: "Narrative", val: 32, desc_en: "Two fundamentally different sources of action motivation", desc_cn: "两种行动的底层动力来源", notes_en: "What drives Chinese people: <span class='keyword'>fear (dignity insult, welfare shortage, retirement anxiety) - external pressure inward</span>. People with narrative tradition: love, calling, inner faith - inside out. Fear-driven means diligent but not brave.", notes_cn: "驱动中国人奋斗的往往是<span class='keyword'>恐惧（自尊受辱、福利短缺、养老焦虑）——由外而内的压力</span>。有公共叙事传统的人更容易被热爱、召唤、内在信仰驱动——由内而外。恐惧驱动让人勤奋但不勇敢。", why_matters: "检查自己的驱动力来源，可以诊断精神状态是压抑还是自由。", mistakes: "以为恐惧驱动更'务实'。它会消耗你的精神能量。", related: ["Narrative_Crisis", "Pragmatism_NC"], scenes_en: ["Chinese diligent but not brave", "Fear of survival vs love of creation"], scenes_cn: ["勤于勤奋但不敢于勇敢", "恐惧生存 vs 热爱创造"] },
+
+            { id: "Consciousness_Dissociation", en: "Consciousness Dissociation", cn: "意识-潜意识断联", group: "Narrative", val: 30, desc_en: "Long-term separation of conscious and subconscious mind", desc_cn: "意识层与潜意识层长期分离的心理状态", notes_en: "Chinese education 'concepts first', constant hierarchy forcing and indoctrination, <span class='keyword'>building consciousness while suppressing subconscious</span>. We think what we 'should' think, not what we 'feel'. This dissociation is the deep source of emptiness and wrongness.", notes_cn: "中国教育'观念为先'，等级强迫和灌输无处不在，<span class='keyword'>不断构建你的意识，同时压抑你的潜意识</span>。我们思考'以为正确的'，而非'感受到的'。这种断联是空虚和'不对劲感'的深层来源。", why_matters: "如果你总觉得'哪里不对劲'却说不出来，很可能就是意识-潜意识断联的表现。", mistakes: "以为压抑感受是'成熟'。它是在制造内在分裂。", related: ["Self_Identity_NC", "Narrative_Crisis"], scenes_en: ["Think 'should', not 'feel'", "Something's wrong but can't say"], scenes_cn: ["思考'应该'而非'感受'", "哪里不对劲说不出来"] },
+
+            { id: "Self_Identity_NC", en: "Self-Identity Integration", cn: "自我同一性整合", group: "Narrative", val: 32, desc_en: "High integration of conscious and subconscious mind", desc_cn: "意识与潜意识高度整合的状态", notes_en: "When <span class='keyword'>consciousness ('I think correct') and subconscious ('I truly feel') are no longer strangers but intimately aligned</span>, inner contradictions naturally dissolve. Existence is no longer diffuse but certain. You truly feel 'the grace of being'.", notes_cn: "当<span class='keyword'>意识（'我以为正确的'）和潜意识（'我真实感受到的'）不再彼此陌生，而是高度亲密默契</span>，内在矛盾自然消失。存在不再是弥散的而是确定的。你真正感受到'存在的恩典'。", why_matters: "这是摆脱精神空虚的终极路径——不是获得更多，而是与自己和解。", mistakes: "以为需要某种神秘体验才能达到。关键只是'忠于感受'。", related: ["Consciousness_Dissociation", "Narrative_Crisis"], scenes_en: ["Inner-outer harmony", "Feeling grace of being"], scenes_cn: ["内外和谐", "感受存在的恩典"] },
+
+            { id: "Short_Video_Emptiness", en: "Short Video Emptiness", cn: "短视频空虚公式", group: "Narrative", val: 28, desc_en: "Emptiness = Emotional Stimulation Frequency / Meaning Accumulation", desc_cn: "空虚感=情绪刺激频率/意义积累度", notes_en: "Short videos bring <span class='keyword'>high-frequency emotional stimulation (quick cry, quick laugh), but leave no trace in spiritual world</span>. More frequent stimulation + less accumulation = stronger emptiness - that's why after bingeing you want to binge more.", notes_cn: "短视频带来<span class='keyword'>高频情绪刺激（快速哭、快速笑），但看过之后在精神世界没有任何痕迹</span>。刺激越频繁、积累越少，空虚感就越强——所以刷完短视频你会更想刷。", why_matters: "这解释了为什么刷短视频后会更空虚。", mistakes: "用刷更多短视频来缓解空虚。形成恶性循环。", related: ["Meaning_Vector", "Narrative_Crisis"], scenes_en: ["Binge then emptier", "No spiritual trace"], scenes_cn: ["越刷越空虚", "精神世界无痕迹"] }
+        ];
+
+        const links = [
+            // === CORE → SEVEN SINS (中心辐射) ===
+            { source: "Exam_Education", target: "Sin1_Servility", label: "Produces 产生" },
+            { source: "Exam_Education", target: "Sin2_Decision", label: "Produces 产生" },
+            { source: "Exam_Education", target: "Sin3_Emotion", label: "Produces 产生" },
+            { source: "Exam_Education", target: "Sin4_Relationship", label: "Produces 产生" },
+            { source: "Exam_Education", target: "Sin5_Thinking", label: "Produces 产生" },
+            { source: "Exam_Education", target: "Sin6_Sexual", label: "Produces 产生" },
+            { source: "Exam_Education", target: "Sin7_Imagination", label: "Produces 产生" },
+
+            // Seven Sins inter-connections
+            { source: "Sin1_Servility", target: "Amygdala Hypertrophy", label: "Causes" },
+            { source: "Sin1_Servility", target: "Learned Helplessness", label: "Causes" },
+            { source: "Sin2_Decision", target: "Dopamine Pattern Distortion", label: "Caused by" },
+            { source: "Sin3_Emotion", target: "DMN Hijacking", label: "Caused by" },
+            { source: "Sin3_Emotion", target: "PFC Overload", label: "Caused by" },
+            { source: "Sin4_Relationship", target: "Comparative Relationship", label: "Manifests as" },
+            { source: "Sin5_Thinking", target: "Dopamine Pattern Distortion", label: "Caused by" },
+            { source: "Sin6_Sexual", target: "Sin3_Emotion", label: "Related" },
+            { source: "Sin7_Imagination", target: "Meaning Collapse", label: "Leads to" },
+            { source: "Sin7_Imagination", target: "Future as Command", label: "Caused by" },
+            // Neuroscience connections
+            { source: "Amygdala Hypertrophy", target: "Chronic Fear", label: "Causes" },
+            { source: "PFC Overload", target: "Leisure Guilt", label: "Causes" },
+            { source: "DMN Hijacking", target: "Leisure Guilt", label: "Causes" },
+            { source: "Dopamine Pattern Distortion", target: "Sin5_Thinking", label: "Causes" },
+            // Psychology connections
+            { source: "Learned Helplessness", target: "Elephant Rope", label: "Illustrated by" },
+            { source: "Chronic Fear", target: "Sin1_Servility", label: "Reinforces" },
+            { source: "Leisure Guilt", target: "Sin3_Emotion", label: "Manifests as" },
+            { source: "Meaning Collapse", target: "Poverty Trifecta", label: "Leads to" },
+            { source: "Future as Command", target: "Innovation Deficit", label: "Causes" },
+            // Social connections
+            { source: "Poverty Trifecta", target: "Innovation Deficit", label: "Causes" },
+            // Metaphor connections
+            { source: "Tightening Spell", target: "Sin1_Servility", label: "Describes" },
+            { source: "Elephant Rope", target: "Learned Helplessness", label: "Illustrates" },
+            { source: "War Zone Comparison", target: "Amygdala Hypertrophy", label: "Explains" },
+            { source: "War Zone Comparison", target: "PFC Overload", label: "Explains" },
+            // Cross-domain
+            { source: "Sin1_Servility", target: "Tightening Spell", label: "Symbolized by" },
+            { source: "Sin7_Imagination", target: "Innovation Deficit", label: "Social effect" },
+
+            // === CORE 2 → CULTURE FEATURES (文化深层结构辐射) ===
+            { source: "Culture_Deep_Structure", target: "Formalization", label: "Feature 特征" },
+            { source: "Culture_Deep_Structure", target: "Symbolization", label: "Feature 特征" },
+            { source: "Culture_Deep_Structure", target: "Holistic_Thinking", label: "Feature 特征" },
+            { source: "Culture_Deep_Structure", target: "Relational_Orientation", label: "Feature 特征" },
+
+            // Culture → Education connections
+            { source: "Formalization", target: "Sin1_Servility", label: "Reinforces 强化" },
+            { source: "Symbolization", target: "Sin1_Servility", label: "Reinforces 强化" },
+            { source: "Holistic_Thinking", target: "Sin5_Thinking", label: "Causes 导致" },
+            { source: "Relational_Orientation", target: "Sin4_Relationship", label: "Causes 导致" },
+            { source: "Relational_Orientation", target: "Subjectivity_Loss", label: "Leads to 导致" },
+            { source: "Subjectivity_Loss", target: "Meaning Collapse", label: "Causes 导致" },
+
+            // Two Core Topics connection
+            { source: "Culture_Deep_Structure", target: "Exam_Education", label: "Enables 支撑" },
+
+            // === CORE 3 → RIGHTS DEFICIT (权利意识缺失辐射) ===
+            { source: "Rights_Deficit", target: "Conditional_Society", label: "Manifests as 表现为" },
+            { source: "Rights_Deficit", target: "Qualification_Anxiety", label: "Causes 导致" },
+            { source: "Rights_Deficit", target: "Emotional_Exploitation", label: "Enables 使能" },
+            { source: "Rights_Deficit", target: "Moral_Institutional_Conflation", label: "Causes 导致" },
+
+            // Rights → Trauma connections
+            { source: "Rights_Deficit", target: "Low_Self_Worth", label: "Trauma 1" },
+            { source: "Rights_Deficit", target: "Boundary_Blurring", label: "Trauma 2" },
+            { source: "Rights_Deficit", target: "Rights_Learned_Helplessness", label: "Trauma 3" },
+            { source: "Rights_Deficit", target: "Distorted_Power_ID", label: "Trauma 4" },
+
+            // Internal Rights connections
+            { source: "Conditional_Society", target: "Qualification_Anxiety", label: "Causes 导致" },
+            { source: "Conditional_Society", target: "Qualification_Attack", label: "Produces 产生" },
+            { source: "Qualification_Anxiety", target: "Unworthiness", label: "Internalizes 内化" },
+            { source: "Qualification_Attack", target: "Qualification_Anxiety", label: "Reinforces 强化" },
+            { source: "Emotional_Exploitation", target: "Boundary_Blurring", label: "Causes 导致" },
+            { source: "Unworthiness", target: "Low_Self_Worth", label: "Manifests 表现" },
+            { source: "Low_Self_Worth", target: "Distorted_Power_ID", label: "Compensates 补偿" },
+            { source: "Confidence_As_Right", target: "Qualification_Anxiety", label: "Antidote 解药" },
+
+            // Rights → Culture connections
+            { source: "Culture_Deep_Structure", target: "Rights_Deficit", label: "Enables 支撑" },
+            { source: "Relational_Orientation", target: "Rights_Deficit", label: "Causes 导致" },
+            { source: "Subjectivity_Loss", target: "Rights_Deficit", label: "Reinforces 强化" },
+
+            // Rights → Education connections
+            { source: "Rights_Deficit", target: "Sin1_Servility", label: "Enables 支撑" },
+            { source: "Rights_Learned_Helplessness", target: "Learned Helplessness", label: "Related 关联" },
+            { source: "Low_Self_Worth", target: "Sin1_Servility", label: "Reinforces 强化" },
+
+            // === CORE 4 → REAL ESTATE DOMESTICATION (房地产驯化辐射) ===
+            { source: "Real_Estate_Domestication", target: "Rationality_Collapse", label: "Mechanism 1" },
+            { source: "Real_Estate_Domestication", target: "Subjectivity_Transfer", label: "Mechanism 2" },
+            { source: "Real_Estate_Domestication", target: "Relationship_Utilitarianization", label: "Mechanism 3" },
+            { source: "Real_Estate_Domestication", target: "Rights_Commodification", label: "Mechanism 4" },
+            { source: "Real_Estate_Domestication", target: "Future_Atrophy", label: "Mechanism 5" },
+
+            // Real Estate → Personality traits
+            { source: "Real_Estate_Domestication", target: "Security_Outsourcing", label: "Trait 1" },
+            { source: "Real_Estate_Domestication", target: "RE_Subjectivity_Regression", label: "Trait 2" },
+            { source: "Real_Estate_Domestication", target: "Dignity_Assetization", label: "Trait 3" },
+            { source: "Real_Estate_Domestication", target: "Risk_Aversion_Personality", label: "Trait 4" },
+            { source: "Real_Estate_Domestication", target: "Emotional_Compression", label: "Trait 5" },
+
+            // Internal Real Estate connections
+            { source: "Rationality_Collapse", target: "Cognitive_Regression", label: "Causes 导致" },
+            { source: "Cognitive_Regression", target: "Authority_Dependence", label: "Leads to 导致" },
+            { source: "Authority_Dependence", target: "Real_Estate_Religion", label: "Forms 形成" },
+            { source: "Subjectivity_Transfer", target: "Dignity_Assetization", label: "Causes 导致" },
+            { source: "Relationship_Utilitarianization", target: "Shareholder_Parents", label: "Produces 产生" },
+            { source: "Relationship_Utilitarianization", target: "Functional_Partner", label: "Produces 产生" },
+            { source: "Rights_Commodification", target: "Rights_Shaming", label: "Causes 导致" },
+            { source: "Future_Atrophy", target: "Risk_Aversion_Personality", label: "Causes 导致" },
+
+            // Real Estate → Culture/Rights connections
+            { source: "Culture_Deep_Structure", target: "Real_Estate_Domestication", label: "Enables 支撑" },
+            { source: "Rights_Deficit", target: "Rights_Commodification", label: "Extends 延伸" },
+            { source: "Rights_Shaming", target: "Low_Self_Worth", label: "Reinforces 强化" },
+            { source: "Dignity_Assetization", target: "Qualification_Anxiety", label: "Causes 导致" },
+            { source: "Sin1_Servility", target: "Authority_Dependence", label: "Enables 支撑" },
+
+            // === CORE 5 → EATING BITTERNESS & FACE CULTURE (吃苦文化与面子尊严) ===
+            { source: "Eating_Bitterness_Culture", target: "Mule_Spirit", label: "Produces 产生" },
+            { source: "Eating_Bitterness_Culture", target: "Pain_As_Value", label: "Trait 1" },
+            { source: "Eating_Bitterness_Culture", target: "Fear_Of_Enjoyment", label: "Trait 2" },
+            { source: "Eating_Bitterness_Culture", target: "EB_Subjectivity_Destruction", label: "Trait 3" },
+            { source: "Eating_Bitterness_Culture", target: "Spiritual_Poverty", label: "Trait 4" },
+
+            // Face vs Dignity
+            { source: "Face_Dignity_Split", target: "Face_Culture", label: "Left path 左路" },
+            { source: "Face_Dignity_Split", target: "Dignity_Concept", label: "Right path 右路" },
+            { source: "Face_Culture", target: "Shame_Education", label: "Mechanism 机制" },
+            { source: "Face_Culture", target: "Power_Addiction", label: "Produces 产生" },
+            { source: "Shame_Education", target: "Dependent_Self", label: "Creates 创造" },
+            { source: "Dependent_Self", target: "Differentiated_Self", label: "Should develop 应发展" },
+            { source: "Differentiated_Self", target: "Integrated_Self", label: "Should develop 应发展" },
+            { source: "Dignity_Deprivation", target: "Face_Culture", label: "Causes 导致" },
+            { source: "Dignity_Deprivation", target: "Power_Addiction", label: "Causes 导致" },
+
+            // Internal connections
+            { source: "Mule_Spirit", target: "Pain_As_Value", label: "Enables 支撑" },
+            { source: "Pain_As_Value", target: "Fear_Of_Enjoyment", label: "Causes 导致" },
+            { source: "Spiritual_Poverty", target: "Emotional_Numbing", label: "Causes 导致" },
+            { source: "Power_Addiction", target: "Slaying_Dragon", label: "Results in 导致" },
+
+            // Cross-module connections
+            { source: "Culture_Deep_Structure", target: "Eating_Bitterness_Culture", label: "Enables 支撑" },
+            { source: "Culture_Deep_Structure", target: "Face_Dignity_Split", label: "Produces 产生" },
+            { source: "Eating_Bitterness_Culture", target: "Rights_Deficit", label: "Reinforces 强化" },
+            { source: "Face_Culture", target: "Qualification_Anxiety", label: "Causes 导致" },
+            { source: "Shame_Education", target: "Sin1_Servility", label: "Reinforces 强化" },
+            { source: "Shame_Education", target: "Low_Self_Worth", label: "Causes 导致" },
+            { source: "EB_Subjectivity_Destruction", target: "Subjectivity_Loss", label: "Related 关联" },
+
+            // === CORE 6 → BEAUTY FILTER & PHOTO OBSESSION (美颜滞镜与拍照心理) ===
+            { source: "Beauty_Filter_Module", target: "Trauma_Aesthetics", label: "Produces 产生" },
+            { source: "Beauty_Filter_Module", target: "Social_Filter", label: "Produces 产生" },
+            { source: "Beauty_Filter_Module", target: "Photo_Obsession", label: "Produces 产生" },
+            { source: "Beauty_Filter_Module", target: "Sensory_Capacity", label: "Destroys 摧毁" },
+
+            // Internal connections
+            { source: "Sensory_Capacity", target: "Private_Happiness", label: "Enables 支撑" },
+            { source: "Binary_Opposition", target: "Sensory_Capacity", label: "Destroys 摧毁" },
+            { source: "Binary_Opposition", target: "Hollow_Person", label: "Creates 创造" },
+            { source: "Photo_Obsession", target: "Like_Dependency", label: "Causes 导致" },
+            { source: "Meaning_Poverty", target: "Photo_Obsession", label: "Causes 导致" },
+            { source: "External_Validation", target: "Photo_Obsession", label: "Causes 导致" },
+            { source: "Social_Filter", target: "Disillusionment", label: "Eventually 最终" },
+            { source: "Trauma_Aesthetics", target: "Disillusionment", label: "Eventually 最终" },
+
+            // Cross-module connections
+            { source: "Culture_Deep_Structure", target: "Beauty_Filter_Module", label: "Enables 支撑" },
+            { source: "Face_Culture", target: "External_Validation", label: "Manifests 体现" },
+            { source: "Face_Culture", target: "Like_Dependency", label: "Extends 延伸" },
+            { source: "Emotional_Numbing", target: "Sensory_Capacity", label: "Destroys 摧毁" },
+            { source: "Shame_Education", target: "Binary_Opposition", label: "Teaches 教导" },
+            { source: "Dependent_Self", target: "External_Validation", label: "Causes 导致" },
+            { source: "Hollow_Person", target: "Photo_Obsession", label: "Causes 导致" },
+
+            // === CORE 7 → NARRATIVE CRISIS (叙事危机辐射) ===
+            { source: "Narrative_Crisis", target: "Meaning_Vector", label: "Core concept 核心概念" },
+            { source: "Narrative_Crisis", target: "Public_Narrative_Structure", label: "Root cause 根因" },
+            { source: "Narrative_Crisis", target: "Folk_Narrative", label: "Missing 缺失" },
+            { source: "Narrative_Crisis", target: "Atomization", label: "Produces 产生" },
+            { source: "Narrative_Crisis", target: "Pragmatism_NC", label: "Produces 产生" },
+            { source: "Narrative_Crisis", target: "Melancholic_Aesthetics", label: "Manifests 表现" },
+            { source: "Narrative_Crisis", target: "Fear_vs_Love_Driven", label: "Explains 解释" },
+            { source: "Narrative_Crisis", target: "Labubu_Molly", label: "Illustrated by 例证" },
+            { source: "Narrative_Crisis", target: "Consciousness_Dissociation", label: "Causes 导致" },
+            { source: "Narrative_Crisis", target: "Differential_Mode_NC", label: "Related 关联" },
+            { source: "Narrative_Crisis", target: "Collective_Unconscious_NC", label: "Shapes 塑造" },
+
+            // Internal Narrative connections
+            { source: "Meaning_Vector", target: "Temporal_Directionality", label: "Defines 定义" },
+            { source: "Meaning_Vector", target: "Short_Video_Emptiness", label: "Explains 解释" },
+            { source: "Labubu_Molly", target: "Collective_Unconscious_NC", label: "Captures 捕捉" },
+            { source: "Labubu_Molly", target: "Hollow_Person", label: "Both are 都是" },
+            { source: "Labubu_Molly", target: "Temporal_Directionality", label: "Illustrates 说明" },
+            { source: "Public_Narrative_Structure", target: "Folk_Narrative", label: "Requires 需要" },
+            { source: "Public_Narrative_Structure", target: "Community_of_Destiny", label: "Enables 支撑" },
+            { source: "Folk_Narrative", target: "Community_of_Destiny", label: "Creates 创造" },
+            { source: "Community_of_Destiny", target: "Atomization", label: "Prevents 防止" },
+            { source: "Differential_Mode_NC", target: "Atomization", label: "Causes 导致" },
+            { source: "Collective_Unconscious_NC", target: "Melancholic_Aesthetics", label: "Manifests 表现" },
+            { source: "Consciousness_Dissociation", target: "Self_Identity_NC", label: "Opposite 相反" },
+            { source: "Self_Identity_NC", target: "Narrative_Crisis", label: "Solution 解法" },
+            { source: "Short_Video_Emptiness", target: "Meaning_Poverty", label: "Related 关联" },
+            { source: "Temporal_Directionality", target: "Meaning Collapse", label: "When missing 缺失时" },
+
+            // Cross-module connections
+            { source: "Culture_Deep_Structure", target: "Narrative_Crisis", label: "Enables 支撑" },
+            { source: "Narrative_Crisis", target: "Hollow_Person", label: "Explains 解释" },
+            { source: "Narrative_Crisis", target: "Meaning Collapse", label: "Related 关联" },
+            { source: "Narrative_Crisis", target: "Meaning_Poverty", label: "Related 关联" },
+            { source: "Differential_Mode_NC", target: "Relational_Orientation", label: "Related 关联" },
+            { source: "Fear_vs_Love_Driven", target: "Mule_Spirit", label: "Related 关联" },
+            { source: "Atomization", target: "Subjectivity_Loss", label: "Related 关联" },
+            { source: "Pragmatism_NC", target: "Eating_Bitterness_Culture", label: "Related 关联" }
+        ];
+
+        const settings = { linkDistance: 80, chargeStrength: -200, labelSize: 1.0, opacity: 0.8, autoRotate: true };
+        const elem = document.getElementById('3d-graph');
+        const Graph = ForceGraph3D()(elem)
+            .graphData({ nodes, links }).backgroundColor('#000005').showNavInfo(false)
+            .nodeThreeObject(node => { const cat = getCategory(node.group); const text = `${node.en}\n${node.cn}`; const sprite = new SpriteText(text); sprite.color = cat.color; sprite.textHeight = (node.val / 2) * settings.labelSize; sprite.fontFace = 'Arial'; sprite.fontWeight = 'bold'; sprite.backgroundColor = `rgba(0,0,0,${settings.opacity / 2})`; sprite.padding = 4; sprite.userData = { baseSize: node.val / 2 }; return sprite; })
+            .linkWidth(2.5).linkColor(link => { const sn = nodes.find(n => n.id === link.source || n.id === link.source.id); if (sn) return getCategory(sn.group).color + '88'; return '#445566'; })
+            .linkOpacity(0.7).linkCurvature(0.12).linkDirectionalArrowLength(5).linkDirectionalArrowRelPos(0.9)
+            .linkDirectionalParticles(3).linkDirectionalParticleSpeed(0.005).linkDirectionalParticleWidth(2)
+            .onNodeClick(node => { Graph.cameraPosition({ x: node.x + 50, y: node.y + 50, z: node.z + 50 }, node, 1500); showHUD(node); });
+        Graph.d3Force('link').distance(settings.linkDistance); Graph.d3Force('charge').strength(settings.chargeStrength);
+
+        const gui = new dat.GUI();
+        const folder = gui.addFolder('Settings');
+        folder.add(settings, 'linkDistance', 10, 300).onChange(val => { Graph.d3Force('link').distance(val); Graph.d3ReheatSimulation(); });
+        folder.add(settings, 'chargeStrength', -500, -10).onChange(val => { Graph.d3Force('charge').strength(val); Graph.d3ReheatSimulation(); });
+        folder.add(settings, 'autoRotate').onChange(val => { Graph.controls().autoRotate = val; }); folder.open();
+
+        function showHUD(node) {
+            const el = id => document.getElementById(id); const cat = getCategory(node.group);
+            el('hud').style.display = 'block'; el('hud-title').innerText = node.en; el('hud-title').style.color = cat.color;
+            el('hud-cn').innerText = `${node.cn} [${node.group}]`;
+            el('hud-desc').innerHTML = `<div class="en">${node.desc_en || ''}</div><div class="cn">${node.desc_cn || ''}</div>`;
+            el('hud-notes').innerHTML = `<div class="en">${node.notes_en || ''}</div><div class="cn">${node.notes_cn || ''}</div>`;
+            el('hud-why').innerHTML = node.why_matters || ''; el('hud-mistakes').innerHTML = node.mistakes || '';
+            const rc = el('hud-related'); rc.innerHTML = ''; if (node.related) node.related.forEach(t => { const tag = document.createElement('span'); tag.className = 'related-tag'; tag.innerText = t; tag.onclick = () => { const tn = nodes.find(n => n.id === t); if (tn) { Graph.cameraPosition({ x: tn.x + 50, y: tn.y + 50, z: tn.z + 50 }, tn, 1500); setTimeout(() => showHUD(tn), 1600); } }; rc.appendChild(tag); });
+            const sc = el('hud-scenes'); sc.innerHTML = ''; if (node.scenes_en) for (let i = 0; i < node.scenes_en.length; i++) { const tag = document.createElement('span'); tag.className = 'scene-tag'; tag.innerHTML = `${node.scenes_en[i]} <span style="color:#88aacc">${node.scenes_cn[i]}</span>`; sc.appendChild(tag); }
+        }
+        function hideHUD() { document.getElementById('hud').style.display = 'none'; }
+
+        // Initialize
+        buildLegend();
+        setTimeout(() => { document.getElementById('loading').style.display = 'none'; }, 1000);
+        Graph.controls().autoRotate = true;
+
+        // Bind close button event
+        document.getElementById('hud-close').addEventListener('click', hideHUD);
+    </script>
+</body>
+
+</html>

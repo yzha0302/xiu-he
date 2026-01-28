@@ -1,0 +1,732 @@
+{
+  "_comment": "Asyre Quality Assessment Framework v2.4",
+  "_version": "2.4",
+  "_date": "2026-01-13",
+  "_description": "基于七层质量公式的量化评估体系，v2.4新增6个心理学维度参数",
+
+  "_quality_formula": {
+    "equation": "Q = T × E × C × F × D × A × B",
+    "logic": "乘法逻辑：任何一个因子为0，整体归零",
+    "insight": "这是残酷性，也是差异化的机会"
+  },
+
+  "quality_factors": {
+    "T": {
+      "name_cn": "可信度",
+      "name_en": "Trustworthiness",
+      "layer": "门槛层",
+      "nature": "前置条件",
+      "automation": "可部分自动化",
+      "moat_strength": "★★★★★",
+      "weight": "critical",
+      "description": "一切的前提，T=0则Q=0",
+
+      "sub_factors": {
+        "accuracy": {
+          "name_cn": "准确性",
+          "name_en": "Accuracy",
+          "description": "事实陈述是否正确无误",
+          "range": [0.0, 1.0],
+          "critical_threshold": 0.7,
+          "evaluation_criteria": [
+            "数据是否有来源",
+            "引用是否准确",
+            "陈述是否可验证",
+            "是否有误导性表述"
+          ]
+        },
+        "transparency": {
+          "name_cn": "透明度",
+          "name_en": "Transparency",
+          "description": "是否公开信息来源和立场",
+          "range": [0.0, 1.0],
+          "critical_threshold": 0.6,
+          "evaluation_criteria": [
+            "是否标注引用来源",
+            "是否披露利益冲突",
+            "是否明确个人立场",
+            "是否区分事实和观点"
+          ]
+        },
+        "source_reliability": {
+          "name_cn": "来源可靠性",
+          "name_en": "Source Reliability",
+          "description": "引用来源是否权威可信",
+          "range": [0.0, 1.0],
+          "critical_threshold": 0.7,
+          "evaluation_criteria": [
+            "来源是否权威",
+            "是否为第一手资料",
+            "是否为同行评审",
+            "是否有多个来源验证"
+          ]
+        }
+      },
+
+      "calculation": "T = (accuracy × 0.4) + (transparency × 0.3) + (source_reliability × 0.3)",
+      "red_flags": [
+        "❌ 数据无来源",
+        "❌ 引用错误",
+        "❌ 混淆事实和观点",
+        "❌ 来源不可靠"
+      ]
+    },
+
+    "E": {
+      "name_cn": "经验+专业",
+      "name_en": "Experience + Expertise",
+      "layer": "护城河",
+      "nature": "人的不可替代区",
+      "automation": "无法自动化",
+      "moat_strength": "★★★★★",
+      "weight": "critical",
+      "description": "定义'我是谁'，风格辨识度",
+
+      "sub_factors": {
+        "firsthand_experience": {
+          "name_cn": "第一手经验",
+          "name_en": "Firsthand Experience",
+          "description": "是否有亲身体验/实践",
+          "range": [0.0, 1.0],
+          "critical_threshold": 0.5,
+          "evaluation_criteria": [
+            "是否有实践案例",
+            "是否有具体细节",
+            "是否有失败教训",
+            "是否有独特视角"
+          ]
+        },
+        "expertise_depth": {
+          "name_cn": "专业深度",
+          "name_en": "Expertise Depth",
+          "description": "领域专业知识积累程度",
+          "range": [0.0, 1.0],
+          "critical_threshold": 0.6,
+          "evaluation_criteria": [
+            "是否使用专业术语",
+            "是否有深度分析",
+            "是否有体系化知识",
+            "是否有前沿洞察"
+          ]
+        },
+        "voice_distinctiveness": {
+          "name_cn": "风格辨识度",
+          "name_en": "Voice Distinctiveness",
+          "description": "风格是否可识别为'你'",
+          "range": [0.0, 1.0],
+          "critical_threshold": 0.6,
+          "evaluation_criteria": [
+            "表达是否有个人特色",
+            "价值观是否鲜明",
+            "语言风格是否一致",
+            "是否有标志性表达"
+          ]
+        },
+        "attitude_strength": {
+          "name_cn": "态度强度",
+          "name_en": "Attitude Strength",
+          "description": "观点立场是否鲜明",
+          "range": [0.0, 1.0],
+          "critical_threshold": 0.7,
+          "evaluation_criteria": [
+            "是否明确表达态度",
+            "是否避免骑墙",
+            "是否有判断力",
+            "是否敢于争议"
+          ]
+        }
+      },
+
+      "calculation": "E = (firsthand_experience × 0.3) + (expertise_depth × 0.3) + (voice_distinctiveness × 0.2) + (attitude_strength × 0.2)",
+      "red_flags": [
+        "❌ 缺少实践案例",
+        "❌ 泛泛而谈",
+        "❌ 态度模糊",
+        "❌ 人人都能写"
+      ]
+    },
+
+    "C": {
+      "name_cn": "深度判断",
+      "name_en": "Content Depth",
+      "layer": "护城河",
+      "nature": "人的降维打击区",
+      "automation": "★ (极低)",
+      "moat_strength": "★★★★★",
+      "weight": "critical",
+      "description": "决定'什么值得说'",
+
+      "sub_factors": {
+        "source_quality": {
+          "name_cn": "资料质量",
+          "name_en": "Source Quality",
+          "description": "引用资料的权威性和深度",
+          "range": [0.0, 1.0],
+          "critical_threshold": 0.7,
+          "evaluation_criteria": [
+            "资料是否权威",
+            "是否有深度分析",
+            "是否有一手资料",
+            "是否过滤噪音"
+          ]
+        },
+        "cross_domain_links": {
+          "name_cn": "跨域关联",
+          "name_en": "Cross-Domain Links",
+          "description": "跨领域知识连接能力",
+          "range": [0.0, 1.0],
+          "critical_threshold": 0.6,
+          "evaluation_criteria": [
+            "是否有跨领域类比",
+            "是否有多学科视角",
+            "是否建立新联系",
+            "是否打破认知边界"
+          ]
+        },
+        "originality": {
+          "name_cn": "原创洞察",
+          "name_en": "Originality",
+          "description": "是否有独特视角/观点",
+          "range": [0.0, 1.0],
+          "critical_threshold": 0.5,
+          "evaluation_criteria": [
+            "是否有新角度",
+            "是否有反直觉发现",
+            "是否挑战常识",
+            "是否有独特结论"
+          ]
+        },
+        "insight_density": {
+          "name_cn": "洞察密度",
+          "name_en": "Insight Density",
+          "description": "单位篇幅内的信息价值",
+          "range": [0.0, 1.0],
+          "critical_threshold": 0.6,
+          "evaluation_criteria": [
+            "是否信息密集",
+            "是否有冗余",
+            "是否每句都有价值",
+            "是否有废话"
+          ]
+        },
+        "cognitive_reframing": {
+          "name_cn": "认知重构力",
+          "name_en": "Cognitive Reframing",
+          "description": "是否提供新的思考框架，而非仅仅是新信息",
+          "range": [0.0, 1.0],
+          "critical_threshold": 0.6,
+          "theoretical_basis": "区分 Information Novelty vs Framework Novelty",
+          "evaluation_criteria": [
+            "是否改变了看问题的角度",
+            "是否提供了新的分析框架",
+            "读后是否觉得'换了个脑子思考'",
+            "框架是否具有迁移性(可应用于其他问题)"
+          ],
+          "scoring_guide": {
+            "0.0-0.3": "仅陈述信息，无框架改变",
+            "0.4-0.6": "有新角度，但框架不够清晰",
+            "0.7-0.8": "提供清晰的新框架",
+            "0.9-1.0": "框架具有普适性，可迁移应用"
+          }
+        }
+      },
+
+      "calculation": "C = (source_quality × 0.25) + (cross_domain_links × 0.15) + (originality × 0.25) + (insight_density × 0.15) + (cognitive_reframing × 0.20)",
+      "red_flags": [
+        "❌ 堆砌信息垃圾",
+        "❌ 没有洞察",
+        "❌ 观点老套",
+        "❌ 密度低"
+      ]
+    },
+
+    "F": {
+      "name_cn": "受众匹配",
+      "name_en": "Fit/Audience Match",
+      "layer": "放大器",
+      "nature": "人机协作",
+      "automation": "★★★",
+      "moat_strength": "★★★",
+      "weight": "high",
+      "description": "决定'说给谁听'",
+
+      "sub_factors": {
+        "cognitive_match": {
+          "name_cn": "认知匹配",
+          "name_en": "Cognitive Match",
+          "description": "内容难度与受众知识水平匹配度",
+          "range": [0.0, 1.0],
+          "critical_threshold": 0.6,
+          "evaluation_criteria": [
+            "术语是否过于专业",
+            "概念是否需要解释",
+            "难度是否适配",
+            "是否有认知门槛"
+          ]
+        },
+        "emotion_alignment": {
+          "name_cn": "情绪契合",
+          "name_en": "Emotion Alignment",
+          "description": "内容情绪与受众当前状态契合度",
+          "range": [0.0, 1.0],
+          "critical_threshold": 0.6,
+          "evaluation_criteria": [
+            "是否击中痛点",
+            "是否引发共鸣",
+            "情绪是否过激",
+            "是否引起反感"
+          ]
+        },
+        "tribe_adaptation": {
+          "name_cn": "圈层适配",
+          "name_en": "Tribe Adaptation",
+          "description": "语言风格与受众文化圈层契合度",
+          "range": [0.0, 1.0],
+          "critical_threshold": 0.7,
+          "evaluation_criteria": [
+            "用词是否圈内化",
+            "梗是否能理解",
+            "价值观是否契合",
+            "是否有文化隔阂"
+          ]
+        },
+        "emotional_polarization": {
+          "name_cn": "情感极化指数",
+          "name_en": "Emotional Polarization",
+          "description": "内容是否能引发强烈的'爱或恨'反应，而非中性",
+          "range": [0.0, 1.0],
+          "critical_threshold": 0.5,
+          "theoretical_basis": "传播学研究：极化内容传播效率更高",
+          "evaluation_criteria": [
+            "是否能引发强烈情绪反应",
+            "是否有明确的站队空间",
+            "是否能激发讨论/争论",
+            "中性/无感反应的概率有多高"
+          ],
+          "scoring_guide": {
+            "0.0-0.3": "中性内容，无感居多",
+            "0.4-0.6": "有观点但不够尖锐",
+            "0.7-0.8": "能引发讨论和站队",
+            "0.9-1.0": "强极化，必然引发争论(慎用)"
+          },
+          "warning": "高极化≠高质量，需要与T层(可信度)平衡，避免为极化而极化"
+        }
+      },
+
+      "calculation": "F = (cognitive_match × 0.35) + (emotion_alignment × 0.25) + (tribe_adaptation × 0.25) + (emotional_polarization × 0.15)",
+      "red_flags": [
+        "❌ 对牛弹琴",
+        "❌ 认知不匹配",
+        "❌ 情绪错位",
+        "❌ 圈层错误"
+      ]
+    },
+
+    "D": {
+      "name_cn": "表达",
+      "name_en": "Delivery",
+      "layer": "放大器",
+      "nature": "人机协作",
+      "automation": "★★★★",
+      "moat_strength": "★★",
+      "weight": "high",
+      "description": "决定'怎么说'",
+
+      "sub_factors": {
+        "practical_value": {
+          "name_cn": "实用价值",
+          "name_en": "Practical Value",
+          "description": "内容对受众有多实用 (STEPPS)",
+          "range": [0.0, 1.0],
+          "critical_threshold": 0.6,
+          "evaluation_criteria": [
+            "是否有可执行建议",
+            "是否解决实际问题",
+            "是否有方法论",
+            "是否可复用"
+          ]
+        },
+        "social_currency": {
+          "name_cn": "社交货币",
+          "name_en": "Social Currency",
+          "description": "分享能让人显得聪明/有品味 (STEPPS)",
+          "range": [0.0, 1.0],
+          "critical_threshold": 0.5,
+          "evaluation_criteria": [
+            "是否显得有见识",
+            "是否提升身份",
+            "是否值得分享",
+            "是否有谈资"
+          ]
+        },
+        "emotion_arousal": {
+          "name_cn": "情绪唤醒",
+          "name_en": "Emotion Arousal",
+          "description": "触发高唤醒情绪 (STEPPS)",
+          "range": [0.0, 1.0],
+          "critical_threshold": 0.6,
+          "evaluation_criteria": [
+            "是否有情绪高潮",
+            "是否引发共鸣",
+            "是否有宣泄感",
+            "是否有惊喜"
+          ]
+        },
+        "story_integration": {
+          "name_cn": "故事整合",
+          "name_en": "Story Integration",
+          "description": "核心信息是否嵌入故事载体 (STEPPS)",
+          "range": [0.0, 1.0],
+          "critical_threshold": 0.5,
+          "evaluation_criteria": [
+            "是否有故事",
+            "故事是否相关",
+            "是否有画面感",
+            "是否易记忆"
+          ]
+        },
+        "rigor": {
+          "name_cn": "严谨性",
+          "name_en": "Rigor",
+          "description": "简化表达是否保持事实准确",
+          "range": [0.0, 1.0],
+          "critical_threshold": 0.7,
+          "evaluation_criteria": [
+            "简化是否失真",
+            "类比是否准确",
+            "是否过度简化",
+            "是否误导"
+          ]
+        },
+        "peak_end_effect": {
+          "name_cn": "峰终体验",
+          "name_en": "Peak-End Effect",
+          "description": "内容是否有记忆峰值和有力结尾",
+          "range": [0.0, 1.0],
+          "critical_threshold": 0.6,
+          "theoretical_basis": "Kahneman峰终定律：记忆由峰值+结尾决定",
+          "evaluation_criteria": [
+            "是否有明确的情绪/认知峰值",
+            "结尾是否有力(不是虎头蛇尾)",
+            "峰值位置是否合理(通常在2/3处)",
+            "峰值和结尾是否呼应"
+          ],
+          "scoring_guide": {
+            "0.0-0.3": "平淡无峰，结尾随意",
+            "0.4-0.6": "有高潮但不够突出，或结尾较弱",
+            "0.7-0.8": "峰值明确，结尾有力",
+            "0.9-1.0": "峰值令人难忘，结尾形成闭环"
+          }
+        },
+        "memory_anchors": {
+          "name_cn": "记忆锚点",
+          "name_en": "Memory Anchors",
+          "description": "是否有可引用、可传播的金句或核心表达",
+          "range": [0.0, 1.0],
+          "critical_threshold": 0.5,
+          "theoretical_basis": "STEPPS社交货币 + 病毒传播研究",
+          "evaluation_criteria": [
+            "是否有可独立引用的金句",
+            "核心观点是否可一句话概括",
+            "是否有便于记忆的类比/隐喻",
+            "是否能被转述给他人"
+          ],
+          "scoring_guide": {
+            "0.0-0.3": "没有可记忆的表达",
+            "0.4-0.6": "有亮点但不够精炼",
+            "0.7-0.8": "有1-2个可引用的金句",
+            "0.9-1.0": "金句密度高，核心概念命名精准"
+          }
+        },
+        "action_clarity": {
+          "name_cn": "行动明确性",
+          "name_en": "Action Clarity",
+          "description": "如果内容包含建议，是否具体到可立即执行",
+          "range": [0.0, 1.0],
+          "critical_threshold": 0.6,
+          "theoretical_basis": "行为设计学 - 降低行动门槛",
+          "evaluation_criteria": [
+            "建议是否具体(不是'多读书'而是'每天读10页')",
+            "是否有第一步行动",
+            "门槛是否足够低",
+            "是否有即时反馈机制"
+          ],
+          "scoring_guide": {
+            "0.0-0.3": "只有抽象建议，无法执行",
+            "0.4-0.6": "有方向但不够具体",
+            "0.7-0.8": "建议具体，门槛适中",
+            "0.9-1.0": "第一步行动清晰，立即可做"
+          },
+          "note": "仅适用于含行动建议的内容，纯观点/情感类可跳过"
+        }
+      },
+
+      "calculation": "D = (practical_value × 0.15) + (social_currency × 0.10) + (emotion_arousal × 0.20) + (story_integration × 0.10) + (rigor × 0.15) + (peak_end_effect × 0.15) + (memory_anchors × 0.10) + (action_clarity × 0.05)",
+      "red_flags": [
+        "❌ 没钩子",
+        "❌ 没情绪",
+        "❌ 没故事",
+        "❌ 不实用"
+      ]
+    },
+
+    "A": {
+      "name_cn": "执行",
+      "name_en": "Amplification",
+      "layer": "放大器",
+      "nature": "可自动化",
+      "automation": "★★★★★",
+      "moat_strength": "★",
+      "weight": "medium",
+      "description": "技巧与平台适配",
+
+      "sub_factors": {
+        "hook_intensity": {
+          "name_cn": "钩子强度",
+          "name_en": "Hook Intensity",
+          "description": "开头吸引力强度",
+          "range": [0.0, 1.0],
+          "critical_threshold": 0.7,
+          "evaluation_criteria": [
+            "3秒内是否有核心信息",
+            "是否引发问题感",
+            "是否制造悬念",
+            "是否有情绪触发"
+          ]
+        },
+        "platform_adaptation": {
+          "name_cn": "平台适配",
+          "name_en": "Platform Adaptation",
+          "description": "内容格式对平台规则的适配",
+          "range": [0.0, 1.0],
+          "critical_threshold": 0.7,
+          "evaluation_criteria": [
+            "长度是否适配",
+            "格式是否符合",
+            "是否符合规范",
+            "是否触碰红线"
+          ]
+        },
+        "oral_language_weight": {
+          "name_cn": "口语化权重",
+          "name_en": "Oral Language Weight",
+          "description": "口语vs书面语比例",
+          "range": [0.0, 1.0],
+          "critical_threshold": 0.7,
+          "evaluation_criteria": [
+            "句子是否够短",
+            "是否能流畅朗读",
+            "是否有书面套话",
+            "是否自然"
+          ]
+        },
+        "structure_clarity": {
+          "name_cn": "结构清晰度",
+          "name_en": "Structure Clarity",
+          "description": "内容结构是否清晰",
+          "range": [0.0, 1.0],
+          "critical_threshold": 0.6,
+          "evaluation_criteria": [
+            "结构是否明确",
+            "层次是否清晰",
+            "逻辑是否连贯",
+            "是否易理解"
+          ]
+        },
+        "pacing": {
+          "name_cn": "节奏",
+          "name_en": "Pacing",
+          "description": "内容节奏控制",
+          "range": [0.0, 1.0],
+          "critical_threshold": 0.6,
+          "evaluation_criteria": [
+            "节奏是否适当",
+            "是否有起伏",
+            "是否有高潮",
+            "是否拖沓"
+          ]
+        },
+        "cognitive_load_curve": {
+          "name_cn": "认知负荷曲线",
+          "name_en": "Cognitive Load Curve",
+          "description": "信息密度是否合理分布，避免认知过载",
+          "range": [0.0, 1.0],
+          "critical_threshold": 0.6,
+          "theoretical_basis": "认知心理学 - 工作记忆限制 + 信息处理理论",
+          "evaluation_criteria": [
+            "难点是否有足够铺垫",
+            "信息是否分层递进",
+            "是否有'喘息点'(过渡/总结)",
+            "开头是否过于密集导致流失"
+          ],
+          "scoring_guide": {
+            "0.0-0.3": "信息堆砌，没有节奏",
+            "0.4-0.6": "有主次但过渡生硬",
+            "0.7-0.8": "信息递进清晰，有喘息点",
+            "0.9-1.0": "认知负荷曲线完美，如滑梯般顺畅"
+          }
+        }
+      },
+
+      "calculation": "A = (hook_intensity × 0.25) + (platform_adaptation × 0.15) + (oral_language_weight × 0.20) + (structure_clarity × 0.15) + (pacing × 0.10) + (cognitive_load_curve × 0.15)",
+      "red_flags": [
+        "❌ 开头无力",
+        "❌ 结构混乱",
+        "❌ 不口语化",
+        "❌ 节奏拖沓"
+      ]
+    },
+
+    "B": {
+      "name_cn": "时机",
+      "name_en": "Buzz",
+      "layer": "放大器",
+      "nature": "实时变量",
+      "automation": "★★★★★",
+      "moat_strength": "★",
+      "weight": "medium",
+      "description": "话题热度与时效",
+
+      "sub_factors": {
+        "heat_score": {
+          "name_cn": "热度指数",
+          "name_en": "Heat Score",
+          "description": "话题当前的讨论热度",
+          "range": [0.0, 1.0],
+          "critical_threshold": 0.5,
+          "evaluation_criteria": [
+            "是否是热点",
+            "讨论量是否高",
+            "是否在上升期",
+            "是否有持续性"
+          ]
+        },
+        "controversy_index": {
+          "name_cn": "争议度",
+          "name_en": "Controversy Index",
+          "description": "话题引发讨论/对立的潜力",
+          "range": [0.0, 1.0],
+          "critical_threshold": 0.4,
+          "evaluation_criteria": [
+            "是否有争议",
+            "是否有对立",
+            "是否引发讨论",
+            "是否有站队"
+          ]
+        },
+        "policy_safety": {
+          "name_cn": "政策安全",
+          "name_en": "Policy Safety",
+          "description": "触碰红线风险 (1-风险)",
+          "range": [0.0, 1.0],
+          "critical_threshold": 0.8,
+          "evaluation_criteria": [
+            "是否触碰红线",
+            "是否有政治风险",
+            "是否有法律风险",
+            "是否有伦理问题"
+          ]
+        },
+        "timeliness": {
+          "name_cn": "时效性",
+          "name_en": "Timeliness",
+          "description": "与当前时间节点的关联度",
+          "range": [0.0, 1.0],
+          "critical_threshold": 0.5,
+          "evaluation_criteria": [
+            "是否过时",
+            "是否太早",
+            "窗口期是否合适",
+            "是否有时效衰减"
+          ]
+        }
+      },
+
+      "calculation": "B = (heat_score × 0.3) + (controversy_index × 0.2) + (policy_safety × 0.3) + (timeliness × 0.2)",
+      "red_flags": [
+        "❌ 话题已过时",
+        "❌ 触碰红线",
+        "❌ 窗口期错误",
+        "❌ 无人关注"
+      ]
+    }
+  },
+
+  "scoring_guide": {
+    "scale": {
+      "0.0-0.3": "❌ 严重不足 - 需要重写",
+      "0.3-0.5": "⚠️ 较弱 - 需要大幅优化",
+      "0.5-0.7": "△ 及格 - 有优化空间",
+      "0.7-0.9": "✓ 良好 - 可以发布",
+      "0.9-1.0": "★ 优秀 - 竞品级"
+    },
+    "overall_quality": {
+      "formula": "Q = T × E × C × F × D × A × B",
+      "thresholds": {
+        "publishable": 0.4,
+        "competitive": 0.6,
+        "excellent": 0.8
+      }
+    }
+  },
+
+  "bottleneck_detection": {
+    "rules": [
+      {
+        "condition": "factor_score < 0.3",
+        "severity": "critical",
+        "action": "必须优化，否则整体归零"
+      },
+      {
+        "condition": "factor_score < 0.5",
+        "severity": "high",
+        "action": "强烈建议优化"
+      },
+      {
+        "condition": "factor_score < 0.7",
+        "severity": "medium",
+        "action": "有优化空间"
+      }
+    ],
+    "prioritization": {
+      "description": "按因子权重和得分差距排序",
+      "formula": "优化优先级 = 权重 × (1 - 当前得分)"
+    }
+  },
+
+  "phase_mapping": {
+    "phase_1_intent_parsing": {
+      "primary_factors": ["F"],
+      "description": "意图解析阶段主要影响受众匹配"
+    },
+    "phase_2_parameter_derivation": {
+      "primary_factors": ["D", "A"],
+      "description": "参数推导阶段主要影响表达和执行"
+    },
+    "phase_3_draft": {
+      "primary_factors": ["E", "C", "T"],
+      "description": "快写阶段主要影响经验、深度和可信度"
+    },
+    "phase_4_critique": {
+      "primary_factors": ["T", "E", "C", "D", "A"],
+      "description": "评价阶段检查所有核心因子"
+    },
+    "phase_5_refine": {
+      "primary_factors": ["D", "A"],
+      "description": "雕刻阶段主要优化表达和执行"
+    },
+    "phase_6_final": {
+      "primary_factors": ["T", "E", "C", "F", "D", "A", "B"],
+      "description": "最终审核检查所有因子，计算综合质量"
+    }
+  },
+
+  "_usage_notes": {
+    "when_to_evaluate": [
+      "Phase 4 (评价文档): 首次完整评估",
+      "Phase 6 (精修审核): 最终质量报告"
+    ],
+    "output_format": "使用 quality_report_template.md 输出格式化报告",
+    "commercial_value": "质量评分轨迹可作为商业化展示材料"
+  }
+}

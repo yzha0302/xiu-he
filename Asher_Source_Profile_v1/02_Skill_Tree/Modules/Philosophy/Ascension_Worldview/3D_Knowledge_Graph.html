@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>3D Knowledge Graph - Ascension Worldview</title>
+    <!-- 
+        ASHER KNOWLEDGE GRAPH STANDARD v2.1
+        Module: Ascension Worldview (飞升世界观)
+        Created: 2026-01-19
+    -->
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #000005;
+            overflow: hidden;
+        }
+
+        /* HUD: Top-Left */
+        #hud {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 400px;
+            background: rgba(10, 15, 25, 0.95);
+            border: 1px solid #334466;
+            border-left: 3px solid #00ffff;
+            border-radius: 4px;
+            padding: 25px;
+            color: #eef;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            display: none;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        #hud h2 {
+            margin: 0 0 5px 0;
+            font-size: 24px;
+            padding-right: 30px;
+        }
+
+        #hud .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.2s;
+            font-size: 20px;
+            color: #889;
+            text-align: center;
+            line-height: 24px;
+        }
+
+        #hud .close-btn:hover {
+            opacity: 1;
+            color: #ff5555;
+        }
+
+        #hud .sub-header {
+            font-size: 14px;
+            color: #8899aa;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #334455;
+            padding-bottom: 10px;
+        }
+
+        #hud .section-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #556677;
+            letter-spacing: 2px;
+            margin-top: 15px;
+            margin-bottom: 8px;
+        }
+
+        #hud .content-block {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #ccd;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        #hud .en {
+            color: #fff;
+        }
+
+        #hud .cn {
+            color: #88aacc;
+            font-size: 13px;
+        }
+
+        #hud .keyword {
+            color: #00ffff;
+            font-weight: bold;
+        }
+
+        #hud .scene-tag {
+            display: inline-block;
+            font-size: 12px;
+            background: #223344;
+            color: #aab;
+            padding: 4px 8px;
+            border-radius: 12px;
+            margin: 3px 5px 3px 0;
+            border: 1px solid #334455;
+        }
+
+        #hud .related-tag {
+            display: inline-block;
+            font-size: 11px;
+            background: #224433;
+            color: #8ca;
+            padding: 3px 8px;
+            border-radius: 8px;
+            margin: 2px 4px 2px 0;
+            border: 1px solid #335544;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        #hud .related-tag:hover {
+            background: #337755;
+            color: #afa;
+        }
+
+        #hud .warning-block {
+            font-size: 13px;
+            line-height: 1.6;
+            color: #faa;
+            background: rgba(80, 20, 20, 0.3);
+            padding: 10px;
+            border-radius: 4px;
+            border-left: 2px solid #f55;
+        }
+
+        #hud .insight-block {
+            font-size: 13px;
+            line-height: 1.6;
+            color: #afc;
+            background: rgba(20, 60, 30, 0.3);
+            padding: 10px;
+            border-radius: 4px;
+            border-left: 2px solid #5a5;
+        }
+
+        /* Legend: Bottom-Left (Collapsible) */
+        #legend {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(10, 15, 25, 0.9);
+            border: 1px solid #334466;
+            border-radius: 4px;
+            padding: 15px 20px;
+            color: #ccd;
+            backdrop-filter: blur(10px);
+            min-width: 180px;
+        }
+
+        #legend h3 {
+            margin: 0;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #778;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        #legend h3::after {
+            content: '▼';
+            font-size: 10px;
+            transition: transform 0.3s;
+        }
+
+        #legend.collapsed h3::after {
+            transform: rotate(-90deg);
+        }
+
+        #legend .legend-items {
+            max-height: 200px;
+            overflow-y: auto;
+            transition: max-height 0.3s ease;
+        }
+
+        #legend.collapsed .legend-items {
+            max-height: 0;
+        }
+
+        #legend .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 6px 0;
+            font-size: 13px;
+        }
+
+        #legend .legend-color {
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+            margin-right: 10px;
+        }
+
+        #legend .legend-label {
+            color: #aab;
+        }
+
+        #legend .legend-count {
+            margin-left: auto;
+            color: #667;
+            font-size: 11px;
+        }
+
+        #legend .legend-total {
+            font-size: 11px;
+            color: #667;
+            margin-left: 10px;
+        }
+
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #00ffff;
+            font-family: monospace;
+            letter-spacing: 2px;
+        }
+    </style>
+    <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/3d-force-graph"></script>
+    <script src="https://unpkg.com/three-spritetext@1.8.1/dist/three-spritetext.min.js"></script>
+    <script src="https://unpkg.com/dat.gui"></script>
+</head>
+
+<body>
+    <div id="loading">INITIALIZING...</div>
+    <div id="3d-graph"></div>
+
+    <!-- HUD with Close Button -->
+    <div id="hud">
+        <span class="close-btn" onclick="hideHUD()">×</span>
+        <h2 id="hud-title">Title</h2>
+        <div id="hud-cn" class="sub-header">Subtitle</div>
+        <div class="section-title">Definition 定义</div>
+        <div id="hud-desc" class="content-block"></div>
+        <div class="section-title">Deep Dive 深度解析</div>
+        <div id="hud-notes" class="content-block" style="border-left: 2px solid #00ffff;"></div>
+        <div class="section-title">Why It Matters 为什么重要</div>
+        <div id="hud-why" class="insight-block"></div>
+        <div class="section-title">Common Mistakes 常见误区</div>
+        <div id="hud-mistakes" class="warning-block"></div>
+        <div class="section-title">Related Terms 关联术语</div>
+        <div id="hud-related"></div>
+        <div class="section-title">Scenarios 应用场景</div>
+        <div id="hud-scenes"></div>
+    </div>
+
+    <!-- Legend (Collapsible) -->
+    <div id="legend">
+        <h3 onclick="toggleLegend()">Domain 领域 <span id="legend-total"></span></h3>
+        <div id="legend-items" class="legend-items"></div>
+    </div>
+
+    <script>
+        // === CATEGORY CONFIGURATION ===
+        const CATEGORY_CONFIG = {
+            "Core": { color: "#00ffff", label_en: "Core Concepts", label_cn: "核心概念" },
+            "Social": { color: "#ff8800", label_en: "Social Structure", label_cn: "社会结构" },
+            "Philosophy": { color: "#aa00ff", label_en: "Philosophy", label_cn: "哲学层面" },
+            "Action": { color: "#00ff00", label_en: "Action Layer", label_cn: "行动层面" },
+            "Formula": { color: "#ffff00", label_en: "Formulas", label_cn: "思维公式" },
+            "System": { color: "#00ff88", label_en: "Execution System", label_cn: "执行体系" },
+            "Roadmap": { color: "#ff6600", label_en: "Future Roadmap", label_cn: "未来路线" },
+            "AntiPattern": { color: "#ff3333", label_en: "Anti-Patterns", label_cn: "反模式陷阱" }
+        };
+
+        // Pre-defined color palette for new categories
+        const COLOR_PALETTE = [
+            "#00ffff", "#00ff00", "#ff0055", "#ff8800", "#aa00ff",
+            "#ffff00", "#00ffaa", "#ff00aa", "#88ff00", "#0088ff"
+        ];
+        let colorIndex = 0;
+
+        function getCategory(groupName, labelCn = groupName) {
+            if (!CATEGORY_CONFIG[groupName]) {
+                CATEGORY_CONFIG[groupName] = {
+                    color: COLOR_PALETTE[colorIndex % COLOR_PALETTE.length],
+                    label_en: groupName,
+                    label_cn: labelCn
+                };
+                colorIndex++;
+            }
+            return CATEGORY_CONFIG[groupName];
+        }
+
+        function toggleLegend() {
+            document.getElementById('legend').classList.toggle('collapsed');
+        }
+
+        function buildLegend() {
+            const container = document.getElementById('legend-items');
+            container.innerHTML = '';
+            const counts = {};
+            let total = 0;
+            nodes.forEach(n => { counts[n.group] = (counts[n.group] || 0) + 1; total++; });
+            document.getElementById('legend-total').innerText = `(${Object.keys(counts).length} 域 / ${total} 点)`;
+            for (const [group, count] of Object.entries(counts)) {
+                const cat = getCategory(group);
+                const item = document.createElement('div');
+                item.className = 'legend-item';
+                item.innerHTML = `
+                    <div class="legend-color" style="background:${cat.color}"></div>
+                    <span class="legend-label">${cat.label_en} ${cat.label_cn}</span>
+                    <span class="legend-count">${count}</span>
+                `;
+                container.appendChild(item);
+            }
+        }
+
+        // --- DATA INJECTION: NODES ---
+        const nodes = [
+            // === CORE CONCEPTS ===
+            {
+                id: "Ascension", en: "Ascension", cn: "飞升", group: "Core", val: 40,
+                desc_en: "Exponential enhancement of individual capabilities through AI-externalized thinking systems",
+                desc_cn: "通过AI外化思维系统，实现个体能力的指数级提升",
+                notes_en: "The essence is an <span class='keyword'>upgrade of cognitive operating system</span>, not physical modification. Like Iron Man's armor - not muscle enhancement, but an iterable exoskeleton. The key shift: from 'memory competition' to 'retrieval + organization competition'.",
+                notes_cn: "本质是<span class='keyword'>认知操作系统的升级</span>，而非肉体改造。就像钢铁侠的战甲——不是增强肌肉，而是可迭代的外骨骼。关键转变：从'记忆力竞赛'变成'检索+组织力竞赛'。",
+                why_matters: "Understanding Ascension transforms fear of AI replacement into opportunity for AI symbiosis - the most critical cognitive upgrade for the AI era.",
+                mistakes: "Mistaking Ascension for 'abandoning humanity'. Actual ascended beings seek same-kind recognition, which requires human interaction.",
+                related: ["EmpowermentMode", "ExternalStorage", "DigitalTwin", "SameKindRecognition"],
+                scenes_en: ["Building personal knowledge systems", "AI-assisted decision making"],
+                scenes_cn: ["构建个人知识体系", "AI辅助决策"]
+            },
+            {
+                id: "EmpowermentMode", en: "Empowerment Mode", cn: "附能模式", group: "Core", val: 35,
+                desc_en: "Invoking knowledge beyond personal capacity through external storage - 'deity possession' style output",
+                desc_cn: "通过外挂调用超出个人能力的知识，'神灵附体'式输出",
+                notes_en: "Like shamanic <span class='keyword'>spirit possession</span>. You're not the deity, but deity can speak through you. Key shift: from 'what I know' to 'what I can invoke'. This shatters traditional professional barriers.",
+                notes_cn: "类比萨满的<span class='keyword'>神灵附体</span>。自己不是神，但神可以借自己的身体说话。关键转变：从'我知道什么'变成'我能调用什么'。这打破了传统的专业壁垒。",
+                why_matters: "Redefines 'professional capability' - not how much you memorized, but whether you can invoke the right knowledge combination at critical moments.",
+                mistakes: "Treating external tools as 'cheating' rather than core capability. Correct mindset: tools are part of you, like glasses for myopia.",
+                related: ["Ascension", "ExternalStorage", "DefinitionPower"],
+                scenes_en: ["Knowledge graph navigation", "On-demand expertise"],
+                scenes_cn: ["知识图谱调用", "即时专家模式"]
+            },
+            {
+                id: "ExternalStorage", en: "External Storage", cn: "外挂", group: "Core", val: 30,
+                desc_en: "Externalizing knowledge/ability storage, achieving 'usage rights' over 'ownership'",
+                desc_cn: "将知识/能力外化存储，实现'使用权'替代'占有权'",
+                notes_en: "Not cheating, but core technology of Ascension. Like renting vs buying a house - knowledge can be invoked rather than memorized. Key shift: from memory competition to <span class='keyword'>retrieval + organization competition</span>.",
+                notes_cn: "不是作弊，而是飞升的核心技术。就像房子可以租而不必买——知识可以调用而不必背诵。关键转变：从记忆力竞赛到<span class='keyword'>检索+组织力竞赛</span>。",
+                why_matters: "Accepting 'external storage' mindset is the first step of Ascension. Stop obsessing about 'putting everything in my brain'.",
+                mistakes: "Only storing without reviewing. Value lies in 'retrievability' - needs regular organization and updates.",
+                related: ["Ascension", "EmpowermentMode", "DigitalTwin"],
+                scenes_en: ["Knowledge graph systems", "AI-assisted writing"],
+                scenes_cn: ["知识图谱系统", "AI辅助写作"]
+            },
+            {
+                id: "DigitalTwin", en: "Digital Twin", cn: "数字人", group: "Core", val: 28,
+                desc_en: "Digitized version of personal attributes, iterable across time",
+                desc_cn: "将个人属性数字化后的可迭代版本",
+                notes_en: "By recording thinking patterns, knowledge systems, values, and various attributes (even physiological data), create a <span class='keyword'>'bodyless you'</span>. Versions evolve: 27-year-old you, 30-year-old you. Like game character stat panels: attack, speed, agility.",
+                notes_cn: "通过记录思维方式、知识体系、价值观、各种属性（甚至生理数据），创建一个<span class='keyword'>'没有肉体的你'</span>。版本会演化：27岁的你、30岁的你。像游戏角色属性面板：攻击力、速度、敏捷。",
+                why_matters: "Digital Twin is the carrier of Ascension. Understanding and externalizing yourself enables AI to more effectively amplify your capabilities.",
+                mistakes: "Only recording 'objective data' (degrees, income) while ignoring 'subjective attributes' (values, aesthetics, decision logic). Latter is true differentiation.",
+                related: ["Ascension", "EmpowermentMode", "ExternalStorage"],
+                scenes_en: ["Personal analytics", "Self-modeling"],
+                scenes_cn: ["个人数据分析", "自我建模"]
+            },
+            // === SOCIAL STRUCTURE ===
+            {
+                id: "MiddleLayerExtinction", en: "Middle Layer Extinction", cn: "中间层消失", group: "Social", val: 35,
+                desc_en: "AI era: top tier directly accesses resources, management layer gets bypassed",
+                desc_cn: "AI时代顶层直达资源，管理层被绕过的社会结构变化",
+                notes_en: "Traditional structure: 'Top → Middle → Resources'. AI era: 'Top → AI → Resources'. Pure information transfer and process supervision jobs will <span class='keyword'>disappear massively</span>. Musk is the exemplar - using AI/automation to bypass traditional hierarchies.",
+                notes_cn: "传统结构是'顶层→中间层→资源'。AI时代：'顶层→AI→资源'。纯粹的信息搬运、流程监督类工作将<span class='keyword'>大规模消失</span>。马斯克是典型案例——用AI/自动化绕过传统层级。",
+                why_matters: "If your current job is 'middle layer' nature (transferring info, supervising execution), urgent transformation needed: either go up (resource integrator) or down (irreplaceable value creator).",
+                mistakes: "Thinking this only happens in tech or manufacturing. Actually all industries' middle layers are being compressed: finance, legal, medical.",
+                related: ["Decentralization", "DefinitionPower", "SameKindRecognition"],
+                scenes_en: ["Career planning", "Organizational restructuring"],
+                scenes_cn: ["职业规划", "组织架构重设"]
+            },
+            {
+                id: "Decentralization", en: "Decentralization", cn: "去中心化", group: "Social", val: 32,
+                desc_en: "Power comes from recognition after sharing value, not centralized control",
+                desc_cn: "权力来自分享价值后的认可，而非集权控制的社会趋势",
+                notes_en: "Historical logic: Centralized systems unstable (rulers fear overthrow, subjects fear execution, everyone in <span class='keyword'>suspicion chains</span>). Western democracy/blockchain/Web3 represent decentralization. In AI era, only way to gain influence: share value you create.",
+                notes_cn: "历史逻辑：集权模式不稳定（统治者怕被推翻，被统治者怕被砍头，所有人在<span class='keyword'>猜疑链</span>中）。西方民主/区块链/Web3代表了去中心化趋势。AI时代获得影响力的唯一途径：分享你创造的价值。",
+                why_matters: "If pursuing power, decentralization strategy (share value → gain recognition) is more effective and stable than centralization (control resources → force compliance).",
+                mistakes: "Thinking decentralization means 'no leaders'. Actually there are still leaders, just power comes from following rather than force.",
+                related: ["SameKindRecognition", "DefinitionPower", "PowerFormula"],
+                scenes_en: ["Community building", "Open source projects"],
+                scenes_cn: ["社区构建", "开源项目"]
+            },
+            {
+                id: "SameKindRecognition", en: "Same-Kind Recognition", cn: "同类认可", group: "Social", val: 38,
+                desc_en: "Ultimate pursuit of ascended beings - recognized by other ascended beings, not robots or 'fools'",
+                desc_cn: "飞升者的终极追求——被其他飞升者认可，而非机器人或'傻子'",
+                notes_en: "Robots solve bottom-level needs (survival, safety) but can't solve power problem. Highest self-actualization needs <span class='keyword'>'recognition'</span>, and must be from 'same kind'. You don't need robot recognition, nor 'fool' recognition. Musk pays creators: he needs <span class='keyword'>influential people</span> to endorse his Mars dream.",
+                notes_cn: "机器人解决马斯洛需求金字塔底层需求（生存、安全），但解决不了权力问题。最高层次的自我实现需要<span class='keyword'>'被认可'</span>，且必须是'同类'的认可。你不需要机器人认可，也不需要'傻子'认可。马斯克给创作者发钱：他需要<span class='keyword'>有影响力的人</span>认同他的火星梦想。",
+                why_matters: "Redefines 'success': not how much you own, but how many 'same kind' recognize you. Explains why top tier helps others ascend.",
+                mistakes: "Pursuing mass follower counts. Actually 100 same-kind recognitions worth more than 1 million ordinary fans.",
+                related: ["Ascension", "Decentralization", "PowerFormula"],
+                scenes_en: ["Network building", "Influence strategy"],
+                scenes_cn: ["人脉构建", "影响力策略"]
+            },
+            {
+                id: "DefinitionPower", en: "Definition Power", cn: "定义权", group: "Social", val: 35,
+                desc_en: "First to define concepts/rules in new era gains discourse power and resources",
+                desc_cn: "在新时代率先定义概念/规则从而获得话语权和资源的能力",
+                notes_en: "World's most profitable companies are 'definition' companies - whoever first defines what's good, right, standard, grabs resources. In AI era transition, massive new concepts await definition. <span class='keyword'>Ascension, Empowerment Mode, Game Instance Theory...</span> whoever proposes and spreads these concepts owns discourse power.",
+                notes_cn: "世界上最赚钱的公司是'下定义'的公司——谁先定义什么是好的、对的、标准的，谁就抢占资源。AI时代变革期大量新概念等待被定义。<span class='keyword'>飞升、附能模式、游戏副本论……</span>谁先提出并传播这些概念，谁就拥有话语权。",
+                why_matters: "Explains why content creation and thought transmission so important. You're not just 'expressing views', you're 'grabbing definition power'.",
+                mistakes: "Only focusing on technical competition (whose AI is stronger), ignoring conceptual competition (who defines how to live in AI era).",
+                related: ["Ascension", "SoulInjection", "Decentralization"],
+                scenes_en: ["Content creation", "Thought leadership"],
+                scenes_cn: ["内容创作", "思想领袖"]
+            },
+            {
+                id: "GameInstanceTheory", en: "Game Instance Theory", cn: "游戏副本论", group: "Social", val: 30,
+                desc_en: "Top tier creates different 'worlds/games' for people to choose and enter",
+                desc_cn: "顶层人创造不同'世界/游戏'供选择进入的未来社会形态假说",
+                notes_en: "Future may resemble <span class='keyword'>Ready Player One</span>'s OASIS: top ascenders each create different 'game instances' (Musk's 'Mars Online', Zuckerberg's 'Meta Online'). Bottom tier can choose which instance to enter. Instances have own rules and value systems. Like different games on Steam.",
+                notes_cn: "未来可能类似<span class='keyword'>《头号玩家》</span>的OASIS：顶层飞升者各自创造不同的'游戏副本'（马斯克的'火星Online'、扎克伯格的'Meta Online'）。底层人可以选择进入哪个副本。各副本有自己的规则和价值体系。像Steam里的不同游戏。",
+                why_matters: "Provides framework for thinking about future society. Ask yourself: What 'instance' do I want to create? Or whose 'instance' do I want to enter?",
+                mistakes: "Treating this as sci-fi rather than reality trend. Tech giants already creating their own 'instances' - Apple ecosystem, WeChat ecosystem are prototypes.",
+                related: ["Ascension", "Decentralization", "DefinitionPower"],
+                scenes_en: ["Future planning", "Platform strategy"],
+                scenes_cn: ["未来规划", "平台策略"]
+            },
+            // === PHILOSOPHY ===
+            {
+                id: "AvatarTheory", en: "Avatar Theory", cn: "化身论", group: "Philosophy", val: 35,
+                desc_en: "Each person is a fragment of God experiencing itself; all experiences have value",
+                desc_cn: "每个人是神体验自己的碎片，所有感受都有价值的哲学观",
+                notes_en: "From <span class='keyword'>Conversations with God</span>. God/universal consciousness doesn't know itself, so fragments into countless pieces (people), letting each experience different feelings: sadness, joy, wealth, poverty. Key insights: ①Sadness isn't 'bad', just one experience God wants; ②Completeness isn't only happiness, but complete experience; ③We create new worlds, as God created us.",
+                notes_cn: "来自<span class='keyword'>《与神对话》</span>。神/宇宙意识不知道自己是谁，所以化为无数碎片（人），让每个碎片体验不同感受：悲伤、快乐、富裕、贫穷。关键推论：①悲伤不是'坏的'，只是神想体验的感受之一；②圆满不是只有快乐，而是体验完整；③我们创造新世界，就像神创造我们。",
+                why_matters: "Powerful meaning-generation framework. Whatever you experience can be understood as 'something God wants to experience', transcending victim mentality.",
+                mistakes: "Treating this as 'chicken soup' or passive acceptance. Correct usage: find meaning in suffering, but still actively act to change.",
+                related: ["ReverseOfDao", "WantButCannot", "MeaningFormula"],
+                scenes_en: ["Meaning-seeking", "Suffering interpretation"],
+                scenes_cn: ["寻找意义", "苦难解读"]
+            },
+            {
+                id: "ReverseOfDao", en: "Reverse of Dao", cn: "反者道之动", group: "Philosophy", val: 30,
+                desc_en: "Extremes lead to reversal; success and failure are in dynamic cycle",
+                desc_cn: "物极必反，成功与失败是动态循环的道家哲学",
+                notes_en: "From <span class='keyword'>Dao De Jing</span> Chapter 40. Three meanings: ①Cyclical (seasons); ②Transformation to opposites ('misfortune leans on fortune'); ③Extremes reverse ('strong things age'). In Ascension context: don't radically envy winners at failure, don't mock losers at success. They're just climbing, you might already be descending.",
+                notes_cn: "出自<span class='keyword'>《道德经》</span>第四十章。三层含义：①循环往复（如四季）；②向相反方向转化（'祸兮福所倚'）；③物极必反（'物壮则老'）。飞升语境中：不要在失败时偏激羡慕成功者，也不要在成功时嘲讽失败者。他们只是上山，你可能已在下坡。",
+                why_matters: "Foundation philosophy for psychological stability. Whatever state you're in, know it will change.",
+                mistakes: "Treating as 'passive waiting' (it'll get better anyway). Correct usage: understand cycles, still act actively.",
+                related: ["AvatarTheory", "MeaningFormula"],
+                scenes_en: ["Emotional regulation", "Career perspective"],
+                scenes_cn: ["情绪调节", "职业视角"]
+            },
+            {
+                id: "WantButCannot", en: "Want But Cannot", cn: "想但做不到", group: "Philosophy", val: 28,
+                desc_en: "Essence of collaboration - capability complementation",
+                desc_cn: "合作的本质基础——能力互补",
+                notes_en: "True collaboration premise: I want to do A but lack ability, while you have ability but didn't think of it. <span class='keyword'>Separation of 'want' and 'can'</span> creates collaboration space. Explains why geniuses need coaches: coach can't beat Tyson, but Tyson 'wants' to be stronger yet can't see his blind spots.",
+                notes_cn: "真正合作的前提：我想做A但能力不足，而你有能力但没想到。<span class='keyword'>'想'和'能'的分离</span>创造了合作空间。解释了为什么天才也需要教练：教练打不过泰森，但泰森'想'变强却看不到自己盲点。",
+                why_matters: "Understanding this formula helps identify true partners: not finding similar people, but complementary ones.",
+                mistakes: "Thinking strong people don't need collaboration, or only collaborating with similar people. Strongest collaboration happens between most different people with shared goals.",
+                related: ["AvatarTheory", "SameKindRecognition", "CollaborationFormula"],
+                scenes_en: ["Partner selection", "Team building"],
+                scenes_cn: ["合作伙伴选择", "团队构建"]
+            },
+            {
+                id: "HollowPerson", en: "Hollow Person", cn: "空心人", group: "Philosophy", val: 25,
+                desc_en: "People lacking internal perception, pursuing external labels",
+                desc_cn: "没有内在感受力，追求外部标签的人群",
+                notes_en: "Characteristic of non-ascended people. Can't accept complexity of things, only know 'good vs bad' binary. Pursue external labels (influencer check-ins, brands, titles) over internal experience. <span class='keyword'>Photo-worthy matters more than the activity itself</span>. In AI era, hollow people most easily manipulated, depending on external definitions for meaning.",
+                notes_cn: "没有飞升的人的典型特征。无法接受事物复杂性，只知道'好与坏'的二元对立。追求外部标签（网红打卡、名牌、头衔）而非内在体验。<span class='keyword'>拍照出片比活动本身重要</span>。AI时代空心人最容易被操控，依赖外部定义获得意义。",
+                why_matters: "Recognizing hollow person traits helps avoid becoming one, and understand why some people struggle to ascend.",
+                mistakes: "Labeling everyone who 'cares about image' as hollow. Key distinction: Does internal perception exist? Can they accept complexity?",
+                related: ["Ascension", "AvatarTheory", "MeaningFormula"],
+                scenes_en: ["Self-diagnosis", "Social observation"],
+                scenes_cn: ["自我诊断", "社会观察"]
+            },
+            {
+                id: "LuxuryTrap", en: "Luxury Trap", cn: "奢侈陷阱", group: "Philosophy", val: 25,
+                desc_en: "Luxuries become necessities, bringing new obligations",
+                desc_cn: "奢侈品变成必需品，带来新义务的历史铁律",
+                notes_en: "From <span class='keyword'>Sapiens</span>. Historical law: luxuries often become necessities, bringing new obligations. Agriculture case: wheat provided more calories (luxury), led to population explosion, locked people to land (necessity), quality of life actually dropped (obligation). Modern case: smartphone from luxury to necessity, brings 'always online' obligation.",
+                notes_cn: "来自<span class='keyword'>《人类简史》</span>。历史铁律：奢侈品往往变成必需品，并带来新义务。农业案例：小麦提供更多卡路里（奢侈），导致人口暴涨，人们被锁死在土地上（必需），生活质量反而下降（义务）。现代案例：智能手机从奢侈变必需，带来'永远在线'的义务。",
+                why_matters: "Every tech upgrade, ask yourself: Is this creating a new 'luxury trap'? Will it domesticate me in return?",
+                mistakes: "Only seeing new tech benefits (efficiency gain), ignoring new obligations and dependencies it brings.",
+                related: ["Ascension", "AvatarTheory", "ReverseOfDao"],
+                scenes_en: ["Technology adoption", "Lifestyle choices"],
+                scenes_cn: ["技术采用", "生活方式选择"]
+            },
+            // === ACTION LAYER ===
+            {
+                id: "SoulInjection", en: "Soul Injection", cn: "灵魂注入", group: "Action", val: 32,
+                desc_en: "Infusing products/content with higher meaning beyond technical excellence",
+                desc_cn: "在技术层面之上赋予产品/内容更高使命和意义",
+                notes_en: "Only technique (术) isn't enough, need 'Dao' (道) level meaning. Technique is singing skills, <span class='keyword'>without emotion no flavor</span>. Product's soul comes from founder's love and higher mission. Writing tool: not 'helping you revise articles' (technique), but 'helping you ascend - express yourself better' (Dao). Users not buying tools, joining a mission.",
+                notes_cn: "只有技术（术）不够，需要'道'层面的意义。技术是唱歌的技巧，<span class='keyword'>没有感情就没有味道</span>。产品的灵魂来自创始人的大爱和更高使命。写作工具：不是'帮你修文章'（术），而是'帮你飞升——让你更好表达自己'（道）。用户不是买工具，是加入一个使命。",
+                why_matters: "Any product/content/career with only technique lacks soul, easily replaced. Soul is the ultimate moat.",
+                mistakes: "Understanding 'soul' as marketing packaging. True soul must come from founder's genuine belief, fakes easily detected.",
+                related: ["DefinitionPower", "Ascension", "SoulFormula"],
+                scenes_en: ["Product development", "Content creation"],
+                scenes_cn: ["产品开发", "内容创作"]
+            },
+            {
+                id: "BecomingProphet", en: "Becoming Prophet", cn: "成为先知", group: "Action", val: 30,
+                desc_en: "Becoming an AI era prophet by defining the future worldview",
+                desc_cn: "通过定义未来世界观成为AI时代的先知",
+                notes_en: "Action transformation: <span class='keyword'>grab definition power</span> for the AI era. Today's discussion → unique worldview → packageable content → propose core concepts → grab definition power → gain followers → become AI era prophet. Key insight: whoever can embrace more people wins in thought competition.",
+                notes_cn: "行动转化：<span class='keyword'>抢占定义权</span>。今日讨论→独特世界观→可传播内容→提出核心概念→抢占定义权→获得追随者→成为AI时代先知。关键洞察：在思想竞争中，谁能包容更多人谁就赢。",
+                why_matters: "Strategic direction for content creation and personal branding in the AI era.",
+                mistakes: "Waiting for others to define, then following. By then resources already claimed. First mover advantage crucial.",
+                related: ["DefinitionPower", "SoulInjection", "Decentralization"],
+                scenes_en: ["Personal branding", "Thought leadership"],
+                scenes_cn: ["个人品牌", "思想领袖"]
+            },
+            // === FORMULAS ===
+            {
+                id: "AscensionFormula", en: "Ascension Formula", cn: "飞升公式", group: "Formula", val: 30,
+                desc_en: "Ascension = AI_Externalization × Self_Knowledge × Value_Creation",
+                desc_cn: "飞升 = AI外化程度 × 自我认知深度 × 价值创造能力",
+                notes_en: "Multiplication not addition. Only AI tools without self-knowledge → 'advanced tool person'. Only self-knowledge without AI → left behind by era. Only first two without value creation → 'refined egoist'. <span class='keyword'>All three multiply for true ascension</span>, any zero collapses total.",
+                notes_cn: "是乘积关系而非加法。只有AI工具没有自我认知→'高级工具人'。只有自我认知没有AI外化→被时代抛弃。只有前两者没有价值创造→'精致利己主义者'。<span class='keyword'>三者相乘才能真正飞升</span>，任何一个为零都会拖垮整体。",
+                why_matters: "Diagnostic tool for assessing Ascension level. Score each variable 1-10, multiply. If low, prioritize lowest scorer.",
+                mistakes: "Only improving AI usage without self-understanding → 'advanced tool person' with efficiency but no direction.",
+                related: ["Ascension", "ExternalStorage", "DigitalTwin"],
+                scenes_en: ["Self-assessment", "Development planning"],
+                scenes_cn: ["自我评估", "发展规划"]
+            },
+            {
+                id: "PowerFormula", en: "Power Formula", cn: "权力公式", group: "Formula", val: 28,
+                desc_en: "Power = Same_Kind_Recognition × Shareable_Value",
+                desc_cn: "权力 = 同类认可数 × 可分享的价值",
+                notes_en: "In AI era, power no longer from controlling resources, but from recognition. Not any recognition counts - <span class='keyword'>robot recognition useless, 'fool' recognition limited value</span>. True power from 'same kind' (other ascenders) recognition. Also recognition comes from sharing value - no sharing, no recognition.",
+                notes_cn: "AI时代权力不再来自控制资源，而来自被认可。但不是任何认可都有价值——<span class='keyword'>机器人认可无用，'傻子'认可价值有限</span>。真正的权力来自'同类'（其他飞升者）的认可。同时认可来自分享的价值，不分享就无法被认可。",
+                why_matters: "Evaluating 'power': ①Count how many same-level people genuinely recognize you (not fan count); ②Calculate how much value you created is shared. Multiply for true influence.",
+                mistakes: "Chasing mass follower counts → looks powerful, actually fragile. Pursuing control/centralization → gets fear not recognition.",
+                related: ["SameKindRecognition", "Decentralization", "DefinitionPower"],
+                scenes_en: ["Influence strategy", "Power assessment"],
+                scenes_cn: ["影响力策略", "权力评估"]
+            },
+            {
+                id: "CollaborationFormula", en: "Collaboration Formula", cn: "合作公式", group: "Formula", val: 25,
+                desc_en: "Collaboration = Want × (1 - Can)",
+                desc_cn: "合作基础 = 想做 × 做不到的程度",
+                notes_en: "True collaboration occurs in gap between 'want' and 'can'. If very capable (Can≈1), don't need collaboration. If don't want (Want≈0), won't seek collaboration. Only when <span class='keyword'>Want is high but Can is low</span>, strong collaboration need arises. Partner's value is opposite: they can do what you can't.",
+                notes_cn: "真正的合作发生在'想做但做不到'的缺口处。如果能力很强（Can接近1），则不需要合作。如果不想做（Want接近0），也不会寻求合作。只有<span class='keyword'>Want高但Can低时</span>，才会产生强烈的合作需求。对方的合作价值正好相反：他能做你做不到的事。",
+                why_matters: "Finding partners: ①List things you really want but can't do; ②Find people strong in those areas; ③Confirm they also have 'want but can't' you can help. Bidirectional match = good collaboration.",
+                mistakes: "Only collaborating with similar people → capability overlap, inefficient. Finding weaker people → you don't need them, unequal collaboration.",
+                related: ["WantButCannot", "SameKindRecognition"],
+                scenes_en: ["Partner selection", "Alliance building"],
+                scenes_cn: ["合作伙伴选择", "联盟构建"]
+            },
+            {
+                id: "MeaningFormula", en: "Meaning Formula", cn: "意义公式", group: "Formula", val: 25,
+                desc_en: "Meaning = Experience × Contrast",
+                desc_cn: "意义 = 体验量 × 对比强度",
+                notes_en: "From Avatar Theory: God needs fragments to experience different feelings for self-understanding. Meaning comes not from single 'happiness', but from <span class='keyword'>rich experience and strong contrast</span>. Only experiencing happiness = don't know what happiness is. Only experiencing success = can't teach others success. Those who failed repeatedly are often better teachers.",
+                notes_cn: "来自化身论：神通过碎片体验不同感受来了解自己。意义不是来自单一的'幸福'，而是来自<span class='keyword'>丰富的体验和强烈的对比</span>。只经历快乐的人不知道什么是快乐，只经历成功的人教不了别人怎么成功。屡败屡战的人反而是更好的老师。",
+                why_matters: "Evaluating life meaning: don't only pursue single state (wealth/success/happiness), pursue richness and contrast. Success after failure more meaningful.",
+                mistakes: "Only pursuing 'happiness' → happiness numbs, loses meaning. Avoiding all 'suffering' → loses contrast, happiness devalues.",
+                related: ["AvatarTheory", "ReverseOfDao", "HollowPerson"],
+                scenes_en: ["Life philosophy", "Meaning-seeking"],
+                scenes_cn: ["人生哲学", "寻找意义"]
+            },
+            {
+                id: "SoulFormula", en: "Soul Formula", cn: "产品灵魂公式", group: "Formula", val: 25,
+                desc_en: "Soul = Technical_Excellence × Higher_Purpose",
+                desc_cn: "灵魂 = 技术卓越度 × 更高使命感",
+                notes_en: "Only technique without mission = 'soulless tool' - easily replaced. Only mission without technique = 'empty slogan' - can't execute. <span class='keyword'>Multiplication means both must be >1</span> for soul. Writing tool: technique (brain science, parameter tuning, refinement) is excellent, mission (help you ascend, be yourself) is transcendent. Multiplied = 'Soul'.",
+                notes_cn: "只有技术没有使命='没有灵魂的工具'——容易被替代。只有使命没有技术='空洞的口号'——无法落地。<span class='keyword'>乘积关系意味着两者都要>1</span>才有灵魂。写作工具：技术层面（脑科学、调参数、漫改雕刻）卓越，使命层面（帮你飞升，成为你自己）超越，两者相乘产生'灵魂'。",
+                why_matters: "Evaluating product/career 'soul': ①Is technique industry-leading? ②Is there mission beyond 'making money/function'? ③Is mission genuinely believed by founder? All three = has soul.",
+                mistakes: "Only doing technique → easily replaced by better technique. Only storytelling → users quickly find empty marketing. Fake mission → users/employees eventually detect.",
+                related: ["SoulInjection", "DefinitionPower", "Ascension"],
+                scenes_en: ["Product evaluation", "Career meaning"],
+                scenes_cn: ["产品评估", "职业意义"]
+            },
+            // === EXECUTION PHASES (4 nodes) ===
+            {
+                id: "Phase1_PersonalAscension", en: "Phase 1: Personal Ascension", cn: "阶段1: 个人飞升", group: "System", val: 20,
+                desc_en: "Build your personal 'empowerment' system through AI externalization",
+                desc_cn: "通过AI外化建立你自己的'附能'系统",
+                notes_en: "The first step of Ascension: establish external storage, continuous input, structured storage, AI collaboration, and on-demand retrieval. Key mindset: <span class='keyword'>tool doesn't matter, consistency matters</span>.",
+                notes_cn: "飞升的第一步：建立记录系统、持续输入、结构化存储、AI协作优化、需要时调用。关键心法：<span class='keyword'>工具不重要，持续性重要</span>。",
+                why_matters: "Without personal ascension foundation, all other phases are impossible. This is the entry point.",
+                mistakes: "Waiting for perfect tools before starting. Start messy, organize later.",
+                related: ["Ascension", "ExternalStorage", "EmpowermentMode", "Phase2_SocialAwareness"],
+                scenes_en: ["Building knowledge systems", "AI-assisted workflows"],
+                scenes_cn: ["构建知识体系", "AI辅助工作流"]
+            },
+            {
+                id: "Phase2_SocialAwareness", en: "Phase 2: Social Awareness Upgrade", cn: "阶段2: 社会认知升级", group: "System", val: 20,
+                desc_en: "Understand how social structures are being reconstructed in the AI era",
+                desc_cn: "理解社会结构正在如何被AI时代重构",
+                notes_en: "Key cognitive updates: <span class='keyword'>ability to invoke AI = ability</span>, middle layer is disappearing, success = recognition not possession, AI amplifies differences not homogenizes.",
+                notes_cn: "关键认知更新：<span class='keyword'>调动AI的能力=能力</span>，中间层正在消失，成功=被认可而非拥有更多，AI放大差异而非趋同。",
+                why_matters: "Without understanding social restructuring, you'll make outdated career and life decisions.",
+                mistakes: "Still competing on credentials when the game has changed to AI fluency.",
+                related: ["MiddleLayerExtinction", "Decentralization", "Phase1_PersonalAscension", "Phase3_PhilosophicalIntegration"],
+                scenes_en: ["Career planning", "Investment decisions"],
+                scenes_cn: ["职业规划", "投资决策"]
+            },
+            {
+                id: "Phase3_PhilosophicalIntegration", en: "Phase 3: Philosophical Integration", cn: "阶段3: 哲学整合", group: "System", val: 20,
+                desc_en: "Establish stable cognition about life meaning through three philosophical pillars",
+                desc_cn: "通过三个哲学支柱建立对人生意义的稳定认知",
+                notes_en: "Three pillars: <span class='keyword'>Avatar Theory</span> (all experiences have value), <span class='keyword'>Reverse of Dao</span> (cycles of success/failure), <span class='keyword'>Want But Cannot</span> (foundation of collaboration).",
+                notes_cn: "三个支柱：<span class='keyword'>化身论</span>（所有体验都有价值）、<span class='keyword'>反者道之动</span>（成功失败的循环）、<span class='keyword'>想但做不到</span>（合作的本质）。",
+                why_matters: "Psychological stability foundation. Without it, external success brings no inner peace.",
+                mistakes: "Treating philosophy as luxury. It's the foundation for sustainable action.",
+                related: ["AvatarTheory", "ReverseOfDao", "WantButCannot", "Phase2_SocialAwareness", "Phase4_ActionTransformation"],
+                scenes_en: ["Meaning-seeking", "Emotional regulation"],
+                scenes_cn: ["寻找意义", "情绪调节"]
+            },
+            {
+                id: "Phase4_ActionTransformation", en: "Phase 4: Action Transformation", cn: "阶段4: 行动转化", group: "System", val: 20,
+                desc_en: "Become an AI-era 'prophet' by grabbing definition power",
+                desc_cn: "通过抢占定义权成为AI时代的'先知'",
+                notes_en: "Path: unique worldview → packageable content → core concepts → <span class='keyword'>grab definition power</span> → gain followers → become prophet. Key insight: whoever can embrace more people wins.",
+                notes_cn: "路径：独特世界观→可传播内容→核心概念→<span class='keyword'>抢占定义权</span>→获得追随者→成为先知。关键洞察：谁能包容更多人谁就赢。",
+                why_matters: "This is how you actually change the world and find your place in it.",
+                mistakes: "Waiting for permission or perfect timing. Definition windows close fast.",
+                related: ["BecomingProphet", "DefinitionPower", "SoulInjection", "Phase3_PhilosophicalIntegration"],
+                scenes_en: ["Content creation", "Thought leadership"],
+                scenes_cn: ["内容创作", "思想领袖"]
+            },
+            // === FUTURE STAGES (4 nodes) ===
+            {
+                id: "Stage1_AIToolAdoption", en: "Stage 1: AI Tool Adoption (2024-2027)", cn: "阶段1: AI工具化普及期", group: "Roadmap", val: 22,
+                desc_en: "AI transforms from auxiliary tool to core capability enhancer",
+                desc_cn: "AI从辅助工具变成核心能力增强器",
+                notes_en: "Key changes: knowledge acquisition cost → zero, professional barriers collapse, <span class='keyword'>differentiation = experience × values × aesthetics</span>. Early ascenders begin forming.",
+                notes_cn: "关键变化：知识获取成本→零，专业壁垒瓦解，<span class='keyword'>差异化 = 经历 × 价值观 × 审美</span>。早期飞升者开始形成。",
+                why_matters: "We are IN this stage now. Actions taken here determine your position in later stages.",
+                mistakes: "Treating AI as passing fad. This is the agricultural revolution of our time.",
+                related: ["Ascension", "EmpowermentMode", "Stage2_SocialRestructuring"],
+                scenes_en: ["Career decisions", "Learning investments"],
+                scenes_cn: ["职业决策", "学习投资"]
+            },
+            {
+                id: "Stage2_SocialRestructuring", en: "Stage 2: Social Restructuring (2027-2035)", cn: "阶段2: 社会结构重组期", group: "Roadmap", val: 22,
+                desc_en: "Middle layer disappears, relationships unbundle, power source shifts",
+                desc_cn: "中间层消失，亲密关系解绑，权力来源转变",
+                notes_en: "Structure: Top→AI→Resources. Gender/marriage unbundles. <span class='keyword'>Intimacy becomes optional combination</span> not mandatory bundle. AI companions/artificial reproduction normalize.",
+                notes_cn: "结构：顶层→AI→资源。性别/婚姻解绑。<span class='keyword'>亲密关系从绑定变为自由选择</span>。AI伴侣/人工生育普及。",
+                why_matters: "If your career plan assumes traditional structures, recalculate now.",
+                mistakes: "Assuming current relationship/career models will persist.",
+                related: ["MiddleLayerExtinction", "Decentralization", "Stage1_AIToolAdoption", "Stage3_NewPowerDynamics"],
+                scenes_en: ["Long-term planning", "Relationship choices"],
+                scenes_cn: ["长期规划", "关系选择"]
+            },
+            {
+                id: "Stage3_NewPowerDynamics", en: "Stage 3: New Power Dynamics (2035-2050)", cn: "阶段3: 新型权力形态期", group: "Roadmap", val: 22,
+                desc_en: "Power from sharing value, not control. Decentralized networks replace hierarchies",
+                desc_cn: "权力来自分享价值而非控制。去中心化网络取代等级制",
+                notes_en: "Old: fear-based control, suspicion chains, revolutions. New: <span class='keyword'>recognition-based influence</span>, value sharing, stable following. AI solves survival/safety, but not power/recognition needs.",
+                notes_cn: "旧模式：恐惧控制，猜疑链，革命。新模式：<span class='keyword'>基于认可的影响力</span>，价值分享，稳定追随。AI解决生存/安全需求，但解决不了权力/认可需求。",
+                why_matters: "Design your influence strategy for this world, not the current one.",
+                mistakes: "Building centralized power when decentralization wins.",
+                related: ["SameKindRecognition", "PowerFormula", "Stage2_SocialRestructuring", "Stage4_GameInstanceSociety"],
+                scenes_en: ["Influence strategy", "Community building"],
+                scenes_cn: ["影响力策略", "社区构建"]
+            },
+            {
+                id: "Stage4_GameInstanceSociety", en: "Stage 4: Game Instance Society (2050+)", cn: "阶段4: 游戏副本化社会", group: "Roadmap", val: 22,
+                desc_en: "Top ascenders create 'game instances' like Ready Player One's OASIS",
+                desc_cn: "顶层飞升者创造'游戏副本'，类似《头号玩家》的OASIS",
+                notes_en: "Each instance has own rules/values. Users choose which to enter. Instances communicate like <span class='keyword'>'aliens sending telegrams'</span>. This may echo ancient myths - we're living what gods once did.",
+                notes_cn: "各副本有自己的规则/价值观。用户选择进入哪个。副本间互通如<span class='keyword'>'外星人发电报'</span>。这可能呼应远古神话——我们正在经历神曾经的事。",
+                why_matters: "Ask yourself: what instance do I want to create? Or whose instance do I want to enter?",
+                mistakes: "Only thinking about survival when you could be thinking about creation.",
+                related: ["GameInstanceTheory", "AvatarTheory", "Stage3_NewPowerDynamics"],
+                scenes_en: ["Vision setting", "Long-term strategy"],
+                scenes_cn: ["愿景设定", "长期策略"]
+            },
+            // === ANTI-PATTERN TRAPS (5 nodes) ===
+            {
+                id: "Trap1_AbandoningHumanity", en: "Trap 1: Mistaking Ascension as Abandoning Humanity", cn: "陷阱1: 误认为飞升是抛弃人类", group: "AntiPattern", val: 16,
+                desc_en: "Thinking 'since AI is so strong, I don't need human interaction anymore'",
+                desc_cn: "认为'既然AI这么强，那我干脆不和人打交道了'",
+                notes_en: "<span class='keyword'>Robots can't solve power needs</span>. Highest self-actualization needs recognition from 'same kind' - other ascenders, not machines or 'fools'.",
+                notes_cn: "<span class='keyword'>机器人解决不了权力问题</span>。最高层次的自我实现需要'同类'认可——其他飞升者，而非机器人或'傻子'。",
+                why_matters: "Musk pays creators because he needs influential people to recognize his Mars dream.",
+                mistakes: "Confusing 'tool upgrade' with 'relationship severance'. Ascension enhances, not replaces.",
+                related: ["SameKindRecognition", "Ascension"],
+                scenes_en: ["Social strategy", "Self-diagnosis"],
+                scenes_cn: ["社交策略", "自我诊断"]
+            },
+            {
+                id: "Trap2_OwnershipVsUsage", en: "Trap 2: Confusing Usage Rights with Ownership", cn: "陷阱2: 混淆使用权与占有权", group: "AntiPattern", val: 16,
+                desc_en: "Thinking 'I must memorize everything in my brain, external systems are just auxiliary'",
+                desc_cn: "认为'我必须把所有知识都记在脑子里，外挂系统只是辅助'",
+                notes_en: "Education inertia: exams require memorization → default 'memorized = mastered'. In AI era: <span class='keyword'>can invoke > can memorize</span>.",
+                notes_cn: "教育惯性：考试要背诵 → 默认'记住=掌握'。AI时代：<span class='keyword'>能调用 > 能记住</span>。",
+                why_matters: "Knowledge graphs are the new memory. Don't compete on memorization.",
+                mistakes: "Treating external tools as 'cheating' instead of core capability.",
+                related: ["ExternalStorage", "EmpowermentMode"],
+                scenes_en: ["Learning strategy", "Tool adoption"],
+                scenes_cn: ["学习策略", "工具采用"]
+            },
+            {
+                id: "Trap3_AIHomogenization", en: "Trap 3: Thinking AI Makes People Homogeneous", cn: "陷阱3: 认为AI会让人趋同", group: "AntiPattern", val: 16,
+                desc_en: "Thinking 'if everyone uses AI, won't everyone become the same?'",
+                desc_cn: "认为'大家都用AI，那所有人不就变得一样了吗'",
+                notes_en: "AI is a <span class='keyword'>capability amplifier</span>, not an answer generator. It amplifies what's in you - your experiences, values, aesthetics. Each person's AI output is unique because each person's 'seed' is different.",
+                notes_cn: "AI是<span class='keyword'>能力放大器</span>，不是答案生成器。它放大的是你肚子里的货——经历、价值观、审美。每个人用AI的方式独特，因为每个人的'种子'不同。",
+                why_matters: "Invest in your unique experiences and perspectives - that's what gets amplified.",
+                mistakes: "Using same templates/prompts as everyone else. Your uniqueness is the moat.",
+                related: ["Ascension", "DigitalTwin"],
+                scenes_en: ["Differentiation strategy", "Personal branding"],
+                scenes_cn: ["差异化策略", "个人品牌"]
+            },
+            {
+                id: "Trap4_CentralizationPursuit", en: "Trap 4: Pursuing Centralization Instead of Decentralization", cn: "陷阱4: 追求集权而非去中心化", group: "AntiPattern", val: 16,
+                desc_en: "Thinking 'with strong AI capabilities, I should control more people/resources'",
+                desc_cn: "认为'我有了强大的AI能力，我要控制更多人/资源'",
+                notes_en: "Power source has changed. Centralized control gets <span class='keyword'>fear, not recognition</span>. True power comes from sharing value and gaining voluntary following.",
+                notes_cn: "权力来源变了。集权控制得到的是<span class='keyword'>恐惧，而非认可</span>。真正的权力来自分享价值、获得自愿追随。",
+                why_matters: "Musk open-sources AI and pays creators - he builds influence through sharing, not control.",
+                mistakes: "Building empires of control when networks of value-sharing win.",
+                related: ["Decentralization", "PowerFormula", "SameKindRecognition"],
+                scenes_en: ["Leadership style", "Organization design"],
+                scenes_cn: ["领导风格", "组织设计"]
+            },
+            {
+                id: "Trap5_TechniqueWithoutSoul", en: "Trap 5: Having Technique Without Soul", cn: "陷阱5: 只有术没有道", group: "AntiPattern", val: 16,
+                desc_en: "Thinking 'my product/skill is technically perfect, that's enough'",
+                desc_cn: "认为'我的产品/技能在技术层面已经很完美了，够了'",
+                notes_en: "Technique is singing skill, <span class='keyword'>without emotion no flavor</span>. Products need a soul - founder's love and higher mission. Users don't buy tools, they join missions.",
+                notes_cn: "技术是唱歌的技巧，<span class='keyword'>没有感情就没有味道</span>。产品需要灵魂——创始人的大爱和更高使命。用户不是买工具，是加入使命。",
+                why_matters: "Soul is the ultimate moat. Technique can be copied, mission cannot.",
+                mistakes: "Treating 'soul' as marketing packaging. Real soul must come from genuine belief.",
+                related: ["SoulInjection", "SoulFormula", "DefinitionPower"],
+                scenes_en: ["Product development", "Career meaning"],
+                scenes_cn: ["产品开发", "职业意义"]
+            }
+        ];
+
+        // --- DATA INJECTION: LINKS ---
+        const links = [
+            // Core internal connections
+            { source: "Ascension", target: "EmpowermentMode", label: "enables" },
+            { source: "Ascension", target: "ExternalStorage", label: "requires" },
+            { source: "Ascension", target: "DigitalTwin", label: "creates" },
+            { source: "EmpowermentMode", target: "ExternalStorage", label: "depends on" },
+            { source: "DigitalTwin", target: "ExternalStorage", label: "stored in" },
+
+            // Core to Social connections
+            { source: "Ascension", target: "MiddleLayerExtinction", label: "causes" },
+            { source: "Ascension", target: "SameKindRecognition", label: "seeks" },
+            { source: "EmpowermentMode", target: "DefinitionPower", label: "enables" },
+
+            // Social internal connections
+            { source: "MiddleLayerExtinction", target: "Decentralization", label: "leads to" },
+            { source: "Decentralization", target: "SameKindRecognition", label: "enables" },
+            { source: "SameKindRecognition", target: "DefinitionPower", label: "grants" },
+            { source: "DefinitionPower", target: "GameInstanceTheory", label: "manifests as" },
+            { source: "GameInstanceTheory", target: "Decentralization", label: "example of" },
+
+            // Philosophy internal connections
+            { source: "AvatarTheory", target: "ReverseOfDao", label: "aligns with" },
+            { source: "AvatarTheory", target: "WantButCannot", label: "explains" },
+            { source: "ReverseOfDao", target: "LuxuryTrap", label: "predicts" },
+            { source: "WantButCannot", target: "HollowPerson", label: "diagnoses" },
+            { source: "AvatarTheory", target: "HollowPerson", label: "contrasts" },
+
+            // Philosophy to Social connections
+            { source: "AvatarTheory", target: "SameKindRecognition", label: "grounds" },
+            { source: "WantButCannot", target: "Decentralization", label: "supports" },
+
+            // Action connections
+            { source: "SoulInjection", target: "DefinitionPower", label: "grants" },
+            { source: "SoulInjection", target: "Ascension", label: "elevates" },
+            { source: "BecomingProphet", target: "DefinitionPower", label: "achieves" },
+            { source: "BecomingProphet", target: "SoulInjection", label: "requires" },
+            { source: "BecomingProphet", target: "SameKindRecognition", label: "gains" },
+
+            // Formula connections
+            { source: "AscensionFormula", target: "Ascension", label: "quantifies" },
+            { source: "AscensionFormula", target: "ExternalStorage", label: "includes" },
+            { source: "AscensionFormula", target: "DigitalTwin", label: "includes" },
+            { source: "PowerFormula", target: "SameKindRecognition", label: "quantifies" },
+            { source: "PowerFormula", target: "Decentralization", label: "supports" },
+            { source: "CollaborationFormula", target: "WantButCannot", label: "quantifies" },
+            { source: "MeaningFormula", target: "AvatarTheory", label: "derives from" },
+            { source: "MeaningFormula", target: "ReverseOfDao", label: "integrates" },
+            { source: "SoulFormula", target: "SoulInjection", label: "quantifies" },
+            { source: "SoulFormula", target: "DefinitionPower", label: "enables" },
+
+            // Cross-layer key connections
+            { source: "Ascension", target: "AvatarTheory", label: "grounded by" },
+            { source: "GameInstanceTheory", target: "BecomingProphet", label: "opportunity for" },
+            { source: "HollowPerson", target: "Ascension", label: "antithesis of" },
+            { source: "LuxuryTrap", target: "Ascension", label: "warns about" },
+
+            // === PHASE CONNECTIONS ===
+            { source: "Phase1_PersonalAscension", target: "Ascension", label: "implements" },
+            { source: "Phase1_PersonalAscension", target: "ExternalStorage", label: "builds" },
+            { source: "Phase2_SocialAwareness", target: "Phase1_PersonalAscension", label: "follows" },
+            { source: "Phase2_SocialAwareness", target: "MiddleLayerExtinction", label: "understands" },
+            { source: "Phase3_PhilosophicalIntegration", target: "Phase2_SocialAwareness", label: "follows" },
+            { source: "Phase3_PhilosophicalIntegration", target: "AvatarTheory", label: "integrates" },
+            { source: "Phase4_ActionTransformation", target: "Phase3_PhilosophicalIntegration", label: "follows" },
+            { source: "Phase4_ActionTransformation", target: "BecomingProphet", label: "executes" },
+
+            // === STAGE CONNECTIONS ===
+            { source: "Stage1_AIToolAdoption", target: "Ascension", label: "enables" },
+            { source: "Stage2_SocialRestructuring", target: "Stage1_AIToolAdoption", label: "follows" },
+            { source: "Stage2_SocialRestructuring", target: "MiddleLayerExtinction", label: "causes" },
+            { source: "Stage3_NewPowerDynamics", target: "Stage2_SocialRestructuring", label: "follows" },
+            { source: "Stage3_NewPowerDynamics", target: "Decentralization", label: "manifests" },
+            { source: "Stage4_GameInstanceSociety", target: "Stage3_NewPowerDynamics", label: "follows" },
+            { source: "Stage4_GameInstanceSociety", target: "GameInstanceTheory", label: "realizes" },
+
+            // === TRAP CONNECTIONS ===
+            { source: "Trap1_AbandoningHumanity", target: "Ascension", label: "warns against" },
+            { source: "Trap1_AbandoningHumanity", target: "SameKindRecognition", label: "misunderstands" },
+            { source: "Trap2_OwnershipVsUsage", target: "ExternalStorage", label: "blocks" },
+            { source: "Trap2_OwnershipVsUsage", target: "EmpowermentMode", label: "prevents" },
+            { source: "Trap3_AIHomogenization", target: "Ascension", label: "fears" },
+            { source: "Trap3_AIHomogenization", target: "DigitalTwin", label: "misunderstands" },
+            { source: "Trap4_CentralizationPursuit", target: "Decentralization", label: "opposes" },
+            { source: "Trap4_CentralizationPursuit", target: "PowerFormula", label: "misapplies" },
+            { source: "Trap5_TechniqueWithoutSoul", target: "SoulInjection", label: "lacks" },
+            { source: "Trap5_TechniqueWithoutSoul", target: "SoulFormula", label: "violates" }
+        ];
+
+        // --- CONFIGURATION ---
+        const settings = { linkDistance: 100, chargeStrength: -250, labelSize: 1.0, opacity: 0.8, autoRotate: true };
+
+        // --- ENGINE ---
+        const elem = document.getElementById('3d-graph');
+        const Graph = ForceGraph3D()(elem)
+            .graphData({ nodes, links })
+            .backgroundColor('#000005')
+            .showNavInfo(false)
+            .nodeThreeObject(node => {
+                const cat = getCategory(node.group);
+                const text = `${node.en}\n${node.cn}`;
+                const sprite = new SpriteText(text);
+                sprite.color = cat.color;
+                sprite.textHeight = (node.val / 2) * settings.labelSize;
+                sprite.fontFace = 'Arial'; sprite.fontWeight = 'bold';
+                sprite.backgroundColor = `rgba(0,0,0,${settings.opacity / 2})`;
+                sprite.padding = 4;
+                sprite.userData = { baseSize: node.val / 2 };
+                return sprite;
+            })
+            .linkWidth(link => 2.5)
+            .linkColor(link => {
+                const sourceNode = nodes.find(n => n.id === link.source || n.id === link.source.id);
+                if (sourceNode) return getCategory(sourceNode.group).color + '88';
+                return '#445566';
+            })
+            .linkOpacity(0.7)
+            .linkCurvature(0.12)
+            .linkCurveRotation(link => {
+                const hash = (link.source?.id || link.source) + (link.target?.id || link.target);
+                let sum = 0;
+                for (let i = 0; i < hash.length; i++) sum += hash.charCodeAt(i);
+                return (sum % 360) * (Math.PI / 180);
+            })
+            .linkDirectionalArrowLength(5)
+            .linkDirectionalArrowRelPos(0.9)
+            .linkDirectionalArrowColor(link => {
+                const sourceNode = nodes.find(n => n.id === link.source || n.id === link.source.id);
+                if (sourceNode) return getCategory(sourceNode.group).color;
+                return '#ffffff';
+            })
+            .linkDirectionalParticles(3)
+            .linkDirectionalParticleSpeed(0.005)
+            .linkDirectionalParticleWidth(2)
+            .linkDirectionalParticleColor(link => {
+                const sourceNode = nodes.find(n => n.id === link.source || n.id === link.source.id);
+                if (sourceNode) return getCategory(sourceNode.group).color;
+                return '#ffffff';
+            })
+            .onNodeClick(node => {
+                // Maintain current zoom level - just rotate to face the node
+                const currentPos = Graph.cameraPosition();
+                const currentDistance = Math.hypot(currentPos.x, currentPos.y, currentPos.z);
+                const nodeDistance = Math.hypot(node.x, node.y, node.z) || 1;
+
+                const newX = (node.x / nodeDistance) * currentDistance;
+                const newY = (node.y / nodeDistance) * currentDistance;
+                const newZ = (node.z / nodeDistance) * currentDistance;
+
+                Graph.cameraPosition({ x: newX, y: newY, z: newZ }, node, 1500);
+                showHUD(node);
+            });
+
+        Graph.d3Force('link').distance(settings.linkDistance);
+        Graph.d3Force('charge').strength(settings.chargeStrength);
+
+        // --- CONTROLS ---
+        const gui = new dat.GUI();
+        const folder = gui.addFolder('Graph Settings');
+        folder.add(settings, 'linkDistance', 10, 300).onChange(val => { Graph.d3Force('link').distance(val); Graph.d3ReheatSimulation(); });
+        folder.add(settings, 'chargeStrength', -500, -10).onChange(val => { Graph.d3Force('charge').strength(val); Graph.d3ReheatSimulation(); });
+        folder.add(settings, 'labelSize', 0.1, 3.0).onChange(val => { Graph.scene().traverse(obj => { if (obj.userData?.baseSize) obj.textHeight = obj.userData.baseSize * val; }); });
+        folder.add(settings, 'opacity', 0.1, 1.0).onChange(val => { Graph.scene().traverse(obj => { if (obj.userData?.baseSize) obj.backgroundColor = `rgba(0,0,0,${val / 2})`; }); });
+        folder.add(settings, 'autoRotate').onChange(val => { Graph.controls().autoRotate = val; });
+        folder.open();
+
+        // --- HUD LOGIC ---
+        function showHUD(node) {
+            const el = (id) => document.getElementById(id);
+            const cat = getCategory(node.group);
+            el('hud').style.display = 'block';
+            el('hud-title').innerText = node.en;
+            el('hud-title').style.color = cat.color;
+            el('hud-cn').innerText = `${node.cn} [${node.group}]`;
+            el('hud-desc').innerHTML = `<div class="en">${node.desc_en || ''}</div><div class="cn">${node.desc_cn || ''}</div>`;
+            el('hud-notes').innerHTML = `<div class="en">${node.notes_en || ''}</div><div class="cn">${node.notes_cn || ''}</div>`;
+
+            // Why It Matters
+            const whyEl = el('hud-why');
+            if (node.why_matters) {
+                whyEl.innerHTML = node.why_matters;
+                whyEl.parentElement.style.display = 'block';
+            } else {
+                whyEl.innerHTML = '';
+                whyEl.parentElement.style.display = 'none';
+            }
+
+            // Common Mistakes
+            const mistakesEl = el('hud-mistakes');
+            if (node.mistakes) {
+                mistakesEl.innerHTML = node.mistakes;
+                mistakesEl.parentElement.style.display = 'block';
+            } else {
+                mistakesEl.innerHTML = '';
+                mistakesEl.parentElement.style.display = 'none';
+            }
+
+            // Related Terms
+            const relatedContainer = el('hud-related');
+            relatedContainer.innerHTML = '';
+            if (node.related && node.related.length > 0) {
+                node.related.forEach(term => {
+                    const tag = document.createElement('span');
+                    tag.className = 'related-tag';
+                    tag.innerText = term;
+                    tag.onclick = () => {
+                        const targetNode = nodes.find(n => n.id === term || n.en === term);
+                        if (targetNode) {
+                            Graph.cameraPosition({ x: targetNode.x + 50, y: targetNode.y + 50, z: targetNode.z + 50 }, targetNode, 1500);
+                            setTimeout(() => showHUD(targetNode), 1600);
+                        }
+                    };
+                    relatedContainer.appendChild(tag);
+                });
+                relatedContainer.parentElement.style.display = 'block';
+            } else {
+                relatedContainer.parentElement.style.display = 'none';
+            }
+
+            // Scenarios
+            const sceneContainer = el('hud-scenes');
+            sceneContainer.innerHTML = '';
+            if (node.scenes_en && node.scenes_en.length > 0) {
+                for (let i = 0; i < node.scenes_en.length; i++) {
+                    const tag = document.createElement('span');
+                    tag.className = 'scene-tag';
+                    tag.innerHTML = `${node.scenes_en[i]} <span style="color:#88aacc">${node.scenes_cn[i]}</span>`;
+                    sceneContainer.appendChild(tag);
+                }
+                sceneContainer.parentElement.style.display = 'block';
+            } else {
+                sceneContainer.parentElement.style.display = 'none';
+            }
+        }
+
+        function hideHUD() {
+            document.getElementById('hud').style.display = 'none';
+        }
+
+        // Initialize
+        buildLegend();
+        setTimeout(() => { document.getElementById('loading').style.display = 'none'; }, 1000);
+        Graph.controls().autoRotate = true;
+    </script>
+</body>
+
+</html>

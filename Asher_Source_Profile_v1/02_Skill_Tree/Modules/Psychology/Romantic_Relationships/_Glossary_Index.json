@@ -1,0 +1,172 @@
+[
+  {
+    "term_en": "Confession (Gao Bai)",
+    "term_cn": "告白",
+    "definition_short": "正式向对方表达爱意的仪式性行为",
+    "definition_deep": "告白不是随口说的'我喜欢你'，而是一个具有仪式意义的情感声明，标志着关系从暧昧期正式进入恋爱阶段。在中国恋爱文化中，告白通常由男方发起，需要精心选择时机和场景。告白的成功与否90%取决于前期暧昧阶段的铺垫质量，只有10%取决于告白本身的技巧。",
+    "why_it_matters": "告白是中国恋爱关系中从模糊到明确的关键转折点，没有告白就没有正式关系",
+    "common_mistakes": "在没有充分暧昧铺垫的情况下突然告白，或者暧昧太久不告白导致窗口关闭",
+    "related_terms": ["Ambiguity Phase", "Signal Reading", "Push-Pull"],
+    "source_file": "1.0_Chinese_Dating_Culture.md"
+  },
+  {
+    "term_en": "Ambiguity Phase (Ai Mei)",
+    "term_cn": "暧昧",
+    "definition_short": "朋友和恋人之间的灰色地带",
+    "definition_deep": "暧昧期是中国恋爱文化中最独特也最重要的阶段——两人互有好感但还没有明确关系。在这个阶段，双方通过高频互动、深度对话和共同经历来测试彼此的兼容性和信任度。暧昧期不是浪费时间，而是关系建立的核心基础设施，承担着信任测试、兼容性验证、家庭预审等多重功能。",
+    "why_it_matters": "跳过暧昧期直接告白就像跳过地基直接盖楼，看似高效实则危险",
+    "common_mistakes": "把暧昧期当成浪费时间急于跳过，或者在暧昧期中不敢推进关系",
+    "related_terms": ["Confession", "Signal Reading", "Push-Pull", "Trust Building"],
+    "source_file": "1.0_Chinese_Dating_Culture.md"
+  },
+  {
+    "term_en": "Men Dang Hu Dui",
+    "term_cn": "门当户对",
+    "definition_short": "社会经济地位匹配的婚恋标准",
+    "definition_deep": "字面意思是'门面和户头相配'，指恋爱双方的家庭社会经济地位应该大致匹配。表面上看是物质条件的比较，但深层逻辑是家庭对婚姻风险管理的朴素策略——相似背景的人往往拥有更多共同语言、相似的生活习惯和更低的文化冲突概率。在现代中国，这个概念已经从传统的'家世'扩展到了教育背景、职业发展和价值观匹配。",
+    "why_it_matters": "这是中国父母评估女儿男朋友时最常用的框架之一，忽视它可能导致家庭阻力",
+    "common_mistakes": "以为门当户对只是'拜金'，忽略其背后的风险管理逻辑",
+    "related_terms": ["Filial Piety", "Family System", "Meet Parents"],
+    "source_file": "1.0_Chinese_Dating_Culture.md"
+  },
+  {
+    "term_en": "Filial Piety (Xiao)",
+    "term_cn": "孝道",
+    "definition_short": "对父母的尊重和服从义务",
+    "definition_deep": "孝道是儒家文化的核心价值之一，要求子女在重大人生决策中尊重并考虑父母的意见。在恋爱婚姻语境下，孝道意味着即使是自由恋爱，父母的态度仍然在决策权重中占据重要位置。研究表明，即使在年轻一代中，孝道义务仍然是影响恋爱和婚姻决策的强大力量。这不是盲目服从，而是家庭系统中的决策协商机制。",
+    "why_it_matters": "理解孝道才能理解为什么中国女生如此重视父母对恋爱对象的看法",
+    "common_mistakes": "把孝道理解为'没有主见'或'被控制'，忽略了它是文化中的协商机制",
+    "related_terms": ["Men Dang Hu Dui", "Family System", "Meet Parents"],
+    "source_file": "1.0_Chinese_Dating_Culture.md"
+  },
+  {
+    "term_en": "Blind Date (Xiang Qin)",
+    "term_cn": "相亲",
+    "definition_short": "由家人或媒人安排的约会",
+    "definition_deep": "相亲是中国传统婚恋文化中由父母、亲戚或媒人安排的正式约会。在现代中国，相亲已经从纯粹的'包办'演变为一种扩大社交圈的方式。在二三线城市尤其普遍，年轻人在父母的推动下参加相亲角或通过亲友介绍认识潜在对象。相亲文化反映了中国社会对婚恋年龄的压力以及家庭在婚恋决策中的深度参与。",
+    "why_it_matters": "理解相亲文化有助于理解中国社会对婚恋的态度和家庭的角色",
+    "common_mistakes": "认为相亲都是被迫的、落后的，忽略了很多年轻人主动利用这个渠道",
+    "related_terms": ["Filial Piety", "Leftover Women", "Family System"],
+    "source_file": "1.0_Chinese_Dating_Culture.md"
+  },
+  {
+    "term_en": "Leftover Women (Sheng Nv)",
+    "term_cn": "剩女",
+    "definition_short": "27岁以上未婚城市职业女性的社会标签",
+    "definition_deep": "剩女是中国社会对27岁以上未婚城市女性的称呼，这个词本身带有性别歧视色彩，但它反映了真实存在的社会压力。中国社会对女性的婚恋年龄有一个隐形的'时钟'，超过某个年龄未婚会面临来自家庭和社会的巨大压力。这种压力会影响女性在恋爱中的决策——有些人会因为压力而降低标准急于结婚，有些人则会更加谨慎以确保选择正确。",
+    "why_it_matters": "理解这种社会压力的存在有助于理解中国女生在恋爱中面临的复杂心理环境",
+    "common_mistakes": "使用这个词来评判女性，或者不理解这种社会压力对女性恋爱决策的深层影响",
+    "related_terms": ["Social Pressure", "Blind Date", "Family Expectations"],
+    "source_file": "1.0_Chinese_Dating_Culture.md"
+  },
+  {
+    "term_en": "Couple Outfits (Qing Lv Zhuang)",
+    "term_cn": "情侣装",
+    "definition_short": "情侣穿的同款衣服或配饰",
+    "definition_deep": "情侣装是中国恋爱文化中归属感和亲密关系的外在表达方式，包括同款衣服、手机壳、钥匙链等。这种行为在西方文化中较少见，但在中国非常普遍。穿情侣装不仅是向外界宣告恋爱关系，更是一种亲密感的仪式化表达——'我们是一对'的视觉化确认。在确认关系后，很多中国情侣会购买情侣物品作为关系的象征。",
+    "why_it_matters": "理解情侣装文化有助于理解中国恋爱中'归属感外显化'的需求",
+    "common_mistakes": "觉得穿情侣装'幼稚'或'没必要'，忽略了它在关系维护中的象征意义",
+    "related_terms": ["Ritual Sense", "Relationship Confirmation", "WeChat Moments"],
+    "source_file": "1.0_Chinese_Dating_Culture.md"
+  },
+  {
+    "term_en": "Ritual Sense (Yi Shi Gan)",
+    "term_cn": "仪式感",
+    "definition_short": "通过精心安排赋予时刻特殊意义",
+    "definition_deep": "仪式感是中国恋爱文化中极其重要的概念——通过精心安排的行为或场景来赋予日常时刻以特殊意义。包括节日送礼、纪念日庆祝、朋友圈官宣、特殊场景下的告白等。在中国恋爱文化中，仪式感不是可选项而是必修课。缺乏仪式感会被解读为'不重视这段关系'或'不够浪漫'。仪式感的核心不是花多少钱，而是用了多少心。",
+    "why_it_matters": "仪式感是中国恋爱关系维护的核心工具，缺少它会让对方觉得你不够用心",
+    "common_mistakes": "以为仪式感等于花钱，忽略了用心程度远比金钱投入重要",
+    "related_terms": ["520", "Couple Outfits", "WeChat Moments"],
+    "source_file": "1.0_Chinese_Dating_Culture.md"
+  },
+  {
+    "term_en": "Reliable (Kao Pu)",
+    "term_cn": "靠谱",
+    "definition_short": "说到做到、值得信赖的品质",
+    "definition_deep": "靠谱是中国恋爱文化中权重最高的品质之一，远高于'有趣'或'浪漫'。一个靠谱的人意味着说到做到、情绪稳定、能让对方感到安全感。在中国女生的评价体系中，'靠谱'往往是决定性因素——一个普通但靠谱的人比一个优秀但不靠谱的人有更高的长期价值。靠谱是通过长期一致性行为积累的信任，不是一次壮举能建立的。",
+    "why_it_matters": "在中国恋爱市场中，靠谱是最核心的竞争力，比外表和经济条件更持久",
+    "common_mistakes": "以为靠谱就是无聊，忽略了靠谱本身就是一种稀缺且极具吸引力的品质",
+    "related_terms": ["Trust Building", "Consistency Signals", "Secure Attachment"],
+    "source_file": "1.0_Chinese_Dating_Culture.md"
+  },
+  {
+    "term_en": "Zuo (Emotional Testing)",
+    "term_cn": "作",
+    "definition_short": "通过情绪化行为试探对方反应",
+    "definition_deep": "在恋爱语境中，'作'指通过情绪化的行为来试探对方的耐心和在意程度。比如故意不回消息看对方会不会着急，无理取闹看对方会不会包容，或者突然冷淡看对方会不会主动来哄。从心理学角度看，'作'通常是焦虑型依恋的表现——对方不确定你是否真的在意她，所以通过制造'测试'来获得确认。理解了这一点就不会简单地认为对方'不讲理'。",
+    "why_it_matters": "理解'作'的心理机制能帮助你在面对时做出正确反应而不是激化冲突",
+    "common_mistakes": "把'作'简单归类为'不讲理'，没有看到背后的情感需求是'确认你在乎我'",
+    "related_terms": ["Anxious Attachment", "Emotional Mirroring", "EFT"],
+    "source_file": "1.0_Chinese_Dating_Culture.md"
+  },
+  {
+    "term_en": "High-Context Culture",
+    "term_cn": "高语境文化",
+    "definition_short": "大量信息通过语境而非语言直接传达的文化",
+    "definition_deep": "高语境文化是人类学家 Edward T. Hall 提出的概念，指在沟通中大量信息不是通过明确的语言表达，而是通过语境、关系、非言语线索和共享知识来传达的文化类型。中国是典型的高语境文化，在恋爱中表现为含蓄的情感表达、潜台词丰富的对话和'意会'大于'言传'的沟通模式。理解高语境文化是正确解读中国女生行为的基础框架。",
+    "why_it_matters": "不理解高语境文化就无法正确解读中国恋爱中的潜台词和非言语信号",
+    "common_mistakes": "用低语境文化(西方)的解码方式去理解高语境文化的信号，导致系统性误判",
+    "related_terms": ["Subtext Reading", "Emotional Mirroring", "Signal Reading"],
+    "source_file": "1.0_Chinese_Dating_Culture.md"
+  },
+  {
+    "term_en": "Push-Pull Technique",
+    "term_cn": "推拉",
+    "definition_short": "在靠近和保持距离之间找节奏",
+    "definition_deep": "推拉是恋爱中维持适度不确定性的技术——在表达好感(推)和保持距离(拉)之间找到动态平衡。这不是操控，而是一种自然的吸引力维护机制。在暧昧期尤其重要：过度'推'(太主动)会让对方感到压力和'到手了'的感觉，过度'拉'(太冷淡)会让对方觉得你不在乎。正确的推拉是'让她知道你喜欢她，但不确定你有多喜欢她'。",
+    "why_it_matters": "掌握推拉节奏是暧昧期维持吸引力的核心技术",
+    "common_mistakes": "把推拉理解为'玩游戏'或'欲擒故纵'，变成了操控而非自然节奏",
+    "related_terms": ["Ambiguity Phase", "Signal Reading", "Attraction Maintenance"],
+    "source_file": "1.0_Chinese_Dating_Culture.md"
+  },
+  {
+    "term_en": "WeChat Moments (Pengyou Quan)",
+    "term_cn": "朋友圈",
+    "definition_short": "微信社交动态功能，恋爱中的无声简历",
+    "definition_deep": "朋友圈是微信的社交动态功能，用户可以发布文字、图片和视频。在中国恋爱文化中，朋友圈扮演着多重角色：在认识期是'无声简历'——对方会翻看你的历史动态来了解你的人格和品味；在暧昧期是互动平台——点赞和评论是低成本的好感表达；在确认关系后是'官宣平台'——公开发布恋爱动态是关系正式化的重要仪式。",
+    "why_it_matters": "朋友圈是中国社交生态的核心组件，在恋爱中承担着展示、互动和确认的多重功能",
+    "common_mistakes": "不经营朋友圈或发布低质量内容，忽略了它在对方评估你时的重要性",
+    "related_terms": ["Ritual Sense", "Relationship Confirmation", "WeChat"],
+    "source_file": "1.0_Chinese_Dating_Culture.md"
+  },
+  {
+    "term_en": "520",
+    "term_cn": "520 (我爱你谐音)",
+    "definition_short": "5月20日，中国网络情人节",
+    "definition_deep": "520是5月20日的缩写，因为中文发音'wu er ling'接近'我爱你'(wo ai ni)而被赋予了浪漫含义。这天已成为中国的非官方'网络情人节'，情侣们会在这天互送礼物、发红包(金额520元)、朋友圈秀恩爱。除了520之外，中国恋爱文化中的重要日子还包括2月14日(西方情人节)、七夕(农历情人节)、恋爱纪念日和各种节日。记住并重视这些日子是关系维护的基本操作。",
+    "why_it_matters": "忘记这些日子在中国恋爱文化中等同于'不重视这段关系'",
+    "common_mistakes": "认为这些节日'没必要'或者忘记了，导致对方觉得你不够在乎",
+    "related_terms": ["Ritual Sense", "Couple Outfits", "WeChat Moments"],
+    "source_file": "1.0_Chinese_Dating_Culture.md"
+  },
+  {
+    "term_en": "Emotionally Focused Therapy (EFT)",
+    "term_cn": "情感聚焦疗法",
+    "definition_short": "通过修复情感连接来改善亲密关系的疗法",
+    "definition_deep": "EFT由Dr. Sue Johnson开发，是一种专注于建立和修复伴侣之间情感连接的心理疗法。核心理念是：伴侣间的冲突表面上看是关于具体事件的，但深层是关于'我在这段关系中是否安全、是否被爱'的依恋需求。EFT帮助伴侣识别这些深层需求并建立安全的回应模式。研究显示EFT能提高约70%的关系满意度。在恋爱初期可以运用EFT的原则来建立安全的情感连接。",
+    "why_it_matters": "EFT提供了理解和建立健康情感连接的科学框架，不只是'凭感觉'",
+    "common_mistakes": "把冲突理解为'对方不讲理'而非'对方的依恋需求没被满足'",
+    "related_terms": ["Attachment Theory", "Emotional Mirroring", "Secure Base"],
+    "source_file": "1.0_Chinese_Dating_Culture.md"
+  },
+  {
+    "term_en": "Attachment Theory",
+    "term_cn": "依恋理论",
+    "definition_short": "童年照顾模式塑造成年亲密关系模式的理论",
+    "definition_deep": "依恋理论由John Bowlby和Mary Ainsworth提出，认为人在童年时期与主要照顾者的互动模式会形成'内在工作模型'，深刻影响成年后的亲密关系模式。三种主要类型：安全型(信任伴侣、舒适表达需求)、焦虑型(渴望亲密但怕被抛弃、需要反复确认)、回避型(害怕过度亲密、用距离保护自己)。在中国恋爱研究中被广泛应用，研究发现回避型依恋通过亲密感建立活动可以得到改善。",
+    "why_it_matters": "理解依恋类型能帮助你识别对方的行为模式并做出正确的回应",
+    "common_mistakes": "把依恋类型当作不可改变的标签，忽略了通过正确的互动模式可以逐步改善",
+    "related_terms": ["EFT", "Secure Attachment", "Anxious Attachment", "Avoidant Attachment", "Zuo"],
+    "source_file": "1.0_Chinese_Dating_Culture.md"
+  },
+  {
+    "term_en": "Subtext Reading (Ting Hua Ting Yin)",
+    "term_cn": "听话听音",
+    "definition_short": "理解字面背后真实含义的沟通技能",
+    "definition_deep": "听话听音是中国高语境文化中的核心沟通技能，指在对方说话时不只听字面意思，还要理解语境、语气、表情等非言语信号传达的真实含义。在恋爱中，这个技能至关重要——当她说'我没事'时，你需要判断是真没事还是不高兴但不想直说。核心原则是：当语言和非言语信号不一致时，相信非言语信号。这不是'读心术'，而是一种可以通过练习提高的文化解码能力。",
+    "why_it_matters": "在中国恋爱沟通中，真实含义常常藏在潜台词里而非字面上",
+    "common_mistakes": "按字面意思理解所有话，或者过度解读把每句话都当成潜台词",
+    "related_terms": ["High-Context Culture", "Emotional Mirroring", "Signal Reading"],
+    "source_file": "1.0_Chinese_Dating_Culture.md"
+  }
+]
