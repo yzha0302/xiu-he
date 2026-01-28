@@ -1,0 +1,5 @@
+# This file defines who owns the code.
+# The owner is automatically requested for review when a PR is opened.
+
+# Match everything (*) and assign to yzha0302
+* @yzha0302
