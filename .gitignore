@@ -89,3 +89,6 @@ vibe-kanban/dev_assets/profiles.json
 * 2.py
 * 2.txt
 * 2
+
+# Archives
+*.tgz
