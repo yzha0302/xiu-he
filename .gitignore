@@ -22,6 +22,7 @@ Asher_Source_Profile_v1/00_Archive/*
 !Asher_Source_Profile_v1/00_Archive/.gitkeep
 !Asher_Source_Profile_v1/00_Archive/*.md
 !Asher_Source_Profile_v1/00_Archive/*/README.md
+!Asher_Source_Profile_v1/00_Archive/Raw_Transcripts/.gitkeep
 
 # Strategy Models (Business Plans - Private)
 Asher_Source_Profile_v1/04_Strategy_Models/*
@@ -67,6 +68,8 @@ __pycache__/
 vibe-kanban/dev_assets/db.sqlite
 
 # --- New Security Audits (2026-01-28) ---
+SECRET_OPERATIONS_MANUAL.md
+
 # Financial & Relationships (Strictly Private)
 Asher_Source_Profile_v1/03_Inventory_Assets/3.3_Financial_Assets.md
 Asher_Source_Profile_v1/03_Inventory_Assets/3.5_Relationship_Database.md
