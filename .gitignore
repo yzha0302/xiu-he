@@ -7,10 +7,8 @@ SECRET_Key_Vault.md
 # --- Specific Content Exclusions (Keep Folder Structure Only) ---
 
 # Document Vault (Sensitive PDFs)
-Asher_Source_Profile_v1/03_Inventory_Assets/3.4_Document_Vault/*
-!Asher_Source_Profile_v1/03_Inventory_Assets/3.4_Document_Vault/.gitkeep
-!Asher_Source_Profile_v1/03_Inventory_Assets/3.4_Document_Vault/_VAULT_GUIDE.md
-!Asher_Source_Profile_v1/03_Inventory_Assets/3.4_Document_Vault/README.md
+
+
 
 # Inbox (Messy)
 Asher_Source_Profile_v1/00_Inbox/*
@@ -70,9 +68,6 @@ vibe-kanban/dev_assets/db.sqlite
 # --- New Security Audits (2026-01-28) ---
 SECRET_OPERATIONS_MANUAL.md
 
-# Financial & Relationships (Strictly Private)
-Asher_Source_Profile_v1/03_Inventory_Assets/3.3_Financial_Assets.md
-Asher_Source_Profile_v1/03_Inventory_Assets/3.5_Relationship_Database.md
 
 # Bot User Data
 integrations/discord-bot/user_data.json
@@ -92,3 +87,6 @@ vibe-kanban/dev_assets/profiles.json
 
 # Archives
 *.tgz
+
+# External Tools
+Projects/moltbot/
