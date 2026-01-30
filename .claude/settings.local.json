@@ -15,7 +15,11 @@
       "Bash(claude mcp list:*)",
       "Bash(claude mcp remove:*)",
       "Bash(claude mcp add:*)",
-      "mcp__skill-server__use_skill"
+      "mcp__skill-server__use_skill",
+      "Bash(git rm:*)",
+      "Bash(source ~/.zshrc)",
+      "Bash(gitsafe:*)",
+      "Bash(git add:*)"
     ]
   }
 }

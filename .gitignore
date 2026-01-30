@@ -67,6 +67,10 @@ vibe-kanban/dev_assets/db.sqlite
 
 # --- New Security Audits (2026-01-28) ---
 SECRET_OPERATIONS_MANUAL.md
+github-recovery-codes.txt
+deploy_to_aws.sh
+pull_from_aws.sh
+.xiao-a/
 
 
 # Bot User Data
