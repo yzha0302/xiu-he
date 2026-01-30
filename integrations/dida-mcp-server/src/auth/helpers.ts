@@ -36,9 +36,14 @@ export function getV2AuthHeaders() {
         throw new Error('Not authenticated with v2 API');
     }
 
+    const cookieHeader = v2AccessToken.includes('t=') ? v2AccessToken : `t=${v2AccessToken}`;
+
     return {
         ...V2_HEADERS,
-        'Cookie': `t=${v2AccessToken}`
+        'Cookie': cookieHeader,
+        'Origin': 'https://dida365.com',
+        'Referer': 'https://dida365.com/',
+        'X-Requested-With': 'XMLHttpRequest'
     };
 }
 

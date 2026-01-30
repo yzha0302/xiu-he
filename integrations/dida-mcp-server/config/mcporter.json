@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "dida": {
+      "command": "node /Users/yixuanzhang/projects/修荷/integrations/dida-mcp-server/dist/index.js"
+    }
+  },
+  "imports": []
+}
