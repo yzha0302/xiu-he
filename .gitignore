@@ -70,6 +70,11 @@ SECRET_OPERATIONS_MANUAL.md
 github-recovery-codes.txt
 deploy_to_aws.sh
 pull_from_aws.sh
+setup_moltbot_pm2.sh
+start_moltbot_on_server.sh
+切换模型脚本.sh
+MOLTBOT_DEPLOYMENT.md
+moltbot_config.json
 .xiao-a/
 
 

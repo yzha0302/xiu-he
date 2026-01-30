@@ -20,7 +20,12 @@
       "Bash(source ~/.zshrc)",
       "Bash(gitsafe:*)",
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(ls:*)",
+      "Bash(ssh:*)",
+      "Bash(chmod:*)",
+      "Bash(./deploy_to_aws.sh)"
     ]
   }
 }
