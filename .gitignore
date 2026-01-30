@@ -68,13 +68,13 @@ vibe-kanban/dev_assets/db.sqlite
 # --- New Security Audits (2026-01-28) ---
 SECRET_OPERATIONS_MANUAL.md
 github-recovery-codes.txt
-deploy_to_aws.sh
-pull_from_aws.sh
-setup_moltbot_pm2.sh
-start_moltbot_on_server.sh
-切换模型脚本.sh
-MOLTBOT_DEPLOYMENT.md
-moltbot_config.json
+scripts/moltbot/deploy_to_aws.sh
+scripts/moltbot/pull_from_aws.sh
+scripts/moltbot/setup_moltbot_pm2.sh
+scripts/moltbot/start_moltbot_on_server.sh
+scripts/moltbot/切换模型脚本.sh
+docs/moltbot/MOLTBOT_DEPLOYMENT.md
+docs/moltbot/moltbot_config.json
 .xiao-a/
 
 
